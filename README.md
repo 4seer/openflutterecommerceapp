@@ -1,16 +1,21 @@
 # openflutterecommerce
 
-A new Flutter project.
+Open Flutter E-commerce App
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+E-commerce Mobile Application build in Flutter.
 
-A few resources to get you started if this is your first Flutter project:
+Mobile App UI/UX
+https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-fe97570a633
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Local Database
+https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-local-database-4744b61264c7
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Functionality description and discussion
+https://medium.com/@openflutterproject/open-flutter-project-product-categories-in-e-commerce-app-84d94117e30e
+https://medium.com/@openflutterproject/open-flutter-project-product-list-and-hashtags-in-e-commerce-app-2c17dd339f31
+https://medium.com/@openflutterproject/open-flutter-project-product-filters-in-e-commerce-app-ef62efcc019f
+https://medium.com/@openflutterproject/open-flutter-project-product-details-in-e-commerce-app-424b9a81fe37
+https://medium.com/@openflutterproject/open-flutter-project-product-reviews-in-e-commerce-app-5feec27a560
+
