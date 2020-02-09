@@ -29,6 +29,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   @override
   Stream<ProductState> mapEventToState(ProductEvent event) async* {
+    ProductStateData data = ProductStateData();
     if(event is ProductShowListEvent){
       if ( this.currentState is ProductsListViewState) {
         ProductsListViewState state = this.currentState as ProductsListViewState;
@@ -38,26 +39,22 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             loading: true
           );
           //Load data from repositories
-          List<Product> products = productRepository.getProducts(event.categoryId);
-          List<HashTag> hashtags = hashtagRepository.getHashtags();
-          Category category = categoryRepository.getCategoryDetails(event.categoryId);
+          data = getStateData(event.categoryId);
           //set state to loaded and update data
           yield state.copyWith(
-            products: products,
-            hashtags: hashtags,
+            products: data.products,
+            hashtags: data.hashtags,
             loading: false,
-            category: category
+            category: data.category
           );
         } 
       } else {
-        List<Product> products = productRepository.getProducts(event.categoryId);
-        List<HashTag> hashtags = hashtagRepository.getHashtags();
-        Category category = categoryRepository.getCategoryDetails(event.categoryId);
+        data = getStateData(event.categoryId);
         yield ProductsListViewState(
           isLoading: false,
-          category: category,
-          hashtags: hashtags,
-          products: products
+          category: data.category,
+          hashtags: data.hashtags,
+          products: data.products
         );
       }
     } else if(event is ProductShowCardEvent){
@@ -67,27 +64,40 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           yield state.copyWith(
             loading: true
           );
-          List<Product> products = productRepository.getProducts(event.categoryId);
-          List<HashTag> hashtags = hashtagRepository.getHashtags();
-          Category category = categoryRepository.getCategoryDetails(event.categoryId);
+          data = getStateData(event.categoryId);
           yield state.copyWith(
-            products: products,
+            products: data.products,
             loading: false,
-            category: category,
-            hashtags: hashtags,
+            category: data.category,
+            hashtags: data.hashtags,
           );
         } 
       } else {
-        List<Product> products = productRepository.getProducts(event.categoryId);
-        List<HashTag> hashtags = hashtagRepository.getHashtags();
-        Category category = categoryRepository.getCategoryDetails(event.categoryId);
+        data = getStateData(event.categoryId);
         yield ProductsCardViewState(
           isLoading: false,
-          category: category,
-          hashtags: hashtags,
-          products: products
+          category: data.category,
+          hashtags: data.hashtags,
+          products: data.products
         );
       }
     }
   }
+  
+  ProductStateData getStateData(int categoryId){
+    ProductStateData data = ProductStateData();
+
+    data.products = productRepository.getProducts(categoryId);
+    data.hashtags = hashtagRepository.getHashtags();
+    data.category = categoryRepository.getCategoryDetails(categoryId);
+
+    return data;
+  }
+
+}
+
+class ProductStateData{
+  List<Product> products;
+  List<HashTag> hashtags;
+  Category category;
 }
