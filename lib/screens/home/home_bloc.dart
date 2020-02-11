@@ -10,22 +10,23 @@ import 'package:openflutterecommerce/screens/home/home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final ProductRepository productRepository;
-  
+
   HomeBloc({
     @required this.productRepository,
-  })  : assert(productRepository != null);
+  }) : assert(productRepository != null);
 
   @override
   HomeState get initialState => HomeInitialState();
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if(event is HomeLoadEvent){
-      if (this.currentState is HomeInitialState) {
-        yield new HomeLoadedState(salesProducts: this.productRepository.getProducts(1),
-          newProducts: this.productRepository.getProducts(2));
-      } else if (this.currentState is HomeLoadedState) {
-        yield this.currentState;
+    if (event is HomeLoadEvent) {
+      if (this.state is HomeInitialState) {
+        yield new HomeLoadedState(
+            salesProducts: this.productRepository.getProducts(1),
+            newProducts: this.productRepository.getProducts(2));
+      } else if (this.state is HomeLoadedState) {
+        yield this.state;
       }
     }
   }
