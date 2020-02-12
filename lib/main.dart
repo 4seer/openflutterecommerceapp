@@ -5,12 +5,14 @@ import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/screens/categories/categories_screen.dart';
 import 'package:openflutterecommerce/screens/home/home_screen.dart';
-import 'package:openflutterecommerce/screens/signin/signin.dart';
+import 'package:openflutterecommerce/screens/signin/forget_password.dart';
+import 'package:openflutterecommerce/screens/signin/signup.dart';
 import 'package:openflutterecommerce/screens/splash_screen.dart';
 
 import 'authentication/authentication.dart';
 import 'config/routes.dart';
 import 'screens/home/home_screen.dart';
+import 'screens/signin/signin.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -51,20 +53,22 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
         OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.cart: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.favourites: (context) => HomeScreen(),
-        OpenFlutterEcommerceRoutes.profile: (context) => HomeScreen(),
+        OpenFlutterEcommerceRoutes.SIGNIN: (context) => SignInScreen(),
         OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
-        OpenFlutterEcommerceRoutes.SIGNUP: (context) => SignInScreen(),
+        OpenFlutterEcommerceRoutes.profile: (context) =>
+            BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                builder: (context, state) {
+              if (state is Authenticated) {
+                return HomeScreen(); //TODO profile properties should be here
+              } else if (state is Unauthenticated) {
+                return SignUpScreen();
+              } else {
+                return SplashScreen();
+              }
+            }),
+        OpenFlutterEcommerceRoutes.FORGET_PASSWORD: (context) =>
+            ForgetPasswordScreen(),
       },
-      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          builder: (context, state) {
-        if (state is Authenticated) {
-          return HomeScreen();
-        } else if (state is Unauthenticated) {
-          return HomeScreen();
-        } else {
-          return SplashScreen();
-        }
-      }),
     );
   }
 }

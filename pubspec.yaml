@@ -48,6 +48,7 @@ flutter:
     - assets/icons/
     - assets/icons/bottom_menu/
     - assets/icons/products/
+    - assets/icons/signin/
     - assets/images/products/
     - assets/splash/
     - assets/thumbs/

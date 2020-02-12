@@ -11,16 +11,15 @@ import 'package:openflutterecommerce/screens/signin/views/title.dart';
 import '../../config/routes.dart';
 import '../../config/theme.dart';
 
-class SignInScreen extends StatefulWidget {
+class ForgetPasswordScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _SignInScreenState();
+    return _ForgetPasswordScreenState();
   }
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
   final GlobalKey<FormState> formKey = new GlobalKey();
 
   double sizeBetween;
@@ -50,28 +49,27 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(
                   height: sizeBetween,
                 ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                  child: Text(
+                      "Please enter your email address. You will receive a link to create a new password via email"),
+                ),
                 SignInField(
                   controller: emailController,
                   hint: "Email",
                   validator: _validateEmail,
                   keyboard: TextInputType.emailAddress,
                 ),
-                SignInField(
-                  controller: passwordController,
-                  hint: "Password",
-                  validator: _passwordCorrect,
-                  keyboard: TextInputType.visiblePassword,
-                  isPassword: true,
-                ),
                 RightArrowAction(
-                  "Forgot your password",
-                  onClick: _showForgotPassword,
+                  "Already have an account",
+                  onClick: _showSignInScreen,
                 ),
-                SignInButton("LOGIN", onPressed: () {
+                SignInButton("SEND", onPressed: () {
                   if (formKey.currentState.validate()) {
-                    BlocProvider.of<SignUpBloc>(context).add(SignInPressed(
-                        email: emailController.text,
-                        password: passwordController.text));
+                    BlocProvider.of<SignUpBloc>(context).add(SendEmailPressed(
+                      emailController.text,
+                    ));
                   }
                 }),
                 SizedBox(
@@ -117,21 +115,6 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  String _passwordCorrect(dynamic value) {
-    String emptyResult = _valueExists(value);
-    if (emptyResult == null || emptyResult.isEmpty) {
-      String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,}$';
-      RegExp regExp = new RegExp(pattern);
-      if (!regExp.hasMatch(value)) {
-        return 'Your password must be at least 8 symbols with number, big and small letter and special character (!@#\$%^&*).';
-      } else {
-        return null;
-      }
-    } else {
-      return emptyResult;
-    }
-  }
-
   String _validateEmail(dynamic value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -146,7 +129,7 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  void _showForgotPassword() {
-    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.FORGET_PASSWORD);
+  void _showSignInScreen() {
+    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.SIGNIN);
   }
 }

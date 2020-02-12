@@ -11,16 +11,17 @@ import 'package:openflutterecommerce/screens/signin/views/title.dart';
 import '../../config/routes.dart';
 import '../../config/theme.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _SignInScreenState();
+    return _SignUpScreenState();
   }
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController nameController = new TextEditingController();
   final GlobalKey<FormState> formKey = new GlobalKey();
 
   double sizeBetween;
@@ -46,9 +47,14 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SignInTitle("Sign in"),
+                SignInTitle("Sign up"),
                 SizedBox(
                   height: sizeBetween,
+                ),
+                SignInField(
+                  controller: nameController,
+                  hint: "Name",
+                  validator: _valueExists,
                 ),
                 SignInField(
                   controller: emailController,
@@ -64,18 +70,19 @@ class _SignInScreenState extends State<SignInScreen> {
                   isPassword: true,
                 ),
                 RightArrowAction(
-                  "Forgot your password",
-                  onClick: _showForgotPassword,
+                  "Already have an account",
+                  onClick: _showSignInScreen,
                 ),
-                SignInButton("LOGIN", onPressed: () {
+                SignInButton("SIGN UP", onPressed: () {
                   if (formKey.currentState.validate()) {
-                    BlocProvider.of<SignUpBloc>(context).add(SignInPressed(
+                    BlocProvider.of<SignUpBloc>(context).add(SignUpPressed(
+                        name: nameController.text,
                         email: emailController.text,
                         password: passwordController.text));
                   }
                 }),
                 SizedBox(
-                  height: sizeBetween * 2,
+                  height: sizeBetween,
                 ),
                 Center(
                   child: Text("Or sign up with social account"),
@@ -146,7 +153,7 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  void _showForgotPassword() {
-    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.FORGET_PASSWORD);
+  void _showSignInScreen() {
+    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.SIGNIN);
   }
 }
