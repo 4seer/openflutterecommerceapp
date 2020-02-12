@@ -8,4 +8,7 @@ class OpenFlutterEcommerceRoutes {
   static final cart = "cart";
   static final favourites = "favourites";
   static final profile = "profile";
+  static const SIGNUP = "signup";
+  static const SIGNIN = "signin";
+  static const FORGET_PASSWORD = "forget_pass";
 }

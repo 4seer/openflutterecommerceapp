@@ -10,7 +10,8 @@ import 'package:openflutterecommerce/repos/models/product.dart';
 
 @immutable
 abstract class ProductState extends Equatable {
-  
+  @override
+  List<Object> get props => [];
 }
 
 @immutable
@@ -25,59 +26,79 @@ class ProductsLoadedState extends ProductState {
   final Category category;
   final bool isLoading;
 
-  ProductsLoadedState({this.hashtags, this.category, this.products, this.isLoading});
+  ProductsLoadedState(
+      {this.hashtags, this.category, this.products, this.isLoading});
 
-  ProductsLoadedState copyWith({
-    Category category, List<HashTag> hashtags,
-    List<Product> products, bool loading}){
-      return ProductsLoadedState(
-        category: category?? this.category,
+  ProductsLoadedState copyWith(
+      {Category category,
+      List<HashTag> hashtags,
+      List<Product> products,
+      bool loading}) {
+    return ProductsLoadedState(
+        category: category ?? this.category,
         products: products ?? this.products,
         hashtags: hashtags ?? this.hashtags,
-        isLoading : loading?? this.isLoading 
-      );
-    }
+        isLoading: loading ?? this.isLoading);
+  }
+
   String toString() => 'ProductLoadedState';
 }
 
 @immutable
 class ProductsListViewState extends ProductsLoadedState {
+  ProductsListViewState(
+      {List<HashTag> hashtags,
+      Category category,
+      List<Product> products,
+      bool isLoading})
+      : super(
+            hashtags: hashtags,
+            category: category,
+            products: products,
+            isLoading: isLoading);
 
-  ProductsListViewState({List<HashTag> hashtags, Category category, List<Product> products, bool isLoading}) 
-    : super(hashtags: hashtags, category: category, products: products, isLoading: isLoading);
-
-  ProductsListViewState copyWith({
-    Category category, List<HashTag> hashtags,
-    List<Product> products, bool loading}){
-      return ProductsListViewState(
-        category: category?? this.category,
+  ProductsListViewState copyWith(
+      {Category category,
+      List<HashTag> hashtags,
+      List<Product> products,
+      bool loading}) {
+    return ProductsListViewState(
+        category: category ?? this.category,
         products: products ?? this.products,
         hashtags: hashtags ?? this.hashtags,
-        isLoading : loading?? this.isLoading 
-      );
-    }
+        isLoading: loading ?? this.isLoading);
+  }
+
   String toString() => 'ProductsListViewState';
 }
 
 @immutable
 class ProductsCardViewState extends ProductsLoadedState {
+  ProductsCardViewState(
+      {List<HashTag> hashtags,
+      Category category,
+      List<Product> products,
+      bool isLoading})
+      : super(
+            hashtags: hashtags,
+            category: category,
+            products: products,
+            isLoading: isLoading);
 
-  ProductsCardViewState({List<HashTag> hashtags, Category category, List<Product> products, bool isLoading}) 
-    : super(hashtags: hashtags, category: category, products: products, isLoading: isLoading);
-
-  ProductsCardViewState copyWith({
-    Category category, List<HashTag> hashtags,
-    List<Product> products, bool loading}){
-      return ProductsCardViewState(
-        category: category?? this.category,
+  ProductsCardViewState copyWith(
+      {Category category,
+      List<HashTag> hashtags,
+      List<Product> products,
+      bool loading}) {
+    return ProductsCardViewState(
+        category: category ?? this.category,
         products: products ?? this.products,
         hashtags: hashtags ?? this.hashtags,
-        isLoading : loading?? this.isLoading 
-      );
-    }
+        isLoading: loading ?? this.isLoading);
+  }
+
   String toString() => 'ProductsCardViewState';
 }
-
 
 @immutable
 class ProductsErrorState extends ProductState {
