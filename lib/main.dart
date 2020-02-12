@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:bloc/bloc.dart';
+import 'package:openflutterecommerce/screens/favorites/favorites.dart';
 import 'package:openflutterecommerce/screens/home/home_screen.dart';
 import 'package:openflutterecommerce/screens/categories/categories_screen.dart';
 
@@ -40,7 +41,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
       routes:{
         OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.cart: (context) => HomeScreen(),
-        OpenFlutterEcommerceRoutes.favourites: (context) => HomeScreen(),
+        OpenFlutterEcommerceRoutes.favourites: (context) => FavouriteScreen(),
         OpenFlutterEcommerceRoutes.profile: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
       }
