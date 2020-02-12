@@ -19,13 +19,12 @@ class FavouriteInitialState extends FavouriteState {
 
 @immutable
 class FavouriteLoadedState extends FavouriteState {
-  final List<Product> salesProducts;
-  final List<Product> newProducts;
+  final List<Product> favouriteProducts;
 
-  FavouriteLoadedState({this.salesProducts, this.newProducts});
+  FavouriteLoadedState({this.favouriteProducts});
 
   String toString() => 'FavouriteLoadedState';
 
   @override
-  List<Object> get props => [salesProducts, newProducts];
+  List<Object> get props => [favouriteProducts];
 }

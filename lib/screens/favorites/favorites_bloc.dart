@@ -4,17 +4,17 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/repos/product_repository.dart';
+import 'package:openflutterecommerce/repos/favourite_repository.dart';
 
 import 'favorites_event.dart';
 import 'favorites_state.dart';
 
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
-  final ProductRepository productRepository;
+  final FavouriteRepository favouriteRepository;
 
   FavouriteBloc({
-    @required this.productRepository,
-  })  : assert(productRepository != null);
+    @required this.favouriteRepository,
+  }) : assert(favouriteRepository != null);
 
   @override
   FavouriteState get initialState => FavouriteInitialState();
@@ -24,8 +24,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     if (event is FavouriteLoadEvent) {
       if (this.state is FavouriteInitialState) {
         yield new FavouriteLoadedState(
-            salesProducts: this.productRepository.getProducts(1),
-            newProducts: this.productRepository.getProducts(2));
+            favouriteProducts: this.favouriteRepository.getFavourites());
       } else if (this.state is FavouriteLoadedState) {
         yield this.state;
       }

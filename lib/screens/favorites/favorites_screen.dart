@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/repos/favourite_repository.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/repos/product_repository.dart';
 import 'package:openflutterecommerce/screens/home/home.dart';
@@ -23,17 +24,12 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: OpenFlutterScaffold(
-          background: null,
-          title: null,
-          body: BlocProvider<FavouriteBloc>(
-              create: (context) {
-                return FavouriteBloc(productRepository: ProductRepository())
-                  ..add(FavouriteLoadEvent());
-              },
-              child: FavouriteWrapper()),
-          bottomMenuIndex: 0,
-        ));
+        child: BlocProvider<FavouriteBloc>(
+            create: (context) {
+              return FavouriteBloc(favouriteRepository: FavouriteRepository())
+                ..add(FavouriteLoadEvent());
+            },
+            child: FavouriteWrapper()));
   }
 }
 
@@ -42,27 +38,14 @@ class FavouriteWrapper extends StatefulWidget {
   _FavouriteWrapperState createState() => _FavouriteWrapperState();
 }
 
-class _FavouriteWrapperState extends OpenFlutterWrapperState<FavouriteWrapper> {
-
-  //State createState() => OpenFlutterWrapperState();
-
+class _FavouriteWrapperState
+    extends OpenFlutterWrapperState<FavouriteWrapper> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavouriteBloc, FavouriteState>(
         builder: (BuildContext context, FavouriteState state) {
           return getPageView(<Widget>[
-            Main1View(
-                changeView: changePage,
-                products:
-                state is FavouriteLoadedState ? state.newProducts : List<Product>()),
-            Main2View(
-                changeView: changePage,
-                salesProducts: state is FavouriteLoadedState
-                    ? state.salesProducts
-                    : List<Product>(),
-                newProducts:
-                state is FavouriteLoadedState ? state.newProducts : List<Product>()),
-            Main3View(changeView: changePage)
+            Container()
           ]);
         });
   }
