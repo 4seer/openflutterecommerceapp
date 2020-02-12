@@ -8,7 +8,8 @@ import 'package:openflutterecommerce/repos/models/product.dart';
 
 @immutable
 abstract class FavouriteState extends Equatable {
-
+  @override
+  List<Object> get props => [];
 }
 
 @immutable
@@ -24,4 +25,7 @@ class FavouriteLoadedState extends FavouriteState {
   FavouriteLoadedState({this.salesProducts, this.newProducts});
 
   String toString() => 'FavouriteLoadedState';
+
+  @override
+  List<Object> get props => [salesProducts, newProducts];
 }

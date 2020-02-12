@@ -27,16 +27,13 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           background: null,
           title: null,
           body: BlocProvider<FavouriteBloc>(
-              builder: (context) {
-                return FavouriteBloc(
-                    productRepository: ProductRepository()
-                )..dispatch(FavouriteLoadEvent());
+              create: (context) {
+                return FavouriteBloc(productRepository: ProductRepository())
+                  ..add(FavouriteLoadEvent());
               },
-              child: FavouriteWrapper()
-          ),
+              child: FavouriteWrapper()),
           bottomMenuIndex: 0,
-        )
-    );
+        ));
   }
 }
 
@@ -51,22 +48,22 @@ class _FavouriteWrapperState extends OpenFlutterWrapperState<FavouriteWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavouriteEvent, FavouriteState>(
-        bloc: BlocProvider.of<FavouriteBloc>(context),
+    return BlocBuilder<FavouriteBloc, FavouriteState>(
         builder: (BuildContext context, FavouriteState state) {
           return getPageView(<Widget>[
-            Main1View(changeView: changePage,
-                products: state is FavouriteLoadedState?
-                state.newProducts : List<Product>()),
-            Main2View(changeView: changePage,
-                salesProducts: state is FavouriteLoadedState?
-                state.salesProducts : List<Product>(),
-                newProducts: state is FavouriteLoadedState?
-                state.newProducts : List<Product>()),
+            Main1View(
+                changeView: changePage,
+                products:
+                state is FavouriteLoadedState ? state.newProducts : List<Product>()),
+            Main2View(
+                changeView: changePage,
+                salesProducts: state is FavouriteLoadedState
+                    ? state.salesProducts
+                    : List<Product>(),
+                newProducts:
+                state is FavouriteLoadedState ? state.newProducts : List<Product>()),
             Main3View(changeView: changePage)
-          ]
-          );
-        }
-    );
+          ]);
+        });
   }
 }

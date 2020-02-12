@@ -5,8 +5,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/repos/product_repository.dart';
-import 'package:openflutterecommerce/screens/home/home_event.dart';
-import 'package:openflutterecommerce/screens/home/home_state.dart';
 
 import 'favorites_event.dart';
 import 'favorites_state.dart';
@@ -23,12 +21,13 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
   @override
   Stream<FavouriteState> mapEventToState(FavouriteEvent event) async* {
-    if(event is FavouriteLoadEvent){
-      if (this.currentState is FavouriteInitialState) {
-        yield new FavouriteLoadedState(salesProducts: this.productRepository.getProducts(1),
+    if (event is FavouriteLoadEvent) {
+      if (this.state is FavouriteInitialState) {
+        yield new FavouriteLoadedState(
+            salesProducts: this.productRepository.getProducts(1),
             newProducts: this.productRepository.getProducts(2));
-      } else if (this.currentState is FavouriteLoadedState) {
-        yield this.currentState;
+      } else if (this.state is FavouriteLoadedState) {
+        yield this.state;
       }
     }
   }

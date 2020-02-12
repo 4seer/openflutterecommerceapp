@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 
 @immutable
 abstract class FavouriteEvent extends Equatable {
-  FavouriteEvent([List props = const []]) : super(props);
+  @override
+  List<Object> get props => [];
 }
 
 @immutable
 class FavouriteLoadEvent extends FavouriteEvent {
   @override
-  String toString() =>
-      'Favourite is Loaded';
+  String toString() => 'Favourite is Loaded';
 }
