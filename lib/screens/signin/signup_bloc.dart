@@ -1,21 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/screens/signin/signin.dart';
 
-class SignInBloc extends Bloc<SignInEvent, SignInState> {
+class SignUpBloc extends Bloc<SignInEvent, SignInState> {
   @override
   SignInState get initialState => InitialState();
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
-    if (event is SignInPressed) {
+    if (event is SignUpPressed) {
       yield ProcessingState();
       await Future.delayed(Duration(seconds: 300)); //TODO use real auth service
       yield FinishedState();
-    } else if (event is LoginWithFB) {
+    } else if (event is SignUpWithFB) {
       yield ProcessingState();
       await Future.delayed(Duration(seconds: 300)); //TODO use real auth service
       yield ErrorState("an error");
-    } else if (event is LoginWithGoogle) {
+    } else if (event is SignUpWithGoogle) {
       yield ProcessingState();
       await Future.delayed(Duration(seconds: 100)); //TODO use real auth service
       yield FinishedState();

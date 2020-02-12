@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 
 @immutable
 abstract class HomeEvent extends Equatable {
-  HomeEvent([List props = const []]) : super(props);
+  @override
+  List<Object> get props => [];
 }
 
 @immutable
 class HomeLoadEvent extends HomeEvent {
   @override
-  String toString() =>
-      'Home is Loaded';
+  String toString() => 'Home is Loaded';
 }

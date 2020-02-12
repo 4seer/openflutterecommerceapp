@@ -8,25 +8,24 @@ import 'package:flutter/material.dart';
 @immutable
 abstract class ProductEvent extends Equatable {
   final int categoryId;
-  ProductEvent(this.categoryId, [List props = const []]) : super(props);
+  ProductEvent(this.categoryId) : super();
+
+  @override
+  List<Object> get props => [categoryId];
 }
 
 @immutable
 class ProductShowListEvent extends ProductEvent {
-
   ProductShowListEvent(int categoryId) : super(categoryId);
 
   @override
-  String toString() =>
-      'Product show list view';
+  String toString() => 'Product show list view';
 }
 
 @immutable
 class ProductShowCardEvent extends ProductEvent {
-
   ProductShowCardEvent(categoryId) : super(categoryId);
 
   @override
-  String toString() =>
-      'Product show card view';
+  String toString() => 'Product show card view';
 }
