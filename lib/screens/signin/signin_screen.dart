@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/screens/signin/signin.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
 import 'package:openflutterecommerce/screens/signin/views/right_arrow_action.dart';
 import 'package:openflutterecommerce/screens/signin/views/service_button.dart';
@@ -10,6 +11,7 @@ import 'package:openflutterecommerce/screens/signin/views/title.dart';
 
 import '../../config/routes.dart';
 import '../../config/theme.dart';
+import 'validator.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -39,105 +41,76 @@ class _SignInScreenState extends State<SignInScreen> {
         iconTheme: IconThemeData(color: AppColors.black),
       ),
       backgroundColor: AppColors.background,
-      body: SingleChildScrollView(
-        child: Container(
-          height: height * 0.9,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SignInTitle("Sign in"),
-              SizedBox(
-                height: sizeBetween,
-              ),
-              SignInField(
-                key: emailKey,
-                controller: emailController,
-                hint: "Email",
-                validator: _validateEmail,
-                keyboard: TextInputType.emailAddress,
-              ),
-              SignInField(
-                key: passwordKey,
-                controller: passwordController,
-                hint: "Password",
-                validator: _passwordCorrect,
-                keyboard: TextInputType.visiblePassword,
-                isPassword: true,
-              ),
-              RightArrowAction(
-                "Forgot your password",
-                onClick: _showForgotPassword,
-              ),
-              SignInButton("LOGIN", onPressed: _validateAndSend),
-              SizedBox(
-                height: sizeBetween * 2,
-              ),
-              Center(
-                child: Text("Or sign up with social account"),
-              ),
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.2),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      ServiceButton(
-                        serviceType: ServiceType.Google,
-                        onPressed: () {
-                          BlocProvider.of<SignUpBloc>(context)
-                              .add(SignUpWithGoogle());
-                        },
-                      ),
-                      ServiceButton(
-                        serviceType: ServiceType.Facebook,
-                        onPressed: () {
-                          BlocProvider.of<SignUpBloc>(context)
-                              .add(SignUpWithFB());
-                        },
-                      ),
-                    ],
-                  )),
-            ],
+      body: BlocConsumer<SignInBloc, SignInState>(listener: (context, state) {
+        if (state is FinishedState) Navigator.of(context).pop();
+      }, builder: (context, state) {
+        if (state is ProcessingState)
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        return SingleChildScrollView(
+          child: Container(
+            height: height * 0.9,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SignInTitle("Sign in"),
+                SizedBox(
+                  height: sizeBetween,
+                ),
+                SignInField(
+                  key: emailKey,
+                  controller: emailController,
+                  hint: "Email",
+                  validator: Validator.validateEmail,
+                  keyboard: TextInputType.emailAddress,
+                ),
+                SignInField(
+                  key: passwordKey,
+                  controller: passwordController,
+                  hint: "Password",
+                  validator: Validator.passwordCorrect,
+                  keyboard: TextInputType.visiblePassword,
+                  isPassword: true,
+                ),
+                RightArrowAction(
+                  "Forgot your password",
+                  onClick: _showForgotPassword,
+                ),
+                SignInButton("LOGIN", onPressed: _validateAndSend),
+                SizedBox(
+                  height: sizeBetween * 2,
+                ),
+                Center(
+                  child: Text("Or sign up with social account"),
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.2),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        ServiceButton(
+                          serviceType: ServiceType.Google,
+                          onPressed: () {
+                            BlocProvider.of<SignUpBloc>(context)
+                                .add(SignUpWithGoogle());
+                          },
+                        ),
+                        ServiceButton(
+                          serviceType: ServiceType.Facebook,
+                          onPressed: () {
+                            BlocProvider.of<SignUpBloc>(context)
+                                .add(SignUpWithFB());
+                          },
+                        ),
+                      ],
+                    )),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
-  }
-
-  String _valueExists(dynamic value) {
-    if (value == null || value.isEmpty) {
-      return "Please fill this field";
-    } else {
-      return null;
-    }
-  }
-
-  String _passwordCorrect(dynamic value) {
-    String emptyResult = _valueExists(value);
-    if (emptyResult == null || emptyResult.isEmpty) {
-      String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,}$';
-      RegExp regExp = new RegExp(pattern);
-      if (!regExp.hasMatch(value)) {
-        return 'Your password must be at least 8 symbols with number, big and small letter and special character (!@#\$%^&*).';
-      } else {
-        return null;
-      }
-    } else {
-      return emptyResult;
-    }
-  }
-
-  String _validateEmail(dynamic value) {
-    String pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regExp = new RegExp(pattern);
-    String emptyResult = _valueExists(value);
-    if (emptyResult == null || emptyResult.isEmpty) {
-      return emptyResult;
-    } else if (!regExp.hasMatch(value)) {
-      return "Not a valid email address. Should be your@email.com";
-    } else {
-      return null;
-    }
   }
 
   void _showForgotPassword() {
