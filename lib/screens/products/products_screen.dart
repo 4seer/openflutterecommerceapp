@@ -11,8 +11,9 @@ import 'package:openflutterecommerce/screens/products/products.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
 import 'package:openflutterecommerce/widgets/scaffold.dart';
 
-class ProductsScreen extends StatefulWidget {
+import 'products.dart';
 
+class ProductsScreen extends StatefulWidget {
   final int categoryId;
 
   const ProductsScreen({Key key, this.categoryId}) : super(key: key);
@@ -25,22 +26,20 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: OpenFlutterScaffold(
-        background: null,
-        title: "Products",
-        body: BlocProvider<ProductBloc>(
-          builder: (context) {
+        child: OpenFlutterScaffold(
+      background: null,
+      title: "Products",
+      body: BlocProvider<ProductBloc>(
+          create: (context) {
             return ProductBloc(
-              productRepository: ProductRepository(),
-              categoryRepository: CategoryRepository(),
-              hashtagRepository: HashtagRepository()
-            )..dispatch(ProductShowListEvent(widget.categoryId));
+                productRepository: ProductRepository(),
+                categoryRepository: CategoryRepository(),
+                hashtagRepository: HashtagRepository())
+              ..add(ProductShowListEvent(widget.categoryId));
           },
-          child: ProductsWrapper()
-        ),
-        bottomMenuIndex: 1,
-      )
-    );
+          child: ProductsWrapper()),
+      bottomMenuIndex: 1,
+    ));
   }
 }
 
@@ -50,20 +49,17 @@ class ProductsWrapper extends StatefulWidget {
 }
 
 class _ProductsWrapperState extends OpenFlutterWrapperState<ProductsWrapper> {
-
   //State createState() => OpenFlutterWrapperState();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductEvent, ProductState>(
+    return BlocBuilder<ProductBloc, ProductState>(
         bloc: BlocProvider.of<ProductBloc>(context),
         builder: (BuildContext context, ProductState state) {
           return getPageView(<Widget>[
             ProductsListView(changeView: changePage),
             ProductsCardView(changeView: changePage),
-          ]
-        );
-      }
-    );
+          ]);
+        });
   }
 }
