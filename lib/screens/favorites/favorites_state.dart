@@ -4,6 +4,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/repos/models/hashtag.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 
 @immutable
@@ -20,11 +21,12 @@ class FavouriteInitialState extends FavouriteState {
 @immutable
 class FavouriteLoadedState extends FavouriteState {
   final List<Product> favouriteProducts;
+  final List<HashTag> hashtags;
 
-  FavouriteLoadedState({this.favouriteProducts});
+  FavouriteLoadedState({this.favouriteProducts,this.hashtags});
 
   String toString() => 'FavouriteLoadedState';
 
   @override
-  List<Object> get props => [favouriteProducts];
+  List<Object> get props => [favouriteProducts,hashtags];
 }

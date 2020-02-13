@@ -5,15 +5,18 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/repos/favourite_repository.dart';
+import 'package:openflutterecommerce/repos/hashtag_repository.dart';
 
 import 'favorites_event.dart';
 import 'favorites_state.dart';
 
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   final FavouriteRepository favouriteRepository;
+  final HashtagRepository hashtagRepository;
 
   FavouriteBloc({
     @required this.favouriteRepository,
+    @required this.hashtagRepository,
   }) : assert(favouriteRepository != null);
 
   @override
@@ -24,7 +27,8 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     if (event is FavouriteLoadEvent) {
       if (this.state is FavouriteInitialState) {
         yield new FavouriteLoadedState(
-            favouriteProducts: this.favouriteRepository.getFavourites());
+            favouriteProducts: this.favouriteRepository.getFavourites(),
+            hashtags: hashtagRepository.getHashtags());
       } else if (this.state is FavouriteLoadedState) {
         yield this.state;
       }
