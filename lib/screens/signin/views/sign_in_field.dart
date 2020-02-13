@@ -24,54 +24,76 @@ class SignInField extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _SignInFieldState();
+    return SignInFieldState();
   }
 }
 
-class _SignInFieldState extends State<SignInField> {
-  bool isRed = false;
+class SignInFieldState extends State<SignInField> {
+  String error = null;
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Card(
-        elevation: 3,
-        shape: isRed
-            ? RoundedRectangleBorder(
-                side: BorderSide(color: AppColors.red, width: 1.0),
-                borderRadius: BorderRadius.circular(AppSizes.TEXT_FIELD_RADIUS),
-              )
-            : RoundedRectangleBorder(
-                side: BorderSide(color: Colors.white, width: 1.0),
-                borderRadius: BorderRadius.circular(AppSizes.TEXT_FIELD_RADIUS),
+      child: Column(
+        children: <Widget>[
+          Card(
+            elevation: 3,
+            shape: error != null
+                ? RoundedRectangleBorder(
+                    side: BorderSide(color: AppColors.red, width: 1.0),
+                    borderRadius:
+                        BorderRadius.circular(AppSizes.TEXT_FIELD_RADIUS),
+                  )
+                : RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.white, width: 1.0),
+                    borderRadius:
+                        BorderRadius.circular(AppSizes.TEXT_FIELD_RADIUS),
+                  ),
+            color: AppColors.white,
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.0),
+              child: TextField(
+                style: TextStyle(
+                    color: AppColors.black,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16),
+                controller: widget.controller,
+                focusNode: widget.focusNode,
+                keyboardType: widget.keyboard,
+                obscureText: widget.isPassword,
+                decoration: InputDecoration(
+                    labelText: widget.hint,
+                    hintText: widget.hint,
+                    suffixIcon: error != null
+                        ? Icon(
+                            Icons.close,
+                            color: AppColors.red,
+                          )
+                        : isChecked ? Icon(Icons.done) : null,
+                    hintStyle: TextStyle(
+                        color: AppColors.lightGray,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300)),
               ),
-        color: AppColors.white,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: TextFormField(
-            controller: widget.controller,
-            focusNode: widget.focusNode,
-            validator: _validator,
-            keyboardType: widget.keyboard,
-            obscureText: widget.isPassword,
-            decoration: InputDecoration(
-                hintText: widget.hint,
-                hintStyle: TextStyle(
-                    color: AppColors.lightGray,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300)),
+            ),
           ),
-        ),
+          error == null
+              ? Container()
+              : Text(
+                  error,
+                  style: TextStyle(color: AppColors.red, fontSize: 12),
+                )
+        ],
       ),
     );
   }
 
-  String _validator(String value) {
-    String validatorResult = widget.validator(value);
+  String validate() {
     setState(() {
-      isRed = validatorResult.isNotEmpty;
+      error = widget.validator(widget.controller.text);
     });
-    return validatorResult;
+    return error;
   }
 }

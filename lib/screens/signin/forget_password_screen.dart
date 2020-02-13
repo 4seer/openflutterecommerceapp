@@ -20,7 +20,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController emailController = new TextEditingController();
-  final GlobalKey<FormState> formKey = new GlobalKey();
+  final GlobalKey<SignInFieldState> emailKey = new GlobalKey();
 
   double sizeBetween;
 
@@ -40,67 +40,58 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       body: SingleChildScrollView(
         child: Container(
           height: height * 0.9,
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SignInTitle("Sign in"),
-                SizedBox(
-                  height: sizeBetween,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-                  child: Text(
-                      "Please enter your email address. You will receive a link to create a new password via email"),
-                ),
-                SignInField(
-                  controller: emailController,
-                  hint: "Email",
-                  validator: _validateEmail,
-                  keyboard: TextInputType.emailAddress,
-                ),
-                RightArrowAction(
-                  "Already have an account",
-                  onClick: _showSignInScreen,
-                ),
-                SignInButton("SEND", onPressed: () {
-                  if (formKey.currentState.validate()) {
-                    BlocProvider.of<SignUpBloc>(context).add(SendEmailPressed(
-                      emailController.text,
-                    ));
-                  }
-                }),
-                SizedBox(
-                  height: sizeBetween * 2,
-                ),
-                Center(
-                  child: Text("Or sign up with social account"),
-                ),
-                Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.2),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        ServiceButton(
-                          serviceType: ServiceType.Google,
-                          onPressed: () {
-                            BlocProvider.of<SignUpBloc>(context)
-                                .add(SignUpWithGoogle());
-                          },
-                        ),
-                        ServiceButton(
-                          serviceType: ServiceType.Facebook,
-                          onPressed: () {
-                            BlocProvider.of<SignUpBloc>(context)
-                                .add(SignUpWithFB());
-                          },
-                        ),
-                      ],
-                    )),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SignInTitle("Sign in"),
+              SizedBox(
+                height: sizeBetween,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                child: Text(
+                    "Please enter your email address. You will receive a link to create a new password via email"),
+              ),
+              SignInField(
+                key: emailKey,
+                controller: emailController,
+                hint: "Email",
+                validator: _validateEmail,
+                keyboard: TextInputType.emailAddress,
+              ),
+              RightArrowAction(
+                "Already have an account",
+                onClick: _showSignInScreen,
+              ),
+              SignInButton("SEND", onPressed: _validateAndSend),
+              SizedBox(
+                height: sizeBetween * 2,
+              ),
+              Center(
+                child: Text("Or sign up with social account"),
+              ),
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.2),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      ServiceButton(
+                        serviceType: ServiceType.Google,
+                        onPressed: () {
+                          BlocProvider.of<SignUpBloc>(context)
+                              .add(SignUpWithGoogle());
+                        },
+                      ),
+                      ServiceButton(
+                        serviceType: ServiceType.Facebook,
+                        onPressed: () {
+                          BlocProvider.of<SignUpBloc>(context)
+                              .add(SignUpWithFB());
+                        },
+                      ),
+                    ],
+                  )),
+            ],
           ),
         ),
       ),
@@ -131,5 +122,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   void _showSignInScreen() {
     Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.SIGNIN);
+  }
+
+  void _validateAndSend() {
+    if (emailKey.currentState.validate() != null) {
+      return;
+    }
+    BlocProvider.of<SignUpBloc>(context).add(SendEmailPressed(
+      emailController.text,
+    ));
   }
 }
