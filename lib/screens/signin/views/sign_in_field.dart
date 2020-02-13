@@ -66,6 +66,7 @@ class SignInFieldState extends State<SignInField> {
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     labelText: widget.hint,
+                    border: InputBorder.none,
                     hintText: widget.hint,
                     suffixIcon: error != null
                         ? Icon(
