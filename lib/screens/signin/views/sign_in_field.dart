@@ -64,6 +64,7 @@ class SignInFieldState extends State<SignInField> {
                 keyboardType: widget.keyboard,
                 obscureText: widget.isPassword,
                 decoration: InputDecoration(
+                    border: InputBorder.none,
                     labelText: widget.hint,
                     hintText: widget.hint,
                     suffixIcon: error != null
