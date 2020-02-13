@@ -6,8 +6,8 @@ import 'package:openflutterecommerce/screens/signin/signup.dart';
 import 'package:openflutterecommerce/screens/signin/views/right_arrow_action.dart';
 import 'package:openflutterecommerce/screens/signin/views/service_button.dart';
 import 'package:openflutterecommerce/screens/signin/views/sign_in_field.dart';
-import 'package:openflutterecommerce/screens/signin/views/signin_button.dart';
 import 'package:openflutterecommerce/screens/signin/views/title.dart';
+import 'package:openflutterecommerce/widgets/red_button_with_shadow.dart';
 
 import '../../config/routes.dart';
 import '../../config/theme.dart';
@@ -75,7 +75,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     "Already have an account",
                     onClick: _showSignInScreen,
                   ),
-                  SignInButton("SEND", onPressed: _validateAndSend),
+                  RedButtonWithShadow("SEND", onPressed: _validateAndSend),
                   SizedBox(
                     height: sizeBetween * 2,
                   ),

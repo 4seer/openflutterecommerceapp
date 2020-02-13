@@ -9,7 +9,8 @@ class ForgetPasswordBloc extends Bloc<SignInEvent, SignInState> {
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
     if (event is SendEmailPressed) {
       yield ProcessingState();
-      await Future.delayed(Duration(seconds: 300)); //TODO use real auth service
+      await Future.delayed(
+          Duration(milliseconds: 300)); //TODO use real auth service
       yield FinishedState();
     }
   }

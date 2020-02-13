@@ -9,15 +9,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
     if (event is SignInPressed) {
       yield ProcessingState();
-      await Future.delayed(Duration(seconds: 300)); //TODO use real auth service
+      await Future.delayed(
+          Duration(milliseconds: 300)); //TODO use real auth service
       yield FinishedState();
     } else if (event is LoginWithFB) {
       yield ProcessingState();
-      await Future.delayed(Duration(seconds: 300)); //TODO use real auth service
+      await Future.delayed(
+          Duration(milliseconds: 300)); //TODO use real auth service
       yield ErrorState("an error");
     } else if (event is LoginWithGoogle) {
       yield ProcessingState();
-      await Future.delayed(Duration(seconds: 100)); //TODO use real auth service
+      await Future.delayed(
+          Duration(milliseconds: 100)); //TODO use real auth service
       yield FinishedState();
     }
   }

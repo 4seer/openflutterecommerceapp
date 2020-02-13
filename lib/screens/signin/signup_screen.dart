@@ -6,8 +6,8 @@ import 'package:openflutterecommerce/screens/signin/validator.dart';
 import 'package:openflutterecommerce/screens/signin/views/right_arrow_action.dart';
 import 'package:openflutterecommerce/screens/signin/views/service_button.dart';
 import 'package:openflutterecommerce/screens/signin/views/sign_in_field.dart';
-import 'package:openflutterecommerce/screens/signin/views/signin_button.dart';
 import 'package:openflutterecommerce/screens/signin/views/title.dart';
+import 'package:openflutterecommerce/widgets/red_button_with_shadow.dart';
 
 import '../../config/routes.dart';
 import '../../config/theme.dart';
@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   "Already have an account",
                   onClick: _showSignInScreen,
                 ),
-                SignInButton("SIGN UP", onPressed: _validateAndSend),
+                RedButtonWithShadow("SIGN UP", onPressed: _validateAndSend),
                 SizedBox(
                   height: sizeBetween,
                 ),
