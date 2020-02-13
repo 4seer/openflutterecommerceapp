@@ -13,6 +13,8 @@ class AppSizes {
   static double imageRadius = 8;
   static double linePadding = 4;
   static const TEXT_FIELD_RADIUS = 4.0;
+  static const APP_BAR_SIZE = 56.0;
+  static const APP_BAR_EXPANDED_SIZE = 200.0;
 }
 
 class AppColors {

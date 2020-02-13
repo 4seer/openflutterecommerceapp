@@ -3,6 +3,7 @@
 //Date: 2020-02-06
 
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/widgets/bottom_menu.dart';
 
 class OpenFlutterCollapsingScaffold extends StatelessWidget {
@@ -26,13 +27,16 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
       body: NestedScrollView(
+        physics: ScrollPhysics(parent: PageScrollPhysics()),
         headerSliverBuilder: title != null
             ? (BuildContext context, bool innerBoxIsScrolled) {
                 return _buildSilverAppBar(context);
               }
             : null,
-        body: this.body,
+        body:  this.body,
       ),
       backgroundColor: this.background,
       bottomNavigationBar: OpenFlutterEcommerceBottomMenu(bottomMenuIndex),
@@ -62,26 +66,52 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
 
     return <Widget>[
       SliverAppBar(
-        expandedHeight: 200.0,
-        floating: false,
-        pinned: true,
-        bottom: tabWidget,
-        actions: <Widget>[
-          Row(children: <Widget>[
-            Icon(Icons.share),
-          ])
-        ],
-        flexibleSpace: FlexibleSpaceBar(
-            centerTitle: true,
-            title: Text(this.title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                )),
-            background: Container(
-              color: this.background,
-            )),
-      ),
+          expandedHeight: AppSizes.APP_BAR_EXPANDED_SIZE,
+          floating: false,
+          pinned: true,
+          bottom: tabWidget,
+          actions: <Widget>[
+            Row(children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.search),
+                color: AppColors.black,
+                onPressed: () {
+                  print("Search favourites.");
+                },
+              ),
+            ])
+          ],
+          flexibleSpace: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              double percent = ((constraints.maxHeight - kToolbarHeight) *
+                  100 /
+                  (AppSizes.APP_BAR_EXPANDED_SIZE - kToolbarHeight));
+              double dx = 0;
+
+              dx = 100 - percent;
+
+              if (constraints.maxHeight == 100) {
+                dx = 0;
+              }
+
+              return Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: kToolbarHeight / 4, left: 0.0),
+                    child: Transform.translate(
+                      child: Text(
+                        title,
+                        style: _theme.textTheme.caption,
+                      ),
+                      offset:
+                          Offset(dx, constraints.maxHeight - kToolbarHeight),
+                    ),
+                  ),
+                ],
+              );
+            },
+          )),
     ];
   }
 }

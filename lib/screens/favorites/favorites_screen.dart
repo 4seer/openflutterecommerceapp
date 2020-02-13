@@ -10,10 +10,14 @@ import 'package:openflutterecommerce/repos/hashtag_repository.dart';
 import 'package:openflutterecommerce/repos/models/hashtag.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/repos/product_repository.dart';
+import 'package:openflutterecommerce/screens/favorites/views/favourites_grid_list.dart';
+import 'package:openflutterecommerce/screens/favorites/views/favourites_list_view.dart';
 import 'package:openflutterecommerce/screens/home/home.dart';
+import 'package:openflutterecommerce/screens/products/products_event.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
 import 'package:openflutterecommerce/widgets/block_header.dart';
 import 'package:openflutterecommerce/widgets/hashtag_list.dart';
+import 'package:openflutterecommerce/widgets/product_filter.dart';
 import 'package:openflutterecommerce/widgets/product_list_view.dart';
 import 'package:openflutterecommerce/widgets/scaffold.dart';
 import 'package:openflutterecommerce/widgets/scaffold_collapsing.dart';
@@ -59,12 +63,15 @@ class _FavouriteWrapperState extends OpenFlutterWrapperState<FavouriteWrapper> {
   buildFavouritesScreen(BuildContext context, FavouriteState state) {
     final double width = MediaQuery.of(context).size.width;
     final double widgetWidth = width - AppSizes.sidePadding * 2;
+    ProductView productView = ProductView.ListView;
+    SortBy sortBy = SortBy.Popular;
 
     return OpenFlutterCollapsingScaffold(
       background: null,
-      title: "Categories",
+      title: "Favourites",
       body: Column(
         children: <Widget>[
+          Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
           Container(
               width: width,
               child: HashTagList(
@@ -72,13 +79,27 @@ class _FavouriteWrapperState extends OpenFlutterWrapperState<FavouriteWrapper> {
                       ? state.hashtags
                       : List<HashTag>(),
                   height: 30)),
-          OpenFlutterBlockHeader(
-              width: widgetWidth, title: 'Favourites', onLinkTap: (() => {})),
-          OpenFlutterProductListView(
-              width: widgetWidth,
-              products: state is FavouriteLoadedState
-                  ? state.favouriteProducts
-                  : List<Product>())
+          Container(
+            padding: EdgeInsets.only(
+                top: AppSizes.sidePadding, bottom: AppSizes.sidePadding),
+            width: width,
+            child: OpenFlutterProductFilter(
+              width: width,
+              height: 24,
+              productView: productView,
+              sortBy: sortBy,
+              onFilterClicked: (() => {}),
+              onChangeViewClicked: (() => {}),
+              onSortClicked: ((SortBy sortBy) => {}),
+            ),
+          ),
+          Expanded(
+            child: FavouritesGridList(
+                width: widgetWidth,
+                products: state is FavouriteLoadedState
+                    ? state.favouriteProducts
+                    : List<Product>()),
+          )
         ],
       ),
       bottomMenuIndex: 1,
