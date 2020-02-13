@@ -88,8 +88,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                   height: sizeBetween,
                 ),
-                Center(
-                  child: Text("Or sign up with social account"),
+                Padding(
+                  padding: EdgeInsets.only(bottom: AppSizes.linePadding),
+                  child: Center(
+                    child: Text("Or sign up with social account"),
+                  ),
                 ),
                 Padding(
                     padding: EdgeInsets.symmetric(horizontal: width * 0.2),
