@@ -3,11 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
 import 'package:openflutterecommerce/screens/signin/validator.dart';
-import 'package:openflutterecommerce/screens/signin/views/right_arrow_action.dart';
-import 'package:openflutterecommerce/screens/signin/views/service_button.dart';
-import 'package:openflutterecommerce/screens/signin/views/sign_in_field.dart';
-import 'package:openflutterecommerce/screens/signin/views/title.dart';
-import 'package:openflutterecommerce/widgets/red_button_with_shadow.dart';
+import 'package:openflutterecommerce/widgets/widgets.dart';
 
 import '../../config/routes.dart';
 import '../../config/theme.dart';
@@ -23,9 +19,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
   final TextEditingController nameController = new TextEditingController();
-  final GlobalKey<SignInFieldState> emailKey = new GlobalKey();
-  final GlobalKey<SignInFieldState> passwordKey = new GlobalKey();
-  final GlobalKey<SignInFieldState> nameKey = new GlobalKey();
+  final GlobalKey<OpenFlutterInputFieldState> emailKey = new GlobalKey();
+  final GlobalKey<OpenFlutterInputFieldState> passwordKey = new GlobalKey();
+  final GlobalKey<OpenFlutterInputFieldState> nameKey = new GlobalKey();
 
   double sizeBetween;
 
@@ -55,24 +51,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SignInTitle("Sign up"),
+                OpenFlutterTitle("Sign up"),
                 SizedBox(
                   height: sizeBetween,
                 ),
-                SignInField(
+                OpenFlutterInputField(
                   key: nameKey,
                   controller: nameController,
                   hint: "Name",
                   validator: Validator.valueExists,
                 ),
-                SignInField(
+                OpenFlutterInputField(
                   key: emailKey,
                   controller: emailController,
                   hint: "Email",
                   validator: Validator.validateEmail,
                   keyboard: TextInputType.emailAddress,
                 ),
-                SignInField(
+                OpenFlutterInputField(
                   key: passwordKey,
                   controller: passwordController,
                   hint: "Password",
@@ -84,7 +80,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   "Already have an account",
                   onClick: _showSignInScreen,
                 ),
-                RedButtonWithShadow("SIGN UP", onPressed: _validateAndSend),
+                OpenFlutterButton(
+                  title: "SIGN UP", 
+                  onPressed: _validateAndSend),
                 SizedBox(
                   height: sizeBetween,
                 ),

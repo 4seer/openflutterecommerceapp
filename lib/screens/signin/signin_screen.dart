@@ -3,11 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/screens/signin/signin.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
-import 'package:openflutterecommerce/screens/signin/views/right_arrow_action.dart';
-import 'package:openflutterecommerce/screens/signin/views/service_button.dart';
-import 'package:openflutterecommerce/screens/signin/views/sign_in_field.dart';
-import 'package:openflutterecommerce/screens/signin/views/title.dart';
-import 'package:openflutterecommerce/widgets/red_button_with_shadow.dart';
+import 'package:openflutterecommerce/widgets/widgets.dart';
 
 import '../../config/routes.dart';
 import '../../config/theme.dart';
@@ -23,8 +19,8 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
-  final GlobalKey<SignInFieldState> emailKey = new GlobalKey();
-  final GlobalKey<SignInFieldState> passwordKey = new GlobalKey();
+  final GlobalKey<OpenFlutterInputFieldState> emailKey = new GlobalKey();
+  final GlobalKey<OpenFlutterInputFieldState> passwordKey = new GlobalKey();
 
   double sizeBetween;
 
@@ -54,18 +50,18 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SignInTitle("Sign in"),
+                OpenFlutterTitle("Sign in"),
                 SizedBox(
                   height: sizeBetween,
                 ),
-                SignInField(
+                OpenFlutterInputField(
                   key: emailKey,
                   controller: emailController,
                   hint: "Email",
                   validator: Validator.validateEmail,
                   keyboard: TextInputType.emailAddress,
                 ),
-                SignInField(
+                OpenFlutterInputField(
                   key: passwordKey,
                   controller: passwordController,
                   hint: "Password",
@@ -77,7 +73,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   "Forgot your password",
                   onClick: _showForgotPassword,
                 ),
-                RedButtonWithShadow("LOGIN", onPressed: _validateAndSend),
+                OpenFlutterButton(title: "LOGIN", 
+                  onPressed: _validateAndSend),
                 SizedBox(
                   height: sizeBetween * 2,
                 ),
