@@ -12,8 +12,8 @@ class OpenFlutterButton extends StatelessWidget{
   final String title;
 
   OpenFlutterButton({Key key, 
-    @required this.width, 
-    @required this.height, 
+    this.width, 
+    this.height, 
     @required this.title, 
     @required this.onPressed}) : 
       super(key: key) ;
@@ -21,7 +21,46 @@ class OpenFlutterButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     ThemeData _theme = Theme.of(context);
-    return RaisedButton(
+    EdgeInsetsGeometry edgeInsets = EdgeInsets.all(0);
+    if ( width == null || height == null){
+      edgeInsets = EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0);
+    }
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      child: InkWell(
+        onTap: onPressed,
+        child: Container(
+          width: width,
+          height: height,
+          padding: edgeInsets,
+          decoration: BoxDecoration(
+              color: AppColors.red,
+              borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+              boxShadow: [
+                BoxShadow(
+                    color: AppColors.red.withOpacity(0.3),
+                    blurRadius: 4.0,
+                    offset: Offset(0.0, 5.0)),
+              ]),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Text(
+                  title,
+                  style: _theme.textTheme.button.copyWith(
+                    backgroundColor: _theme.textTheme.button.backgroundColor,
+                    color: _theme.textTheme.button.color
+                  )
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    /*RaisedButton(
       onPressed: onPressed,
       shape: new RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(
@@ -39,6 +78,6 @@ class OpenFlutterButton extends StatelessWidget{
           )
         )
       )
-    );
+    );*/
   }
 }
