@@ -14,7 +14,7 @@ Roadmap
 
 https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-development-roadmap-2473952aebc5
 
-A short guide how to take part
+A short guide how to start contributing to Open Flutter Project
 
 https://medium.com/@openflutterproject/open-flutter-project-developer-guidelines-4a4fa3fa289e
 
