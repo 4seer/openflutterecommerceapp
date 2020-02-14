@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/screens/signin/signin.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
+import 'package:openflutterecommerce/screens/signin/validator.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
 
 import '../../config/routes.dart';
 import '../../config/theme.dart';
-import 'validator.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _SignInScreenState();
+    return _SignUpScreenState();
   }
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController nameController = new TextEditingController();
   final GlobalKey<OpenFlutterInputFieldState> emailKey = new GlobalKey();
   final GlobalKey<OpenFlutterInputFieldState> passwordKey = new GlobalKey();
+  final GlobalKey<OpenFlutterInputFieldState> nameKey = new GlobalKey();
 
   double sizeBetween;
 
@@ -37,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
         iconTheme: IconThemeData(color: AppColors.black),
       ),
       backgroundColor: AppColors.background,
-      body: BlocConsumer<SignInBloc, SignInState>(listener: (context, state) {
+      body: BlocConsumer<SignUpBloc, SignInState>(listener: (context, state) {
         if (state is FinishedState) Navigator.of(context).pop();
       }, builder: (context, state) {
         if (state is ProcessingState)
@@ -50,9 +51,15 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                OpenFlutterBlockHeader(title: "Sign in", width: width),
+                OpenFlutterBlockHeader(title: "Sign up", width: width),
                 SizedBox(
                   height: sizeBetween,
+                ),
+                OpenFlutterInputField(
+                  key: nameKey,
+                  controller: nameController,
+                  hint: "Name",
+                  validator: Validator.valueExists,
                 ),
                 OpenFlutterInputField(
                   key: emailKey,
@@ -70,13 +77,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   isPassword: true,
                 ),
                 RightArrowAction(
-                  "Forgot your password",
-                  onClick: _showForgotPassword,
+                  "Already have an account",
+                  onClick: _showSignInScreen,
                 ),
-                OpenFlutterButton(title: "LOGIN", 
+                OpenFlutterButton(
+                  title: "SIGN UP", 
                   onPressed: _validateAndSend),
                 SizedBox(
-                  height: sizeBetween * 2,
+                  height: sizeBetween,
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: AppSizes.linePadding),
@@ -113,18 +121,23 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void _showForgotPassword() {
-    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.FORGET_PASSWORD);
+  void _showSignInScreen() {
+    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.SIGNIN);
   }
 
   void _validateAndSend() {
+    if (nameKey.currentState.validate() != null) {
+      return;
+    }
     if (emailKey.currentState.validate() != null) {
       return;
     }
     if (passwordKey.currentState.validate() != null) {
       return;
     }
-    BlocProvider.of<SignUpBloc>(context).add(SignInPressed(
-        email: emailController.text, password: passwordController.text));
+    BlocProvider.of<SignUpBloc>(context).add(SignUpPressed(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text));
   }
 }
