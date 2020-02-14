@@ -18,6 +18,10 @@ A short guide how to take part
 
 https://medium.com/@openflutterproject/open-flutter-project-developer-guidelines-4a4fa3fa289e
 
+Widget Library
+
+https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-flutter-widgets-f63f3c33ac94
+
 7 reasons for a developers to contribute to open-source projects
 
 https://medium.com/@openflutterproject/open-flutter-project-developer-guidelines-4a4fa3fa289e
