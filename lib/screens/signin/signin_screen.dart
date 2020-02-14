@@ -50,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                OpenFlutterTitle("Sign in"),
+                OpenFlutterBlockHeader(title: "Sign in", width: width),
                 SizedBox(
                   height: sizeBetween,
                 ),

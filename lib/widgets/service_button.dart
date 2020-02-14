@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../config/theme.dart';
 
-class ServiceButton extends StatelessWidget {
+class OpenFlutterServiceButton extends StatelessWidget {
   final ServiceType serviceType;
   final VoidCallback onPressed;
 
-  const ServiceButton(
+  const OpenFlutterServiceButton(
       {Key key, this.serviceType = ServiceType.Google, this.onPressed})
       : super(key: key);
 
