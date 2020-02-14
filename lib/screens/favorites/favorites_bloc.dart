@@ -24,14 +24,39 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
   @override
   Stream<FavouriteState> mapEventToState(FavouriteEvent event) async* {
+    print("mapEventToState: $event");
     if (event is FavouriteLoadEvent) {
-      if (this.state is FavouriteInitialState) {
-        yield new FavouriteLoadedState(
-            favouriteProducts: this.favouriteRepository.getFavourites(),
-            hashtags: hashtagRepository.getHashtags());
-      } else if (this.state is FavouriteLoadedState) {
-        yield this.state;
+      print("event: FavouriteLoadEvent");
+      if (state is FavouriteListViewState) {
+        print("event: FavouriteListViewState");
+        yield _setListViewState();
+      } else if (state is FavouriteGridViewState) {
+        print("event: FavouriteGridViewEvent");
+        yield _setGridViewState();
+      } else {
+        print("event: FavouriteListViewState");
+        yield _setListViewState();
       }
+    } else if (event is FavouriteListViewEvent) {
+      print("event: FavouriteListViewState");
+      yield _setListViewState();
+    } else if (event is FavouriteGridViewEvent) {
+      print("event: FavouriteGridViewEvent");
+      yield _setGridViewState();
     }
+  }
+
+  FavouriteState _setListViewState() {
+    print("_setListViewState");
+    return new FavouriteListViewState(
+        favouriteProducts: this.favouriteRepository.getFavourites(),
+        hashtags: hashtagRepository.getHashtags());
+  }
+
+  FavouriteState _setGridViewState() {
+    print("_setGridViewState");
+    return new FavouriteGridViewState(
+        favouriteProducts: this.favouriteRepository.getFavourites(),
+        hashtags: hashtagRepository.getHashtags());
   }
 }

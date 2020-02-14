@@ -19,13 +19,26 @@ class FavouriteInitialState extends FavouriteState {
 }
 
 @immutable
-class FavouriteLoadedState extends FavouriteState {
+class FavouriteListViewState extends FavouriteState {
   final List<Product> favouriteProducts;
   final List<HashTag> hashtags;
 
-  FavouriteLoadedState({this.favouriteProducts,this.hashtags});
+  FavouriteListViewState({this.favouriteProducts,this.hashtags});
 
-  String toString() => 'FavouriteLoadedState';
+  String toString() => 'FavouriteListViewState';
+
+  @override
+  List<Object> get props => [favouriteProducts,hashtags];
+}
+
+@immutable
+class FavouriteGridViewState extends FavouriteState {
+  final List<Product> favouriteProducts;
+  final List<HashTag> hashtags;
+
+  FavouriteGridViewState({this.favouriteProducts,this.hashtags});
+
+  String toString() => 'FavouriteGridViewState';
 
   @override
   List<Object> get props => [favouriteProducts,hashtags];

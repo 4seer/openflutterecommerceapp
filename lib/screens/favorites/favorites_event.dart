@@ -16,3 +16,15 @@ class FavouriteLoadEvent extends FavouriteEvent {
   @override
   String toString() => 'Favourite is Loaded';
 }
+
+@immutable
+class FavouriteListViewEvent extends FavouriteEvent {
+  @override
+  String toString() => 'Favourite is Loaded in ListView';
+}
+
+@immutable
+class FavouriteGridViewEvent extends FavouriteEvent {
+  @override
+  String toString() => 'Favourite is Loaded in GridView';
+}
