@@ -56,8 +56,8 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                 Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                 Container(
                     width: width,
-                    child:
-                    OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
+                    child: OpenFlutterHashTagList(
+                        tags: state.hashtags, height: 30)),
                 Container(
                   padding: EdgeInsets.only(
                       top: AppSizes.sidePadding, bottom: AppSizes.sidePadding),

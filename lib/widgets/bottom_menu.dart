@@ -3,7 +3,7 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 
 class OpenFlutterBottomMenu extends StatelessWidget {
@@ -11,26 +11,17 @@ class OpenFlutterBottomMenu extends StatelessWidget {
 
   OpenFlutterBottomMenu(this.menuIndex);
 
-  Color colorByIndex(ThemeData theme, int index){
-    return index == menuIndex ? theme.accentColor: theme.primaryColorLight;
+  Color colorByIndex(ThemeData theme, int index) {
+    return index == menuIndex ? theme.accentColor : theme.primaryColorLight;
   }
 
-  BottomNavigationBarItem getItem(String image, String title, ThemeData theme, int index){
+  BottomNavigationBarItem getItem(
+      IconData image, String title, ThemeData theme, int index) {
     return BottomNavigationBarItem(
-        icon: SvgPicture.asset(image, 
-          height: 24,
-          width: 24,
-          color: colorByIndex(theme, index)
-        ), 
-        title: Text(title, 
-          style: TextStyle(
-            fontSize: 10,
-            color: colorByIndex(theme, index)
-          )
-        )
-    );
+        icon: Icon(image, color: colorByIndex(theme, index)),
+        title: Text(title,
+            style: TextStyle(fontSize: 10, color: colorByIndex(theme, index))));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +49,11 @@ class OpenFlutterBottomMenu extends StatelessWidget {
         }
       },
       items: [
-        getItem('assets/icons/bottom_menu/home.svg', 'Home', _theme, 0),
-        getItem('assets/icons/bottom_menu/cart.svg', 'Shop', _theme, 1),
-        getItem('assets/icons/bottom_menu/bag.svg', 'Bag', _theme, 2),
-        getItem('assets/icons/bottom_menu/favorites.svg', 'Favorites', _theme, 3),
-        getItem('assets/icons/bottom_menu/profile.svg', 'Profile', _theme, 4),
+        getItem(FontAwesomeIcons.home, 'Home', _theme, 0),
+        getItem(FontAwesomeIcons.shoppingCart, 'Shop', _theme, 1),
+        getItem(FontAwesomeIcons.shoppingBag, 'Bag', _theme, 2),
+        getItem(FontAwesomeIcons.heart, 'Favorites', _theme, 3),
+        getItem(FontAwesomeIcons.user, 'Profile', _theme, 4),
       ],
     );
   }

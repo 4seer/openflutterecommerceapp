@@ -66,8 +66,8 @@ class _ProductsListViewState extends State<ProductsListView> {
                                 EdgeInsets.only(top: AppSizes.sidePadding)),
                         Container(
                             width: width,
-                            child:
-                            OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
+                            child: OpenFlutterHashTagList(
+                                tags: state.hashtags, height: 30)),
                         Container(
                           padding: EdgeInsets.only(
                               top: AppSizes.sidePadding,
