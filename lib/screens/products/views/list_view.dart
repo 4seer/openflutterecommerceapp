@@ -40,7 +40,7 @@ class _ProductsListViewState extends State<ProductsListView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.subtitle
+                    style: _theme.textTheme.subtitle2
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -67,7 +67,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                         Container(
                             width: width,
                             child:
-                                HashTagList(tags: state.hashtags, height: 30)),
+                            OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
                         Container(
                           padding: EdgeInsets.only(
                               top: AppSizes.sidePadding,

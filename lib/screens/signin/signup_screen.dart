@@ -76,13 +76,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   keyboard: TextInputType.visiblePassword,
                   isPassword: true,
                 ),
-                RightArrowAction(
+                OpenFlutterRightArrow(
                   "Already have an account",
                   onClick: _showSignInScreen,
                 ),
                 OpenFlutterButton(
-                  title: "SIGN UP", 
-                  onPressed: _validateAndSend),
+                    title: "SIGN UP", onPressed: _validateAndSend),
                 SizedBox(
                   height: sizeBetween,
                 ),
@@ -97,14 +96,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        ServiceButton(
+                        OpenFlutterServiceButton(
                           serviceType: ServiceType.Google,
                           onPressed: () {
                             BlocProvider.of<SignUpBloc>(context)
                                 .add(SignUpWithGoogle());
                           },
                         ),
-                        ServiceButton(
+                        OpenFlutterServiceButton(
                           serviceType: ServiceType.Facebook,
                           onPressed: () {
                             BlocProvider.of<SignUpBloc>(context)

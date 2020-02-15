@@ -37,7 +37,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
-                style: _theme.textTheme.subtitle
+                style: _theme.textTheme.subtitle2
                     .copyWith(color: _theme.errorColor)));
       }
       return Container();
@@ -56,7 +56,8 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                 Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                 Container(
                     width: width,
-                    child: HashTagList(tags: state.hashtags, height: 30)),
+                    child:
+                    OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
                 Container(
                   padding: EdgeInsets.only(
                       top: AppSizes.sidePadding, bottom: AppSizes.sidePadding),
