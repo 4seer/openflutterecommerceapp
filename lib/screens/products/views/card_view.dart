@@ -56,7 +56,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                 Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                 Container(
                     width: width,
-                    child: HashTagList(tags: state.hashtags, height: 30)),
+                    child: OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
                 Container(
                   padding: EdgeInsets.only(
                       top: AppSizes.sidePadding, bottom: AppSizes.sidePadding),
@@ -68,10 +68,10 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     sortBy: sortBy,
                     onFilterClicked: (() => {}),
                     onChangeViewClicked: (() => {
-                          BlocProvider.of<ProductBloc>(context)
-                              .add(ProductShowListEvent(state.category.id)),
-                          widget.changeView(changeType: ViewChangeType.Backward)
-                        }),
+                      BlocProvider.of<ProductBloc>(context)
+                          .add(ProductShowListEvent(state.category.id, sortBy)),
+                      widget.changeView(changeType: ViewChangeType.Backward)
+                    }),
                     onSortClicked: ((SortBy sortBy) => {}),
                   ),
                 ),

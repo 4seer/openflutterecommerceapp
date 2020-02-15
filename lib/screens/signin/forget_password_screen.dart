@@ -67,7 +67,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     validator: Validator.validateEmail,
                     keyboard: TextInputType.emailAddress,
                   ),
-                  RightArrowAction(
+                  OpenFlutterRightArrow(
                     "Already have an account",
                     onClick: _showSignInScreen,
                   ),
@@ -87,14 +87,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          ServiceButton(
+                          OpenFlutterServiceButton(
                             serviceType: ServiceType.Google,
                             onPressed: () {
                               BlocProvider.of<SignUpBloc>(context)
                                   .add(SignUpWithGoogle());
                             },
                           ),
-                          ServiceButton(
+                          OpenFlutterServiceButton(
                             serviceType: ServiceType.Facebook,
                             onPressed: () {
                               BlocProvider.of<SignUpBloc>(context)

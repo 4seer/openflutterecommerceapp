@@ -69,7 +69,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   keyboard: TextInputType.visiblePassword,
                   isPassword: true,
                 ),
-                RightArrowAction(
+                OpenFlutterRightArrow(
                   "Forgot your password",
                   onClick: _showForgotPassword,
                 ),
@@ -89,14 +89,14 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        ServiceButton(
+                        OpenFlutterServiceButton(
                           serviceType: ServiceType.Google,
                           onPressed: () {
                             BlocProvider.of<SignUpBloc>(context)
                                 .add(SignUpWithGoogle());
                           },
                         ),
-                        ServiceButton(
+                        OpenFlutterServiceButton(
                           serviceType: ServiceType.Facebook,
                           onPressed: () {
                             BlocProvider.of<SignUpBloc>(context)

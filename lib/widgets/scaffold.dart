@@ -57,7 +57,7 @@ class OpenFlutterScaffold extends StatelessWidget {
         ]
       ):null,
       body: this.body,
-      bottomNavigationBar: OpenFlutterEcommerceBottomMenu(bottomMenuIndex),
+      bottomNavigationBar: OpenFlutterBottomMenu(bottomMenuIndex),
     );
   }
 }

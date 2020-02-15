@@ -8,11 +8,13 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
 import 'package:openflutterecommerce/widgets/block_header.dart';
+import 'package:openflutterecommerce/widgets/clickable_line.dart';
 import 'package:openflutterecommerce/widgets/hashtag_list.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
 import 'package:openflutterecommerce/widgets/product_tile.dart';
 
 import '../products.dart';
+
 
 class ProductsListView extends StatefulWidget {
   final Function({@required ViewChangeType changeType, int index}) changeView;
@@ -50,8 +52,8 @@ class _ProductsListViewState extends State<ProductsListView> {
             builder: (context, state) {
               if (state is ProductsListViewState) {
                 return SingleChildScrollView(
-                    child: Column(children: <Widget>[
-                  Container(
+                  child: Column(children: <Widget>[
+                    Container(
                       color: AppColors.white,
                       child: Column(children: <Widget>[
                         Padding(
@@ -67,7 +69,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                         Container(
                             width: width,
                             child:
-                                HashTagList(tags: state.hashtags, height: 30)),
+                                OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
                         Container(
                           padding: EdgeInsets.only(
                               top: AppSizes.sidePadding,
@@ -82,7 +84,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                             onChangeViewClicked: (() => {
                                   bloc
                                     ..add(ProductShowCardEvent(
-                                        state.category.id)),
+                                        state.category.id, sortBy)),
                                   widget.changeView(
                                       changeType: ViewChangeType.Forward)
                                 }),
@@ -90,18 +92,65 @@ class _ProductsListViewState extends State<ProductsListView> {
                           ),
                         ),
                       ])),
-                  state.isLoading
+                    state.isLoading
                       ? Center(child: CircularProgressIndicator())
                       : Container(
+                          height: 500,
                           padding: EdgeInsets.only(top: AppSizes.sidePadding),
                           color: _theme.backgroundColor,
-                          child: Column(
-                              children:
-                                  buildProductList(state.products, width)))
-                ]));
+                          child:  Stack(
+                            children: <Widget>[
+                              Container(
+                                height: 100,
+                                child: Column(
+                                  children: buildProductList(state.products, width),
+                                )
+                              ),/*
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                child: Container(
+                                  color: AppColors.white,
+                                  height: 400,
+                                  width: width,
+                                  child: Column(children: <Widget>[
+                                    Text("Sort by",
+                                      style: _theme.textTheme.subtitle
+                                    ),
+                                    Column(children:buildSortBy(
+                                      width, bloc, state.category.id)
+                                    )
+                                  ],
+                                ),
+                              )
+                            )*/
+                          ]
+                        )
+                      )
+                    ]
+                  )
+                );
               }
               return Center(child: CircularProgressIndicator());
             }));
+  }
+
+  List<Widget> buildSortBy(double width, ProductBloc bloc, int categoryId){
+    List<String> sortByVariantTitles = ["Popular", "Newest", "Customer Review","Price: lowest to hight", "Price: highest to low"];
+    List<SortBy> sortByVariants = [SortBy.Popular, SortBy.Newest, SortBy.CustomerReview, SortBy.PriceLowestToHigh, SortBy.PriceHighestToLow];
+    List<Widget> widgets = List<Widget>();
+    for(int i = 0; i< sortByVariants.length && i < sortByVariantTitles.length; i++){
+      widgets.add(
+        OpenFlutterClickableLine(
+          height: 58,
+          width: width,
+          title: sortByVariantTitles[i],
+          onTap: ( () => {
+            bloc..add(ProductChangeSortByEvent(categoryId, sortByVariants[i]))
+          }))
+      );
+    }
+    return widgets;
   }
 
   buildProductList(List<Product> products, double width) {
