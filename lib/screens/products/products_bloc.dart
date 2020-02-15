@@ -30,12 +30,40 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   @override
   Stream<ProductState> mapEventToState(ProductEvent event) async* {
     ProductStateData data = ProductStateData();
-    if (event is ProductShowListEvent) {
+    if ( event is ProductChangeSortByEvent){
+      switch ( this.state.runtimeType ){
+        case ProductsListViewState:
+          ProductsListViewState state = this.state as ProductsListViewState;
+          yield state.copyWith(sortBy: event.sortBy, showSortBy: false);
+        break;
+
+        case ProductsCardViewState:
+          ProductsCardViewState state = this.state as ProductsCardViewState;
+          yield state.copyWith(sortBy: event.sortBy, showSortBy: false);
+        break;
+      }
+    }
+    else if ( event is ProductShowSortByEvent) {
+      switch ( this.state.runtimeType ){
+        case ProductsListViewState:
+          ProductsListViewState state = this.state as ProductsListViewState;
+          yield state.copyWith(showSortBy: !state.showSortBy);
+        break;
+
+        case ProductsCardViewState:
+          ProductsCardViewState state = this.state as ProductsCardViewState;
+          yield state.copyWith(showSortBy: !state.showSortBy);
+        break;
+      }
+    }
+    else if (event is ProductShowListEvent) {
       if (this.state is ProductsListViewState) {
         ProductsListViewState state = this.state as ProductsListViewState;
         if (state.category.id != event.categoryId) {
           //Set state to loading
-          yield state.copyWith(loading: true);
+          yield state.copyWith(loading: true, 
+            showSortBy: false,
+            sortBy: event.sortBy);
           //Load data from repositories
           data = getStateData(event.categoryId);
           //set state to loaded and update data
@@ -43,12 +71,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
               products: data.products,
               hashtags: data.hashtags,
               loading: false,
+              showSortBy: false,  
               category: data.category);
         }
       } else {
         data = getStateData(event.categoryId);
         yield ProductsListViewState(
             isLoading: false,
+            showSortBy: false,
+            sortBy: event.sortBy,
             category: data.category,
             hashtags: data.hashtags,
             products: data.products);
@@ -57,11 +88,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       if (this.state is ProductsCardViewState) {
         ProductsCardViewState state = this.state as ProductsCardViewState;
         if (state.category.id != event.categoryId) {
-          yield state.copyWith(loading: true);
+          yield state.copyWith(loading: true,
+            showSortBy: false);
           data = getStateData(event.categoryId);
           yield state.copyWith(
             products: data.products,
             loading: false,
+            showSortBy: false,
+            sortBy: event.sortBy,
             category: data.category,
             hashtags: data.hashtags,
           );
@@ -70,6 +104,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         data = getStateData(event.categoryId);
         yield ProductsCardViewState(
             isLoading: false,
+            showSortBy: false,
+            sortBy: event.sortBy,
             category: data.category,
             hashtags: data.hashtags,
             products: data.products);

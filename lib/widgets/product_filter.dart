@@ -56,7 +56,7 @@ class OpenFlutterProductFilter extends StatelessWidget {
           ),
           InkWell(
             onTap: ( () => {
-              this.onFilterClicked()
+              this.onSortClicked(sortBy)
             }),
             child: Row(
               children: <Widget>[

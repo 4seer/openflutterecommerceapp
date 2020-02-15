@@ -12,6 +12,7 @@ class AppSizes {
   static double buttonRadius = 25;
   static double imageRadius = 8;
   static double linePadding = 4;
+  static double widgetBorderRadius = 34;
   static const TEXT_FIELD_RADIUS = 4.0;
 }
 
@@ -19,6 +20,7 @@ class AppColors {
   static const red = Color(0xFFDB3022);
   static const black = Color(0xFF222222);
   static const lightGray = Color(0xFF9B9B9B);
+  static const darkGray = Color(0xFF979797);
   static const white = Color(0xFFFFFFFF);
   static const orange = Color(0xFFFFBA49);
   static const background = Color(0xFFE5E5E5);

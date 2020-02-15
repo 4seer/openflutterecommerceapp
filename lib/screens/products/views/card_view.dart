@@ -10,6 +10,7 @@ import 'package:openflutterecommerce/widgets/block_header.dart';
 import 'package:openflutterecommerce/widgets/hashtag_list.dart';
 import 'package:openflutterecommerce/widgets/product_card.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
+import 'package:openflutterecommerce/widgets/sortby.dart';
 
 import '../../wrapper.dart';
 import '../products.dart';
@@ -31,7 +32,10 @@ class _ProductsCardViewState extends State<ProductsCardView> {
   Widget build(BuildContext context) {
     final double width =
         MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
+    final double fullWidth = MediaQuery.of(context).size.width;
+    final double topPartHeight = 360 ;
     ThemeData _theme = Theme.of(context);
+    final bloc = BlocProvider.of<ProductBloc>(context);
     return BlocListener<ProductBloc, ProductState>(listener: (context, state) {
       if (state is ProductsErrorState) {
         return Container(
@@ -72,26 +76,56 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                           .add(ProductShowListEvent(state.category.id, sortBy)),
                       widget.changeView(changeType: ViewChangeType.Backward)
                     }),
-                    onSortClicked: ((SortBy sortBy) => {}),
+                    onSortClicked: ((SortBy sortBy) => {
+                      bloc
+                        ..add(ProductShowSortByEvent(
+                          state.category.id, sortBy)),
+                    }),
                   ),
                 ),
               ])),
           state.isLoading
               ? Center(child: CircularProgressIndicator())
               : Container(
+                  height: MediaQuery.of(context).size.height - topPartHeight,
                   width: width,
-                  height: state.products.length > 0
-                      ? width * state.products.length
-                      : width * 1.6,
                   padding: EdgeInsets.only(top: AppSizes.sidePadding),
-                  //color: _theme.backgroundColor,
-                  child: GridView.extent(
-                      childAspectRatio: 1 / 1.6,
-                      maxCrossAxisExtent: width / 2,
-                      padding: const EdgeInsets.all(4),
-                      mainAxisSpacing: 4,
-                      crossAxisSpacing: 4,
-                      children: buildProductList(state.products, width)))
+                  color: _theme.backgroundColor,
+                  child:  Stack(
+                    children: <Widget>[
+                      Container(
+                        height: MediaQuery.of(context).size.height - topPartHeight,
+                        width: width,
+                        child: SingleChildScrollView(
+                          child: Container(
+                            width: width,
+                            height: state.products.length > 0
+                              ? width * state.products.length
+                              : width * 1.6,
+                            padding: EdgeInsets.only(top: AppSizes.sidePadding),
+                            //color: _theme.backgroundColor,
+                            child: GridView.extent(
+                              childAspectRatio: 1 / 1.6,
+                              maxCrossAxisExtent: width / 2,
+                              padding: const EdgeInsets.all(4),
+                              mainAxisSpacing: 4,
+                              crossAxisSpacing: 4,
+                              children: buildProductList(state.products, width)
+                              )
+                            )
+                          )
+                      ),
+
+                      state.showSortBy?    
+                        OpenFlutterSortBy(
+                          currentSortBy: state.sortBy,
+                          onSelect: ( (SortBy newSortBy)=>{
+                            bloc..add(ProductChangeSortByEvent(state.category.id, newSortBy))
+                          })
+                        ) : Container()
+                  ]
+                )
+              )
         ]));
       }
       return Center(child: CircularProgressIndicator());

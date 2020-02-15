@@ -25,6 +25,14 @@ class ProductShowListEvent extends ProductEvent {
 }
 
 @immutable
+class ProductShowSortByEvent extends ProductEvent {
+  ProductShowSortByEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
+
+  @override
+  String toString() => 'ProductShowSortByEvent';
+}
+
+@immutable
 class ProductShowCardEvent extends ProductEvent {
   ProductShowCardEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
 

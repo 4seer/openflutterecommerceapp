@@ -113,6 +113,54 @@ class ProductRepository {
             categoryTitle: 'Sitlly',
             isNew: true
           ),
+          Product(
+            id: 5,
+            image: "assets/thumbs/dress/dress2.png",
+            discountPercent: 20,
+            favorite: false,
+            rating: 5,
+            ratingCount: 10,
+            price: 15,
+            title: 'Evening Dress',
+            categoryTitle: 'Dorothy Perkins',
+            isNew: true
+          ),
+          Product(
+            id: 6,
+            image: "assets/thumbs/dress/dress1.png",
+            discountPercent: 15,
+            favorite: false,
+            rating: 5,
+            ratingCount: 10,
+            price: 22,
+            title: 'Short Dress',
+            categoryTitle: 'Sitlly',
+            isNew: false
+          ),
+          Product(
+            id: 7,
+            image: "assets/thumbs/dress/dress2.png",
+            discountPercent: 20,
+            favorite: false,
+            rating: 5,
+            ratingCount: 10,
+            price: 15,
+            title: 'Evening Dress',
+            categoryTitle: 'Dorothy Perkins',
+            isNew: false
+          ),
+          Product(
+            id: 8,
+            image: "assets/thumbs/dress/dress1.png",
+            discountPercent: 15,
+            favorite: false,
+            rating: 5,
+            ratingCount: 10,
+            price: 22,
+            title: 'Short Dress',
+            categoryTitle: 'Sitlly',
+            isNew: true
+          ),
         ];
         return products;
       break;
