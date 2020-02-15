@@ -73,7 +73,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     onFilterClicked: (() => {}),
                     onChangeViewClicked: (() => {
                       BlocProvider.of<ProductBloc>(context)
-                          .add(ProductShowListEvent(state.category.id, sortBy)),
+                          .add(ProductShowCardEvent(state.category.id, sortBy)),
                       widget.changeView(changeType: ViewChangeType.Backward)
                     }),
                     onSortClicked: ((SortBy sortBy) => {
@@ -88,32 +88,36 @@ class _ProductsCardViewState extends State<ProductsCardView> {
               ? Center(child: CircularProgressIndicator())
               : Container(
                   height: MediaQuery.of(context).size.height - topPartHeight,
-                  width: width,
-                  padding: EdgeInsets.only(top: AppSizes.sidePadding),
+                  width: fullWidth,
+                  //padding: EdgeInsets.only(top: AppSizes.sidePadding),
                   color: _theme.backgroundColor,
                   child:  Stack(
                     children: <Widget>[
-                      Container(
-                        height: MediaQuery.of(context).size.height - topPartHeight,
-                        width: width,
-                        child: SingleChildScrollView(
-                          child: Container(
-                            width: width,
-                            height: state.products.length > 0
-                              ? width * state.products.length
-                              : width * 1.6,
-                            padding: EdgeInsets.only(top: AppSizes.sidePadding),
-                            //color: _theme.backgroundColor,
-                            child: GridView.extent(
-                              childAspectRatio: 1 / 1.6,
-                              maxCrossAxisExtent: width / 2,
-                              padding: const EdgeInsets.all(4),
-                              mainAxisSpacing: 4,
-                              crossAxisSpacing: 4,
-                              children: buildProductList(state.products, width)
+                      Positioned(
+                        left: AppSizes.sidePadding,
+                        child: Container(
+                          //padding: EdgeInsets.only(left: AppSizes.sidePadding),
+                          height: MediaQuery.of(context).size.height - topPartHeight,
+                          width: width,
+                          child: SingleChildScrollView(
+                            child: Container(
+                              width: width,
+                              height: state.products.length > 0
+                                ? width * state.products.length
+                                : width * 1.6,
+                              padding: EdgeInsets.only(top: AppSizes.sidePadding),
+                              //color: _theme.backgroundColor,
+                              child: GridView.extent(
+                                childAspectRatio: 1 / 1.6,
+                                maxCrossAxisExtent: width / 2,
+                                padding: const EdgeInsets.all(4),
+                                mainAxisSpacing: 4,
+                                crossAxisSpacing: 4,
+                                children: buildProductList(state.products, width)
+                                )
                               )
                             )
-                          )
+                        )
                       ),
 
                       state.showSortBy?    

@@ -47,12 +47,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       switch ( this.state.runtimeType ){
         case ProductsListViewState:
           ProductsListViewState state = this.state as ProductsListViewState;
-          yield state.copyWith(showSortBy: !state.showSortBy);
+          yield state.copyWith(sortBy: event.sortBy, showSortBy: !state.showSortBy);
         break;
 
         case ProductsCardViewState:
           ProductsCardViewState state = this.state as ProductsCardViewState;
-          yield state.copyWith(showSortBy: !state.showSortBy);
+          yield state.copyWith(sortBy: event.sortBy, showSortBy: !state.showSortBy);
         break;
       }
     }
@@ -103,12 +103,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       } else {
         data = getStateData(event.categoryId);
         yield ProductsCardViewState(
-            isLoading: false,
-            showSortBy: false,
-            sortBy: event.sortBy,
-            category: data.category,
-            hashtags: data.hashtags,
-            products: data.products);
+          isLoading: false,
+          showSortBy: false,
+          sortBy: event.sortBy,
+          category: data.category,
+          hashtags: data.hashtags,
+          products: data.products
+        );
       }
     }
   }

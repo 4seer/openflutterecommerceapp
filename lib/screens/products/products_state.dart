@@ -40,12 +40,13 @@ class ProductsLoadedState extends ProductState {
       bool showSortBy,
       SortBy sortBy}) {
     return ProductsLoadedState(
-        category: category ?? this.category,
-        products: products ?? this.products,
-        hashtags: hashtags ?? this.hashtags,
-        isLoading: loading ?? this.isLoading,
-        showSortBy: showSortBy ?? this.showSortBy,
-        sortBy: sortBy ?? this.sortBy);
+      category: category ?? this.category,
+      products: products ?? this.products,
+      hashtags: hashtags ?? this.hashtags,
+      isLoading: loading ?? this.isLoading,
+      showSortBy: showSortBy ?? this.showSortBy,
+      sortBy: sortBy ?? this.sortBy
+    );
   }
 
    @override
@@ -87,13 +88,13 @@ class ProductsListViewState extends ProductsLoadedState {
       bool showFilterBy,
       SortBy sortBy})
       : super(
-            hashtags: hashtags,
-            category: category,
-            products: products,
-            isLoading: isLoading,
-            showSortBy: showSortBy,
-            sortBy: sortBy
-            );
+        hashtags: hashtags,
+        category: category,
+        products: products,
+        isLoading: isLoading,
+        showSortBy: showSortBy,
+        sortBy: sortBy
+      );
 
   ProductsListViewState copyWith(
       {Category category,
@@ -131,6 +132,7 @@ class ProductsCardViewState extends ProductsLoadedState {
             products: products,
             isLoading: isLoading,
             showSortBy: showSortBy,
+            sortBy: sortBy
             );
 
   ProductsCardViewState copyWith(
