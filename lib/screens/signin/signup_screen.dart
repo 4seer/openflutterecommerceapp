@@ -81,8 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onClick: _showSignInScreen,
                 ),
                 OpenFlutterButton(
-                  title: "SIGN UP", 
-                  onPressed: _validateAndSend),
+                    title: "SIGN UP", onPressed: _validateAndSend),
                 SizedBox(
                   height: sizeBetween,
                 ),

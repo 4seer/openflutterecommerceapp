@@ -71,8 +71,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     "Already have an account",
                     onClick: _showSignInScreen,
                   ),
-                  OpenFlutterButton(title: "SEND", 
-                    onPressed: _validateAndSend),
+                  OpenFlutterButton(title: "SEND", onPressed: _validateAndSend),
                   SizedBox(
                     height: sizeBetween * 2,
                   ),

@@ -69,7 +69,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                         Container(
                             width: width,
                             child:
-                                OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
+                            OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
                         Container(
                           padding: EdgeInsets.only(
                               top: AppSizes.sidePadding,
@@ -95,35 +95,17 @@ class _ProductsListViewState extends State<ProductsListView> {
                     state.isLoading
                       ? Center(child: CircularProgressIndicator())
                       : Container(
-                          height: 500,
+                          height: MediaQuery.of(context).size.height - 350,
                           padding: EdgeInsets.only(top: AppSizes.sidePadding),
                           color: _theme.backgroundColor,
                           child:  Stack(
                             children: <Widget>[
                               Container(
-                                height: 100,
+                                height: MediaQuery.of(context).size.height - 350,
                                 child: Column(
                                   children: buildProductList(state.products, width),
                                 )
-                              ),/*
-                              Positioned(
-                                bottom: 0,
-                                left: 0,
-                                child: Container(
-                                  color: AppColors.white,
-                                  height: 400,
-                                  width: width,
-                                  child: Column(children: <Widget>[
-                                    Text("Sort by",
-                                      style: _theme.textTheme.subtitle
-                                    ),
-                                    Column(children:buildSortBy(
-                                      width, bloc, state.category.id)
-                                    )
-                                  ],
-                                ),
-                              )
-                            )*/
+                              ),
                           ]
                         )
                       )

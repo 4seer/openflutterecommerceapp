@@ -73,8 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   "Forgot your password",
                   onClick: _showForgotPassword,
                 ),
-                OpenFlutterButton(title: "LOGIN", 
-                  onPressed: _validateAndSend),
+                OpenFlutterButton(title: "LOGIN", onPressed: _validateAndSend),
                 SizedBox(
                   height: sizeBetween * 2,
                 ),
