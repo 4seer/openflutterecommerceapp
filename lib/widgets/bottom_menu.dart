@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 
-class OpenFlutterEcommerceBottomMenu extends StatelessWidget {
+class OpenFlutterBottomMenu extends StatelessWidget {
   final int menuIndex;
 
-  OpenFlutterEcommerceBottomMenu(this.menuIndex);
+  OpenFlutterBottomMenu(this.menuIndex);
 
   Color colorByIndex(ThemeData theme, int index){
     return index == menuIndex ? theme.accentColor: theme.primaryColorLight;

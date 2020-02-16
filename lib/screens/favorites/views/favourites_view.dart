@@ -44,7 +44,7 @@ class FavouritesView extends StatelessWidget {
           Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
           Container(
               width: width,
-              child: HashTagList(
+              child: OpenFlutterHashTagList(
                   tags: state is FavouriteListViewState
                       ? state.hashtags
                       : List<HashTag>(),

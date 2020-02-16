@@ -44,6 +44,21 @@ void main() {
 }
 
 class OpenFlutterEcommerceApp extends StatelessWidget {
+  get _signIn => BlocProvider<SignInBloc>(
+        create: (context) => SignInBloc(),
+        child: SignInScreen(),
+      );
+
+  get _signUp => BlocProvider<SignUpBloc>(
+        create: (context) => SignUpBloc(),
+        child: SignUpScreen(),
+      );
+
+  get _forgetPassword => BlocProvider<ForgetPasswordBloc>(
+        create: (context) => ForgetPasswordBloc(),
+        child: ForgetPasswordScreen(),
+      );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,7 +68,9 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
         OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.cart: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.favourites: (context) => FavouriteScreen(),
-        OpenFlutterEcommerceRoutes.SIGNIN: (context) => SignInScreen(),
+        OpenFlutterEcommerceRoutes.SIGNIN: (context) => _signIn,
+        OpenFlutterEcommerceRoutes.SIGNUP: (context) => _signUp,
+        OpenFlutterEcommerceRoutes.FORGET_PASSWORD: (context) => _forgetPassword,
         OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
         OpenFlutterEcommerceRoutes.profile: (context) =>
             BlocBuilder<AuthenticationBloc, AuthenticationState>(
@@ -61,13 +78,11 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
               if (state is Authenticated) {
                 return HomeScreen(); //TODO profile properties should be here
               } else if (state is Unauthenticated) {
-                return SignUpScreen();
+                return _signUp;
               } else {
                 return SplashScreen();
               }
             }),
-        OpenFlutterEcommerceRoutes.FORGET_PASSWORD: (context) =>
-            ForgetPasswordScreen(),
       },
     );
   }

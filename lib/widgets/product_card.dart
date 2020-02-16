@@ -21,6 +21,7 @@ class OpenFlutterProductCard extends StatelessWidget {
       children: <Widget>[
         Container(
           //height: height*2,
+          padding: EdgeInsets.symmetric(horizontal: AppSizes.widgetSidePadding/2),
           width: width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -28,7 +29,6 @@ class OpenFlutterProductCard extends StatelessWidget {
             children: <Widget>[
               Container(
                 width:  width+AppSizes.widgetSidePadding,
-                padding: EdgeInsets.only(right: AppSizes.widgetSidePadding),
                 child: Container(
                   height: width*1.13,
                   decoration: new BoxDecoration(
@@ -91,7 +91,7 @@ class OpenFlutterProductCard extends StatelessWidget {
   buildTopLabel(Product product, ThemeData theme) {
     return Positioned(
       top: 5,
-      left: 5,
+      left: 5 + AppSizes.sidePadding/2,
       child: product.isNew ?
         Container(
           padding: EdgeInsets.all(AppSizes.linePadding*1.5),

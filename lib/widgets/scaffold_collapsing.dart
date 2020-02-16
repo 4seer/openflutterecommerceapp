@@ -4,7 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/widgets/bottom_menu.dart';
+
+import 'bottom_menu.dart';
 
 class OpenFlutterCollapsingScaffold extends StatelessWidget {
   final Color background;
@@ -39,7 +40,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
         body:  this.body,
       ),
       backgroundColor: this.background,
-      bottomNavigationBar: OpenFlutterEcommerceBottomMenu(bottomMenuIndex),
+      bottomNavigationBar: OpenFlutterBottomMenu(bottomMenuIndex),
     );
   }
 

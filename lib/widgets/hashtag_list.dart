@@ -8,13 +8,13 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/hashtag.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
 
-class HashTagList extends StatelessWidget {
+class OpenFlutterHashTagList extends StatelessWidget {
 
   final List<HashTag> tags;
   final double height;
   final Function onTap;
 
-  const HashTagList({Key key, this.tags, this.onTap, this.height}) : super(key: key);
+  const OpenFlutterHashTagList({Key key, this.tags, this.onTap, this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

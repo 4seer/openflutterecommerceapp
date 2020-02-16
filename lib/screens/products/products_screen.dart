@@ -9,6 +9,7 @@ import 'package:openflutterecommerce/repos/hashtag_repository.dart';
 import 'package:openflutterecommerce/repos/product_repository.dart';
 import 'package:openflutterecommerce/screens/products/products.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
+import 'package:openflutterecommerce/widgets/product_filter.dart';
 import 'package:openflutterecommerce/widgets/scaffold.dart';
 
 import 'products.dart';
@@ -35,7 +36,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 productRepository: ProductRepository(),
                 categoryRepository: CategoryRepository(),
                 hashtagRepository: HashtagRepository())
-              ..add(ProductShowListEvent(widget.categoryId));
+              ..add(ProductShowListEvent(widget.categoryId, SortBy.Popular));
           },
           child: ProductsWrapper()),
       bottomMenuIndex: 1,
