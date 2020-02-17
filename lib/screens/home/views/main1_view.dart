@@ -46,7 +46,7 @@ class _Main1ViewState extends State<Main1View> {
                   padding: EdgeInsets.only(left: AppSizes.sidePadding),
                   width: width/2,
                   child: Text('Fashion sale',
-                    style: _theme.textTheme.headline)
+                    style: _theme.textTheme.headline1)
                 ),
                 Container(
                   padding: EdgeInsets.only(left: AppSizes.sidePadding,

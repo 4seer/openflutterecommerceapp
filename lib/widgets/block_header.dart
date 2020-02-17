@@ -41,7 +41,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
                     width: rightLinkWidth,
                     child: Align(alignment: Alignment.centerRight,
                       child: Text(this.linkText,
-                        style: _theme.textTheme.display2
+                        style: _theme.textTheme.bodyText2
                       )
                     )
                   )
@@ -51,7 +51,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
           ),
           this.description != null?
             Text(this.description,
-              style: _theme.textTheme.display2)
+              style: _theme.textTheme.bodyText2)
             :Container()
         ]
       )

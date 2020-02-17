@@ -13,6 +13,7 @@ import 'package:openflutterecommerce/screens/splash_screen.dart';
 
 import 'authentication/authentication.dart';
 import 'config/routes.dart';
+import 'screens/checkout/checkout_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/signin/signin.dart';
 
@@ -69,6 +70,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.cart: (context) => CartScreen(),
+        OpenFlutterEcommerceRoutes.checkout: (context) => CheckoutScreen(),
         OpenFlutterEcommerceRoutes.favourites: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.signin: (context) => _signIn,
         OpenFlutterEcommerceRoutes.signup: (context) => _signUp,

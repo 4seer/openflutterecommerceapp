@@ -3,6 +3,7 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
@@ -29,7 +30,15 @@ class _CartViewState extends State<CartView> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          Text('User cart')
+          Text('User cart'),
+          OpenFlutterButton(
+            height: 50,
+            width: 200,
+            title: "Proceed to checkout",
+            onPressed: (() => {
+              Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.checkout)
+            })
+          )
         ]
       )
     );

@@ -45,7 +45,7 @@ class _ProductsListViewState extends State<ProductsListView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                  style: _theme.textTheme.subtitle
+                  style: _theme.textTheme.headline3
                     .copyWith(color: _theme.errorColor)));
           }
           return Container();

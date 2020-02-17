@@ -39,10 +39,10 @@ class _ProductsCardViewState extends State<ProductsCardView> {
     return BlocListener<ProductBloc, ProductState>(listener: (context, state) {
       if (state is ProductsErrorState) {
         return Container(
-            padding: EdgeInsets.all(AppSizes.sidePadding),
-            child: Text('An error occured',
-                style: _theme.textTheme.subtitle
-                    .copyWith(color: _theme.errorColor)));
+          padding: EdgeInsets.all(AppSizes.sidePadding),
+          child: Text('An error occured',
+              style: _theme.textTheme.headline3
+                  .copyWith(color: _theme.errorColor)));
       }
       return Container();
     }, child: BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
@@ -73,7 +73,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     onFilterClicked: (() => {}),
                     onChangeViewClicked: (() => {
                       BlocProvider.of<ProductBloc>(context)
-                          .add(ProductShowCardEvent(state.category.id, sortBy)),
+                          .add(ProductShowListEvent(state.category.id, sortBy)),
                       widget.changeView(changeType: ViewChangeType.Backward)
                     }),
                     onSortClicked: ((SortBy sortBy) => {

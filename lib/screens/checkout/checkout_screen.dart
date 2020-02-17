@@ -20,17 +20,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: OpenFlutterScaffold(
-      background: null,
-      title: null,
-      body: BlocProvider<CheckoutBloc>(
+      child: OpenFlutterScaffold(
+        background: null,
+        title: "Checkout",
+        body: BlocProvider<CheckoutBloc>(
           create: (context) {
             return CheckoutBloc(productRepository: ProductRepository())
               ..add(CheckoutStartEvent());
           },
           child: CheckoutWrapper()),
-      bottomMenuIndex: 0,
-    ));
+        bottomMenuIndex: 0,
+      )
+    );
   }
 }
 
@@ -47,7 +48,11 @@ class _CheckoutWrapperState extends OpenFlutterWrapperState<CheckoutWrapper> {
     return BlocBuilder<CheckoutBloc, CheckoutState>(
         builder: (BuildContext context, CheckoutState state) {
       return getPageView(<Widget>[
-        CartView(changeView: changePage)
+        CartView(changeView: changePage),
+        PaymentMethodView(changeView: changePage),
+        ShippingAddressView(changeView: changePage),
+        Success1View(changeView: changePage),
+        Success2View(changeView: changePage),
       ]);
     });
   }
