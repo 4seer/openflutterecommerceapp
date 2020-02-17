@@ -40,7 +40,7 @@ class SimpleBlocDelegate extends BlocDelegate {
 void main() async {
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',
-    supportedLocales: ['en_US', 'de'],
+    supportedLocales: ['en_US', 'de', 'fr'],
   );
 
   WidgetsFlutterBinding.ensureInitialized();
