@@ -28,3 +28,9 @@ class CheckoutProceedState extends CheckoutState {
   @override
   List<Object> get props => [cartProducts];
 }
+
+
+@immutable
+class CheckoutErrorState extends CheckoutState {
+  String toString() => 'CheckoutErrorState';
+}
