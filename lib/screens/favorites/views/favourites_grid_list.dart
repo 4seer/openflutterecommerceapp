@@ -1,6 +1,11 @@
+// Favourites Grid list of products and on Favourites screen
+// Author: umair_adil@live.com
+// Date: 2020-02-14
+
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
+import 'package:openflutterecommerce/screens/favorites/views/favourites_grid_item.dart';
 import 'package:openflutterecommerce/widgets/product_card.dart';
 
 class FavouritesGridList extends StatelessWidget {
@@ -18,20 +23,17 @@ class FavouritesGridList extends StatelessWidget {
     List<Widget> productTiles = new List<Widget>();
     ThemeData _theme = Theme.of(context);
     for (int i = 0; i < products.length; i++) {
-      productTiles.add(OpenFlutterProductCard(
+      productTiles.add(FavouritesGridCard(
           width: elementWidth, height: elementHeight, product: products[i]));
     }
     if (productTiles.isNotEmpty) {
-      return Container(
-          padding: EdgeInsets.only(top: AppSizes.sidePadding),
-          child: GridView.count(
-              crossAxisCount: 2,
-              childAspectRatio: 1.0,
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              children: productTiles.map((Widget childItem) {
-                return childItem;
-              }).toList()));
+      return GridView.count(
+          crossAxisCount: 2,
+          shrinkWrap: true,
+          physics: BouncingScrollPhysics(),
+          children: productTiles.map((Widget childItem) {
+            return childItem;
+          }).toList());
     } else {
       return Container();
     }

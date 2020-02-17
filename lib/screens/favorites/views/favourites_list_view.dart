@@ -1,7 +1,13 @@
+// Favourites List of products and on Favourites screen
+// Author: umair_adil@live.com
+// Date: 2020-02-14
+
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/widgets/product_card.dart';
+
+import 'favourites_list_item.dart';
 
 class FavouritesListView extends StatelessWidget {
   final double width;
@@ -18,7 +24,7 @@ class FavouritesListView extends StatelessWidget {
     List<Widget> productTiles = new List<Widget>();
     ThemeData _theme = Theme.of(context);
     for (int i = 0; i < products.length; i++) {
-      productTiles.add(OpenFlutterProductCard(
+      productTiles.add(FavouritesListCard(
           width: elementWidth, height: elementHeight, product: products[i]));
     }
     if (productTiles.isNotEmpty) {

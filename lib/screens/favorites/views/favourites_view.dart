@@ -1,3 +1,7 @@
+// Favourites View
+// Author: umair_adil@live.com
+// Date: 2020-02-14
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -89,7 +93,7 @@ class FavouritesView extends StatelessWidget {
               : List<Product>());
     } else if (state is FavouriteGridViewState) {
       return FavouritesGridList(
-          products: state is FavouriteListViewState
+          products: state is FavouriteGridViewState
               ? state.favouriteProducts
               : List<Product>());
     } else {

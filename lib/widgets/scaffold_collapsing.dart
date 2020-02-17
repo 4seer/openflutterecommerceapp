@@ -1,6 +1,6 @@
-//Scaffold for Open Flutter E-commerce App
-//Author: openflutterproject@gmail.com
-//Date: 2020-02-06
+//Collapsing Scaffold for Open Flutter E-commerce App
+//Author: umair_adil@live.com
+//Date: 2020-02-13
 
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';

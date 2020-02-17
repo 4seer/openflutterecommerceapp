@@ -38,6 +38,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(BlocProvider<AuthenticationBloc>(
+
     create: (context) => AuthenticationBloc()..add(AppStarted()),
     child: OpenFlutterEcommerceApp(),
   ));
