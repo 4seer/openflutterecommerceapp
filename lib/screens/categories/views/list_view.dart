@@ -37,7 +37,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
-                style: _theme.textTheme.subtitle
+                style: _theme.textTheme.headline3
                     .copyWith(color: _theme.errorColor)));
       }
       return Container();
@@ -46,21 +46,23 @@ class _CategoriesListViewState extends State<CategoriesListView> {
       if (state is CategoryListViewState) {
         return SingleChildScrollView(
             child: Column(children: <Widget>[
-          Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
-          OpenFlutterButton(
-              onPressed: (() => {
-                    BlocProvider.of<CategoryBloc>(context)
-                        .add(CategoryShowTilesEvent(1)),
-                    widget.changeView(changeType: ViewChangeType.Forward)
-                  }),
-              title: "VIEW ALL ITEMS",
-              width: widgetWidth,
-              height: 50),
-          Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
-          state.isLoading
-              ? Center(child: CircularProgressIndicator())
-              : Column(children: buildCategoryList(state.categories))
-        ]));
+              Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
+              OpenFlutterButton(
+                  onPressed: (() => {
+                        BlocProvider.of<CategoryBloc>(context)
+                            .add(CategoryShowTilesEvent(1)),
+                        widget.changeView(changeType: ViewChangeType.Forward)
+                      }),
+                  title: "VIEW ALL ITEMS",
+                  width: widgetWidth,
+                  height: 50),
+              Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
+              state.isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : Column(children: buildCategoryList(state.categories))
+            ]
+          )
+        );
       }
       return Center(child: CircularProgressIndicator());
     }));

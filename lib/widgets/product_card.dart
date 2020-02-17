@@ -21,6 +21,7 @@ class OpenFlutterProductCard extends StatelessWidget {
       children: <Widget>[
         Container(
           //height: height*2,
+          padding: EdgeInsets.symmetric(horizontal: AppSizes.widgetSidePadding/2),
           width: width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -28,7 +29,6 @@ class OpenFlutterProductCard extends StatelessWidget {
             children: <Widget>[
               Container(
                 width:  width+AppSizes.widgetSidePadding,
-                padding: EdgeInsets.only(right: AppSizes.widgetSidePadding),
                 child: Container(
                   height: width*1.13,
                   decoration: new BoxDecoration(
@@ -43,9 +43,9 @@ class OpenFlutterProductCard extends StatelessWidget {
               ),
               buildRating(product, _theme),
               Text(product.categoryTitle,
-                style: _theme.textTheme.display1),
+                style: _theme.textTheme.bodyText1),
               Text(product.title,
-                style: _theme.textTheme.display3),
+                style: _theme.textTheme.headline3),
               buildPrice(product, _theme),
             ]
           ),
@@ -59,7 +59,7 @@ class OpenFlutterProductCard extends StatelessWidget {
     return Row(
       children: <Widget>[
         Text("\$" + product.price.toStringAsFixed(0),
-          style: _theme.textTheme.display4.copyWith(
+          style: _theme.textTheme.headline5.copyWith(
             decoration: discountPrice>0?
               TextDecoration.lineThrough: TextDecoration.none,
           )
@@ -67,7 +67,7 @@ class OpenFlutterProductCard extends StatelessWidget {
         Padding(padding: EdgeInsets.only(left: AppSizes.linePadding),),
         discountPrice>0?
           Text("\$" + discountPrice.toStringAsFixed(0),
-            style: _theme.textTheme.display4.copyWith(
+            style: _theme.textTheme.headline5.copyWith(
               color: _theme.errorColor
             )):
         Container()
@@ -91,7 +91,7 @@ class OpenFlutterProductCard extends StatelessWidget {
   buildTopLabel(Product product, ThemeData theme) {
     return Positioned(
       top: 5,
-      left: 5,
+      left: 5 + AppSizes.sidePadding/2,
       child: product.isNew ?
         Container(
           padding: EdgeInsets.all(AppSizes.linePadding*1.5),
@@ -100,7 +100,7 @@ class OpenFlutterProductCard extends StatelessWidget {
             color: AppColors.black,
           ),
           child: Text('NEW',
-            style: theme.textTheme.display1.copyWith(
+            style: theme.textTheme.bodyText1.copyWith(
               color: AppColors.white,
               fontWeight: FontWeight.bold
             )
@@ -114,7 +114,7 @@ class OpenFlutterProductCard extends StatelessWidget {
               color: theme.errorColor,
             ),
             child: Text("-" + product.discountPercent.toStringAsFixed(0)+"%",
-              style: theme.textTheme.display1.copyWith(
+              style: theme.textTheme.bodyText1.copyWith(
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,
               )

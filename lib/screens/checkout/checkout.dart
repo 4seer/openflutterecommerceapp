@@ -2,3 +2,8 @@ export 'checkout_bloc.dart';
 export 'checkout_event.dart';
 export 'checkout_screen.dart';
 export 'checkout_state.dart';
+export 'views/cart_view.dart';
+export 'views/payment_method_view.dart';
+export 'views/shipping_address_view.dart';
+export 'views/success1_view.dart';
+export 'views/success2_view.dart';

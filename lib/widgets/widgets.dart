@@ -1,4 +1,5 @@
 export 'block_header.dart';
+export 'block_subtitle.dart';
 export 'bottom_menu.dart';
 export 'category_list_element.dart';
 export 'category_tile.dart';
@@ -13,3 +14,5 @@ export 'right_arrow_action.dart';
 export 'scaffold.dart';
 export 'service_button.dart';
 export 'input_field.dart';
+export 'clickable_line.dart';
+export 'sortby.dart';

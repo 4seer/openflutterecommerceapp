@@ -44,7 +44,7 @@ class _Main3ViewState extends State<Main3View> {
                     bottom: AppSizes.sidePadding),
                   width: width,
                   child: Text('New collection',
-                    style: _theme.textTheme.headline.copyWith(
+                    style: _theme.textTheme.headline1.copyWith(
                       fontSize: 34
                     ))
                 )
@@ -58,7 +58,7 @@ class _Main3ViewState extends State<Main3View> {
                 height: width/2-2,
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('Summer sale',
-                  style: _theme.textTheme.headline.copyWith(
+                  style: _theme.textTheme.headline1.copyWith(
                     fontSize: 34,
                     color: _theme.accentColor
                   ))),
@@ -75,7 +75,7 @@ class _Main3ViewState extends State<Main3View> {
                   )
                 ),
                 child: Text('Black',
-                  style: _theme.textTheme.headline.copyWith(
+                  style: _theme.textTheme.headline1.copyWith(
                     fontSize: 34
                   ))),
             ],),
@@ -91,7 +91,7 @@ class _Main3ViewState extends State<Main3View> {
                 )
               ),
               child: Text('Men’s hoodies',
-                style: _theme.textTheme.headline.copyWith(
+                style: _theme.textTheme.headline1.copyWith(
                   fontSize: 34
                 ))),
           ],),

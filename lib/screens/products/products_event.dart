@@ -4,11 +4,13 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/widgets/product_filter.dart';
 
 @immutable
 abstract class ProductEvent extends Equatable {
   final int categoryId;
-  ProductEvent(this.categoryId) : super();
+  final SortBy sortBy;
+  ProductEvent(this.categoryId, this.sortBy) : super();
 
   @override
   List<Object> get props => [categoryId];
@@ -16,16 +18,33 @@ abstract class ProductEvent extends Equatable {
 
 @immutable
 class ProductShowListEvent extends ProductEvent {
-  ProductShowListEvent(int categoryId) : super(categoryId);
+  ProductShowListEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
 
   @override
   String toString() => 'Product show list view';
 }
 
 @immutable
+class ProductShowSortByEvent extends ProductEvent {
+  ProductShowSortByEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
+
+  @override
+  String toString() => 'ProductShowSortByEvent';
+}
+
+@immutable
 class ProductShowCardEvent extends ProductEvent {
-  ProductShowCardEvent(categoryId) : super(categoryId);
+  ProductShowCardEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
 
   @override
   String toString() => 'Product show card view';
+}
+
+
+@immutable
+class ProductChangeSortByEvent extends ProductEvent {
+  ProductChangeSortByEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
+
+  @override
+  String toString() => 'ProductChangeSortByEvent';
 }
