@@ -11,4 +11,5 @@ class OpenFlutterEcommerceRoutes {
   static const signup = "signup";
   static const signin = "signin";
   static const forgotPassword = "forgot_pass";
+  static const settings = "settings";
 }
