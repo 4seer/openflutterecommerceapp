@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/widgets/custom_textfeild.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -49,14 +48,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SizedBox(
                 height: 21,
               ),
-              CustomTextField(
-                labelText: 'Full Name',
+              OpenFlutterInputField(
+                hint: 'Full Name',
               ),
               SizedBox(
                 height: 24,
               ),
-              CustomTextField(
-                labelText: 'Date of Birth',
+              OpenFlutterInputField(
+                hint: 'Date of Birth',
               ),
               SizedBox(
                 height: 55,
@@ -85,9 +84,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SizedBox(
                 height: 21,
               ),
-              CustomTextField(
-                labelText: 'Password',
-                obscureText: true,
+              OpenFlutterInputField(
+                hint: 'Password',
               ),
               SizedBox(
                 height: 50,
@@ -211,8 +209,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   SizedBox(
                     height: 18,
                   ),
-                  CustomTextField(
-                    labelText: 'Old Password',
+                  OpenFlutterInputField(
+                    hint: 'Old Password',
                   ),
                   SizedBox(
                     height: 18,
@@ -229,15 +227,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   SizedBox(
                     height: 18,
                   ),
-                  CustomTextField(
-                    labelText: 'New Password',
+                  OpenFlutterInputField(
+                    hint: 'New Password',
                   ),
                   SizedBox(
                     height: 18,
                   ),
-                  CustomTextField(
-                    labelText: 'Repeat New Password',
-                    obscureText: true,
+                  OpenFlutterInputField(
+                    hint: 'Repeat New Password',
                   ),
                   SizedBox(
                     height: 18,
