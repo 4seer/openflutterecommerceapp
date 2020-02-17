@@ -35,7 +35,7 @@ class OpenFlutterClickableLine extends StatelessWidget {
         width: width,
         color: this.backgroundColor,
         child: Text(title,
-          style: _theme.textTheme.display3.copyWith(
+          style: _theme.textTheme.headline3.copyWith(
             fontWeight: FontWeight.normal,
             color: textColor
           )

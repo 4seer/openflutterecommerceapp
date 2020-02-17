@@ -37,7 +37,6 @@ class _ProductsListViewState extends State<ProductsListView> {
     final double topPartHeight = 360;
     final bloc = BlocProvider.of<ProductBloc>(context);
 
-
     ThemeData _theme = Theme.of(context);
     return BlocListener(
         bloc: bloc,
@@ -46,7 +45,7 @@ class _ProductsListViewState extends State<ProductsListView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                  style: _theme.textTheme.subtitle
+                  style: _theme.textTheme.headline3
                     .copyWith(color: _theme.errorColor)));
           }
           return Container();

@@ -40,7 +40,7 @@ class OpenFlutterSortBy extends StatelessWidget {
               ),
             ),
             Text("Sort by",
-              style: _theme.textTheme.subtitle
+              style: _theme.textTheme.headline3
             ),
             Container(
               padding: EdgeInsets.only(top: AppSizes.sidePadding),

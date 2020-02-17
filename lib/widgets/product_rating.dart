@@ -46,7 +46,7 @@ class OpenFlutterProductRating extends StatelessWidget {
         ),
         ratingCount>0?
           Text('('+ratingCount.toString()+')',
-            style: _theme.textTheme.display1.copyWith(
+            style: _theme.textTheme.bodyText1.copyWith(
               fontSize: 14)
           )
         : Container(),

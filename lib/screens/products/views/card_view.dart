@@ -39,17 +39,17 @@ class _ProductsCardViewState extends State<ProductsCardView> {
     return BlocListener<ProductBloc, ProductState>(listener: (context, state) {
       if (state is ProductsErrorState) {
         return Container(
-            padding: EdgeInsets.all(AppSizes.sidePadding),
-            child: Text('An error occured',
-                style: _theme.textTheme.subtitle
-                    .copyWith(color: _theme.errorColor)));
+          padding: EdgeInsets.all(AppSizes.sidePadding),
+          child: Text('An error occured',
+              style: _theme.textTheme.headline3
+                  .copyWith(color: _theme.errorColor)));
       }
       return Container();
     }, child: BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
       if (state is ProductsCardViewState) {
         return SingleChildScrollView(
-            child: Column(children: <Widget>[
-          Container(
+          child: Column(children: <Widget>[
+            Container(
               color: AppColors.white,
               child: Column(children: <Widget>[
                 Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
@@ -73,7 +73,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     onFilterClicked: (() => {}),
                     onChangeViewClicked: (() => {
                       BlocProvider.of<ProductBloc>(context)
-                          .add(ProductShowCardEvent(state.category.id, sortBy)),
+                          .add(ProductShowListEvent(state.category.id, sortBy)),
                       widget.changeView(changeType: ViewChangeType.Backward)
                     }),
                     onSortClicked: ((SortBy sortBy) => {
@@ -83,8 +83,9 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     }),
                   ),
                 ),
-              ])),
-          state.isLoading
+              ])
+            ),
+            state.isLoading
               ? Center(child: CircularProgressIndicator())
               : Container(
                   height: MediaQuery.of(context).size.height - topPartHeight,
@@ -127,10 +128,12 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                             bloc..add(ProductChangeSortByEvent(state.category.id, newSortBy))
                           })
                         ) : Container()
-                  ]
-                )
+                    ]
+                  )
               )
-        ]));
+            ]
+          )
+        );
       }
       return Center(child: CircularProgressIndicator());
     }));
