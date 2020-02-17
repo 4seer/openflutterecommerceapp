@@ -90,7 +90,8 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
           theme: OpenFlutterEcommerceTheme.of(context),
           routes: <String, WidgetBuilder>{
             OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
-            OpenFlutterEcommerceRoutes.cart: (context) => HomeScreen(),
+            OpenFlutterEcommerceRoutes.cart: (context) => CartScreen(),
+            OpenFlutterEcommerceRoutes.checkout: (context) => CheckoutScreen(),
             OpenFlutterEcommerceRoutes.favourites: (context) => HomeScreen(),
             OpenFlutterEcommerceRoutes.signin: (context) => _signIn,
             OpenFlutterEcommerceRoutes.signup: (context) => _signUp,
