@@ -50,7 +50,7 @@ class OpenFlutterBottomMenu extends StatelessWidget {
             Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart);
             break;
           case 3:
-            Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.favourites);
+            Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.settings);
             break;
           case 4:
             Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.profile);

@@ -45,9 +45,9 @@ class OpenFlutterProductTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:<Widget>[
                         Text(product.title,
-                          style: _theme.textTheme.subtitle),
+                          style: _theme.textTheme.headline3),
                         Text(product.categoryTitle,
-                          style: _theme.textTheme.display1),
+                          style: _theme.textTheme.bodyText1),
                         Padding(padding: EdgeInsets.only(top: AppSizes.linePadding)),
                         OpenFlutterProductRating(
                           rating: product.rating,
@@ -56,7 +56,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                         ),
                         Padding(padding: EdgeInsets.only(top: AppSizes.linePadding)),
                         Text('\$'+product.price.toStringAsFixed(2),
-                          style: _theme.textTheme.display4.copyWith(
+                          style: _theme.textTheme.headline5.copyWith(
                             color: _theme.primaryColor,
                             fontWeight: FontWeight.bold
                           )

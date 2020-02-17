@@ -1,4 +1,5 @@
 export 'block_header.dart';
+export 'block_subtitle.dart';
 export 'bottom_menu.dart';
 export 'category_list_element.dart';
 export 'category_tile.dart';

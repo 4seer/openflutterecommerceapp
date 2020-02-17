@@ -121,7 +121,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _showSignInScreen() {
-    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.SIGNIN);
+    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.signin);
   }
 
   void _validateAndSend() {

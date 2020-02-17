@@ -43,9 +43,9 @@ class OpenFlutterProductCard extends StatelessWidget {
               ),
               buildRating(product, _theme),
               Text(product.categoryTitle,
-                style: _theme.textTheme.display1),
+                style: _theme.textTheme.bodyText1),
               Text(product.title,
-                style: _theme.textTheme.display3),
+                style: _theme.textTheme.headline3),
               buildPrice(product, _theme),
             ]
           ),
@@ -59,7 +59,7 @@ class OpenFlutterProductCard extends StatelessWidget {
     return Row(
       children: <Widget>[
         Text("\$" + product.price.toStringAsFixed(0),
-          style: _theme.textTheme.display4.copyWith(
+          style: _theme.textTheme.headline5.copyWith(
             decoration: discountPrice>0?
               TextDecoration.lineThrough: TextDecoration.none,
           )
@@ -67,7 +67,7 @@ class OpenFlutterProductCard extends StatelessWidget {
         Padding(padding: EdgeInsets.only(left: AppSizes.linePadding),),
         discountPrice>0?
           Text("\$" + discountPrice.toStringAsFixed(0),
-            style: _theme.textTheme.display4.copyWith(
+            style: _theme.textTheme.headline5.copyWith(
               color: _theme.errorColor
             )):
         Container()
@@ -100,7 +100,7 @@ class OpenFlutterProductCard extends StatelessWidget {
             color: AppColors.black,
           ),
           child: Text('NEW',
-            style: theme.textTheme.display1.copyWith(
+            style: theme.textTheme.bodyText1.copyWith(
               color: AppColors.white,
               fontWeight: FontWeight.bold
             )
@@ -114,7 +114,7 @@ class OpenFlutterProductCard extends StatelessWidget {
               color: theme.errorColor,
             ),
             child: Text("-" + product.discountPercent.toStringAsFixed(0)+"%",
-              style: theme.textTheme.display1.copyWith(
+              style: theme.textTheme.bodyText1.copyWith(
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,
               )

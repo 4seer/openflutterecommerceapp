@@ -53,6 +53,7 @@ flutter:
     - assets/icons/products/
     - assets/icons/signin/
     - assets/images/products/
+    - assets/images/checkout/
     - assets/splash/
     - assets/thumbs/
     - assets/thumbs/dress/
