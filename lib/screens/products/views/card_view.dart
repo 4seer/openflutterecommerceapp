@@ -48,8 +48,8 @@ class _ProductsCardViewState extends State<ProductsCardView> {
     }, child: BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
       if (state is ProductsCardViewState) {
         return SingleChildScrollView(
-            child: Column(children: <Widget>[
-          Container(
+          child: Column(children: <Widget>[
+            Container(
               color: AppColors.white,
               child: Column(children: <Widget>[
                 Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
@@ -83,8 +83,9 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     }),
                   ),
                 ),
-              ])),
-          state.isLoading
+              ])
+            ),
+            state.isLoading
               ? Center(child: CircularProgressIndicator())
               : Container(
                   height: MediaQuery.of(context).size.height - topPartHeight,
@@ -127,10 +128,12 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                             bloc..add(ProductChangeSortByEvent(state.category.id, newSortBy))
                           })
                         ) : Container()
-                  ]
-                )
+                    ]
+                  )
               )
-        ]));
+            ]
+          )
+        );
       }
       return Center(child: CircularProgressIndicator());
     }));

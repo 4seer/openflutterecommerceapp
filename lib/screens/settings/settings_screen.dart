@@ -49,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 21,
               ),
               OpenFlutterInputField(
-                hint: 'Full Name',
+                hint: 'Full Name', 
               ),
               SizedBox(
                 height: 24,

@@ -37,7 +37,6 @@ class _ProductsListViewState extends State<ProductsListView> {
     final double topPartHeight = 360;
     final bloc = BlocProvider.of<ProductBloc>(context);
 
-
     ThemeData _theme = Theme.of(context);
     return BlocListener(
         bloc: bloc,
