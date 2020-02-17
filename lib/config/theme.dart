@@ -14,6 +14,7 @@ class AppSizes {
   static const double linePadding = 4;
   static const double widgetBorderRadius = 34;
   static const TEXT_FIELD_RADIUS = 4.0;
+  static EdgeInsets bottomSheetPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 10);
 }
 
 class AppColors {
@@ -25,6 +26,7 @@ class AppColors {
   static const orange = Color(0xFFFFBA49);
   static const background = Color(0xFFE5E5E5);
   static const transparent = Color(0x00000000);
+  static const success = Color(0xFF2AA952);
 }
 
 class OpenFlutterEcommerceTheme {

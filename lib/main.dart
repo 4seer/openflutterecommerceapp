@@ -6,6 +6,7 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/screens/cart/cart_screen.dart';
 import 'package:openflutterecommerce/screens/categories/categories_screen.dart';
 import 'package:openflutterecommerce/screens/home/home_screen.dart';
+import 'package:openflutterecommerce/screens/settings/settings_screen.dart';
 import 'package:openflutterecommerce/screens/signin/forget_password.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
 import 'package:openflutterecommerce/screens/splash_screen.dart';
@@ -74,6 +75,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
         OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
             _forgetPassword,
         OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
+        OpenFlutterEcommerceRoutes.settings: (context) => SettingsScreen(),
         OpenFlutterEcommerceRoutes.profile: (context) =>
             BlocBuilder<AuthenticationBloc, AuthenticationState>(
                 builder: (context, state) {
