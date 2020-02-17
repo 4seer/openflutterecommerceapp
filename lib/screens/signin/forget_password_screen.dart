@@ -112,7 +112,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   }
 
   void _showSignInScreen() {
-    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.SIGNIN);
+    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.signin);
   }
 
   void _validateAndSend() {

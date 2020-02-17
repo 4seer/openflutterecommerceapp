@@ -5,14 +5,14 @@
 import 'package:flutter/material.dart';
 
 class AppSizes {
-  static int splashScreenTitleFontSize = 48;
-  static int titleFontSize = 34;
-  static double sidePadding = 15;
-  static double widgetSidePadding = 20;
-  static double buttonRadius = 25;
-  static double imageRadius = 8;
-  static double linePadding = 4;
-  static double widgetBorderRadius = 34;
+  static const int splashScreenTitleFontSize = 48;
+  static const int titleFontSize = 34;
+  static const double sidePadding = 15;
+  static const double widgetSidePadding = 20;
+  static const double buttonRadius = 25;
+  static const double imageRadius = 8;
+  static const double linePadding = 4;
+  static const double widgetBorderRadius = 34;
   static const TEXT_FIELD_RADIUS = 4.0;
 }
 

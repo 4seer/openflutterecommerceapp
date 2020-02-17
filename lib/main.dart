@@ -68,16 +68,16 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
         OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.cart: (context) => HomeScreen(),
         OpenFlutterEcommerceRoutes.favourites: (context) => HomeScreen(),
-        OpenFlutterEcommerceRoutes.SIGNIN: (context) => _signIn,
-        OpenFlutterEcommerceRoutes.SIGNUP: (context) => _signUp,
-        OpenFlutterEcommerceRoutes.FORGET_PASSWORD: (context) =>
+        OpenFlutterEcommerceRoutes.signin: (context) => _signIn,
+        OpenFlutterEcommerceRoutes.signup: (context) => _signUp,
+        OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
             _forgetPassword,
         OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
         OpenFlutterEcommerceRoutes.profile: (context) =>
             BlocBuilder<AuthenticationBloc, AuthenticationState>(
                 builder: (context, state) {
               if (state is Authenticated) {
-                return HomeScreen(); //TODO profile properties should be here
+                return HomeScreen(); 
               } else if (state is Unauthenticated) {
                 return _signUp;
               } else {
