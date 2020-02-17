@@ -63,7 +63,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Open FLutter E-commerce',
+      title: 'Open Flutter E-commerce',
       theme: OpenFlutterEcommerceTheme.of(context),
       routes: <String, WidgetBuilder>{
         OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
