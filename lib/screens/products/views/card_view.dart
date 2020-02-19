@@ -46,7 +46,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
       }
       return Container();
     }, child: BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
-      if (state is ProductsCardViewState) {
+      if (state is ProductsLoadedState) {
         return SingleChildScrollView(
           child: Column(children: <Widget>[
             Container(
@@ -54,13 +54,13 @@ class _ProductsCardViewState extends State<ProductsCardView> {
               child: Column(children: <Widget>[
                 Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                 OpenFlutterBlockHeader(
-                  title: state.category.title,
+                  title: state.data.category.title,
                   width: MediaQuery.of(context).size.width,
                 ),
                 Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                 Container(
                     width: width,
-                    child: OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
+                    child: OpenFlutterHashTagList(tags: state.data.hashtags, height: 30)),
                 Container(
                   padding: EdgeInsets.only(
                       top: AppSizes.sidePadding, bottom: AppSizes.sidePadding),
@@ -72,14 +72,11 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     sortBy: sortBy,
                     onFilterClicked: (() => {}),
                     onChangeViewClicked: (() => {
-                      BlocProvider.of<ProductBloc>(context)
-                          .add(ProductShowListEvent(state.category.id, sortBy)),
                       widget.changeView(changeType: ViewChangeType.Backward)
                     }),
                     onSortClicked: ((SortBy sortBy) => {
                       bloc
-                        ..add(ProductShowSortByEvent(
-                          state.category.id, sortBy)),
+                        ..add(ProductShowSortByEvent()),
                     }),
                   ),
                 ),
@@ -103,8 +100,8 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                           child: SingleChildScrollView(
                             child: Container(
                               width: width,
-                              height: state.products.length > 0
-                                ? width * state.products.length
+                              height: state.data.products.length > 0
+                                ? width * state.data.products.length
                                 : width * 1.6,
                               padding: EdgeInsets.only(top: AppSizes.sidePadding),
                               //color: _theme.backgroundColor,
@@ -114,7 +111,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                                 padding: const EdgeInsets.all(4),
                                 mainAxisSpacing: 4,
                                 crossAxisSpacing: 4,
-                                children: buildProductList(state.products, width)
+                                children: buildProductList(state.data.products, width)
                                 )
                               )
                             )
@@ -125,7 +122,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                         OpenFlutterSortBy(
                           currentSortBy: state.sortBy,
                           onSelect: ( (SortBy newSortBy)=>{
-                            bloc..add(ProductChangeSortByEvent(state.category.id, newSortBy))
+                            bloc..add(ProductChangeSortByEvent(newSortBy))
                           })
                         ) : Container()
                     ]
