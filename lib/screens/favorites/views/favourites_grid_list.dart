@@ -27,13 +27,20 @@ class FavouritesGridList extends StatelessWidget {
           width: elementWidth, height: elementHeight, product: products[i]));
     }
     if (productTiles.isNotEmpty) {
-      return GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          physics: BouncingScrollPhysics(),
-          children: productTiles.map((Widget childItem) {
-            return childItem;
-          }).toList());
+      return new GridView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 250.0,
+          mainAxisSpacing: 4.0,
+          crossAxisSpacing: 4.0,
+          childAspectRatio: MediaQuery.of(context).size.width /
+              (MediaQuery.of(context).size.height),
+        ),
+        padding: const EdgeInsets.only(left: 4.0),
+        itemCount: productTiles.length,
+        itemBuilder: (context, i) => productTiles[i],
+      );
     } else {
       return Container();
     }

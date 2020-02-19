@@ -15,7 +15,15 @@ abstract class FavouriteState extends Equatable {
 
 @immutable
 class FavouriteInitialState extends FavouriteState {
-  String toString() => 'FavouriteInitialState';
+  final List<Product> favouriteProducts;
+  final List<HashTag> hashtags;
+
+  FavouriteInitialState({this.favouriteProducts,this.hashtags});
+
+  String toString() => 'FavouriteListViewState';
+
+  @override
+  List<Object> get props => [favouriteProducts,hashtags];
 }
 
 @immutable

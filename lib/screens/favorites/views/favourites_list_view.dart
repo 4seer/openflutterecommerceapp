@@ -28,16 +28,23 @@ class FavouritesListView extends StatelessWidget {
           width: elementWidth, height: elementHeight, product: products[i]));
     }
     if (productTiles.isNotEmpty) {
-      return Container(
-          padding: EdgeInsets.only(top: AppSizes.sidePadding),
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            itemCount: productTiles.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return productTiles[index];
-            },
-          ));
+      return Padding(
+        padding: const EdgeInsets.only(left: 2.0,right: 2.0),
+        child: ListView.separated(
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 10,
+            );
+          },
+          physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          itemCount: productTiles.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return productTiles[index];
+          },
+        ),
+      );
     } else {
       return Container();
     }

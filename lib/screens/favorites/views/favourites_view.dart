@@ -41,38 +41,46 @@ class FavouritesView extends StatelessWidget {
     SortBy sortBy = SortBy.Popular;
 
     return OpenFlutterCollapsingScaffold(
-      background: null,
+      background: AppColors.background,
       title: "Favourites",
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
           Container(
-              width: width,
-              child: OpenFlutterHashTagList(
-                  tags: state is FavouriteListViewState
-                      ? state.hashtags
-                      : List<HashTag>(),
-                  height: 30)),
-          Container(
-            padding: EdgeInsets.only(
-                top: AppSizes.sidePadding, bottom: AppSizes.sidePadding),
-            width: width,
-            child: OpenFlutterProductFilter(
-              width: width,
-              height: 24,
-              productView: productView,
-              sortBy: sortBy,
-              onFilterClicked: (() => {print("Filter Clicked")}),
-              onChangeViewClicked: (() {
-                print("Change View Clicked");
+            color: AppColors.white,
+            child: Column(
+              children: <Widget>[
+                Container(
+                    width: width,
+                    child: OpenFlutterHashTagList(
+                        tags: state is FavouriteInitialState
+                            ? state.hashtags
+                            : List<HashTag>(),
+                        height: 30)),
+                Container(
+                  padding: EdgeInsets.only(
+                      top: AppSizes.sidePadding*2.50, bottom: AppSizes.sidePadding),
+                  width: width*0.95,
+                  child: OpenFlutterProductFilter(
+                    width: width*0.95,
+                    height: 20,
+                    productView: productView,
+                    sortBy: sortBy,
+                    onFilterClicked: (() => {print("Filter Clicked")}),
+                    onChangeViewClicked: (() {
+                      print("Change View Clicked");
 
-                if (state is FavouriteListViewState) {
-                  bloc..add(FavouriteGridViewEvent());
-                } else if (state is FavouriteGridViewState) {
-                  bloc..add(FavouriteListViewEvent());
-                }
-              }),
-              onSortClicked: ((SortBy sortBy) => {print("Sort Clicked")}),
+                      if (state is FavouriteListViewState) {
+                        bloc..add(FavouriteGridViewEvent());
+                      } else if (state is FavouriteGridViewState) {
+                        bloc..add(FavouriteListViewEvent());
+                      }
+                    }),
+                    onSortClicked: ((SortBy sortBy) => {print("Sort Clicked")}),
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(

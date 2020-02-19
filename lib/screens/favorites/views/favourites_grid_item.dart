@@ -22,8 +22,10 @@ class FavouritesGridCard extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Container(
+          color: AppColors.white,
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
                     width: width*1.35,
@@ -36,22 +38,25 @@ class FavouritesGridCard extends StatelessWidget {
                                 fit: BoxFit.fill,
                                 image: AssetImage(product.image))),
                         child: Container())),
-                buildRating(product, _theme),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left:8.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      buildRating(product, _theme),
                       Text(product.categoryTitle,
                           style: _theme.textTheme.display1),
                       Text(product.title, style: _theme.textTheme.display3),
                       Padding(
                         padding: EdgeInsets.all(AppSizes.linePadding),
                       ),
-                      Column(
+                      Row(
                         children: <Widget>[
                           buildColor(product, _theme),
+                          Padding(
+                            padding: EdgeInsets.all(AppSizes.sidePadding),
+                          ),
                           buildSize(product, _theme),
                         ],
                       ),
@@ -116,12 +121,12 @@ class FavouritesGridCard extends StatelessWidget {
   buildTopLabel(Product product, ThemeData theme) {
     return Positioned(
       top: 5,
-      left: 5 + AppSizes.sidePadding / 2,
+      left: AppSizes.sidePadding / 3,
       child: product.isNew
           ? Container(
               padding: EdgeInsets.all(AppSizes.linePadding * 1.5),
               decoration: new BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSizes.imageRadius),
+                borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                 color: AppColors.black,
               ),
               child: Text('NEW',
@@ -129,9 +134,9 @@ class FavouritesGridCard extends StatelessWidget {
                       color: AppColors.white, fontWeight: FontWeight.bold)))
           : (product.discountPercent > 0
               ? Container(
-                  padding: EdgeInsets.all(AppSizes.linePadding * 2),
+                  padding: EdgeInsets.all(AppSizes.linePadding * 1.5),
                   decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppSizes.imageRadius),
+                    borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                     color: theme.errorColor,
                   ),
                   child: Text(
@@ -153,7 +158,7 @@ class FavouritesGridCard extends StatelessWidget {
         ),
         Text("Blue",
             style:
-                _theme.textTheme.display4.copyWith(color: _theme.accentColor))
+                _theme.textTheme.display4.copyWith(color: AppColors.black))
       ],
     );
   }
@@ -167,21 +172,21 @@ class FavouritesGridCard extends StatelessWidget {
         ),
         Text("L",
             style:
-                _theme.textTheme.display4.copyWith(color: _theme.accentColor))
+                _theme.textTheme.display4.copyWith(color: AppColors.black))
       ],
     );
   }
 
   buildCartButton(Product product, ThemeData theme) {
     return Positioned(
-        bottom: 5,
-        right: 5 + AppSizes.sidePadding / 2,
+        bottom: 115,
+        right:  AppSizes.sidePadding / 3,
         child: Container(
-          height: 30.0,
-            width: 30.0,
-            padding: EdgeInsets.all(15.0),
+          height: 40.0,
+            width: 40.0,
+            padding: EdgeInsets.all(5.0),
             decoration: new BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSizes.imageRadius),
+                borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                 color: AppColors.red,
                 image: new DecorationImage(
                     fit: BoxFit.scaleDown,
