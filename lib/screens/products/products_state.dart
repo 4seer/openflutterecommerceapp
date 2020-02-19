@@ -9,6 +9,12 @@ import 'package:openflutterecommerce/repos/models/hashtag.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
 
+class ProductStateData {
+  List<Product> products;
+  List<HashTag> hashtags;
+  Category category;
+}
+
 @immutable
 abstract class ProductState extends Equatable {
   @override
@@ -16,145 +22,37 @@ abstract class ProductState extends Equatable {
 }
 
 @immutable
-class ProductInitialState extends ProductState {
-  String toString() => 'ProductInitialState';
-}
+class ProductInitialState extends ProductState { }
 
 @immutable
 class ProductsLoadedState extends ProductState {
-  final List<Product> products;
-  final List<HashTag> hashtags;
-  final Category category;
+  final ProductStateData data;
   final bool isLoading;
   final bool showSortBy;
   final SortBy sortBy;
 
-  ProductsLoadedState({this.hashtags, this.category, this.products, 
-    this.isLoading, this.showSortBy, this.sortBy});
+  ProductsLoadedState({this.data, this.isLoading, 
+    this.showSortBy, this.sortBy});
 
   ProductsLoadedState copyWith(
-      {Category category,
-      List<HashTag> hashtags,
-      List<Product> products,
+      {ProductStateData data,
       bool loading, 
       bool showSortBy,
       SortBy sortBy}) {
     return ProductsLoadedState(
-      category: category ?? this.category,
-      products: products ?? this.products,
-      hashtags: hashtags ?? this.hashtags,
+      data: data ?? this.data,
       isLoading: loading ?? this.isLoading,
       showSortBy: showSortBy ?? this.showSortBy,
       sortBy: sortBy ?? this.sortBy
     );
   }
-
-   @override
-  int get hashCode =>
-    category.hashCode ^
-    products.hashCode ^
-    hashtags.hashCode ^
-    isLoading.hashCode ^
-    showSortBy.hashCode ^
-    sortBy.hashCode;
-    
+  
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ProductsLoadedState &&
-        category == other.category &&
-        products == other.products &&
-        hashtags == other.hashtags &&
-        isLoading == other.isLoading &&
-        showSortBy == other.showSortBy &&
-        sortBy == other.sortBy;
+  bool get stringify => true;
 
-  String toString() => 'ProductLoadedState:' + toStringWithData();
-
-  String toStringWithData() =>  
-    ' showSortBy='+showSortBy.toString() +
-    ', isLoading='+isLoading.toString() +
-    ', sortBy='+sortBy.toString();
+  @override
+  List<Object> get props => [data, isLoading, showSortBy, sortBy];
 }
 
 @immutable
-class ProductsListViewState extends ProductsLoadedState {
-  ProductsListViewState(
-      {List<HashTag> hashtags,
-      Category category,
-      List<Product> products,
-      bool isLoading,
-      bool showSortBy,
-      bool showFilterBy,
-      SortBy sortBy})
-      : super(
-        hashtags: hashtags,
-        category: category,
-        products: products,
-        isLoading: isLoading,
-        showSortBy: showSortBy,
-        sortBy: sortBy
-      );
-
-  ProductsListViewState copyWith(
-      {Category category,
-      List<HashTag> hashtags,
-      List<Product> products,
-      bool loading,
-      bool showSortBy,
-      SortBy sortBy}) {
-    return ProductsListViewState(
-        category: category ?? this.category,
-        products: products ?? this.products,
-        hashtags: hashtags ?? this.hashtags,
-        isLoading: loading ?? this.isLoading,
-        showSortBy: showSortBy ?? this.showSortBy,
-        sortBy: sortBy ?? this.sortBy);
-  }
-
-  String toString() => 'ProductsListViewState:' + toStringWithData();
-}
-
-@immutable
-class ProductsCardViewState extends ProductsLoadedState {
-
-  ProductsCardViewState(
-      {List<HashTag> hashtags,
-      Category category,
-      List<Product> products,
-      bool isLoading,
-      bool showSortBy,
-      SortBy sortBy,
-      })
-      : super(
-            hashtags: hashtags,
-            category: category,
-            products: products,
-            isLoading: isLoading,
-            showSortBy: showSortBy,
-            sortBy: sortBy
-            );
-
-  ProductsCardViewState copyWith(
-      {Category category,
-      List<HashTag> hashtags,
-      List<Product> products,
-      bool loading,
-      bool showSortBy,
-      SortBy sortBy}) {
-      return ProductsCardViewState(
-          category: category ?? this.category,
-          products: products ?? this.products,
-          hashtags: hashtags ?? this.hashtags,
-          isLoading: loading ?? this.isLoading,
-          showSortBy: showSortBy ?? this.showSortBy,
-          sortBy: sortBy ?? this.sortBy);
-  }
-
-  String toString() => 'ProductsCardViewState: '+ toStringWithData();
-}
-
-@immutable
-class ProductsErrorState extends ProductState {
-  String toString() => 'ProductsErrorState';
-}
+class ProductsErrorState extends ProductState { }

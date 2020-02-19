@@ -8,43 +8,30 @@ import 'package:openflutterecommerce/widgets/product_filter.dart';
 
 @immutable
 abstract class ProductEvent extends Equatable {
-  final int categoryId;
-  final SortBy sortBy;
-  ProductEvent(this.categoryId, this.sortBy) : super();
+  @override
+  List<Object> get props => [];
+}
 
+@immutable
+class ProductStartEvent extends ProductEvent { 
+  final int categoryId;
+
+  ProductStartEvent(this.categoryId);
+  
   @override
   List<Object> get props => [categoryId];
 }
 
 @immutable
-class ProductShowListEvent extends ProductEvent {
-  ProductShowListEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
-
-  @override
-  String toString() => 'Product show list view';
-}
-
-@immutable
-class ProductShowSortByEvent extends ProductEvent {
-  ProductShowSortByEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
-
-  @override
-  String toString() => 'ProductShowSortByEvent';
-}
-
-@immutable
-class ProductShowCardEvent extends ProductEvent {
-  ProductShowCardEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
-
-  @override
-  String toString() => 'Product show card view';
-}
+class ProductShowSortByEvent extends ProductEvent { }
 
 
 @immutable
 class ProductChangeSortByEvent extends ProductEvent {
-  ProductChangeSortByEvent(int categoryId, SortBy sortBy) : super(categoryId, sortBy);
+  final SortBy sortBy;
 
+  ProductChangeSortByEvent(this.sortBy);
+  
   @override
-  String toString() => 'ProductChangeSortByEvent';
+  List<Object> get props => [sortBy];
 }
