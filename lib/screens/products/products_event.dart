@@ -23,16 +23,6 @@ class ProductStartEvent extends ProductEvent {
 }
 
 @immutable
-abstract class ProductLoadedEvent extends ProductEvent {
-  final int categoryId;
-
-  ProductLoadedEvent(this.categoryId);
-  
-  @override
-  List<Object> get props => [categoryId];
-}
-
-@immutable
 class ProductShowSortByEvent extends ProductEvent { }
 
 

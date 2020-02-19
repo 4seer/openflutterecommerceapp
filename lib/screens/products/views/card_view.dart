@@ -26,7 +26,6 @@ class ProductsCardView extends StatefulWidget {
 
 class _ProductsCardViewState extends State<ProductsCardView> {
   ProductView productView = ProductView.CardView;
-  SortBy sortBy = SortBy.Popular;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +68,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     width: width,
                     height: 24,
                     productView: productView,
-                    sortBy: sortBy,
+                    sortBy: state.sortBy,
                     onFilterClicked: (() => {}),
                     onChangeViewClicked: (() => {
                       widget.changeView(changeType: ViewChangeType.Backward)

@@ -6,9 +6,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/repos/category_repository.dart';
 import 'package:openflutterecommerce/repos/hashtag_repository.dart';
-import 'package:openflutterecommerce/repos/models/category.dart';
-import 'package:openflutterecommerce/repos/models/hashtag.dart';
-import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/repos/product_repository.dart';
 import 'package:openflutterecommerce/screens/products/products_event.dart';
 import 'package:openflutterecommerce/screens/products/products_state.dart';
@@ -46,23 +43,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     else if ( event is ProductShowSortByEvent) {
       ProductsLoadedState state = this.state as ProductsLoadedState;
       yield state.copyWith(showSortBy: true);
-    }
-    else if (event is ProductLoadedEvent) {
-      if (this.state is ProductsLoadedState) {
-        ProductsLoadedState state = this.state as ProductsLoadedState;
-        if (state.data.category.id != event.categoryId) {
-          //Set state to loading
-          yield state.copyWith(loading: true, 
-            showSortBy: false);
-          //Load data from repositories
-          data = getStateData(event.categoryId);
-          //set state to loaded and update data
-          yield state.copyWith(
-            data: data,
-            loading: false,
-            showSortBy: false);
-        }
-      }
     }
   }
 
