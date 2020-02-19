@@ -53,7 +53,7 @@ class _ProductsListViewState extends State<ProductsListView> {
         child: BlocBuilder(
             bloc: bloc,
             builder: (context, state) {
-              if (state is ProductsListViewState) {
+              if (state is ProductsLoadedState) {
                 return Container(
                   child: Column(children: <Widget>[
                     Container(
@@ -63,7 +63,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                             padding:
                                 EdgeInsets.only(top: AppSizes.sidePadding)),
                         OpenFlutterBlockHeader(
-                          title: state.category.title,
+                          title: state.data.category.title,
                           width: MediaQuery.of(context).size.width,
                         ),
                         Padding(
@@ -72,7 +72,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                         Container(
                           width: width,
                           child:
-                          OpenFlutterHashTagList(tags: state.hashtags, height: 30)),
+                          OpenFlutterHashTagList(tags: state.data.hashtags, height: 30)),
                         Container(
                           padding: EdgeInsets.only(
                             top: AppSizes.sidePadding,
@@ -85,16 +85,12 @@ class _ProductsListViewState extends State<ProductsListView> {
                             sortBy: state.sortBy,
                             onFilterClicked: (() => {}),
                             onChangeViewClicked: (() => {
-                              bloc
-                                ..add(ProductShowCardEvent(
-                                  state.category.id, state.sortBy)),
                               widget.changeView(
                                 changeType: ViewChangeType.Forward)
                             }),
                             onSortClicked: ((SortBy sortBy) => {
                               bloc
-                                ..add(ProductShowSortByEvent(
-                                  state.category.id, sortBy)),
+                                ..add(ProductShowSortByEvent()),
                             }),
                           ),
                         ),
@@ -113,7 +109,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                                 width: fullWidth,
                                 child: SingleChildScrollView(
                                   child: Column(
-                                    children: buildProductList(state.products, width),
+                                    children: buildProductList(state.data.products, width),
                                   )
                                 )
                               ),
@@ -122,7 +118,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                                 OpenFlutterSortBy(
                                   currentSortBy: state.sortBy,
                                   onSelect: ( (SortBy newSortBy)=>{
-                                    bloc..add(ProductChangeSortByEvent(state.category.id, newSortBy))
+                                    bloc..add(ProductChangeSortByEvent(newSortBy))
                                   })
                                 ) : Container()
                           ]
