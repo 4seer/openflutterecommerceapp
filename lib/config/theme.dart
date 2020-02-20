@@ -39,6 +39,7 @@ class OpenFlutterEcommerceTheme {
       bottomAppBarColor: AppColors.lightGray,
       backgroundColor: AppColors.background,
       errorColor: AppColors.red,
+      dividerColor: Colors.transparent,
       appBarTheme: theme.appBarTheme.copyWith(
         color: AppColors.white,
         iconTheme: IconThemeData(color: AppColors.black),
@@ -48,7 +49,8 @@ class OpenFlutterEcommerceTheme {
         //over image white text
         headline1: theme.textTheme.headline1
           .copyWith(fontSize: 48, color: AppColors.white),
-        headline2: theme.textTheme.headline2,
+        headline2: theme.textTheme.headline2
+          .copyWith(fontSize: 24, color: AppColors.black,fontWeight: FontWeight.w700 ),
 
         //product title
         headline3: theme.textTheme.headline3.copyWith(
