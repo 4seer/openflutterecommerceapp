@@ -36,7 +36,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 productRepository: ProductRepository(),
                 categoryRepository: CategoryRepository(),
                 hashtagRepository: HashtagRepository())
-              ..add(ProductShowListEvent(widget.categoryId, SortBy.Popular));
+              ..add(ProductStartEvent(widget.categoryId));
           },
           child: ProductsWrapper()),
       bottomMenuIndex: 1,

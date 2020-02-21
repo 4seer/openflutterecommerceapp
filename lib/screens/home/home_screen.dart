@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: OpenFlutterScaffold(
+      child: OpenFlutterScaffold(
       background: null,
       title: null,
       body: BlocProvider<HomeBloc>(
@@ -47,20 +47,22 @@ class _HomeWrapperState extends OpenFlutterWrapperState<HomeWrapper> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
         builder: (BuildContext context, HomeState state) {
-      return getPageView(<Widget>[
-        Main1View(
-            changeView: changePage,
-            products:
-                state is HomeLoadedState ? state.newProducts : List<Product>()),
-        Main2View(
-            changeView: changePage,
-            salesProducts: state is HomeLoadedState
-                ? state.salesProducts
-                : List<Product>(),
-            newProducts:
-                state is HomeLoadedState ? state.newProducts : List<Product>()),
-        Main3View(changeView: changePage)
-      ]);
-    });
+          return getPageView(<Widget>[
+            Main1View(
+                changeView: changePage,
+                products: state is HomeLoadedState
+                    ? state.newProducts
+                    : List<Product>()),
+            Main2View(
+                changeView: changePage,
+                salesProducts: state is HomeLoadedState
+                    ? state.salesProducts
+                    : List<Product>(),
+                newProducts: state is HomeLoadedState
+                    ? state.newProducts
+                    : List<Product>()),
+            Main3View(changeView: changePage)
+          ]);
+        });
   }
 }

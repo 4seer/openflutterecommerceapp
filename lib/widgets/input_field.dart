@@ -44,12 +44,12 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
                 ? RoundedRectangleBorder(
                     side: BorderSide(color: AppColors.red, width: 1.0),
                     borderRadius:
-                        BorderRadius.circular(AppSizes.TEXT_FIELD_RADIUS),
+                        BorderRadius.circular(AppSizes.textFieldRadius),
                   )
                 : RoundedRectangleBorder(
                     side: BorderSide(color: Colors.white, width: 1.0),
                     borderRadius:
-                        BorderRadius.circular(AppSizes.TEXT_FIELD_RADIUS),
+                        BorderRadius.circular(AppSizes.textFieldRadius),
                   ),
             color: AppColors.white,
             child: Padding(

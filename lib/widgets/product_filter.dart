@@ -49,7 +49,7 @@ class OpenFlutterProductFilter extends StatelessWidget {
                   padding: EdgeInsets.only(left: iconSize/3),
                   width: thirdWidth,
                   child: Text('Filters',
-                    style: _theme.textTheme.display1)
+                    style: _theme.textTheme.bodyText1)
                 )
               ]
             )
@@ -66,7 +66,7 @@ class OpenFlutterProductFilter extends StatelessWidget {
                   padding: EdgeInsets.only(left: iconSize/3),
                   width: thirdWidth*2,
                   child: Text(getSortTitle(sortBy),
-                    style: _theme.textTheme.display1)
+                    style: _theme.textTheme.bodyText1)
                 )
               ]
             )

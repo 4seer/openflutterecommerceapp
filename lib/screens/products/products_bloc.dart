@@ -6,12 +6,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/repos/category_repository.dart';
 import 'package:openflutterecommerce/repos/hashtag_repository.dart';
-import 'package:openflutterecommerce/repos/models/category.dart';
-import 'package:openflutterecommerce/repos/models/hashtag.dart';
-import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/repos/product_repository.dart';
 import 'package:openflutterecommerce/screens/products/products_event.dart';
 import 'package:openflutterecommerce/screens/products/products_state.dart';
+import 'package:openflutterecommerce/widgets/product_filter.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepository productRepository;
@@ -30,87 +28,21 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   @override
   Stream<ProductState> mapEventToState(ProductEvent event) async* {
     ProductStateData data = ProductStateData();
-    if ( event is ProductChangeSortByEvent){
-      switch ( this.state.runtimeType ){
-        case ProductsListViewState:
-          ProductsListViewState state = this.state as ProductsListViewState;
-          yield state.copyWith(sortBy: event.sortBy, showSortBy: false);
-        break;
-
-        case ProductsCardViewState:
-          ProductsCardViewState state = this.state as ProductsCardViewState;
-          yield state.copyWith(sortBy: event.sortBy, showSortBy: false);
-        break;
-      }
+    if ( event is ProductStartEvent){
+      data = getStateData(event.categoryId);
+      yield ProductsLoadedState(
+        isLoading: false,
+        showSortBy: false,
+        sortBy: SortBy.Popular,
+        data: data);
+    }
+    else if ( event is ProductChangeSortByEvent){
+      ProductsLoadedState state = this.state as ProductsLoadedState;
+      yield state.copyWith(sortBy: event.sortBy, showSortBy: false);
     }
     else if ( event is ProductShowSortByEvent) {
-      switch ( this.state.runtimeType ){
-        case ProductsListViewState:
-          ProductsListViewState state = this.state as ProductsListViewState;
-          yield state.copyWith(sortBy: event.sortBy, showSortBy: !state.showSortBy);
-        break;
-
-        case ProductsCardViewState:
-          ProductsCardViewState state = this.state as ProductsCardViewState;
-          yield state.copyWith(sortBy: event.sortBy, showSortBy: !state.showSortBy);
-        break;
-      }
-    }
-    else if (event is ProductShowListEvent) {
-      if (this.state is ProductsListViewState) {
-        ProductsListViewState state = this.state as ProductsListViewState;
-        if (state.category.id != event.categoryId) {
-          //Set state to loading
-          yield state.copyWith(loading: true, 
-            showSortBy: false,
-            sortBy: event.sortBy);
-          //Load data from repositories
-          data = getStateData(event.categoryId);
-          //set state to loaded and update data
-          yield state.copyWith(
-              products: data.products,
-              hashtags: data.hashtags,
-              loading: false,
-              showSortBy: false,  
-              category: data.category);
-        }
-      } else {
-        data = getStateData(event.categoryId);
-        yield ProductsListViewState(
-            isLoading: false,
-            showSortBy: false,
-            sortBy: event.sortBy,
-            category: data.category,
-            hashtags: data.hashtags,
-            products: data.products);
-      }
-    } else if (event is ProductShowCardEvent) {
-      if (this.state is ProductsCardViewState) {
-        ProductsCardViewState state = this.state as ProductsCardViewState;
-        if (state.category.id != event.categoryId) {
-          yield state.copyWith(loading: true,
-            showSortBy: false);
-          data = getStateData(event.categoryId);
-          yield state.copyWith(
-            products: data.products,
-            loading: false,
-            showSortBy: false,
-            sortBy: event.sortBy,
-            category: data.category,
-            hashtags: data.hashtags,
-          );
-        }
-      } else {
-        data = getStateData(event.categoryId);
-        yield ProductsCardViewState(
-          isLoading: false,
-          showSortBy: false,
-          sortBy: event.sortBy,
-          category: data.category,
-          hashtags: data.hashtags,
-          products: data.products
-        );
-      }
+      ProductsLoadedState state = this.state as ProductsLoadedState;
+      yield state.copyWith(showSortBy: true);
     }
   }
 
@@ -123,10 +55,4 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     return data;
   }
-}
-
-class ProductStateData {
-  List<Product> products;
-  List<HashTag> hashtags;
-  Category category;
 }
