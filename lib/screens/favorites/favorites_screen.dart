@@ -4,28 +4,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/favourite_repository.dart';
 import 'package:openflutterecommerce/repos/hashtag_repository.dart';
-import 'package:openflutterecommerce/repos/models/hashtag.dart';
-import 'package:openflutterecommerce/repos/models/product.dart';
-import 'package:openflutterecommerce/repos/product_repository.dart';
 import 'package:openflutterecommerce/screens/favorites/views/favourites_grid_list.dart';
-import 'package:openflutterecommerce/screens/favorites/views/favourites_view.dart';
 import 'package:openflutterecommerce/screens/favorites/views/favourites_list_view.dart';
-import 'package:openflutterecommerce/screens/home/home.dart';
-import 'package:openflutterecommerce/screens/products/products_event.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
-import 'package:openflutterecommerce/widgets/block_header.dart';
-import 'package:openflutterecommerce/widgets/hashtag_list.dart';
-import 'package:openflutterecommerce/widgets/product_filter.dart';
-import 'package:openflutterecommerce/widgets/product_list_view.dart';
-import 'package:openflutterecommerce/widgets/scaffold.dart';
-import 'package:openflutterecommerce/widgets/scaffold_collapsing.dart';
 
 import 'favorites_bloc.dart';
 import 'favorites_event.dart';
-import 'favorites_state.dart';
 
 class FavouriteScreen extends StatefulWidget {
   @override
@@ -55,6 +41,9 @@ class FavouriteWrapper extends StatefulWidget {
 class _FavouriteWrapperState extends OpenFlutterWrapperState<FavouriteWrapper> {
   @override
   Widget build(BuildContext context) {
-    return getPageView(<Widget>[FavouritesView()]);
+    return getPageView(<Widget>[
+      FavouritesListView(changeView: changePage, width: MediaQuery.of(context).size.width,),
+      FavouritesGridList(changeView: changePage, width: MediaQuery.of(context).size.width,)
+    ]);
   }
 }

@@ -20,7 +20,7 @@ class FavouriteInitialState extends FavouriteState {
 
   FavouriteInitialState({this.favouriteProducts,this.hashtags});
 
-  String toString() => 'FavouriteListViewState';
+  String toString() => 'FavouriteInitialState';
 
   @override
   List<Object> get props => [favouriteProducts,hashtags];

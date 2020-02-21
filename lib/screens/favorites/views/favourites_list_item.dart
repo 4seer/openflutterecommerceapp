@@ -3,7 +3,6 @@
 // Date: 2020-02-17
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
@@ -52,8 +51,8 @@ class FavouritesListCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(product.categoryTitle,
-                            style: _theme.textTheme.display1),
-                        Text(product.title, style: _theme.textTheme.display3),
+                            style: _theme.textTheme.bodyText1),
+                        Text(product.title, style: _theme.textTheme.headline6.copyWith(fontSize: 16)),
                         Padding(
                           padding: EdgeInsets.all(AppSizes.linePadding),
                         ),
@@ -96,7 +95,7 @@ class FavouritesListCard extends StatelessWidget {
     return Row(
       children: <Widget>[
         Text("\$" + product.price.toStringAsFixed(0),
-            style: _theme.textTheme.display4.copyWith(
+            style: _theme.textTheme.headline5.copyWith(
               decoration: discountPrice > 0
                   ? TextDecoration.lineThrough
                   : TextDecoration.none,
@@ -106,7 +105,7 @@ class FavouritesListCard extends StatelessWidget {
         ),
         discountPrice > 0
             ? Text("\$" + discountPrice.toStringAsFixed(0),
-                style: _theme.textTheme.display4
+                style: _theme.textTheme.headline5
                     .copyWith(color: _theme.errorColor))
             : Container()
       ],
@@ -139,7 +138,7 @@ class FavouritesListCard extends StatelessWidget {
                 color: AppColors.black,
               ),
               child: Text('NEW',
-                  style: theme.textTheme.display1.copyWith(
+                  style: theme.textTheme.bodyText1.copyWith(
                       color: AppColors.white, fontWeight: FontWeight.bold)))
           : (product.discountPercent > 0
               ? Container(
@@ -150,7 +149,7 @@ class FavouritesListCard extends StatelessWidget {
                   ),
                   child: Text(
                       "-" + product.discountPercent.toStringAsFixed(0) + "%",
-                      style: theme.textTheme.display1.copyWith(
+                      style: theme.textTheme.bodyText1.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.bold,
                       )))
@@ -161,12 +160,12 @@ class FavouritesListCard extends StatelessWidget {
   buildColor(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text("Color:", style: _theme.textTheme.display4.copyWith()),
+        Text("Color:", style: _theme.textTheme.headline5.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text("Blue",
-            style: _theme.textTheme.display4.copyWith(color: AppColors.black))
+            style: _theme.textTheme.headline5.copyWith(color: AppColors.black))
       ],
     );
   }
@@ -174,12 +173,12 @@ class FavouritesListCard extends StatelessWidget {
   buildSize(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text("Size:", style: _theme.textTheme.display4.copyWith()),
+        Text("Size:", style: _theme.textTheme.headline5.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text("L",
-            style: _theme.textTheme.display4.copyWith(color: AppColors.black))
+            style: _theme.textTheme.headline5.copyWith(color: AppColors.black))
       ],
     );
   }

@@ -20,7 +20,9 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   }) : assert(favouriteRepository != null);
 
   @override
-  FavouriteState get initialState => FavouriteInitialState();
+  FavouriteState get initialState => new FavouriteInitialState(
+      favouriteProducts: this.favouriteRepository.getFavourites(),
+      hashtags: hashtagRepository.getHashtags());
 
   @override
   Stream<FavouriteState> mapEventToState(FavouriteEvent event) async* {
