@@ -11,44 +11,31 @@ import 'package:openflutterecommerce/widgets/scaffold_collapsing.dart';
 
 import '../../../wrapper.dart';
 import '../../favorites_bloc.dart';
+import '../../favorites_event.dart';
 import '../../favorites_state.dart';
 import 'favourites_list_item.dart';
 
 class FavouritesListView extends StatefulWidget {
-  final double width;
-
   final Function({@required ViewChangeType changeType, int index}) changeView;
 
-  const FavouritesListView({Key key, this.changeView, this.width})
+  final FavouriteState state;
+  const FavouritesListView({Key key, this.changeView, this.state})
       : super(key: key);
 
   @override
-  _FavouritesListViewState createState() =>
-      _FavouritesListViewState(key: key, width: width);
+  _FavouritesListViewState createState() => _FavouritesListViewState(key: key);
 }
 
 class _FavouritesListViewState extends State<FavouritesListView> {
-  final double width;
-  final double height = 284;
-  final double elementHeight = 184;
-  final double elementWidth = 148;
-
-  _FavouritesListViewState({Key key, this.width});
+  _FavouritesListViewState({Key key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<FavouriteBloc, FavouriteState>(listener:
-        (context, state) {
-      print("BlocListener: ${state}");
-      return Container();
-    }, child:
-        BlocBuilder<FavouriteBloc, FavouriteState>(builder: (context, state) {
-      print("BlocBuilder: ${state}");
-      return _buildFavouritesHeader(context, state);
-    }));
+    return _buildFavouritesHeader(context, widget.state);
   }
 
   Widget _buildFavouritesHeader(BuildContext context, FavouriteState state) {
+    final bloc = BlocProvider.of<FavouriteBloc>(context);
     final double width = MediaQuery.of(context).size.width;
     ProductView productView = ProductView.ListView;
     SortBy sortBy = SortBy.Popular;
@@ -84,8 +71,8 @@ class _FavouritesListViewState extends State<FavouritesListView> {
                     sortBy: sortBy,
                     onFilterClicked: (() => {print("Filter Clicked")}),
                     onChangeViewClicked: (() {
-                      print("Change View Clicked");
-
+                      print("Show TileView");
+                      bloc..add(FavouriteTileViewEvent());
                       widget.changeView(changeType: ViewChangeType.Forward);
                     }),
                     onSortClicked: ((SortBy sortBy) => {print("Sort Clicked")}),
@@ -95,7 +82,7 @@ class _FavouritesListViewState extends State<FavouritesListView> {
             ),
           ),
           Expanded(
-            child: _buildListView(state),
+            child: _buildListView(state, context),
           )
         ],
       ),
@@ -103,18 +90,15 @@ class _FavouritesListViewState extends State<FavouritesListView> {
     );
   }
 
-  Widget _buildListView(FavouriteState state) {
-    print("_buildListView: ${state}");
+  Widget _buildListView(FavouriteState state, BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     var productTiles = List();
     var product =
         state is FavouriteListViewState ? state.favouriteProducts : List();
 
     if (product.isNotEmpty) {
       for (int i = 0; i < product.length; i++) {
-        productTiles.add(FavouritesListCard(
-            width: elementWidth,
-            height: elementHeight,
-            product: product[i]));
+        productTiles.add(FavouritesListCard(width: width, product: product[i]));
       }
       if (productTiles.isNotEmpty) {
         return Padding(

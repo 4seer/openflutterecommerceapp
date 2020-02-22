@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
+import 'package:openflutterecommerce/screens/product_details/productDetails_screen.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
 
 class FavouritesTileItem extends StatelessWidget {
@@ -18,67 +19,69 @@ class FavouritesTileItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData _theme = Theme.of(context);
-    return Stack(
-      children: <Widget>[
-        Container(
-          color: AppColors.white,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                    width: width*1.35,
-                    child: Container(
-                        height: width*1.35,
-                        decoration: new BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(AppSizes.imageRadius),
-                            image: new DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage(product.image))),
-                        child: Container())),
-                Padding(
-                  padding: const EdgeInsets.only(left:8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      buildRating(product, _theme),
-                      Text(product.categoryTitle,
-                          style: _theme.textTheme.bodyText1),
-                      Text(product.title, style: _theme.textTheme.headline6.copyWith(fontSize: 16)),
-                      Padding(
-                        padding: EdgeInsets.all(AppSizes.linePadding),
-                      ),
-                      Row(
+    return GestureDetector(
+        onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ProductDetailsScreen())),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              color: AppColors.white,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                        width: width * 0.50,
+                        child: Container(
+                            height: width * 0.50,
+                            decoration: new BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(AppSizes.imageRadius),
+                                image: new DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(product.image))),
+                            child: Container())),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          buildColor(product, _theme),
-                          Padding(
-                            padding: EdgeInsets.all(AppSizes.sidePadding),
-                          ),
-                          buildSize(product, _theme),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(AppSizes.linePadding),
-                      ),
-                      Column(
-                        children: <Widget>[
-                          buildPrice(product, _theme),
+                          buildRating(product, _theme),
                           Padding(
                             padding: EdgeInsets.all(AppSizes.linePadding),
                           ),
+                          Text(product.categoryTitle,
+                              style: _theme.textTheme.bodyText1),
+                          Text(product.title,
+                              style: _theme.textTheme.headline6
+                                  .copyWith(fontSize: 14)),
+                          Padding(
+                            padding: EdgeInsets.all(AppSizes.linePadding),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              buildColor(product, _theme),
+                              Padding(
+                                padding: EdgeInsets.all(AppSizes.linePadding),
+                              ),
+                              buildSize(product, _theme),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(AppSizes.linePadding),
+                          ),
+                          buildPrice(product, _theme),
                         ],
-                      )
-                    ],
-                  ),
-                )
-              ]),
-        ),
-        buildTopLabel(product, _theme),
-        buildCartButton(product, _theme),
-      ],
-    );
+                      ),
+                    )
+                  ]),
+            ),
+            buildTopLabel(product, _theme),
+            buildCartButton(product, _theme),
+            buildRemoveButton(product)
+          ],
+        ));
   }
 
   buildPrice(Product product, ThemeData _theme) {
@@ -86,7 +89,7 @@ class FavouritesTileItem extends StatelessWidget {
     return Row(
       children: <Widget>[
         Text("\$" + product.price.toStringAsFixed(0),
-            style: _theme.textTheme.headline5.copyWith(
+            style: _theme.textTheme.bodyText2.copyWith(
               decoration: discountPrice > 0
                   ? TextDecoration.lineThrough
                   : TextDecoration.none,
@@ -96,7 +99,7 @@ class FavouritesTileItem extends StatelessWidget {
         ),
         discountPrice > 0
             ? Text("\$" + discountPrice.toStringAsFixed(0),
-                style: _theme.textTheme.headline5
+                style: _theme.textTheme.bodyText2
                     .copyWith(color: _theme.errorColor))
             : Container()
       ],
@@ -105,9 +108,7 @@ class FavouritesTileItem extends StatelessWidget {
 
   buildRating(Product product, ThemeData _theme) {
     return Container(
-        width: width - 20,
-        padding: EdgeInsets.only(
-            top: AppSizes.linePadding, bottom: AppSizes.linePadding),
+        padding: EdgeInsets.only(top: AppSizes.linePadding),
         child: OpenFlutterProductRating(
             rating: product.rating, ratingCount: product.ratingCount));
   }
@@ -151,13 +152,12 @@ class FavouritesTileItem extends StatelessWidget {
   buildColor(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text("Color:", style: _theme.textTheme.headline5.copyWith()),
+        Text("Color:", style: _theme.textTheme.bodyText1.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text("Blue",
-            style:
-                _theme.textTheme.headline5.copyWith(color: AppColors.black))
+            style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
       ],
     );
   }
@@ -165,23 +165,22 @@ class FavouritesTileItem extends StatelessWidget {
   buildSize(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text("Size:", style: _theme.textTheme.headline5.copyWith()),
+        Text("Size:", style: _theme.textTheme.bodyText1.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text("L",
-            style:
-                _theme.textTheme.headline5.copyWith(color: AppColors.black))
+            style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
       ],
     );
   }
 
   buildCartButton(Product product, ThemeData theme) {
     return Positioned(
-        bottom: 115,
-        right:  AppSizes.sidePadding / 3,
+        bottom: height * 0.15,
+        right: AppSizes.sidePadding / 3,
         child: Container(
-          height: 40.0,
+            height: 40.0,
             width: 40.0,
             padding: EdgeInsets.all(5.0),
             decoration: new BoxDecoration(
@@ -189,7 +188,21 @@ class FavouritesTileItem extends StatelessWidget {
                 color: AppColors.red,
                 image: new DecorationImage(
                     fit: BoxFit.scaleDown,
-                    colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    colorFilter:
+                        ColorFilter.mode(Colors.white, BlendMode.srcIn),
                     image: AssetImage("assets/icons/favourites/bag.png")))));
+  }
+
+  buildRemoveButton(Product product) {
+    return Positioned(
+        top: -5,
+        right: -10,
+        child: IconButton(
+          icon: Icon(Icons.close),
+          color: AppColors.lightGray,
+          onPressed: () {
+            print("Remove from favourites clicked");
+          },
+        ));
   }
 }

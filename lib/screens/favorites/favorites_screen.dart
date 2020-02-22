@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/repos/favourite_repository.dart';
 import 'package:openflutterecommerce/repos/hashtag_repository.dart';
+import 'package:openflutterecommerce/screens/favorites/favorites.dart';
 import 'package:openflutterecommerce/screens/favorites/views/listView/favourites_list_view.dart';
 import 'package:openflutterecommerce/screens/favorites/views/tileView/favourites_tile_view.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
@@ -27,7 +28,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               return FavouriteBloc(
                   favouriteRepository: FavouriteRepository(),
                   hashtagRepository: HashtagRepository())
-                ..add(FavouriteLoadEvent());
+                ..add(FavouriteListViewEvent());
             },
             child: FavouriteWrapper()));
   }
@@ -41,9 +42,13 @@ class FavouriteWrapper extends StatefulWidget {
 class _FavouriteWrapperState extends OpenFlutterWrapperState<FavouriteWrapper> {
   @override
   Widget build(BuildContext context) {
-    return getPageView(<Widget>[
-      FavouritesListView(changeView: changePage, width: MediaQuery.of(context).size.width,),
-      FavouritesTileView(changeView: changePage, width: MediaQuery.of(context).size.width,)
-    ]);
+    return BlocBuilder<FavouriteBloc, FavouriteState>(
+        bloc: BlocProvider.of<FavouriteBloc>(context),
+        builder: (BuildContext context, FavouriteState state) {
+          return getPageView(<Widget>[
+            FavouritesListView(changeView: changePage, state: state),
+            FavouritesTileView(changeView: changePage, state: state)
+          ]);
+        });
   }
 }

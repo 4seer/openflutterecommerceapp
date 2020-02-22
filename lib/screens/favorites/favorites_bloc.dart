@@ -20,45 +20,21 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   }) : assert(favouriteRepository != null);
 
   @override
-  FavouriteState get initialState => new FavouriteInitialState(
-      favouriteProducts: this.favouriteRepository.getFavourites(),
-      hashtags: hashtagRepository.getHashtags());
-
-  @override
   Stream<FavouriteState> mapEventToState(FavouriteEvent event) async* {
     print("mapEventToState: $event");
-    if (event is FavouriteLoadEvent) {
-      print("event: FavouriteLoadEvent");
-      if (state is FavouriteListViewState) {
-        print("event: FavouriteListViewState");
-        yield _setListViewState();
-      } else if (state is FavouriteGridViewState) {
-        print("event: FavouriteGridViewEvent");
-        yield _setGridViewState();
-      } else {
-        print("event: FavouriteListViewState");
-        yield _setListViewState();
-      }
-    } else if (event is FavouriteListViewEvent) {
-      print("event: FavouriteListViewState");
-      yield _setListViewState();
-    } else if (event is FavouriteGridViewEvent) {
-      print("event: FavouriteGridViewEvent");
-      yield _setGridViewState();
+    if (event is FavouriteListViewEvent) {
+      yield FavouriteListViewState(
+          favouriteProducts: this.favouriteRepository.getFavourites(),
+          hashtags: hashtagRepository.getHashtags());
+    } else if (event is FavouriteTileViewEvent) {
+      yield FavouriteTileViewState(
+          favouriteProducts: this.favouriteRepository.getFavourites(),
+          hashtags: hashtagRepository.getHashtags());
     }
   }
 
-  FavouriteState _setListViewState() {
-    print("_setListViewState");
-    return new FavouriteListViewState(
-        favouriteProducts: this.favouriteRepository.getFavourites(),
-        hashtags: hashtagRepository.getHashtags());
-  }
-
-  FavouriteState _setGridViewState() {
-    print("_setGridViewState");
-    return new FavouriteGridViewState(
-        favouriteProducts: this.favouriteRepository.getFavourites(),
-        hashtags: hashtagRepository.getHashtags());
-  }
+  @override
+  FavouriteState get initialState => FavouriteListViewState(
+      favouriteProducts: this.favouriteRepository.getFavourites(),
+      hashtags: hashtagRepository.getHashtags());
 }

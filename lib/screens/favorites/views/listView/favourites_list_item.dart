@@ -5,89 +5,96 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
+import 'package:openflutterecommerce/screens/product_details/productDetails_screen.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
 
 class FavouritesListCard extends StatelessWidget {
   final Product product;
   final double width;
-  final double height;
 
-  const FavouritesListCard({Key key, this.product, this.width, this.height})
+  const FavouritesListCard({Key key, this.product, this.width})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ThemeData _theme = Theme.of(context);
-    return Stack(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(10.0),
-          child: Container(
-            color: AppColors.white,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Stack(
+    return GestureDetector(
+        onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ProductDetailsScreen())),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(10.0),
+              child: Container(
+                color: AppColors.white,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(
-                          width: width * 0.85,
-                          child: Container(
-                              height: width * 0.85,
-                              decoration: new BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      AppSizes.imageRadius),
-                                  image: new DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(product.image))),
-                              child: Container())),
-                      buildTopLabel(product, _theme)
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(product.categoryTitle,
-                            style: _theme.textTheme.bodyText1),
-                        Text(product.title, style: _theme.textTheme.headline6.copyWith(fontSize: 16)),
-                        Padding(
-                          padding: EdgeInsets.all(AppSizes.linePadding),
-                        ),
-                        Row(
+                      Stack(
+                        children: <Widget>[
+                          Container(
+                              width: width * 0.30,
+                              child: Container(
+                                  height: width * 0.35,
+                                  decoration: new BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          AppSizes.imageRadius),
+                                      image: new DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(product.image))),
+                                  child: Container())),
+                          buildTopLabel(product, _theme)
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            buildColor(product, _theme),
+                            Text(product.categoryTitle,
+                                style: _theme.textTheme.bodyText1),
+                            Text(product.title,
+                                style: _theme.textTheme.headline6
+                                    .copyWith(fontSize: 16)),
                             Padding(
                               padding: EdgeInsets.all(AppSizes.linePadding),
                             ),
-                            buildSize(product, _theme),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: AppSizes.linePadding),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            buildPrice(product, _theme),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: AppSizes.sidePadding * 1.45),
+                            Row(
+                              children: <Widget>[
+                                buildColor(product, _theme),
+                                Padding(
+                                  padding: EdgeInsets.all(AppSizes.linePadding),
+                                ),
+                                buildSize(product, _theme),
+                              ],
                             ),
-                            buildRating(product, _theme),
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(left: AppSizes.linePadding),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                buildPrice(product, _theme),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: AppSizes.sidePadding * 1.45),
+                                ),
+                                buildRating(product, _theme),
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    ),
-                  )
-                ]),
-          ),
-        ),
-        buildCartButton(product, _theme),
-      ],
-    );
+                        ),
+                      )
+                    ]),
+              ),
+            ),
+            buildCartButton(product, _theme),
+            buildRemoveButton(product)
+          ],
+        ));
   }
 
   buildPrice(Product product, ThemeData _theme) {
@@ -114,7 +121,6 @@ class FavouritesListCard extends StatelessWidget {
 
   buildRating(Product product, ThemeData _theme) {
     return Container(
-        width: width - 20,
         padding: EdgeInsets.only(
             top: AppSizes.linePadding, bottom: AppSizes.linePadding),
         child: OpenFlutterProductRating(
@@ -199,5 +205,18 @@ class FavouritesListCard extends StatelessWidget {
                     colorFilter:
                         ColorFilter.mode(Colors.white, BlendMode.srcIn),
                     image: AssetImage("assets/icons/favourites/bag.png")))));
+  }
+
+  buildRemoveButton(Product product) {
+    return Positioned(
+        top: 0,
+        right: AppSizes.sidePadding / 3,
+        child: IconButton(
+          icon: Icon(Icons.close),
+          color: AppColors.lightGray,
+          onPressed: () {
+            print("Remove from favourites clicked");
+          },
+        ));
   }
 }

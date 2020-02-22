@@ -13,14 +13,14 @@ import 'package:openflutterecommerce/widgets/scaffold_collapsing.dart';
 
 import '../../../wrapper.dart';
 import '../../favorites_bloc.dart';
+import '../../favorites_event.dart';
 import '../../favorites_state.dart';
 
 class FavouritesTileView extends StatefulWidget {
-  final double width;
-
   final Function({@required ViewChangeType changeType, int index}) changeView;
 
-  const FavouritesTileView({Key key, this.changeView, this.width})
+  final FavouriteState state;
+  const FavouritesTileView({Key key, this.changeView, this.state})
       : super(key: key);
 
   @override
@@ -28,30 +28,17 @@ class FavouritesTileView extends StatefulWidget {
 }
 
 class _FavouritesTileViewState extends State<FavouritesTileView> {
-  final double width;
-  final double height = 284;
-  final double elementHeight = 184;
-  final double elementWidth = 148;
-
-  _FavouritesTileViewState({Key key, this.width});
+  _FavouritesTileViewState({Key key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<FavouriteBloc, FavouriteState>(listener:
-        (context, state) {
-      print("BlocListener: ${state}");
-      return Container();
-    }, child:
-        BlocBuilder<FavouriteBloc, FavouriteState>(builder: (context, state) {
-      print("BlocBuilder: ${state}");
-      return _buildFavouritesHeader(context, state);
-    }));
+    return _buildFavouritesHeader(context, widget.state);
   }
 
   Widget _buildFavouritesHeader(BuildContext context, FavouriteState state) {
     final bloc = BlocProvider.of<FavouriteBloc>(context);
     final double width = MediaQuery.of(context).size.width;
-    ProductView productView = ProductView.ListView;
+    ProductView productView = ProductView.CardView;
     SortBy sortBy = SortBy.Popular;
 
     return OpenFlutterCollapsingScaffold(
@@ -69,11 +56,9 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
                     width: width,
                     padding: EdgeInsets.only(left: 8.0, right: 8.0),
                     child: OpenFlutterHashTagList(
-                        tags: state is FavouriteListViewState
+                        tags: state is FavouriteTileViewState
                             ? state.hashtags
-                            : state is FavouriteGridViewState
-                                ? state.hashtags
-                                : List(),
+                            : List(),
                         height: 30)),
                 Container(
                   padding: EdgeInsets.only(
@@ -87,9 +72,9 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
                     sortBy: sortBy,
                     onFilterClicked: (() => {print("Filter Clicked")}),
                     onChangeViewClicked: (() {
-                      print("Change View Clicked");
-
-                      widget.changeView(changeType: ViewChangeType.Forward);
+                      print("Show ListView");
+                      bloc..add(FavouriteListViewEvent());
+                      widget.changeView(changeType: ViewChangeType.Backward);
                     }),
                     onSortClicked: ((SortBy sortBy) => {print("Sort Clicked")}),
                   ),
@@ -98,7 +83,7 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
             ),
           ),
           Expanded(
-            child: _buildListView(state),
+            child: _buildTileView(state, context),
           )
         ],
       ),
@@ -106,17 +91,18 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
     );
   }
 
-  Widget _buildListView(FavouriteState state) {
-    print("_buildListView: ${state}");
+  Widget _buildTileView(FavouriteState state, BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     var productTiles = List();
-    var products = state is FavouriteGridViewState
+    var products = state is FavouriteTileViewState
         ? state.favouriteProducts
         : List<Product>();
 
     if (products.isNotEmpty) {
       for (int i = 0; i < products.length; i++) {
         productTiles.add(FavouritesTileItem(
-            width: elementWidth, height: elementHeight, product: products[i]));
+            width: width, height: height, product: products[i]));
       }
       if (productTiles.isNotEmpty) {
         return new GridView.builder(
@@ -126,8 +112,7 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
             maxCrossAxisExtent: 250.0,
             mainAxisSpacing: 4.0,
             crossAxisSpacing: 4.0,
-            childAspectRatio: MediaQuery.of(context).size.width /
-                (MediaQuery.of(context).size.height),
+            childAspectRatio: width / height * 1.05,
           ),
           padding: const EdgeInsets.only(left: 4.0),
           itemCount: productTiles.length,

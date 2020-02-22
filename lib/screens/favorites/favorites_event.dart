@@ -12,19 +12,13 @@ abstract class FavouriteEvent extends Equatable {
 }
 
 @immutable
-class FavouriteLoadEvent extends FavouriteEvent {
-  @override
-  String toString() => 'Favourite is Loaded';
-}
-
-@immutable
 class FavouriteListViewEvent extends FavouriteEvent {
   @override
   String toString() => 'Favourite is Loaded in ListView';
 }
 
 @immutable
-class FavouriteGridViewEvent extends FavouriteEvent {
+class FavouriteTileViewEvent extends FavouriteEvent {
   @override
-  String toString() => 'Favourite is Loaded in GridView';
+  String toString() => 'Favourite is Loaded in TileView';
 }
