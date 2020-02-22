@@ -9,9 +9,9 @@ import 'package:openflutterecommerce/widgets/hashtag_list.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
 import 'package:openflutterecommerce/widgets/scaffold_collapsing.dart';
 
-import '../../wrapper.dart';
-import '../favorites_bloc.dart';
-import '../favorites_state.dart';
+import '../../../wrapper.dart';
+import '../../favorites_bloc.dart';
+import '../../favorites_state.dart';
 import 'favourites_list_item.dart';
 
 class FavouritesListView extends StatefulWidget {

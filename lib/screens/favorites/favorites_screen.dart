@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/repos/favourite_repository.dart';
 import 'package:openflutterecommerce/repos/hashtag_repository.dart';
-import 'package:openflutterecommerce/screens/favorites/views/favourites_grid_list.dart';
-import 'package:openflutterecommerce/screens/favorites/views/favourites_list_view.dart';
+import 'package:openflutterecommerce/screens/favorites/views/listView/favourites_list_view.dart';
+import 'package:openflutterecommerce/screens/favorites/views/tileView/favourites_tile_view.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
 
 import 'favorites_bloc.dart';
@@ -43,7 +43,7 @@ class _FavouriteWrapperState extends OpenFlutterWrapperState<FavouriteWrapper> {
   Widget build(BuildContext context) {
     return getPageView(<Widget>[
       FavouritesListView(changeView: changePage, width: MediaQuery.of(context).size.width,),
-      FavouritesGridList(changeView: changePage, width: MediaQuery.of(context).size.width,)
+      FavouritesTileView(changeView: changePage, width: MediaQuery.of(context).size.width,)
     ]);
   }
 }

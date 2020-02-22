@@ -7,12 +7,12 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
 
-class FavouritesGridCard extends StatelessWidget {
+class FavouritesTileItem extends StatelessWidget {
   final Product product;
   final double width;
   final double height;
 
-  const FavouritesGridCard({Key key, this.product, this.width, this.height})
+  const FavouritesTileItem({Key key, this.product, this.width, this.height})
       : super(key: key);
 
   @override

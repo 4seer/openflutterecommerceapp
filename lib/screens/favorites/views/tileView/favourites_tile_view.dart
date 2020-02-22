@@ -6,35 +6,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
-import 'package:openflutterecommerce/screens/favorites/views/favourites_grid_item.dart';
+import 'package:openflutterecommerce/screens/favorites/views/tileView/favourites_tile_item.dart';
 import 'package:openflutterecommerce/widgets/hashtag_list.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
 import 'package:openflutterecommerce/widgets/scaffold_collapsing.dart';
 
-import '../../wrapper.dart';
-import '../favorites_bloc.dart';
-import '../favorites_event.dart';
-import '../favorites_state.dart';
+import '../../../wrapper.dart';
+import '../../favorites_bloc.dart';
+import '../../favorites_state.dart';
 
-class FavouritesGridList extends StatefulWidget {
+class FavouritesTileView extends StatefulWidget {
   final double width;
 
   final Function({@required ViewChangeType changeType, int index}) changeView;
 
-  const FavouritesGridList({Key key, this.changeView, this.width})
+  const FavouritesTileView({Key key, this.changeView, this.width})
       : super(key: key);
 
   @override
-  _FavouritesGridListViewState createState() => _FavouritesGridListViewState();
+  _FavouritesTileViewState createState() => _FavouritesTileViewState();
 }
 
-class _FavouritesGridListViewState extends State<FavouritesGridList> {
+class _FavouritesTileViewState extends State<FavouritesTileView> {
   final double width;
   final double height = 284;
   final double elementHeight = 184;
   final double elementWidth = 148;
 
-  _FavouritesGridListViewState({Key key, this.width});
+  _FavouritesTileViewState({Key key, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +115,7 @@ class _FavouritesGridListViewState extends State<FavouritesGridList> {
 
     if (products.isNotEmpty) {
       for (int i = 0; i < products.length; i++) {
-        productTiles.add(FavouritesGridCard(
+        productTiles.add(FavouritesTileItem(
             width: elementWidth, height: elementHeight, product: products[i]));
       }
       if (productTiles.isNotEmpty) {
