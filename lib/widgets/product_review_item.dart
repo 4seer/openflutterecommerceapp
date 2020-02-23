@@ -31,7 +31,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
     Key key,
     this.avatarUrl = "",
     this.avatarSize = 40.0,
-    this.writerName = "Anonimo",
+    this.writerName = "",
     this.ratingCount = 0,
     this.rating = 0.0,
     this.reviewDateTime = "",
