@@ -2,6 +2,10 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
+// Clean code and refactor to support rating selection
+// Author: juan.agu@outlook.com
+// Date: 2020-02-23
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

@@ -1,3 +1,7 @@
+// Rating summary widget
+// Author: juan.agu@outlook.com
+// Date: 2020-02-23
+
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
 
@@ -5,9 +9,13 @@ class OpenFlutterRatingSummary extends StatelessWidget {
   final double rating;
   final List<StarQuantity> starQuantities;
   final int ratingCount;
-
   final int ratingQuantity;
   final bool showLabel;
+  final Color barColor;
+  final double barHeight;
+  final double starIconSize;
+  final double labelFontSize;
+  final double reviewCounterLabelFontSize;
 
   const OpenFlutterRatingSummary({
     Key key,
@@ -16,6 +24,11 @@ class OpenFlutterRatingSummary extends StatelessWidget {
     this.ratingQuantity = 0,
     this.showLabel = true,
     this.starQuantities,
+    this.barColor = Colors.redAccent,
+    this.barHeight = 10.0,
+    this.starIconSize = 14.0,
+    this.labelFontSize = 14.0,
+    this.reviewCounterLabelFontSize = 14.0,
   }) : super(key: key);
 
   @override
@@ -31,10 +44,8 @@ class OpenFlutterRatingSummary extends StatelessWidget {
   }
 
   Widget _buildSummaryQuantity(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
@@ -45,9 +56,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
             ),
             _buildLabel(context),
           ],
-        ),
-      ),
-    );
+        );
   }
 
   Widget _buildSummaryList(BuildContext context) {
@@ -67,7 +76,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
         '${ratingQuantity.toString()} ratings',
         style: Theme.of(context).textTheme.caption.copyWith(
               color: Colors.grey,
-              fontSize: 14.0,
+              fontSize: labelFontSize,
             ),
       );
     }
@@ -121,7 +130,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
         child: OpenFlutterProductRating(
           rating: starQuantity.rating,
           ratingCount: ratingCount,
-          iconSize: 14.0,
+          iconSize: starIconSize,
           showDefaultStar: false,
           spacing: 1.0,
           rtl: true,
@@ -141,10 +150,10 @@ class OpenFlutterRatingSummary extends StatelessWidget {
             Flexible(
               flex: _calculateBarWithByQuantity(starQuantity.quantity),
               child: Container(
-                height: 10.0,
+                height: barHeight,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(barHeight / 2),
+                  color: barColor,
                 ),
               ),
             ),
@@ -164,7 +173,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
       child: Text(
         starQuantity.quantity.toInt().toString(),
         style: Theme.of(context).textTheme.caption.copyWith(
-              fontSize: 14.0,
+              fontSize: reviewCounterLabelFontSize,
             ),
         textAlign: TextAlign.center,
         maxLines: 1,

@@ -1,3 +1,7 @@
+// Product review item: show the author of the review rating comment, date and support show or hide photos
+// Author: juan.agu@outlook.com
+// Date: 2020-02-23
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
@@ -16,6 +20,13 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   final double rating;
   final int ratingCount;
 
+  final Function onHelpfulTapped;
+  final bool isHelpfulMarked;
+
+  final double helpfulIconSize;
+
+  final double helpfulFontSize;
+
   const OpenFlutterProductReviewItem({
     Key key,
     this.avatarUrl = "",
@@ -28,6 +39,10 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
     this.withPhotos = false,
     this.photos,
     this.photoSize = 96.0,
+    this.onHelpfulTapped,
+    this.isHelpfulMarked = false,
+    this.helpfulIconSize = 14.0,
+    this.helpfulFontSize = 12.0,
   }) : super(key: key);
 
   @override
@@ -60,6 +75,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
                     ),
                     _buildReviewComment(context),
                     _buildPhotos(context),
+                    _buildIsHelpful(context),
                   ],
                 ),
               ),
@@ -188,5 +204,48 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildIsHelpful(BuildContext context) {
+    return GestureDetector(
+      onTap: onHelpfulTapped,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: 32.0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Center(
+              child: Text(
+                "Helpful",
+                textAlign: TextAlign.end,
+                style: Theme.of(context).textTheme.caption.copyWith(
+                      color: _getHelpfulColor(context),
+                      fontSize: helpfulFontSize,
+                    ),
+              ),
+            ),
+            SizedBox(
+              width: 4.0,
+            ),
+            Center(
+              child: Icon(
+                Icons.thumb_up,
+                color: _getHelpfulColor(context),
+                size: helpfulIconSize,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Color _getHelpfulColor(BuildContext context) {
+    return isHelpfulMarked
+        ? Theme.of(context).accentColor
+        : Theme.of(context).unselectedWidgetColor;
   }
 }
