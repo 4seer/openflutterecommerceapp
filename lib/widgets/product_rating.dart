@@ -20,7 +20,7 @@ class OpenFlutterProductRating extends StatelessWidget {
     Key key,
     this.rating,
     this.ratingCount,
-    this.iconSize,
+    this.iconSize = 24.0,
     this.spacing = 2.0,
     this.onRatingSelected,
     this.rtl = false,
