@@ -22,9 +22,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
 
   final Function onHelpfulTapped;
   final bool isHelpfulMarked;
-
   final double helpfulIconSize;
-
   final double helpfulFontSize;
 
   const OpenFlutterProductReviewItem({
