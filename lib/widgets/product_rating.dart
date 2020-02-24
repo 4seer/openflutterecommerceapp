@@ -12,6 +12,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class OpenFlutterProductRating extends StatelessWidget {
   final double rating;
   final int ratingCount;
+  final int starCount;
+  final MainAxisAlignment alignment;
   final double iconSize;
   final double spacing;
   final bool rtl;
@@ -24,6 +26,8 @@ class OpenFlutterProductRating extends StatelessWidget {
     Key key,
     this.rating,
     this.ratingCount,
+    this.alignment = MainAxisAlignment.center,
+    this.starCount = 5,
     this.iconSize = 24.0,
     this.spacing = 2.0,
     this.onRatingSelected,
@@ -37,7 +41,7 @@ class OpenFlutterProductRating extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: alignment,
       children: <Widget>[
         _buildStars(context, rating),
         _buildRatingLabel(context),
@@ -49,7 +53,7 @@ class OpenFlutterProductRating extends StatelessWidget {
     return Wrap(
       alignment: WrapAlignment.start,
       spacing: spacing,
-      children: List.generate(ratingCount, (index) => _buildStar(index)),
+      children: List.generate(starCount, (index) => _buildStar(index)),
     );
   }
 

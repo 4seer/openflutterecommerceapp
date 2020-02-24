@@ -85,7 +85,9 @@ class OpenFlutterProductCard extends StatelessWidget {
         bottom: AppSizes.linePadding),
       child: OpenFlutterProductRating(
         rating: product.rating,
-        ratingCount: product.ratingCount
+        ratingCount: product.ratingCount,
+        alignment: MainAxisAlignment.start,
+        iconSize: 12
       )
     );
   }

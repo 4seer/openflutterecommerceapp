@@ -79,122 +79,116 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     var deviceWidth = MediaQuery.of(context).size.width;
     var deviceHeight = MediaQuery.of(context).size.height;
     return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        textTheme: _appbar.textTheme,
-        iconTheme: _appbar.iconTheme,
-        actionsIconTheme: _appbar.actionsIconTheme,
-        backgroundColor: _appbar.color,
-        title: Text("Short dress"),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      backgroundColor: _theme.backgroundColor,
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
+      child: OpenFlutterScaffold(
+        title: "Short dress",
+        bottomMenuIndex: 3,
+        background: _theme.backgroundColor,
+        body: SingleChildScrollView(
           child: Container(
             color: Colors.white,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  height: deviceHeight * 0.52,
-                  child: ListView.builder(
-                    itemBuilder: (context, index) => Container(
-                      decoration: BoxDecoration(color: Colors.black), //simpley replace the container with the images
-                      width: deviceWidth * 0.75,
-                      margin: EdgeInsets.only(right: 4.0, bottom: 5.0),
-                    ),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: list.length,
-                  ),
-                ),
-                Container(   //countains size button,color button and favourite button
-                  margin: EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      selectionOutlineButton(
-                        deviceWidth,"Size",_showSelectSizeBottomSheet
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    height: deviceHeight * 0.52,
+                    child: ListView.builder(
+                      itemBuilder: (context, index) => Container(
+                        decoration: BoxDecoration(color: Colors.black), //simpley replace the container with the images
+                        width: deviceWidth * 0.75,
+                        margin: EdgeInsets.only(right: 4.0, bottom: 5.0),
                       ),
-                      selectionOutlineButton(
-                        deviceWidth,"Color",_showSelectColorBottomSheet
-                      ),
-                      OpenFlutterFavouriteButton(favourite: favorite,setFavourite: setFavourite,),
-                    ],
-                  ),
-                ),
-                productDetails(_theme), //Function call for Product detail widget
-                Container(
-                  margin:
-                      EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0),
-                  child: Text(
-                    text,
-                    style: TextStyle(fontSize: 15.0),
-                  ),
-                ),
-                Container(
-//                  decoration: BoxDecoration(
-//                      boxShadow: <BoxShadow>[
-//                        BoxShadow(
-//                            color: Colors.black54,
-//                            blurRadius: 15.0,
-//                            offset: Offset(0.0, 0.75)
-//                        )
-//                      ],
-//                    color: AppColors.white
-//                  ),
-                  width: deviceWidth,
-                  margin: EdgeInsets.only(bottom: 13),
-                  height: 90,
-                  child: Center(
-                    child: OpenFlutterButton(
-                      title: "ADD TO CART",
-                      onPressed: null,
-                      width: deviceWidth * 0.88,
-                      height: 50,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: list.length,
                     ),
                   ),
-                ),
-                Theme(data: dividertheme, child: Divider()),
-                OpenFlutterExpansionTile(title: "Shipping info",description: text,),
-                Theme(data: dividertheme, child: Divider()),
-                OpenFlutterExpansionTile(title: "Support",description: text,),
-                Theme(data: dividertheme, child: Divider()),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Container(
-                  margin:
-                      EdgeInsets.only(left: 16.0, right: 16.0, bottom: 12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      new Text(
-                        "You can also like this",
-                        style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.w600),
-                      ),
-                      new Text(
-                        product.length.toString() + " items",
-                        style: TextStyle(color: AppColors.lightGray),
-                      )
-                    ],
+                  Container(   //countains size button,color button and favourite button
+                    margin: EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        selectionOutlineButton(
+                          deviceWidth,"Size",_showSelectSizeBottomSheet
+                        ),
+                        selectionOutlineButton(
+                          deviceWidth,"Color",_showSelectColorBottomSheet
+                        ),
+                        OpenFlutterFavouriteButton(favourite: favorite,setFavourite: setFavourite,),
+                      ],
+                    ),
                   ),
-                ),
-                OpenFlutterProductListView(
-                  width: deviceWidth,
-                  products: product,
-                )
-              ],
+                  productDetails(_theme), //Function call for Product detail widget
+                  Container(
+                    margin:
+                        EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0),
+                    child: Text(
+                      text,
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ),
+                  Container(
+  //                  decoration: BoxDecoration(
+  //                      boxShadow: <BoxShadow>[
+  //                        BoxShadow(
+  //                            color: Colors.black54,
+  //                            blurRadius: 15.0,
+  //                            offset: Offset(0.0, 0.75)
+  //                        )
+  //                      ],
+  //                    color: AppColors.white
+  //                  ),
+                    width: deviceWidth,
+                    margin: EdgeInsets.only(bottom: 13),
+                    height: 90,
+                    child: Center(
+                      child: OpenFlutterButton(
+                        title: "ADD TO CART",
+                        onPressed: null,
+                        width: deviceWidth * 0.88,
+                        height: 50,
+                      ),
+                    ),
+                  ),
+                  Theme(data: dividertheme, child: Divider()),
+                  OpenFlutterExpansionTile(title: "Shipping info",description: text,),
+                  Theme(data: dividertheme, child: Divider()),
+                  OpenFlutterExpansionTile(title: "Support",description: text,),
+                  Theme(data: dividertheme, child: Divider()),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    margin:
+                        EdgeInsets.only(left: 16.0, right: 16.0, bottom: 12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        new Text(
+                          "You can also like this",
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w600),
+                        ),
+                        new Text(
+                          product.length.toString() + " items",
+                          style: TextStyle(color: AppColors.lightGray),
+                        )
+                      ],
+                    ),
+                  ),
+                  OpenFlutterProductListView(
+                    width: deviceWidth,
+                    products: product,
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    ));
+      )
+    );
   }
 
   void setFavourite() {
@@ -423,6 +417,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           OpenFlutterProductRating(
             rating: rating,
             ratingCount: ratingCount,
+            alignment: MainAxisAlignment.start,
           )
         ],
       ),
