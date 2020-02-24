@@ -15,6 +15,8 @@ class AppSizes {
   static const double widgetBorderRadius = 34;
   static const double textFieldRadius = 4.0;
   static const EdgeInsets bottomSheetPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 10);
+  static const APP_BAR_SIZE = 56.0;
+  static const APP_BAR_EXPANDED_SIZE = 200.0;
 }
 
 class AppColors {
