@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
+import 'package:openflutterecommerce/screens/product_details/productDetails_screen.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
 
 class OpenFlutterProductCard extends StatelessWidget {
@@ -17,41 +18,44 @@ class OpenFlutterProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData _theme = Theme.of(context);
-    return Stack(
-      children: <Widget>[
-        Container(
-          //height: height*2,
-          padding: EdgeInsets.symmetric(horizontal: AppSizes.widgetSidePadding/2),
-          width: width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                width:  width+AppSizes.widgetSidePadding,
-                child: Container(
-                  height: width*1.13,
-                  decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppSizes.imageRadius),
-                    image: new DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(product.image)
-                    )
+    return GestureDetector(
+      onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>ProductDetailsScreen())),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            //height: height*2,
+            padding: EdgeInsets.symmetric(horizontal: AppSizes.widgetSidePadding/2),
+            width: width,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                      width:  width+AppSizes.widgetSidePadding,
+                      child: Container(
+                          height: width*1.13,
+                          decoration: new BoxDecoration(
+                              borderRadius: BorderRadius.circular(AppSizes.imageRadius),
+                              image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(product.image)
+                              )
+                          ),
+                          child: Container()
+                      )
                   ),
-                  child: Container()
-                )
-              ),
-              buildRating(product, _theme),
-              Text(product.categoryTitle,
-                style: _theme.textTheme.bodyText1),
-              Text(product.title,
-                style: _theme.textTheme.headline3),
-              buildPrice(product, _theme),
-            ]
+                  buildRating(product, _theme),
+                  Text(product.categoryTitle,
+                      style: _theme.textTheme.bodyText1),
+                  Text(product.title,
+                      style: _theme.textTheme.headline3),
+                  buildPrice(product, _theme),
+                ]
+            ),
           ),
-        ),
-        buildTopLabel(product, _theme),
-      ],
+          buildTopLabel(product, _theme),
+        ],
+      ),
     );
   }
   buildPrice(Product product, ThemeData _theme){
@@ -81,7 +85,9 @@ class OpenFlutterProductCard extends StatelessWidget {
         bottom: AppSizes.linePadding),
       child: OpenFlutterProductRating(
         rating: product.rating,
-        ratingCount: product.ratingCount
+        ratingCount: product.ratingCount,
+        alignment: MainAxisAlignment.start,
+        iconSize: 12
       )
     );
   }
