@@ -56,7 +56,8 @@ class OpenFlutterProductTile extends StatelessWidget {
                                 OpenFlutterProductRating(
                                     rating: product.rating,
                                     ratingCount: product.ratingCount,
-                                    iconSize: 14
+                                    iconSize: 14,
+                                    alignment: MainAxisAlignment.start,
                                 ),
                                 Padding(padding: EdgeInsets.only(top: AppSizes.linePadding)),
                                 Text('\$'+product.price.toStringAsFixed(2),
