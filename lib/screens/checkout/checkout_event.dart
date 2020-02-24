@@ -68,5 +68,7 @@ class CheckoutAddNewShippingAddressEvent extends CheckoutEvent {
   final String postal;
   final String country;
 
-  CheckoutAddNewShippingAddressEvent(this.fullName, this.address, this.city, this.state, this.postal, this.country);
+  CheckoutAddNewShippingAddressEvent({
+    this.fullName, this.address, this.city, 
+    this.state, this.postal, this.country});
 }

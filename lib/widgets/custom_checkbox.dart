@@ -22,10 +22,10 @@ class OpenFlutterCheckbox extends StatelessWidget {
     ThemeData _theme = Theme.of(context);
     double rightLinkWidth = 100;
     return Container(
-      padding: EdgeInsets.only(left: AppSizes.sidePadding),
       child: InkWell(
         onTap: (() => { this.onTap(!checked) }),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Checkbox(
               activeColor: _theme.primaryColor,

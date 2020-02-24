@@ -12,6 +12,7 @@ import 'package:openflutterecommerce/widgets/payment_card.dart';
 import 'package:openflutterecommerce/widgets/payment_card_preview.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
 
+import '../../wrapper.dart';
 import '../checkout_bloc.dart';
 import '../checkout_state.dart';
 
@@ -197,6 +198,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
 
   _changeDefaultPaymentCard(CheckoutBloc bloc, int cardId){
     bloc..add(CheckoutSetDefaultCardEvent(cardId));
+    widget.changeView(changeType: ViewChangeType.Exact, index: 0);
     //TODO: implement change of default payment card
   }
 }
