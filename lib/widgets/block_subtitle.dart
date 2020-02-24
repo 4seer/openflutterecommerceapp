@@ -11,8 +11,11 @@ class OpenFlutterBlockSubtitle extends StatelessWidget {
   final String linkText;
   final Function onLinkTap;
 
-  const OpenFlutterBlockSubtitle({Key key, this.width, 
-    this.title, this.linkText, this.onLinkTap}) : super(key: key);
+  const OpenFlutterBlockSubtitle({Key key, 
+    this.width, 
+    @required this.title, 
+    this.linkText, 
+    this.onLinkTap,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

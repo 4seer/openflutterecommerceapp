@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/repos/product_repository.dart';
 import 'package:openflutterecommerce/screens/checkout/checkout.dart';
+import 'package:openflutterecommerce/screens/checkout/views/add_shipping_address_view.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
 import 'package:openflutterecommerce/widgets/scaffold.dart';
 
@@ -29,7 +30,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ..add(CheckoutStartEvent());
           },
           child: CheckoutWrapper()),
-        bottomMenuIndex: 0,
+        bottomMenuIndex: 2,
       )
     );
   }
@@ -51,6 +52,7 @@ class _CheckoutWrapperState extends OpenFlutterWrapperState<CheckoutWrapper> {
         CartView(changeView: changePage),
         PaymentMethodView(changeView: changePage),
         ShippingAddressView(changeView: changePage),
+        AddShippingAddressView(changeView: changePage),
         Success1View(changeView: changePage),
         Success2View(changeView: changePage),
       ]);

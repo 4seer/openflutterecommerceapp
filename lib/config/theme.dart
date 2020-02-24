@@ -27,6 +27,7 @@ class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const orange = Color(0xFFFFBA49);
   static const background = Color(0xFFE5E5E5);
+  static const backgroundLight = Color(0xFFF9F9F9);
   static const transparent = Color(0x00000000);
   static const success = Color(0xFF2AA952);
 }
@@ -40,6 +41,7 @@ class OpenFlutterEcommerceTheme {
       accentColor: AppColors.red,
       bottomAppBarColor: AppColors.lightGray,
       backgroundColor: AppColors.background,
+      dialogBackgroundColor: AppColors.backgroundLight,
       errorColor: AppColors.red,
       dividerColor: Colors.transparent,
       appBarTheme: theme.appBarTheme.copyWith(

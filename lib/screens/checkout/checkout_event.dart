@@ -9,25 +9,19 @@ import 'package:flutter/material.dart';
 abstract class CheckoutEvent extends Equatable {
   @override
   List<Object> get props => [];
+
+  @override
+  bool get stringify => true;
 }
 
 @immutable
-class CheckoutStartEvent extends CheckoutEvent {
-  @override
-  String toString() => 'CheckoutStartEvent';
-}
+class CheckoutStartEvent extends CheckoutEvent { }
 
 @immutable
-class CheckoutFinishEvent extends CheckoutEvent {
-  @override
-  String toString() => 'CheckoutFinishEvent';
-}
+class CheckoutFinishEvent extends CheckoutEvent { }
 
 @immutable
-class CheckoutShowAddNewCardEvent extends CheckoutEvent {
-  @override
-  String toString() => 'CheckoutShowAddNewCardEvent';
-}
+class CheckoutShowAddNewCardEvent extends CheckoutEvent { }
 
 @immutable
 class CheckoutSetDefaultCardEvent extends CheckoutEvent {
@@ -36,7 +30,7 @@ class CheckoutSetDefaultCardEvent extends CheckoutEvent {
   CheckoutSetDefaultCardEvent(this.cardId);
 
   @override
-  String toString() => 'CheckoutSetDefaultCardEvent';
+  List<Object> get props => [cardId];
 }
 
 
@@ -49,23 +43,19 @@ class CheckoutAddNewCardEvent extends CheckoutEvent {
   final int cvv;
   final bool setAsDefault;
 
-  CheckoutAddNewCardEvent(this.nameOnCard, this.cardNumber, 
+  CheckoutAddNewCardEvent({this.nameOnCard, this.cardNumber, 
     this.expirationMonth, this.expirationYear, 
-    this.cvv, this.setAsDefault);
+    this.cvv, this.setAsDefault});
 
   @override
-  String toString() => 'CheckoutAddNewCardEvent';
+  List<Object> get props => [nameOnCard, cardNumber, expirationMonth, expirationYear, cvv, setAsDefault];
 }
-
 
 @immutable
 class CheckoutSetDefaultShippingAddressEvent extends CheckoutEvent {
   final int shippingAddressId;
 
   CheckoutSetDefaultShippingAddressEvent(this.shippingAddressId);
-
-  @override
-  String toString() => 'CheckoutSetDefaultShippingAddressEvent';
 }
 
 
@@ -78,9 +68,7 @@ class CheckoutAddNewShippingAddressEvent extends CheckoutEvent {
   final String postal;
   final String country;
 
-  CheckoutAddNewShippingAddressEvent(this.fullName, this.address, this.city, this.state, this.postal, this.country);
-
-
-  @override
-  String toString() => 'CheckoutAddNewShippingAddressEvent';
+  CheckoutAddNewShippingAddressEvent({
+    this.fullName, this.address, this.city, 
+    this.state, this.postal, this.country});
 }
