@@ -58,9 +58,7 @@ class _CartViewState extends State<CartView> {
                     title: 'Jane Doe',
                     linkText: 'Change',
                     onLinkTap: ( () => {
-                      BlocProvider.of<CheckoutBloc>(context)
-                          .add(CheckoutShowAddNewCardEvent()),
-                      widget.changeView(changeType: ViewChangeType.Backward)
+                      widget.changeView(changeType: ViewChangeType.Exact, index: 2)
                     }),
                     child: RichText(
                       text: TextSpan(
@@ -78,7 +76,7 @@ class _CartViewState extends State<CartView> {
                     width: width,
                     linkText: "Change",
                     onLinkTap: ( () => {
-
+                      widget.changeView(changeType: ViewChangeType.Forward)
                     }),
                   ),
                   OpenFlutterPaymentCard(

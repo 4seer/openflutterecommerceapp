@@ -20,17 +20,26 @@ class CheckoutInitialState extends CheckoutState {
 @immutable
 class CheckoutProceedState extends CheckoutState {
   final List<Product> cartProducts;
+  final int cardId;
+  final bool showAddNewCardForm;
 
-  CheckoutProceedState({this.cartProducts});
+  CheckoutProceedState({
+    @required this.cardId, 
+    this.cartProducts, 
+    this.showAddNewCardForm = false});
 
-  String toString() => 'CheckoutProceedState';
+  CheckoutProceedState copyWith(
+      {List<Product> cartProducts, int cardId, bool showAddNewCardForm}) {
+    return CheckoutProceedState(
+        cartProducts: cartProducts ?? this.cartProducts,
+        showAddNewCardForm: showAddNewCardForm ?? this.showAddNewCardForm,
+        cardId: cardId ?? this.cardId);
+  }
 
   @override
-  List<Object> get props => [cartProducts];
+  List<Object> get props => [cartProducts, cardId, showAddNewCardForm];
 }
 
 
 @immutable
-class CheckoutErrorState extends CheckoutState {
-  String toString() => 'CheckoutErrorState';
-}
+class CheckoutErrorState extends CheckoutState { }
