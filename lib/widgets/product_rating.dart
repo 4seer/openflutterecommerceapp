@@ -10,16 +10,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class OpenFlutterProductRating extends StatelessWidget {
+  //current product rating
   final double rating;
+  //current number of reviews by users
   final int ratingCount;
+  //number of start: 5 as standart
   final int starCount;
+  //star alignment in the row
   final MainAxisAlignment alignment;
+  //size of stars
   final double iconSize;
+  //spacing between stars
   final double spacing;
   final bool rtl;
+  //show number of reviews
   final bool showLabel;
+  //allow adding your rating
   final bool editable;
+  //
   final bool showDefaultStar;
+  //callback when rating was selected
   final Function(double rating) onRatingSelected;
 
   const OpenFlutterProductRating({
