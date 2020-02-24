@@ -87,7 +87,8 @@ class OpenFlutterProductCard extends StatelessWidget {
         rating: product.rating,
         ratingCount: product.ratingCount,
         alignment: MainAxisAlignment.start,
-        iconSize: 12
+        iconSize: 12,
+        labelFontSize: 12,
       )
     );
   }
