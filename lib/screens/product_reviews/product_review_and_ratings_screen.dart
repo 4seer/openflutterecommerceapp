@@ -28,54 +28,50 @@ class OpenFlutterReviewsAndRatingsScreen extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-      ),
-      child: ListView(
-        children: _buildChildren(context),
-      ),
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          floating: false,
+          pinned: true,
+          expandedHeight: 120.0,
+          centerTitle: false,
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
+            title: _buildTitle(context),
+          ),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                ),
+                child: _buildItem(context, index),
+              );
+            },
+            childCount: 10,
+          ),
+        )
+      ],
     );
   }
 
-  List<Widget> _buildChildren(BuildContext context) {
-    var children = List<Widget>();
-    children.add(_buildTitle(context));
-    children.add(_buildRatingSummary(context));
-    children.add(_buildTitleCommentAndFilter(context));
-    children.add(_buildProductReviewItem());
-    children.add(_buildProductReviewItem());
-    children.add(_buildProductReviewItem());
-    children.add(_buildProductReviewItem());
-    return children;
-  }
-
-  Widget _buildProductReviewItem() {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 16.0,
-      ),
-      child: OpenFlutterProductReviewItem(
-        rating: 4,
-        starCount: 5,
-        writerName: "Helene moore",
-        isHelpfulMarked: true,
-        comment:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-        avatarUrl: "https://avatars1.githubusercontent.com/u/4689126?s=460&v=4",
-      ),
-    );
+  Widget _buildItem(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        return _buildRatingSummary(context);
+      case 1:
+        return _buildTitleCommentAndFilter(context);
+      default:
+        return _buildProductReviewItem();
+    }
   }
 
   Widget _buildTitle(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 16.0,
-      ),
-      child: OpenFlutterBlockHeader(
-        title: "Ratings&Reviews",
-        width: MediaQuery.of(context).size.width,
-      ),
+    return Text(
+      "Ratings&Reviews",
+      style: Theme.of(context).textTheme.headline2,
     );
   }
 
@@ -172,6 +168,30 @@ class OpenFlutterReviewsAndRatingsScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void _addReviews(List<Widget> children) {
+    children.add(_buildProductReviewItem());
+    children.add(_buildProductReviewItem());
+    children.add(_buildProductReviewItem());
+    children.add(_buildProductReviewItem());
+  }
+
+  Widget _buildProductReviewItem() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 16.0,
+      ),
+      child: OpenFlutterProductReviewItem(
+        rating: 4,
+        starCount: 5,
+        writerName: "Helene moore",
+        isHelpfulMarked: true,
+        comment:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        avatarUrl: "https://avatars1.githubusercontent.com/u/4689126?s=460&v=4",
+      ),
     );
   }
 }
