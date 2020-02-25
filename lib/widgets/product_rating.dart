@@ -84,11 +84,11 @@ class OpenFlutterProductRating extends StatelessWidget {
 
   Widget _buildStar(int index) {
     return GestureDetector(
-      onTap: () {
-        if (editable) {
-          onRatingSelected(_calculateRatingSelected(index));
-        }
-      },
+      onTap: editable
+          ? () {
+              onRatingSelected(_calculateRatingSelected(index));
+            }
+          : null,
       child: Container(
         width: iconSize + 2.0,
         height: iconSize + 2.0,

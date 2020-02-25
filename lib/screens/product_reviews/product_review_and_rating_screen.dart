@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
 
-class OpenFlutterReviewsAndRatingsScreen extends StatelessWidget {
-  const OpenFlutterReviewsAndRatingsScreen({
+class ProductReviewRatingScreen extends StatefulWidget {
+  final Product product;
+
+  const ProductReviewRatingScreen({
     Key key,
+    this.product,
   }) : super(key: key);
 
+  @override
+  State<StatefulWidget> createState() {
+    return ProductReviewRatingScreenState();
+  }
+}
+
+class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +63,7 @@ class OpenFlutterReviewsAndRatingsScreen extends StatelessWidget {
             },
             childCount: 10,
           ),
-        )
+        ),
       ],
     );
   }
@@ -169,13 +180,6 @@ class OpenFlutterReviewsAndRatingsScreen extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  void _addReviews(List<Widget> children) {
-    children.add(_buildProductReviewItem());
-    children.add(_buildProductReviewItem());
-    children.add(_buildProductReviewItem());
-    children.add(_buildProductReviewItem());
   }
 
   Widget _buildProductReviewItem() {
