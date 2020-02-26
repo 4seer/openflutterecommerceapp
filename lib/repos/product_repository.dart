@@ -18,7 +18,7 @@ class ProductRepository {
             discountPercent: 20,
             favorite: false,
             rating: 5,
-            ratingCount: 10,
+            ratingCount: 1316,
             price: 15,
             title: 'Evening Dress',
             categoryTitle: 'Dorothy Perkins',

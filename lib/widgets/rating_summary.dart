@@ -7,7 +7,7 @@ import 'package:openflutterecommerce/widgets/product_rating.dart';
 
 class OpenFlutterRatingSummary extends StatelessWidget {
   final double rating;
-  final List<StarQuantity> starQuantities;
+  final List<StarQuantity> ratingDetail;
   final int startCount;
   final int ratingQuantity;
   final bool showLabel;
@@ -23,7 +23,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
     this.rating = 5,
     this.ratingQuantity = 0,
     this.showLabel = true,
-    this.starQuantities,
+    this.ratingDetail,
     this.barColor = Colors.redAccent,
     this.barHeight = 10.0,
     this.starIconSize = 14.0,
@@ -89,8 +89,8 @@ class OpenFlutterRatingSummary extends StatelessWidget {
 
   List<Widget> _buildList(BuildContext context) {
     List<Widget> list = List<Widget>();
-    if (starQuantities != null && starQuantities.isNotEmpty) {
-      starQuantities.forEach((starQuantity) {
+    if (ratingDetail != null && ratingDetail.isNotEmpty) {
+      ratingDetail.forEach((starQuantity) {
         list.add(_buildItem(context, starQuantity));
       });
     }

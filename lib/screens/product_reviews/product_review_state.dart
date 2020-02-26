@@ -26,4 +26,13 @@ class ProductReviewLoadedState extends ProductReviewState {
   ProductReviewLoadedState(this.data);
 }
 
+@immutable
 class ProductReviewLoadingState extends ProductReviewState {}
+
+@immutable
+class ProductReviewWithPhotosState extends ProductReviewLoadedState {
+  final bool withPhotos;
+
+  ProductReviewWithPhotosState(ProductReviewData data, this.withPhotos)
+      : super(data);
+}

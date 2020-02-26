@@ -1,5 +1,6 @@
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
+import 'package:openflutterecommerce/repos/product_repository.dart';
 import 'package:openflutterecommerce/screens/product_reviews/product_review_and_rating_screen.dart';
 import 'package:openflutterecommerce/widgets/expansion_tile.dart';
 import 'package:openflutterecommerce/widgets/favourite_button.dart';
@@ -10,58 +11,13 @@ class ProductDetailsScreen extends StatefulWidget {
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
-
+//TODO all this code should be refactor
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   List<int> list = [1, 2, 3, 4, 5];
   List<String> _sizes = ['XS', 'S', 'M', 'L', 'XL'];
   List<String> _color = ['Red', 'Black', 'White', 'Yellow'];
   Orientation orientation;
-  List<Product> product = [
-    Product(
-        id: 1,
-        image: "assets/thumbs/dress/dress2.png",
-        discountPercent: 20,
-        favorite: false,
-        rating: 5,
-        ratingCount: 10,
-        price: 15,
-        title: 'Evening Dress',
-        categoryTitle: 'Dorothy Perkins',
-        isNew: true),
-    Product(
-        id: 2,
-        image: "assets/thumbs/dress/dress1.png",
-        discountPercent: 15,
-        favorite: false,
-        rating: 5,
-        ratingCount: 10,
-        price: 22,
-        title: 'Short Dress',
-        categoryTitle: 'Sitlly',
-        isNew: false),
-    Product(
-        id: 3,
-        image: "assets/thumbs/dress/dress2.png",
-        discountPercent: 20,
-        favorite: false,
-        rating: 5,
-        ratingCount: 10,
-        price: 15,
-        title: 'Evening Dress',
-        categoryTitle: 'Dorothy Perkins',
-        isNew: false),
-    Product(
-        id: 4,
-        image: "assets/thumbs/dress/dress1.png",
-        discountPercent: 15,
-        favorite: false,
-        rating: 5,
-        ratingCount: 10,
-        price: 22,
-        title: 'Short Dress',
-        categoryTitle: 'Sitlly',
-        isNew: true),
-  ];
+  List<Product> product = ProductRepository().getProducts(1);
   bool favorite = false;
   String text = //dummy text for product description,shipping info and support
       "Lorem ipsum dolor amet ennui chia synth mixtape wolf forage brooklyn pug you probably haven't heard of them lumbersexual, iceland tilde. Poke tumeric readymade brunch, mustache banh mi man bun bushwick celiac hoodie mumblecore";

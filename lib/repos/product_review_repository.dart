@@ -8,6 +8,7 @@ class ProductReviewRepository {
       1,
       "Jhon Doe",
       "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+      4.0,
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       DateTime.now(),
       false,
@@ -17,6 +18,7 @@ class ProductReviewRepository {
       2,
       "Flutter Reviewer",
       "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+      4.0,
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       DateTime.now(),
       false,
@@ -29,6 +31,7 @@ class ProductReviewRepository {
       3,
       "Juan Agú",
       "http://personal.psu.edu/xqz5228/jpg.jpg",
+      5.0,
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       DateTime.now(),
       false,
@@ -45,6 +48,7 @@ class ProductReviewRepository {
       4,
       "Flutter Reviewer",
       "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+      1.0,
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       DateTime.now(),
       false,
@@ -54,6 +58,7 @@ class ProductReviewRepository {
       5,
       "Jhon Doe2",
       "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+      2.0,
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       DateTime.now(),
       true,
@@ -63,6 +68,7 @@ class ProductReviewRepository {
       6,
       "Flutter Reviewer2",
       "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+      3.0,
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       DateTime.now(),
       false,
@@ -77,6 +83,7 @@ class ProductReviewRepository {
       7,
       "Jhon Doe3",
       "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+      4.0,
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       DateTime.now(),
       true,
@@ -86,6 +93,7 @@ class ProductReviewRepository {
       8,
       "Flutter Reviewer3",
       "https://i.pinimg.com/474x/9e/8e/18/9e8e18212e529bb23bcdeb3515b2276a--minions-movie--minion-movie.jpg",
+      5.0,
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       DateTime.now(),
       false,
@@ -106,6 +114,6 @@ class ProductReviewRepository {
     var maxIndex = results.length - 1;
     var startIndex = rnd.nextInt(maxIndex);
 
-    return results.sublist(startIndex, maxIndex - startIndex);
+    return results.sublist(startIndex, maxIndex);
   }
 }

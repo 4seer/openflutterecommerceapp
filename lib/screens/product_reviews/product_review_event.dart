@@ -13,3 +13,10 @@ class ProductReviewStartEvent extends ProductReviewEvent {
 
   ProductReviewStartEvent(this.productId);
 }
+
+@immutable
+class ProductReviewWithPhotosEvent extends ProductReviewEvent {
+  final bool withPhotos;
+
+  ProductReviewWithPhotosEvent(this.withPhotos);
+}
