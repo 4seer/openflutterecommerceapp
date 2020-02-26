@@ -51,11 +51,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 Container(
                   height: deviceHeight * 0.52,
                   child: ListView.builder(
-                    itemBuilder: (context, index) => Container(
-                      decoration: BoxDecoration(color: Colors.black),
-                      //simpley replace the container with the images
-                      width: deviceWidth * 0.75,
-                      margin: EdgeInsets.only(right: 4.0, bottom: 5.0),
+                    itemBuilder: (context, index) => 
+                      Image.asset("assets/images/products/shortdress.png",
+                        width: deviceWidth * 0.75,
+                        height: deviceHeight * 0.52,
                     ),
                     scrollDirection: Axis.horizontal,
                     itemCount: list.length,
