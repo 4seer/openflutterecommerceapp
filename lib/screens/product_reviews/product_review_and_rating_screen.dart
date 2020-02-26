@@ -8,6 +8,10 @@ import 'package:openflutterecommerce/screens/product_reviews/product_review_even
 import 'package:openflutterecommerce/screens/product_reviews/product_review_state.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
 
+import '../products/products.dart';
+import 'product_review_event.dart';
+import 'product_review_state.dart';
+
 class ProductReviewRatingScreen extends StatefulWidget {
   final Product product;
 
@@ -60,7 +64,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
         BlocProvider<ProductReviewBloc>(
           create: (context) {
             return ProductReviewBloc(ProductReviewRepository())
-              ..add(ProductReviewStartEvent(widget.product.id));
+              ..add(ProductReviewStartEvent(widget.product.id, false));
           },
           child: ProductReviewWrapper(
             product: widget.product,
@@ -103,7 +107,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
           child: OpenFlutterButton(
             title: "Write a review",
             icon: Icons.edit,
-            width: MediaQuery.of(context).size.width * 0.45,
+            width: MediaQuery.of(context).size.width * 0.5,
           ),
         ),
       ],
@@ -136,14 +140,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
     return BlocBuilder<ProductReviewBloc, ProductReviewState>(
         bloc: BlocProvider.of<ProductReviewBloc>(context),
         builder: (BuildContext context, ProductReviewState state) {
-          if (state is ProductReviewLoadedState) {
-            comments = state.data.reviews;
-            reviewCount = state.data.reviewCounter;
-          }
-
-          if (state is ProductReviewWithPhotosState) {
-            withPhotos = state.withPhotos;
-          }
+          _readState(state);
 
           return SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -161,6 +158,19 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
             ),
           );
         });
+  }
+
+  void _readState(ProductReviewState state) {
+    if (state is ProductReviewLoadingState) {
+      comments = null;
+      reviewCount = 0;
+    }
+
+    if (state is ProductReviewLoadedState) {
+      comments = state.data.reviews;
+      reviewCount = state.data.reviewCounter;
+      withPhotos = state.data.withPhotos;
+    }
   }
 
   Widget _buildItem(BuildContext context, int index) {
@@ -223,7 +233,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
                 title: "with photos",
                 onTap: (value) {
                   BlocProvider.of<ProductReviewBloc>(context)
-                      .add(ProductReviewWithPhotosEvent(value));
+                      .add(ProductReviewStartEvent(widget.product.id, value));
                 },
               ),
             ),
