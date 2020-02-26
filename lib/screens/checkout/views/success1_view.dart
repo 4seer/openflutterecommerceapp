@@ -29,7 +29,7 @@ class _Success1ViewState extends State<Success1View> {
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(AppSizes.imageRadius),
         image: new DecorationImage(
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.fitHeight,
             image: AssetImage("assets/images/checkout/success.png")
         )
       ),
