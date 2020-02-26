@@ -19,9 +19,6 @@ class _OpenFlutterSearchBarState extends State<OpenFlutterSearchBar> {
   @override
   Widget build(BuildContext context) {
     ThemeData _theme = Theme.of(context);
-    _searchKeyController.addListener(() {
-      widget.onChange(_searchKeyController.text);
-    });
     double width = MediaQuery.of(context).size.width;
     return Container(
       height: 50,
@@ -59,6 +56,10 @@ class _OpenFlutterSearchBarState extends State<OpenFlutterSearchBar> {
   @override
   void initState() {
     _searchKeyController = new TextEditingController(text: widget.searchKey );
+    
+    _searchKeyController.addListener(() {
+      widget.onChange(_searchKeyController.text);
+    });
     
     super.initState();
   }

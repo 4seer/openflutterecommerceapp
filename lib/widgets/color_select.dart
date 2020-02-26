@@ -3,7 +3,7 @@ import 'package:openflutterecommerce/config/theme.dart';
 
 import 'block_subtitle.dart';
 
-class OpenFlutterColorSelect extends StatelessWidget {
+class OpenFlutterColorSelect extends StatefulWidget {
   final List<Color> availableColors;
   final List<Color> selectedColors;
   final String label;
@@ -16,12 +16,26 @@ class OpenFlutterColorSelect extends StatelessWidget {
     @required this.onClick}) : super(key: key);
 
   @override
+  _OpenFlutterColorSelectState createState() => _OpenFlutterColorSelectState();
+}
+
+class _OpenFlutterColorSelectState extends State<OpenFlutterColorSelect> {
+
+  List<Color> selectedColors;
+
+  @override
+  void initState() {
+    selectedColors = widget.selectedColors;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Column(
       children:<Widget>[
         OpenFlutterBlockSubtitle(
-          title: label,
+          title: widget.label,
           width: width
         ),
         Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
@@ -42,17 +56,18 @@ class OpenFlutterColorSelect extends StatelessWidget {
       ]
     );
   }
+
   buildColors(BuildContext context){
     List<Widget> colorWidgets = List<Widget>();
-    for(int i = 0; i < availableColors.length; i++){
+    for(int i = 0; i < widget.availableColors.length; i++){
       colorWidgets.add(
         Padding(
           padding: EdgeInsets.only(right: AppSizes.sidePadding),
           child: InkWell(
             onTap: ( () => {
-              updateSelectedColors(availableColors[i])
+              updateSelectedColors(widget.availableColors[i])
             }), 
-            child: buildColorWidget(availableColors[i], context)
+            child: buildColorWidget(widget.availableColors[i], context)
           )
         )
       );
@@ -67,7 +82,7 @@ class OpenFlutterColorSelect extends StatelessWidget {
       height: 44,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(22)),
-        border: selectedColors.contains(color) ? 
+        border: widget.selectedColors.contains(color) ? 
           Border.all(
             color:  _theme.accentColor
           ) : null,
@@ -87,12 +102,11 @@ class OpenFlutterColorSelect extends StatelessWidget {
   }
 
   updateSelectedColors(Color color){
-    if ( selectedColors.contains(color))
-      selectedColors.remove(color);
+    if ( this.selectedColors.contains(color))
+      this.selectedColors.remove(color);
     else 
-      selectedColors.add(color);
-    this.onClick(this.selectedColors);
+      this.selectedColors.add(color);
+    setState( () { });
+    this.widget.onClick(this.selectedColors);
   }
-
-
 }

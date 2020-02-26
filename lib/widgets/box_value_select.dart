@@ -5,7 +5,7 @@ import 'package:openflutterecommerce/repos/models/category.dart';
 
 import 'block_subtitle.dart';
 
-class OpenFlutterSelectValuesBoxes<T> extends StatelessWidget {
+class OpenFlutterSelectValuesBoxes<T> extends StatefulWidget {
   final List<T> availableValues;
   final List<T> selectedValues;
   final String label;
@@ -19,12 +19,25 @@ class OpenFlutterSelectValuesBoxes<T> extends StatelessWidget {
     @required this.onClick, this.boxWidth}) : super(key: key);
 
   @override
+  _OpenFlutterSelectValuesBoxesState<T> createState() => _OpenFlutterSelectValuesBoxesState<T>();
+}
+
+class _OpenFlutterSelectValuesBoxesState<T> extends State<OpenFlutterSelectValuesBoxes<T>> {
+  List<T> selectedValues;
+
+  @override
+  void initState() {
+    selectedValues = widget.selectedValues;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Column(
       children:<Widget>[
         OpenFlutterBlockSubtitle(
-          title: label,
+          title: widget.label,
           width: width
         ),
         Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
@@ -37,7 +50,7 @@ class OpenFlutterSelectValuesBoxes<T> extends StatelessWidget {
                 width: width,
                 padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding*2),
                 child:Wrap(
-                  children: buildColors(context)
+                  children: buildSelectBoxes(context)
                 ),
               )
             ]
@@ -46,17 +59,18 @@ class OpenFlutterSelectValuesBoxes<T> extends StatelessWidget {
       ]
     );
   }
-  buildColors(BuildContext context){
+
+  buildSelectBoxes(BuildContext context){
     List<Widget> colorWidgets = List<Widget>();
-    for(int i = 0; i < availableValues.length; i++){
+    for(int i = 0; i < widget.availableValues.length; i++){
       colorWidgets.add(
         Padding(
           padding: EdgeInsets.only(right: AppSizes.sidePadding),
           child: InkWell(
             onTap: ( () => {
-              updateSelectedSizes(availableValues[i])
+              updateSelectedBoxes(widget.availableValues[i])
             }), 
-            child: buildBoxWidget(availableValues[i], context)
+            child: buildBoxWidget(widget.availableValues[i], context)
           )
         )
       );
@@ -68,26 +82,26 @@ class OpenFlutterSelectValuesBoxes<T> extends StatelessWidget {
     ThemeData _theme = Theme.of(context);
     return Container(
       alignment: Alignment.center,
-      width: boxWidth,
+      width: widget.boxWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         border: 
           Border.all(
-            color:  selectedValues.contains(currentValue) ? 
+            color:  widget.selectedValues.contains(currentValue) ? 
               _theme.accentColor
               : _theme.primaryColorLight
           ),
-        color: selectedValues.contains(currentValue) ? 
+        color: widget.selectedValues.contains(currentValue) ? 
           _theme.accentColor
           : AppColors.white
       ),
       padding: EdgeInsets.symmetric(
         vertical: AppSizes.sidePadding,
-        horizontal: boxWidth == null? AppSizes.sidePadding : 0),
+        horizontal: widget.boxWidth == null? AppSizes.sidePadding : 0),
       child: Text(convertValueToString(currentValue).toUpperCase(),
         overflow: TextOverflow.ellipsis,
         style: _theme.textTheme.headline5.copyWith(
-          color: selectedValues.contains(currentValue) ? 
+          color: widget.selectedValues.contains(currentValue) ? 
             AppColors.white
             : _theme.accentColor,
         ))
@@ -100,14 +114,14 @@ class OpenFlutterSelectValuesBoxes<T> extends StatelessWidget {
     return currentValue;
   }
 
-  updateSelectedSizes(T currentValue){
-    if ( selectedValues != null ) {
-      if ( selectedValues.contains(currentValue))
-        selectedValues.remove(currentValue);
+  updateSelectedBoxes(T currentValue){
+    if ( this.selectedValues != null ) {
+      if ( this.selectedValues.contains(currentValue))
+        this.selectedValues.remove(currentValue);
       else 
-        selectedValues.add(currentValue);
+        this.selectedValues.add(currentValue);
     }
-    this.onClick(this.selectedValues);
+    setState(() { });
+    this.widget.onClick(this.selectedValues);
   }
-
 }

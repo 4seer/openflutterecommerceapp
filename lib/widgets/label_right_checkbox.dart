@@ -17,7 +17,6 @@ class OpenFlutterLabelRightCheckbox extends StatefulWidget {
 class _OpenFlutterLabelRightCheckboxState extends State<OpenFlutterLabelRightCheckbox> {
   bool _checked;
 
-
   @override
   void initState() {
     _checked = widget.checked;
@@ -27,33 +26,41 @@ class _OpenFlutterLabelRightCheckboxState extends State<OpenFlutterLabelRightChe
   @override
   Widget build(BuildContext context) {
     ThemeData _theme = Theme.of(context);
-    return Container(
-      child: Row(children: <Widget>[
-        Container(
-          width: widget.width - 50,
-          child: Text(
-            widget.title,
-            style: _theme.textTheme.headline3.copyWith(
-              color: _checked ? 
-                _theme.accentColor 
-                : _theme.primaryColor
+    return InkWell(
+      onTap: ( () => {
+        changeCheckboxValue(!_checked)
+      }),
+      child: Container(
+        child: Row(children: <Widget>[
+          Container(
+            width: widget.width - 50,
+            child: Text(
+              widget.title,
+              style: _theme.textTheme.headline3.copyWith(
+                color: _checked ? 
+                  _theme.accentColor 
+                  : _theme.primaryColor
+              )
             )
-          )
-        ),
-        Container(
-          child: Checkbox(
-            activeColor: _theme.accentColor,
-            checkColor: AppColors.white,
-            value: _checked, 
-            onChanged: (bool value) { 
-              widget.onChanged(value);
-              setState( () {
-                _checked = value;
-              });
-             },
           ),
-        )
-      ],)
+          Container(
+            child: Checkbox(
+              activeColor: _theme.accentColor,
+              checkColor: AppColors.white,
+              value: _checked, 
+              onChanged: (bool value) { 
+                changeCheckboxValue(value);
+              },
+            ),
+          )
+        ],)
+      )
     );
+  }
+  changeCheckboxValue(bool newValue){
+    widget.onChanged(newValue);
+    setState( () {
+      _checked = newValue;
+    });
   }
 }

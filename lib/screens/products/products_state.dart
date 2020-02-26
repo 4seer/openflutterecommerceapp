@@ -49,7 +49,7 @@ class ProductsLoadedState extends ProductState {
 
   final List<String> selectedSizes;
 
-  final List<Category> availableCatgories = [
+  final List<Category> availableCategories = [
     Category(id: 1, title: 'Women'),
     Category(id: 2, title: 'Men'),
     Category(id: 3, title: 'Boys'),
@@ -67,7 +67,7 @@ class ProductsLoadedState extends ProductState {
     Brand(6, 'Diesel'),
   ];
 
-  final List<Brand> selectedBrands;
+  final List<int> selectedBrandIds;
 
   final RangeValues priceRange;
 
@@ -79,7 +79,7 @@ class ProductsLoadedState extends ProductState {
     this.showSortBy, this.sortBy, 
     this.priceRange, @required this.availablePriceRange,
     this.selectedColors, this.selectedSizes,
-    this.selectedCategories, this.selectedBrands,
+    this.selectedCategories, this.selectedBrandIds,
     this.brandSearchKey
     });
 
@@ -93,7 +93,7 @@ class ProductsLoadedState extends ProductState {
       List<Color> selectedColors,
       List<String> selectedSizes,
       List<Category> selectedCategories,
-      List<Brand> selectedBrands,
+      List<int> selectedBrandIds,
       String brandSearchKey}) {
     return ProductsLoadedState(
       data: data ?? this.data,
@@ -105,7 +105,7 @@ class ProductsLoadedState extends ProductState {
       selectedColors: selectedColors ?? this.selectedColors,
       selectedSizes: selectedSizes ?? this.selectedSizes,
       selectedCategories: selectedCategories ?? this.selectedCategories,
-      selectedBrands: selectedBrands ?? this.selectedBrands,
+      selectedBrandIds: selectedBrandIds ?? this.selectedBrandIds,
       brandSearchKey: brandSearchKey ?? this.brandSearchKey
     );
   }
@@ -118,7 +118,7 @@ class ProductsLoadedState extends ProductState {
     data, isLoading, showSortBy, sortBy, 
     availablePriceRange, priceRange, 
     selectedColors, selectedSizes, selectedCategories, 
-    selectedBrands, brandSearchKey
+    selectedBrandIds, brandSearchKey
   ];
 }
 

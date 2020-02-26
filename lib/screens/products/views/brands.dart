@@ -55,7 +55,8 @@ class _SelectBrandViewState extends State<SelectBrandView> {
                     child: Column(
                       children: buildBranCheckboxList(
                         state.availableBrands,
-                        state.selectedBrands,
+                        state.selectedBrandIds,
+                        state.brandSearchKey,
                         width,
                         bloc
                       )
@@ -76,7 +77,7 @@ class _SelectBrandViewState extends State<SelectBrandView> {
                     OpenFlutterButton(
                       width: (fullWidth - AppSizes.sidePadding*5)/2,
                       onPressed: ( () => {
-                        widget.changeView(changeType: ViewChangeType.Exact, index: 0)
+                        widget.changeView(changeType: ViewChangeType.Backward)
                       }), 
                       title: 'Discard',
                       textColor: _theme.primaryColor,
@@ -86,7 +87,7 @@ class _SelectBrandViewState extends State<SelectBrandView> {
                     OpenFlutterButton(
                       width: (fullWidth - AppSizes.sidePadding*5)/2,
                       onPressed: ( () => {
-                        widget.changeView(changeType: ViewChangeType.Exact, index: 0)
+                        widget.changeView(changeType: ViewChangeType.Backward)
                       }), 
                       title: 'Apply',
                     ),
@@ -103,28 +104,35 @@ class _SelectBrandViewState extends State<SelectBrandView> {
   }
 
   buildBranCheckboxList(List<Brand> brands, 
-    List<Brand> selectedBrands, 
+    List<int> selectedBrandIds, 
+    String searchKeyFilter,
     double width,
     ProductBloc bloc
   ){
     List<Widget> checkboxes = List<Widget>();
     for(int i = 0; i < brands.length; i++){
-      checkboxes.add(
-        OpenFlutterLabelRightCheckbox(
-          width: width - AppSizes.sidePadding*2,
-          checked: false,
-          title: brands[i].title,
-          onChanged: ((bool value) {
-            if ( value )
-              selectedBrands.insert(selectedBrands.length, brands[i]);
-            else
-              selectedBrands.remove(brands[i]);
-            bloc..add(ProductChangeSelectedBrandsEvent(
-              selectedBrands
-            ));
-          }),
-        )
-      );
+      if ( searchKeyFilter != null &&
+        brands[i].title.toLowerCase().contains(searchKeyFilter.toLowerCase()))
+      {
+        bool selected = selectedBrandIds != null && 
+              selectedBrandIds.contains(brands[i].id);
+        checkboxes.add(
+          OpenFlutterLabelRightCheckbox(
+            width: width - AppSizes.sidePadding*2,
+            checked: selected,
+            title: brands[i].title,
+            onChanged: ((bool value) {
+              if ( value && !selectedBrandIds.contains(brands[i].id)  )
+                selectedBrandIds.insert(selectedBrandIds.length, brands[i].id);
+              else
+                selectedBrandIds.remove(brands[i].id);
+              bloc..add(ProductChangeSelectedBrandsEvent(
+                selectedBrandIds
+              ));
+            }),
+          )
+        );
+      }
     }
     return checkboxes;
   }

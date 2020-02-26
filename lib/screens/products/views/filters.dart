@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/repos/models/brand.dart';
 import 'package:openflutterecommerce/repos/models/category.dart';
 import 'package:openflutterecommerce/widgets/box_value_select.dart';
 import 'package:openflutterecommerce/widgets/color_select.dart';
@@ -84,7 +85,7 @@ class _ProductFilterViewState extends State<ProductFilterView> {
                   OpenFlutterSelectValuesBoxes<Category>(
                     key: UniqueKey(),
                     boxWidth: 70, 
-                    availableValues: state.availableCatgories, 
+                    availableValues: state.availableCategories, 
                     selectedValues: state.selectedCategories, 
                     label: 'Categories', 
                     onClick: ( (List<Category> newSelectedValues) =>{
@@ -95,7 +96,7 @@ class _ProductFilterViewState extends State<ProductFilterView> {
                   ),
                   OpenFlutterTextTile(
                     title: 'Brand',
-                    subtitle: 'adidas Originals, Jack & Jones, s.Oliver',
+                    subtitle: getBrandList(state.availableBrands, state.selectedBrandIds),// 'adidas Originals, Jack & Jones, s.Oliver',
                     onClick: ( () => {
                       widget.changeView(
                         changeType: ViewChangeType.Exact, index:3)
@@ -136,5 +137,16 @@ class _ProductFilterViewState extends State<ProductFilterView> {
       }
     })
    );
+  }
+
+  getBrandList(List<Brand> availableBrands, List<int> selectedBrandIds){
+    var concatenate = "";
+
+    availableBrands.forEach((Brand item){
+      if ( concatenate.length < 70 ) //maximum 100 chars in this line
+        if ( selectedBrandIds.length ==0 || selectedBrandIds.contains(item.id) )
+          concatenate +=  (concatenate.length > 0 ? ', ' : '') + item.title;
+    });
+    return concatenate;
   }
 }

@@ -36,12 +36,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         isLoading: false,
         showSortBy: false,
         sortBy: SortBy.Popular,
-        selectedBrands: List<Brand>(),
+        selectedBrandIds: List<int>(),
         selectedCategories: List<Category>(),
         selectedSizes: List<String>(),
         selectedColors: List<Color>(),
         priceRange: RangeValues(70,150),
         availablePriceRange: RangeValues(0,1000),
+        brandSearchKey: "",
         data: data);
     }
     else if ( event is ProductChangeSortByEvent){
@@ -70,7 +71,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }
     else if ( event is ProductChangeSelectedBrandsEvent){
       ProductsLoadedState state = this.state as ProductsLoadedState;
-      yield state.copyWith(selectedBrands: event.selectedBrands);
+      yield state.copyWith(selectedBrandIds: event.selectedBrandIds);
     }
     else if ( event is ProductChangeBrandSearchKeyEvent){
       ProductsLoadedState state = this.state as ProductsLoadedState;

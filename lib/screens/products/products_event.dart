@@ -80,12 +80,12 @@ class ProductChangeSelectedCategoriesEvent extends ProductEvent {
 
 @immutable
 class ProductChangeSelectedBrandsEvent extends ProductEvent {
-  final List<Brand> selectedBrands;
+  final List<int> selectedBrandIds;
 
-  ProductChangeSelectedBrandsEvent(this.selectedBrands);
+  ProductChangeSelectedBrandsEvent(this.selectedBrandIds);
   
   @override
-  List<Object> get props => [selectedBrands];
+  List<Object> get props => [selectedBrandIds];
 }
 
 @immutable
