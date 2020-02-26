@@ -18,7 +18,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   final double photoSize;
 
   final double rating;
-  final int ratingCount;
+  final int starCount;
 
   final Function onHelpfulTapped;
   final bool isHelpfulMarked;
@@ -30,7 +30,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
     this.avatarUrl = "",
     this.avatarSize = 40.0,
     this.writerName = "",
-    this.ratingCount = 0,
+    this.starCount = 0,
     this.rating = 0.0,
     this.reviewDateTime = "",
     this.comment = "",
@@ -119,7 +119,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
       children: <Widget>[
         OpenFlutterProductRating(
           showLabel: false,
-          ratingCount: ratingCount,
+          ratingCount: starCount,
           rating: rating,
           editable: false,
           iconSize: 14.0,
