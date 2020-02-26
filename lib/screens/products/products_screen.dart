@@ -8,6 +8,8 @@ import 'package:openflutterecommerce/repos/category_repository.dart';
 import 'package:openflutterecommerce/repos/hashtag_repository.dart';
 import 'package:openflutterecommerce/repos/product_repository.dart';
 import 'package:openflutterecommerce/screens/products/products.dart';
+import 'package:openflutterecommerce/screens/products/views/brands.dart';
+import 'package:openflutterecommerce/screens/products/views/filters.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
 import 'package:openflutterecommerce/widgets/scaffold.dart';
@@ -60,6 +62,8 @@ class _ProductsWrapperState extends OpenFlutterWrapperState<ProductsWrapper> {
           return getPageView(<Widget>[
             ProductsListView(changeView: changePage),
             ProductsCardView(changeView: changePage),
+            ProductFilterView(changeView: changePage),
+            SelectBrandView(changeView: changePage)
           ]);
         });
   }

@@ -69,7 +69,10 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     height: 24,
                     productView: productView,
                     sortBy: state.sortBy,
-                    onFilterClicked: (() => {}),
+                    onFilterClicked: (() => {
+                      widget.changeView(
+                        changeType: ViewChangeType.Exact, index:2)
+                    }),
                     onChangeViewClicked: (() => {
                       widget.changeView(changeType: ViewChangeType.Backward)
                     }),
