@@ -5,6 +5,7 @@ import 'package:openflutterecommerce/repos/models/category.dart';
 import 'package:openflutterecommerce/widgets/box_value_select.dart';
 import 'package:openflutterecommerce/widgets/color_select.dart';
 import 'package:openflutterecommerce/widgets/price_slider.dart';
+import 'package:openflutterecommerce/widgets/text_tile.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
 
 import '../../wrapper.dart';
@@ -92,6 +93,14 @@ class _ProductFilterViewState extends State<ProductFilterView> {
                       ))
                     }),
                   ),
+                  OpenFlutterTextTile(
+                    title: 'Brand',
+                    subtitle: 'adidas Originals, Jack & Jones, s.Oliver',
+                    onClick: ( () => {
+                      widget.changeView(
+                        changeType: ViewChangeType.Exact, index:3)
+                    })
+                  )
                 ]
               )
             ),

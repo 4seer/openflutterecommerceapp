@@ -87,3 +87,13 @@ class ProductChangeSelectedBrandsEvent extends ProductEvent {
   @override
   List<Object> get props => [selectedBrands];
 }
+
+@immutable
+class ProductChangeBrandSearchKeyEvent extends ProductEvent {
+  final String newSearchKey;
+
+  ProductChangeBrandSearchKeyEvent(this.newSearchKey);
+  
+  @override
+  List<Object> get props => [newSearchKey];
+}

@@ -72,6 +72,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       ProductsLoadedState state = this.state as ProductsLoadedState;
       yield state.copyWith(selectedBrands: event.selectedBrands);
     }
+    else if ( event is ProductChangeBrandSearchKeyEvent){
+      ProductsLoadedState state = this.state as ProductsLoadedState;
+      yield state.copyWith(brandSearchKey: event.newSearchKey);
+    }
   }
 
   ProductStateData getStateData(int categoryId) {

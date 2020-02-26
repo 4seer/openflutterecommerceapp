@@ -73,11 +73,14 @@ class ProductsLoadedState extends ProductState {
 
   final RangeValues availablePriceRange;
 
+  final String brandSearchKey;
+
   ProductsLoadedState({this.data, this.isLoading, 
     this.showSortBy, this.sortBy, 
     this.priceRange, @required this.availablePriceRange,
     this.selectedColors, this.selectedSizes,
-    this.selectedCategories, this.selectedBrands
+    this.selectedCategories, this.selectedBrands,
+    this.brandSearchKey
     });
 
   ProductsLoadedState copyWith(
@@ -90,7 +93,8 @@ class ProductsLoadedState extends ProductState {
       List<Color> selectedColors,
       List<String> selectedSizes,
       List<Category> selectedCategories,
-      List<Brand> selectedBrands}) {
+      List<Brand> selectedBrands,
+      String brandSearchKey}) {
     return ProductsLoadedState(
       data: data ?? this.data,
       isLoading: loading ?? this.isLoading,
@@ -101,7 +105,8 @@ class ProductsLoadedState extends ProductState {
       selectedColors: selectedColors ?? this.selectedColors,
       selectedSizes: selectedSizes ?? this.selectedSizes,
       selectedCategories: selectedCategories ?? this.selectedCategories,
-      selectedBrands: selectedBrands ?? this.selectedBrands
+      selectedBrands: selectedBrands ?? this.selectedBrands,
+      brandSearchKey: brandSearchKey ?? this.brandSearchKey
     );
   }
   
@@ -113,7 +118,7 @@ class ProductsLoadedState extends ProductState {
     data, isLoading, showSortBy, sortBy, 
     availablePriceRange, priceRange, 
     selectedColors, selectedSizes, selectedCategories, 
-    selectedBrands
+    selectedBrands, brandSearchKey
   ];
 }
 
