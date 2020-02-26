@@ -14,8 +14,8 @@ class Category extends Equatable {
   Category(
       {@required this.id,
       @required this.title,
-      @required this.image,
-      @required this.typeId});
+      this.image,
+      this.typeId});
 
   @override
   List<Object> get props => [id, title, image, typeId];

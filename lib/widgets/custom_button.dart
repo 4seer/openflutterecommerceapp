@@ -12,6 +12,9 @@ class OpenFlutterButton extends StatelessWidget {
   final String title;
   final IconData icon;
   final double iconSize;
+  final Color backgroundColor;
+  final Color textColor;
+  final Color borderColor;
 
   OpenFlutterButton({
     Key key,
@@ -20,6 +23,9 @@ class OpenFlutterButton extends StatelessWidget {
     @required this.title,
     @required this.onPressed,
     this.icon,
+    this.backgroundColor = AppColors.red,
+    this.textColor = AppColors.white,
+    this.borderColor = AppColors.red,
     this.iconSize = 18.0,
   }) : super(key: key);
 
@@ -39,11 +45,12 @@ class OpenFlutterButton extends StatelessWidget {
           height: height,
           padding: edgeInsets,
           decoration: BoxDecoration(
-              color: AppColors.red,
+              color: backgroundColor,
+              border: Border.all(color: borderColor),
               borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
               boxShadow: [
                 BoxShadow(
-                    color: AppColors.red.withOpacity(0.3),
+                    color: backgroundColor.withOpacity(0.3),
                     blurRadius: 4.0,
                     offset: Offset(0.0, 5.0)),
               ]),
@@ -86,7 +93,7 @@ class OpenFlutterButton extends StatelessWidget {
       title,
       style: _theme.textTheme.button.copyWith(
         backgroundColor: _theme.textTheme.button.backgroundColor,
-        color: _theme.textTheme.button.color,
+        color: textColor,
       ),
     );
   }
