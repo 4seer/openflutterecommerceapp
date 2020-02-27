@@ -11,12 +11,7 @@ class ProductReviewEvent extends Equatable {
 class ProductReviewStartEvent extends ProductReviewEvent {
   final int productId;
 
-  ProductReviewStartEvent(this.productId);
-}
-
-@immutable
-class ProductReviewWithPhotosEvent extends ProductReviewEvent {
   final bool withPhotos;
 
-  ProductReviewWithPhotosEvent(this.withPhotos);
+  ProductReviewStartEvent(this.productId, this.withPhotos);
 }

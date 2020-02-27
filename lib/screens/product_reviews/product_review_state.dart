@@ -6,8 +6,9 @@ import 'package:openflutterecommerce/repos/models/product_review.dart';
 class ProductReviewData {
   final List<ProductReview> reviews;
   final int reviewCounter;
+  final bool withPhotos;
 
-  ProductReviewData(this.reviews, this.reviewCounter);
+  ProductReviewData(this.reviews, this.reviewCounter, this.withPhotos);
 }
 
 @immutable

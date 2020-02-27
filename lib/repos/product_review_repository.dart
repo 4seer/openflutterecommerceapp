@@ -101,12 +101,18 @@ class ProductReviewRepository {
     ),
   ];
 
-  Future<List<ProductReview>> findReviewsByProductId(int productId) async {
+  Future<List<ProductReview>> findReviewsByProductId(
+      int productId, bool withPhotos) async {
     await Future.delayed(Duration(
       seconds: 2,
     ));
 
-    return _buildResponse();
+    var response = _buildResponse();
+    if (withPhotos) {
+      return response.where((element) => element.hasPhotos()).toList();
+    }
+
+    return response;
   }
 
   List<ProductReview> _buildResponse() {
