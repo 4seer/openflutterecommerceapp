@@ -29,7 +29,7 @@ class _CartScreenState extends State<CartScreen> {
               ..add(CartLoadedEvent());
           },
           child: CartWrapper()),
-      bottomMenuIndex: 0,
+      bottomMenuIndex: 2,
     ));
   }
 }

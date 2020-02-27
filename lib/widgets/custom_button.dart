@@ -37,7 +37,7 @@ class OpenFlutterButton extends StatelessWidget {
       edgeInsets = EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0);
     }
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      padding: edgeInsets,
       child: InkWell(
         onTap: onPressed,
         child: Container(

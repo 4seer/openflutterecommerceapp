@@ -2,10 +2,76 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
+import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/repos/models/cart_product.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
+import 'package:openflutterecommerce/repos/models/product_color.dart';
 import 'package:openflutterecommerce/repos/models/product_rating.dart';
 
 class ProductRepository {
+
+  List<CartProduct> getCartProducts(){
+    return [
+      CartProduct(
+        product: Product(
+          id: 1,
+          image: "assets/images/checkout/cart/product1.png",
+          discountPercent: 20,
+          favorite: false,
+          rating: 5,
+          ratingCount: 10,
+          price: 15,
+          title: 'Pullover',
+          categoryTitle: 'Dorothy Perkins',
+          isNew: true
+        ),
+        size: 'L',
+        color: ProductColor(Colors.black, 'Black'),
+        quantity: 1,
+        price: 15
+      ),
+
+      CartProduct(
+        product: Product(
+          id: 2,
+          image: "assets/images/checkout/cart/product2.png",
+          discountPercent: 20,
+          favorite: false,
+          rating: 5,
+          ratingCount: 10,
+          price: 15,
+          title: 'T-shirt',
+          categoryTitle: 'Dorothy Perkins',
+          isNew: true
+        ),
+        size: 'L',
+        color: ProductColor(Colors.grey, 'Gray'),
+        quantity: 1,
+        price: 15
+      ),
+
+
+      CartProduct(
+        product: Product(
+          id: 3,
+          image: "assets/images/checkout/cart/product2.png",
+          discountPercent: 20,
+          favorite: false,
+          rating: 5,
+          ratingCount: 10,
+          price: 15,
+          title: 'Sport Dress',
+          categoryTitle: 'Dorothy Perkins',
+          isNew: true
+        ),
+        size: 'L',
+        color: ProductColor(Colors.grey, 'Gray'),
+        quantity: 1,
+        price: 15
+      ),
+
+    ];
+  }
   //Get Product array
   //TODO: fetch from local DB
   List<Product> getProducts(int categoryId) {

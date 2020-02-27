@@ -44,9 +44,10 @@ class OpenFlutterBottomPopup extends StatelessWidget {
               ), 
             ),
           ),
-          Text("Sort by",
-            style: _theme.textTheme.headline3
-          ),
+          title != '' ?
+            Text(title,
+              style: _theme.textTheme.headline3
+            ) : Container(),
 
 
           Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),

@@ -97,6 +97,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             OpenFlutterEcommerceRoutes.cart: (context) => CartScreen(),
             OpenFlutterEcommerceRoutes.checkout: (context) => CheckoutScreen(),
             OpenFlutterEcommerceRoutes.favourites: (context) => FavouriteScreen(),
+            OpenFlutterEcommerceRoutes.settings: (context) => SettingsScreen(),
             OpenFlutterEcommerceRoutes.signin: (context) => _signIn,
             OpenFlutterEcommerceRoutes.signup: (context) => _signUp,
             OpenFlutterEcommerceRoutes.forgotPassword: (context) =>

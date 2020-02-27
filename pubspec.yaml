@@ -55,6 +55,7 @@ flutter:
     - assets/icons/favourites/
     - assets/images/products/
     - assets/images/checkout/
+    - assets/images/checkout/cart/
     - assets/splash/
     - assets/thumbs/
     - assets/thumbs/dress/

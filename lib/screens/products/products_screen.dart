@@ -57,14 +57,14 @@ class _ProductsWrapperState extends OpenFlutterWrapperState<ProductsWrapper> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductBloc, ProductState>(
-        bloc: BlocProvider.of<ProductBloc>(context),
-        builder: (BuildContext context, ProductState state) {
-          return getPageView(<Widget>[
-            ProductsListView(changeView: changePage),
-            ProductsCardView(changeView: changePage),
-            ProductFilterView(changeView: changePage),
-            SelectBrandView(changeView: changePage)
-          ]);
-        });
+      bloc: BlocProvider.of<ProductBloc>(context),
+      builder: (BuildContext context, ProductState state) {
+        return getPageView(<Widget>[
+          ProductsListView(changeView: changePage),
+          ProductsCardView(changeView: changePage),
+          ProductFilterView(changeView: changePage),
+          SelectBrandView(changeView: changePage)
+        ]);
+      });
   }
 }
