@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/widgets/bottom_popup.dart';
 import 'package:openflutterecommerce/widgets/clickable_line.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
 
@@ -13,43 +14,14 @@ class OpenFlutterSortBy extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData _theme = Theme.of(context);
     double fullWidth = MediaQuery.of(context).size.width;
-    return Positioned(
-        bottom: 0,
-        left: 0,
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(AppSizes.widgetBorderRadius),
-              topRight: Radius.circular(AppSizes.widgetBorderRadius),
-            )
-          ), 
-          height: 400,
-          width: fullWidth,
-          child: Column(children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(AppSizes.sidePadding),
-              child:Container(
-                width: 60,
-                height: 6,
-                decoration: BoxDecoration(
-                  color: AppColors.darkGray,
-                  borderRadius: BorderRadius.circular(AppSizes.imageRadius)
-                ), 
-              ),
-            ),
-            Text("Sort by",
-              style: _theme.textTheme.headline3
-            ),
-            Container(
-              padding: EdgeInsets.only(top: AppSizes.sidePadding),
-              child:  Column(
-                children:buildSortBy(fullWidth, _theme)
-              )
-            )
-          ],
-        ),
+    return OpenFlutterBottomPopup(
+      title: 'Sort By',
+      height: 400,
+      child: Container(
+        padding: EdgeInsets.only(top: AppSizes.sidePadding),
+        child:  Column(
+          children:buildSortBy(fullWidth, _theme)
+        )
       )
     ) ;
   }

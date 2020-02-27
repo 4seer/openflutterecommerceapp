@@ -15,29 +15,28 @@ class OpenFlutterProductListView extends StatelessWidget {
   final double elementHeight = 184;
   final double elementWidth = 148;
   final List<Product> products;
-  const OpenFlutterProductListView({Key key, this.width, 
-    this.products}) : super(key: key);
+
+  const OpenFlutterProductListView({
+    Key key,
+    this.width,
+    this.products,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> productTiles = new List<Widget>();
-    ThemeData _theme = Theme.of(context);
-    for(int i = 0; i < products.length; i++){
-      productTiles.add(
-        OpenFlutterProductCard(
-          width: elementWidth,
-          height: elementHeight, 
-          product: products[i])
-      );
+    for (int i = 0; i < products.length; i++) {
+      productTiles.add(OpenFlutterProductCard(
+        width: elementWidth,
+        height: elementHeight,
+        product: products[i],
+      ));
     }
     return Container(
-      padding: EdgeInsets.only(top: AppSizes.sidePadding),
-      width: width,
-      height: height,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: productTiles
-      )
-    );
+        padding: EdgeInsets.only(top: AppSizes.sidePadding),
+        width: width,
+        height: height,
+        child:
+            ListView(scrollDirection: Axis.horizontal, children: productTiles));
   }
 }

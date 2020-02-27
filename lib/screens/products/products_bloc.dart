@@ -6,6 +6,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/repos/category_repository.dart';
 import 'package:openflutterecommerce/repos/hashtag_repository.dart';
+import 'package:openflutterecommerce/repos/models/brand.dart';
+import 'package:openflutterecommerce/repos/models/category.dart';
 import 'package:openflutterecommerce/repos/product_repository.dart';
 import 'package:openflutterecommerce/screens/products/products_event.dart';
 import 'package:openflutterecommerce/screens/products/products_state.dart';
@@ -34,6 +36,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         isLoading: false,
         showSortBy: false,
         sortBy: SortBy.Popular,
+        selectedBrandIds: List<int>(),
+        selectedCategories: List<Category>(),
+        selectedSizes: List<String>(),
+        selectedColors: List<Color>(),
+        priceRange: RangeValues(70,150),
+        availablePriceRange: RangeValues(0,1000),
+        brandSearchKey: "",
         data: data);
     }
     else if ( event is ProductChangeSortByEvent){
@@ -43,6 +52,30 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     else if ( event is ProductShowSortByEvent) {
       ProductsLoadedState state = this.state as ProductsLoadedState;
       yield state.copyWith(showSortBy: true);
+    }
+    else if ( event is ProductChangePriceRangeEvent){
+      ProductsLoadedState state = this.state as ProductsLoadedState;
+      yield state.copyWith(priceRange: event.priceRange);
+    }
+    else if ( event is ProductChangeSelectedColorsEvent){
+      ProductsLoadedState state = this.state as ProductsLoadedState;
+      yield state.copyWith(selectedColors: event.selectedColors);
+    }
+    else if ( event is ProductChangeSelectedSizesEvent){
+      ProductsLoadedState state = this.state as ProductsLoadedState;
+      yield state.copyWith(selectedSizes: event.selectedSizes);
+    }
+    else if ( event is ProductChangeSelectedCategoriesEvent){
+      ProductsLoadedState state = this.state as ProductsLoadedState;
+      yield state.copyWith(selectedCategories: event.selectedCategories);
+    }
+    else if ( event is ProductChangeSelectedBrandsEvent){
+      ProductsLoadedState state = this.state as ProductsLoadedState;
+      yield state.copyWith(selectedBrandIds: event.selectedBrandIds);
+    }
+    else if ( event is ProductChangeBrandSearchKeyEvent){
+      ProductsLoadedState state = this.state as ProductsLoadedState;
+      yield state.copyWith(brandSearchKey: event.newSearchKey);
     }
   }
 

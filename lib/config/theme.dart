@@ -15,6 +15,8 @@ class AppSizes {
   static const double widgetBorderRadius = 34;
   static const double textFieldRadius = 4.0;
   static const EdgeInsets bottomSheetPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 10);
+  static const APP_BAR_SIZE = 56.0;
+  static const APP_BAR_EXPANDED_SIZE = 200.0;
 }
 
 class AppColors {
@@ -25,6 +27,7 @@ class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const orange = Color(0xFFFFBA49);
   static const background = Color(0xFFE5E5E5);
+  static const backgroundLight = Color(0xFFF9F9F9);
   static const transparent = Color(0x00000000);
   static const success = Color(0xFF2AA952);
 }
@@ -38,7 +41,9 @@ class OpenFlutterEcommerceTheme {
       accentColor: AppColors.red,
       bottomAppBarColor: AppColors.lightGray,
       backgroundColor: AppColors.background,
+      dialogBackgroundColor: AppColors.backgroundLight,
       errorColor: AppColors.red,
+      dividerColor: Colors.transparent,
       appBarTheme: theme.appBarTheme.copyWith(
         color: AppColors.white,
         iconTheme: IconThemeData(color: AppColors.black),
@@ -48,7 +53,8 @@ class OpenFlutterEcommerceTheme {
         //over image white text
         headline1: theme.textTheme.headline1
           .copyWith(fontSize: 48, color: AppColors.white),
-        headline2: theme.textTheme.headline2,
+        headline2: theme.textTheme.headline2
+          .copyWith(fontSize: 24, color: AppColors.black,fontWeight: FontWeight.w700 ),
 
         //product title
         headline3: theme.textTheme.headline3.copyWith(

@@ -60,8 +60,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                       color: AppColors.white,
                       child: Column(children: <Widget>[
                         Padding(
-                            padding:
-                                EdgeInsets.only(top: AppSizes.sidePadding)),
+                          padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                         OpenFlutterBlockHeader(
                           title: state.data.category.title,
                           width: MediaQuery.of(context).size.width,
@@ -83,7 +82,10 @@ class _ProductsListViewState extends State<ProductsListView> {
                             height: 24,
                             productView: productView,
                             sortBy: state.sortBy,
-                            onFilterClicked: (() => {}),
+                            onFilterClicked: (() => {
+                              widget.changeView(
+                                changeType: ViewChangeType.Exact, index:2)
+                            }),
                             onChangeViewClicked: (() => {
                               widget.changeView(
                                 changeType: ViewChangeType.Forward)

@@ -77,7 +77,7 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Text('SUMMER SALES',
-                                style: _theme.textTheme.headline3),
+                                style: _theme.textTheme.headline3.copyWith(color: AppColors.white)),
                               Text('Up to 50% off',
                                 style: _theme.textTheme.headline3.copyWith(
                                   color: AppColors.white

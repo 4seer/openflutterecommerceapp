@@ -22,10 +22,30 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     if (event is CheckoutStartEvent) {
       if (this.state is CheckoutInitialState) {
         yield new CheckoutProceedState(
-            cartProducts: this.productRepository.getProducts(2));
+          cardId: 1,
+          cartProducts: this.productRepository.getProducts(2));
       } else if (this.state is CheckoutProceedState) {
         yield this.state;
-      }
+      } 
+    } else if ( event is CheckoutSetDefaultCardEvent){
+      if (this.state is CheckoutProceedState) {
+        yield (this.state as CheckoutProceedState).copyWith(
+          cardId: event.cardId
+        );
+      } 
+    } else if ( event is CheckoutShowAddNewCardEvent){
+      if (this.state is CheckoutProceedState) {
+        yield (this.state as CheckoutProceedState).copyWith(
+          showAddNewCardForm: true
+        );
+      } 
+    } else if ( event is CheckoutAddNewCardEvent){
+      if (this.state is CheckoutProceedState) {
+        //TODO: add new card
+        yield (this.state as CheckoutProceedState).copyWith(
+          showAddNewCardForm: false
+        );
+      } 
     }
   }
 }

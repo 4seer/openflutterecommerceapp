@@ -3,6 +3,18 @@
 // Date: 2020-02-17
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/screens/checkout/checkout_event.dart';
+import 'package:openflutterecommerce/widgets/bottom_popup.dart';
+import 'package:openflutterecommerce/widgets/custom_checkbox.dart';
+import 'package:openflutterecommerce/widgets/payment_card.dart';
+import 'package:openflutterecommerce/widgets/payment_card_preview.dart';
+import 'package:openflutterecommerce/widgets/widgets.dart';
+
+import '../../wrapper.dart';
+import '../checkout_bloc.dart';
+import '../checkout_state.dart';
 
 class PaymentMethodView extends StatefulWidget {
 
@@ -15,10 +27,178 @@ class PaymentMethodView extends StatefulWidget {
 }
 
 class _PaymentMethodViewState extends State<PaymentMethodView> {
+
+  int paymentCardIndex = 0;
+
+  TextEditingController _nameOnCardController;
+  TextEditingController _cardNumberController;
+  TextEditingController _expirationDateController;
+  TextEditingController _cvvController;
+  
+  @override
+  void initState() {
+    _nameOnCardController = new TextEditingController();
+    _cardNumberController = new TextEditingController();
+    _expirationDateController = new TextEditingController();
+    _cvvController = new TextEditingController();
+    
+    super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    _nameOnCardController?.dispose();
+    _cardNumberController?.dispose();
+    _expirationDateController?.dispose();
+    _cvvController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    final bloc = BlocProvider.of<CheckoutBloc>(context);
+    final ThemeData _theme = Theme.of(context);
+    final double width = MediaQuery.of(context).size.width;
+
+    return BlocListener(
+        bloc: bloc,
+        listener: (BuildContext context, CheckoutState state) {
+          if (state is CheckoutErrorState) {
+            return Container(
+                padding: EdgeInsets.all(AppSizes.sidePadding),
+                child: Text('An error occured',
+                  style: _theme.textTheme.headline3
+                    .copyWith(color: _theme.errorColor)));
+          }
+          return Container();
+        },
+        child: BlocBuilder(
+          bloc: bloc,
+          builder: (BuildContext context, CheckoutState state) {
+            int currentCardId = 0;
+            bool showAddNewCardForm = false;
+            if ( state is CheckoutProceedState) {
+              currentCardId = state.cardId;
+              showAddNewCardForm = state.showAddNewCardForm;
+            }
+
+            return SingleChildScrollView(
+              child: Stack(
+                children:<Widget>[
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
+                    child: Column(
+                      children: <Widget>[
+                        OpenFlutterBlockSubtitle(
+                          width: width,
+                          title: 'Your payment cards'),
+                        OpenFlutterPaymentCardPreview(
+                          width: width,
+                          cardNumber: '**** **** **** 3947',
+                          cardHolderName: 'Jennyfer Doe',
+                          expirationMonth: 5,
+                          expirationYear: 23,
+                        ),
+                        OpenFlutterCheckbox(
+                          width: width,
+                          title: 'Use as default payment method',
+                          checked: currentCardId==1,
+                          onTap: ((bool newValue)=> { _changeDefaultPaymentCard(bloc, 1) })
+                        ),
+
+                        OpenFlutterPaymentCardPreview(
+                          width: width,
+                          cardNumber: '**** **** **** 4546',
+                          cardHolderName: 'Jennyfer Doe',
+                          expirationMonth: 11,
+                          expirationYear: 22,
+                          cardType: CardType.Visa
+                        ),
+                        OpenFlutterCheckbox(
+                          width: width,
+                          title: 'Use as default payment method',
+                          checked: currentCardId==2,
+                          onTap: ((bool newValue)=> { _changeDefaultPaymentCard(bloc, 2) })
+                        ),
+                      ]
+                    )
+                  ),
+
+                  Positioned(
+                    bottom: AppSizes.sidePadding,
+                    right: AppSizes.sidePadding,
+                    child: FloatingActionButton(
+                      mini: true,
+                      backgroundColor: _theme.primaryColor,
+                      onPressed: ( () => {
+                        bloc..add(CheckoutShowAddNewCardEvent())
+                      }),
+                      child: Icon(Icons.add, size: 36)
+                    ),
+                  ),
+
+                  showAddNewCardForm ? 
+                    OpenFlutterBottomPopup(
+                      title: 'Add new card',
+                      height: 550,
+                      child: Column(
+                        children:<Widget>[
+                          OpenFlutterInputField(
+                            controller: _nameOnCardController,
+                            hint: 'Name on card',
+                          ),
+                          Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
+                          OpenFlutterInputField(
+                            controller: _cardNumberController,
+                            hint: 'Card number',
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
+                          OpenFlutterInputField(
+                            controller: _expirationDateController,
+                            hint: 'Expiration Date',
+                          ),
+                          Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
+                          OpenFlutterInputField(
+                            controller: _cvvController,
+                            hint: 'CVV',
+                          ),
+                          Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
+                          OpenFlutterCheckbox(
+                            width: width,
+                            title: 'Use as default payment method',
+                            checked: false,
+                            onTap: ((bool newValue)=> { _changeDefaultPaymentCard(bloc, 3) })
+                          ),
+                          Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
+                          OpenFlutterButton(
+                            title: 'ADD CARD',
+                            onPressed: ( () => {
+                              bloc..add(CheckoutAddNewCardEvent(
+                                nameOnCard: _nameOnCardController.text,
+                                cardNumber: _cardNumberController.text,
+                                expirationMonth: int.parse(_expirationDateController.text.split('/')[0]),
+                                expirationYear: int.parse(_expirationDateController.text.split('/')[1]),
+                                cvv: int.parse(_cvvController.text)
+                              ))
+                            }),
+                          )
+                        ] ,
+                      ),
+                    ) : Container()
+                ]
+              )
+            );
+          }
+        )
+    
     );
+  }
+
+  _changeDefaultPaymentCard(CheckoutBloc bloc, int cardId){
+    bloc..add(CheckoutSetDefaultCardEvent(cardId));
+    widget.changeView(changeType: ViewChangeType.Exact, index: 0);
+    //TODO: implement change of default payment card
   }
 }

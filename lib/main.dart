@@ -2,24 +2,26 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/screens/cart/cart_screen.dart';
 import 'package:openflutterecommerce/screens/categories/categories_screen.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:openflutterecommerce/screens/favorites/favorites.dart';
 import 'package:openflutterecommerce/screens/home/home_screen.dart';
+
 import 'package:openflutterecommerce/screens/profile/profile_screen.dart';
 import 'package:openflutterecommerce/screens/settings/settings_screen.dart';
+
 import 'package:openflutterecommerce/screens/signin/forget_password.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
 import 'package:openflutterecommerce/screens/splash_screen.dart';
+
 import 'authentication/authentication.dart';
 import 'config/routes.dart';
 import 'screens/checkout/checkout_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/signin/signin.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -94,7 +96,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
             OpenFlutterEcommerceRoutes.cart: (context) => CartScreen(),
             OpenFlutterEcommerceRoutes.checkout: (context) => CheckoutScreen(),
-            OpenFlutterEcommerceRoutes.favourites: (context) => HomeScreen(),
+            OpenFlutterEcommerceRoutes.favourites: (context) => FavouriteScreen(),
             OpenFlutterEcommerceRoutes.signin: (context) => _signIn,
             OpenFlutterEcommerceRoutes.signup: (context) => _signUp,
             OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
