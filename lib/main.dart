@@ -100,6 +100,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
                 _forgetPassword,
             OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
+            OpenFlutterEcommerceRoutes.profile: (context) =>
                 BlocBuilder<AuthenticationBloc, AuthenticationState>(
                     builder: (context, state) {
                   if (state is Authenticated) {
