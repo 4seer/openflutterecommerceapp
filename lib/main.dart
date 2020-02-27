@@ -9,6 +9,7 @@ import 'package:openflutterecommerce/screens/categories/categories_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:openflutterecommerce/screens/home/home_screen.dart';
+import 'package:openflutterecommerce/screens/profile/profile_screen.dart';
 import 'package:openflutterecommerce/screens/settings/settings_screen.dart';
 import 'package:openflutterecommerce/screens/signin/forget_password.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
@@ -85,6 +86,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             localizationDelegate,
           ],
           supportedLocales: localizationDelegate.supportedLocales,
+          debugShowCheckedModeBanner: false,
           locale: localizationDelegate.currentLocale,
           title: 'Open FLutter E-commerce',
           theme: OpenFlutterEcommerceTheme.of(context),
@@ -98,11 +100,10 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
                 _forgetPassword,
             OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
-            OpenFlutterEcommerceRoutes.profile: (context) =>
                 BlocBuilder<AuthenticationBloc, AuthenticationState>(
                     builder: (context, state) {
                   if (state is Authenticated) {
-                    return HomeScreen(); //TODO profile properties should be here
+                    return ProfileScreen(); //TODO profile properties should be here
                   } else if (state is Unauthenticated) {
                     return _signUp;
                   } else {

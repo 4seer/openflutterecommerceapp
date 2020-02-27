@@ -61,6 +61,7 @@ flutter:
     - assets/thumbs/shirt/
     - assets/thumbs/category/
     - assets/i18n/
+    - assets/profile/
   
 
   # An image asset can refer to one or more resolution-specific "variants", see
