@@ -1,6 +1,6 @@
 # openflutterecommerce
 
-Open Flutter E-commerce App
+Open Flutter Project E-commerce App is mobile application for e-commerce. We are building a commercially valuable product as an open-source project to make mobile technology accessible for small and medium businesses.
 
 ## Getting Started
 
@@ -10,9 +10,21 @@ Mobile App UI/UX
 
 https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-fe97570a633
 
-Local Database
+Roadmap
 
-https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-local-database-4744b61264c7
+https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-development-roadmap-2473952aebc5
+
+A short guide how to start contributing to Open Flutter Project
+
+https://medium.com/@openflutterproject/open-flutter-project-developer-guidelines-4a4fa3fa289e
+
+Widget Library
+
+https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-flutter-widgets-f63f3c33ac94
+
+7 reasons for a developers to contribute to open-source projects
+
+https://medium.com/@openflutterproject/open-flutter-project-developer-guidelines-4a4fa3fa289e
 
 Functionality description and discussion
 
@@ -25,4 +37,8 @@ https://medium.com/@openflutterproject/open-flutter-project-product-filters-in-e
 https://medium.com/@openflutterproject/open-flutter-project-product-details-in-e-commerce-app-424b9a81fe37
 
 https://medium.com/@openflutterproject/open-flutter-project-product-reviews-in-e-commerce-app-5feec27a560
+
+Local Database
+
+https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-local-database-4744b61264c7
 
