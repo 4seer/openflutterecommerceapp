@@ -107,7 +107,10 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
           child: OpenFlutterButton(
             title: "Write a review",
             icon: Icons.edit,
-            width: MediaQuery.of(context).size.width * 0.5,
+            width: MediaQuery.of(context).size.width * 0.5, 
+            onPressed: () => {
+              
+            },
           ),
         ),
       ],
