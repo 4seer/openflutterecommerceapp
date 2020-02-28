@@ -11,7 +11,6 @@ import 'package:openflutterecommerce/screens/products/products.dart';
 import 'package:openflutterecommerce/screens/products/views/brands.dart';
 import 'package:openflutterecommerce/screens/products/views/filters.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
-import 'package:openflutterecommerce/widgets/product_filter.dart';
 import 'package:openflutterecommerce/widgets/scaffold.dart';
 
 import 'products.dart';
@@ -32,9 +31,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
         child: OpenFlutterScaffold(
       background: null,
       title: "Products",
-      body: BlocProvider<ProductBloc>(
+      body: BlocProvider<ProductsBloc>(
           create: (context) {
-            return ProductBloc(
+            return ProductsBloc(
                 productRepository: ProductRepository(),
                 categoryRepository: CategoryRepository(),
                 hashtagRepository: HashtagRepository())
@@ -56,8 +55,8 @@ class _ProductsWrapperState extends OpenFlutterWrapperState<ProductsWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductBloc, ProductState>(
-      bloc: BlocProvider.of<ProductBloc>(context),
+    return BlocBuilder<ProductsBloc, ProductState>(
+      bloc: BlocProvider.of<ProductsBloc>(context),
       builder: (BuildContext context, ProductState state) {
         return getPageView(<Widget>[
           ProductsListView(changeView: changePage),

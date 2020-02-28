@@ -29,9 +29,9 @@ class _ProductFilterViewState extends State<ProductFilterView> {
     final double width =
       MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
     final double fullWidth = MediaQuery.of(context).size.width;
-    final bloc = BlocProvider.of<ProductBloc>(context);
+    final bloc = BlocProvider.of<ProductsBloc>(context);
     ThemeData _theme = Theme.of(context);
-    return BlocListener<ProductBloc, ProductState>(listener: (context, state) {
+    return BlocListener<ProductsBloc, ProductState>(listener: (context, state) {
       if (state is ProductsErrorState) {
         return Container(
           padding: EdgeInsets.all(AppSizes.sidePadding),
@@ -40,7 +40,7 @@ class _ProductFilterViewState extends State<ProductFilterView> {
                   .copyWith(color: _theme.errorColor)));
       }
       return Container();
-    }, child: BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
+    }, child: BlocBuilder<ProductsBloc, ProductState>(builder: (context, state) {
       if ( state is ProductsLoadedState ) {
 
         return Stack (

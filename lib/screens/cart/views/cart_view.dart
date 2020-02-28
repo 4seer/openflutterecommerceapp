@@ -114,7 +114,7 @@ class _CartViewState extends State<CartView> {
               ),
               state.showPromoPopup ?
                 OpenFlutterBottomPopup(
-                  height: 500,
+                  //height: 500,
                   title: '',
                   child: Column(
                     children: <Widget>[

@@ -10,6 +10,34 @@ import 'package:openflutterecommerce/repos/models/product_rating.dart';
 
 class ProductRepository {
 
+  void addToFav(int id){
+    //TODO: add to fav [local database]
+  }
+
+  void removeFromFav(int id){
+    //TODO: remove from fav
+  }
+
+  Product getProduct(int id){
+    return Product(
+        id: 1,
+        image: "assets/images/checkout/cart/product1.png",
+        discountPercent: 20,
+        favorite: false,
+        rating: 5,
+        ratingCount: 10,
+        price: 15,
+        title: 'Pullover',
+        categoryTitle: 'Dorothy Perkins',
+        isNew: true,
+        sizes: ['Red', 'Black', 'White', 'Yellow'],
+        colors:  ['XS', 'S', 'M', 'L', 'XL'],
+        description: "Lorem ipsum dolor amet ennui chia synth mixtape wolf forage brooklyn pug you probably haven't heard of them lumbersexual, iceland tilde. Poke tumeric readymade brunch, mustache banh mi man bun bushwick celiac hoodie mumblecore"
+      );
+  }
+  List<Product> getSimilarProducts(int productId){
+    return getProducts(1);
+  }
   List<CartProduct> getCartProducts(){
     return [
       CartProduct(

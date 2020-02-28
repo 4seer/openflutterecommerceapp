@@ -22,9 +22,9 @@ class _SelectBrandViewState extends State<SelectBrandView> {
   @override
   Widget build(BuildContext context) {
     ThemeData _theme = Theme.of(context);
-    final bloc = BlocProvider.of<ProductBloc>(context);
+    final bloc = BlocProvider.of<ProductsBloc>(context);
     double fullWidth = MediaQuery.of(context).size.width;
-    return BlocListener<ProductBloc, ProductState>(listener: (context, state) {
+    return BlocListener<ProductsBloc, ProductState>(listener: (context, state) {
       if (state is ProductsErrorState) {
         return Container(
           padding: EdgeInsets.all(AppSizes.sidePadding),
@@ -33,7 +33,7 @@ class _SelectBrandViewState extends State<SelectBrandView> {
                   .copyWith(color: _theme.errorColor)));
       }
       return Container();
-    }, child: BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
+    }, child: BlocBuilder<ProductsBloc, ProductState>(builder: (context, state) {
       if ( state is ProductsLoadedState ) {
         double width = MediaQuery.of(context).size.width;
         return Stack (
@@ -107,7 +107,7 @@ class _SelectBrandViewState extends State<SelectBrandView> {
     List<int> selectedBrandIds, 
     String searchKeyFilter,
     double width,
-    ProductBloc bloc
+    ProductsBloc bloc
   ){
     List<Widget> checkboxes = List<Widget>();
     for(int i = 0; i < brands.length; i++){

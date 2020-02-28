@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
-import 'package:openflutterecommerce/screens/product_details/productDetails_screen.dart';
+import 'package:openflutterecommerce/screens/product_details/product_screen.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
 
 class FavouritesTileItem extends StatelessWidget {

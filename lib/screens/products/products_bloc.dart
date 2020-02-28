@@ -13,12 +13,12 @@ import 'package:openflutterecommerce/screens/products/products_event.dart';
 import 'package:openflutterecommerce/screens/products/products_state.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
 
-class ProductBloc extends Bloc<ProductEvent, ProductState> {
+class ProductsBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepository productRepository;
   final CategoryRepository categoryRepository;
   final HashtagRepository hashtagRepository;
 
-  ProductBloc({
+  ProductsBloc({
     @required this.categoryRepository,
     @required this.productRepository,
     @required this.hashtagRepository,

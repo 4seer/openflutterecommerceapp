@@ -18,6 +18,11 @@ class Product extends Equatable {
   final bool favorite;
   final bool isNew;
   final List<ProductRating> ratingDetail;
+  final List<String> images;
+  final String description;
+
+  final List<String> sizes;
+  final List<String> colors;
 
   Product({
     @required this.id,
@@ -31,6 +36,10 @@ class Product extends Equatable {
     @required this.favorite,
     @required this.isNew,
     this.ratingDetail,
+    this.images,
+    this.description,
+    this.sizes,
+    this.colors
   });
 
   @override
