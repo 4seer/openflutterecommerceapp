@@ -119,7 +119,8 @@ class _ProfileViewState extends State<ProfileView> {
               title: "Settings",
               subtitle:  "Notification, Password",
               onTap: ( () => {
-                Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.settings)
+                widget.changeView(changeType: ViewChangeType.Exact, index: 6)
+                //Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.settings)
               })
             )
           ],

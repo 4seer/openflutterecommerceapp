@@ -11,7 +11,7 @@ import 'package:openflutterecommerce/screens/favorites/favorites.dart';
 import 'package:openflutterecommerce/screens/home/home_screen.dart';
 
 import 'package:openflutterecommerce/screens/profile/profile_screen.dart';
-import 'package:openflutterecommerce/screens/settings/settings_screen.dart';
+//import 'package:openflutterecommerce/screens/settings/settings_screen.dart';
 
 import 'package:openflutterecommerce/screens/signin/forget_password.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
@@ -97,7 +97,6 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             OpenFlutterEcommerceRoutes.cart: (context) => CartScreen(),
             OpenFlutterEcommerceRoutes.checkout: (context) => CheckoutScreen(),
             OpenFlutterEcommerceRoutes.favourites: (context) => FavouriteScreen(),
-            OpenFlutterEcommerceRoutes.settings: (context) => SettingsScreen(),
             OpenFlutterEcommerceRoutes.signin: (context) => _signIn,
             OpenFlutterEcommerceRoutes.signup: (context) => _signUp,
             OpenFlutterEcommerceRoutes.forgotPassword: (context) =>

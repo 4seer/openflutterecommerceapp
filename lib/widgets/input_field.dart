@@ -10,6 +10,7 @@ class OpenFlutterInputField extends StatefulWidget {
   final FocusNode focusNode;
   final VoidCallback onFinished;
   final bool isPassword;
+  final double horizontalPadding;
 
   const OpenFlutterInputField(
       {Key key,
@@ -19,7 +20,8 @@ class OpenFlutterInputField extends StatefulWidget {
       this.keyboard = TextInputType.text,
       this.focusNode,
       this.onFinished,
-      this.isPassword = false})
+      this.isPassword = false,
+      this.horizontalPadding = 16.0})
       : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
       child: Column(
         children: <Widget>[
           Card(

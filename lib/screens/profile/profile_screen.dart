@@ -11,6 +11,7 @@ import 'package:openflutterecommerce/screens/profile/views/payment_methods.dart'
 import 'package:openflutterecommerce/screens/profile/views/profile.dart';
 import 'package:openflutterecommerce/screens/profile/views/promos.dart';
 import 'package:openflutterecommerce/screens/profile/views/reviews.dart';
+import 'package:openflutterecommerce/screens/profile/views/settings.dart';
 import 'package:openflutterecommerce/screens/profile/views/shipping_addresses.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
 
@@ -59,6 +60,7 @@ class _ProfileWrapperState extends OpenFlutterWrapperState<ProfileWrapper> {
             PaymentMethodsView(changeView: changePage),
             PromosView(changeView: changePage),
             MyReviewsView(changeView: changePage),
+            SettingsView(changeView: changePage),
           ]);
       });
   }
