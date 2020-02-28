@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/authentication/authentication.dart';
+import 'package:openflutterecommerce/repos/models/app_user.dart';
 import 'package:openflutterecommerce/screens/signin/signin.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
@@ -92,14 +94,14 @@ class _SignInScreenState extends State<SignInScreen> {
                           serviceType: ServiceType.Google,
                           onPressed: () {
                             BlocProvider.of<SignUpBloc>(context)
-                                .add(SignUpWithGoogle());
+                                .add(LoginWithGoogle());
                           },
                         ),
                         OpenFlutterServiceButton(
                           serviceType: ServiceType.Facebook,
                           onPressed: () {
-                            BlocProvider.of<SignUpBloc>(context)
-                                .add(SignUpWithFB());
+                            BlocProvider.of<SignInBloc>(context)
+                                .add(LoginWithFB());
                           },
                         ),
                       ],
@@ -123,7 +125,15 @@ class _SignInScreenState extends State<SignInScreen> {
     if (passwordKey.currentState.validate() != null) {
       return;
     }
-    BlocProvider.of<SignUpBloc>(context).add(SignInPressed(
+    BlocProvider.of<SignInBloc>(context).add(SignInPressed(
         email: emailController.text, password: passwordController.text));
+
+    BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn(
+        AppUser(
+          emailController.text,
+          passwordController.text
+        )
+      )
+    );
   }
 }

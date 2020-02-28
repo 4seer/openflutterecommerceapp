@@ -34,8 +34,8 @@ class _ProductsCardViewState extends State<ProductsCardView> {
     final double fullWidth = MediaQuery.of(context).size.width;
     final double topPartHeight = 360 ;
     ThemeData _theme = Theme.of(context);
-    final bloc = BlocProvider.of<ProductBloc>(context);
-    return BlocListener<ProductBloc, ProductState>(listener: (context, state) {
+    final bloc = BlocProvider.of<ProductsBloc>(context);
+    return BlocListener<ProductsBloc, ProductState>(listener: (context, state) {
       if (state is ProductsErrorState) {
         return Container(
           padding: EdgeInsets.all(AppSizes.sidePadding),
@@ -44,7 +44,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                   .copyWith(color: _theme.errorColor)));
       }
       return Container();
-    }, child: BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
+    }, child: BlocBuilder<ProductsBloc, ProductState>(builder: (context, state) {
       if (state is ProductsLoadedState) {
         return SingleChildScrollView(
           child: Column(children: <Widget>[

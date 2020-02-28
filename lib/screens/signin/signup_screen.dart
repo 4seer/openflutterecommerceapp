@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/authentication/authentication.dart';
+import 'package:openflutterecommerce/authentication/authentication_bloc.dart';
+import 'package:openflutterecommerce/repos/models/app_user.dart';
 import 'package:openflutterecommerce/screens/signin/signup.dart';
 import 'package:openflutterecommerce/screens/signin/validator.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
@@ -138,5 +141,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         name: nameController.text,
         email: emailController.text,
         password: passwordController.text));
+
+    BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn(
+        AppUser(
+          emailController.text,
+          passwordController.text
+        )
+      )
+    );
   }
 }

@@ -12,8 +12,9 @@ class OpenFlutterBlockHeader extends StatelessWidget {
   final Function onLinkTap;
   final String description;
 
-  const OpenFlutterBlockHeader({Key key, this.width, 
-    this.title, this.linkText, this.onLinkTap, 
+  const OpenFlutterBlockHeader({Key key, 
+    @required this.width, 
+    @required this.title, this.linkText, this.onLinkTap, 
     this.description}) : super(key: key);
 
   @override

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/widgets/clickable_line.dart';
-import 'package:openflutterecommerce/widgets/product_filter.dart';
 
 class OpenFlutterBottomPopup extends StatelessWidget {
   final Widget child;
-  final double height;
   final String title;
 
   const OpenFlutterBottomPopup({Key key, 
     @required this.child, 
-    @required this.height,
     @required this.title}) : super(key: key);
 
   @override
@@ -29,32 +25,33 @@ class OpenFlutterBottomPopup extends StatelessWidget {
               topRight: Radius.circular(AppSizes.widgetBorderRadius),
             )
           ), 
-          height: height,
           width: fullWidth,
           child: Column(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(AppSizes.sidePadding),
-            child:Container(
-              width: 60,
-              height: 6,
-              decoration: BoxDecoration(
-                color: AppColors.darkGray,
-                borderRadius: BorderRadius.circular(AppSizes.imageRadius)
-              ), 
-            ),
-          ),
-          Text("Sort by",
-            style: _theme.textTheme.headline3
-          ),
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(AppSizes.sidePadding),
+                child:Container(
+                  width: 60,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: AppColors.darkGray,
+                    borderRadius: BorderRadius.circular(AppSizes.imageRadius)
+                  ), 
+                ),
+              ),
+              title != '' ?
+                Text(title,
+                  style: _theme.textTheme.headline3
+                ) : Container(),
 
 
-          Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
+              Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
 
-          child
-        ],
-      ),
-        )
+              child
+            ],
+        ),
+      )
     ) ;
   }
 }

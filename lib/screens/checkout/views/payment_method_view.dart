@@ -141,7 +141,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                   showAddNewCardForm ? 
                     OpenFlutterBottomPopup(
                       title: 'Add new card',
-                      height: 550,
+                      //height: 550,
                       child: Column(
                         children:<Widget>[
                           OpenFlutterInputField(

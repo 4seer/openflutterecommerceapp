@@ -6,7 +6,6 @@ import 'product_review_state.dart';
 
 class ProductReviewBloc extends Bloc<ProductReviewEvent, ProductReviewState> {
   final ProductReviewRepository productReviewRepository;
-  List<ProductReview> comments;
 
   ProductReviewBloc(this.productReviewRepository);
 
@@ -18,22 +17,18 @@ class ProductReviewBloc extends Bloc<ProductReviewEvent, ProductReviewState> {
     if (event is ProductReviewStartEvent) {
       yield ProductReviewLoadingState();
 
-      comments =
-          await productReviewRepository.findReviewsByProductId(event.productId);
+      var comments =
+          await _getCommentsReviews(event.productId, event.withPhotos);
 
-      var data = _buildData();
+      var data = ProductReviewData(comments, comments.length, event.withPhotos);
 
       yield ProductReviewLoadedState(data);
     }
-
-    if (event is ProductReviewWithPhotosEvent) {
-      yield ProductReviewLoadingState();
-      var data = _buildData();
-      yield ProductReviewWithPhotosState(data, event.withPhotos);
-    }
   }
 
-  ProductReviewData _buildData() {
-    return ProductReviewData(comments, comments.length);
+  Future<List<ProductReview>> _getCommentsReviews(
+      int productId, bool withPhotos) async {
+    return await productReviewRepository.findReviewsByProductId(
+        productId, withPhotos);
   }
 }

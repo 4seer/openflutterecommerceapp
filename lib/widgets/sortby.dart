@@ -16,7 +16,6 @@ class OpenFlutterSortBy extends StatelessWidget {
     double fullWidth = MediaQuery.of(context).size.width;
     return OpenFlutterBottomPopup(
       title: 'Sort By',
-      height: 400,
       child: Container(
         padding: EdgeInsets.only(top: AppSizes.sidePadding),
         child:  Column(

@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
-import 'package:openflutterecommerce/screens/product_details/productDetails_screen.dart';
+import 'package:openflutterecommerce/screens/product_details/product_screen.dart';
 import 'package:openflutterecommerce/widgets/favourite_button.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
 
@@ -42,7 +42,8 @@ class OpenFlutterProductTile extends StatelessWidget {
                             child: Image(image: AssetImage(product.image))
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: AppSizes.linePadding*2),
+                          padding: EdgeInsets.only(top: AppSizes.linePadding*2,
+                            left: AppSizes.sidePadding),
                           alignment: Alignment.topLeft,
                           width: this.width - 100,
                           child: Column(

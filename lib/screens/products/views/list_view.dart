@@ -35,7 +35,7 @@ class _ProductsListViewState extends State<ProductsListView> {
     MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
     final double fullWidth = MediaQuery.of(context).size.width;
     final double topPartHeight = 360;
-    final bloc = BlocProvider.of<ProductBloc>(context);
+    final bloc = BlocProvider.of<ProductsBloc>(context);
 
     ThemeData _theme = Theme.of(context);
     return BlocListener(

@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
-import 'package:openflutterecommerce/screens/product_details/productDetails_screen.dart';
+import 'package:openflutterecommerce/screens/product_details/product_screen.dart';
 import 'package:openflutterecommerce/screens/product_reviews/product_review_and_rating_screen.dart';
 import 'package:openflutterecommerce/widgets/product_rating.dart';
 
