@@ -89,7 +89,9 @@ class OrderRepository {
         state: 'CA'
       ), 
       trackingNumber: 'IW3475453456',
-      totalAmount: 155
+      totalAmount: 155,
+      orderDate: DateTime.parse("2020-01-20 20:18:04Z"),
+      quantity: 3
     );
   }
 
@@ -116,7 +118,9 @@ class OrderRepository {
           state: 'CA'
         ), 
         trackingNumber: 'IW3475453455',
-        totalAmount: 133
+        totalAmount: 133,
+        orderDate: DateTime.parse("2020-01-22 20:18:04Z"),
+        quantity: 3
       ),
       UserOrder(
         orderNumber: 1947035, 
@@ -139,7 +143,9 @@ class OrderRepository {
           state: 'CA'
         ), 
         trackingNumber: 'IW3475453456',
-        totalAmount: 155
+        totalAmount: 155,
+        orderDate: DateTime.parse("2020-01-20 20:18:04Z"),
+        quantity: 3
       ),
       
     ];

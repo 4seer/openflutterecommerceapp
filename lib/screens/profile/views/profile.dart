@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/screens/profile/profile_bloc.dart';
+import 'package:openflutterecommerce/screens/profile/profile_event.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
 import 'package:openflutterecommerce/widgets/menu_line.dart';
 
@@ -16,6 +19,7 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
+    ProfileBloc bloc = BlocProvider.of<ProfileBloc>(context);
     return ListView(
       children: <Widget>[
         Column(
@@ -71,6 +75,7 @@ class _ProfileViewState extends State<ProfileView> {
               //TODO: make short card info
               subtitle:  "Already Have 12 orders",
               onTap: ( () => {
+                bloc..add(ProfileMyOrdersEvent()),
                 widget.changeView(changeType: ViewChangeType.Exact, index: 1)
               })
             ),

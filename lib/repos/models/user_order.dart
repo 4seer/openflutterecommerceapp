@@ -19,6 +19,8 @@ class UserOrder extends Equatable{
   final Promo promo;
   final double totalAmount;
   final String trackingNumber;
+  final DateTime orderDate;
+  final int quantity;
 
   UserOrder({
     @required this.products, 
@@ -27,9 +29,11 @@ class UserOrder extends Equatable{
     @required this.shippingAddress,
     @required this.trackingNumber, 
     @required this.promo, 
-    @required this.totalAmount
+    @required this.totalAmount,
+    @required this.orderDate,
+    @required this.quantity
   });
 
   @override
-  List<Object> get props =>[products, orderNumber, orderStatus, shippingAddress, trackingNumber, promo, totalAmount];
+  List<Object> get props =>[products, orderNumber, orderStatus, shippingAddress, trackingNumber, promo, totalAmount, orderDate, quantity];
 }

@@ -30,6 +30,7 @@ dependencies:
   flutter_bloc: ^3.1.0
   equatable: ^1.1.0
   flutter_translate: any
+  bubble_tab_indicator: any
 
 dev_dependencies:
   flutter_test:

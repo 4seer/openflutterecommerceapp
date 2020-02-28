@@ -10,14 +10,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
-    if (event is ProfileMyOrders) {
+    if (event is ProfileMyOrdersEvent) {
       yield ProfileMyOrdersProcessingState();
       OrderRepository repo = OrderRepository();
       List<UserOrder> orders = repo.getMyOrders();
       yield ProfileMyOrdersState(
         orderData: orders
       );
-    } else if (event is ProfileMyOrderDetails) {
+    } else if (event is ProfileMyOrderDetailsEvent) {
       yield ProfileMyOrdersProcessingState();
       OrderRepository repo = OrderRepository();
       UserOrder order = repo.getOrderDetails();

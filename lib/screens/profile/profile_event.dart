@@ -7,6 +7,6 @@ abstract class ProfileEvent extends Equatable {
 
 class ProfileStartEvent extends ProfileEvent { }
 
-class ProfileMyOrders extends ProfileEvent { }
+class ProfileMyOrdersEvent extends ProfileEvent { }
 
-class ProfileMyOrderDetails extends ProfileEvent { }
+class ProfileMyOrderDetailsEvent extends ProfileEvent { }
