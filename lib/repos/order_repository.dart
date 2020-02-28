@@ -10,8 +10,9 @@ import 'package:openflutterecommerce/repos/models/shipping_address.dart';
 import 'models/user_order.dart';
 
 class OrderRepository {
-  UserOrder getOrderDetails(){
+  UserOrder getOrderDetails(int orderId){
     return UserOrder(
+      id: 1,
       orderNumber: 1947035, 
       orderStatus: UserOrderStatus.Delivered, 
       products: <CartProduct>[
@@ -88,6 +89,8 @@ class OrderRepository {
         postal: '91709', 
         state: 'CA'
       ), 
+      paymentMethod: '**** **** **** 3947',
+      deliveryMethod: 'FedEx, 3 days, \$15',
       trackingNumber: 'IW3475453456',
       totalAmount: 155,
       orderDate: DateTime.parse("2020-01-20 20:18:04Z"),
@@ -98,6 +101,7 @@ class OrderRepository {
   List<UserOrder> getMyOrders(){
     return [
       UserOrder(
+        id: 1,
         orderNumber: 1947034, 
         orderStatus: UserOrderStatus.Delivered, 
         products: <CartProduct>[], 
@@ -117,12 +121,15 @@ class OrderRepository {
           postal: '91709', 
           state: 'CA'
         ), 
+        paymentMethod: '**** **** **** 3947',
+        deliveryMethod: 'FedEx, 3 days, \$15',
         trackingNumber: 'IW3475453455',
         totalAmount: 133,
         orderDate: DateTime.parse("2020-01-22 20:18:04Z"),
         quantity: 3
       ),
       UserOrder(
+        id: 2,
         orderNumber: 1947035, 
         orderStatus: UserOrderStatus.Delivered, 
         products: <CartProduct>[], 
@@ -142,6 +149,8 @@ class OrderRepository {
           postal: '91709', 
           state: 'CA'
         ), 
+        paymentMethod: '**** **** **** 3947',
+        deliveryMethod: 'FedEx, 3 days, \$15',
         trackingNumber: 'IW3475453456',
         totalAmount: 155,
         orderDate: DateTime.parse("2020-01-20 20:18:04Z"),

@@ -16,9 +16,9 @@ class OpenFlutterScaffold extends StatelessWidget {
   const OpenFlutterScaffold(
       {Key key,
       this.background,
-      this.title,
-      this.body,
-      this.bottomMenuIndex,
+      @required this.title,
+      @required this.body,
+      @required this.bottomMenuIndex,
       this.tabBarList,
       this.tabController})
       : super(key: key);

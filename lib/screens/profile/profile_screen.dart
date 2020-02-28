@@ -6,6 +6,7 @@ import 'package:openflutterecommerce/screens/checkout/views/shipping_address_vie
 import 'package:openflutterecommerce/screens/profile/profile_bloc.dart';
 import 'package:openflutterecommerce/screens/profile/profile_event.dart';
 import 'package:openflutterecommerce/screens/profile/profile_state.dart';
+import 'package:openflutterecommerce/screens/profile/views/order_details.dart';
 import 'package:openflutterecommerce/screens/profile/views/orders.dart';
 import 'package:openflutterecommerce/screens/profile/views/payment_methods.dart';
 import 'package:openflutterecommerce/screens/profile/views/profile.dart';
@@ -29,6 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: OpenFlutterScaffold(
+        title: 'My Profile',
         body: BlocProvider<ProfileBloc>(
           create: (context) {
             return ProfileBloc(
@@ -61,6 +63,7 @@ class _ProfileWrapperState extends OpenFlutterWrapperState<ProfileWrapper> {
             PromosView(changeView: changePage),
             MyReviewsView(changeView: changePage),
             SettingsView(changeView: changePage),
+            MyOrderDetailsView(changeView: changePage),
           ]);
       });
   }

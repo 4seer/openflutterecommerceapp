@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 class ShippingAddress extends Equatable{
   final String fullName;
@@ -21,4 +22,6 @@ class ShippingAddress extends Equatable{
   @override
   List<Object> get props => [fullName, address, city, state, postal, country];
   
+  @override
+  String toString() => address + ', ' + city + ', ' + state + ' ' + postal + ', ' + country;
 }

@@ -42,7 +42,8 @@ class OpenFlutterProductTile extends StatelessWidget {
                             child: Image(image: AssetImage(product.image))
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: AppSizes.linePadding*2),
+                          padding: EdgeInsets.only(top: AppSizes.linePadding*2,
+                            left: AppSizes.sidePadding),
                           alignment: Alignment.topLeft,
                           width: this.width - 100,
                           child: Column(

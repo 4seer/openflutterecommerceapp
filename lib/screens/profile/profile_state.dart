@@ -25,8 +25,8 @@ class ProfileMyOrdersState extends ProfileState {
 }
 
 @immutable
-class ProfileMyOrderDetailState extends ProfileState {
+class ProfileMyOrderDetailsState extends ProfileState {
   final UserOrder orderData;
 
-  ProfileMyOrderDetailState({this.orderData});
+  ProfileMyOrderDetailsState({this.orderData});
 }

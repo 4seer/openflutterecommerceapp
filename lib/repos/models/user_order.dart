@@ -12,10 +12,15 @@ enum UserOrderStatus{
 }
 
 class UserOrder extends Equatable{
+  final int id;
   final List<CartProduct> products;
   final int orderNumber;
   final UserOrderStatus orderStatus;
   final ShippingAddress shippingAddress;
+  //TODO: extend further on
+  final String paymentMethod;
+  //TODO: extend further on
+  final String deliveryMethod;
   final Promo promo;
   final double totalAmount;
   final String trackingNumber;
@@ -23,10 +28,13 @@ class UserOrder extends Equatable{
   final int quantity;
 
   UserOrder({
+    @required this.id,
     @required this.products, 
     @required this.orderNumber, 
     @required this.orderStatus, 
     @required this.shippingAddress,
+    @required this.paymentMethod,
+    @required this.deliveryMethod,
     @required this.trackingNumber, 
     @required this.promo, 
     @required this.totalAmount,
@@ -35,5 +43,5 @@ class UserOrder extends Equatable{
   });
 
   @override
-  List<Object> get props =>[products, orderNumber, orderStatus, shippingAddress, trackingNumber, promo, totalAmount, orderDate, quantity];
+  List<Object> get props =>[id, products, orderNumber, orderStatus, shippingAddress, paymentMethod, deliveryMethod, trackingNumber, promo, totalAmount, orderDate, quantity];
 }

@@ -20,8 +20,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     } else if (event is ProfileMyOrderDetailsEvent) {
       yield ProfileMyOrdersProcessingState();
       OrderRepository repo = OrderRepository();
-      UserOrder order = repo.getOrderDetails();
-      yield ProfileMyOrderDetailState(
+      UserOrder order = repo.getOrderDetails(event.orderId);
+      yield ProfileMyOrderDetailsState(
         orderData: order
       );
     }

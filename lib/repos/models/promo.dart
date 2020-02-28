@@ -19,4 +19,7 @@ class Promo extends Equatable{
 
   @override
   List<Object> get props => [discount, title, promoCode, daysLeft, textColor];
+
+  @override 
+  String toString() => discount.toStringAsFixed(0) +'%, '+title;
 }

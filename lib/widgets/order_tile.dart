@@ -5,8 +5,11 @@ import 'package:openflutterecommerce/repos/models/user_order.dart';
 
 class OpenFlutterOrderTile extends StatelessWidget {
   final UserOrder order;
+  final Function(int) onClick;
 
-  const OpenFlutterOrderTile({Key key, this.order}) : super(key: key);
+  const OpenFlutterOrderTile({Key key, 
+    @required this.order, 
+    @required this.onClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +39,11 @@ class OpenFlutterOrderTile extends StatelessWidget {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                          text: "Order ",
-                          style: _theme.textTheme.headline3,
+                          text: "Order: ",
+                          style: _theme.textTheme.headline3.copyWith(
+                            color: _theme.primaryColorLight,
+                            fontWeight: FontWeight.normal
+                          ),
                         ),
                         TextSpan(
                           text: "#"+order.orderNumber.toString(),
@@ -65,8 +71,10 @@ class OpenFlutterOrderTile extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Text(
-                        'Tacking Number',
-                        style: _theme.textTheme.headline3,
+                        'Tacking Number: ',
+                        style: _theme.textTheme.headline3.copyWith(
+                          color: _theme.primaryColorLight
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
@@ -87,12 +95,14 @@ class OpenFlutterOrderTile extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           Text(
-                            'Quantity',
-                            style: _theme.textTheme.headline3,
+                            'Quantity: ',
+                            style: _theme.textTheme.headline3.copyWith(
+                              color: _theme.primaryColorLight
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: AppSizes.sidePadding),
+                                left: AppSizes.linePadding),
                             child: Text(
                               order.quantity.toString(),
                               style: _theme.textTheme.headline3,
@@ -103,8 +113,10 @@ class OpenFlutterOrderTile extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           Text(
-                            'Totat Amount:',
-                            style: _theme.textTheme.headline3,
+                            'Totat Amount: ',
+                            style: _theme.textTheme.headline3.copyWith(
+                              color: _theme.primaryColorLight
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -134,7 +146,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
                       bottom: 10),
                     color: AppColors.white,
                     onPressed: () {
-
+                      this.onClick(order.id);
                     },
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(
@@ -145,7 +157,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
                     child: new Text('Details',
                       style: _theme.textTheme.headline3,),
                   ),
-                  Text('Delivered',
+                  Text(order.orderStatus.toString().split(".")[1],
                     style: _theme.textTheme.headline3.copyWith(
                       color: AppColors.green
                     )
@@ -157,5 +169,24 @@ class OpenFlutterOrderTile extends StatelessWidget {
         ),
       )
     );
+  }
+
+  getOrderStatusString(){
+    String str = "New";
+    switch(order.orderStatus){
+      case UserOrderStatus.Paid:
+        str = "Paid";
+        break;
+      case UserOrderStatus.Sent:
+        str = "Sent";
+        break;
+      case UserOrderStatus.Delivered:
+        str = "Delivered";
+        break;
+      case UserOrderStatus.New:
+      default:
+        break;
+    }
+    return str;
   }
 }
