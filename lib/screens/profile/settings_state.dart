@@ -12,6 +12,8 @@ abstract class SettingsState extends Equatable {
   List<Object> get props => [settings];
 }
 
+class InitialSettingsState extends SettingsState {}
+
 class FullNameUpdatedState extends SettingsState {}
 
 class DateOfBirthUpdatedState extends SettingsState {}

@@ -8,11 +8,25 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class UpdateFullNameEvent extends SettingsEvent {
+  final String fullName;
+
+  UpdateFullNameEvent({this.fullName});
+
+  @override
+  List<Object> get props => [];
+
   @override
   String toString() => 'Update FullName Event';
 }
 
 class UpdateDateOfBirthEvent extends SettingsEvent {
+  final String dateOfBirth;
+
+  UpdateDateOfBirthEvent({this.dateOfBirth});
+
+  @override
+  List<Object> get props => [];
+
   @override
   String toString() => 'Update DateOfBirth Event';
 }
