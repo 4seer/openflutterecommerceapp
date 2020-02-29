@@ -7,13 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/widgets/hashtag_list.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
+import 'package:openflutterecommerce/widgets/product_tile.dart';
 import 'package:openflutterecommerce/widgets/scaffold_collapsing.dart';
 
-import '../../../wrapper.dart';
-import '../../favorites_bloc.dart';
-import '../../favorites_event.dart';
-import '../../favorites_state.dart';
-import 'favourites_list_item.dart';
+import '../../wrapper.dart';
+import '../favorites_bloc.dart';
+import '../favorites_event.dart';
+import '../favorites_state.dart';
 
 class FavouritesListView extends StatefulWidget {
   final Function({@required ViewChangeType changeType, int index}) changeView;
@@ -81,6 +81,9 @@ class _FavouritesListViewState extends State<FavouritesListView> {
               ],
             ),
           ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+          ),
           Expanded(
             child: _buildListView(state, context),
           )
@@ -98,15 +101,26 @@ class _FavouritesListViewState extends State<FavouritesListView> {
 
     if (product.isNotEmpty) {
       for (int i = 0; i < product.length; i++) {
-        productTiles.add(FavouritesListCard(width: width, product: product[i]));
+        productTiles.add(OpenFlutterProductTile(
+          product: product[i],
+          height: 100,
+          width: width - AppSizes.sidePadding * 4,
+          showCartButton: true,
+          showRemoveButton: true,
+          showColorAndSize: true,
+          showRatingInLine: true,
+          showTopLabel: true,
+          showCategoryFirst: true,
+        ));
       }
+
       if (productTiles.isNotEmpty) {
         return Padding(
-          padding: const EdgeInsets.only(left: 2.0, right: 2.0),
+          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
           child: ListView.separated(
             separatorBuilder: (BuildContext context, int index) {
               return SizedBox(
-                height: 10,
+                height: 5,
               );
             },
             physics: BouncingScrollPhysics(),

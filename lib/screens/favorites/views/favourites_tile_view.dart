@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
-import 'package:openflutterecommerce/screens/favorites/views/tileView/favourites_tile_item.dart';
 import 'package:openflutterecommerce/widgets/hashtag_list.dart';
+import 'package:openflutterecommerce/widgets/product_card.dart';
 import 'package:openflutterecommerce/widgets/product_filter.dart';
 import 'package:openflutterecommerce/widgets/scaffold_collapsing.dart';
 
-import '../../../wrapper.dart';
-import '../../favorites_bloc.dart';
-import '../../favorites_event.dart';
-import '../../favorites_state.dart';
+import '../../wrapper.dart';
+import '../favorites_bloc.dart';
+import '../favorites_event.dart';
+import '../favorites_state.dart';
 
 class FavouritesTileView extends StatefulWidget {
   final Function({@required ViewChangeType changeType, int index}) changeView;
@@ -83,7 +83,14 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
             ),
           ),
           Expanded(
-            child: _buildTileView(state, context),
+            child: GridView.extent(
+                childAspectRatio: 1 / 1.8,
+                maxCrossAxisExtent: width / 2,
+                padding: const EdgeInsets.all(4),
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+                shrinkWrap: true,
+                children: buildProductList(state, width)),
           )
         ],
       ),
@@ -91,38 +98,26 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
     );
   }
 
-  Widget _buildTileView(FavouriteState state, BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
-    var productTiles = List();
+  buildProductList(FavouriteState state, double width) {
+    List<Widget> elements = List<Widget>();
+    final double widgetWidth = (width) / 2;
+    final double height = widgetWidth * 1.789;
     var products = state is FavouriteTileViewState
         ? state.favouriteProducts
         : List<Product>();
-
-    if (products.isNotEmpty) {
-      for (int i = 0; i < products.length; i++) {
-        productTiles.add(FavouritesTileItem(
-            width: width, height: height, product: products[i]));
-      }
-      if (productTiles.isNotEmpty) {
-        return new GridView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 250.0,
-            mainAxisSpacing: 4.0,
-            crossAxisSpacing: 4.0,
-            childAspectRatio: width / height * 1.05,
-          ),
-          padding: const EdgeInsets.only(left: 4.0),
-          itemCount: productTiles.length,
-          itemBuilder: (context, i) => productTiles[i],
-        );
-      } else {
-        return Container();
-      }
-    } else {
-      return Container();
+    for (int i = 0; i < products.length; i++) {
+      elements.add(OpenFlutterProductCard(
+        product: products[i],
+        height: height,
+        width: widgetWidth,
+        showCartButton: true,
+        showRemoveButton: true,
+        showColorAndSize: true,
+        showRatingInLine: true,
+        showTopLabel: true,
+        showCategoryFirst: true,
+      ));
     }
+    return elements;
   }
 }

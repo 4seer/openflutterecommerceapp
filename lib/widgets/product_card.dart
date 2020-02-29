@@ -3,6 +3,7 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/screens/product_details/product_screen.dart';
@@ -13,12 +14,24 @@ class OpenFlutterProductCard extends StatelessWidget {
   final Product product;
   final double width;
   final double height;
+  final showCartButton;
+  final showRemoveButton;
+  final showColorAndSize;
+  final showRatingInLine;
+  final showTopLabel;
+  final showCategoryFirst;
 
   const OpenFlutterProductCard({
     Key key,
     this.product,
     this.width,
     this.height,
+    this.showCartButton = false,
+    this.showRemoveButton = false,
+    this.showColorAndSize = false,
+    this.showRatingInLine = false,
+    this.showTopLabel = false,
+    this.showCategoryFirst = false
   }) : super(key: key);
 
   @override
@@ -54,10 +67,31 @@ class OpenFlutterProductCard extends StatelessWidget {
                   Text(product.categoryTitle,
                       style: _theme.textTheme.bodyText1),
                   Text(product.title, style: _theme.textTheme.headline3),
+                  Visibility(
+                    child: Row(
+                      children: <Widget>[
+                        buildColor(product, _theme),
+                        Padding(
+                          padding:
+                          EdgeInsets.all(AppSizes.linePadding),
+                        ),
+                        buildSize(product, _theme),
+                      ],
+                    ),
+                    visible: showColorAndSize,
+                  ),
                   buildPrice(product, _theme),
                 ]),
           ),
           buildTopLabel(product, _theme),
+          Visibility(
+            child: buildCartButton(product, _theme),
+            visible: showCartButton,
+          ),
+          Visibility(
+            child: buildRemoveButton(product),
+            visible: showRemoveButton,
+          )
         ],
       ),
     );
@@ -139,5 +173,61 @@ class OpenFlutterProductCard extends StatelessWidget {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => ProductDetailsScreen(),
     ));
+  }
+
+  buildColor(Product product, ThemeData _theme) {
+    return Row(
+      children: <Widget>[
+        Text("Color:", style: _theme.textTheme.bodyText1.copyWith()),
+        Padding(
+          padding: EdgeInsets.only(left: AppSizes.linePadding),
+        ),
+        Text("Blue",
+            style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
+      ],
+    );
+  }
+
+  buildSize(Product product, ThemeData _theme) {
+    return Row(
+      children: <Widget>[
+        Text("Size:", style: _theme.textTheme.bodyText1.copyWith()),
+        Padding(
+          padding: EdgeInsets.only(left: AppSizes.linePadding),
+        ),
+        Text("L",
+            style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
+      ],
+    );
+  }
+
+  buildCartButton(Product product, ThemeData theme) {
+    return Positioned(
+        bottom: height * 0.22,
+        right: AppSizes.sidePadding / 3,
+        child: Container(
+            height: 40.0,
+            width: 40.0,
+            padding: EdgeInsets.all(5.0),
+            child: SvgPicture.asset("assets/icons/favourites/fav_cart.svg"),
+            decoration: new BoxDecoration(
+              borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+              color: AppColors.red,
+            )
+        )
+    );
+  }
+
+  buildRemoveButton(Product product) {
+    return Positioned(
+        top: AppSizes.sidePadding/2-10,
+        right: AppSizes.sidePadding/2-10,
+        child: IconButton(
+          icon: Icon(Icons.close),
+          color: AppColors.lightGray,
+          onPressed: () {
+            print("Remove from favourites clicked");
+          },
+        ));
   }
 }

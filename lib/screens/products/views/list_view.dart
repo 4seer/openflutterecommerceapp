@@ -16,7 +16,6 @@ import 'package:openflutterecommerce/widgets/sortby.dart';
 
 import '../products.dart';
 
-
 class ProductsListView extends StatefulWidget {
   final Function({@required ViewChangeType changeType, int index}) changeView;
 
@@ -32,7 +31,7 @@ class _ProductsListViewState extends State<ProductsListView> {
   @override
   Widget build(BuildContext context) {
     final double width =
-    MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
+        MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
     final double fullWidth = MediaQuery.of(context).size.width;
     final double topPartHeight = 360;
     final bloc = BlocProvider.of<ProductsBloc>(context);
@@ -45,8 +44,8 @@ class _ProductsListViewState extends State<ProductsListView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                  style: _theme.textTheme.headline3
-                    .copyWith(color: _theme.errorColor)));
+                    style: _theme.textTheme.headline3
+                        .copyWith(color: _theme.errorColor)));
           }
           return Container();
         },
@@ -55,27 +54,28 @@ class _ProductsListViewState extends State<ProductsListView> {
             builder: (context, state) {
               if (state is ProductsLoadedState) {
                 return Container(
-                  child: Column(children: <Widget>[
-                    Container(
+                    child: Column(children: <Widget>[
+                  Container(
                       color: AppColors.white,
                       child: Column(children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.only(top: AppSizes.sidePadding)),
+                            padding:
+                                EdgeInsets.only(top: AppSizes.sidePadding)),
                         OpenFlutterBlockHeader(
                           title: state.data.category.title,
                           width: MediaQuery.of(context).size.width,
                         ),
                         Padding(
-                          padding:
-                            EdgeInsets.only(top: AppSizes.sidePadding)),
+                            padding:
+                                EdgeInsets.only(top: AppSizes.sidePadding)),
                         Container(
-                          width: width,
-                          child:
-                          OpenFlutterHashTagList(tags: state.data.hashtags, height: 30)),
+                            width: width,
+                            child: OpenFlutterHashTagList(
+                                tags: state.data.hashtags, height: 30)),
                         Container(
                           padding: EdgeInsets.only(
-                            top: AppSizes.sidePadding,
-                            bottom: AppSizes.sidePadding),
+                              top: AppSizes.sidePadding,
+                              bottom: AppSizes.sidePadding),
                           width: width,
                           child: OpenFlutterProductFilter(
                             width: width,
@@ -83,52 +83,49 @@ class _ProductsListViewState extends State<ProductsListView> {
                             productView: productView,
                             sortBy: state.sortBy,
                             onFilterClicked: (() => {
-                              widget.changeView(
-                                changeType: ViewChangeType.Exact, index:2)
-                            }),
+                                  widget.changeView(
+                                      changeType: ViewChangeType.Exact,
+                                      index: 2)
+                                }),
                             onChangeViewClicked: (() => {
-                              widget.changeView(
-                                changeType: ViewChangeType.Forward)
-                            }),
+                                  widget.changeView(
+                                      changeType: ViewChangeType.Forward)
+                                }),
                             onSortClicked: ((SortBy sortBy) => {
-                              bloc
-                                ..add(ProductShowSortByEvent()),
-                            }),
+                                  bloc..add(ProductShowSortByEvent()),
+                                }),
                           ),
                         ),
                       ])),
-                    state.isLoading
+                  state.isLoading
                       ? Center(child: CircularProgressIndicator())
                       : Container(
-                          height: MediaQuery.of(context).size.height - topPartHeight,
+                          height: MediaQuery.of(context).size.height -
+                              topPartHeight,
                           width: fullWidth,
                           padding: EdgeInsets.only(top: AppSizes.sidePadding),
                           color: _theme.backgroundColor,
-                          child:  Stack(
-                            children: <Widget>[
-                              Container(
-                                height: MediaQuery.of(context).size.height - topPartHeight,
+                          child: Stack(children: <Widget>[
+                            Container(
+                                height: MediaQuery.of(context).size.height -
+                                    topPartHeight,
                                 width: fullWidth,
                                 child: SingleChildScrollView(
-                                  child: Column(
-                                    children: buildProductList(state.data.products, width),
-                                  )
-                                )
-                              ),
-
-                              state.showSortBy?    
-                                OpenFlutterSortBy(
-                                  currentSortBy: state.sortBy,
-                                  onSelect: ( (SortBy newSortBy)=>{
-                                    bloc..add(ProductChangeSortByEvent(newSortBy))
-                                  })
-                                ) : Container()
-                          ]
-                        )
-                      )
-                    ]
-                  )
-                );
+                                    child: Column(
+                                  children: buildProductList(
+                                      state.data.products, width),
+                                ))),
+                            state.showSortBy
+                                ? OpenFlutterSortBy(
+                                    currentSortBy: state.sortBy,
+                                    onSelect: ((SortBy newSortBy) => {
+                                          bloc
+                                            ..add(ProductChangeSortByEvent(
+                                                newSortBy))
+                                        }))
+                                : Container()
+                          ]))
+                ]));
               }
               return Center(child: CircularProgressIndicator());
             }));
@@ -140,9 +137,10 @@ class _ProductsListViewState extends State<ProductsListView> {
       elements.add(Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
           child: OpenFlutterProductTile(
-              product: products[i],
-              height: 100,
-              width: width - AppSizes.sidePadding * 2)));
+            product: products[i],
+            height: 100,
+            width: width - AppSizes.sidePadding * 2
+          )));
     }
     return elements;
   }
