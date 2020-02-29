@@ -13,7 +13,7 @@ class UpdateFullNameEvent extends SettingsEvent {
   UpdateFullNameEvent({this.fullName});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [fullName];
 
   @override
   String toString() => 'Update FullName Event';
@@ -25,7 +25,7 @@ class UpdateDateOfBirthEvent extends SettingsEvent {
   UpdateDateOfBirthEvent({this.dateOfBirth});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [dateOfBirth];
 
   @override
   String toString() => 'Update DateOfBirth Event';

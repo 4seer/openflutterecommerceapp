@@ -11,6 +11,7 @@ class OpenFlutterInputField extends StatefulWidget {
   final VoidCallback onFinished;
   final bool isPassword;
   final double horizontalPadding;
+  final Function onValueChanged;
 
   const OpenFlutterInputField(
       {Key key,
@@ -21,7 +22,8 @@ class OpenFlutterInputField extends StatefulWidget {
       this.focusNode,
       this.onFinished,
       this.isPassword = false,
-      this.horizontalPadding = 16.0})
+      this.horizontalPadding = 16.0,
+      this.onValueChanged})
       : super(key: key);
 
   @override
@@ -57,6 +59,7 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
             child: Padding(
               padding: EdgeInsets.only(left: 16.0),
               child: TextField(
+                onChanged: (value) => this.widget.onValueChanged(value),
                 style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.normal,
