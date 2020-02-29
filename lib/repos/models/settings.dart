@@ -1,12 +1,11 @@
 import 'package:flutter/widgets.dart';
-import 'package:equatable/equatable.dart';
 
-class Settings extends Equatable {
-  final String fullName;
-  final String dateOfBirth;
-  final bool notifySales;
-  final bool notifyArrivals;
-  final bool notifyDelivery;
+class Settings {
+  String fullName;
+  String dateOfBirth;
+  bool notifySales;
+  bool notifyArrivals;
+  bool notifyDelivery;
 
   Settings(
       {@required this.fullName,
@@ -14,8 +13,4 @@ class Settings extends Equatable {
       @required this.notifySales,
       @required this.notifyArrivals,
       @required this.notifyDelivery});
-
-  @override
-  List<Object> get props =>
-      [fullName, dateOfBirth, notifySales, notifyArrivals, notifyDelivery];
 }
