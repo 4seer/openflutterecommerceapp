@@ -20,6 +20,7 @@ class OpenFlutterProductTile extends StatelessWidget {
   final showColorAndSize;
   final showRatingInLine;
   final showTopLabel;
+  final showCategoryFirst;
 
   const OpenFlutterProductTile(
       {Key key,
@@ -27,17 +28,17 @@ class OpenFlutterProductTile extends StatelessWidget {
       this.height,
       this.width,
       this.onFavClicked,
-      this.showCartButton,
-      this.showRemoveButton,
-      this.showColorAndSize,
-      this.showRatingInLine,
-      this.showTopLabel})
+      this.showCartButton = false,
+      this.showRemoveButton = false,
+      this.showColorAndSize = false,
+      this.showRatingInLine = false,
+      this.showTopLabel = false,
+      this.showCategoryFirst = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ThemeData _theme = Theme.of(context);
-    print("hello");
     return Padding(
         padding: EdgeInsets.only(bottom: 10),
         child: Stack(
@@ -64,10 +65,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(product.categoryTitle,
-                                  style: _theme.textTheme.bodyText1),
-                              Text(product.title,
-                                  style: _theme.textTheme.headline3),
+                              buildTitleAndSubtitle(_theme),
                               Padding(
                                 padding: EdgeInsets.all(AppSizes.linePadding),
                               ),
@@ -86,8 +84,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                               ),
                               Padding(
                                   padding: EdgeInsets.only(
-                                      top: AppSizes.linePadding,
-                                      bottom: AppSizes.linePadding)),
+                                      top: AppSizes.linePadding)),
                               buildRating(_theme)
                             ]),
                       ),
@@ -118,6 +115,26 @@ class OpenFlutterProductTile extends StatelessWidget {
         ));
   }
 
+  buildTitleAndSubtitle(ThemeData _theme) {
+    return showCategoryFirst
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(product.categoryTitle, style: _theme.textTheme.bodyText1),
+              Text(product.title, style: _theme.textTheme.headline3),
+            ],
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(product.title, style: _theme.textTheme.headline3),
+              Text(product.categoryTitle, style: _theme.textTheme.bodyText1),
+            ],
+          );
+  }
+
   buildRating(ThemeData _theme) {
     return showRatingInLine
         ? Row(
@@ -133,16 +150,20 @@ class OpenFlutterProductTile extends StatelessWidget {
                 ratingCount: product.ratingCount,
                 iconSize: 12,
                 alignment: MainAxisAlignment.start,
+                labelFontSize: 12,
               ),
             ],
           )
         : Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               OpenFlutterProductRating(
                 rating: product.rating,
                 ratingCount: product.ratingCount,
                 iconSize: 12,
                 alignment: MainAxisAlignment.start,
+                labelFontSize: 12,
               ),
               Padding(padding: EdgeInsets.only(top: AppSizes.linePadding)),
               Text('\$' + product.price.toStringAsFixed(2),
@@ -172,7 +193,7 @@ class OpenFlutterProductTile extends StatelessWidget {
               ],
             )
           : Container(
-              width: 100,
+              width: 80,
               alignment: Alignment.centerLeft,
               child: Image(image: AssetImage(product.image))),
     );

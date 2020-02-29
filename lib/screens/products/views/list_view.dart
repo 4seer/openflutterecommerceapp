@@ -139,12 +139,7 @@ class _ProductsListViewState extends State<ProductsListView> {
           child: OpenFlutterProductTile(
             product: products[i],
             height: 100,
-            width: width - AppSizes.sidePadding * 2,
-            showCartButton: true,
-            showRemoveButton: true,
-            showColorAndSize: true,
-            showRatingInLine: true,
-            showTopLabel: true,
+            width: width - AppSizes.sidePadding * 2
           )));
     }
     return elements;
