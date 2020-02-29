@@ -29,14 +29,16 @@ class OpenFlutterProductListView extends StatelessWidget {
       productTiles.add(OpenFlutterProductCard(
         width: elementWidth,
         height: elementHeight,
-        product: products[i],
+        product: products[i]
       ));
     }
     return Container(
         padding: EdgeInsets.only(top: AppSizes.sidePadding),
         width: width,
         height: height,
-        child:
-            ListView(scrollDirection: Axis.horizontal, children: productTiles));
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: productTiles
+        ));
   }
 }
