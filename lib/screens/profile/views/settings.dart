@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/screens/profile/password_bloc.dart';
+import 'package:openflutterecommerce/screens/profile/password_event.dart';
+import 'package:openflutterecommerce/screens/profile/password_state.dart';
 import 'package:openflutterecommerce/screens/profile/settings_bloc.dart';
 import 'package:openflutterecommerce/screens/profile/settings_event.dart';
 import 'package:openflutterecommerce/screens/profile/settings_state.dart';
@@ -19,17 +22,17 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends State<SettingsView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  TextEditingController _oldPasswordController;
+  TextEditingController _currentPasswordController;
   TextEditingController _newPasswordController;
-  TextEditingController _confirmPasswordController;
+  TextEditingController _repeatPasswordController;
   TextEditingController _fullNameController;
   TextEditingController _dateOfBirthController;
 
   @override
   void initState() {
-    _oldPasswordController = new TextEditingController();
+    _currentPasswordController = new TextEditingController();
     _newPasswordController = new TextEditingController();
-    _confirmPasswordController = new TextEditingController();
+    _repeatPasswordController = new TextEditingController();
     _fullNameController = new TextEditingController();
     _dateOfBirthController = new TextEditingController();
     super.initState();
@@ -37,9 +40,9 @@ class _SettingsViewState extends State<SettingsView> {
 
   @override
   void dispose() {
-    _oldPasswordController?.dispose();
+    _currentPasswordController?.dispose();
     _newPasswordController?.dispose();
-    _confirmPasswordController?.dispose();
+    _repeatPasswordController?.dispose();
     _fullNameController?.dispose();
     _dateOfBirthController?.dispose();
     super.dispose();
@@ -47,7 +50,6 @@ class _SettingsViewState extends State<SettingsView> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     final settingsBloc = SettingsBloc();
 
     return BlocProvider<SettingsBloc>(
@@ -194,86 +196,164 @@ class _SettingsViewState extends State<SettingsView> {
   }
 
   _showChangePasswordBottomSheet(BuildContext context) {
+    final PasswordBloc passwordBloc = PasswordBloc();
+
     showModalBottomSheet(
         context: context,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(34), topRight: Radius.circular(34)),
         ),
-        builder: (BuildContext context) => Container(
-              height: 472,
-              padding: AppSizes.bottomSheetPadding,
-              decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(34),
-                      topRight: Radius.circular(34)),
-                  boxShadow: []),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 6,
-                      width: 60,
+        builder: (BuildContext context) => BlocProvider<PasswordBloc>(
+              create: (context) => passwordBloc,
+              child: BlocBuilder<PasswordBloc, PasswordState>(
+                  bloc: passwordBloc,
+                  builder: (context, state) {
+                    if (state is PasswordChangedState) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        // close bottom sheet
+                        Navigator.pop(context);
+
+                        _showAlertDialog(context, 'Success',
+                            'Password changed successfully');
+
+                        clearPasswordFields();
+                      });
+                    } else if (state is ChangePasswordErrorState) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        _showAlertDialog(context, 'Error', state.errorMessage);
+                      });
+                    }
+
+                    return Container(
+                      height: 472,
+                      padding: AppSizes.bottomSheetPadding,
                       decoration: BoxDecoration(
-                        color: AppColors.lightGray,
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      'Password Change',
-                      style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 18,
-                    ),
-                    OpenFlutterInputField(
-                      controller: _oldPasswordController,
-                      hint: 'Old Password',
-                    ),
-                    SizedBox(
-                      height: 18,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Text(
-                          'Forgot Password?',
-                          style: TextStyle(color: AppColors.lightGray),
+                          color: AppColors.background,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(34),
+                              topRight: Radius.circular(34)),
+                          boxShadow: []),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 6,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                color: AppColors.lightGray,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              'Password Change',
+                              style: TextStyle(
+                                  color: AppColors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 18,
+                            ),
+                            OpenFlutterInputField(
+                              controller: _currentPasswordController,
+                              hint: 'Old Password',
+                              error: state is EmptyCurrentPasswordState
+                                  ? 'field cannot be empty'
+                                  : state is IncorrectCurrentPasswordState
+                                      ? 'incorrect current password'
+                                      : null,
+                            ),
+                            SizedBox(
+                              height: 18,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  'Forgot Password?',
+                                  style: TextStyle(color: AppColors.lightGray),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 18,
+                            ),
+                            OpenFlutterInputField(
+                              controller: _newPasswordController,
+                              hint: 'New Password',
+                              error: state is EmptyNewPasswordState
+                                  ? 'field cannot be empty'
+                                  : state is InvalidNewPasswordState
+                                      ? 'password should be at least 6 characters'
+                                      : null,
+                            ),
+                            SizedBox(
+                              height: 18,
+                            ),
+                            OpenFlutterInputField(
+                              controller: _repeatPasswordController,
+                              hint: 'Repeat New Password',
+                              error: state is EmptyRepeatPasswordState
+                                  ? 'field cannot be empty'
+                                  : state is PasswordMismatchState
+                                      ? 'password mismatch'
+                                      : null,
+                            ),
+                            SizedBox(
+                              height: 18,
+                            ),
+                            OpenFlutterButton(
+                                title: 'Save Password',
+                                height: 48,
+                                onPressed: () => passwordBloc.add(
+                                    ChangePasswordEvent(
+                                        currentPassword:
+                                            _currentPasswordController.text,
+                                        newPassword:
+                                            _newPasswordController.text,
+                                        repeatNewPassword:
+                                            _repeatPasswordController.text)))
+                          ],
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 18,
-                    ),
-                    OpenFlutterInputField(
-                      controller: _newPasswordController,
-                      hint: 'New Password',
-                    ),
-                    SizedBox(
-                      height: 18,
-                    ),
-                    OpenFlutterInputField(
-                      controller: _confirmPasswordController,
-                      hint: 'Repeat New Password',
-                    ),
-                    SizedBox(
-                      height: 18,
-                    ),
-                    OpenFlutterButton(
-                      title: 'Save Password',
-                      height: 48,
-                      onPressed: () {},
-                    )
-                  ],
-                ),
-              ),
+                      ),
+                    );
+                  }),
             ));
+  }
+
+  _showAlertDialog(BuildContext context, String title, String content) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(content),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void clearPasswordFields() {
+    _currentPasswordController.text = '';
+    _newPasswordController.text = '';
+    _repeatPasswordController.text = '';
   }
 }

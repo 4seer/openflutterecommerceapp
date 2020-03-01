@@ -5,43 +5,27 @@ class PasswordState extends Equatable {
   List<Object> get props => [];
 }
 
-class IncorrectCurrentPasswordState extends PasswordState {
-  final String currentPassword;
-  final String newPassword;
-  final String repeatNewPassword;
+class InitialPasswordState extends PasswordState {}
 
-  IncorrectCurrentPasswordState(
-      {this.currentPassword, this.newPassword, this.repeatNewPassword});
+class IncorrectCurrentPasswordState extends PasswordState {}
 
-  @override
-  List<Object> get props =>
-      [this.currentPassword, this.newPassword, this.repeatNewPassword];
-}
+class EmptyCurrentPasswordState extends PasswordState {}
 
-class PasswordMismatchState extends PasswordState {
-  final String currentPassword;
-  final String newPassword;
-  final String repeatNewPassword;
+class EmptyNewPasswordState extends PasswordState {}
 
-  PasswordMismatchState(
-      {this.currentPassword, this.newPassword, this.repeatNewPassword});
+class EmptyRepeatPasswordState extends PasswordState {}
 
-  @override
-  List<Object> get props =>
-      [this.currentPassword, this.newPassword, this.repeatNewPassword];
-}
+class PasswordMismatchState extends PasswordState {}
 
-class InvalidNewPasswordState extends PasswordState {
-  final String currentPassword;
-  final String newPassword;
-  final String repeatNewPassword;
-
-  InvalidNewPasswordState(
-      {this.currentPassword, this.newPassword, this.repeatNewPassword});
-
-  @override
-  List<Object> get props =>
-      [this.currentPassword, this.newPassword, this.repeatNewPassword];
-}
+class InvalidNewPasswordState extends PasswordState {}
 
 class PasswordChangedState extends PasswordState {}
+
+class ChangePasswordErrorState extends PasswordState {
+  final String errorMessage;
+
+  ChangePasswordErrorState({this.errorMessage}) : super();
+
+  @override
+  List<Object> get props => [this.errorMessage];
+}

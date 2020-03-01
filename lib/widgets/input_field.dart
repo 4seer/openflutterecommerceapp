@@ -12,6 +12,7 @@ class OpenFlutterInputField extends StatefulWidget {
   final bool isPassword;
   final double horizontalPadding;
   final Function onValueChanged;
+  final String error;
 
   const OpenFlutterInputField(
       {Key key,
@@ -23,7 +24,8 @@ class OpenFlutterInputField extends StatefulWidget {
       this.onFinished,
       this.isPassword = false,
       this.horizontalPadding = 16.0,
-      this.onValueChanged})
+      this.onValueChanged,
+      this.error})
       : super(key: key);
 
   @override
@@ -38,6 +40,8 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
 
   @override
   Widget build(BuildContext context) {
+    error = this.widget.error;
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
       child: Column(
