@@ -84,8 +84,8 @@ class _SettingsViewState extends State<SettingsView> {
                 controller: _fullNameController,
                 hint: 'Full Name',
                 horizontalPadding: 0,
-                onValueChanged: (value) =>
-                    settingsBloc.add(UpdateFullNameEvent(fullName: value)),
+                onValueChanged: (value) => settingsBloc.add(
+                    UpdateFullNameEvent(fullName: value.toString().trim())),
               ),
               SizedBox(
                 height: 24,
@@ -94,8 +94,9 @@ class _SettingsViewState extends State<SettingsView> {
                 controller: _dateOfBirthController,
                 hint: 'Date of Birth',
                 horizontalPadding: 0,
-                onValueChanged: (value) => settingsBloc
-                    .add(UpdateDateOfBirthEvent(dateOfBirth: value)),
+                onValueChanged: (value) => settingsBloc.add(
+                    UpdateDateOfBirthEvent(
+                        dateOfBirth: value.toString().trim())),
               ),
               SizedBox(
                 height: 55,
@@ -312,11 +313,13 @@ class _SettingsViewState extends State<SettingsView> {
                                 onPressed: () => passwordBloc.add(
                                     ChangePasswordEvent(
                                         currentPassword:
-                                            _currentPasswordController.text,
+                                            _currentPasswordController.text
+                                                .trim(),
                                         newPassword:
-                                            _newPasswordController.text,
+                                            _newPasswordController.text.trim(),
                                         repeatNewPassword:
-                                            _repeatPasswordController.text)))
+                                            _repeatPasswordController.text
+                                                .trim())))
                           ],
                         ),
                       ),

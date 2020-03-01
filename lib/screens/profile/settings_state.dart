@@ -35,3 +35,12 @@ class NotifyArrivalsUpdatedSate extends SettingsState {
 class NotifyDeliveryUpdatedState extends SettingsState {
   NotifyDeliveryUpdatedState({Settings settings}) : super(settings: settings);
 }
+
+class ChangeSettingsErrorState extends SettingsState {
+  final String errorMessage;
+
+  ChangeSettingsErrorState({Settings settings, this.errorMessage})
+      : super(settings: settings);
+  @override
+  List<Object> get props => [settings, errorMessage];
+}

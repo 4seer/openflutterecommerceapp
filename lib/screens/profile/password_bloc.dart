@@ -12,25 +12,25 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
   @override
   Stream<PasswordState> mapEventToState(PasswordEvent event) async* {
     if (event is ChangePasswordEvent) {
-      if (event.currentPassword.trim().length == 0) {
+      if (event.currentPassword.length == 0) {
         yield EmptyCurrentPasswordState();
-      } else if (event.newPassword.trim().length == 0) {
+      } else if (event.newPassword.length == 0) {
         yield EmptyNewPasswordState();
-      } else if (event.repeatNewPassword.trim().length == 0) {
+      } else if (event.repeatNewPassword.length == 0) {
         yield EmptyRepeatPasswordState();
-      } else if (event.newPassword.trim() != event.repeatNewPassword.trim()) {
+      } else if (event.newPassword != event.repeatNewPassword) {
         yield PasswordMismatchState();
-      } else if (event.newPassword.trim().length < 6) {
+      } else if (event.newPassword.length < 6) {
         yield InvalidNewPasswordState();
       } else {
         try {
           String currentPassword =
               await passwordRepository.getCurrentPassword();
-          if (event.currentPassword.trim() != currentPassword) {
+          if (event.currentPassword != currentPassword) {
             yield IncorrectCurrentPasswordState();
           } else {
             try {
-              await passwordRepository.changePassword(event.newPassword.trim());
+              await passwordRepository.changePassword(event.newPassword);
               yield PasswordChangedState();
             } catch (error) {
               yield ChangePasswordErrorState(errorMessage: error.toString());
