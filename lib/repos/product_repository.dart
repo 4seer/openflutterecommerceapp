@@ -32,7 +32,14 @@ class ProductRepository {
         isNew: true,
         sizes: ['Red', 'Black', 'White', 'Yellow'],
         colors:  ['XS', 'S', 'M', 'L', 'XL'],
-        description: "Lorem ipsum dolor amet ennui chia synth mixtape wolf forage brooklyn pug you probably haven't heard of them lumbersexual, iceland tilde. Poke tumeric readymade brunch, mustache banh mi man bun bushwick celiac hoodie mumblecore"
+        description: "Lorem ipsum dolor amet ennui chia synth mixtape wolf forage brooklyn pug you probably haven't heard of them lumbersexual, iceland tilde. Poke tumeric readymade brunch, mustache banh mi man bun bushwick celiac hoodie mumblecore",
+        ratingDetail: [
+              ProductRating(rating: 5.0, quantity: 600),
+              ProductRating(rating: 4.0, quantity: 700),
+              ProductRating(rating: 3.0, quantity: 12),
+              ProductRating(rating: 2.0, quantity: 4),
+              ProductRating(rating: 1.0, quantity: 0),
+            ]
       );
   }
   List<Product> getSimilarProducts(int productId){
@@ -173,7 +180,8 @@ class ProductRepository {
               price: 22,
               title: 'Short Dress',
               categoryTitle: 'Sitlly',
-              isNew: true),
+              isNew: true,
+              ratingDetail: []),
         ];
         break;
 
@@ -190,7 +198,8 @@ class ProductRepository {
               price: 15,
               title: 'Evening Dress',
               categoryTitle: 'Dorothy Perkins',
-              isNew: true),
+              isNew: true,
+              ratingDetail: []),
           Product(
               id: 6,
               image: "assets/thumbs/dress/dress1.png",
@@ -201,7 +210,8 @@ class ProductRepository {
               price: 22,
               title: 'Short Dress',
               categoryTitle: 'Sitlly',
-              isNew: false),
+              isNew: false,
+              ratingDetail: []),
           Product(
               id: 7,
               image: "assets/thumbs/dress/dress2.png",
@@ -212,7 +222,8 @@ class ProductRepository {
               price: 15,
               title: 'Evening Dress',
               categoryTitle: 'Dorothy Perkins',
-              isNew: false),
+              isNew: false,
+              ratingDetail: []),
           Product(
               id: 8,
               image: "assets/thumbs/dress/dress1.png",
@@ -223,7 +234,8 @@ class ProductRepository {
               price: 22,
               title: 'Short Dress',
               categoryTitle: 'Sitlly',
-              isNew: true),
+              isNew: true,
+              ratingDetail: []),
           Product(
               id: 5,
               image: "assets/thumbs/dress/dress2.png",
@@ -234,7 +246,8 @@ class ProductRepository {
               price: 15,
               title: 'Evening Dress',
               categoryTitle: 'Dorothy Perkins',
-              isNew: true),
+              isNew: true,
+              ratingDetail: []),
           Product(
               id: 6,
               image: "assets/thumbs/dress/dress1.png",
@@ -245,7 +258,8 @@ class ProductRepository {
               price: 22,
               title: 'Short Dress',
               categoryTitle: 'Sitlly',
-              isNew: false),
+              isNew: false,
+              ratingDetail: []),
           Product(
               id: 7,
               image: "assets/thumbs/dress/dress2.png",
@@ -256,7 +270,8 @@ class ProductRepository {
               price: 15,
               title: 'Evening Dress',
               categoryTitle: 'Dorothy Perkins',
-              isNew: false),
+              isNew: false,
+              ratingDetail: []),
           Product(
               id: 8,
               image: "assets/thumbs/dress/dress1.png",
@@ -267,7 +282,8 @@ class ProductRepository {
               price: 22,
               title: 'Short Dress',
               categoryTitle: 'Sitlly',
-              isNew: true),
+              isNew: true,
+              ratingDetail: []),
         ];
         return products;
         break;
