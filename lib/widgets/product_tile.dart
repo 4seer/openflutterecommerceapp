@@ -179,7 +179,7 @@ class OpenFlutterProductTile extends StatelessWidget {
           ? Stack(
               children: <Widget>[
                 Container(
-                    width: width * 0.30,
+                    width: 80,//width * 0.30,
                     child: Container(
                         height: width * 0.35,
                         decoration: new BoxDecoration(
