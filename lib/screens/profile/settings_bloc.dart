@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/repos/models/settings.dart';
 import 'package:openflutterecommerce/repos/settings_repository.dart';
@@ -5,10 +6,12 @@ import 'package:openflutterecommerce/screens/profile/settings_event.dart';
 import 'package:openflutterecommerce/screens/profile/settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  @override
-  SettingsRepository settingsRepository = SettingsRepository();
+  final SettingsRepository settingsRepository;
 
-  SettingsState get initialState => InitialSettingsState(
+  SettingsBloc({@required this.settingsRepository})
+      : assert(settingsRepository != null);
+
+  SettingsState get initialState => SettingsInitialState(
       settings: Settings(
           fullName: '',
           dateOfBirth: '',
@@ -39,7 +42,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
             settings: newSettings, errorMessage: error);
       }
     } else if (event is UpdateNotifySalesEvent) {
-      newSettings.notifySales = !state.settings.notifySales;
+      newSettings.notifySales = event.notifySales;
       try {
         await settingsRepository.updateNotifySales(newSettings.notifySales);
         yield NotifySalesUpdatedState(settings: newSettings);
@@ -48,7 +51,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
             settings: newSettings, errorMessage: error);
       }
     } else if (event is UpdateNotifyArrivalsEvent) {
-      newSettings.notifyArrivals = !state.settings.notifyArrivals;
+      newSettings.notifyArrivals = event.notifyArrivals;
       try {
         await settingsRepository
             .updateNotifyArrivals(newSettings.notifyArrivals);
@@ -58,7 +61,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
             settings: newSettings, errorMessage: error);
       }
     } else if (event is UpdateNotifyDeliveryEvent) {
-      newSettings.notifyDelivery = !state.settings.notifyDelivery;
+      newSettings.notifyDelivery = event.notifyDelivery;
       try {
         await settingsRepository
             .updateNotifyDelivery(newSettings.notifyDelivery);

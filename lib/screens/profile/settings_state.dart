@@ -12,30 +12,37 @@ abstract class SettingsState extends Equatable {
   List<Object> get props => [settings];
 }
 
-class InitialSettingsState extends SettingsState {
-  InitialSettingsState({Settings settings}) : super(settings: settings);
+@immutable
+class SettingsInitialState extends SettingsState {
+  SettingsInitialState({Settings settings}) : super(settings: settings);
 }
 
+@immutable
 class FullNameUpdatedState extends SettingsState {
   FullNameUpdatedState({Settings settings}) : super(settings: settings);
 }
 
+@immutable
 class DateOfBirthUpdatedState extends SettingsState {
   DateOfBirthUpdatedState({Settings settings}) : super(settings: settings);
 }
 
+@immutable
 class NotifySalesUpdatedState extends SettingsState {
   NotifySalesUpdatedState({Settings settings}) : super(settings: settings);
 }
 
+@immutable
 class NotifyArrivalsUpdatedSate extends SettingsState {
   NotifyArrivalsUpdatedSate({Settings settings}) : super(settings: settings);
 }
 
+@immutable
 class NotifyDeliveryUpdatedState extends SettingsState {
   NotifyDeliveryUpdatedState({Settings settings}) : super(settings: settings);
 }
 
+@immutable
 class ChangeSettingsErrorState extends SettingsState {
   final String errorMessage;
 

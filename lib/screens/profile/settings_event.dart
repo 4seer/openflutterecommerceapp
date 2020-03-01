@@ -7,6 +7,7 @@ abstract class SettingsEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 class UpdateFullNameEvent extends SettingsEvent {
   final String fullName;
 
@@ -19,6 +20,7 @@ class UpdateFullNameEvent extends SettingsEvent {
   String toString() => 'Update FullName Event';
 }
 
+@immutable
 class UpdateDateOfBirthEvent extends SettingsEvent {
   final String dateOfBirth;
 
@@ -31,17 +33,41 @@ class UpdateDateOfBirthEvent extends SettingsEvent {
   String toString() => 'Update DateOfBirth Event';
 }
 
+@immutable
 class UpdateNotifySalesEvent extends SettingsEvent {
+  final bool notifySales;
+
+  UpdateNotifySalesEvent({this.notifySales});
+
   @override
   String toString() => 'Update NotifySales Event';
+
+  @override
+  List<Object> get props => [notifySales];
 }
 
+@immutable
 class UpdateNotifyArrivalsEvent extends SettingsEvent {
+  final bool notifyArrivals;
+
+  UpdateNotifyArrivalsEvent({this.notifyArrivals});
+
   @override
   String toString() => 'Update NotifyArrivals Event';
+
+  @override
+  List<Object> get props => [notifyArrivals];
 }
 
+@immutable
 class UpdateNotifyDeliveryEvent extends SettingsEvent {
+  final bool notifyDelivery;
+
+  UpdateNotifyDeliveryEvent({this.notifyDelivery});
+
   @override
   String toString() => 'Update Delivery Event';
+
+  @override
+  List<Object> get props => [notifyDelivery];
 }

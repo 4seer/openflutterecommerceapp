@@ -1,13 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/repos/password_repository.dart';
 import 'package:openflutterecommerce/screens/profile/password_event.dart';
 import 'package:openflutterecommerce/screens/profile/password_state.dart';
 
 class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
-  PasswordRepository passwordRepository = PasswordRepository();
+  final PasswordRepository passwordRepository;
+
+  PasswordBloc({@required this.passwordRepository})
+      : assert(passwordRepository != null);
 
   @override
-  PasswordState get initialState => InitialPasswordState();
+  PasswordState get initialState => PasswordInitialState();
 
   @override
   Stream<PasswordState> mapEventToState(PasswordEvent event) async* {

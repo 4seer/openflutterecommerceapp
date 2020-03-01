@@ -1,11 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:equatable/equatable.dart';
 
-class PasswordEvent extends Equatable {
+@immutable
+abstract class PasswordEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
 
+@immutable
 class ChangePasswordEvent extends PasswordEvent {
   final String currentPassword;
   final String newPassword;

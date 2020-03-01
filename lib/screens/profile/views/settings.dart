@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/repos/password_repository.dart';
+import 'package:openflutterecommerce/repos/settings_repository.dart';
 import 'package:openflutterecommerce/screens/profile/password_bloc.dart';
 import 'package:openflutterecommerce/screens/profile/password_event.dart';
 import 'package:openflutterecommerce/screens/profile/password_state.dart';
@@ -50,154 +52,159 @@ class _SettingsViewState extends State<SettingsView> {
 
   @override
   Widget build(BuildContext context) {
-    final settingsBloc = SettingsBloc();
+    final settingsBloc = SettingsBloc(settingsRepository: SettingsRepository());
 
     return BlocProvider<SettingsBloc>(
       create: (context) => settingsBloc,
-      child:
-          BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
-        _fullNameController.text = state.settings.fullName;
-        _dateOfBirthController.text = state.settings.dateOfBirth;
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+          bloc: settingsBloc,
+          builder: (context, state) {
+            _fullNameController.text = state.settings.fullName;
+            _dateOfBirthController.text = state.settings.dateOfBirth;
 
-        return SingleChildScrollView(
-            child: Container(
-          padding: EdgeInsets.all(AppSizes.sidePadding),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Settings',
-                style: TextStyle(fontSize: 34, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 23,
-              ),
-              Text(
-                'Personal Information',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 21,
-              ),
-              OpenFlutterInputField(
-                controller: _fullNameController,
-                hint: 'Full Name',
-                horizontalPadding: 0,
-                onValueChanged: (value) => settingsBloc.add(
-                    UpdateFullNameEvent(fullName: value.toString().trim())),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              OpenFlutterInputField(
-                controller: _dateOfBirthController,
-                hint: 'Date of Birth',
-                horizontalPadding: 0,
-                onValueChanged: (value) => settingsBloc.add(
-                    UpdateDateOfBirthEvent(
-                        dateOfBirth: value.toString().trim())),
-              ),
-              SizedBox(
-                height: 55,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            return SingleChildScrollView(
+                child: Container(
+              padding: EdgeInsets.all(AppSizes.sidePadding),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Password',
+                    'Settings',
+                    style: TextStyle(fontSize: 34, fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    height: 23,
+                  ),
+                  Text(
+                    'Personal Information',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      _showChangePasswordBottomSheet(context);
-                    },
-                    child: Text(
-                      'Change',
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: AppColors.lightGray,
-                          fontWeight: FontWeight.w500),
-                    ),
+                  SizedBox(
+                    height: 21,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 21,
-              ),
-              Text(
-                'Notifications',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
+                  OpenFlutterInputField(
+                    controller: _fullNameController,
+                    hint: 'Full Name',
+                    horizontalPadding: 0,
+                    onValueChanged: (value) => settingsBloc.add(
+                        UpdateFullNameEvent(fullName: value.toString().trim())),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  OpenFlutterInputField(
+                    controller: _dateOfBirthController,
+                    hint: 'Date of Birth',
+                    horizontalPadding: 0,
+                    onValueChanged: (value) => settingsBloc.add(
+                        UpdateDateOfBirthEvent(
+                            dateOfBirth: value.toString().trim())),
+                  ),
+                  SizedBox(
+                    height: 55,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Password',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _showChangePasswordBottomSheet(context);
+                        },
+                        child: Text(
+                          'Change',
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: AppColors.lightGray,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 21,
+                  ),
                   Text(
-                    'Sales',
-                    style: TextStyle(fontSize: 14, color: AppColors.black),
+                    'Notifications',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                  CupertinoSwitch(
-                    trackColor: AppColors.lightGray,
-                    value: state.settings.notifySales,
-                    activeColor: AppColors.success,
-                    onChanged: (newValue) =>
-                        settingsBloc.add(UpdateNotifySalesEvent()),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Sales',
+                        style: TextStyle(fontSize: 14, color: AppColors.black),
+                      ),
+                      CupertinoSwitch(
+                        trackColor: AppColors.lightGray,
+                        value: state.settings.notifySales,
+                        activeColor: AppColors.success,
+                        onChanged: (newValue) => settingsBloc
+                            .add(UpdateNotifySalesEvent(notifySales: newValue)),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'New arrivals',
+                        style: TextStyle(fontSize: 14, color: AppColors.black),
+                      ),
+                      CupertinoSwitch(
+                        trackColor: AppColors.lightGray,
+                        value: state.settings.notifyArrivals,
+                        activeColor: AppColors.success,
+                        onChanged: (newValue) => settingsBloc.add(
+                            UpdateNotifyArrivalsEvent(
+                                notifyArrivals: newValue)),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Delivery status changes',
+                        style: TextStyle(fontSize: 14, color: AppColors.black),
+                      ),
+                      CupertinoSwitch(
+                        trackColor: AppColors.lightGray,
+                        value: state.settings.notifyDelivery,
+                        activeColor: AppColors.success,
+                        onChanged: (newValue) => settingsBloc.add(
+                            UpdateNotifyDeliveryEvent(
+                                notifyDelivery: newValue)),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50,
                   ),
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'New arrivals',
-                    style: TextStyle(fontSize: 14, color: AppColors.black),
-                  ),
-                  CupertinoSwitch(
-                    trackColor: AppColors.lightGray,
-                    value: state.settings.notifyArrivals,
-                    activeColor: AppColors.success,
-                    onChanged: (newValue) =>
-                        settingsBloc.add(UpdateNotifyArrivalsEvent()),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Delivery status changes',
-                    style: TextStyle(fontSize: 14, color: AppColors.black),
-                  ),
-                  CupertinoSwitch(
-                    trackColor: AppColors.lightGray,
-                    value: state.settings.notifyDelivery,
-                    activeColor: AppColors.success,
-                    onChanged: (newValue) =>
-                        settingsBloc.add(UpdateNotifyDeliveryEvent()),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-            ],
-          ),
-        ));
-      }),
+            ));
+          }),
     );
   }
 
   _showChangePasswordBottomSheet(BuildContext context) {
-    final PasswordBloc passwordBloc = PasswordBloc();
+    final PasswordBloc passwordBloc =
+        PasswordBloc(passwordRepository: PasswordRepository());
 
     showModalBottomSheet(
         context: context,
