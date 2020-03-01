@@ -14,7 +14,7 @@ import 'package:openflutterecommerce/screens/wrapper.dart';
 import 'package:openflutterecommerce/widgets/block_header.dart';
 import 'package:openflutterecommerce/widgets/bottom_popup.dart';
 import 'package:openflutterecommerce/widgets/cart_tile.dart';
-import 'package:openflutterecommerce/widgets/input_buttom.dart';
+import 'package:openflutterecommerce/widgets/input_button.dart';
 import 'package:openflutterecommerce/widgets/product_list_view.dart';
 import 'package:openflutterecommerce/widgets/promo_tile.dart';
 import 'package:openflutterecommerce/widgets/summary_line.dart';

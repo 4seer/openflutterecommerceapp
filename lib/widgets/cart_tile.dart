@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/cart_product.dart';
-import 'package:openflutterecommerce/widgets/block_header.dart';
-import 'package:openflutterecommerce/widgets/widgets.dart';
 
 class OpenFlutterCartTile extends StatefulWidget {
   final CartProduct item;
