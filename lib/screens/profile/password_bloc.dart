@@ -16,11 +16,11 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
   @override
   Stream<PasswordState> mapEventToState(PasswordEvent event) async* {
     if (event is ChangePasswordEvent) {
-      if (event.currentPassword.length == 0) {
+      if (event.currentPassword.isEmpty) {
         yield EmptyCurrentPasswordState();
-      } else if (event.newPassword.length == 0) {
+      } else if (event.newPassword.isEmpty) {
         yield EmptyNewPasswordState();
-      } else if (event.repeatNewPassword.length == 0) {
+      } else if (event.repeatNewPassword.isEmpty) {
         yield EmptyRepeatPasswordState();
       } else if (event.newPassword != event.repeatNewPassword) {
         yield PasswordMismatchState();
