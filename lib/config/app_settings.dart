@@ -1,0 +1,3 @@
+class AppSettings {
+  bool cacheIsEnabled;
+}
