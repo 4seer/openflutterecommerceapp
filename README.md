@@ -40,3 +40,16 @@ Functionality description and discussion
 
 [E-commerce App Mobile App Local Database Structure](https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-local-database-4744b61264c7)
 
+
+You need to update the configuration of your IDE to tell the location of the entry point.
+
+The example for VS Code is below:
+
+     "configurations": [
+        {
+            "name": "Flutter",
+            "request": "launch",
+            "program": "lib/presentation/main.dart",
+            "type": "dart"
+        }
+    ]
