@@ -49,7 +49,7 @@ The example for VS Code is below:
         {
             "name": "Flutter",
             "request": "launch",
-            "program": "lib/presentation/main.dart",
+            "program": "lib/main.dart",
             "type": "dart"
         }
     ]
