@@ -21,7 +21,7 @@ class _OpenFlutterProductCartCardState
         height: 120,
         child: Card(
           color: Colors.white,
-          margin: EdgeInsets.all(10.0),
+          margin: EdgeInsets.only(bottom:16.0,top: 16.0),
           child: Stack(
             alignment: Alignment.topLeft,
             children: <Widget>[_imageWidget, _listWidget],

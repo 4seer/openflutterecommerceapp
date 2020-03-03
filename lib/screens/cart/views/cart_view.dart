@@ -24,45 +24,186 @@ class CartView extends StatefulWidget {
 
 class _CartViewState extends State<CartView> {
   ThemeData _theme;
+  double width;
   @override
   Widget build(BuildContext context) {
-    _theme= Theme.of(context);
-    final double width = MediaQuery.of(context).size.width;
+    _theme = Theme.of(context);
+    width = MediaQuery.of(context).size.width;
     return SafeArea(
-        child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Text(
-                    'My Bag',
-                    style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
-                  ),
-                  _cartListView,
-                  _totalAmountView
-
-                ])));
+      child: Scaffold(
+          body: Padding(
+              padding: EdgeInsets.only(left: 16, right: 16),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Text(
+                      'My Bag',
+                      style:
+                          TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+                    ),
+                    _cartListView,
+                    //  _promoCodeView,
+                    _totalAmountView,
+                    _checkoutButton
+                  ]))),
+    );
   }
-  Widget get _totalAmountView =>Container(
-    margin: EdgeInsets.all(10),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Text(
-          "Total Amount",
-          style: _theme.textTheme.subtitle2,
+
+  Widget get _checkoutButton => OpenFlutterButton(
+      title: 'CHECK OUT',
+      height: 48,
+      onPressed: () {
+        showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return Container(
+                color: Color(0xFF737373),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(249, 249, 249, 1),
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20.0))),
+                  child: ListView(
+                    padding: EdgeInsets.all(16),
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: Container(
+                          height: 6,
+                          width: 60,
+                          color: Color(0xFF737373),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 18, bottom: 18),
+                        child: Text(
+                          "Your Promo Codes",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: 2,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(top: 12, bottom: 12),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    height: width / 5,
+                                    width: width / 5,
+                                    color: Colors.red,
+                                    child: Row(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text("10",style: TextStyle(fontSize: 34,color: Colors.white),),
+                                      Column(mainAxisSize: MainAxisSize.min,children: <Widget>[
+                                        Text("%",style:TextStyle(fontSize: 14,color: Colors.white),),
+                                        Text("off",style:TextStyle(fontSize: 14,color: Colors.white),),
+                                      ],)
+                                    ],),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          "Personal Offer",
+                                          style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500),
+                                        ),
+                                        Text(
+                                          "myPromoCode2020",
+                                          style: TextStyle(fontSize: 11),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 10.0),
+                                          child: Text(
+                                            "6 days Remaining",
+                                            style: TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.grey),
+                                          ),
+                                        ),
+                                        OpenFlutterButton(
+                                          title: "Apply",
+                                          width: 93,
+                                          height: 36,
+                                          onPressed: () {},
+                                          isNeedPadding: false,
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          })
+                    ],
+                  ),
+                ),
+              );
+            });
+      });
+
+  Widget get _promoCodeView => Container(
+        color: Colors.white,
+        child: TextField(
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              suffix: Container(
+                  height: 35,
+                  child: FloatingActionButton(
+                    heroTag: null,
+                    mini: true,
+                    backgroundColor: Colors.black,
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ))),
         ),
-        Text(
-          "\$52.0",
-          style: _theme.textTheme.subtitle2,
+      );
+  Widget get _totalAmountView => Container(
+        margin: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              "Total Amount",
+              style: _theme.textTheme.subtitle2,
+            ),
+            Text(
+              "\$52.0",
+              style: _theme.textTheme.subtitle2,
+            ),
+          ],
         ),
-      ],
-    ),
-  );
-  Widget get _cartListView =>
-      ListView.builder(
+      );
+  Widget get _cartListView => ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return OpenFlutterProductCartCard(
             productCart: ProductCart(

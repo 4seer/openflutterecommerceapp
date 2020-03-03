@@ -10,12 +10,14 @@ class OpenFlutterButton extends StatelessWidget{
   final double height;
   final Function onPressed;
   final String title;
+  final bool isNeedPadding;
 
-  OpenFlutterButton({Key key, 
-    this.width, 
-    this.height, 
-    @required this.title, 
-    @required this.onPressed}) : 
+  OpenFlutterButton({Key key,
+    this.width,
+    this.height,
+    @required this.title,
+    @required this.onPressed,
+    this.isNeedPadding = true}) :
       super(key: key) ;
 
   @override
@@ -26,7 +28,7 @@ class OpenFlutterButton extends StatelessWidget{
       edgeInsets = EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0);
     }
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      padding: isNeedPadding? EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0):EdgeInsets.zero,
       child: InkWell(
         onTap: onPressed,
         child: Container(
