@@ -7,17 +7,17 @@ import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/presentation/features/splash_screen.dart';
 
-import '../config/routes.dart';
-import 'features/authentication/authentication.dart';
-import 'features/cart/cart.dart';
-import 'features/categories/categories.dart';
-import 'features/checkout/checkout.dart';
-import 'features/favorites/favorites.dart';
-import 'features/home/home.dart';
-import 'features/profile/profile.dart';
-import 'features/signin/forget_password.dart';
-import 'features/signin/signin.dart';
-import 'features/signin/signup.dart';
+import 'config/routes.dart';
+import 'presentation/features/authentication/authentication.dart';
+import 'presentation/features/cart/cart.dart';
+import 'presentation/features/categories/categories.dart';
+import 'presentation/features/checkout/checkout.dart';
+import 'presentation/features/favorites/favorites.dart';
+import 'presentation/features/home/home.dart';
+import 'presentation/features/profile/profile.dart';
+import 'presentation/features/signin/forget_password.dart';
+import 'presentation/features/signin/signin.dart';
+import 'presentation/features/signin/signup.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
