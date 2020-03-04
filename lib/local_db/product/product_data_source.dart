@@ -1,15 +1,15 @@
 import 'package:openflutterecommerce/local_db/data_source.dart';
-import 'package:openflutterecommerce/local_db/product/models/product_data.dart';
+import 'package:openflutterecommerce/local_db/product/entities/product_entity.dart';
 
 class ProductDataSource extends DataSource {
   @override
-  Future<List<ProductData>> all() async {
+  Future<List<ProductEntity>> all() async {
     await openDatabaseIfNotOpened();
 
     final List<Map<String, dynamic>> maps = await db.query(tableName);
 
     return List.generate(maps.length, (i) {
-      return ProductData(
+      return ProductEntity(
         id: maps[i]['id'],
         title: maps[i]['title'],
         image: maps[i]['image'],
@@ -31,13 +31,13 @@ class ProductDataSource extends DataSource {
   }
 
   @override
-  Future<ProductData> get(int id) async {
+  Future<ProductEntity> get(int id) async {
     await openDatabaseIfNotOpened();
 
     final List<Map<String, dynamic>> maps =
         await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
-    return ProductData(
+    return ProductEntity(
       id: maps[0]['id'],
       title: maps[0]['title'],
       image: maps[0]['image'],

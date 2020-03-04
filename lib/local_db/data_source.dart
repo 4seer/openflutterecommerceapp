@@ -1,7 +1,7 @@
-import 'package:openflutterecommerce/local_db/config.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:openflutterecommerce/local_db/data_source_model.dart';
+import 'package:openflutterecommerce/local_db/config.dart';
+import 'package:openflutterecommerce/local_db/entity.dart';
 
 abstract class DataSource {
   Database db;
@@ -35,15 +35,15 @@ abstract class DataSource {
     }
   }
 
-  Future<DataSourceModel> get(int id) async {
+  Future<Entity> get(int id) async {
     return null;
   }
 
-  Future<List<DataSourceModel>> all() async {
+  Future<List<Entity>> all() async {
     return null;
   }
 
-  Future<void> insert(DataSourceModel model) async {
+  Future<void> insert(Entity model) async {
     await openDatabaseIfNotOpened();
 
     await db.insert(
@@ -53,7 +53,7 @@ abstract class DataSource {
     );
   }
 
-  Future<void> update(DataSourceModel model) async {
+  Future<void> update(Entity model) async {
     await openDatabaseIfNotOpened();
 
     await db.update(

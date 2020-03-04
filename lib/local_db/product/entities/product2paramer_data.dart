@@ -1,11 +1,11 @@
-import 'package:openflutterecommerce/local_db/data_source_model.dart';
+import 'package:openflutterecommerce/local_db/entity.dart';
 
-class Product2ParameterData extends DataSourceModel {
+class Product2ParameterEntity extends Entity {
   final int id;
   final int productParameterId;
   final int productId;
 
-  Product2ParameterData({this.id, this.productParameterId, this.productId});
+  Product2ParameterEntity({this.id, this.productParameterId, this.productId});
 
   @override
   Map<String, dynamic> toMap() {

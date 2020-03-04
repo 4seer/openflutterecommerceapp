@@ -1,6 +1,6 @@
-import 'package:openflutterecommerce/local_db/data_source_model.dart';
+import 'package:openflutterecommerce/local_db/entity.dart';
 
-class ProductData extends DataSourceModel {
+class ProductEntity extends Entity {
   final int id;
   final String title;
   final String image;
@@ -18,7 +18,7 @@ class ProductData extends DataSourceModel {
   final int rating4Count;
   final int rating5Count;
 
-  ProductData(
+  ProductEntity(
       {this.id,
       this.title,
       this.image,

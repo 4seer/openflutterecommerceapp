@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/local_db/product/models/product_data.dart';
+import 'package:openflutterecommerce/local_db/product/entities/product_entity.dart';
 import 'package:openflutterecommerce/local_db/product/product_data_source.dart';
 
 void main() {
@@ -14,7 +14,7 @@ void main() {
     });
 
     test('test: insert and get product', () async {
-      ProductData product = ProductData(
+      ProductEntity product = ProductEntity(
         id: 1,
         title: 'Product 1',
         image: 'https:example.com/image.png',
@@ -34,57 +34,57 @@ void main() {
       );
       await productDataSource.insert(product);
 
-      ProductData insertedProduct = await productDataSource.get(product.id);
+      ProductEntity insertedProduct = await productDataSource.get(product.id);
       print(insertedProduct);
       expect(product == insertedProduct, true);
     });
 
     test('test: update product', () async {
-      ProductData product = ProductData(id: 1, title: 'Product 1');
+      ProductEntity product = ProductEntity(id: 1, title: 'Product 1');
       await productDataSource.insert(product);
 
-      ProductData insertedProduct = await productDataSource.get(product.id);
+      ProductEntity insertedProduct = await productDataSource.get(product.id);
 
-      ProductData productToUpdate =
-          ProductData(id: insertedProduct.id, title: 'Product 2');
+      ProductEntity productToUpdate =
+          ProductEntity(id: insertedProduct.id, title: 'Product 2');
 
       await productDataSource.update(productToUpdate);
 
-      ProductData updatedProduct =
+      ProductEntity updatedProduct =
           await productDataSource.get(productToUpdate.id);
       expect(productToUpdate == updatedProduct, true);
     });
 
     test('test: delete all products', () async {
-      await productDataSource.insert(ProductData(id: 1, title: 'Product 1'));
-      await productDataSource.insert(ProductData(id: 2, title: 'Product 3'));
-      await productDataSource.insert(ProductData(id: 3, title: 'Product 3'));
+      await productDataSource.insert(ProductEntity(id: 1, title: 'Product 1'));
+      await productDataSource.insert(ProductEntity(id: 2, title: 'Product 3'));
+      await productDataSource.insert(ProductEntity(id: 3, title: 'Product 3'));
 
       await productDataSource.deleteAll();
 
-      List<ProductData> allProducts = await productDataSource.all();
+      List<ProductEntity> allProducts = await productDataSource.all();
       expect(allProducts.length == 0, true);
     });
 
     test('test: delete a product', () async {
       await productDataSource.deleteAll();
 
-      await productDataSource.insert(ProductData(id: 1, title: 'Product 1'));
+      await productDataSource.insert(ProductEntity(id: 1, title: 'Product 1'));
 
       await productDataSource.delete(1);
 
-      List<ProductData> allProducts = await productDataSource.all();
+      List<ProductEntity> allProducts = await productDataSource.all();
       expect(allProducts.length == 0, true);
     });
 
     test('test: get all products', () async {
       await productDataSource.deleteAll();
 
-      await productDataSource.insert(ProductData(id: 1, title: 'Product 1'));
-      await productDataSource.insert(ProductData(id: 2, title: 'Product 3'));
-      await productDataSource.insert(ProductData(id: 3, title: 'Product 3'));
+      await productDataSource.insert(ProductEntity(id: 1, title: 'Product 1'));
+      await productDataSource.insert(ProductEntity(id: 2, title: 'Product 3'));
+      await productDataSource.insert(ProductEntity(id: 3, title: 'Product 3'));
 
-      List<ProductData> allProducts = await productDataSource.all();
+      List<ProductEntity> allProducts = await productDataSource.all();
       expect(allProducts.length == 3, true);
     });
   });

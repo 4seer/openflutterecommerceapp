@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:equatable/equatable.dart';
 
 @immutable
-abstract class DataSourceModel extends Equatable {
+abstract class Entity extends Equatable {
   int get id;
 
   Map<String, dynamic> toMap();
