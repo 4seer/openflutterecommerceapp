@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:openflutterecommerce/local_db/product/data_sources/product_data_source.dart';
 import 'package:openflutterecommerce/local_db/product/entities/product_entity.dart';
-import 'package:openflutterecommerce/local_db/product/product_data_source.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
