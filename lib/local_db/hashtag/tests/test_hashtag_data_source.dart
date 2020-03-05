@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/local_db/hashtag/data_sources/hashtag_data_sources.dart';
+import 'package:openflutterecommerce/local_db/hashtag/data_sources/hashtag_data_source.dart';
 import 'package:openflutterecommerce/local_db/hashtag/entities/hashtag_entity.dart';
 
 void main() {
