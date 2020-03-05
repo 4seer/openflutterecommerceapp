@@ -10,7 +10,7 @@ class ProductEntity extends Entity {
   final int categoryId;
   final int amount;
   final String description;
-  final int isFavourite;
+  final bool isFavourite;
   final double rating;
   final int rating1Count;
   final int rating2Count;
