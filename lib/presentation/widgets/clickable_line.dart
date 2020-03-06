@@ -24,9 +24,9 @@ class OpenFlutterClickableLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     return InkWell(
-        onTap: (() => {this.onTap(sortBy)}),
+        onTap: (() => {onTap(sortBy)}),
         child: Container(
             padding: EdgeInsets.symmetric(
                 horizontal: AppSizes.sidePadding,
@@ -34,7 +34,7 @@ class OpenFlutterClickableLine extends StatelessWidget {
             alignment: Alignment.centerLeft,
             height: height,
             width: width,
-            color: this.backgroundColor,
+            color: backgroundColor,
             child: Text(title,
                 style: _theme.textTheme.headline3.copyWith(
                     fontWeight: FontWeight.normal, color: textColor))));

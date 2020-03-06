@@ -35,7 +35,7 @@ class _CartViewState extends State<CartView> {
 
   @override
   void initState() {
-    _promoController = new TextEditingController();
+    _promoController = TextEditingController();
     super.initState();
   }
 
@@ -47,9 +47,8 @@ class _CartViewState extends State<CartView> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    final double width = MediaQuery.of(context).size.width;
-    final double widgetWidth = width - AppSizes.sidePadding * 2;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
     final bloc = BlocProvider.of<CartBloc>(context);
     return BlocListener<CartBloc, CartState>(listener: (context, state) {
       if (state is CartErrorState) {
@@ -63,7 +62,7 @@ class _CartViewState extends State<CartView> {
     }, child: BlocBuilder<CartBloc, CartState>(builder: (context, state) {
       if (state is CartLoadedState) {
         totalPrice = 0;
-        for (int i = 0; i < state.cartProducts.length; i++) {
+        for (var i = 0; i < state.cartProducts.length; i++) {
           totalPrice += state.cartProducts[i].price;
         }
         return Stack(children: <Widget>[
@@ -135,9 +134,9 @@ class _CartViewState extends State<CartView> {
     }));
   }
 
-  buildPromos(List<Promo> promos, CartBloc bloc) {
-    List<Widget> widgets = List<Widget>();
-    for (int i = 0; i < promos.length; i++) {
+  List<Widget> buildPromos(List<Promo> promos, CartBloc bloc) {
+    var widgets = <Widget>[];
+    for (var i = 0; i < promos.length; i++) {
       widgets.add(Container(
           padding: EdgeInsets.symmetric(
               horizontal: AppSizes.sidePadding, vertical: AppSizes.sidePadding),
@@ -151,9 +150,9 @@ class _CartViewState extends State<CartView> {
     return widgets;
   }
 
-  buildCartItems(List<CartProduct> items, CartBloc bloc) {
-    List<Widget> widgets = List<Widget>();
-    for (int i = 0; i < items.length; i++) {
+  List<Widget> buildCartItems(List<CartProduct> items, CartBloc bloc) {
+    var widgets = <Widget>[];
+    for (var i = 0; i < items.length; i++) {
       widgets.add(Container(
           padding: EdgeInsets.symmetric(
               horizontal: AppSizes.sidePadding, vertical: AppSizes.sidePadding),

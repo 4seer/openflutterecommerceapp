@@ -33,10 +33,10 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
 
   @override
   void initState() {
-    _nameOnCardController = new TextEditingController();
-    _cardNumberController = new TextEditingController();
-    _expirationDateController = new TextEditingController();
-    _cvvController = new TextEditingController();
+    _nameOnCardController = TextEditingController();
+    _cardNumberController = TextEditingController();
+    _expirationDateController = TextEditingController();
+    _cvvController = TextEditingController();
 
     super.initState();
   }
@@ -53,8 +53,8 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<CheckoutBloc>(context);
-    final ThemeData _theme = Theme.of(context);
-    final double width = MediaQuery.of(context).size.width;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
 
     return BlocListener(
         bloc: bloc,
@@ -71,8 +71,8 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
         child: BlocBuilder(
             bloc: bloc,
             builder: (BuildContext context, CheckoutState state) {
-              int currentCardId = 0;
-              bool showAddNewCardForm = false;
+              var currentCardId = 0;
+              var showAddNewCardForm = false;
               if (state is CheckoutProceedState) {
                 currentCardId = state.cardId;
                 showAddNewCardForm = state.showAddNewCardForm;
@@ -197,7 +197,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
             }));
   }
 
-  _changeDefaultPaymentCard(CheckoutBloc bloc, int cardId) {
+  void _changeDefaultPaymentCard(CheckoutBloc bloc, int cardId) {
     bloc..add(CheckoutSetDefaultCardEvent(cardId));
     widget.changeView(changeType: ViewChangeType.Exact, index: 0);
     //TODO: implement change of default payment card

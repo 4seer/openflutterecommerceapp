@@ -32,11 +32,11 @@ class _SettingsViewState extends State<SettingsView> {
 
   @override
   void initState() {
-    _currentPasswordController = new TextEditingController();
-    _newPasswordController = new TextEditingController();
-    _repeatPasswordController = new TextEditingController();
-    _fullNameController = new TextEditingController();
-    _dateOfBirthController = new TextEditingController();
+    _currentPasswordController = TextEditingController();
+    _newPasswordController = TextEditingController();
+    _repeatPasswordController = TextEditingController();
+    _fullNameController = TextEditingController();
+    _dateOfBirthController = TextEditingController();
     super.initState();
   }
 
@@ -202,9 +202,8 @@ class _SettingsViewState extends State<SettingsView> {
     );
   }
 
-  _showChangePasswordBottomSheet(BuildContext context) {
-    final PasswordBloc passwordBloc =
-        PasswordBloc(passwordRepository: PasswordRepository());
+  void _showChangePasswordBottomSheet(BuildContext context) {
+    var passwordBloc = PasswordBloc(passwordRepository: PasswordRepository());
 
     showModalBottomSheet(
         context: context,
@@ -335,7 +334,8 @@ class _SettingsViewState extends State<SettingsView> {
             ));
   }
 
-  _showAlertDialog(BuildContext context, String title, String content) {
+  Future<void> _showAlertDialog(
+      BuildContext context, String title, String content) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {

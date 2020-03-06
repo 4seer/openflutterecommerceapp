@@ -100,7 +100,7 @@ class ProductsLoadedState extends ProductState {
       String brandSearchKey}) {
     return ProductsLoadedState(
         data: data ?? this.data,
-        isLoading: loading ?? this.isLoading,
+        isLoading: loading ?? isLoading,
         showSortBy: showSortBy ?? this.showSortBy,
         sortBy: sortBy ?? this.sortBy,
         priceRange: priceRange ?? this.priceRange,

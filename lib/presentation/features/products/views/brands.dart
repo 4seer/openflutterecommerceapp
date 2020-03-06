@@ -20,9 +20,9 @@ class SelectBrandView extends StatefulWidget {
 class _SelectBrandViewState extends State<SelectBrandView> {
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     final bloc = BlocProvider.of<ProductsBloc>(context);
-    double fullWidth = MediaQuery.of(context).size.width;
+    var fullWidth = MediaQuery.of(context).size.width;
     return BlocListener<ProductsBloc, ProductState>(listener: (context, state) {
       if (state is ProductsErrorState) {
         return Container(
@@ -44,7 +44,7 @@ class _SelectBrandViewState extends State<SelectBrandView> {
 
   Stack _buildViewByLoadedState(BuildContext context, ProductsLoadedState state,
       ProductsBloc bloc, double fullWidth, ThemeData _theme) {
-    double width = MediaQuery.of(context).size.width;
+    var width = MediaQuery.of(context).size.width;
     return Stack(children: <Widget>[
       SingleChildScrollView(
         child: Column(children: <Widget>[
@@ -94,16 +94,20 @@ class _SelectBrandViewState extends State<SelectBrandView> {
     ]);
   }
 
-  buildBranCheckboxList(List<Brand> brands, List<int> selectedBrandIds,
-      String searchKeyFilter, double width, ProductsBloc bloc) {
-    List<Widget> checkboxes = List<Widget>();
-    for (int i = 0; i < brands.length; i++) {
+  List<Widget> buildBranCheckboxList(
+      List<Brand> brands,
+      List<int> selectedBrandIds,
+      String searchKeyFilter,
+      double width,
+      ProductsBloc bloc) {
+    var checkboxes = <Widget>[];
+    for (var i = 0; i < brands.length; i++) {
       if (searchKeyFilter != null &&
           brands[i]
               .title
               .toLowerCase()
               .contains(searchKeyFilter.toLowerCase())) {
-        bool selected =
+        var selected =
             selectedBrandIds != null && selectedBrandIds.contains(brands[i].id);
         checkboxes.add(
           OpenFlutterLabelRightCheckbox(
@@ -111,10 +115,11 @@ class _SelectBrandViewState extends State<SelectBrandView> {
             checked: selected,
             title: brands[i].title,
             onChanged: ((bool value) {
-              if (value && !selectedBrandIds.contains(brands[i].id))
+              if (value && !selectedBrandIds.contains(brands[i].id)) {
                 selectedBrandIds.insert(selectedBrandIds.length, brands[i].id);
-              else
+              } else {
                 selectedBrandIds.remove(brands[i].id);
+              }
               bloc..add(ProductChangeSelectedBrandsEvent(selectedBrandIds));
             }),
           ),

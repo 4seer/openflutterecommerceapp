@@ -35,13 +35,13 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
 
   Widget _buildFavouritesHeader(BuildContext context, FavouriteState state) {
     final bloc = BlocProvider.of<FavouriteBloc>(context);
-    final double width = MediaQuery.of(context).size.width;
-    ProductView productView = ProductView.CardView;
-    SortBy sortBy = SortBy.Popular;
+    var width = MediaQuery.of(context).size.width;
+    var productView = ProductView.CardView;
+    var sortBy = SortBy.Popular;
 
     return OpenFlutterCollapsingScaffold(
       background: AppColors.background,
-      title: "Favourites",
+      title: 'Favourites',
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,7 +56,7 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
                     child: OpenFlutterHashTagList(
                         tags: state is FavouriteTileViewState
                             ? state.hashtags
-                            : List(),
+                            : [],
                         height: 30)),
                 Container(
                   padding: EdgeInsets.only(
@@ -68,13 +68,13 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
                     height: 20,
                     productView: productView,
                     sortBy: sortBy,
-                    onFilterClicked: (() => {print("Filter Clicked")}),
+                    onFilterClicked: (() => {print('Filter Clicked')}),
                     onChangeViewClicked: (() {
-                      print("Show ListView");
+                      print('Show ListView');
                       bloc..add(FavouriteListViewEvent());
                       widget.changeView(changeType: ViewChangeType.Backward);
                     }),
-                    onSortClicked: ((SortBy sortBy) => {print("Sort Clicked")}),
+                    onSortClicked: ((SortBy sortBy) => {print('Sort Clicked')}),
                   ),
                 ),
               ],
@@ -96,25 +96,26 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
     );
   }
 
-  buildProductList(FavouriteState state, double width) {
-    List<Widget> elements = List<Widget>();
-    final double widgetWidth = (width) / 2;
-    final double height = widgetWidth * 1.789;
-    var products = state is FavouriteTileViewState
-        ? state.favouriteProducts
-        : List<Product>();
-    for (int i = 0; i < products.length; i++) {
-      elements.add(OpenFlutterProductCard(
-        product: products[i],
-        height: height,
-        width: widgetWidth,
-        showCartButton: true,
-        showRemoveButton: true,
-        showColorAndSize: true,
-        showRatingInLine: true,
-        showTopLabel: true,
-        showCategoryFirst: true,
-      ));
+  List<Widget> buildProductList(FavouriteState state, double width) {
+    var elements = <Widget>[];
+    var widgetWidth = (width) / 2;
+    var height = widgetWidth * 1.789;
+    var products =
+        state is FavouriteTileViewState ? state.favouriteProducts : <Product>[];
+    for (var i = 0; i < products.length; i++) {
+      elements.add(
+        OpenFlutterProductCard(
+          product: products[i],
+          height: height,
+          width: widgetWidth,
+          showCartButton: true,
+          showRemoveButton: true,
+          showColorAndSize: true,
+          showRatingInLine: true,
+          showTopLabel: true,
+          showCategoryFirst: true,
+        ),
+      );
     }
     return elements;
   }

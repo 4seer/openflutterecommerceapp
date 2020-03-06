@@ -89,7 +89,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
   }
 
   List<Widget> _buildList(BuildContext context) {
-    List<Widget> list = List<Widget>();
+    var list = <Widget>[];
     if (ratingDetail != null && ratingDetail.isNotEmpty) {
       ratingDetail.forEach((starQuantity) {
         list.add(_buildItem(context, starQuantity));

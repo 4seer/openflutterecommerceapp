@@ -38,12 +38,12 @@ class _MyOrdersViewState extends State<MyOrdersView> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    double width = MediaQuery.of(context).size.width;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
     return BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {},
         builder: (context, state) {
-          ProfileBloc bloc = BlocProvider.of<ProfileBloc>(context);
+          var bloc = BlocProvider.of<ProfileBloc>(context);
           if (state is ProfileMyOrdersState) {
             return SafeArea(
               child: DefaultTabController(
@@ -106,7 +106,7 @@ class _MyOrdersViewState extends State<MyOrdersView> {
         });
   }
 
-  buildOrderList(List<UserOrder> orders, ProfileBloc bloc) {
+  ListView buildOrderList(List<UserOrder> orders, ProfileBloc bloc) {
     return ListView.builder(
         shrinkWrap: true,
         itemCount: orders.length,

@@ -11,26 +11,28 @@ class OpenFlutterBottomMenu extends StatelessWidget {
 
   OpenFlutterBottomMenu(this.menuIndex);
 
-  Color colorByIndex(ThemeData theme, int index){
-    return index == menuIndex ? theme.accentColor: theme.primaryColorLight;
+  Color colorByIndex(ThemeData theme, int index) {
+    return index == menuIndex ? theme.accentColor : theme.primaryColorLight;
   }
 
-  BottomNavigationBarItem getItem(String image, String title, ThemeData theme, int index){
+  BottomNavigationBarItem getItem(
+      String image, String title, ThemeData theme, int index) {
     return BottomNavigationBarItem(
-        icon: SvgPicture.asset(image, 
-          height: 24,
-          width: 24,
-          color: colorByIndex(theme, index)
-        ), 
-        title: Text(title, 
-          style: TextStyle(
-            fontSize: 10,
-            color: colorByIndex(theme, index)
-          )
-        )
+      icon: SvgPicture.asset(
+        image,
+        height: 24.0,
+        width: 24.0,
+        color: colorByIndex(theme, index),
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 10.0,
+          color: colorByIndex(theme, index),
+        ),
+      ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,8 @@ class OpenFlutterBottomMenu extends StatelessWidget {
         getItem('assets/icons/bottom_menu/home.svg', 'Home', _theme, 0),
         getItem('assets/icons/bottom_menu/cart.svg', 'Shop', _theme, 1),
         getItem('assets/icons/bottom_menu/bag.svg', 'Bag', _theme, 2),
-        getItem('assets/icons/bottom_menu/favorites.svg', 'Favorites', _theme, 3),
+        getItem(
+            'assets/icons/bottom_menu/favorites.svg', 'Favorites', _theme, 3),
         getItem('assets/icons/bottom_menu/profile.svg', 'Profile', _theme, 4),
       ],
     );

@@ -34,12 +34,12 @@ class OpenFlutterInputField extends StatefulWidget {
 }
 
 class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
-  String error = null;
+  String error;
   bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
-    error = this.widget.error;
+    error = widget.error;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
@@ -62,7 +62,7 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
             child: Padding(
               padding: EdgeInsets.only(left: 16.0),
               child: TextField(
-                onChanged: (value) => this.widget.onValueChanged(value),
+                onChanged: (value) => widget.onValueChanged(value),
                 style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.normal,

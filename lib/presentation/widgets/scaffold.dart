@@ -26,14 +26,14 @@ class OpenFlutterScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Tab> tabBars = List<Tab>();
-    ThemeData _theme = Theme.of(context);
+    var tabBars = <Tab>[];
+    var _theme = Theme.of(context);
     if (tabBarList != null) {
-      for (int i = 0; i < tabBarList.length; i++) {
+      for (var i = 0; i < tabBarList.length; i++) {
         tabBars.add(Tab(key: UniqueKey(), text: tabBarList[i]));
       }
     }
-    Widget tabWidget = tabBars.length > 0
+    Widget tabWidget = tabBars.isNotEmpty
         ? TabBar(
             unselectedLabelColor: _theme.primaryColor,
             unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
@@ -45,10 +45,10 @@ class OpenFlutterScaffold extends StatelessWidget {
             indicatorSize: TabBarIndicatorSize.tab)
         : null;
     return Scaffold(
-      backgroundColor: this.background,
+      backgroundColor: background,
       appBar: title != null
           ? AppBar(
-              title: Text(this.title),
+              title: Text(title),
               bottom: tabWidget,
               actions: <Widget>[
                   Row(children: <Widget>[
@@ -56,7 +56,7 @@ class OpenFlutterScaffold extends StatelessWidget {
                   ])
                 ])
           : null,
-      body: this.body,
+      body: body,
       bottomNavigationBar: OpenFlutterBottomMenu(bottomMenuIndex),
     );
   }

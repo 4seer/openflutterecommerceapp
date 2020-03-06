@@ -29,7 +29,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
     return SafeArea(
         child: OpenFlutterScaffold(
       background: null,
-      title: "Products",
+      title: 'Products',
       body: BlocProvider<ProductsBloc>(
           create: (context) {
             return ProductsBloc(

@@ -17,13 +17,13 @@ class OpenFlutterCategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     return Padding(
         padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
         child: Container(
             padding: EdgeInsets.only(left: AppSizes.sidePadding),
             height: height,
-            decoration: new BoxDecoration(
+            decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(AppSizes.imageRadius),
             ),
@@ -31,7 +31,7 @@ class OpenFlutterCategoryTile extends StatelessWidget {
               children: <Widget>[
                 Container(
                     alignment: Alignment.centerLeft,
-                    width: this.width - 200,
+                    width: width - 200.0,
                     child: Text(category.title,
                         style: _theme.textTheme.headline3)),
                 Container(

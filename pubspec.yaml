@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 0.0.2+2
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -33,6 +33,7 @@ dependencies:
   bubble_tab_indicator: any
   dartz: ^0.8.9
   rxdart: ^0.23.1
+  pedantic: ^1.9.0
 
 dev_dependencies:
   flutter_test:

@@ -17,7 +17,7 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
   Future<Either<Failure, ProductsByFilterResult>> execute(
       ProductsByFilterParams params) async {
     try {
-      List<Product> products = await _findProductsByFilter(params);
+      var products = await _findProductsByFilter(params);
 
       if (products != null && products.isNotEmpty) {
         return Right(ProductsByFilterResult(

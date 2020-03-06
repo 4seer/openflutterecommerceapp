@@ -13,7 +13,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     return Container(
         padding: EdgeInsets.all(AppSizes.imageRadius),
         child: Container(
@@ -38,13 +38,13 @@ class OpenFlutterOrderTile extends StatelessWidget {
                     RichText(
                         text: TextSpan(children: <TextSpan>[
                       TextSpan(
-                        text: "Order: ",
+                        text: 'Order: ',
                         style: _theme.textTheme.headline3.copyWith(
                             color: _theme.primaryColorLight,
                             fontWeight: FontWeight.normal),
                       ),
                       TextSpan(
-                        text: "#" + order.orderNumber.toString(),
+                        text: '#' + order.orderNumber.toString(),
                         style: _theme.textTheme.headline3
                             .copyWith(fontWeight: FontWeight.w700),
                       ),
@@ -134,18 +134,18 @@ class OpenFlutterOrderTile extends StatelessWidget {
                           left: 24, right: 24, top: 10, bottom: 10),
                       color: AppColors.white,
                       onPressed: () {
-                        this.onClick(order.id);
+                        onClick(order.id);
                       },
                       shape: RoundedRectangleBorder(
                           borderRadius:
-                              new BorderRadius.circular(AppSizes.imageRadius),
+                              BorderRadius.circular(AppSizes.imageRadius),
                           side: BorderSide(color: AppColors.black, width: 2)),
-                      child: new Text(
+                      child: Text(
                         'Details',
                         style: _theme.textTheme.headline3,
                       ),
                     ),
-                    Text(order.orderStatus.toString().split(".")[1],
+                    Text(order.orderStatus.toString().split('.')[1],
                         style: _theme.textTheme.headline3
                             .copyWith(color: AppColors.green)),
                   ],
@@ -156,17 +156,17 @@ class OpenFlutterOrderTile extends StatelessWidget {
         ));
   }
 
-  getOrderStatusString() {
-    String str = "New";
+  String getOrderStatusString() {
+    var str = 'New';
     switch (order.orderStatus) {
       case UserOrderStatus.Paid:
-        str = "Paid";
+        str = 'Paid';
         break;
       case UserOrderStatus.Sent:
-        str = "Sent";
+        str = 'Sent';
         break;
       case UserOrderStatus.Delivered:
-        str = "Delivered";
+        str = 'Delivered';
         break;
       case UserOrderStatus.New:
       default:

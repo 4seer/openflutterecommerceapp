@@ -104,7 +104,7 @@ class OpenFlutterProductRating extends StatelessWidget {
 
     if (isSelected || showDefaultStar) {
       return SvgPicture.asset(
-          "assets/icons/products/star" + (isSelected ? "_fav" : "") + ".svg",
+          'assets/icons/products/star' + (isSelected ? '_fav' : '') + '.svg',
           width: iconSize,
           height: iconSize);
     }

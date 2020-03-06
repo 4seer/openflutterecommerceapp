@@ -16,7 +16,7 @@ class OrderRepository {
           CartProduct(
               product: Product(
                   id: 1,
-                  image: "assets/images/checkout/cart/product1.png",
+                  image: 'assets/images/checkout/cart/product1.png',
                   discountPercent: 20,
                   favorite: false,
                   rating: 5,
@@ -32,7 +32,7 @@ class OrderRepository {
           CartProduct(
               product: Product(
                   id: 2,
-                  image: "assets/images/checkout/cart/product2.png",
+                  image: 'assets/images/checkout/cart/product2.png',
                   discountPercent: 20,
                   favorite: false,
                   rating: 5,
@@ -48,7 +48,7 @@ class OrderRepository {
           CartProduct(
               product: Product(
                   id: 3,
-                  image: "assets/images/checkout/cart/product2.png",
+                  image: 'assets/images/checkout/cart/product2.png',
                   discountPercent: 20,
                   favorite: false,
                   rating: 5,
@@ -80,7 +80,7 @@ class OrderRepository {
         deliveryMethod: 'FedEx, 3 days, \$15',
         trackingNumber: 'IW3475453456',
         totalAmount: 155,
-        orderDate: DateTime.parse("2020-01-20 20:18:04Z"),
+        orderDate: DateTime.parse('2020-01-20 20:18:04Z'),
         quantity: 3);
   }
 
@@ -109,7 +109,7 @@ class OrderRepository {
           deliveryMethod: 'FedEx, 3 days, \$15',
           trackingNumber: 'IW3475453455',
           totalAmount: 133,
-          orderDate: DateTime.parse("2020-01-22 20:18:04Z"),
+          orderDate: DateTime.parse('2020-01-22 20:18:04Z'),
           quantity: 3),
       UserOrder(
           id: 2,
@@ -134,7 +134,7 @@ class OrderRepository {
           deliveryMethod: 'FedEx, 3 days, \$15',
           trackingNumber: 'IW3475453456',
           totalAmount: 155,
-          orderDate: DateTime.parse("2020-01-20 20:18:04Z"),
+          orderDate: DateTime.parse('2020-01-20 20:18:04Z'),
           quantity: 3),
     ];
   }

@@ -4,36 +4,27 @@
 
 import 'package:flutter/material.dart';
 
-enum ViewChangeType{
-  Start,
-  Forward,
-  Backward,
-  Exact
-}
+enum ViewChangeType { Start, Forward, Backward, Exact }
 
-class OpenFlutterWrapperState<StatefullWidget> extends State{
-
+class OpenFlutterWrapperState<StatefullWidget> extends State {
   PageController _viewController;
 
-  getPageView(List<Widget> widgets){
+  PageView getPageView(List<Widget> widgets) {
     return PageView(
-      physics: NeverScrollableScrollPhysics(),
-      controller: _viewController,
-      children: widgets
-    );
+        physics: NeverScrollableScrollPhysics(),
+        controller: _viewController,
+        children: widgets);
   }
 
-  changePage({@required ViewChangeType changeType, int index}){
-    switch(changeType){
+  void changePage({@required ViewChangeType changeType, int index}) {
+    switch (changeType) {
       case ViewChangeType.Forward:
         _viewController.nextPage(
-          duration: Duration(milliseconds: 300), 
-          curve: Curves.elasticIn);
+            duration: Duration(milliseconds: 300), curve: Curves.elasticIn);
         break;
       case ViewChangeType.Backward:
         _viewController.previousPage(
-          duration: Duration(milliseconds: 300), 
-          curve: Curves.elasticIn);
+            duration: Duration(milliseconds: 300), curve: Curves.elasticIn);
         break;
       case ViewChangeType.Start:
         _viewController.jumpToPage(0);
@@ -46,7 +37,7 @@ class OpenFlutterWrapperState<StatefullWidget> extends State{
 
   @override
   void initState() {
-    _viewController = new PageController();
+    _viewController = PageController();
     super.initState();
   }
 

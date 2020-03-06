@@ -5,14 +5,13 @@
 import 'models/product.dart';
 
 class FavouriteRepository {
-
   //Get Favourite array
   //TODO: fetch from local DB
   List<Product> getFavourites() {
     return [
       Product(
           id: 1,
-          image: "assets/thumbs/dress/dress2.png",
+          image: 'assets/thumbs/dress/dress2.png',
           discountPercent: 20,
           favorite: true,
           rating: 5,
@@ -23,7 +22,7 @@ class FavouriteRepository {
           isNew: true),
       Product(
           id: 2,
-          image: "assets/thumbs/dress/dress1.png",
+          image: 'assets/thumbs/dress/dress1.png',
           discountPercent: 15,
           favorite: true,
           rating: 5,
@@ -34,7 +33,7 @@ class FavouriteRepository {
           isNew: false),
       Product(
           id: 3,
-          image: "assets/thumbs/dress/dress2.png",
+          image: 'assets/thumbs/dress/dress2.png',
           discountPercent: 20,
           favorite: true,
           rating: 5,
@@ -45,7 +44,7 @@ class FavouriteRepository {
           isNew: false),
       Product(
           id: 4,
-          image: "assets/thumbs/dress/dress1.png",
+          image: 'assets/thumbs/dress/dress1.png',
           discountPercent: 15,
           favorite: true,
           rating: 5,
@@ -56,7 +55,7 @@ class FavouriteRepository {
           isNew: true),
       Product(
           id: 5,
-          image: "assets/thumbs/dress/dress2.png",
+          image: 'assets/thumbs/dress/dress2.png',
           discountPercent: 20,
           favorite: true,
           rating: 5,
@@ -67,7 +66,7 @@ class FavouriteRepository {
           isNew: true),
       Product(
           id: 6,
-          image: "assets/thumbs/dress/dress1.png",
+          image: 'assets/thumbs/dress/dress1.png',
           discountPercent: 15,
           favorite: true,
           rating: 5,
@@ -78,7 +77,7 @@ class FavouriteRepository {
           isNew: false),
       Product(
           id: 7,
-          image: "assets/thumbs/dress/dress2.png",
+          image: 'assets/thumbs/dress/dress2.png',
           discountPercent: 20,
           favorite: true,
           rating: 5,
@@ -89,7 +88,7 @@ class FavouriteRepository {
           isNew: false),
       Product(
           id: 8,
-          image: "assets/thumbs/dress/dress1.png",
+          image: 'assets/thumbs/dress/dress1.png',
           discountPercent: 15,
           favorite: true,
           rating: 5,

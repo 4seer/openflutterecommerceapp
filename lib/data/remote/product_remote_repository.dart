@@ -17,8 +17,8 @@ class ProductRemoteRepository implements ProductRepository {
       seconds: 2,
     ));
     return [
-      ProductApiDto(1, "Black T-Short"),
-      ProductApiDto(2, "Small T-Short"),
+      ProductApiDto(1, 'Black T-Short'),
+      ProductApiDto(2, 'Small T-Short'),
     ];
   }
 }
