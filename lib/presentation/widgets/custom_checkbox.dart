@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:openflutterecommerce/config/theme.dart';
 
 //TODO: change to statefull widget
 class OpenFlutterCheckbox extends StatelessWidget {
@@ -26,11 +25,11 @@ class OpenFlutterCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    double rightLinkWidth = 100;
+    var _theme = Theme.of(context);
+    var rightLinkWidth = 100.0;
     return Container(
         child: InkWell(
-            onTap: (() => {this.onTap(!checked)}),
+            onTap: (() => {onTap(!checked)}),
             child: Row(
               mainAxisAlignment: mainAxisAlignment,
               children: <Widget>[
@@ -38,13 +37,16 @@ class OpenFlutterCheckbox extends StatelessWidget {
                     activeColor: _theme.primaryColor,
                     checkColor: _theme.backgroundColor,
                     value: checked,
-                    onChanged: ((bool newValue) => {this.onTap(newValue)})),
+                    onChanged: ((bool newValue) => {onTap(newValue)})),
                 Container(
-                    width: this.width - rightLinkWidth,
-                    child: Text(this.title,
-                        style: _theme.textTheme.headline3.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: _theme.primaryColor))),
+                  width: width - rightLinkWidth,
+                  child: Text(
+                    title,
+                    style: _theme.textTheme.headline3.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: _theme.primaryColor),
+                  ),
+                ),
               ],
             )));
   }

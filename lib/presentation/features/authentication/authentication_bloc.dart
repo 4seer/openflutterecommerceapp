@@ -25,7 +25,7 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapAppStartedToState() async* {
     try {
       final credentials = await _getSavedCredentials();
-      print("credentials loaded $credentials");
+      print('credentials loaded $credentials');
       if (credentials == null) {
         yield Unauthenticated();
       } else {

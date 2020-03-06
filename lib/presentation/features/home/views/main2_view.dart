@@ -24,18 +24,20 @@ class Main2View extends StatefulWidget {
 class _Main2ViewState extends State<Main2View> {
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    final double width = MediaQuery.of(context).size.width;
-    final double widgetWidth = width - AppSizes.sidePadding * 2;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
+    var widgetWidth = width - AppSizes.sidePadding * 2;
     return SingleChildScrollView(
         child: Column(children: <Widget>[
       Container(
           height: width * 0.52,
           width: width,
-          decoration: new BoxDecoration(
-              image: new DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage("assets/splash/topbanner.png"))),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage('assets/splash/topbanner.png'),
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,11 +69,12 @@ class _Main2ViewState extends State<Main2View> {
       OpenFlutterProductListView(
           width: widgetWidth, products: widget.newProducts),
       OpenFlutterButton(
-          title: 'Next Home Page',
-          width: 160,
-          height: 48,
-          onPressed: (() =>
-              widget.changeView(changeType: ViewChangeType.Forward)))
+        title: 'Next Home Page',
+        width: 160,
+        height: 48,
+        onPressed: (() =>
+            widget.changeView(changeType: ViewChangeType.Forward)),
+      )
     ]));
   }
 }

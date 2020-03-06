@@ -25,6 +25,6 @@ class ProductReview extends Equatable {
   List<Object> get props => [id];
 
   bool hasPhotos() {
-    return this.photos != null && this.photos.isNotEmpty;
+    return photos != null && photos.isNotEmpty;
   }
 }

@@ -12,8 +12,8 @@ class OpenFlutterSortBy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    double fullWidth = MediaQuery.of(context).size.width;
+    var _theme = Theme.of(context);
+    var fullWidth = MediaQuery.of(context).size.width;
     return OpenFlutterBottomPopup(
         title: 'Sort By',
         child: Container(
@@ -22,25 +22,26 @@ class OpenFlutterSortBy extends StatelessWidget {
   }
 
   List<Widget> buildSortBy(double width, ThemeData _theme) {
-    List<String> sortByVariantTitles = [
-      "Popular",
-      "Newest",
-      "Customer Review",
-      "Price: lowest to hight",
-      "Price: highest to low"
+    var sortByVariantTitles = <String>[
+      'Popular',
+      'Newest',
+      'Customer Review',
+      'Price: lowest to hight',
+      'Price: highest to low'
     ];
-    List<SortBy> sortByVariants = [
+    var sortByVariants = <SortBy>[
       SortBy.Popular,
       SortBy.Newest,
       SortBy.CustomerReview,
       SortBy.PriceLowestToHigh,
       SortBy.PriceHighestToLow
     ];
-    List<Widget> widgets = List<Widget>();
-    for (int i = 0;
+    var widgets = <Widget>[];
+    for (var i = 0;
         i < sortByVariants.length && i < sortByVariantTitles.length;
         i++) {
-      widgets.add(OpenFlutterClickableLine(
+      widgets.add(
+        OpenFlutterClickableLine(
           height: 58,
           width: width,
           title: sortByVariantTitles[i],
@@ -49,7 +50,9 @@ class OpenFlutterSortBy extends StatelessWidget {
               sortByVariants[i] == currentSortBy ? _theme.accentColor : null,
           textColor:
               sortByVariants[i] == currentSortBy ? AppColors.white : null,
-          onTap: ((SortBy newSortBy) => {this.onSelect(sortByVariants[i])})));
+          onTap: ((SortBy newSortBy) => {onSelect(sortByVariants[i])}),
+        ),
+      );
     }
     return widgets;
   }

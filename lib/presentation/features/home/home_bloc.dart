@@ -21,12 +21,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is HomeLoadEvent) {
-      if (this.state is HomeInitialState) {
-        yield new HomeLoadedState(
-            salesProducts: this.productRepository.getProducts(1),
-            newProducts: this.productRepository.getProducts(2));
-      } else if (this.state is HomeLoadedState) {
-        yield this.state;
+      if (state is HomeInitialState) {
+        yield HomeLoadedState(
+            salesProducts: productRepository.getProducts(1),
+            newProducts: productRepository.getProducts(2));
+      } else if (state is HomeLoadedState) {
+        yield state;
       }
     }
   }

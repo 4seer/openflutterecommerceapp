@@ -19,11 +19,9 @@ class ProductFilterView extends StatefulWidget {
 class _ProductFilterViewState extends State<ProductFilterView> {
   @override
   Widget build(BuildContext context) {
-    final double width =
-        MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
-    final double fullWidth = MediaQuery.of(context).size.width;
+    var fullWidth = MediaQuery.of(context).size.width;
     final bloc = BlocProvider.of<ProductsBloc>(context);
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     return BlocListener<ProductsBloc, ProductState>(listener: (context, state) {
       if (state is ProductsErrorState) {
         return Container(
@@ -126,14 +124,18 @@ class _ProductFilterViewState extends State<ProductFilterView> {
     }));
   }
 
-  getBrandList(List<Brand> availableBrands, List<int> selectedBrandIds) {
-    var concatenate = "";
+  String getBrandList(List<Brand> availableBrands, List<int> selectedBrandIds) {
+    var concatenate = '';
 
     availableBrands.forEach((Brand item) {
-      if (concatenate.length < 70) //maximum 100 chars in this line
-      if (selectedBrandIds.length == 0 || selectedBrandIds.contains(item.id))
-        concatenate += (concatenate.length > 0 ? ', ' : '') + item.title;
+      var maxCharacters = 70;
+      if (concatenate.length < maxCharacters) {
+        if (selectedBrandIds.isEmpty || selectedBrandIds.contains(item.id)) {
+          concatenate += (concatenate.isNotEmpty ? ', ' : '') + item.title;
+        }
+      }
     });
+
     return concatenate;
   }
 }

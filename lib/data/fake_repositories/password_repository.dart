@@ -4,6 +4,6 @@ class PasswordRepository {
   }
 
   Future<void> changePassword(String password) async {
-    Future.delayed(Duration(seconds: 4));
+    await Future.delayed(Duration(seconds: 4));
   }
 }

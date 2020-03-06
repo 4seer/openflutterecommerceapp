@@ -38,13 +38,12 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    AppBarTheme _appbar = _theme.appBarTheme;
-    final dividertheme =
+    var _theme = Theme.of(context);
+    final dividerTheme =
         Theme.of(context).copyWith(dividerColor: AppColors.darkGray);
     var deviceWidth = MediaQuery.of(context).size.width;
     var deviceHeight = MediaQuery.of(context).size.height;
-    ProductBloc bloc = BlocProvider.of<ProductBloc>(context);
+    var bloc = BlocProvider.of<ProductBloc>(context);
     return BlocListener(
         bloc: bloc,
         listener: (context, state) {
@@ -73,7 +72,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           height: deviceHeight * 0.52,
                           child: ListView.builder(
                             itemBuilder: (context, index) => Image.asset(
-                              "assets/images/products/shortdress.png",
+                              'assets/images/products/shortdress.png',
                               width: deviceWidth * 0.75,
                               height: deviceHeight * 0.52,
                             ),
@@ -82,15 +81,15 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           ),
                         ),
                         Container(
-                          //countains size button,color button and favourite button
+                          //contains size button,color button and favourite button
                           margin: EdgeInsets.all(16),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
-                              selectionOutlineButton(deviceWidth, "Size",
+                              selectionOutlineButton(deviceWidth, 'Size',
                                   _showSelectSizeBottomSheet, bloc),
-                              selectionOutlineButton(deviceWidth, "Color",
+                              selectionOutlineButton(deviceWidth, 'Color',
                                   _showSelectColorBottomSheet, bloc),
                               OpenFlutterFavouriteButton(
                                 favourite: favorite,
@@ -115,7 +114,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           height: 90,
                           child: Center(
                             child: OpenFlutterButton(
-                              title: "ADD TO CART",
+                              title: 'ADD TO CART',
                               onPressed: (() =>
                                   {_showSelectSizeBottomSheet(context, bloc)}),
                               width: deviceWidth * 0.88,
@@ -123,19 +122,19 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                             ),
                           ),
                         ),
-                        Theme(data: dividertheme, child: Divider()),
+                        Theme(data: dividerTheme, child: Divider()),
                         OpenFlutterExpansionTile(
-                          title: "Shipping info",
+                          title: 'Shipping info',
                           //TODO: get this date from store settings
                           description: widget.product.description,
                         ),
-                        Theme(data: dividertheme, child: Divider()),
+                        Theme(data: dividerTheme, child: Divider()),
                         OpenFlutterExpansionTile(
-                          title: "Support",
+                          title: 'Support',
                           //TODO: get this date from store settings
                           description: widget.product.description,
                         ),
-                        Theme(data: dividertheme, child: Divider()),
+                        Theme(data: dividerTheme, child: Divider()),
                         SizedBox(
                           height: 10.0,
                         ),
@@ -146,15 +145,15 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              new Text(
-                                "You can also like this",
+                              Text(
+                                'You can also like this',
                                 style: TextStyle(
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.w600),
                               ),
-                              new Text(
+                              Text(
                                 widget.similarProducts.length.toString() +
-                                    " items",
+                                    ' items',
                                 style: TextStyle(color: AppColors.lightGray),
                               )
                             ],
@@ -174,16 +173,17 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   }
 
   void setFavourite(ProductBloc bloc) {
-    if (!favorite)
+    if (!favorite) {
       bloc..add(ProductAddToFavEvent(widget.product.id));
-    else
+    } else {
       bloc..add(ProductRemoveFromFavEvent(widget.product.id));
+    }
     setState(() {
       favorite = !favorite;
     });
   }
 
-  _showSelectSizeBottomSheet(BuildContext context, ProductBloc bloc) {
+  void _showSelectSizeBottomSheet(BuildContext context, ProductBloc bloc) {
     showModalBottomSheet(
         context: context,
         shape: RoundedRectangleBorder(
@@ -235,7 +235,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                   onTap: () => {
                                     bloc..add(ProductSetSizeEvent(size: value))
                                   },
-                                  child: new Container(
+                                  child: Container(
                                     margin: EdgeInsets.all(10.0),
                                     decoration: BoxDecoration(
                                         border: Border.all(
@@ -262,7 +262,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           .copyWith(dividerColor: AppColors.darkGray),
                       child: Divider()),
                   ExpansionTile(
-                    title: Text("Size info"),
+                    title: Text('Size info'),
                     trailing: Icon(Icons.keyboard_arrow_right),
                   ),
                   Theme(
@@ -274,7 +274,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                   ),
                   Center(
                     child: OpenFlutterButton(
-                      title: "ADD TO CART",
+                      title: 'ADD TO CART',
                       onPressed: (() => {
                             bloc..add(ProductAddToCartEvent(widget.product.id))
                           }),
@@ -285,7 +285,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             ));
   } //modelBottomSheet for selecting size
 
-  _showSelectColorBottomSheet(BuildContext context,
+  void _showSelectColorBottomSheet(BuildContext context,
       ProductBloc bloc) //modelBottomSheet for selecting color
   {
     showModalBottomSheet(
@@ -341,7 +341,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                           ..add(ProductSetColorEvent(
                                               color: value))
                                       }),
-                                  child: new Container(
+                                  child: Container(
                                     margin: EdgeInsets.all(10.0),
                                     decoration: BoxDecoration(
                                         border: Border.all(
@@ -365,7 +365,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                   ),
                   Center(
                     child: OpenFlutterButton(
-                      title: "ADD TO CART",
+                      title: 'ADD TO CART',
                       onPressed: (() => {
                             bloc..add(ProductAddToCartEvent(widget.product.id))
                           }),
@@ -410,7 +410,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   Widget productDetails(ThemeData theme) {
     //title,rating,price of product
-    return new Container(
+    return Container(
       margin: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 17.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -418,21 +418,21 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              new Text(
+              Text(
                 widget.product.title,
                 style: theme.textTheme.headline2,
               ),
-              new Text(
+              Text(
                 '\$' + widget.product.price.toString(),
                 style: theme.textTheme.headline2,
               )
             ],
           ),
-          new Text(
+          Text(
             widget.product.categoryTitle,
             style: theme.textTheme.bodyText1,
           ),
-          new SizedBox(
+          SizedBox(
             height: 5,
           ),
           GestureDetector(

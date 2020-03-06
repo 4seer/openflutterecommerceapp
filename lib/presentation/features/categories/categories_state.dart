@@ -14,6 +14,7 @@ abstract class CategoryState extends Equatable {
 
 @immutable
 class CategoryInitialState extends CategoryState {
+  @override
   String toString() => 'CategoryInitialState';
 }
 
@@ -30,9 +31,10 @@ class CategoryLoadedState extends CategoryState {
     return CategoryLoadedState(
         typeId: typeId ?? this.typeId,
         categories: categories ?? this.categories,
-        isLoading: loading ?? this.isLoading);
+        isLoading: loading ?? isLoading);
   }
 
+  @override
   String toString() => 'CategoryLoadedState';
 
   @override
@@ -44,34 +46,46 @@ class CategoryListViewState extends CategoryLoadedState {
   CategoryListViewState({int typeId, List<Category> categories, bool isLoading})
       : super(typeId: typeId, categories: categories, isLoading: isLoading);
 
+  @override
   CategoryListViewState copyWith(
       {int typeId, List<Category> categories, bool loading}) {
     return CategoryListViewState(
         typeId: typeId ?? this.typeId,
         categories: categories ?? this.categories,
-        isLoading: loading ?? this.isLoading);
+        isLoading: loading ?? isLoading);
   }
 
+  @override
   String toString() => 'CategoryListViewState';
 }
 
 @immutable
 class CategoryTileViewState extends CategoryLoadedState {
-  CategoryTileViewState({int typeId, List<Category> categories, bool isLoading})
-      : super(typeId: typeId, categories: categories, isLoading: isLoading);
+  CategoryTileViewState({
+    int typeId,
+    List<Category> categories,
+    bool isLoading,
+  }) : super(
+          typeId: typeId,
+          categories: categories,
+          isLoading: isLoading,
+        );
 
+  @override
   CategoryTileViewState copyWith(
       {int typeId, List<Category> categories, bool loading}) {
     return CategoryTileViewState(
         typeId: typeId ?? this.typeId,
         categories: categories ?? this.categories,
-        isLoading: loading ?? this.isLoading);
+        isLoading: loading ?? isLoading);
   }
 
+  @override
   String toString() => 'CategoryTileViewState';
 }
 
 @immutable
 class CategoryErrorState extends CategoryState {
+  @override
   String toString() => 'CategoryErrorState';
 }

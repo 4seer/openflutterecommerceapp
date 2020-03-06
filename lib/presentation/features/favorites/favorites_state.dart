@@ -20,6 +20,7 @@ class FavouriteListViewState extends FavouriteState {
 
   FavouriteListViewState({this.favouriteProducts,this.hashtags});
 
+  @override
   String toString() => 'FavouriteListViewState';
 
   @override
@@ -33,6 +34,7 @@ class FavouriteTileViewState extends FavouriteState {
 
   FavouriteTileViewState({this.favouriteProducts,this.hashtags});
 
+  @override
   String toString() => 'FavouriteTileViewState';
 
   @override

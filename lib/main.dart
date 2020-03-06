@@ -56,21 +56,6 @@ void main() async {
 }
 
 class OpenFlutterEcommerceApp extends StatelessWidget {
-  get _signIn => BlocProvider<SignInBloc>(
-        create: (context) => SignInBloc(),
-        child: SignInScreen(),
-      );
-
-  get _signUp => BlocProvider<SignUpBloc>(
-        create: (context) => SignUpBloc(),
-        child: SignUpScreen(),
-      );
-
-  get _forgetPassword => BlocProvider<ForgetPasswordBloc>(
-        create: (context) => ForgetPasswordBloc(),
-        child: ForgetPasswordScreen(),
-      );
-
   @override
   Widget build(BuildContext context) {
     var localizationDelegate = LocalizedApp.of(context).delegate;
@@ -98,9 +83,10 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
       OpenFlutterEcommerceRoutes.cart: (context) => CartScreen(),
       OpenFlutterEcommerceRoutes.checkout: (context) => CheckoutScreen(),
       OpenFlutterEcommerceRoutes.favourites: (context) => FavouriteScreen(),
-      OpenFlutterEcommerceRoutes.signin: (context) => _signIn,
-      OpenFlutterEcommerceRoutes.signup: (context) => _signUp,
-      OpenFlutterEcommerceRoutes.forgotPassword: (context) => _forgetPassword,
+      OpenFlutterEcommerceRoutes.signin: (context) => _buildSignInBloc(),
+      OpenFlutterEcommerceRoutes.signup: (context) => _buildSignUpBloc(),
+      OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
+          _buildForgetPasswordBloc(),
       OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
       OpenFlutterEcommerceRoutes.profile: (context) =>
           BlocBuilder<AuthenticationBloc, AuthenticationState>(
@@ -108,11 +94,32 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             if (state is Authenticated) {
               return ProfileScreen(); //TODO profile properties should be here
             } else if (state is Unauthenticated) {
-              return _signUp;
+              return _buildSignInBloc();
             } else {
               return SplashScreen();
             }
           }),
     };
+  }
+
+  BlocProvider<ForgetPasswordBloc> _buildForgetPasswordBloc() {
+    return BlocProvider<ForgetPasswordBloc>(
+      create: (context) => ForgetPasswordBloc(),
+      child: ForgetPasswordScreen(),
+    );
+  }
+
+  BlocProvider<SignInBloc> _buildSignInBloc() {
+    return BlocProvider<SignInBloc>(
+      create: (context) => SignInBloc(),
+      child: SignInScreen(),
+    );
+  }
+
+  BlocProvider<SignUpBloc> _buildSignUpBloc() {
+    return BlocProvider<SignUpBloc>(
+      create: (context) => SignUpBloc(),
+      child: SignUpScreen(),
+    );
   }
 }

@@ -10,19 +10,18 @@ import 'models/product_color.dart';
 import 'models/product_rating.dart';
 
 class ProductRepository {
-
-  void addToFav(int id){
+  void addToFav(int id) {
     //TODO: add to fav [local database]
   }
 
-  void removeFromFav(int id){
+  void removeFromFav(int id) {
     //TODO: remove from fav
   }
 
-  Product getProduct(int id){
+  Product getProduct(int id) {
     return Product(
         id: 1,
-        image: "assets/images/checkout/cart/product1.png",
+        image: 'assets/images/checkout/cart/product1.png',
         discountPercent: 20,
         favorite: false,
         rating: 5,
@@ -32,82 +31,75 @@ class ProductRepository {
         categoryTitle: 'Dorothy Perkins',
         isNew: true,
         sizes: ['Red', 'Black', 'White', 'Yellow'],
-        colors:  ['XS', 'S', 'M', 'L', 'XL'],
-        description: "Lorem ipsum dolor amet ennui chia synth mixtape wolf forage brooklyn pug you probably haven't heard of them lumbersexual, iceland tilde. Poke tumeric readymade brunch, mustache banh mi man bun bushwick celiac hoodie mumblecore",
+        colors: ['XS', 'S', 'M', 'L', 'XL'],
+        description:
+            "Lorem ipsum dolor amet ennui chia synth mixtape wolf forage brooklyn pug you probably haven't heard of them lumbersexual, iceland tilde. Poke tumeric readymade brunch, mustache banh mi man bun bushwick celiac hoodie mumblecore",
         ratingDetail: [
           ProductRating(rating: 5.0, quantity: 600),
           ProductRating(rating: 4.0, quantity: 700),
           ProductRating(rating: 3.0, quantity: 12),
           ProductRating(rating: 2.0, quantity: 4),
           ProductRating(rating: 1.0, quantity: 0),
-        ]
-      );
+        ]);
   }
-  List<Product> getSimilarProducts(int productId){
+
+  List<Product> getSimilarProducts(int productId) {
     return getProducts(1);
   }
-  List<CartProduct> getCartProducts(){
+
+  List<CartProduct> getCartProducts() {
     return [
       CartProduct(
-        product: Product(
-          id: 1,
-          image: "assets/images/checkout/cart/product1.png",
-          discountPercent: 20,
-          favorite: false,
-          rating: 5,
-          ratingCount: 10,
-          price: 15,
-          title: 'Pullover',
-          categoryTitle: 'Dorothy Perkins',
-          isNew: true
-        ),
-        size: 'L',
-        color: ProductColor(Colors.black, 'Black'),
-        quantity: 1,
-        price: 15
-      ),
-
+          product: Product(
+              id: 1,
+              image: 'assets/images/checkout/cart/product1.png',
+              discountPercent: 20,
+              favorite: false,
+              rating: 5,
+              ratingCount: 10,
+              price: 15,
+              title: 'Pullover',
+              categoryTitle: 'Dorothy Perkins',
+              isNew: true),
+          size: 'L',
+          color: ProductColor(Colors.black, 'Black'),
+          quantity: 1,
+          price: 15),
       CartProduct(
-        product: Product(
-          id: 2,
-          image: "assets/images/checkout/cart/product2.png",
-          discountPercent: 20,
-          favorite: false,
-          rating: 5,
-          ratingCount: 10,
-          price: 15,
-          title: 'T-shirt',
-          categoryTitle: 'Dorothy Perkins',
-          isNew: true
-        ),
-        size: 'L',
-        color: ProductColor(Colors.grey, 'Gray'),
-        quantity: 1,
-        price: 15
-      ),
-
-
+          product: Product(
+              id: 2,
+              image: 'assets/images/checkout/cart/product2.png',
+              discountPercent: 20,
+              favorite: false,
+              rating: 5,
+              ratingCount: 10,
+              price: 15,
+              title: 'T-shirt',
+              categoryTitle: 'Dorothy Perkins',
+              isNew: true),
+          size: 'L',
+          color: ProductColor(Colors.grey, 'Gray'),
+          quantity: 1,
+          price: 15),
       CartProduct(
-        product: Product(
-          id: 3,
-          image: "assets/images/checkout/cart/product2.png",
-          discountPercent: 20,
-          favorite: false,
-          rating: 5,
-          ratingCount: 10,
-          price: 15,
-          title: 'Sport Dress',
-          categoryTitle: 'Dorothy Perkins',
-          isNew: true
-        ),
-        size: 'L',
-        color: ProductColor(Colors.grey, 'Gray'),
-        quantity: 1,
-        price: 15
-      ),
-
+          product: Product(
+              id: 3,
+              image: 'assets/images/checkout/cart/product2.png',
+              discountPercent: 20,
+              favorite: false,
+              rating: 5,
+              ratingCount: 10,
+              price: 15,
+              title: 'Sport Dress',
+              categoryTitle: 'Dorothy Perkins',
+              isNew: true),
+          size: 'L',
+          color: ProductColor(Colors.grey, 'Gray'),
+          quantity: 1,
+          price: 15),
     ];
   }
+
   //Get Product array
   //TODO: fetch from local DB
   List<Product> getProducts(int categoryId) {
@@ -116,7 +108,7 @@ class ProductRepository {
         return [
           Product(
             id: 1,
-            image: "assets/thumbs/dress/dress2.png",
+            image: 'assets/thumbs/dress/dress2.png',
             discountPercent: 20,
             favorite: false,
             rating: 5,
@@ -135,7 +127,7 @@ class ProductRepository {
           ),
           Product(
             id: 2,
-            image: "assets/thumbs/dress/dress1.png",
+            image: 'assets/thumbs/dress/dress1.png',
             discountPercent: 15,
             favorite: false,
             rating: 5,
@@ -154,7 +146,7 @@ class ProductRepository {
           ),
           Product(
             id: 3,
-            image: "assets/thumbs/dress/dress2.png",
+            image: 'assets/thumbs/dress/dress2.png',
             discountPercent: 20,
             favorite: false,
             rating: 5,
@@ -173,7 +165,7 @@ class ProductRepository {
           ),
           Product(
               id: 4,
-              image: "assets/thumbs/dress/dress1.png",
+              image: 'assets/thumbs/dress/dress1.png',
               discountPercent: 15,
               favorite: false,
               rating: 5,
@@ -191,7 +183,7 @@ class ProductRepository {
         final products = [
           Product(
               id: 5,
-              image: "assets/thumbs/dress/dress2.png",
+              image: 'assets/thumbs/dress/dress2.png',
               discountPercent: 20,
               favorite: false,
               rating: 5,
@@ -203,7 +195,7 @@ class ProductRepository {
               ratingDetail: []),
           Product(
               id: 6,
-              image: "assets/thumbs/dress/dress1.png",
+              image: 'assets/thumbs/dress/dress1.png',
               discountPercent: 15,
               favorite: false,
               rating: 5,
@@ -215,7 +207,7 @@ class ProductRepository {
               ratingDetail: []),
           Product(
               id: 7,
-              image: "assets/thumbs/dress/dress2.png",
+              image: 'assets/thumbs/dress/dress2.png',
               discountPercent: 20,
               favorite: false,
               rating: 5,
@@ -227,7 +219,7 @@ class ProductRepository {
               ratingDetail: []),
           Product(
               id: 8,
-              image: "assets/thumbs/dress/dress1.png",
+              image: 'assets/thumbs/dress/dress1.png',
               discountPercent: 15,
               favorite: false,
               rating: 5,
@@ -239,7 +231,7 @@ class ProductRepository {
               ratingDetail: []),
           Product(
               id: 5,
-              image: "assets/thumbs/dress/dress2.png",
+              image: 'assets/thumbs/dress/dress2.png',
               discountPercent: 20,
               favorite: false,
               rating: 5,
@@ -251,7 +243,7 @@ class ProductRepository {
               ratingDetail: []),
           Product(
               id: 6,
-              image: "assets/thumbs/dress/dress1.png",
+              image: 'assets/thumbs/dress/dress1.png',
               discountPercent: 15,
               favorite: false,
               rating: 5,
@@ -263,7 +255,7 @@ class ProductRepository {
               ratingDetail: []),
           Product(
               id: 7,
-              image: "assets/thumbs/dress/dress2.png",
+              image: 'assets/thumbs/dress/dress2.png',
               discountPercent: 20,
               favorite: false,
               rating: 5,
@@ -275,7 +267,7 @@ class ProductRepository {
               ratingDetail: []),
           Product(
               id: 8,
-              image: "assets/thumbs/dress/dress1.png",
+              image: 'assets/thumbs/dress/dress1.png',
               discountPercent: 15,
               favorite: false,
               rating: 5,

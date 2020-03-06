@@ -38,7 +38,7 @@ class OpenFlutterProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     return Padding(
         padding: EdgeInsets.only(bottom: 10),
         child: Stack(
@@ -50,7 +50,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
                 child: Container(
                     height: height,
-                    decoration: new BoxDecoration(
+                    decoration: BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(AppSizes.imageRadius),
                     ),
@@ -61,7 +61,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                             top: AppSizes.linePadding * 2,
                             left: AppSizes.sidePadding),
                         alignment: Alignment.topLeft,
-                        width: this.width - 100,
+                        width: width - 100.0,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -97,7 +97,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                   right: 0,
                   child: OpenFlutterFavouriteButton(
                     favourite: product.favorite,
-                    setFavourite: this.onFavClicked,
+                    setFavourite: onFavClicked,
                     size: 36.0,
                     iconSize: 12.0,
                   )),
@@ -115,7 +115,7 @@ class OpenFlutterProductTile extends StatelessWidget {
         ));
   }
 
-  buildTitleAndSubtitle(ThemeData _theme) {
+  Widget buildTitleAndSubtitle(ThemeData _theme) {
     return showCategoryFirst
         ? Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -135,7 +135,7 @@ class OpenFlutterProductTile extends StatelessWidget {
           );
   }
 
-  buildRating(ThemeData _theme) {
+  Widget buildRating(ThemeData _theme) {
     return showRatingInLine
         ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,7 +173,7 @@ class OpenFlutterProductTile extends StatelessWidget {
           );
   }
 
-  buildProductImage(ThemeData _theme) {
+  Widget buildProductImage(ThemeData _theme) {
     return Visibility(
       child: showTopLabel
           ? Stack(
@@ -182,10 +182,10 @@ class OpenFlutterProductTile extends StatelessWidget {
                     width: 80, //width * 0.30,
                     child: Container(
                         height: width * 0.35,
-                        decoration: new BoxDecoration(
+                        decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.circular(AppSizes.imageRadius),
-                            image: new DecorationImage(
+                            image: DecorationImage(
                                 fit: BoxFit.fill,
                                 image: AssetImage(product.image))),
                         child: Container())),
@@ -199,16 +199,16 @@ class OpenFlutterProductTile extends StatelessWidget {
     );
   }
 
-  getDiscountPrice(Product product) {
+  double getDiscountPrice(Product product) {
     return (product.price * (100 - product.discountPercent) / 100)
         .roundToDouble();
   }
 
-  buildPrice(Product product, ThemeData _theme) {
-    double discountPrice = getDiscountPrice(product);
+  Widget buildPrice(Product product, ThemeData _theme) {
+    var discountPrice = getDiscountPrice(product);
     return Row(
       children: <Widget>[
-        Text("\$" + product.price.toStringAsFixed(0),
+        Text('\$' + product.price.toStringAsFixed(0),
             style: _theme.textTheme.headline5.copyWith(
               decoration: discountPrice > 0
                   ? TextDecoration.lineThrough
@@ -218,7 +218,7 @@ class OpenFlutterProductTile extends StatelessWidget {
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         discountPrice > 0
-            ? Text("\$" + discountPrice.toStringAsFixed(0),
+            ? Text('\$' + discountPrice.toStringAsFixed(0),
                 style: _theme.textTheme.headline5
                     .copyWith(color: _theme.errorColor))
             : Container()
@@ -226,33 +226,35 @@ class OpenFlutterProductTile extends StatelessWidget {
     );
   }
 
-  buildColor(Product product, ThemeData _theme) {
+  Widget buildColor(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text("Color:", style: _theme.textTheme.headline5.copyWith()),
+        Text('Color:', style: _theme.textTheme.headline5.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
-        Text("Blue",
+        Text(
+          'Blue',
+          style: _theme.textTheme.headline5.copyWith(color: AppColors.black),
+        ),
+      ],
+    );
+  }
+
+  Widget buildSize(Product product, ThemeData _theme) {
+    return Row(
+      children: <Widget>[
+        Text('Size:', style: _theme.textTheme.headline5.copyWith()),
+        Padding(
+          padding: EdgeInsets.only(left: AppSizes.linePadding),
+        ),
+        Text('L',
             style: _theme.textTheme.headline5.copyWith(color: AppColors.black))
       ],
     );
   }
 
-  buildSize(Product product, ThemeData _theme) {
-    return Row(
-      children: <Widget>[
-        Text("Size:", style: _theme.textTheme.headline5.copyWith()),
-        Padding(
-          padding: EdgeInsets.only(left: AppSizes.linePadding),
-        ),
-        Text("L",
-            style: _theme.textTheme.headline5.copyWith(color: AppColors.black))
-      ],
-    );
-  }
-
-  buildCartButton(Product product, ThemeData theme) {
+  Positioned buildCartButton(Product product, ThemeData theme) {
     return Positioned(
         bottom: 0,
         right: AppSizes.sidePadding / 8,
@@ -260,14 +262,14 @@ class OpenFlutterProductTile extends StatelessWidget {
             height: 40.0,
             width: 40.0,
             padding: EdgeInsets.all(5.0),
-            child: SvgPicture.asset("assets/icons/favourites/fav_cart.svg"),
-            decoration: new BoxDecoration(
+            child: SvgPicture.asset('assets/icons/favourites/fav_cart.svg'),
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
               color: AppColors.red,
             )));
   }
 
-  buildRemoveButton(Product product) {
+  Positioned buildRemoveButton(Product product) {
     return Positioned(
         top: AppSizes.sidePadding / 2 - 10,
         right: AppSizes.sidePadding / 2 - 10,
@@ -275,19 +277,19 @@ class OpenFlutterProductTile extends StatelessWidget {
           icon: Icon(Icons.close),
           color: AppColors.lightGray,
           onPressed: () {
-            print("Remove clicked");
+            print('Remove clicked');
           },
         ));
   }
 
-  buildTopLabel(Product product, ThemeData theme) {
+  Positioned buildTopLabel(Product product, ThemeData theme) {
     return Positioned(
       top: 5,
       left: AppSizes.sidePadding / 3,
       child: product.isNew
           ? Container(
               padding: EdgeInsets.all(AppSizes.linePadding * 1.5),
-              decoration: new BoxDecoration(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                 color: AppColors.black,
               ),
@@ -297,12 +299,12 @@ class OpenFlutterProductTile extends StatelessWidget {
           : (product.discountPercent > 0
               ? Container(
                   padding: EdgeInsets.all(AppSizes.linePadding * 1.5),
-                  decoration: new BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                     color: theme.errorColor,
                   ),
                   child: Text(
-                      "-" + product.discountPercent.toStringAsFixed(0) + "%",
+                      '-' + product.discountPercent.toStringAsFixed(0) + '%',
                       style: theme.textTheme.bodyText1.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.bold,

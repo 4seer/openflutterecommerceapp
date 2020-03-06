@@ -4,8 +4,6 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/cart_product.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/promo.dart';
 import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
 import 'package:openflutterecommerce/data/fake_repositories/promo_repository.dart';
 
@@ -24,13 +22,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   @override
   Stream<CartState> mapEventToState(CartEvent event) async* {
     if (event is CartLoadedEvent) {
-      if (this.state is CartInitialState) {
-        List<CartProduct> products = ProductRepository().getCartProducts();
-        List<Promo> promos = PromoRepository().getPromos();
-        yield new CartLoadedState(
+      if (state is CartInitialState) {
+        var products = ProductRepository().getCartProducts();
+        var promos = PromoRepository().getPromos();
+        yield CartLoadedState(
             showPromoPopup: false, promos: promos, cartProducts: products);
-      } else if (this.state is CartLoadedState) {
-        yield this.state;
+      } else if (state is CartLoadedState) {
+        yield state;
       }
     } else if (event is CartQuantityChangedEvent) {
       //TODO: do necessary updates
@@ -40,14 +38,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       //TODO: add to favs
     } else if (event is CartPromoAppliedEvent) {
       //TODO: apply promo code
-      CartLoadedState state = this.state as CartLoadedState;
+      var state = this.state as CartLoadedState;
       yield state.copyWith(showPromoPopup: false);
     } else if (event is CartPromoCodeAppliedEvent) {
       //TODO: apply promo code
-      CartLoadedState state = this.state as CartLoadedState;
+      var state = this.state as CartLoadedState;
       yield state.copyWith(showPromoPopup: false);
     } else if (event is CartShowPopupEvent) {
-      CartLoadedState state = this.state as CartLoadedState;
+      var state = this.state as CartLoadedState;
       yield state.copyWith(showPromoPopup: true);
     }
   }

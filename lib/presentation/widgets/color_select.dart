@@ -9,18 +9,19 @@ class OpenFlutterColorSelect extends StatefulWidget {
   final String label;
   final Function(List<Color>) onClick;
 
-  const OpenFlutterColorSelect({Key key, 
-    @required this.availableColors, 
-    @required this.selectedColors, 
-    @required this.label, 
-    @required this.onClick}) : super(key: key);
+  const OpenFlutterColorSelect(
+      {Key key,
+      @required this.availableColors,
+      @required this.selectedColors,
+      @required this.label,
+      @required this.onClick})
+      : super(key: key);
 
   @override
   _OpenFlutterColorSelectState createState() => _OpenFlutterColorSelectState();
 }
 
 class _OpenFlutterColorSelectState extends State<OpenFlutterColorSelect> {
-
   List<Color> selectedColors;
 
   @override
@@ -31,82 +32,72 @@ class _OpenFlutterColorSelectState extends State<OpenFlutterColorSelect> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return Column(
-      children:<Widget>[
-        OpenFlutterBlockSubtitle(
-          title: widget.label,
-          width: width
-        ),
-        Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding),),
-        Container(
+    var width = MediaQuery.of(context).size.width;
+    return Column(children: <Widget>[
+      OpenFlutterBlockSubtitle(title: widget.label, width: width),
+      Padding(
+        padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
+      ),
+      Container(
           padding: EdgeInsets.symmetric(vertical: AppSizes.sidePadding),
           color: AppColors.white,
-          child: Column(
-            children:<Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding*2),
-                child:Row(
-                  children: buildColors(context)
-                ),
-              )
-            ]
-          )
-        )
-      ]
-    );
+          child: Column(children: <Widget>[
+            Container(
+              padding:
+                  EdgeInsets.symmetric(horizontal: AppSizes.sidePadding * 2),
+              child: Row(children: buildColors(context)),
+            )
+          ]))
+    ]);
   }
 
-  buildColors(BuildContext context){
-    List<Widget> colorWidgets = List<Widget>();
-    for(int i = 0; i < widget.availableColors.length; i++){
+  List<Widget> buildColors(BuildContext context) {
+    var colorWidgets = <Widget>[];
+    for (var i = 0; i < widget.availableColors.length; i++) {
       colorWidgets.add(
         Padding(
           padding: EdgeInsets.only(right: AppSizes.sidePadding),
           child: InkWell(
-            onTap: ( () => {
-              updateSelectedColors(widget.availableColors[i])
-            }), 
-            child: buildColorWidget(widget.availableColors[i], context)
-          )
-        )
+            onTap: (() => {updateSelectedColors(widget.availableColors[i])}),
+            child: buildColorWidget(widget.availableColors[i], context),
+          ),
+        ),
       );
     }
     return colorWidgets;
   }
 
-  buildColorWidget(Color color, BuildContext context){
-    ThemeData _theme = Theme.of(context);
+  Container buildColorWidget(Color color, BuildContext context) {
+    var _theme = Theme.of(context);
     return Container(
-      width: 44,
-      height: 44,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(22)),
-        border: widget.selectedColors.contains(color) ? 
-          Border.all(
-            color:  _theme.accentColor
-          ) : null,
-
-      ),
-      padding: EdgeInsets.all(4),
-      child: Container(
+        width: 44,
+        height: 44,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(18)),
-          border: Border.all(
-            color: _theme.primaryColorLight
+          borderRadius: BorderRadius.all(
+            Radius.circular(22),
           ),
-          color: color
+          border: widget.selectedColors.contains(color)
+              ? Border.all(color: _theme.accentColor)
+              : null,
         ),
-      )
-    );
+        padding: EdgeInsets.all(4),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(18),
+              ),
+              border: Border.all(color: _theme.primaryColorLight),
+              color: color),
+        ));
   }
 
-  updateSelectedColors(Color color){
-    if ( this.selectedColors.contains(color))
-      this.selectedColors.remove(color);
-    else 
-      this.selectedColors.add(color);
-    setState( () { });
-    this.widget.onClick(this.selectedColors);
+  void updateSelectedColors(Color color) {
+    if (selectedColors.contains(color)) {
+      selectedColors.remove(color);
+    } else {
+      selectedColors.add(color);
+    }
+    setState(() {});
+    widget.onClick(selectedColors);
   }
 }

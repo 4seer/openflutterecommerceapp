@@ -16,7 +16,7 @@ class SignUpBloc extends Bloc<SignInEvent, SignInState> {
       yield ProcessingState();
       await Future.delayed(
           Duration(milliseconds: 300)); //TODO use real auth service
-      yield ErrorState("an error");
+      yield ErrorState('an error');
     } else if (event is SignUpWithGoogle) {
       yield ProcessingState();
       await Future.delayed(

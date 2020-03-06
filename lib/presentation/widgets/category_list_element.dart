@@ -14,7 +14,7 @@ class OpenFlutterCatregoryListElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     return Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.only(

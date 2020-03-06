@@ -16,15 +16,15 @@ class ForgetPasswordScreen extends StatefulWidget {
 }
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  final TextEditingController emailController = new TextEditingController();
-  final GlobalKey<OpenFlutterInputFieldState> emailKey = new GlobalKey();
+  final TextEditingController emailController = TextEditingController();
+  final GlobalKey<OpenFlutterInputFieldState> emailKey = GlobalKey();
 
   double sizeBetween;
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     sizeBetween = height / 20;
     return Scaffold(
       appBar: AppBar(
@@ -39,17 +39,18 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           if (state is FinishedState) Navigator.of(context).pop();
         },
         builder: (context, state) {
-          if (state is ProcessingState)
+          if (state is ProcessingState) {
             return Center(
               child: CircularProgressIndicator(),
             );
+          }
           return SingleChildScrollView(
             child: Container(
               height: height * 0.9,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  OpenFlutterBlockHeader(title: "Sign in", width: width),
+                  OpenFlutterBlockHeader(title: 'Sign in', width: width),
                   SizedBox(
                     height: sizeBetween,
                   ),
@@ -57,27 +58,27 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
                     child: Text(
-                        "Please enter your email address. You will receive a link to create a new password via email"),
+                        'Please enter your email address. You will receive a link to create a new password via email'),
                   ),
                   OpenFlutterInputField(
                     key: emailKey,
                     controller: emailController,
-                    hint: "Email",
+                    hint: 'Email',
                     validator: Validator.validateEmail,
                     keyboard: TextInputType.emailAddress,
                   ),
                   OpenFlutterRightArrow(
-                    "Already have an account",
+                    'Already have an account',
                     onClick: _showSignInScreen,
                   ),
-                  OpenFlutterButton(title: "SEND", onPressed: _validateAndSend),
+                  OpenFlutterButton(title: 'SEND', onPressed: _validateAndSend),
                   SizedBox(
                     height: sizeBetween * 2,
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: AppSizes.linePadding),
                     child: Center(
-                      child: Text("Or sign up with social account"),
+                      child: Text('Or sign up with social account'),
                     ),
                   ),
                   Padding(

@@ -22,8 +22,8 @@ class MyOrderDetailsView extends StatefulWidget {
 class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    double width = MediaQuery.of(context).size.width;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
     return BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -40,12 +40,12 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                           RichText(
                               text: TextSpan(children: <TextSpan>[
                             TextSpan(
-                              text: "Order: ",
+                              text: 'Order: ',
                               style: _theme.textTheme.headline3,
                             ),
                             TextSpan(
                               text:
-                                  "#" + state.orderData.orderNumber.toString(),
+                                  '#' + state.orderData.orderNumber.toString(),
                               style: _theme.textTheme.headline3
                                   .copyWith(fontWeight: FontWeight.w700),
                             ),
@@ -107,16 +107,7 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                         height: AppSizes.sidePadding,
                       ),
                       Column(
-                        children: <Widget>[
-                          for (CartProduct item in state.orderData.products)
-                            OpenFlutterCartTile(
-                              item: item,
-                              onAddToFav: null,
-                              onChangeQuantity: null,
-                              onRemoveFromCart: null,
-                              orderComplete: true,
-                            )
-                        ],
+                        children: _buildCartProductItems(state),
                       ),
                       SizedBox(
                         height: AppSizes.sidePadding,
@@ -179,7 +170,21 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
         });
   }
 
-  buildSummaryLine(String label, String text, ThemeData _theme, double width) {
+  List<Widget> _buildCartProductItems(ProfileMyOrderDetailsState state) {
+    return <Widget>[
+      for (CartProduct item in state.orderData.products)
+        OpenFlutterCartTile(
+          item: item,
+          onAddToFav: null,
+          onChangeQuantity: null,
+          onRemoveFromCart: null,
+          orderComplete: true,
+        )
+    ];
+  }
+
+  Row buildSummaryLine(
+      String label, String text, ThemeData _theme, double width) {
     print(label + ' ' + text);
     return Row(
         crossAxisAlignment: CrossAxisAlignment.start,

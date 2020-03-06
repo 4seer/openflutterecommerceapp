@@ -21,26 +21,25 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   @override
   Stream<CheckoutState> mapEventToState(CheckoutEvent event) async* {
     if (event is CheckoutStartEvent) {
-      if (this.state is CheckoutInitialState) {
-        yield new CheckoutProceedState(
-            cardId: 1, cartProducts: this.productRepository.getProducts(2));
-      } else if (this.state is CheckoutProceedState) {
-        yield this.state;
+      if (state is CheckoutInitialState) {
+        yield CheckoutProceedState(
+            cardId: 1, cartProducts: productRepository.getProducts(2));
+      } else if (state is CheckoutProceedState) {
+        yield state;
       }
     } else if (event is CheckoutSetDefaultCardEvent) {
-      if (this.state is CheckoutProceedState) {
-        yield (this.state as CheckoutProceedState)
-            .copyWith(cardId: event.cardId);
+      if (state is CheckoutProceedState) {
+        yield (state as CheckoutProceedState).copyWith(cardId: event.cardId);
       }
     } else if (event is CheckoutShowAddNewCardEvent) {
-      if (this.state is CheckoutProceedState) {
-        yield (this.state as CheckoutProceedState)
+      if (state is CheckoutProceedState) {
+        yield (state as CheckoutProceedState)
             .copyWith(showAddNewCardForm: true);
       }
     } else if (event is CheckoutAddNewCardEvent) {
-      if (this.state is CheckoutProceedState) {
+      if (state is CheckoutProceedState) {
         //TODO: add new card
-        yield (this.state as CheckoutProceedState)
+        yield (state as CheckoutProceedState)
             .copyWith(showAddNewCardForm: false);
       }
     }

@@ -21,20 +21,20 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
   @override
   Stream<FavouriteState> mapEventToState(FavouriteEvent event) async* {
-    print("mapEventToState: $event");
+    print('mapEventToState: $event');
     if (event is FavouriteListViewEvent) {
       yield FavouriteListViewState(
-          favouriteProducts: this.favouriteRepository.getFavourites(),
+          favouriteProducts: favouriteRepository.getFavourites(),
           hashtags: hashtagRepository.getHashtags());
     } else if (event is FavouriteTileViewEvent) {
       yield FavouriteTileViewState(
-          favouriteProducts: this.favouriteRepository.getFavourites(),
+          favouriteProducts: favouriteRepository.getFavourites(),
           hashtags: hashtagRepository.getHashtags());
     }
   }
 
   @override
   FavouriteState get initialState => FavouriteListViewState(
-      favouriteProducts: this.favouriteRepository.getFavourites(),
+      favouriteProducts: favouriteRepository.getFavourites(),
       hashtags: hashtagRepository.getHashtags());
 }

@@ -3,12 +3,10 @@
 // Date: 2020-02-17
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
-import '../checkout_bloc.dart';
 
 class Success1View extends StatefulWidget {
   final Function changeView;
@@ -22,14 +20,14 @@ class Success1View extends StatefulWidget {
 class _Success1ViewState extends State<Success1View> {
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
 
     return Container(
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSizes.imageRadius),
-            image: new DecorationImage(
+            image: DecorationImage(
                 fit: BoxFit.fitHeight,
-                image: AssetImage("assets/images/checkout/success.png"))),
+                image: AssetImage('assets/images/checkout/success.png'))),
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding * 3),
             child: Column(

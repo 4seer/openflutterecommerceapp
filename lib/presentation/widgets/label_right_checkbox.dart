@@ -7,14 +7,17 @@ class OpenFlutterLabelRightCheckbox extends StatefulWidget {
   final Function(bool) onChanged;
   final double width;
 
-  const OpenFlutterLabelRightCheckbox({Key key, this.checked, this.title, this.onChanged, this.width}) : super(key: key);
+  const OpenFlutterLabelRightCheckbox(
+      {Key key, this.checked, this.title, this.onChanged, this.width})
+      : super(key: key);
 
-  
   @override
-  _OpenFlutterLabelRightCheckboxState createState() => _OpenFlutterLabelRightCheckboxState();
+  _OpenFlutterLabelRightCheckboxState createState() =>
+      _OpenFlutterLabelRightCheckboxState();
 }
 
-class _OpenFlutterLabelRightCheckboxState extends State<OpenFlutterLabelRightCheckbox> {
+class _OpenFlutterLabelRightCheckboxState
+    extends State<OpenFlutterLabelRightCheckbox> {
   bool _checked;
 
   @override
@@ -25,41 +28,36 @@ class _OpenFlutterLabelRightCheckboxState extends State<OpenFlutterLabelRightChe
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     return InkWell(
-      onTap: ( () => {
-        changeCheckboxValue(!_checked)
-      }),
-      child: Container(
-        child: Row(children: <Widget>[
-          Container(
-            width: widget.width - 50,
-            child: Text(
-              widget.title,
-              style: _theme.textTheme.headline3.copyWith(
-                color: _checked ? 
-                  _theme.accentColor 
-                  : _theme.primaryColor
-              )
+        onTap: (() => {changeCheckboxValue(!_checked)}),
+        child: Container(
+            child: Row(
+          children: <Widget>[
+            Container(
+                width: widget.width - 50,
+                child: Text(widget.title,
+                    style: _theme.textTheme.headline3.copyWith(
+                        color: _checked
+                            ? _theme.accentColor
+                            : _theme.primaryColor))),
+            Container(
+              child: Checkbox(
+                activeColor: _theme.accentColor,
+                checkColor: AppColors.white,
+                value: _checked,
+                onChanged: (bool value) {
+                  changeCheckboxValue(value);
+                },
+              ),
             )
-          ),
-          Container(
-            child: Checkbox(
-              activeColor: _theme.accentColor,
-              checkColor: AppColors.white,
-              value: _checked, 
-              onChanged: (bool value) { 
-                changeCheckboxValue(value);
-              },
-            ),
-          )
-        ],)
-      )
-    );
+          ],
+        )));
   }
-  changeCheckboxValue(bool newValue){
+
+  void changeCheckboxValue(bool newValue) {
     widget.onChanged(newValue);
-    setState( () {
+    setState(() {
       _checked = newValue;
     });
   }

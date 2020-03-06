@@ -27,13 +27,13 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
 
   const OpenFlutterProductReviewItem({
     Key key,
-    this.avatarUrl = "",
+    this.avatarUrl = '',
     this.avatarSize = 40.0,
-    this.writerName = "",
+    this.writerName = '',
     this.starCount = 0,
     this.rating = 0.0,
-    this.reviewDateTime = "",
-    this.comment = "",
+    this.reviewDateTime = '',
+    this.comment = '',
     this.withPhotos = false,
     this.photos,
     this.photoSize = 96.0,
@@ -217,7 +217,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
           children: <Widget>[
             Center(
               child: Text(
-                "Helpful",
+                'Helpful',
                 textAlign: TextAlign.end,
                 style: Theme.of(context).textTheme.caption.copyWith(
                       color: _getHelpfulColor(context),

@@ -5,7 +5,6 @@ import 'package:openflutterecommerce/data/fake_repositories/models/product_revie
 import 'package:openflutterecommerce/data/fake_repositories/product_review_repository.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
-import '../products/products.dart';
 import 'product_review_bloc.dart';
 import 'product_review_event.dart';
 import 'product_review_state.dart';
@@ -74,7 +73,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
 
   Widget _buildTitle(BuildContext context) {
     return Text(
-      "Ratings&Reviews",
+      'Ratings&Reviews',
       style: Theme.of(context).textTheme.headline2,
     );
   }
@@ -103,7 +102,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
         Container(
           alignment: Alignment.bottomRight,
           child: OpenFlutterButton(
-            title: "Write a review",
+            title: 'Write a review',
             icon: Icons.edit,
             width: MediaQuery.of(context).size.width * 0.5,
             onPressed: () => {},
@@ -221,7 +220,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              "$reviewCount reviews",
+              '$reviewCount reviews',
               style: Theme.of(context).textTheme.subtitle1,
             ),
             Expanded(
@@ -229,7 +228,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
                 width: MediaQuery.of(context).size.width * 0.5,
                 mainAxisAlignment: MainAxisAlignment.end,
                 checked: withPhotos,
-                title: "with photos",
+                title: 'with photos',
                 onTap: (value) {
                   BlocProvider.of<ProductReviewBloc>(context)
                       .add(ProductReviewStartEvent(widget.product.id, value));
@@ -250,7 +249,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
     }
 
     if (comments.isNotEmpty) {
-      ProductReview productReview = _getProductReview(index, comments);
+      var productReview = _getProductReview(index, comments);
 
       return Padding(
         padding: const EdgeInsets.only(
@@ -294,7 +293,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
       padding: const EdgeInsets.only(top: 16.0),
       child: Center(
         child: Text(
-          "Without reviews",
+          'Without reviews',
           style: Theme.of(context).textTheme.bodyText1,
           textAlign: TextAlign.center,
         ),

@@ -11,6 +11,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc({@required this.settingsRepository})
       : assert(settingsRepository != null);
 
+  @override
   SettingsState get initialState => SettingsInitialState(
       settings: Settings(
           fullName: '',
@@ -21,7 +22,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
-    Settings newSettings = state.settings;
+    var newSettings = state.settings;
 
     if (event is UpdateFullNameEvent) {
       newSettings.fullName = event.fullName;

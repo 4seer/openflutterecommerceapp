@@ -22,40 +22,46 @@ class Main1View extends StatefulWidget {
 class _Main1ViewState extends State<Main1View> {
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    final double width = MediaQuery.of(context).size.width;
-    final double widgetWidth = width - AppSizes.sidePadding * 2;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
+    var widgetWidth = width - AppSizes.sidePadding * 2;
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           Container(
               height: width * 1.43,
               width: width,
-              decoration: new BoxDecoration(
-                  image: new DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage("assets/splash/splash-home.png"))),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/splash/splash-home.png'),
+                ),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                      padding: EdgeInsets.only(left: AppSizes.sidePadding),
+                      padding: EdgeInsets.only(
+                        left: AppSizes.sidePadding,
+                      ),
                       width: width / 2,
                       child: Text(translate('fashionSale'),
                           style: _theme.textTheme.headline1)),
                   Container(
-                      padding: EdgeInsets.only(
-                          left: AppSizes.sidePadding,
-                          bottom: AppSizes.sidePadding,
-                          top: AppSizes.sidePadding),
+                    padding: EdgeInsets.only(
+                        left: AppSizes.sidePadding,
+                        bottom: AppSizes.sidePadding,
+                        top: AppSizes.sidePadding),
+                    width: 160,
+                    child: OpenFlutterButton(
+                      title: 'Check',
                       width: 160,
-                      child: OpenFlutterButton(
-                          title: 'Check',
-                          width: 160,
-                          height: 48,
-                          onPressed: (() => widget.changeView(
-                              changeType: ViewChangeType.Forward))))
+                      height: 48,
+                      onPressed: (() => widget.changeView(
+                          changeType: ViewChangeType.Forward)),
+                    ),
+                  )
                 ],
               )),
           OpenFlutterBlockHeader(
@@ -68,11 +74,12 @@ class _Main1ViewState extends State<Main1View> {
           OpenFlutterProductListView(
               width: widgetWidth, products: widget.products),
           OpenFlutterButton(
-              title: 'Next Home Page',
-              width: 160,
-              height: 48,
-              onPressed: (() =>
-                  widget.changeView(changeType: ViewChangeType.Forward)))
+            title: 'Next Home Page',
+            width: 160,
+            height: 48,
+            onPressed: (() =>
+                widget.changeView(changeType: ViewChangeType.Forward)),
+          )
         ],
       ),
     );

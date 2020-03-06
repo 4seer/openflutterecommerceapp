@@ -10,7 +10,7 @@ class ProductRepositoryFactory {
   ProductRepositoryFactory(this.appSettings);
 
   ProductRepository create() {
-    if (this.appSettings.cacheIsEnabled) {
+    if (appSettings.cacheIsEnabled) {
       return ProductCacheRepository(
         ProductLocalRepository(),
         ProductRemoteRepository(),
@@ -18,7 +18,7 @@ class ProductRepositoryFactory {
     }
 
     //TODO in this point the app should be call an interface to detected if the device has internet
-    bool hasInternet = false;
+    var hasInternet = false;
     if (hasInternet) {
       return ProductRemoteRepository();
     }
