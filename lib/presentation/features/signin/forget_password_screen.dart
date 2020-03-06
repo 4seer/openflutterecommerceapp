@@ -69,7 +69,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   ),
                   OpenFlutterRightArrow(
                     'Already have an account',
-                    onClick: _showSignInScreen,
+                    onClick: _showSignUpScreen,
                   ),
                   OpenFlutterButton(title: 'SEND', onPressed: _validateAndSend),
                   SizedBox(
@@ -111,8 +111,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     );
   }
 
-  void _showSignInScreen() {
-    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.signin);
+  void _showSignUpScreen() {
+    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.signup);
   }
 
   void _validateAndSend() {
