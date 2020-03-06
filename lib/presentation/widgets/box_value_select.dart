@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
 
 import 'block_subtitle.dart';
 
@@ -103,7 +104,8 @@ class _OpenFlutterSelectValuesBoxesState<T>
 
   String convertValueToString(T currentValue) {
     if (currentValue is CategoryView) return currentValue.title;
-    return '';
+    if (currentValue is Category) return currentValue.title;
+    return currentValue.toString();
   }
 
   void updateSelectedBoxes(T currentValue) {
