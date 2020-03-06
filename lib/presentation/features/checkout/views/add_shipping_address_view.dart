@@ -33,12 +33,12 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
 
   @override
   void initState() {
-    _fullNameController = new TextEditingController();
-    _addressController = new TextEditingController();
-    _cityController = new TextEditingController();
-    _stateController = new TextEditingController();
-    _postalController = new TextEditingController();
-    _countryController = new TextEditingController();
+    _fullNameController = TextEditingController();
+    _addressController = TextEditingController();
+    _cityController = TextEditingController();
+    _stateController = TextEditingController();
+    _postalController = TextEditingController();
+    _countryController = TextEditingController();
 
     super.initState();
   }
@@ -57,8 +57,7 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<CheckoutBloc>(context);
-    final ThemeData _theme = Theme.of(context);
-    final double width = MediaQuery.of(context).size.width;
+    var _theme = Theme.of(context);
 
     return BlocListener(
         bloc: bloc,
@@ -75,12 +74,7 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
         child: BlocBuilder(
             bloc: bloc,
             builder: (BuildContext context, CheckoutState state) {
-              int currentCardId = 0;
-              bool showAddNewCardForm = false;
-              if (state is CheckoutProceedState) {
-                currentCardId = state.cardId;
-                showAddNewCardForm = state.showAddNewCardForm;
-              }
+              if (state is CheckoutProceedState) {}
 
               return SingleChildScrollView(
                 child: Column(
@@ -149,11 +143,5 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
                 ),
               );
             }));
-  }
-
-  _changeDefaultPaymentCard(CheckoutBloc bloc, int cardId) {
-    bloc..add(CheckoutSetDefaultCardEvent(cardId));
-    widget.changeView(changeType: ViewChangeType.Exact, index: 0);
-    //TODO: implement change of default payment card
   }
 }

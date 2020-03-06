@@ -20,8 +20,7 @@ class Success2View extends StatefulWidget {
 class _Success2ViewState extends State<Success2View> {
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    double width = MediaQuery.of(context).size.width - AppSizes.sidePadding;
+    var _theme = Theme.of(context);
     return Container(
         padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
         child: Column(
@@ -29,7 +28,7 @@ class _Success2ViewState extends State<Success2View> {
           children: <Widget>[
             Container(
                 padding: EdgeInsets.only(top: AppSizes.sidePadding * 5),
-                child: Image.asset("assets/images/checkout/bags.png")),
+                child: Image.asset('assets/images/checkout/bags.png')),
             Padding(
               padding: EdgeInsets.only(
                 top: AppSizes.sidePadding * 3,

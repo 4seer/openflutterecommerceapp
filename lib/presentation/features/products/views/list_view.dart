@@ -25,13 +25,12 @@ class _ProductsListViewState extends State<ProductsListView> {
 
   @override
   Widget build(BuildContext context) {
-    final double width =
-        MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
-    final double fullWidth = MediaQuery.of(context).size.width;
-    final double topPartHeight = 360;
+    var width = MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
+    var fullWidth = MediaQuery.of(context).size.width;
+    var topPartHeight = 360;
     final bloc = BlocProvider.of<ProductsBloc>(context);
 
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     return BlocListener(
         bloc: bloc,
         listener: (context, state) {
@@ -127,9 +126,9 @@ class _ProductsListViewState extends State<ProductsListView> {
             }));
   }
 
-  buildProductList(List<Product> products, double width) {
-    List<Widget> elements = List<Widget>();
-    for (int i = 0; i < products.length; i++) {
+  List<Widget> buildProductList(List<Product> products, double width) {
+    var elements = <Widget>[];
+    for (var i = 0; i < products.length; i++) {
       elements.add(Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
           child: OpenFlutterProductTile(

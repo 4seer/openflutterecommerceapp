@@ -14,6 +14,7 @@ abstract class CheckoutState extends Equatable {
 
 @immutable
 class CheckoutInitialState extends CheckoutState {
+  @override
   String toString() => 'CheckoutInitialState';
 }
 

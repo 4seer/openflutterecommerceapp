@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:openflutterecommerce/data/factories/product_repository_factory.dart';
 import 'package:openflutterecommerce/domain/entities/category.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';

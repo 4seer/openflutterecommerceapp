@@ -38,5 +38,5 @@ class ChangePasswordErrorState extends PasswordState {
   ChangePasswordErrorState({this.errorMessage}) : super();
 
   @override
-  List<Object> get props => [this.errorMessage];
+  List<Object> get props => [errorMessage];
 }

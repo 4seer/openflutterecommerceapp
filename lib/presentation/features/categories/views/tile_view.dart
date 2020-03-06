@@ -22,20 +22,23 @@ class CategoriesTileView extends StatefulWidget {
 
 class _CategoriesTileViewState extends State<CategoriesTileView>
     with SingleTickerProviderStateMixin {
-  final List<String> types = ["Women", "Men", "Kids"];
+  final List<String> types = ['Women', 'Men', 'Kids'];
   final List<int> categotyIds = [1, 2, 3];
   TabController _tabController;
 
   @override
   void initState() {
-    _tabController = new TabController(length: this.types.length, vsync: this);
+    _tabController = TabController(
+      length: types.length,
+      vsync: this,
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    final double width = MediaQuery.of(context).size.width;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
     final bloc = BlocProvider.of<CategoryBloc>(context);
     return BlocListener(
         bloc: bloc,
@@ -53,8 +56,8 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
             bloc: bloc,
             builder: (context, state) {
               if (state is CategoryTileViewState) {
-                List<Widget> tabViews = List<Widget>();
-                for (int categoryId in categotyIds)
+                var tabViews = <Widget>[];
+                for (var categoryId in categotyIds) {
                   tabViews.add(SingleChildScrollView(
                       child: Column(children: <Widget>[
                     Padding(
@@ -62,7 +65,7 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
                         child: Container(
                             width: width,
                             padding: EdgeInsets.all(AppSizes.sidePadding * 2),
-                            decoration: new BoxDecoration(
+                            decoration: BoxDecoration(
                               color: _theme.accentColor,
                               borderRadius:
                                   BorderRadius.circular(AppSizes.imageRadius),
@@ -86,13 +89,14 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
                                     .getCategories(categoryId),
                                 width - AppSizes.sidePadding * 3)))
                   ])));
+                }
                 return SafeArea(
                     child: OpenFlutterScaffold(
                         background: null,
-                        title: "Categories",
+                        title: 'Categories',
                         bottomMenuIndex: 1,
                         tabController: _tabController,
-                        tabBarList: this.types,
+                        tabBarList: types,
                         body: TabBarView(
                           children: tabViews,
                           controller: _tabController,
@@ -102,9 +106,9 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
             }));
   }
 
-  buildCategoryList(List<Category> categories, double width) {
-    List<Widget> elements = List<Widget>();
-    for (int i = 0; i < categories.length; i++) {
+  List<Widget> buildCategoryList(List<Category> categories, double width) {
+    var elements = <Widget>[];
+    for (var i = 0; i < categories.length; i++) {
       elements.add(InkWell(
           onTap: (() {
             Navigator.push(

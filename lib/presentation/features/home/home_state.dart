@@ -14,6 +14,7 @@ abstract class HomeState extends Equatable {
 
 @immutable
 class HomeInitialState extends HomeState {
+  @override
   String toString() => 'HomeInitialState';
 }
 
@@ -24,6 +25,7 @@ class HomeLoadedState extends HomeState {
 
   HomeLoadedState({this.salesProducts, this.newProducts});
 
+  @override
   String toString() => 'HomeLoadedState';
 
   @override

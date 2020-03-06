@@ -22,7 +22,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return SafeArea(
         child: OpenFlutterScaffold(
       background: null,
-      title: "Checkout",
+      title: 'Checkout',
       body: BlocProvider<CheckoutBloc>(
           create: (context) {
             return CheckoutBloc(productRepository: ProductRepository())

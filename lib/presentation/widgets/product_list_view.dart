@@ -3,7 +3,6 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
 
@@ -24,8 +23,8 @@ class OpenFlutterProductListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> productTiles = new List<Widget>();
-    for (int i = 0; i < products.length; i++) {
+    var productTiles = <Widget>[];
+    for (var i = 0; i < products.length; i++) {
       productTiles.add(
         OpenFlutterProductCard(
             width: elementWidth, height: elementHeight, product: products[i]),

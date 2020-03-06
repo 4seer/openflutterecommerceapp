@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
 import 'package:openflutterecommerce/data/fake_repositories/models/product_color.dart';
 
+// ignore: must_be_immutable
 class CartProduct extends Equatable {
   final Product product;
   final String size;
@@ -9,9 +10,15 @@ class CartProduct extends Equatable {
   int quantity;
   double price;
 
-  CartProduct({this.product, this.quantity, this.size, this.color, this.price});
+  CartProduct({
+    this.product,
+    this.quantity,
+    this.size,
+    this.color,
+    this.price,
+  });
 
-  changeQuantity(int newQuantity) {
+  void changeQuantity(int newQuantity) {
     quantity = newQuantity;
     price = quantity * product.price;
   }

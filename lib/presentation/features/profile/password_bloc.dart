@@ -28,8 +28,7 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
         yield InvalidNewPasswordState();
       } else {
         try {
-          String currentPassword =
-              await passwordRepository.getCurrentPassword();
+          var currentPassword = await passwordRepository.getCurrentPassword();
           if (event.currentPassword != currentPassword) {
             yield IncorrectCurrentPasswordState();
           } else {

@@ -19,17 +19,19 @@ class Main3View extends StatefulWidget {
 class _Main3ViewState extends State<Main3View> {
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    final double width = MediaQuery.of(context).size.width;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
         child: Column(children: <Widget>[
       Container(
           height: width * 0.96,
           width: width,
-          decoration: new BoxDecoration(
-              image: new DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage("assets/splash/main3.png"))),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage('assets/splash/main3.png'),
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,10 +63,12 @@ class _Main3ViewState extends State<Main3View> {
                   alignment: Alignment.bottomLeft,
                   padding: EdgeInsets.only(
                       bottom: AppSizes.sidePadding, left: AppSizes.sidePadding),
-                  decoration: new BoxDecoration(
-                      image: new DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage("assets/splash/bottombanner.png"))),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage('assets/splash/bottombanner.png'),
+                    ),
+                  ),
                   child: Text('Black',
                       style:
                           _theme.textTheme.headline1.copyWith(fontSize: 34))),
@@ -75,10 +79,12 @@ class _Main3ViewState extends State<Main3View> {
               width: width / 2,
               alignment: Alignment.center,
               padding: EdgeInsets.only(left: AppSizes.sidePadding),
-              decoration: new BoxDecoration(
-                  image: new DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage("assets/splash/sidebanner.png"))),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/splash/sidebanner.png'),
+                ),
+              ),
               child: Text('Men’s hoodies',
                   style: _theme.textTheme.headline1.copyWith(fontSize: 34))),
         ],

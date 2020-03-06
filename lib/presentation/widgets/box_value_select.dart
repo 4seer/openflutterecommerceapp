@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
 
 import 'block_subtitle.dart';
 
@@ -37,7 +37,7 @@ class _OpenFlutterSelectValuesBoxesState<T>
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    var width = MediaQuery.of(context).size.width;
     return Column(children: <Widget>[
       OpenFlutterBlockSubtitle(title: widget.label, width: width),
       Padding(
@@ -57,58 +57,67 @@ class _OpenFlutterSelectValuesBoxesState<T>
     ]);
   }
 
-  buildSelectBoxes(BuildContext context) {
-    List<Widget> colorWidgets = List<Widget>();
-    for (int i = 0; i < widget.availableValues.length; i++) {
-      colorWidgets.add(Padding(
+  List<Widget> buildSelectBoxes(BuildContext context) {
+    var colorWidgets = <Widget>[];
+    for (var i = 0; i < widget.availableValues.length; i++) {
+      colorWidgets.add(
+        Padding(
           padding: EdgeInsets.only(right: AppSizes.sidePadding),
           child: InkWell(
-              onTap: (() => {updateSelectedBoxes(widget.availableValues[i])}),
-              child: buildBoxWidget(widget.availableValues[i], context))));
+            onTap: (() => {updateSelectedBoxes(widget.availableValues[i])}),
+            child: buildBoxWidget(widget.availableValues[i], context),
+          ),
+        ),
+      );
     }
     return colorWidgets;
   }
 
-  buildBoxWidget(T currentValue, BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+  Container buildBoxWidget(T currentValue, BuildContext context) {
+    var _theme = Theme.of(context);
     return Container(
-        alignment: Alignment.center,
-        width: widget.boxWidth,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-            border: Border.all(
-                color: widget.selectedValues.contains(currentValue)
-                    ? _theme.accentColor
-                    : _theme.primaryColorLight),
-            color: widget.selectedValues.contains(currentValue)
-                ? _theme.accentColor
-                : AppColors.white),
-        padding: EdgeInsets.symmetric(
-            vertical: AppSizes.sidePadding,
-            horizontal: widget.boxWidth == null ? AppSizes.sidePadding : 0),
-        child: Text(convertValueToString(currentValue).toUpperCase(),
-            overflow: TextOverflow.ellipsis,
-            style: _theme.textTheme.headline5.copyWith(
+      alignment: Alignment.center,
+      width: widget.boxWidth,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          border: Border.all(
               color: widget.selectedValues.contains(currentValue)
-                  ? AppColors.white
-                  : _theme.accentColor,
-            )));
+                  ? _theme.accentColor
+                  : _theme.primaryColorLight),
+          color: widget.selectedValues.contains(currentValue)
+              ? _theme.accentColor
+              : AppColors.white),
+      padding: EdgeInsets.symmetric(
+          vertical: AppSizes.sidePadding,
+          horizontal: widget.boxWidth == null ? AppSizes.sidePadding : 0),
+      child: Text(
+        convertValueToString(currentValue).toUpperCase(),
+        overflow: TextOverflow.ellipsis,
+        style: _theme.textTheme.headline5.copyWith(
+          color: widget.selectedValues.contains(currentValue)
+              ? AppColors.white
+              : _theme.accentColor,
+        ),
+      ),
+    );
   }
 
-  convertValueToString(T currentValue) {
+  String convertValueToString(T currentValue) {
     if (currentValue is CategoryView) return currentValue.title;
-    return currentValue;
+    if (currentValue is Category) return currentValue.title;
+    return currentValue.toString();
   }
 
-  updateSelectedBoxes(T currentValue) {
-    if (this.selectedValues != null) {
-      if (this.selectedValues.contains(currentValue))
-        this.selectedValues.remove(currentValue);
-      else
-        this.selectedValues.add(currentValue);
+  void updateSelectedBoxes(T currentValue) {
+    if (selectedValues != null) {
+      if (selectedValues.contains(currentValue)) {
+        selectedValues.remove(currentValue);
+      } else {
+        selectedValues.add(currentValue);
+      }
     }
     setState(() {});
-    this.widget.onClick(this.selectedValues);
+    widget.onClick(selectedValues);
   }
 }
 

@@ -16,8 +16,8 @@ class ProductLocalRepository implements ProductRepository {
       seconds: 2,
     ));
     return [
-      ProductDao(1, "Black T-Short"),
-      ProductDao(2, "Small T-Short"),
+      ProductDao(1, 'Black T-Short'),
+      ProductDao(2, 'Small T-Short'),
     ];
   }
 }

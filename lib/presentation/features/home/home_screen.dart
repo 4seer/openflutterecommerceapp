@@ -50,14 +50,13 @@ class _HomeWrapperState extends OpenFlutterWrapperState<HomeWrapper> {
         Main1View(
             changeView: changePage,
             products:
-                state is HomeLoadedState ? state.newProducts : List<Product>()),
+                state is HomeLoadedState ? state.newProducts : <Product>[]),
         Main2View(
             changeView: changePage,
-            salesProducts: state is HomeLoadedState
-                ? state.salesProducts
-                : List<Product>(),
+            salesProducts:
+                state is HomeLoadedState ? state.salesProducts : <Product>[],
             newProducts:
-                state is HomeLoadedState ? state.newProducts : List<Product>()),
+                state is HomeLoadedState ? state.newProducts : <Product>[]),
         Main3View(changeView: changePage)
       ]);
     });

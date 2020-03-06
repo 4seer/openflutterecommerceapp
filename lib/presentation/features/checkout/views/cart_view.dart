@@ -27,9 +27,8 @@ class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<CheckoutBloc>(context);
-    final ThemeData _theme = Theme.of(context);
-    final double width =
-        MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
 
     return BlocListener(
         bloc: bloc,
@@ -61,7 +60,7 @@ class _CartViewState extends State<CartView> {
                       child: RichText(
                         text: TextSpan(
                             text:
-                                "3 Newbridge Court Chino Hills, CA 91709, United States",
+                                '3 Newbridge Court Chino Hills, CA 91709, United States',
                             style: _theme.textTheme.headline5
                                 .copyWith(color: _theme.primaryColor)),
                         maxLines: 2,
@@ -69,18 +68,18 @@ class _CartViewState extends State<CartView> {
                   OpenFlutterBlockSubtitle(
                     title: 'Payment',
                     width: width,
-                    linkText: "Change",
+                    linkText: 'Change',
                     onLinkTap: (() => {
                           widget.changeView(changeType: ViewChangeType.Forward)
                         }),
                   ),
                   OpenFlutterPaymentCard(
-                    cardNumber: "**** **** **** 3947",
+                    cardNumber: '**** **** **** 3947',
                   ),
                   OpenFlutterBlockSubtitle(
                     title: 'Delivery Method',
                     width: width,
-                    linkText: "Change",
+                    linkText: 'Change',
                     onLinkTap: (() => {}),
                   ),
                   OpenFlutterDeliveryMethod(),

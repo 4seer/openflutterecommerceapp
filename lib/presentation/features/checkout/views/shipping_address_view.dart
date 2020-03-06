@@ -26,9 +26,8 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<CheckoutBloc>(context);
-    final ThemeData _theme = Theme.of(context);
-    final double width =
-        MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
 
     return BlocListener(
         bloc: bloc,
@@ -70,7 +69,7 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
             }));
   }
 
-  _buildShippingAddress(
+  Widget _buildShippingAddress(
       ThemeData _theme, double width, CheckoutBloc bloc, bool checked) {
     return OpenFlutterActionCard(
         title: 'Jane Doe',
@@ -80,7 +79,7 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
         child: Column(children: <Widget>[
           RichText(
             text: TextSpan(
-                text: "3 Newbridge Court Chino Hills, CA 91709, United States",
+                text: '3 Newbridge Court Chino Hills, CA 91709, United States',
                 style: _theme.textTheme.headline5
                     .copyWith(color: _theme.primaryColor)),
             maxLines: 2,
@@ -97,7 +96,7 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
         ]));
   }
 
-  _changeDefaultShippingAddress(CheckoutBloc bloc, int shippingAddressId) {
+  void _changeDefaultShippingAddress(CheckoutBloc bloc, int shippingAddressId) {
     //TODO: pass datat to state
     bloc..add(CheckoutSetDefaultShippingAddressEvent(shippingAddressId));
     widget.changeView(changeType: ViewChangeType.Exact, index: 0);

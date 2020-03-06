@@ -28,14 +28,14 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
 
   @override
   void initState() {
-    this.quantity = widget.item.quantity;
+    quantity = widget.item.quantity;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    double width = MediaQuery.of(context).size.width;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
     return Padding(
         padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
         child: Container(
@@ -219,7 +219,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                       child: Container(
                           height: 90,
                           width: 140,
-                          decoration: new BoxDecoration(
+                          decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(AppSizes.imageRadius),
                               color: AppColors.white,
@@ -239,7 +239,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                       alignment: Alignment.center,
                                       padding:
                                           EdgeInsets.all(AppSizes.sidePadding),
-                                      decoration: new BoxDecoration(
+                                      decoration: BoxDecoration(
                                         border: Border(
                                           bottom: BorderSide(
                                               color: _theme.primaryColorLight,

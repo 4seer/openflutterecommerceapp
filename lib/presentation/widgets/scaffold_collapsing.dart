@@ -37,23 +37,23 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
                 return _buildSilverAppBar(context);
               }
             : null,
-        body:  this.body,
+        body: body,
       ),
-      backgroundColor: this.background,
+      backgroundColor: background,
       bottomNavigationBar: OpenFlutterBottomMenu(bottomMenuIndex),
     );
   }
 
   List<Widget> _buildSilverAppBar(BuildContext context) {
-    List<Tab> tabBars = List<Tab>();
-    ThemeData _theme = Theme.of(context);
+    var tabBars = <Tab>[];
+    var _theme = Theme.of(context);
     if (tabBarList != null) {
-      for (int i = 0; i < tabBarList.length; i++) {
+      for (var i = 0; i < tabBarList.length; i++) {
         tabBars.add(Tab(key: UniqueKey(), text: tabBarList[i]));
       }
     }
 
-    Widget tabWidget = tabBars.length > 0
+    Widget tabWidget = tabBars.isNotEmpty
         ? TabBar(
             unselectedLabelColor: _theme.primaryColor,
             unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
@@ -77,19 +77,19 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
                 icon: Icon(Icons.search),
                 color: AppColors.black,
                 onPressed: () {
-                  print("Search favourites.");
+                  print('Search favourites.');
                 },
               ),
             ])
           ],
           flexibleSpace: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              double percent = ((constraints.maxHeight - kToolbarHeight) *
-                  100 /
+              var percent = ((constraints.maxHeight - kToolbarHeight) *
+                  100.0 /
                   (AppSizes.APP_BAR_EXPANDED_SIZE - kToolbarHeight));
-              double dx = 0;
+              var dx = 0.0;
 
-              dx = 100 - percent;
+              dx = 100.0 - percent;
 
               if (constraints.maxHeight == 100) {
                 dx = 0;

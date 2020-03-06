@@ -34,13 +34,14 @@ class _FavouritesListViewState extends State<FavouritesListView> {
 
   Widget _buildFavouritesHeader(BuildContext context, FavouriteState state) {
     final bloc = BlocProvider.of<FavouriteBloc>(context);
+    // ignore: omit_local_variable_types
     final double width = MediaQuery.of(context).size.width;
-    ProductView productView = ProductView.ListView;
-    SortBy sortBy = SortBy.Popular;
+    var productView = ProductView.ListView;
+    var sortBy = SortBy.Popular;
 
     return OpenFlutterCollapsingScaffold(
       background: AppColors.background,
-      title: "Favourites",
+      title: 'Favourites',
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,7 +56,7 @@ class _FavouritesListViewState extends State<FavouritesListView> {
                     child: OpenFlutterHashTagList(
                         tags: state is FavouriteListViewState
                             ? state.hashtags
-                            : List(),
+                            : [],
                         height: 30)),
                 Container(
                   padding: EdgeInsets.only(
@@ -67,13 +68,13 @@ class _FavouritesListViewState extends State<FavouritesListView> {
                     height: 20,
                     productView: productView,
                     sortBy: sortBy,
-                    onFilterClicked: (() => {print("Filter Clicked")}),
+                    onFilterClicked: (() => {print('Filter Clicked')}),
                     onChangeViewClicked: (() {
-                      print("Show TileView");
+                      print('Show TileView');
                       bloc..add(FavouriteTileViewEvent());
                       widget.changeView(changeType: ViewChangeType.Forward);
                     }),
-                    onSortClicked: ((SortBy sortBy) => {print("Sort Clicked")}),
+                    onSortClicked: ((SortBy sortBy) => {print('Sort Clicked')}),
                   ),
                 ),
               ],
@@ -93,12 +94,12 @@ class _FavouritesListViewState extends State<FavouritesListView> {
 
   Widget _buildListView(FavouriteState state, BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    var productTiles = List();
+    var productTiles = [];
     var product =
-        state is FavouriteListViewState ? state.favouriteProducts : List();
+        state is FavouriteListViewState ? state.favouriteProducts : [];
 
     if (product.isNotEmpty) {
-      for (int i = 0; i < product.length; i++) {
+      for (var i = 0; i < product.length; i++) {
         productTiles.add(OpenFlutterProductTile(
           product: product[i],
           height: 100,

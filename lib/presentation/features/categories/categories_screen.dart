@@ -46,10 +46,10 @@ class _CategoriesWrapperState
     });
   }
 
-  buildListScreen(BuildContext context) {
+  Widget buildListScreen(BuildContext context) {
     return OpenFlutterScaffold(
       background: null,
-      title: "Categories",
+      title: 'Categories',
       body: CategoriesListView(changeView: changePage),
       bottomMenuIndex: 1,
     );

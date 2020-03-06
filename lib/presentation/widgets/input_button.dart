@@ -15,7 +15,7 @@ class OpenFlutterInputButton extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
+    var _theme = Theme.of(context);
     return Container(
       height: 38,
       width: width,

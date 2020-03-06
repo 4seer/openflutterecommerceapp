@@ -18,8 +18,8 @@ class OpenFlutterPromoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _theme = Theme.of(context);
-    double width = MediaQuery.of(context).size.width;
+    var _theme = Theme.of(context);
+    var width = MediaQuery.of(context).size.width;
     return Container(
       height: 80,
       decoration: BoxDecoration(
@@ -36,7 +36,7 @@ class OpenFlutterPromoTile extends StatelessWidget {
           Container(
               width: 80,
               decoration: BoxDecoration(
-                  image: new DecorationImage(
+                  image: DecorationImage(
                       fit: BoxFit.fill, image: AssetImage(item.image))),
               padding: EdgeInsets.all(AppSizes.linePadding * 2),
               child: Row(children: <Widget>[

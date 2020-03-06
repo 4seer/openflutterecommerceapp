@@ -35,11 +35,11 @@ class OpenFlutterServiceButton extends StatelessWidget {
   String _selectImage() {
     switch (serviceType) {
       case ServiceType.Google:
-        return "assets/icons/signin/google.png";
+        return 'assets/icons/signin/google.png';
       case ServiceType.Facebook:
-        return "assets/icons/signin/facebook.png";
+        return 'assets/icons/signin/facebook.png';
     }
-    return "";
+    return '';
   }
 }
 

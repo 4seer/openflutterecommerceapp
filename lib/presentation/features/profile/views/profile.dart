@@ -18,7 +18,7 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
-    ProfileBloc bloc = BlocProvider.of<ProfileBloc>(context);
+    var bloc = BlocProvider.of<ProfileBloc>(context);
     return ListView(
       children: <Widget>[
         Column(
@@ -28,7 +28,7 @@ class _ProfileViewState extends State<ProfileView> {
               padding: const EdgeInsets.only(top: 40.0, left: 10.0),
               child: Container(
                   child: Text(
-                "My profile",
+                'My profile',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 34.0),
               )),
             ),
@@ -43,11 +43,11 @@ class _ProfileViewState extends State<ProfileView> {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/profile/user-profile.jpeg"))),
+                        image: AssetImage('assets/profile/user-profile.jpeg'))),
               ),
               title: Text(
                 //TODO: take from profile info
-                "Matilda Brown",
+                'Matilda Brown',
                 style: TextStyle(
                   color: AppColors.black,
                   fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class _ProfileViewState extends State<ProfileView> {
               ),
               subtitle: Text(
                 //TODO: take from profile info
-                "matildabrown@mail.com",
+                'matildabrown@mail.com',
                 style: TextStyle(
                     color: AppColors.lightGray, fontWeight: FontWeight.bold),
               ),
@@ -64,9 +64,9 @@ class _ProfileViewState extends State<ProfileView> {
               height: 25.0,
             ),
             OpenFlutterMenuLine(
-                title: "My orders",
+                title: 'My orders',
                 //TODO: make short card info
-                subtitle: "Already Have 12 orders",
+                subtitle: 'Already Have 12 orders',
                 onTap: (() => {
                       bloc..add(ProfileMyOrdersEvent()),
                       widget.changeView(
@@ -74,44 +74,44 @@ class _ProfileViewState extends State<ProfileView> {
                     })),
             Divider(),
             OpenFlutterMenuLine(
-                title: "Shipping addresses",
+                title: 'Shipping addresses',
                 //TODO: make dynamic address count
-                subtitle: "3 addresses",
+                subtitle: '3 addresses',
                 onTap: (() => {
                       widget.changeView(
                           changeType: ViewChangeType.Exact, index: 2)
                     })),
             Divider(),
             OpenFlutterMenuLine(
-                title: "Payments methods",
+                title: 'Payments methods',
                 //TODO: make short card info
-                subtitle: "visa **34",
+                subtitle: 'visa **34',
                 onTap: (() => {
                       widget.changeView(
                           changeType: ViewChangeType.Exact, index: 3)
                     })),
             Divider(),
             OpenFlutterMenuLine(
-                title: "Promocodes",
+                title: 'Promocodes',
                 //TODO: make dynamic later
-                subtitle: "You have special promocodes",
+                subtitle: 'You have special promocodes',
                 onTap: (() => {
                       widget.changeView(
                           changeType: ViewChangeType.Exact, index: 4)
                     })),
             Divider(),
             OpenFlutterMenuLine(
-                title: "My reviews",
+                title: 'My reviews',
                 //TODO: make dynamic later
-                subtitle: "review for 4 items",
+                subtitle: 'review for 4 items',
                 onTap: (() => {
                       widget.changeView(
                           changeType: ViewChangeType.Exact, index: 5)
                     })),
             Divider(),
             OpenFlutterMenuLine(
-                title: "Settings",
-                subtitle: "Notification, Password",
+                title: 'Settings',
+                subtitle: 'Notification, Password',
                 onTap: (() => {
                       widget.changeView(
                           changeType: ViewChangeType.Exact, index: 6)
