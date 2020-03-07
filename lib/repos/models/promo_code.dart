@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class PromoCode extends Equatable {
   final int id;
   final String title;
-  final String description;
-  final double offerPercentage;
+  final String promoCode;
+  final String offerPercentage;
   final String expiryDate;
 
 
@@ -13,7 +13,7 @@ class PromoCode extends Equatable {
   PromoCode(
       {@required this.id,
         @required this.title,
-        @required this.description,
+        @required this.promoCode,
         @required this.offerPercentage,
         @required this.expiryDate,
       });
@@ -22,7 +22,7 @@ class PromoCode extends Equatable {
   List<Object> get props => [
     id,
     title,
-    description,
+    promoCode,
     offerPercentage,
     expiryDate,
   ];

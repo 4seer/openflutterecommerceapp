@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/models/product.dart';
 import 'package:openflutterecommerce/repos/models/product_cart.dart';
+import 'package:openflutterecommerce/repos/models/promo_code.dart';
 import 'package:openflutterecommerce/screens/wrapper.dart';
 import 'package:openflutterecommerce/widgets/block_header.dart';
 import 'package:openflutterecommerce/widgets/product_cart.dart';
@@ -56,7 +57,22 @@ class _CartViewState extends State<CartView> {
       title: 'CHECK OUT',
       height: 48,
       onPressed: () {
-        showPromoCodesBottomSheet();
+        List<PromoCode> promos = [
+          PromoCode(
+              id: 0,
+              title: "Personal Offer",
+              promoCode: "myPromoCode2020",
+              expiryDate: "6 days remaining",
+              offerPercentage: "10"),
+          PromoCode(
+              id: 0,
+              title: "Season Offer",
+              promoCode: "promo2020",
+              expiryDate: "2 days remaining",
+              offerPercentage: "15")
+        ];
+
+        showPromoCodesBottomSheet(promos);
       });
 
   Widget get _promoCodeView => Container(
@@ -69,7 +85,15 @@ class _CartViewState extends State<CartView> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(child: TextField(decoration: InputDecoration(border: InputBorder.none,labelText: "Enter Your Promo Code",labelStyle: _theme.textTheme.bodyText1),style: _theme.textTheme.bodyText1,),),
+            Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    labelText: "Enter Your Promo Code",
+                    labelStyle: _theme.textTheme.bodyText1),
+                style: _theme.textTheme.bodyText1,
+              ),
+            ),
             FloatingActionButton(
               heroTag: null,
               mini: true,
@@ -115,7 +139,7 @@ class _CartViewState extends State<CartView> {
         shrinkWrap: true,
       );
 
-  void showPromoCodesBottomSheet() {
+  void showPromoCodesBottomSheet(List<PromoCode> promoCodesList) {
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -138,10 +162,10 @@ class _CartViewState extends State<CartView> {
                       color: Color(0xFF737373),
                     ),
                   ),
-                      Padding(
-                        padding: const EdgeInsets.only(top:18.0),
-                        child: _promoCodeView,
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18.0),
+                    child: _promoCodeView,
+                  ),
                   Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 18),
                     child: Text(
@@ -154,7 +178,7 @@ class _CartViewState extends State<CartView> {
                   ),
                   ListView.builder(
                       shrinkWrap: true,
-                      itemCount: 2,
+                      itemCount: promoCodesList.length,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: EdgeInsets.only(top: 12, bottom: 12),
@@ -174,7 +198,7 @@ class _CartViewState extends State<CartView> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
-                                      "10",
+                                      promoCodesList[index].offerPercentage,
                                       style: TextStyle(
                                           fontSize: 34, color: Colors.white),
                                     ),
@@ -206,13 +230,13 @@ class _CartViewState extends State<CartView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      "Personal Offer",
+                                      promoCodesList[index].title,
                                       style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500),
                                     ),
                                     Text(
-                                      "myPromoCode2020",
+                                      promoCodesList[index].promoCode,
                                       style: TextStyle(fontSize: 11),
                                     ),
                                   ],
@@ -227,7 +251,7 @@ class _CartViewState extends State<CartView> {
                                       padding:
                                           const EdgeInsets.only(bottom: 10.0),
                                       child: Text(
-                                        "6 days Remaining",
+                                        promoCodesList[index].expiryDate,
                                         style: TextStyle(
                                             fontSize: 11, color: Colors.grey),
                                       ),
