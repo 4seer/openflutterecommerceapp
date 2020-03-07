@@ -10,6 +10,7 @@ abstract class DataSource {
 
   String get primaryKey;
 
+  // connect to database
   Future<Database> openDatabaseConnection() async {
     final Future<Database> database = openDatabase(
       join(await getDatabasesPath(), OpenFlutterDatabaseConfig.databaseName),
@@ -35,14 +36,17 @@ abstract class DataSource {
     }
   }
 
+  // get a record in the table
   Future<Entity> get(int id) async {
     return null;
   }
 
+  // get all records in the table
   Future<List<Entity>> all() async {
     return null;
   }
 
+  // insert a record into the table
   Future<void> insert(Entity model) async {
     await openDatabaseIfNotOpened();
 
@@ -53,6 +57,7 @@ abstract class DataSource {
     );
   }
 
+  // update a record in the table
   Future<void> update(Entity model) async {
     await openDatabaseIfNotOpened();
 
@@ -64,6 +69,7 @@ abstract class DataSource {
     );
   }
 
+  // delete a record in the table
   Future<void> delete(int id) async {
     await openDatabaseIfNotOpened();
 
@@ -74,6 +80,7 @@ abstract class DataSource {
     );
   }
 
+  // delete all records in the table
   Future<void> deleteAll() async {
     await openDatabaseIfNotOpened();
 
