@@ -1,5 +1,5 @@
 class OpenFlutterDatabaseConfig {
-  static const String databaseName = 'openflutterdatabase18.db';
+  static const String databaseName = 'openflutterdatabase19.db';
   static const int databaseVersion = 1;
   static const createTablesQueries = [
     'CREATE TABLE IF NOT EXISTS Product(id INTEGER PRIMARY KEY, title TEXT, image TEXT, thumb TEXT, price REAL, discountPercent REAL, categoryId INTEGER, amount INTEGER, description TEXT, isFavourite NUMERIC, rating REAL, rating1Count INTEGER, rating2Count INTEGER, rating3Count INTEGER, rating4Count INTEGER, rating5Count INTEGER)',
@@ -19,7 +19,7 @@ class OpenFlutterDatabaseConfig {
     'CREATE TABLE IF NOT EXISTS PromoCode(id INTEGER PRIMARY KEY, title TEXT, image TEXT, promoCode TEXT, discountPercent REAL, belongsToUser NUMERIC, wasUsed NUMERIC)',
     'CREATE TABLE IF NOT EXISTS DeliveryMethod(id INTEGER PRIMARY KEY, title TEXT, price REAL)',
     'CREATE TABLE IF NOT EXISTS UserOrder(id INTEGER PRIMARY KEY, orderNumber INTEGER, trackingNumber TEXT, productCount INTEGER, promoCodeId INTEGER, discountPercent REAL, discountTitle TEXT, shippingAddressId INTEGER, orderStatus TEXT, totalAmount REAL, deliveryMethodId INTEGER, deliveryPrice REAL)',
-    'CREATE TABLE IF NOT EXISTS OrderProduct(id INTEGER PRIMARY KEY, productId INTEGER, totalAmount INTEGER, totalPrice REAL, title TEXT, discountPercent REAL, thumb TEXT)',
+    'CREATE TABLE IF NOT EXISTS OrderProduct(id INTEGER PRIMARY KEY, productId INTEGER, productCount INTEGER, totalPrice REAL, title TEXT, discountPercent REAL, thumb TEXT)',
     'CREATE TABLE IF NOT EXISTS OrderProductParameter(id INTEGER PRIMARY KEY, productId INTEGER, parameterId INTEGER, parameterValueId INTEGER)'
   ];
 }
