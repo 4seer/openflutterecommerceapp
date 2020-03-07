@@ -30,8 +30,8 @@ class _CartViewState extends State<CartView> {
     _theme = Theme.of(context);
     width = MediaQuery.of(context).size.width;
     return SafeArea(
-      child: Scaffold(
-          body: Padding(
+      child: SingleChildScrollView(
+          child: Padding(
               padding: EdgeInsets.only(left: 16, right: 16),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,6 +45,7 @@ class _CartViewState extends State<CartView> {
                     ),
                     _cartListView,
                     //  _promoCodeView,
+                    _promoCodeView,
                     _totalAmountView,
                     _checkoutButton
                   ]))),
@@ -55,136 +56,30 @@ class _CartViewState extends State<CartView> {
       title: 'CHECK OUT',
       height: 48,
       onPressed: () {
-        showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return Container(
-                color: Color(0xFF737373),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(249, 249, 249, 1),
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          topLeft: Radius.circular(20.0))),
-                  child: ListView(
-                    padding: EdgeInsets.all(16),
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          height: 6,
-                          width: 60,
-                          color: Color(0xFF737373),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 18, bottom: 18),
-                        child: Text(
-                          "Your Promo Codes",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: 2,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.only(top: 12, bottom: 12),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    height: width / 5,
-                                    width: width / 5,
-                                    color: Colors.red,
-                                    child: Row(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text("10",style: TextStyle(fontSize: 34,color: Colors.white),),
-                                      Column(mainAxisSize: MainAxisSize.min,children: <Widget>[
-                                        Text("%",style:TextStyle(fontSize: 14,color: Colors.white),),
-                                        Text("off",style:TextStyle(fontSize: 14,color: Colors.white),),
-                                      ],)
-                                    ],),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          "Personal Offer",
-                                          style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500),
-                                        ),
-                                        Text(
-                                          "myPromoCode2020",
-                                          style: TextStyle(fontSize: 11),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(bottom: 10.0),
-                                          child: Text(
-                                            "6 days Remaining",
-                                            style: TextStyle(
-                                                fontSize: 11,
-                                                color: Colors.grey),
-                                          ),
-                                        ),
-                                        OpenFlutterButton(
-                                          title: "Apply",
-                                          width: 93,
-                                          height: 36,
-                                          onPressed: () {},
-                                          isNeedPadding: false,
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            );
-                          })
-                    ],
-                  ),
-                ),
-              );
-            });
+        showPromoCodesBottomSheet();
       });
 
   Widget get _promoCodeView => Container(
-        color: Colors.white,
-        child: TextField(
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              suffix: Container(
-                  height: 35,
-                  child: FloatingActionButton(
-                    heroTag: null,
-                    mini: true,
-                    backgroundColor: Colors.black,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ))),
+        height: 50,
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(child: TextField(decoration: InputDecoration(border: InputBorder.none,labelText: "Enter Your Promo Code",labelStyle: _theme.textTheme.bodyText1),style: _theme.textTheme.bodyText1,),),
+            FloatingActionButton(
+              heroTag: null,
+              mini: true,
+              backgroundColor: Colors.black,
+              child: Icon(
+                Icons.arrow_forward,
+                color: Colors.white,
+              ),
+            )
+          ],
         ),
       );
   Widget get _totalAmountView => Container(
@@ -219,4 +114,142 @@ class _CartViewState extends State<CartView> {
         itemCount: 3,
         shrinkWrap: true,
       );
+
+  void showPromoCodesBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            color: Color(0xFF737373),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(249, 249, 249, 1),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20.0))),
+              child: ListView(
+                padding: EdgeInsets.all(16),
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      height: 6,
+                      width: 60,
+                      color: Color(0xFF737373),
+                    ),
+                  ),
+                      Padding(
+                        padding: const EdgeInsets.only(top:18.0),
+                        child: _promoCodeView,
+                      ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 18),
+                    child: Text(
+                      "Your Promo Codes",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.only(top: 12, bottom: 12),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                height: width / 5,
+                                width: width / 5,
+                                color: Colors.red,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      "10",
+                                      style: TextStyle(
+                                          fontSize: 34, color: Colors.white),
+                                    ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Text(
+                                          "%",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          "off",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Personal Offer",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      "myPromoCode2020",
+                                      style: TextStyle(fontSize: 11),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: Text(
+                                        "6 days Remaining",
+                                        style: TextStyle(
+                                            fontSize: 11, color: Colors.grey),
+                                      ),
+                                    ),
+                                    OpenFlutterButton(
+                                      title: "Apply",
+                                      width: 93,
+                                      height: 36,
+                                      onPressed: () {},
+                                      isNeedPadding: false,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      })
+                ],
+              ),
+            ),
+          );
+        });
+  }
 }
