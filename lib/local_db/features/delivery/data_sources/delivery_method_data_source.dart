@@ -4,7 +4,7 @@ import 'package:openflutterecommerce/local_db/features/delivery/entities/deliver
 class DeliveryMethodDataSource extends DataSource {
   @override
   Future<List<DeliveryMethodEntity>> all() async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps = await db.query(tableName);
 
@@ -19,7 +19,7 @@ class DeliveryMethodDataSource extends DataSource {
 
   @override
   Future<DeliveryMethodEntity> get(int id) async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
         await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);

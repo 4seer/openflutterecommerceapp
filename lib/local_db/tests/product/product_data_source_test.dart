@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       productDataSource = ProductDataSource();
+      await productDataSource.open();
     });
 
     test('test: insert and get product', () async {
@@ -237,6 +238,10 @@ void main() {
 
       List<ProductEntity> allProducts = await productDataSource.all();
       expect(allProducts.length == 3, true);
+    });
+
+    tearDown(() async {
+      await productDataSource.close();
     });
   });
 }

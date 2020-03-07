@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = ProductParameterDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in ProductParameter table', () async {
@@ -97,6 +98,10 @@ void main() {
 
       List<ProductParameterEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

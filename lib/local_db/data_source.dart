@@ -11,16 +11,14 @@ abstract class DataSource {
   String get primaryKey;
 
   // connect to database
-  Future<Database> openDatabaseConnection() async {
-    final Future<Database> database = openDatabase(
+  Future<void> open() async {
+    db = await openDatabase(
       join(await getDatabasesPath(), OpenFlutterDatabaseConfig.databaseName),
       onCreate: (db, version) {
         return _createDb(db);
       },
       version: OpenFlutterDatabaseConfig.databaseVersion,
     );
-
-    return database;
   }
 
   static void _createDb(Database db) {
@@ -28,12 +26,6 @@ abstract class DataSource {
         .forEach((createTableQuery) async {
       await db.execute(createTableQuery);
     });
-  }
-
-  Future<void> openDatabaseIfNotOpened() async {
-    if (db == null) {
-      db = await openDatabaseConnection();
-    }
   }
 
   // get a record in the table
@@ -48,7 +40,7 @@ abstract class DataSource {
 
   // insert a record into the table
   Future<void> insert(Entity model) async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     await db.insert(
       tableName,
@@ -59,7 +51,7 @@ abstract class DataSource {
 
   // update a record in the table
   Future<void> update(Entity model) async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     await db.update(
       tableName,
@@ -71,7 +63,7 @@ abstract class DataSource {
 
   // delete a record in the table
   Future<void> delete(int id) async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     await db.delete(
       tableName,
@@ -82,8 +74,21 @@ abstract class DataSource {
 
   // delete all records in the table
   Future<void> deleteAll() async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     await db.rawDelete('DELETE FROM $tableName');
+  }
+
+  // close database connection
+  Future<void> close() async {
+    checkDatabaseConnection();
+    await db.close();
+  }
+
+  checkDatabaseConnection() {
+    if (db == null) {
+      throw Exception(
+          'No open connection to database - call .open() on the datasource to establish a connection to the database');
+    }
   }
 }

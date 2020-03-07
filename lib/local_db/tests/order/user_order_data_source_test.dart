@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = UserOrderDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in UserOrder table', () async {
@@ -185,6 +186,10 @@ void main() {
           deliveryPrice: 15.00));
       List<UserOrderEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

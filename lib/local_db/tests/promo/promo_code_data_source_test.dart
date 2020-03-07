@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = PromoCodeDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in promocode table', () async {
@@ -135,6 +136,10 @@ void main() {
           wasUsed: false));
       List<PromoCodeEntity> allData = await dataSource.all();
       expect(allData.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

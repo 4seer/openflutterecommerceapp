@@ -4,7 +4,7 @@ import 'package:openflutterecommerce/local_db/features/product/entities/product_
 class ProductParameterVariantDataSource extends DataSource {
   @override
   Future<List<ProductParameterVariantEntity>> all() async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps = await db.query(tableName);
 
@@ -20,7 +20,7 @@ class ProductParameterVariantDataSource extends DataSource {
 
   @override
   Future<ProductParameterVariantEntity> get(int id) async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
         await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);

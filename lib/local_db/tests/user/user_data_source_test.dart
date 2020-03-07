@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = UserDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in user table', () async {
@@ -156,6 +157,10 @@ void main() {
 
       List<UserEntity> allData = await dataSource.all();
       expect(allData.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

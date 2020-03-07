@@ -4,7 +4,7 @@ import 'package:openflutterecommerce/local_db/features/hashtag/entities/category
 class CategoryHashTagDataSource extends DataSource {
   @override
   Future<List<CategoryHashTagEntity>> all() async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps = await db.query(tableName);
 
@@ -19,7 +19,7 @@ class CategoryHashTagDataSource extends DataSource {
 
   @override
   Future<CategoryHashTagEntity> get(int id) async {
-    await openDatabaseIfNotOpened();
+    checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
         await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);

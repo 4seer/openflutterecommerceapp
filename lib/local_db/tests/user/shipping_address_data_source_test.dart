@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = ShippingAddressDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in shippingaddress table', () async {
@@ -135,6 +136,10 @@ void main() {
 
       List<ShippingAddressEntity> allData = await dataSource.all();
       expect(allData.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

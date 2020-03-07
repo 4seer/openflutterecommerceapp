@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = DeliveryMethodDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in DeliveryMethod table', () async {
@@ -75,6 +76,10 @@ void main() {
           .insert(DeliveryMethodEntity(id: 3, title: 'Title 3', price: 977.99));
       List<DeliveryMethodEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

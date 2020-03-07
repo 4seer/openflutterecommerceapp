@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:openflutterecommerce/local_db/features/product/data_sources/product2parameter_data_source.dart';
 import 'package:openflutterecommerce/local_db/features/product/entities/product2parameter_entity.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -12,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = Product2ParameterDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in product2parameter table', () async {
@@ -44,7 +44,8 @@ void main() {
 
       await dataSource.update(dataToUpdate);
 
-      Product2ParameterEntity updatedData = await dataSource.get(dataToUpdate.id);
+      Product2ParameterEntity updatedData =
+          await dataSource.get(dataToUpdate.id);
       expect(dataToUpdate == updatedData, true);
     });
 
@@ -107,6 +108,10 @@ void main() {
 
       List<Product2ParameterEntity> allData = await dataSource.all();
       expect(allData.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

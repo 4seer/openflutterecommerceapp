@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = OrderProductParameterDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in OrderProductParameter table',
@@ -80,6 +81,10 @@ void main() {
           id: 3, productId: 1, parameterId: 3, parameterValueId: 3));
       List<OrderProductParameterEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

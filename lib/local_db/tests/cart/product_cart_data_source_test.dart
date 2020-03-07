@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = ProductCartDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in productcart table', () async {
@@ -78,6 +79,10 @@ void main() {
           id: 3, productId: 1, productCount: 1, totalPrice: 235.00));
       List<ProductCartEntity> allData = await dataSource.all();
       expect(allData.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

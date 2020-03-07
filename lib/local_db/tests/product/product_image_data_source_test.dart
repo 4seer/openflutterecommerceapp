@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = ProductImageDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in ProductImage table', () async {
@@ -116,6 +117,10 @@ void main() {
 
       List<ProductImageEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
+    });
+    
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }

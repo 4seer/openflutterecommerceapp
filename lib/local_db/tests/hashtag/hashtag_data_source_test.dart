@@ -11,6 +11,7 @@ void main() {
 
     setUp(() async {
       dataSource = HashTagDataSource();
+      await dataSource.open();
     });
 
     test('test: insert and get a record in HashTag table', () async {
@@ -95,6 +96,10 @@ void main() {
       ));
       List<HashTagEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
+    });
+
+    tearDown(() async {
+      await dataSource.close();
     });
   });
 }
