@@ -50,7 +50,7 @@ void main() {
       await dataSource.deleteAll();
 
       List<DeliveryMethodEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: delete a record in DeliveryMethod table', () async {
@@ -62,7 +62,7 @@ void main() {
       await dataSource.delete(1);
 
       List<DeliveryMethodEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: get all records in DeliveryMethod table', () async {

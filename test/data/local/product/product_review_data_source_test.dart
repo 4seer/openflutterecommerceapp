@@ -98,7 +98,7 @@ void main() {
       await dataSource.deleteAll();
 
       List<ProductReviewEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: delete a record in ProductReview table', () async {
@@ -118,7 +118,7 @@ void main() {
       await dataSource.delete(1);
 
       List<ProductReviewEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: get all records in ProductReview table', () async {

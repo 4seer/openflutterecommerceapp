@@ -59,7 +59,7 @@ void main() {
 
       await dataSource.update(dataToUpdate);
 
-      UserEntity updatedData = await dataSource.get(dataToUpdate.id);
+      var updatedData = await dataSource.get(dataToUpdate.id);
       expect(dataToUpdate == updatedData, true);
     });
 
@@ -98,7 +98,7 @@ void main() {
       await dataSource.deleteAll();
 
       List<UserEntity> allData = await dataSource.all();
-      expect(allData.length == 0, true);
+      expect(allData.isEmpty, true);
     });
 
     test('test: delete a record in user table', () async {
@@ -118,7 +118,7 @@ void main() {
       await dataSource.delete(1);
 
       List<UserEntity> allData = await dataSource.all();
-      expect(allData.length == 0, true);
+      expect(allData.isEmpty, true);
     });
 
     test('test: get all records in user table', () async {

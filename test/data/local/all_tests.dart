@@ -32,7 +32,7 @@ import 'user/shipping_address_data_source_test.dart'
     as shipping_address_data_source_test;
 import 'user/user_data_source_test.dart' as user_data_source_test;
 
-main(List<String> args) {
+void main(List<String> args) {
   // run tests on all data sources (tables)
   delivery_method_data_source_test.main();
   category_hashtag_data_source_test.main();
