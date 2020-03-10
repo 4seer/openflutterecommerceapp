@@ -26,4 +26,4 @@ jobs:
       #- name: Static analysis
       #  run: flutter  analyze
       - name: Running tests
-        run: flutter test --coverage
+        run: flutter run -t test/tests.dart
