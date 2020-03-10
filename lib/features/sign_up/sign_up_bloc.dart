@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/data/fake_repositories/models/app_user.dart';
 import 'package:openflutterecommerce/features/authentication/authentication.dart';
-import 'package:openflutterecommerce/repos/models/app_user.dart';
 import 'package:openflutterecommerce/repos/user_repository.dart';
 
 import 'sign_up.dart';
@@ -27,7 +27,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     if (event is SignUpPressed) {
       yield SignUpProcessingState();
       try {
-        String token = await userRepository.signUp(
+        final token = await userRepository.signUp(
           name: event.name,
           email: event.email,
           password: event.password,

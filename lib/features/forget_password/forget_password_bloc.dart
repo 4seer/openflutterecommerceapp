@@ -3,24 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'forget_password.dart';
 
 class ForgetPasswordBloc
-    extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
+    extends Bloc<ForgetPasswordEvent, ForgetPasswordState> {
   @override
-  ForgotPasswordState get initialState => ForgotPasswordInitialState();
+  ForgetPasswordState get initialState => ForgetPasswordInitialState();
 
   @override
-  Stream<ForgotPasswordState> mapEventToState(
-    ForgotPasswordEvent event,
+  Stream<ForgetPasswordState> mapEventToState(
+    ForgetPasswordEvent event,
   ) async* {
-    if (event is ForgotPasswordPressed) {
-      yield ForgotPasswordProcessingState();
+    if (event is ForgetPasswordPressed) {
+      yield ForgetPasswordProcessingState();
       try {
         await Future.delayed(
           Duration(milliseconds: 300),
         ); //TODO use real auth service
 
-        yield ForgotPasswordFinishedState();
+        yield ForgetPasswordFinishedState();
       } catch (error) {
-        yield ForgotPasswordErrorState(error);
+        yield ForgetPasswordErrorState(error);
       }
     }
   }

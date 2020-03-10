@@ -1,0 +1,91 @@
+// Category list Bloc States
+// Author: openflutterproject@gmail.com
+// Date: 2020-02-06
+
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
+
+@immutable
+abstract class CategoryState extends Equatable {
+  @override
+  List<Object> get props => [];
+}
+
+@immutable
+class CategoryInitialState extends CategoryState {
+  @override
+  String toString() => 'CategoryInitialState';
+}
+
+@immutable
+class CategoryLoadedState extends CategoryState {
+  final List<Category> categories;
+  final bool isLoading;
+  final int typeId;
+
+  CategoryLoadedState({this.typeId, this.categories, this.isLoading});
+
+  CategoryLoadedState copyWith(
+      {int typeId, List<Category> categories, bool loading}) {
+    return CategoryLoadedState(
+        typeId: typeId ?? this.typeId,
+        categories: categories ?? this.categories,
+        isLoading: loading ?? isLoading);
+  }
+
+  @override
+  String toString() => 'CategoryLoadedState';
+
+  @override
+  List<Object> get props => [categories, isLoading, typeId];
+}
+
+@immutable
+class CategoryListViewState extends CategoryLoadedState {
+  CategoryListViewState({int typeId, List<Category> categories, bool isLoading})
+      : super(typeId: typeId, categories: categories, isLoading: isLoading);
+
+  @override
+  CategoryListViewState copyWith(
+      {int typeId, List<Category> categories, bool loading}) {
+    return CategoryListViewState(
+        typeId: typeId ?? this.typeId,
+        categories: categories ?? this.categories,
+        isLoading: loading ?? isLoading);
+  }
+
+  @override
+  String toString() => 'CategoryListViewState';
+}
+
+@immutable
+class CategoryTileViewState extends CategoryLoadedState {
+  CategoryTileViewState({
+    int typeId,
+    List<Category> categories,
+    bool isLoading,
+  }) : super(
+          typeId: typeId,
+          categories: categories,
+          isLoading: isLoading,
+        );
+
+  @override
+  CategoryTileViewState copyWith(
+      {int typeId, List<Category> categories, bool loading}) {
+    return CategoryTileViewState(
+        typeId: typeId ?? this.typeId,
+        categories: categories ?? this.categories,
+        isLoading: loading ?? isLoading);
+  }
+
+  @override
+  String toString() => 'CategoryTileViewState';
+}
+
+@immutable
+class CategoryErrorState extends CategoryState {
+  @override
+  String toString() => 'CategoryErrorState';
+}

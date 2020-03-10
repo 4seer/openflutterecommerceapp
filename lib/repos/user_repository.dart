@@ -3,7 +3,7 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/repos/models/app_user.dart';
+import 'package:openflutterecommerce/data/fake_repositories/models/app_user.dart';
 
 class UserRepository {
   /// Sign in with [email] and [password] and return
@@ -18,7 +18,7 @@ class UserRepository {
 
       return 'token';
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 
@@ -35,7 +35,7 @@ class UserRepository {
 
       return 'token';
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 
@@ -47,7 +47,7 @@ class UserRepository {
 
       return AppUser(token: 'token');
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 

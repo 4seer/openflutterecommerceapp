@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:openflutterecommerce/repos/models/app_user.dart';
+import 'package:openflutterecommerce/data/fake_repositories/models/app_user.dart';
 
 abstract class AuthenticationState extends Equatable {
   @override
