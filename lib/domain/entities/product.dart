@@ -14,4 +14,11 @@ class Product extends Entity<int> {
   bool hasRating() {
     return rating != null;
   }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id
+    };
+  }
 }

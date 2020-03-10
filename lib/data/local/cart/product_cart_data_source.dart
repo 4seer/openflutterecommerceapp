@@ -1,5 +1,5 @@
-import 'package:openflutterecommerce/local_db/data_source.dart';
-import 'package:openflutterecommerce/local_db/features/cart/entities/product_cart_entity.dart';
+import 'package:openflutterecommerce/data/local/data_source.dart';
+import 'package:openflutterecommerce/domain/entities/cart/product_cart_entity.dart';
 
 class ProductCartDataSource extends DataSource {
   @override
