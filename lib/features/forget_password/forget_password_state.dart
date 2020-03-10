@@ -1,21 +1,21 @@
 import 'package:equatable/equatable.dart';
 
-abstract class ForgotPasswordState extends Equatable {
+abstract class ForgetPasswordState extends Equatable {
   @override
   List<Object> get props => [];
 }
 
-class ForgotPasswordInitialState extends ForgotPasswordState {}
+class ForgetPasswordInitialState extends ForgetPasswordState {}
 
-class ForgotPasswordProcessingState extends ForgotPasswordState {}
+class ForgetPasswordProcessingState extends ForgetPasswordState {}
 
-class ForgotPasswordErrorState extends ForgotPasswordState {
+class ForgetPasswordErrorState extends ForgetPasswordState {
   final String error;
 
-  ForgotPasswordErrorState(this.error);
+  ForgetPasswordErrorState(this.error);
 
   @override
   List<Object> get props => [error];
 }
 
-class ForgotPasswordFinishedState extends ForgotPasswordState {}
+class ForgetPasswordFinishedState extends ForgetPasswordState {}

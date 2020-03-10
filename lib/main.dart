@@ -6,24 +6,23 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/repos/user_repository.dart';
-import 'package:openflutterecommerce/screens/cart/cart_screen.dart';
-import 'package:openflutterecommerce/screens/categories/categories_screen.dart';
-import 'package:openflutterecommerce/screens/favorites/favorites.dart';
-import 'package:openflutterecommerce/screens/home/home_screen.dart';
 
-import 'package:openflutterecommerce/screens/profile/profile_screen.dart';
-import 'package:openflutterecommerce/screens/signin/forget_password_screen.dart';
-import 'package:openflutterecommerce/screens/splash_screen.dart';
 
 import 'features/authentication/authentication.dart';
 import 'config/routes.dart';
 import 'features/forget_password/forget_password.dart';
 import 'features/sign_up/sign_up.dart';
-import 'screens/checkout/checkout_screen.dart';
-import 'screens/home/home_screen.dart';
 import 'features/sign_in/sign_in.dart';
-import 'screens/signin/signin_screen.dart';
-import 'screens/signin/signup_screen.dart';
+import 'presentation/features/cart/cart_screen.dart';
+import 'presentation/features/categories/categories_screen.dart';
+import 'presentation/features/checkout/checkout_screen.dart';
+import 'presentation/features/favorites/favorites_screen.dart';
+import 'presentation/features/home/home_screen.dart';
+import 'presentation/features/profile/profile_screen.dart';
+import 'presentation/features/signin/forget_password_screen.dart';
+import 'presentation/features/signin/signin_screen.dart';
+import 'presentation/features/signin/signup_screen.dart';
+import 'presentation/features/splash_screen.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
