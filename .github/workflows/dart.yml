@@ -7,22 +7,23 @@ on:
     branches: [ dev_cicd_tests ]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    container:
-      image:  google/dart:latest
-
+  
+  test:
+    #The type of machine to run the job on. [windows,macos, ubuntu , self-hosted]
+    runs-on: macos-latest
+    #sequence of tasks called
     steps:
-    - uses: actions/checkout@v2
-    - uses: subosito/flutter-action@v1
-      with:
-        flutter-version: '1.12.14'
-        channel: 'dev'
-    - name: Install dependencies
-      run: flutter pub get
-    - name: Static analysis
-      run: flutter  analyze
-    - name: Running tests
-      run: flutter test --coverage
+      # The branch or tag ref that triggered the workflow will be checked out.
+      # https://github.com/actions/checkout
+      - uses: actions/checkout@v1
+      # Setup a flutter environment.
+      # https://github.com/marketplace/actions/flutter-action
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.12.14'
+          channel: 'dev'
+      - run: flutter pub get
+      - name: Static analysis
+        run: flutter  analyze
+      - name: Running tests
+        run: flutter test --coverage
