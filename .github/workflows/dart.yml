@@ -23,7 +23,8 @@ jobs:
           flutter-version: '1.15.18'
           channel: 'dev'
       - run: flutter pub get
-      #- name: Static analysis
-      #  run: flutter  analyze
-      - name: Running tests
-        run: flutter run -t test/tests.dart
+      - name: Static analysis
+        run: flutter analyze
+      # - name: Running tests
+      # We can run SQLite tests only on real device
+      #  run: flutter run -t test/tests.dart

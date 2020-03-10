@@ -147,7 +147,7 @@ void main() {
       await productDataSource.deleteAll();
 
       List<ProductEntity> allProducts = await productDataSource.all();
-      expect(allProducts.length == 0, true);
+      expect(allProducts.isEmpty, true);
     });
 
     test('test: delete a product', () async {
@@ -175,7 +175,7 @@ void main() {
       await productDataSource.delete(1);
 
       List<ProductEntity> allProducts = await productDataSource.all();
-      expect(allProducts.length == 0, true);
+      expect(allProducts.isEmpty, true);
     });
 
     test('test: get all products', () async {
