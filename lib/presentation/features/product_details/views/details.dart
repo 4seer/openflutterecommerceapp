@@ -186,101 +186,109 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   void _showSelectSizeBottomSheet(BuildContext context, ProductBloc bloc) {
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(34), topRight: Radius.circular(34)),
         ),
-        builder: (BuildContext context) => Container(
-              height: 472,
-              padding: AppSizes.bottomSheetPadding,
-              decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(34),
-                      topRight: Radius.circular(34)),
-                  boxShadow: []),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Container(
-                    height: 6,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    'Select size',
-                    style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 18,
-                  ),
-                  Container(
-                    //height: 250,
-                    child: IgnorePointer(
-                      child: GridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 3,
-                        childAspectRatio: 100 / 60,
-                        children: widget.product.sizes
-                            .map((String value) => InkWell(
-                                  onTap: () => {
-                                    bloc..add(ProductSetSizeEvent(size: value))
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: AppColors.darkGray),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15.0))),
-                                    child: Center(
-                                      child: Text(
-                                        value,
-                                        style: TextStyle(fontSize: 15.0),
-                                      ),
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
+        builder: (BuildContext context) => FractionallySizedBox(
+              heightFactor: 0.62,
+              child: Container(
+                padding: AppSizes.bottomSheetPadding,
+                decoration: BoxDecoration(
+                    color: AppColors.background,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(34),
+                        topRight: Radius.circular(34)),
+                    boxShadow: []),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Container(
+                        height: 6,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          color: AppColors.lightGray,
+                          borderRadius: BorderRadius.circular(3),
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        'Select size',
+                        style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 18,
+                      ),
+                      Container(
+                        child: IgnorePointer(
+                          child: GridView.count(
+                            shrinkWrap: true,
+                            crossAxisCount: 3,
+                            childAspectRatio: 100 / 60,
+                            children: widget.product.sizes
+                                .map((String value) => InkWell(
+                                      onTap: () => {
+                                        bloc
+                                          ..add(
+                                              ProductSetSizeEvent(size: value))
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.all(10.0),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: AppColors.darkGray),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(15.0))),
+                                        child: Center(
+                                          child: Text(
+                                            value,
+                                            style: TextStyle(fontSize: 15.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Theme(
+                          data: Theme.of(context)
+                              .copyWith(dividerColor: AppColors.darkGray),
+                          child: Divider()),
+                      ExpansionTile(
+                        title: Text('Size info'),
+                        trailing: Icon(Icons.keyboard_arrow_right),
+                      ),
+                      Theme(
+                          data: Theme.of(context)
+                              .copyWith(dividerColor: AppColors.darkGray),
+                          child: Divider()),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Center(
+                        child: OpenFlutterButton(
+                          title: 'ADD TO CART',
+                          onPressed: (() => {
+                                bloc
+                                  ..add(
+                                      ProductAddToCartEvent(widget.product.id))
+                              }),
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Theme(
-                      data: Theme.of(context)
-                          .copyWith(dividerColor: AppColors.darkGray),
-                      child: Divider()),
-                  ExpansionTile(
-                    title: Text('Size info'),
-                    trailing: Icon(Icons.keyboard_arrow_right),
-                  ),
-                  Theme(
-                      data: Theme.of(context)
-                          .copyWith(dividerColor: AppColors.darkGray),
-                      child: Divider()),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Center(
-                    child: OpenFlutterButton(
-                      title: 'ADD TO CART',
-                      onPressed: (() => {
-                            bloc..add(ProductAddToCartEvent(widget.product.id))
-                          }),
-                    ),
-                  )
-                ],
+                ),
               ),
             ));
   } //modelBottomSheet for selecting size
@@ -290,88 +298,95 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   {
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(34), topRight: Radius.circular(34)),
         ),
-        builder: (BuildContext context) => Container(
-              height: 472,
-              padding: AppSizes.bottomSheetPadding,
-              decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(34),
-                      topRight: Radius.circular(34)),
-                  boxShadow: []),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Container(
-                    height: 6,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    'Select color',
-                    style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 18,
-                  ),
-                  Container(
-                    //height: 250,
-                    child: IgnorePointer(
-                      child: GridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 3,
-                        childAspectRatio: 100 / 60,
-                        children: widget.product.colors
-                            .map((String value) => GestureDetector(
-                                  onTap: () => (() => {
-                                        bloc
-                                          ..add(ProductSetColorEvent(
-                                              color: value))
-                                      }),
-                                  child: Container(
-                                    margin: EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: AppColors.darkGray),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15.0))),
-                                    child: Center(
-                                      child: Text(
-                                        value,
-                                        style: TextStyle(fontSize: 15.0),
-                                      ),
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
+        builder: (BuildContext context) => FractionallySizedBox(
+              heightFactor: 0.45,
+              child: Container(
+                padding: AppSizes.bottomSheetPadding,
+                decoration: BoxDecoration(
+                    color: AppColors.background,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(34),
+                        topRight: Radius.circular(34)),
+                    boxShadow: []),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Container(
+                        height: 6,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          color: AppColors.lightGray,
+                          borderRadius: BorderRadius.circular(3),
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        'Select color',
+                        style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 18,
+                      ),
+                      Container(
+                        //height: 250,
+                        child: IgnorePointer(
+                          child: GridView.count(
+                            shrinkWrap: true,
+                            crossAxisCount: 3,
+                            childAspectRatio: 100 / 60,
+                            children: widget.product.colors
+                                .map((String value) => GestureDetector(
+                                      onTap: () => (() => {
+                                            bloc
+                                              ..add(ProductSetColorEvent(
+                                                  color: value))
+                                          }),
+                                      child: Container(
+                                        margin: EdgeInsets.all(10.0),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: AppColors.darkGray),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(15.0))),
+                                        child: Center(
+                                          child: Text(
+                                            value,
+                                            style: TextStyle(fontSize: 15.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Center(
+                        child: OpenFlutterButton(
+                          title: 'ADD TO CART',
+                          onPressed: (() => {
+                                bloc
+                                  ..add(
+                                      ProductAddToCartEvent(widget.product.id))
+                              }),
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Center(
-                    child: OpenFlutterButton(
-                      title: 'ADD TO CART',
-                      onPressed: (() => {
-                            bloc..add(ProductAddToCartEvent(widget.product.id))
-                          }),
-                    ),
-                  )
-                ],
+                ),
               ),
             ));
   }
