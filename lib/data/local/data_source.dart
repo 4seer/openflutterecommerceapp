@@ -85,7 +85,7 @@ abstract class DataSource {
     await db.close();
   }
 
-  checkDatabaseConnection() {
+  void checkDatabaseConnection() {
     if (db == null) {
       throw Exception(
           'No open connection to database - call .open() on the datasource to establish a connection to the database');
