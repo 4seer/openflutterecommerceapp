@@ -30,8 +30,8 @@ class ProductRepository {
         title: 'Pullover',
         categoryTitle: 'Dorothy Perkins',
         isNew: true,
-        sizes: ['Red', 'Black', 'White', 'Yellow'],
-        colors: ['XS', 'S', 'M', 'L', 'XL'],
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
+        colors: ['Red', 'Black', 'White', 'Yellow'],
         description:
             "Lorem ipsum dolor amet ennui chia synth mixtape wolf forage brooklyn pug you probably haven't heard of them lumbersexual, iceland tilde. Poke tumeric readymade brunch, mustache banh mi man bun bushwick celiac hoodie mumblecore",
         ratingDetail: [
