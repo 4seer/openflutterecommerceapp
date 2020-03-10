@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/screens/signin/forget_password.dart';
-import 'package:openflutterecommerce/screens/signin/signup.dart';
+import 'package:openflutterecommerce/features/forget_password/forget_password.dart';
+import 'package:openflutterecommerce/features/sign_up/sign_up.dart';
 import 'package:openflutterecommerce/widgets/widgets.dart';
 
 import '../../config/routes.dart';
@@ -35,15 +35,30 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         iconTheme: IconThemeData(color: AppColors.black),
       ),
       backgroundColor: AppColors.background,
-      body: BlocConsumer<ForgetPasswordBloc, SignInState>(
+      body: BlocConsumer<ForgetPasswordBloc, ForgotPasswordState>(
         listener: (context, state) {
-          if (state is FinishedState) Navigator.of(context).pop();
+          // on success push back
+          if (state is ForgotPasswordFinishedState) {
+            Navigator.of(context).pop();
+          }
+          // on failure show a snackbar
+          if (state is ForgotPasswordErrorState) {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                content: Text('${state.error}'),
+                backgroundColor: Colors.red,
+                duration: Duration(seconds: 3),
+              ),
+            );
+          }
         },
         builder: (context, state) {
-          if (state is ProcessingState)
+          // show loading screen while processing
+          if (state is ForgotPasswordProcessingState) {
             return Center(
               child: CircularProgressIndicator(),
             );
+          }
           return SingleChildScrollView(
             child: Container(
               height: height * 0.9,
@@ -82,26 +97,29 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ),
                   ),
                   Padding(
-                      padding: EdgeInsets.symmetric(horizontal: width * 0.2),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          OpenFlutterServiceButton(
-                            serviceType: ServiceType.Google,
-                            onPressed: () {
-                              BlocProvider.of<SignUpBloc>(context)
-                                  .add(SignUpWithGoogle());
-                            },
-                          ),
-                          OpenFlutterServiceButton(
-                            serviceType: ServiceType.Facebook,
-                            onPressed: () {
-                              BlocProvider.of<SignUpBloc>(context)
-                                  .add(SignUpWithFB());
-                            },
-                          ),
-                        ],
-                      )),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.2),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        OpenFlutterServiceButton(
+                          serviceType: ServiceType.Google,
+                          onPressed: () {
+                            BlocProvider.of<SignUpBloc>(context).add(
+                              SignUpPressedGoogle(),
+                            );
+                          },
+                        ),
+                        OpenFlutterServiceButton(
+                          serviceType: ServiceType.Facebook,
+                          onPressed: () {
+                            BlocProvider.of<SignUpBloc>(context).add(
+                              SignUpPressedFacebook(),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -119,8 +137,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     if (emailKey.currentState.validate() != null) {
       return;
     }
-    BlocProvider.of<SignUpBloc>(context).add(SendEmailPressed(
-      emailController.text,
-    ));
+    BlocProvider.of<ForgetPasswordBloc>(context).add(
+      ForgotPasswordPressed(
+        emailController.text,
+      ),
+    );
   }
 }
