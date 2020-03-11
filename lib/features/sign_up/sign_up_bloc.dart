@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/data/fake_repositories/models/app_user.dart';
+import 'package:openflutterecommerce/data/remote/repositories/user_repository.dart';
 import 'package:openflutterecommerce/features/authentication/authentication.dart';
-import 'package:openflutterecommerce/repos/user_repository.dart';
 
 import 'sign_up.dart';
 
