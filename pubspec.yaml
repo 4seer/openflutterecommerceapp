@@ -36,6 +36,7 @@ dependencies:
   pedantic: ^1.9.0
   sqflite:
   path:
+  http: ^0.12.0+4
 
 dev_dependencies:
   flutter_test:

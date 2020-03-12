@@ -4,7 +4,12 @@
  * @see user_repository.dart
  */
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:openflutterecommerce/data/remote/constants.dart';
+import 'package:openflutterecommerce/data/remote/utils.dart';
 import 'package:openflutterecommerce/domain/entities/user/user_entity.dart';
 
 class UserRepository {
@@ -14,14 +19,18 @@ class UserRepository {
     @required String email,
     @required String password,
   }) async {
-    try {
-      // TODO api call for user information
-      await Future.delayed(Duration(seconds: 2));
+    var route = HttpClient().createUri(endpointAuthToken);
+    var data = <String, String>{
+      'username': email,
+      'password': password,
+    };
 
-      return 'token';
-    } catch (error) {
-      rethrow;
+    var response = await http.post(route, body: data);
+    Map jsonResponse = json.decode(response.body);
+    if (response.statusCode != 200) {
+      throw jsonResponse['message'];
     }
+    return jsonResponse['token'];
   }
 
   /// Sign up with [username] and [password] and return

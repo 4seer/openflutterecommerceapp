@@ -27,7 +27,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     if (event is SignInPressed) {
       yield SignInProcessingState();
       try {
-        final token = await userRepository.signIn(
+        var token = await userRepository.signIn(
           email: event.email,
           password: event.password,
         );
