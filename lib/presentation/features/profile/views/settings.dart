@@ -87,7 +87,7 @@ class _SettingsViewState extends State<SettingsView> {
                     controller: _fullNameController,
                     hint: 'Full Name',
                     horizontalPadding: 0,
-                    onValueChanged: (value) => settingsBloc.add(
+                    onValueChanged: (value) => settingsBloc..add(
                         UpdateFullNameEvent(fullName: value.toString().trim())),
                   ),
                   SizedBox(
@@ -166,7 +166,7 @@ class _SettingsViewState extends State<SettingsView> {
                         trackColor: AppColors.lightGray,
                         value: state.settings.notifyArrivals,
                         activeColor: AppColors.success,
-                        onChanged: (newValue) => settingsBloc.add(
+                        onChanged: (newValue) => settingsBloc..add(
                             UpdateNotifyArrivalsEvent(
                                 notifyArrivals: newValue)),
                       ),
@@ -186,7 +186,7 @@ class _SettingsViewState extends State<SettingsView> {
                         trackColor: AppColors.lightGray,
                         value: state.settings.notifyDelivery,
                         activeColor: AppColors.success,
-                        onChanged: (newValue) => settingsBloc.add(
+                        onChanged: (newValue) => settingsBloc..add(
                             UpdateNotifyDeliveryEvent(
                                 notifyDelivery: newValue)),
                       ),
