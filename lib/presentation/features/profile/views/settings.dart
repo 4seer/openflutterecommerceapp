@@ -316,7 +316,7 @@ class _SettingsViewState extends State<SettingsView> {
                             OpenFlutterButton(
                                 title: 'Save Password',
                                 height: 48,
-                                onPressed: () => passwordBloc.add(
+                                onPressed: () => passwordBloc..add(
                                     ChangePasswordEvent(
                                         currentPassword:
                                             _currentPasswordController.text
