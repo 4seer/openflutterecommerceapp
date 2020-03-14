@@ -86,7 +86,7 @@ void main() {
       await dataSource.deleteAll();
 
       List<PromoCodeEntity> allData = await dataSource.all();
-      expect(allData.length == 0, true);
+      expect(allData.isEmpty, true);
     });
 
     test('test: delete a record in promocode table', () async {
@@ -104,7 +104,7 @@ void main() {
       await dataSource.delete(1);
 
       List<PromoCodeEntity> allData = await dataSource.all();
-      expect(allData.length == 0, true);
+      expect(allData.isEmpty, true);
     });
 
     test('test: get all records in promocode table', () async {

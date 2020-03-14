@@ -50,7 +50,7 @@ void main() {
       await dataSource.deleteAll();
 
       List<ProductHashTagEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: delete a record in ProductHashTag table', () async {
@@ -62,7 +62,7 @@ void main() {
       await dataSource.delete(1);
 
       List<ProductHashTagEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: get all records in ProductHashTag table', () async {

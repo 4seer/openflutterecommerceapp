@@ -80,7 +80,7 @@ void main() {
       await dataSource.deleteAll();
 
       List<ProductCategoryEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: delete a record in ProductCategory table', () async {
@@ -97,7 +97,7 @@ void main() {
       await dataSource.delete(1);
 
       List<ProductCategoryEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: get all records in ProductCategory table', () async {
