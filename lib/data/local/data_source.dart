@@ -1,7 +1,8 @@
+import 'package:openflutterecommerce/domain/entities/entity.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
 import 'config.dart';
-import 'package:openflutterecommerce/domain/entities/entity.dart';
 
 abstract class DataSource {
   Database db;
@@ -85,7 +86,7 @@ abstract class DataSource {
     await db.close();
   }
 
-  checkDatabaseConnection() {
+  void checkDatabaseConnection() {
     if (db == null) {
       throw Exception(
           'No open connection to database - call .open() on the datasource to establish a connection to the database');

@@ -63,7 +63,7 @@ void main() {
       await dataSource.deleteAll();
 
       List<ProductParameterEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: delete a record in ProductParameter table', () async {
@@ -77,7 +77,7 @@ void main() {
       await dataSource.delete(1);
 
       List<ProductParameterEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: get all records in ProductParameter table', () async {

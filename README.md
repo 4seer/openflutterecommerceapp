@@ -71,3 +71,12 @@ The example for VS Code is below:
             "type": "dart"
         }
     ]
+
+To check the code quality with Flutter Analyzer (recommended when you want to add something) please run in console:
+
+    flutter analyze
+
+It should give no errors message:
+
+    Analyzing openflutterecommerceapp...
+    No issues found! (ran in 3.5s)

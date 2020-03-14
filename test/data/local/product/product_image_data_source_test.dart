@@ -74,7 +74,7 @@ void main() {
       await dataSource.deleteAll();
 
       List<ProductImageEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: delete a record in ProductImage table', () async {
@@ -90,7 +90,7 @@ void main() {
       await dataSource.delete(1);
 
       List<ProductImageEntity> allRecords = await dataSource.all();
-      expect(allRecords.length == 0, true);
+      expect(allRecords.isEmpty, true);
     });
 
     test('test: get all records in ProductImage table', () async {
@@ -118,7 +118,7 @@ void main() {
       List<ProductImageEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
     });
-    
+
     tearDown(() async {
       await dataSource.close();
     });
