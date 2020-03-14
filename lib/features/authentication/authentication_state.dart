@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/app_user.dart';
 
 abstract class AuthenticationState extends Equatable {
   @override
@@ -8,16 +7,6 @@ abstract class AuthenticationState extends Equatable {
 
 class Uninitialized extends AuthenticationState {}
 
-class Authenticated extends AuthenticationState {
-  final AppUser user;
-
-  Authenticated(this.user);
-
-  @override
-  List<Object> get props => [user.email];
-
-  @override
-  String toString() => 'Authenticated { displayName: ${user.email} }';
-}
+class Authenticated extends AuthenticationState {}
 
 class Unauthenticated extends AuthenticationState {}

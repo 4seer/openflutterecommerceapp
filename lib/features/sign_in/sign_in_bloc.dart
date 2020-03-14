@@ -31,7 +31,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           email: event.email,
           password: event.password,
         );
-        authenticationBloc.add(LoggedIn(AppUser(token: token)));
+        authenticationBloc.add(LoggedIn(token));
         yield SignInFinishedState();
       } catch (error) {
         yield SignInErrorState(error);

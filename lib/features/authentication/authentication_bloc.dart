@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:openflutterecommerce/config/storage.dart';
 
 import 'authentication_event.dart';
 import 'authentication_state.dart';
@@ -12,44 +13,42 @@ class AuthenticationBloc
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
+    // app start
     if (event is AppStarted) {
-      yield* _mapAppStartedToState();
-    }
-    if (event is LoggedIn) {
-      _saveCredentials(event.user.email, event.user.password);
-      yield Authenticated(event.user);
-    }
-    if (event is LoggedOut) {
-      _clearCredentials();
-      yield Unauthenticated();
-    }
-  }
-
-  Stream<AuthenticationState> _mapAppStartedToState() async* {
-    try {
-      final credentials = await _getSavedCredentials();
-      print("credentials loaded $credentials");
-      if (credentials == null) {
-        yield Unauthenticated();
+      var token = await _getToken();
+      if (token != '') {
+        Storage().token = token;
+        yield Authenticated();
       } else {
-        //TODO try to login with login repository
         yield Unauthenticated();
       }
-    } catch (_) {
+    }
+
+    if (event is LoggedIn) {
+      Storage().token = event.token;
+      await _saveToken(event.token);
+      yield Authenticated();
+    }
+
+    if (event is LoggedOut) {
+      Storage().token = '';
+      await _deleteToken();
       yield Unauthenticated();
     }
   }
 
-  Future<MapEntry<String, String>> _getSavedCredentials() async {
-    //TODO get credentials from the secure storage
-    return null;
+  /// delete from keystore/keychain
+  Future<void> _deleteToken() async {
+    await Storage().secureStorage.delete(key: 'access_token');
   }
 
-  void _saveCredentials(String email, String password) {
-    //TODO save to a secure storage
+  /// write to keystore/keychain
+  Future<void> _saveToken(String token) async {
+    await Storage().secureStorage.write(key: 'access_token', value: token);
   }
 
-  void _clearCredentials() {
-    //TODO clear secure storage
+  /// read to keystore/keychain
+  Future<String> _getToken() async {
+    return await Storage().secureStorage.read(key: 'access_token') ?? '';
   }
 }

@@ -32,7 +32,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           email: event.email,
           password: event.password,
         );
-        authenticationBloc.add(LoggedIn(AppUser(token: token)));
+        authenticationBloc.add(LoggedIn(token));
         yield SignUpFinishedState();
       } catch (error) {
         yield SignUpErrorState(error);
