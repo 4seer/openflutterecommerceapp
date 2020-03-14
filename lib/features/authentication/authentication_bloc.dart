@@ -10,13 +10,16 @@ class AuthenticationBloc
 
   @override
   Stream<AuthenticationState> mapEventToState(
-      AuthenticationEvent event) async* {
+    AuthenticationEvent event,
+  ) async* {
     if (event is AppStarted) {
       yield* _mapAppStartedToState();
-    } else if (event is LoggedIn) {
+    }
+    if (event is LoggedIn) {
       _saveCredentials(event.user.email, event.user.password);
       yield Authenticated(event.user);
-    } else if (event is LoggedOut) {
+    }
+    if (event is LoggedOut) {
       _clearCredentials();
       yield Unauthenticated();
     }
@@ -25,7 +28,7 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapAppStartedToState() async* {
     try {
       final credentials = await _getSavedCredentials();
-      print('credentials loaded $credentials');
+      print("credentials loaded $credentials");
       if (credentials == null) {
         yield Unauthenticated();
       } else {
