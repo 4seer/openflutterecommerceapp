@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/data/fake_repositories/models/app_user.dart';
+import 'package:openflutterecommerce/data/remote/repositories/user_repository.dart';
 import 'package:openflutterecommerce/features/authentication/authentication.dart';
-import 'package:openflutterecommerce/repos/user_repository.dart';
 
 import 'sign_in.dart';
 
@@ -27,11 +27,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     if (event is SignInPressed) {
       yield SignInProcessingState();
       try {
-        final token = await userRepository.signIn(
+        var token = await userRepository.signIn(
           email: event.email,
           password: event.password,
         );
-        authenticationBloc.add(LoggedIn(AppUser(token: token)));
+        authenticationBloc.add(LoggedIn(token));
         yield SignInFinishedState();
       } catch (error) {
         yield SignInErrorState(error);
