@@ -59,7 +59,7 @@ void main() {
 
       await dataSource.update(dataToUpdate);
 
-      UserEntity updatedData = await dataSource.get(dataToUpdate.id);
+      var updatedData = await dataSource.get(dataToUpdate.id);
       expect(dataToUpdate == updatedData, true);
     });
 
