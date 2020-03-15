@@ -4,10 +4,10 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/category_repository.dart';
 import 'package:openflutterecommerce/data/fake_repositories/hashtag_repository.dart';
 import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
 import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
+import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 

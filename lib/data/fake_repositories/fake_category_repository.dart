@@ -1,41 +1,48 @@
-// Category repository
-// Author: openflutterproject@gmail.com
-// Date: 2020-02-06
+import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
+import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
 
-import 'models/category.dart';
-
-class CategoryRepository {
-  //Get list of categories by type (men/women/kids)
-  //TODO: fetch from local DB
-  List<Category> getCategories(int typeId) {
-    switch (typeId) {
-      case 1:
-      case 2:
-      case 3:
+class FakeCategoryRepository extends CategoryRepository {
+  @override
+  List<Category> getCategories(CategoryType categoryType) {
+    switch (categoryType) {
+      case CategoryType.newItems:
         return [
           Category(
-              id: 1,
-              title: 'New ' + typeId.toString(),
-              image: 'assets/thumbs/category/new.png',
-              typeId: 1),
-          Category(
               id: 2,
-              title: 'Clothes ' + typeId.toString(),
+              title: 'New closes',
               image: 'assets/thumbs/category/clothes.png',
               typeId: 1),
           Category(
               id: 3,
-              title: 'Shoes ' + typeId.toString(),
+              title: 'New shoes',
               image: 'assets/thumbs/category/shoes.png',
               typeId: 1),
           Category(
               id: 4,
-              title: 'Accessories ' + typeId.toString(),
+              title: 'New accessories',
               image: 'assets/thumbs/category/accessories.png',
               typeId: 1),
         ];
-        break;
-      case 4:
+      case CategoryType.sale:
+        return [
+          Category(
+              id: 5,
+              title: 'Clothes for sale',
+              image: 'assets/thumbs/category/clothes.png',
+              typeId: 1),
+          Category(
+              id: 6,
+              title: 'Shoes for sale',
+              image: 'assets/thumbs/category/shoes.png',
+              typeId: 1),
+          Category(
+              id: 7,
+              title: 'Accessories for sale',
+              image: 'assets/thumbs/category/accessories.png',
+              typeId: 1),
+        ];
+      case CategoryType.general:
+      default:
         return [
           Category(id: 10, title: 'Tops', image: '', typeId: 4),
           Category(id: 11, title: 'Shirts & Blouses', image: '', typeId: 4),
@@ -51,13 +58,10 @@ class CategoryRepository {
           Category(id: 21, title: 'Skirts', image: '', typeId: 4),
           Category(id: 22, title: 'Dresses', image: '', typeId: 4),
         ];
-        break;
     }
-    return [];
   }
 
-  //Get category details
-  //TODO: fetch details from local DB
+  @override
   Category getCategoryDetails(int categoryId) {
     return Category(
         id: 1,

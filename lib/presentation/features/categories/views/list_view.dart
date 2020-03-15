@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
+import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
-import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 
 import '../categories.dart';
 import '../categories_bloc.dart';
@@ -16,9 +16,7 @@ import '../categories_event.dart';
 import '../categories_state.dart';
 
 class CategoriesListView extends StatefulWidget {
-  final Function changeView;
-
-  const CategoriesListView({Key key, this.changeView}) : super(key: key);
+  const CategoriesListView({Key key}) : super(key: key);
 
   @override
   _CategoriesListViewState createState() => _CategoriesListViewState();
@@ -50,8 +48,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
               OpenFlutterButton(
                 onPressed: (() => {
                       BlocProvider.of<CategoryBloc>(context)
-                          .add(CategoryShowTilesEvent(1)),
-                      widget.changeView(changeType: ViewChangeType.Forward)
+                          .add(CategoryShowTilesEvent(CategoryType.general)),
                     }),
                 title: 'VIEW ALL ITEMS',
                 width: widgetWidth,
@@ -62,13 +59,9 @@ class _CategoriesListViewState extends State<CategoriesListView> {
                   top: AppSizes.sidePadding,
                 ),
               ),
-              state.isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Column(
-                      children: buildCategoryList(state.categories),
-                    )
+              Column(
+                children: buildCategoryList(state.categories),
+              )
             ],
           ),
         );

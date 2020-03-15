@@ -5,6 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/data/fake_repositories/fake_category_repository.dart';
+import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
 import 'package:openflutterecommerce/presentation/features/splash_screen.dart';
 
 import 'config/routes.dart';
@@ -47,12 +49,22 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = SimpleBlocDelegate();
-  runApp(BlocProvider<AuthenticationBloc>(
+  runApp(
+    BlocProvider<AuthenticationBloc>(
       create: (context) => AuthenticationBloc()..add(AppStarted()),
-      child: LocalizedApp(
-        delegate,
-        OpenFlutterEcommerceApp(),
-      )));
+      child: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<CategoryRepository>(
+            create: (context) => FakeCategoryRepository(),
+          ),
+        ],
+        child: LocalizedApp(
+          delegate,
+          OpenFlutterEcommerceApp(),
+        ),
+      ),
+    ),
+  );
 }
 
 class OpenFlutterEcommerceApp extends StatelessWidget {
@@ -68,6 +80,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             localizationDelegate,
           ],
+          onGenerateRoute: _registerRoutesWithParameters,
           supportedLocales: localizationDelegate.supportedLocales,
           debugShowCheckedModeBanner: false,
           locale: localizationDelegate.currentLocale,
@@ -87,7 +100,6 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
       OpenFlutterEcommerceRoutes.signup: (context) => _buildSignUpBloc(),
       OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
           _buildForgetPasswordBloc(),
-      OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
       OpenFlutterEcommerceRoutes.profile: (context) =>
           BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) {
@@ -121,5 +133,24 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
       create: (context) => SignUpBloc(),
       child: SignUpScreen(),
     );
+  }
+
+  Route _registerRoutesWithParameters(RouteSettings settings) {
+    if (settings.name == OpenFlutterEcommerceRoutes.shop) {
+      final CategoriesParameters args = settings.arguments;
+      return MaterialPageRoute(
+        builder: (context) {
+          return CategoriesScreen(
+            parameters: args,
+          );
+        },
+      );
+    } else {
+      return MaterialPageRoute(
+        builder: (context) {
+          return HomeScreen();
+        },
+      );
+    }
   }
 }

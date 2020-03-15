@@ -4,25 +4,41 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/category_repository.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
+import 'package:openflutterecommerce/presentation/widgets/loading_view.dart';
+import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import 'categories.dart';
 
 class CategoriesScreen extends StatefulWidget {
+  final CategoriesParameters parameters;
+
+  const CategoriesScreen({Key key, this.parameters}) : super(key: key);
+
   @override
   _CategoriesScreenState createState() => _CategoriesScreenState();
+}
+
+class CategoriesParameters {
+  final CategoryType category;
+
+  const CategoriesParameters(this.category);
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
+    print("widget parameters at categories screen ${widget.parameters}");
     return SafeArea(
         child: BlocProvider<CategoryBloc>(
             create: (context) {
-              return CategoryBloc(categoryRepository: CategoryRepository())
-                ..add(CategoryShowListEvent(4));
+              return CategoryBloc(
+                  categoryRepository:
+                      RepositoryProvider.of<CategoryRepository>(context))
+                ..add(CategoryShowListEvent(widget.parameters == null
+                    ? CategoryType.general
+                    : widget.parameters.category));
             },
             child: CategoriesWrapper()));
   }
@@ -37,20 +53,25 @@ class _CategoriesWrapperState
     extends OpenFlutterWrapperState<CategoriesWrapper> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CategoryBloc, CategoryState>(
-        builder: (BuildContext context, CategoryState state) {
-      return getPageView(<Widget>[
-        buildListScreen(context),
-        CategoriesTileView(changeView: changePage),
-      ]);
-    });
+    return BlocListener<CategoryBloc, CategoryState>(
+        child: getPageView(<Widget>[
+          LoadingView(),
+          buildListScreen(context),
+          CategoriesTileView(changeView: changePage),
+        ]),
+        listener: (BuildContext context, CategoryState state) {
+          final index = state is CategoryLoadingState
+              ? 0
+              : state is CategoryListViewState ? 1 : 2;
+          changePage(changeType: ViewChangeType.Exact, index: index);
+        });
   }
 
   Widget buildListScreen(BuildContext context) {
     return OpenFlutterScaffold(
       background: null,
       title: 'Categories',
-      body: CategoriesListView(changeView: changePage),
+      body: CategoriesListView(),
       bottomMenuIndex: 1,
     );
   }

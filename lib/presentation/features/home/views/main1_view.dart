@@ -3,11 +3,14 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
+import 'package:openflutterecommerce/presentation/features/categories/categories.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 class Main1View extends StatefulWidget {
   final List<Product> products;
@@ -68,7 +71,10 @@ class _Main1ViewState extends State<Main1View> {
             width: widgetWidth,
             title: 'New',
             linkText: 'View All',
-            onLinkTap: (() => {}),
+            onLinkTap: () => {
+              Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.shop,
+                  arguments: CategoriesParameters(CategoryType.newItems))
+            },
             description: 'You’ve never seen it before!',
           ),
           OpenFlutterProductListView(

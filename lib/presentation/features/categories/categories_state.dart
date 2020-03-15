@@ -5,54 +5,51 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
+import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
 
 @immutable
 abstract class CategoryState extends Equatable {
+  final CategoryType type;
+
+  CategoryState({this.type = CategoryType.general});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [type];
 }
 
 @immutable
-class CategoryInitialState extends CategoryState {
+class CategoryLoadingState extends CategoryState {
   @override
   String toString() => 'CategoryInitialState';
 }
 
 @immutable
-class CategoryLoadedState extends CategoryState {
+abstract class CategoryViewState extends CategoryState {
   final List<Category> categories;
-  final bool isLoading;
-  final int typeId;
 
-  CategoryLoadedState({this.typeId, this.categories, this.isLoading});
+  CategoryViewState({CategoryType categoryType, this.categories})
+      : super(type: categoryType);
 
-  CategoryLoadedState copyWith(
-      {int typeId, List<Category> categories, bool loading}) {
-    return CategoryLoadedState(
-        typeId: typeId ?? this.typeId,
-        categories: categories ?? this.categories,
-        isLoading: loading ?? isLoading);
-  }
+  CategoryViewState copyWith();
 
   @override
   String toString() => 'CategoryLoadedState';
 
   @override
-  List<Object> get props => [categories, isLoading, typeId];
+  List<Object> get props => [categories, type];
 }
 
 @immutable
-class CategoryListViewState extends CategoryLoadedState {
-  CategoryListViewState({int typeId, List<Category> categories, bool isLoading})
-      : super(typeId: typeId, categories: categories, isLoading: isLoading);
+class CategoryListViewState extends CategoryViewState {
+  CategoryListViewState(
+      {CategoryType type, List<Category> categories, bool isLoading})
+      : super(categoryType: type, categories: categories);
 
   @override
   CategoryListViewState copyWith(
-      {int typeId, List<Category> categories, bool loading}) {
+      {CategoryType type, List<Category> categories}) {
     return CategoryListViewState(
-        typeId: typeId ?? this.typeId,
-        categories: categories ?? this.categories,
-        isLoading: loading ?? isLoading);
+        type: type ?? this.type, categories: categories ?? this.categories);
   }
 
   @override
@@ -60,24 +57,21 @@ class CategoryListViewState extends CategoryLoadedState {
 }
 
 @immutable
-class CategoryTileViewState extends CategoryLoadedState {
+class CategoryTileViewState extends CategoryViewState {
   CategoryTileViewState({
-    int typeId,
+    CategoryType type,
     List<Category> categories,
     bool isLoading,
   }) : super(
-          typeId: typeId,
+          categoryType: type,
           categories: categories,
-          isLoading: isLoading,
         );
 
   @override
   CategoryTileViewState copyWith(
-      {int typeId, List<Category> categories, bool loading}) {
+      {CategoryType type, List<Category> categories, bool loading}) {
     return CategoryTileViewState(
-        typeId: typeId ?? this.typeId,
-        categories: categories ?? this.categories,
-        isLoading: loading ?? isLoading);
+        type: type ?? this.type, categories: categories ?? this.categories);
   }
 
   @override

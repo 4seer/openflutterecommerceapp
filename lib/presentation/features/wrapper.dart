@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 enum ViewChangeType { Start, Forward, Backward, Exact }
 
-class OpenFlutterWrapperState<StatefullWidget> extends State {
+class OpenFlutterWrapperState<T> extends State {
   PageController _viewController;
 
   PageView getPageView(List<Widget> widgets) {
