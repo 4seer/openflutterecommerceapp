@@ -58,7 +58,39 @@ Functionality description and discussion
 
 [E-commerce App Mobile App Local Database Structure](https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-local-database-4744b61264c7)
 
+## Flutter Version
 
+You may need to update flutter to dev or beta for the most recent updates to work. Use following commands to upgrade flutter:
+
+```
+flutter channel dev
+flutter upgrade
+```
+or
+
+```
+flutter channel beta
+flutter upgrade
+```
+
+## Tests
+To run tests use command below:
+
+```
+flutter run -t test/test.dart
+```
+
+## Linter
+To check the code quality with Flutter Analyzer (recommended when you want to add something) please run in console:
+
+    flutter analyze
+
+It should give no errors message:
+
+    Analyzing openflutterecommerceapp...
+    No issues found! (ran in 3.5s)
+
+## IDE settings
 You need to update the configuration of your IDE to tell the location of the entry point.
 
 The example for VS Code is below:
@@ -71,12 +103,3 @@ The example for VS Code is below:
             "type": "dart"
         }
     ]
-
-To check the code quality with Flutter Analyzer (recommended when you want to add something) please run in console:
-
-    flutter analyze
-
-It should give no errors message:
-
-    Analyzing openflutterecommerceapp...
-    No issues found! (ran in 3.5s)
