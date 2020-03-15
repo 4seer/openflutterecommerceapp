@@ -118,7 +118,7 @@ void main() {
       List<ProductImageEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
     });
-    
+
     tearDown(() async {
       await dataSource.close();
     });
