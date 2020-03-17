@@ -71,7 +71,29 @@ flutter:
     - assets/thumbs/category/
     - assets/i18n/
     - assets/profile/
-  
+
+  fonts:
+    - family: Metropolis
+      fonts:
+        - asset: fonts/Metropolis-Black.otf
+        - asset: fonts/Metropolis-BlackItalic.otf
+        - asset: fonts/Metropolis-Bold.otf
+        - asset: fonts/Metropolis-BoldItalic.otf
+        - asset: fonts/Metropolis-ExtraBold.otf
+        - asset: fonts/Metropolis-ExtraBoldItalic.otf
+        - asset: fonts/Metropolis-ExtraLight.otf
+        - asset: fonts/Metropolis-ExtraLightItalic.otf
+        - asset: fonts/Metropolis-Light.otf
+        - asset: fonts/Metropolis-LightItalic.otf
+        - asset: fonts/Metropolis-Medium.otf
+        - asset: fonts/Metropolis-MediumItalic.otf
+        - asset: fonts/Metropolis-Regular.otf
+        - asset: fonts/Metropolis-RegularItalic.otf
+        - asset: fonts/Metropolis-SemiBold.otf
+        - asset: fonts/Metropolis-SemiBoldItalic.otf
+        - asset: fonts/Metropolis-Thin.otf
+        - asset: fonts/Metropolis-ThinItalic.otf
+          style: normal
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

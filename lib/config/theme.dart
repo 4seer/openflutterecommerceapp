@@ -50,44 +50,46 @@ class OpenFlutterEcommerceTheme {
           color: AppColors.white,
           iconTheme: IconThemeData(color: AppColors.black),
           textTheme: theme.textTheme.copyWith(
-              caption: TextStyle(color: AppColors.black, fontSize: 18))),
+              caption: TextStyle(color: AppColors.black, fontSize: 18, fontFamily: 'Metropolis'))),
       textTheme: theme.textTheme.copyWith(
         //over image white text
         headline1: theme.textTheme.headline1
-            .copyWith(fontSize: 48, color: AppColors.white),
+            .copyWith(fontSize: 48, color: AppColors.white, fontFamily: 'Metropolis'),
         headline2: theme.textTheme.headline2.copyWith(
-            fontSize: 24, color: AppColors.black, fontWeight: FontWeight.w700),
+            fontSize: 24, color: AppColors.black, fontWeight: FontWeight.w700, fontFamily: 'Metropolis'),
 
         //product title
         headline3: theme.textTheme.headline3.copyWith(
-            color: AppColors.black, fontSize: 16, fontWeight: FontWeight.bold),
+            color: AppColors.black, fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'Metropolis'),
 
-        headline4: theme.textTheme.headline4,
+        headline4: theme.textTheme.headline4.copyWith(fontFamily: 'Metropolis'),
         //product price
         headline5: theme.textTheme.headline5
-            .copyWith(color: AppColors.lightGray, fontSize: 14),
-        headline6: theme.textTheme.headline6,
+            .copyWith(color: AppColors.lightGray, fontSize: 14, fontFamily: 'Metropolis'),
+        headline6: theme.textTheme.headline6.copyWith(fontFamily: 'Metropolis'),
 
         subtitle1: theme.textTheme.headline1
-            .copyWith(fontSize: 18, color: AppColors.black),
+            .copyWith(fontSize: 18, color: AppColors.black, fontFamily: 'Metropolis'),
         subtitle2: theme.textTheme.headline1.copyWith(
-            fontSize: 24, color: AppColors.white, fontWeight: FontWeight.bold),
+            fontSize: 24, color: AppColors.white, fontWeight: FontWeight.bold, fontFamily: 'Metropolis'),
         //red button with white text
         button: theme.textTheme.button
-            .copyWith(fontSize: 14, color: AppColors.white),
+            .copyWith(fontSize: 14, color: AppColors.white, fontFamily: 'Metropolis'),
         //black caption title
         caption: theme.textTheme.caption.copyWith(
           fontSize: 34,
-          color: AppColors.black,
+          color: AppColors.black, fontFamily: 'Metropolis'
         ),
         //light gray small text
         bodyText1: theme.textTheme.bodyText1.copyWith(
           color: AppColors.lightGray,
-          fontSize: 11,
+          fontSize: 11, fontFamily: 'Metropolis'
         ),
         //view all link
         bodyText2: theme.textTheme.bodyText2
-            .copyWith(color: AppColors.black, fontSize: 11),
+            .copyWith(color: AppColors.black, fontSize: 11, fontFamily: 'Metropolis'),
+      ).apply(
+        fontFamily: 'Metropolis'
       ),
       buttonTheme: theme.buttonTheme.copyWith(
         minWidth: 50,
