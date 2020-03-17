@@ -34,6 +34,8 @@ class AppColors {
   static const green = Color(0xFF2AA952);
 }
 
+// Ref: Font Weights: https://api.flutter.dev/flutter/dart-ui/FontWeight-class.html
+// Ref: Font Weights for TextTheme: https://api.flutter.dev/flutter/material/TextTheme-class.html
 class OpenFlutterEcommerceTheme {
   static ThemeData of(context) {
     var theme = Theme.of(context);
@@ -50,44 +52,44 @@ class OpenFlutterEcommerceTheme {
           color: AppColors.white,
           iconTheme: IconThemeData(color: AppColors.black),
           textTheme: theme.textTheme.copyWith(
-              caption: TextStyle(color: AppColors.black, fontSize: 18, fontFamily: 'Metropolis'))),
+              caption: TextStyle(color: AppColors.black, fontSize: 18, fontFamily: 'Metropolis', fontWeight: FontWeight.w400))),
       textTheme: theme.textTheme.copyWith(
         //over image white text
         headline1: theme.textTheme.headline1
-            .copyWith(fontSize: 48, color: AppColors.white, fontFamily: 'Metropolis'),
+            .copyWith(fontSize: 48, color: AppColors.white, fontFamily: 'Metropolis',fontWeight: FontWeight.w300),
         headline2: theme.textTheme.headline2.copyWith(
-            fontSize: 24, color: AppColors.black, fontWeight: FontWeight.w700, fontFamily: 'Metropolis'),
+            fontSize: 24, color: AppColors.black, fontWeight: FontWeight.w300, fontFamily: 'Metropolis'), //
 
         //product title
         headline3: theme.textTheme.headline3.copyWith(
-            color: AppColors.black, fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'Metropolis'),
+            color: AppColors.black, fontSize: 16, fontWeight: FontWeight.w400, fontFamily: 'Metropolis'),
 
-        headline4: theme.textTheme.headline4.copyWith(fontFamily: 'Metropolis'),
+        headline4: theme.textTheme.headline4.copyWith(fontFamily: 'Metropolis', fontWeight: FontWeight.w400),
         //product price
         headline5: theme.textTheme.headline5
-            .copyWith(color: AppColors.lightGray, fontSize: 14, fontFamily: 'Metropolis'),
-        headline6: theme.textTheme.headline6.copyWith(fontFamily: 'Metropolis'),
+            .copyWith(color: AppColors.lightGray, fontSize: 14, fontFamily: 'Metropolis', fontWeight: FontWeight.w400),
+        headline6: theme.textTheme.headline6.copyWith(fontFamily: 'Metropolis', fontWeight: FontWeight.w500),
 
         subtitle1: theme.textTheme.headline1
-            .copyWith(fontSize: 18, color: AppColors.black, fontFamily: 'Metropolis'),
+            .copyWith(fontSize: 18, color: AppColors.black, fontFamily: 'Metropolis', fontWeight: FontWeight.w400),
         subtitle2: theme.textTheme.headline1.copyWith(
-            fontSize: 24, color: AppColors.white, fontWeight: FontWeight.bold, fontFamily: 'Metropolis'),
+            fontSize: 24, color: AppColors.white, fontFamily: 'Metropolis', fontWeight: FontWeight.w500),
         //red button with white text
         button: theme.textTheme.button
-            .copyWith(fontSize: 14, color: AppColors.white, fontFamily: 'Metropolis'),
+            .copyWith(fontSize: 14, color: AppColors.white, fontFamily: 'Metropolis', fontWeight: FontWeight.w500),
         //black caption title
         caption: theme.textTheme.caption.copyWith(
           fontSize: 34,
-          color: AppColors.black, fontFamily: 'Metropolis'
+          color: AppColors.black, fontFamily: 'Metropolis', fontWeight: FontWeight.w400
         ),
         //light gray small text
         bodyText1: theme.textTheme.bodyText1.copyWith(
           color: AppColors.lightGray,
-          fontSize: 11, fontFamily: 'Metropolis'
+          fontSize: 11, fontFamily: 'Metropolis', fontWeight: FontWeight.w400
         ),
         //view all link
         bodyText2: theme.textTheme.bodyText2
-            .copyWith(color: AppColors.black, fontSize: 11, fontFamily: 'Metropolis'),
+            .copyWith(color: AppColors.black, fontSize: 11, fontFamily: 'Metropolis', fontWeight: FontWeight.w400),
       ).apply(
         fontFamily: 'Metropolis'
       ),
