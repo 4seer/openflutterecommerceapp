@@ -4,11 +4,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/category_repository.dart';
 import 'package:openflutterecommerce/data/fake_repositories/hashtag_repository.dart';
 import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
+import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import 'products.dart';
 import 'views/brands.dart';
@@ -34,7 +34,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
           create: (context) {
             return ProductsBloc(
                 productRepository: ProductRepository(),
-                categoryRepository: CategoryRepository(),
+                categoryRepository:
+                    RepositoryProvider.of<CategoryRepository>(context),
                 hashtagRepository: HashtagRepository())
               ..add(ProductStartEvent(widget.categoryId));
           },
