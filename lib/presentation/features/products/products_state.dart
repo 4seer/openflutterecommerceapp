@@ -4,10 +4,10 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/brand.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/hashtag.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/fake_model/models/brand.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 class ProductStateData {
@@ -48,10 +48,10 @@ class ProductsLoadedState extends ProductState {
   final List<String> selectedSizes;
 
   final List<Category> availableCategories = [
-    Category(id: 1, title: 'Women'),
-    Category(id: 2, title: 'Men'),
-    Category(id: 3, title: 'Boys'),
-    Category(id: 4, title: 'Girls'),
+    Category(1, name: 'Women'),
+    Category(2, name: 'Men'),
+    Category(3, name: 'Boys'),
+    Category(4, name: 'Girls'),
   ];
 
   final List<Category> selectedCategories;

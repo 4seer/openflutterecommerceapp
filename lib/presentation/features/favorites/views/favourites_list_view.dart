@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/scaffold_collapsing.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/scaffold_collapsing.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';

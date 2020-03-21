@@ -4,10 +4,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/cart_repository.dart';
 import 'package:openflutterecommerce/presentation/features/cart/views/cart_view.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
+import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import 'cart.dart';
 
@@ -25,7 +25,9 @@ class _CartScreenState extends State<CartScreen> {
         title: null,
         body: BlocProvider<CartBloc>(
             create: (context) {
-              return CartBloc(productRepository: ProductRepository())
+              return CartBloc(
+                  cartRepository:
+                      RepositoryProvider.of<CartRepository>(context))
                 ..add(CartLoadedEvent());
             },
             child: CartWrapper()),

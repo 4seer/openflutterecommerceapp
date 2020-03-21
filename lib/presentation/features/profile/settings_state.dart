@@ -1,6 +1,6 @@
-import 'package:flutter/widgets.dart';
 import 'package:equatable/equatable.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/settings.dart';
+import 'package:flutter/widgets.dart';
+import 'package:openflutterecommerce/data/fake_model/models/settings.dart';
 
 @immutable
 abstract class SettingsState extends Equatable {

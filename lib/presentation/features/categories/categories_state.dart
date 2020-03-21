@@ -4,17 +4,16 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
-import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
 
 @immutable
 abstract class CategoryState extends Equatable {
-  final CategoryType type;
+  final int parentCategoryId;
 
-  CategoryState({this.type = CategoryType.general});
+  CategoryState({this.parentCategoryId = 0});
 
   @override
-  List<Object> get props => [type];
+  List<Object> get props => [parentCategoryId];
 }
 
 @immutable
@@ -27,30 +26,17 @@ class CategoryLoadingState extends CategoryState {
 abstract class CategoryViewState extends CategoryState {
   final List<Category> categories;
 
-  CategoryViewState({CategoryType categoryType, this.categories})
-      : super(type: categoryType);
-
-  CategoryViewState copyWith();
+  CategoryViewState({int parentCategoryId, this.categories})
+      : super(parentCategoryId: parentCategoryId);
 
   @override
-  String toString() => 'CategoryLoadedState';
-
-  @override
-  List<Object> get props => [categories, type];
+  List<Object> get props => [categories, parentCategoryId];
 }
 
 @immutable
 class CategoryListViewState extends CategoryViewState {
-  CategoryListViewState(
-      {CategoryType type, List<Category> categories, bool isLoading})
-      : super(categoryType: type, categories: categories);
-
-  @override
-  CategoryListViewState copyWith(
-      {CategoryType type, List<Category> categories}) {
-    return CategoryListViewState(
-        type: type ?? this.type, categories: categories ?? this.categories);
-  }
+  CategoryListViewState({int parentCategoryId, List<Category> categories})
+      : super(parentCategoryId: parentCategoryId, categories: categories);
 
   @override
   String toString() => 'CategoryListViewState';
@@ -59,20 +45,12 @@ class CategoryListViewState extends CategoryViewState {
 @immutable
 class CategoryTileViewState extends CategoryViewState {
   CategoryTileViewState({
-    CategoryType type,
+    int parentCategoryId,
     List<Category> categories,
-    bool isLoading,
   }) : super(
-          categoryType: type,
+          parentCategoryId: parentCategoryId,
           categories: categories,
         );
-
-  @override
-  CategoryTileViewState copyWith(
-      {CategoryType type, List<Category> categories, bool loading}) {
-    return CategoryTileViewState(
-        type: type ?? this.type, categories: categories ?? this.categories);
-  }
 
   @override
   String toString() => 'CategoryTileViewState';

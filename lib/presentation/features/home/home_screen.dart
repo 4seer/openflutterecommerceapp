@@ -4,10 +4,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
+import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import 'home.dart';
 
@@ -25,7 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
       title: null,
       body: BlocProvider<HomeBloc>(
           create: (context) {
-            return HomeBloc(productRepository: ProductRepository())
+            return HomeBloc(
+                productRepository:
+                    RepositoryProvider.of<ProductRepository>(context))
               ..add(HomeLoadEvent());
           },
           child: HomeWrapper()),

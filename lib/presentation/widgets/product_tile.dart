@@ -5,13 +5,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
 
 import 'widgets.dart';
 
 class OpenFlutterProductTile extends StatelessWidget {
   final Product product;
+  final Category category;
   final double height;
   final double width;
   final Function(bool) onFavClicked;
@@ -25,6 +27,7 @@ class OpenFlutterProductTile extends StatelessWidget {
   const OpenFlutterProductTile(
       {Key key,
       this.product,
+      this.category,
       this.height,
       this.width,
       this.onFavClicked,
@@ -96,7 +99,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                   bottom: 0,
                   right: 0,
                   child: OpenFlutterFavouriteButton(
-                    favourite: product.favorite,
+                    favourite: product.isFavorite,
                     setFavourite: onFavClicked,
                     size: 36.0,
                     iconSize: 12.0,
@@ -121,7 +124,7 @@ class OpenFlutterProductTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(product.categoryTitle, style: _theme.textTheme.bodyText1),
+              Text(category.name, style: _theme.textTheme.bodyText1),
               Text(product.title, style: _theme.textTheme.headline3),
             ],
           )
@@ -130,7 +133,7 @@ class OpenFlutterProductTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(product.title, style: _theme.textTheme.headline3),
-              Text(product.categoryTitle, style: _theme.textTheme.bodyText1),
+              Text(category.name, style: _theme.textTheme.bodyText1),
             ],
           );
   }
@@ -146,7 +149,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                 padding: EdgeInsets.only(left: AppSizes.sidePadding * 0.45),
               ),
               OpenFlutterProductRating(
-                rating: product.rating,
+                rating: product.averageRating,
                 ratingCount: product.ratingCount,
                 iconSize: 12,
                 alignment: MainAxisAlignment.start,
@@ -159,7 +162,7 @@ class OpenFlutterProductTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               OpenFlutterProductRating(
-                rating: product.rating,
+                rating: product.averageRating,
                 ratingCount: product.ratingCount,
                 iconSize: 12,
                 alignment: MainAxisAlignment.start,
@@ -187,7 +190,9 @@ class OpenFlutterProductTile extends StatelessWidget {
                                 BorderRadius.circular(AppSizes.imageRadius),
                             image: DecorationImage(
                                 fit: BoxFit.fill,
-                                image: AssetImage(product.image))),
+                                image: product.mainImage.isLocal
+                                    ? AssetImage(product.mainImage.address)
+                                    : NetworkImage(product.mainImage.address))),
                         child: Container())),
                 buildTopLabel(product, _theme)
               ],
@@ -195,7 +200,9 @@ class OpenFlutterProductTile extends StatelessWidget {
           : Container(
               width: 80,
               alignment: Alignment.centerLeft,
-              child: Image(image: AssetImage(product.image))),
+              child: product.mainImage.isLocal
+                  ? Image.asset(product.mainImage.address)
+                  : Image.network(product.mainImage.address)),
     );
   }
 

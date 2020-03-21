@@ -3,7 +3,7 @@
 // Date: 2020-02-06
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 
 import 'categories.dart';
 
@@ -22,30 +22,35 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   Stream<CategoryState> mapEventToState(CategoryEvent event) async* {
     if (event is CategoryShowListEvent) {
       if (state is CategoryListViewState) {
-        var state = this.state as CategoryListViewState;
-        if (state.type != event.type) {
+        if (state.parentCategoryId != event.parentCategoryId) {
           yield CategoryLoadingState();
-          var categories = _categoryRepository.getCategories(event.type);
-          yield state.copyWith(categories: categories, type: event.type);
+          final categories = await _categoryRepository.getCategories(
+              parentCategoryId: event.parentCategoryId);
+          yield CategoryListViewState(
+              categories: categories, parentCategoryId: event.parentCategoryId);
         }
       } else {
-        var categories = _categoryRepository.getCategories(event.type);
+        yield CategoryLoadingState();
+        final categories = await _categoryRepository.getCategories(
+            parentCategoryId: event.parentCategoryId);
         yield CategoryListViewState(
-            isLoading: false, type: event.type, categories: categories);
+            parentCategoryId: event.parentCategoryId, categories: categories);
       }
     } else if (event is CategoryShowTilesEvent) {
       if (state is CategoryTileViewState) {
-        var state = this.state as CategoryTileViewState;
-        if (state.type != event.type) {
-          yield state.copyWith(loading: true);
-          var categories = _categoryRepository.getCategories(event.type);
-          yield state.copyWith(
-              categories: categories, loading: false, type: event.type);
+        if (state.parentCategoryId != event.parentCategoryId) {
+          yield CategoryLoadingState();
+          final categories = await _categoryRepository.getCategories(
+              parentCategoryId: event.parentCategoryId);
+          yield CategoryTileViewState(
+              categories: categories, parentCategoryId: event.parentCategoryId);
         }
       } else {
-        var categories = _categoryRepository.getCategories(event.type);
+        yield CategoryLoadingState();
+        final categories = await _categoryRepository.getCategories(
+            parentCategoryId: event.parentCategoryId);
         yield CategoryTileViewState(
-            isLoading: false, type: event.type, categories: categories);
+            parentCategoryId: event.parentCategoryId, categories: categories);
       }
     }
   }

@@ -1,0 +1,21 @@
+// Category model declaration
+// Author: openflutterproject@gmail.com
+// Date: 2020-02-06
+
+import 'package:openflutterecommerce/data/abstract/model/category.dart' as data;
+import 'package:openflutterecommerce/data/abstract/model/commerce_image.dart';
+
+class FakeCategory extends data.Category {
+  FakeCategory(
+      {int id,
+      int parentId,
+      String name,
+      String description,
+      String localImage})
+      : super(id,
+            parentId: parentId,
+            name: name,
+            description: description,
+            image:
+                CommerceImage(0, localImage, 'image of $name', isLocal: true));
+}

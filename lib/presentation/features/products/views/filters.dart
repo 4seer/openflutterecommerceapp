@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/brand.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/fake_model/models/brand.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+
 import '../../wrapper.dart';
 import '../products.dart';
 
@@ -57,7 +58,6 @@ class _ProductFilterViewState extends State<ProductFilterView> {
               label: 'Colors',
             ),
             OpenFlutterSelectValuesBoxes<String>(
-              key: UniqueKey(),
               availableValues: state.availableSizes,
               selectedValues: state.selectedSizes,
               boxWidth: 50,
@@ -68,15 +68,13 @@ class _ProductFilterViewState extends State<ProductFilterView> {
                   }),
             ),
             OpenFlutterSelectValuesBoxes<Category>(
-              key: UniqueKey(),
               boxWidth: 70,
               availableValues: state.availableCategories,
               selectedValues: state.selectedCategories,
               label: 'Categories',
               onClick: ((List<Category> newSelectedValues) => {
-                    bloc
-                      ..add(ProductChangeSelectedCategoriesEvent(
-                          newSelectedValues))
+                    bloc.add(
+                        ProductChangeSelectedCategoriesEvent(newSelectedValues))
                   }),
             ),
             OpenFlutterTextTile(

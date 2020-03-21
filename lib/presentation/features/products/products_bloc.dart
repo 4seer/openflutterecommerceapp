@@ -4,10 +4,10 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/hashtag_repository.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
-import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -29,7 +29,7 @@ class ProductsBloc extends Bloc<ProductEvent, ProductState> {
   Stream<ProductState> mapEventToState(ProductEvent event) async* {
     var data = ProductStateData();
     if (event is ProductStartEvent) {
-      data = getStateData(event.categoryId);
+      data = await getStateData(event.categoryId);
       yield ProductsLoadedState(
           isLoading: false,
           showSortBy: false,
@@ -69,12 +69,12 @@ class ProductsBloc extends Bloc<ProductEvent, ProductState> {
     }
   }
 
-  ProductStateData getStateData(int categoryId) {
+  Future<ProductStateData> getStateData(int categoryId) async {
     var data = ProductStateData();
 
-    data.products = productRepository.getProducts(categoryId);
+    data.products = await productRepository.getProductsInCategory(categoryId);
     data.hashtags = hashtagRepository.getHashtags();
-    data.category = categoryRepository.getCategoryDetails(categoryId);
+    data.category = await categoryRepository.getCategoryDetails(categoryId);
 
     return data;
   }

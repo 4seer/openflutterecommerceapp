@@ -5,9 +5,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
+import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../products.dart';
 
@@ -56,7 +56,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                             padding:
                                 EdgeInsets.only(top: AppSizes.sidePadding)),
                         OpenFlutterBlockHeader(
-                          title: state.data.category.title,
+                          title: state.data.category.name,
                           width: MediaQuery.of(context).size.width,
                         ),
                         Padding(

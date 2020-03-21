@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/cart_product.dart';
-import 'package:openflutterecommerce/presentation/widgets/cart_tile.dart';
+import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
+import 'package:openflutterecommerce/presentation/widgets/data_driven/cart_tile.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../profile_bloc.dart';
@@ -88,7 +88,7 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                           Row(
                             children: <Widget>[
                               Text(
-                                state.orderData.quantity.toString(),
+                                state.orderData.totalQuantity.toString(),
                                 style: _theme.textTheme.headline3,
                               ),
                               Padding(
@@ -132,7 +132,7 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                       ),
                       buildSummaryLine(
                           'Total Amount:',
-                          '\$' + state.orderData.totalAmount.toStringAsFixed(0),
+                          '\$' + state.orderData.totalPrice.toStringAsFixed(0),
                           _theme,
                           width),
                       SizedBox(
@@ -172,7 +172,7 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
 
   List<Widget> _buildCartProductItems(ProfileMyOrderDetailsState state) {
     return <Widget>[
-      for (CartProduct item in state.orderData.products)
+      for (CartItem item in state.orderData.products)
         OpenFlutterCartTile(
           item: item,
           onAddToFav: null,

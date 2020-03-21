@@ -1,34 +1,40 @@
-import 'package:openflutterecommerce/domain/entities/category.dart';
-import 'package:openflutterecommerce/domain/entities/product.dart';
-import 'package:openflutterecommerce/domain/repositories/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 
-class ProductRemoteRepository implements ProductRepository {
+class RemoteProductRepository extends ProductRepository {
   @override
-  Future<List<Product>> getProductsByCategory(Category category) async {
-    var apiProducts = await _simulateApi();
-    return apiProducts.map(_mapApiToEntity);
+  Future<List<Product>> getFavorites() {
+    // TODO: implement getFavorites
+    throw UnimplementedError();
   }
 
-  Product _mapApiToEntity(ProductApiDto e) =>
-      Product(e.identifier, e.productTitle, null);
-
-  Future<List<ProductApiDto>> _simulateApi() async {
-    await Future.delayed(Duration(
-      seconds: 2,
-    ));
-    return [
-      ProductApiDto(1, 'Black T-Short'),
-      ProductApiDto(2, 'Small T-Short'),
-    ];
+  @override
+  Future<Product> getProduct(int id) {
+    // TODO: implement getProduct
+    throw UnimplementedError();
   }
-}
 
-class ProductApiDto {
-  final int identifier;
-  final String productTitle;
+  @override
+  Future<List<Product>> getProductsInCategory(int id) {
+    // TODO: implement getProductsInCategory
+    throw UnimplementedError();
+  }
 
-  ProductApiDto(
-    this.identifier,
-    this.productTitle,
-  );
+  @override
+  Future<List<Product>> getSimilarProducts(int id) {
+    // TODO: implement getSimilarProducts
+    throw UnimplementedError();
+  }
+
+  @override
+  Future addToFavorites(int productId) {
+    // TODO: implement addToFavorites
+    throw UnimplementedError();
+  }
+
+  @override
+  Future removeFromFavorites(int productId) {
+    // TODO: implement removeFromFavorites
+    throw UnimplementedError();
+  }
 }
