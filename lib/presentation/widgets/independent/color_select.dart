@@ -39,15 +39,16 @@ class _OpenFlutterColorSelectState extends State<OpenFlutterColorSelect> {
         padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
       ),
       Container(
-          padding: EdgeInsets.symmetric(vertical: AppSizes.sidePadding),
-          color: AppColors.white,
-          child: Column(children: <Widget>[
-            Container(
-              padding:
-                  EdgeInsets.symmetric(horizontal: AppSizes.sidePadding * 2),
-              child: Row(children: buildColors(context)),
-            )
-          ]))
+        padding: EdgeInsets.symmetric(
+          vertical: AppSizes.sidePadding, 
+          horizontal: AppSizes.sidePadding * 2),
+        width: width,
+        color: AppColors.white,
+        child: Wrap(
+          spacing: AppSizes.sidePadding,
+          children: buildColors(context),
+        ),
+      )
     ]);
   }
 
@@ -55,12 +56,9 @@ class _OpenFlutterColorSelectState extends State<OpenFlutterColorSelect> {
     var colorWidgets = <Widget>[];
     for (var i = 0; i < widget.availableColors.length; i++) {
       colorWidgets.add(
-        Padding(
-          padding: EdgeInsets.only(right: AppSizes.sidePadding),
-          child: InkWell(
-            onTap: (() => {updateSelectedColors(widget.availableColors[i])}),
-            child: buildColorWidget(widget.availableColors[i], context),
-          ),
+        InkWell(
+          onTap: (() => {updateSelectedColors(widget.availableColors[i])}),
+          child: buildColorWidget(widget.availableColors[i], context),
         ),
       );
     }
