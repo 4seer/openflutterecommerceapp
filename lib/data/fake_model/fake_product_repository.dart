@@ -2,6 +2,8 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
+import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/models/product.dart';
 
@@ -9,25 +11,6 @@ class FakeProductRepository extends ProductRepository {
   @override
   Future<FakeProduct> getProduct(int id) async {
     return _productsInside[id];
-  }
-
-  @override
-  Future<List<FakeProduct>> getProductsInCategory(int categoryId) async {
-    return _categoryContent[categoryId]
-        .map((e) => _productsInside[e])
-        .toList(growable: false);
-  }
-
-  @override
-  Future<List<FakeProduct>> getSimilarProducts(int productId) async {
-    int categoryWithProduct = _categoryContent.entries.first.key;
-    for (final mapEntry in _categoryContent.entries) {
-      if (mapEntry.value.contains(productId)) {
-        categoryWithProduct = mapEntry.key;
-        break;
-      }
-    }
-    return getProductsInCategory(categoryWithProduct);
   }
 
   @override
@@ -45,6 +28,26 @@ class FakeProductRepository extends ProductRepository {
   Future removeFromFavorites(int productId) async {
     _productsInside[productId] =
         _productsInside[productId].changeIsFavorite(false);
+  }
+
+  @override
+  Future<List<Product>> getProductsInCategory(int categoryId, {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) async {
+    return _categoryContent[categoryId]
+        .map((e) => _productsInside[e])
+        .toList(growable: false);
+  }
+
+  @override
+  Future<List<Product>> getSimilarProducts(int productId, {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
+
+    int categoryWithProduct = _categoryContent.entries.first.key;
+    for (final mapEntry in _categoryContent.entries) {
+      if (mapEntry.value.contains(productId)) {
+        categoryWithProduct = mapEntry.key;
+        break;
+      }
+    }
+    return getProductsInCategory(categoryWithProduct);
   }
 
   final Map<int, List<int>> _categoryContent = {
