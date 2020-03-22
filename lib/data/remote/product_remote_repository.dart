@@ -28,13 +28,15 @@ class RemoteProductRepository extends ProductRepository {
   }
 
   @override
-  Future<List<Product>> getProductsInCategory(int categoryId, {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
+  Future<List<Product>> getProductsInCategory(int categoryId,
+      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
     // TODO: implement getProductsInCategory
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Product>> getSimilarProducts(int categoryI, {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
+  Future<List<Product>> getSimilarProducts(int categoryI,
+      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
     // TODO: implement getSimilarProducts
     throw UnimplementedError();
   }

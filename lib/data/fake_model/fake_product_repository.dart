@@ -31,15 +31,16 @@ class FakeProductRepository extends ProductRepository {
   }
 
   @override
-  Future<List<Product>> getProductsInCategory(int categoryId, {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) async {
+  Future<List<Product>> getProductsInCategory(int categoryId,
+      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) async {
     return _categoryContent[categoryId]
         .map((e) => _productsInside[e])
         .toList(growable: false);
   }
 
   @override
-  Future<List<Product>> getSimilarProducts(int productId, {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
-
+  Future<List<Product>> getSimilarProducts(int productId,
+      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
     int categoryWithProduct = _categoryContent.entries.first.key;
     for (final mapEntry in _categoryContent.entries) {
       if (mapEntry.value.contains(productId)) {

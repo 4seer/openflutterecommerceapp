@@ -12,8 +12,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
   CategoryBloc({
     @required CategoryRepository categoryRepository,
-  })  : _categoryRepository = categoryRepository,
-        assert(categoryRepository != null);
+  }) : _categoryRepository = categoryRepository;
 
   @override
   CategoryState get initialState => CategoryLoadingState();
@@ -50,6 +49,17 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         final categories = await _categoryRepository.getCategories(
             parentCategoryId: event.parentCategoryId);
         yield CategoryTileViewState(
+            parentCategoryId: event.parentCategoryId, categories: categories);
+      }
+    } else if (event is ChangeCategoryParent) {
+      yield CategoryLoadingState();
+      final categories = await _categoryRepository.getCategories(
+          parentCategoryId: event.parentCategoryId);
+      if (state is CategoryTileViewState) {
+        yield CategoryTileViewState(
+            parentCategoryId: event.parentCategoryId, categories: categories);
+      } else {
+        yield CategoryListViewState(
             parentCategoryId: event.parentCategoryId, categories: categories);
       }
     }

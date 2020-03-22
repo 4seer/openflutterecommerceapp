@@ -23,6 +23,13 @@ class FakeCategoryRepository extends CategoryRepository {
     FakeCategory(
       id: ID_NEW,
       name: 'New items',
+      isCategoryContainer: true,
+      localImage: 'assets/thumbs/category/clothes.png',
+    ),
+    FakeCategory(
+      id: ID_SALE,
+      name: 'Sale',
+      isCategoryContainer: true,
       localImage: 'assets/thumbs/category/clothes.png',
     ),
     FakeCategory(
@@ -45,13 +52,11 @@ class FakeCategoryRepository extends CategoryRepository {
     ),
     FakeCategory(
       id: 3,
-      parentId: ID_GENERAL,
       name: 'Shoes',
       localImage: 'assets/thumbs/category/shoes.png',
     ),
     FakeCategory(
       id: 4,
-      parentId: ID_GENERAL,
       name: 'Accessories',
       localImage: 'assets/thumbs/category/accessories.png',
     ),
@@ -73,26 +78,18 @@ class FakeCategoryRepository extends CategoryRepository {
       name: 'Accessories for sale',
       localImage: 'assets/thumbs/category/accessories.png',
     ),
-    FakeCategory(id: 10, parentId: ID_GENERAL, name: 'Tops', localImage: ''),
-    FakeCategory(
-        id: 11, parentId: ID_GENERAL, name: 'Shirts & Blouses', localImage: ''),
-    FakeCategory(
-        id: 12,
-        parentId: ID_GENERAL,
-        name: 'Cardigans & Sweaters',
-        localImage: ''),
-    FakeCategory(
-        id: 13, parentId: ID_GENERAL, name: 'Knitwear', localImage: ''),
-    FakeCategory(id: 14, parentId: ID_GENERAL, name: 'Blazers', localImage: ''),
-    FakeCategory(
-        id: 15, parentId: ID_GENERAL, name: 'Knitwear', localImage: ''),
-    FakeCategory(id: 16, parentId: ID_GENERAL, name: 'Blazers', localImage: ''),
-    FakeCategory(
-        id: 17, parentId: ID_GENERAL, name: 'Outerwear', localImage: ''),
-    FakeCategory(id: 18, parentId: ID_GENERAL, name: 'Pants', localImage: ''),
-    FakeCategory(id: 19, parentId: ID_GENERAL, name: 'Jeans', localImage: ''),
-    FakeCategory(id: 20, parentId: ID_GENERAL, name: 'Shorts', localImage: ''),
-    FakeCategory(id: 21, parentId: ID_GENERAL, name: 'Skirts', localImage: ''),
-    FakeCategory(id: 22, parentId: ID_GENERAL, name: 'Dresses', localImage: ''),
+    FakeCategory(id: 10, name: 'Tops', localImage: ''),
+    FakeCategory(id: 11, name: 'Shirts & Blouses', localImage: ''),
+    FakeCategory(id: 12, name: 'Cardigans & Sweaters', localImage: ''),
+    FakeCategory(id: 13, name: 'Knitwear', localImage: ''),
+    FakeCategory(id: 14, name: 'Blazers', localImage: ''),
+    FakeCategory(id: 15, name: 'Knitwear', localImage: ''),
+    FakeCategory(id: 16, name: 'Blazers', localImage: ''),
+    FakeCategory(id: 17, name: 'Outerwear', localImage: ''),
+    FakeCategory(id: 18, name: 'Pants', localImage: ''),
+    FakeCategory(id: 19, name: 'Jeans', localImage: ''),
+    FakeCategory(id: 20, name: 'Shorts', localImage: ''),
+    FakeCategory(id: 21, name: 'Skirts', localImage: ''),
+    FakeCategory(id: 22, name: 'Dresses', localImage: ''),
   ];
 }

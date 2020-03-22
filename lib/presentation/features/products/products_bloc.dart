@@ -11,7 +11,7 @@ import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
-class ProductsBloc extends Bloc<ProductEvent, ProductState> {
+class ProductsBloc extends Bloc<ProductsListEvent, ProductState> {
   final ProductRepository productRepository;
   final CategoryRepository categoryRepository;
   final HashtagRepository hashtagRepository;
@@ -26,9 +26,9 @@ class ProductsBloc extends Bloc<ProductEvent, ProductState> {
   ProductState get initialState => ProductInitialState();
 
   @override
-  Stream<ProductState> mapEventToState(ProductEvent event) async* {
+  Stream<ProductState> mapEventToState(ProductsListEvent event) async* {
     var data = ProductStateData();
-    if (event is ProductStartEvent) {
+    if (event is ScreenLoadedEvent) {
       data = await getStateData(event.categoryId);
       yield ProductsLoadedState(
           isLoading: false,

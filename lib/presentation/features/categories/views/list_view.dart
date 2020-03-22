@@ -76,16 +76,21 @@ class _CategoriesListViewState extends State<CategoriesListView> {
     for (var i = 0; i < categories.length; i++) {
       elements.add(
         InkWell(
-          onTap: (() {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return ProductsScreen(categoryId: categories[i].id);
+          onTap: categories[i].isCategoryContainer
+              ? () {
+                  BlocProvider.of<CategoryBloc>(context)
+                      .add(ChangeCategoryParent(categories[i].id));
+                }
+              : () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ProductsScreen(categoryId: categories[i].id);
+                      },
+                    ),
+                  );
                 },
-              ),
-            );
-          }),
           child: OpenFlutterCatregoryListElement(category: categories[i]),
         ),
       );

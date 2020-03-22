@@ -38,7 +38,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 categoryRepository:
                     RepositoryProvider.of<CategoryRepository>(context),
                 hashtagRepository: HashtagRepository())
-              ..add(ProductStartEvent(widget.categoryId));
+              ..add(ScreenLoadedEvent(widget.categoryId));
           },
           child: ProductsWrapper()),
       bottomMenuIndex: 1,

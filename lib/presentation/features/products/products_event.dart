@@ -8,26 +8,26 @@ import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 @immutable
-abstract class ProductEvent extends Equatable {
+abstract class ProductsListEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
 
 @immutable
-class ProductStartEvent extends ProductEvent {
+class ScreenLoadedEvent extends ProductsListEvent {
   final int categoryId;
 
-  ProductStartEvent(this.categoryId);
+  ScreenLoadedEvent(this.categoryId);
 
   @override
   List<Object> get props => [categoryId];
 }
 
 @immutable
-class ProductShowSortByEvent extends ProductEvent {}
+class ProductShowSortByEvent extends ProductsListEvent {}
 
 @immutable
-class ProductChangeSortByEvent extends ProductEvent {
+class ProductChangeSortByEvent extends ProductsListEvent {
   final SortBy sortBy;
 
   ProductChangeSortByEvent(this.sortBy);
@@ -37,7 +37,7 @@ class ProductChangeSortByEvent extends ProductEvent {
 }
 
 @immutable
-class ProductChangePriceRangeEvent extends ProductEvent {
+class ProductChangePriceRangeEvent extends ProductsListEvent {
   final RangeValues priceRange;
 
   ProductChangePriceRangeEvent(this.priceRange);
@@ -47,7 +47,7 @@ class ProductChangePriceRangeEvent extends ProductEvent {
 }
 
 @immutable
-class ProductChangeSelectedColorsEvent extends ProductEvent {
+class ProductChangeSelectedColorsEvent extends ProductsListEvent {
   final List<Color> selectedColors;
 
   ProductChangeSelectedColorsEvent(this.selectedColors);
@@ -57,7 +57,7 @@ class ProductChangeSelectedColorsEvent extends ProductEvent {
 }
 
 @immutable
-class ProductChangeSelectedSizesEvent extends ProductEvent {
+class ProductChangeSelectedSizesEvent extends ProductsListEvent {
   final List<String> selectedSizes;
 
   ProductChangeSelectedSizesEvent(this.selectedSizes);
@@ -67,7 +67,7 @@ class ProductChangeSelectedSizesEvent extends ProductEvent {
 }
 
 @immutable
-class ProductChangeSelectedCategoriesEvent extends ProductEvent {
+class ProductChangeSelectedCategoriesEvent extends ProductsListEvent {
   final List<Category> selectedCategories;
 
   ProductChangeSelectedCategoriesEvent(this.selectedCategories);
@@ -77,7 +77,7 @@ class ProductChangeSelectedCategoriesEvent extends ProductEvent {
 }
 
 @immutable
-class ProductChangeSelectedBrandsEvent extends ProductEvent {
+class ProductChangeSelectedBrandsEvent extends ProductsListEvent {
   final List<int> selectedBrandIds;
 
   ProductChangeSelectedBrandsEvent(this.selectedBrandIds);
@@ -87,7 +87,7 @@ class ProductChangeSelectedBrandsEvent extends ProductEvent {
 }
 
 @immutable
-class ProductChangeBrandSearchKeyEvent extends ProductEvent {
+class ProductChangeBrandSearchKeyEvent extends ProductsListEvent {
   final String newSearchKey;
 
   ProductChangeBrandSearchKeyEvent(this.newSearchKey);

@@ -16,15 +16,13 @@ abstract class CategoryEvent extends Equatable {
 @immutable
 class CategoryShowListEvent extends CategoryEvent {
   CategoryShowListEvent(int parentCategoryId) : super(parentCategoryId);
-
-  @override
-  String toString() => 'Category show list view';
 }
 
 @immutable
 class CategoryShowTilesEvent extends CategoryEvent {
   CategoryShowTilesEvent(int parentCategoryId) : super(parentCategoryId);
+}
 
-  @override
-  String toString() => 'Category show tiles view';
+class ChangeCategoryParent extends CategoryEvent {
+  ChangeCategoryParent(int parentCategoryId) : super(parentCategoryId);
 }

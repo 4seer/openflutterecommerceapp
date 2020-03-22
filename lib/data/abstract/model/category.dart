@@ -8,9 +8,17 @@ class Category extends Equatable {
   final String name;
   final String description;
   final CommerceImage image;
+  final bool isCategoryContainer;
 
-  Category(this.id,
-      {this.parentId = 0, this.name, this.description, this.image});
+  Category(
+    this.id, {
+    int parentId,
+    this.name,
+    this.description,
+    this.image,
+    bool isCategoryContainer,
+  })  : parentId = parentId ?? 0,
+        isCategoryContainer = isCategoryContainer ?? false;
 
   @override
   List<Object> get props => [id, parentId, name, image, image];
