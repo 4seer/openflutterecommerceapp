@@ -16,7 +16,7 @@ class OpenFlutterProductTile extends StatelessWidget {
   final Category category;
   final double height;
   final double width;
-  final Function(bool) onFavClicked;
+  final VoidCallback onFavClicked;
   final showCartButton;
   final showRemoveButton;
   final showColorAndSize;
@@ -26,11 +26,11 @@ class OpenFlutterProductTile extends StatelessWidget {
 
   const OpenFlutterProductTile(
       {Key key,
-      this.product,
+      @required this.product,
       this.category,
       this.height,
       this.width,
-      this.onFavClicked,
+      @required this.onFavClicked,
       this.showCartButton = false,
       this.showRemoveButton = false,
       this.showColorAndSize = false,
@@ -124,7 +124,9 @@ class OpenFlutterProductTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(category.name, style: _theme.textTheme.bodyText1),
+              category == null
+                  ? Container()
+                  : Text(category.name, style: _theme.textTheme.bodyText1),
               Text(product.title, style: _theme.textTheme.headline3),
             ],
           )
@@ -133,7 +135,9 @@ class OpenFlutterProductTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(product.title, style: _theme.textTheme.headline3),
-              Text(category.name, style: _theme.textTheme.bodyText1),
+              category == null
+                  ? Container()
+                  : Text(category.name, style: _theme.textTheme.bodyText1),
             ],
           );
   }

@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/scaffold_collapsing.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -71,7 +72,7 @@ class _FavouritesListViewState extends State<FavouritesListView> {
                     onFilterClicked: (() => {print('Filter Clicked')}),
                     onChangeViewClicked: (() {
                       print('Show TileView');
-                      bloc..add(FavouriteTileViewEvent());
+                      bloc..add(ShowTileViewEvent());
                       widget.changeView(changeType: ViewChangeType.Forward);
                     }),
                     onSortClicked: ((SortBy sortBy) => {print('Sort Clicked')}),
@@ -94,14 +95,18 @@ class _FavouritesListViewState extends State<FavouritesListView> {
 
   Widget _buildListView(FavouriteState state, BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    var productTiles = [];
-    var product =
+    final List<Widget> productTiles = [];
+    final List<Product> products =
         state is FavouriteListViewState ? state.favouriteProducts : [];
 
-    if (product.isNotEmpty) {
-      for (var i = 0; i < product.length; i++) {
+    if (products.isNotEmpty) {
+      for (var i = 0; i < products.length; i++) {
         productTiles.add(OpenFlutterProductTile(
-          product: product[i],
+          product: products[i],
+          onFavClicked: () {
+            BlocProvider.of<FavouriteBloc>(context).add(
+                MakeFavoriteEvent(!products[i].isFavorite, products[i].id));
+          },
           height: 100,
           width: width - AppSizes.sidePadding * 4,
           showCartButton: true,

@@ -33,12 +33,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
       body: BlocProvider<ProductsBloc>(
           create: (context) {
             return ProductsBloc(
+                categoryId: widget.categoryId,
                 productRepository:
                     RepositoryProvider.of<ProductRepository>(context),
                 categoryRepository:
                     RepositoryProvider.of<CategoryRepository>(context),
                 hashtagRepository: HashtagRepository())
-              ..add(ScreenLoadedEvent(widget.categoryId));
+              ..add(ScreenLoadedEvent());
           },
           child: ProductsWrapper()),
       bottomMenuIndex: 1,

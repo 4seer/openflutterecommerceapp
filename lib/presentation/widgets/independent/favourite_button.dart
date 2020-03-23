@@ -3,7 +3,7 @@ import 'package:openflutterecommerce/config/theme.dart';
 
 class OpenFlutterFavouriteButton extends StatelessWidget {
   final bool favourite;
-  final ValueChanged<bool> setFavourite;
+  final VoidCallback setFavourite;
   final double size;
   final double iconSize;
 
@@ -19,9 +19,7 @@ class OpenFlutterFavouriteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var _theme = Theme.of(context);
     return InkWell(
-      onTap: () {
-        setFavourite(!favourite);
-      },
+      onTap: setFavourite,
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.white,

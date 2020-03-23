@@ -26,13 +26,13 @@ class Product extends Equatable {
     this.price,
     this.discountPercent,
     this.amountAvailable,
-    this.created,
+    DateTime created,
     this.averageRating,
     this.ratingCount,
     this.images,
     this.attributes,
     this.isFavorite = false,
-  });
+  }) : created = created ?? DateTime.now();
 
   bool get isNew => created.difference(DateTime.now()).inDays < 3;
 

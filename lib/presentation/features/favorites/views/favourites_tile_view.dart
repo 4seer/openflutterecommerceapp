@@ -71,7 +71,7 @@ class _FavouritesTileViewState extends State<FavouritesTileView> {
                     onFilterClicked: (() => {print('Filter Clicked')}),
                     onChangeViewClicked: (() {
                       print('Show ListView');
-                      bloc..add(FavouriteListViewEvent());
+                      bloc..add(ShowListViewEvent());
                       widget.changeView(changeType: ViewChangeType.Backward);
                     }),
                     onSortClicked: ((SortBy sortBy) => {print('Sort Clicked')}),

@@ -29,7 +29,6 @@ class CategoriesParameters {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
-    print("widget parameters at categories screen ${widget.parameters}");
     return SafeArea(
         child: BlocProvider<CategoryBloc>(
             create: (context) {

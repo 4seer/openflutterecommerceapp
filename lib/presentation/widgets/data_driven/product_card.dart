@@ -70,7 +70,9 @@ class OpenFlutterProductCard extends StatelessWidget {
                     ),
                   ),
                   buildRating(context, product),
-                  Text(category.name, style: _theme.textTheme.bodyText1),
+                  category == null
+                      ? Container()
+                      : Text(category.name, style: _theme.textTheme.bodyText1),
                   Text(product.title, style: _theme.textTheme.headline3),
                   Visibility(
                     child: Row(

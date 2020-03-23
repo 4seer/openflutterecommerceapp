@@ -71,6 +71,7 @@ flutter:
     - assets/thumbs/category/
     - assets/i18n/
     - assets/profile/
+    - assets/placeholder.png
 
   fonts:
     - family: Metropolis

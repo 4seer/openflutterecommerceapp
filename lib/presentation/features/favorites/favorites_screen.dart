@@ -27,7 +27,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                   favouriteRepository:
                       RepositoryProvider.of<ProductRepository>(context),
                   hashtagRepository: HashtagRepository())
-                ..add(FavouriteListViewEvent());
+                ..add(ShowListViewEvent());
             },
             child: FavouriteWrapper()));
   }

@@ -2,6 +2,8 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
+import 'dart:math';
+
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
@@ -33,31 +35,16 @@ class FakeProductRepository extends ProductRepository {
   @override
   Future<List<Product>> getProductsInCategory(int categoryId,
       {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) async {
-    return _categoryContent[categoryId]
-        .map((e) => _productsInside[e])
-        .toList(growable: false);
+    final List<int> generatedContent = _generateRandomProductList();
+    return generatedContent.map((e) => _productsInside[e]).toList();
   }
 
   @override
   Future<List<Product>> getSimilarProducts(int productId,
-      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
-    int categoryWithProduct = _categoryContent.entries.first.key;
-    for (final mapEntry in _categoryContent.entries) {
-      if (mapEntry.value.contains(productId)) {
-        categoryWithProduct = mapEntry.key;
-        break;
-      }
-    }
-    return getProductsInCategory(categoryWithProduct);
+      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) async {
+    final List<int> generatedContent = _generateRandomProductList();
+    return generatedContent.map((e) => _productsInside[e]).toList();
   }
-
-  final Map<int, List<int>> _categoryContent = {
-    2: [3, 4, 5],
-    3: [6],
-    4: [1, 2],
-    5: [1, 2, 3, 4, 5, 6],
-    6: [],
-  };
 
   final Map<int, FakeProduct> _productsInside = {
     1: FakeProduct(
@@ -128,4 +115,14 @@ class FakeProductRepository extends ProductRepository {
       colors: ['Red', 'Black', 'White', 'Yellow'],
     )
   };
+
+  List<int> _generateRandomProductList() {
+    final rnd = Random();
+    int productCount = rnd.nextInt(6);
+    final List<int> result = List(productCount);
+    for (int i = 0; i < productCount; i++) {
+      result[i] = rnd.nextInt(5) + 1;
+    }
+    return result;
+  }
 }

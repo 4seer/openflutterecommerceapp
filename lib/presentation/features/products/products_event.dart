@@ -15,12 +15,10 @@ abstract class ProductsListEvent extends Equatable {
 
 @immutable
 class ScreenLoadedEvent extends ProductsListEvent {
-  final int categoryId;
-
-  ScreenLoadedEvent(this.categoryId);
+  ScreenLoadedEvent();
 
   @override
-  List<Object> get props => [categoryId];
+  List<Object> get props => [];
 }
 
 @immutable
@@ -94,4 +92,14 @@ class ProductChangeBrandSearchKeyEvent extends ProductsListEvent {
 
   @override
   List<Object> get props => [newSearchKey];
+}
+
+class MakeFavorite extends ProductsListEvent {
+  final bool isFavorite;
+  final int productId;
+
+  MakeFavorite(this.isFavorite, this.productId);
+
+  @override
+  List<Object> get props => [isFavorite, productId];
 }

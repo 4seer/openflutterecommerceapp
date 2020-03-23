@@ -43,8 +43,8 @@ class UserOrder extends Equatable {
     this.trackingNumber,
     this.promo,
     DateTime orderCreated,
-  })  : this.products = products ?? List(),
-        this.orderDate = orderCreated ?? DateTime.now();
+  })  : products = products ?? [],
+        orderDate = orderCreated ?? DateTime.now();
 
   @override
   List<Object> get props => [

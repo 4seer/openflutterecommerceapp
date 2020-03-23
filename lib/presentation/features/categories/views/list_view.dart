@@ -4,9 +4,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
-import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../categories.dart';
@@ -82,14 +82,9 @@ class _CategoriesListViewState extends State<CategoriesListView> {
                       .add(ChangeCategoryParent(categories[i].id));
                 }
               : () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ProductsScreen(categoryId: categories[i].id);
-                      },
-                    ),
-                  );
+                  Navigator.of(context).pushNamed(
+                      OpenFlutterEcommerceRoutes.productList,
+                      arguments: categories[i].id);
                 },
           child: OpenFlutterCatregoryListElement(category: categories[i]),
         ),

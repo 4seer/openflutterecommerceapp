@@ -15,8 +15,10 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductState> {
   final ProductRepository productRepository;
   final CategoryRepository categoryRepository;
   final HashtagRepository hashtagRepository;
+  final int categoryId;
 
   ProductsBloc({
+    @required this.categoryId,
     @required this.categoryRepository,
     @required this.productRepository,
     @required this.hashtagRepository,
@@ -27,9 +29,8 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductState> {
 
   @override
   Stream<ProductState> mapEventToState(ProductsListEvent event) async* {
-    var data = ProductStateData();
     if (event is ScreenLoadedEvent) {
-      data = await getStateData(event.categoryId);
+      final data = await getStateData(categoryId);
       yield ProductsLoadedState(
           isLoading: false,
           showSortBy: false,
@@ -43,29 +44,37 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductState> {
           brandSearchKey: '',
           data: data);
     } else if (event is ProductChangeSortByEvent) {
-      var state = this.state as ProductsLoadedState;
+      final state = this.state as ProductsLoadedState;
       yield state.copyWith(sortBy: event.sortBy, showSortBy: false);
     } else if (event is ProductShowSortByEvent) {
-      var state = this.state as ProductsLoadedState;
+      final state = this.state as ProductsLoadedState;
       yield state.copyWith(showSortBy: true);
     } else if (event is ProductChangePriceRangeEvent) {
-      var state = this.state as ProductsLoadedState;
+      final state = this.state as ProductsLoadedState;
       yield state.copyWith(priceRange: event.priceRange);
     } else if (event is ProductChangeSelectedColorsEvent) {
-      var state = this.state as ProductsLoadedState;
+      final state = this.state as ProductsLoadedState;
       yield state.copyWith(selectedColors: event.selectedColors);
     } else if (event is ProductChangeSelectedSizesEvent) {
-      var state = this.state as ProductsLoadedState;
+      final state = this.state as ProductsLoadedState;
       yield state.copyWith(selectedSizes: event.selectedSizes);
     } else if (event is ProductChangeSelectedCategoriesEvent) {
-      var state = this.state as ProductsLoadedState;
+      final state = this.state as ProductsLoadedState;
       yield state.copyWith(selectedCategories: event.selectedCategories);
     } else if (event is ProductChangeSelectedBrandsEvent) {
-      var state = this.state as ProductsLoadedState;
+      final state = this.state as ProductsLoadedState;
       yield state.copyWith(selectedBrandIds: event.selectedBrandIds);
     } else if (event is ProductChangeBrandSearchKeyEvent) {
-      var state = this.state as ProductsLoadedState;
+      final state = this.state as ProductsLoadedState;
       yield state.copyWith(brandSearchKey: event.newSearchKey);
+    } else if (event is MakeFavorite) {
+      if (event.isFavorite) {
+        await productRepository.addToFavorites(event.productId);
+      } else {
+        await productRepository.removeFromFavorites(event.productId);
+      }
+      final state = this.state as ProductsLoadedState;
+      yield state.copyWith(data: await getStateData(categoryId));
     }
   }
 

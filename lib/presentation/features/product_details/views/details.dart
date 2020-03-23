@@ -103,8 +103,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                   [
                                     OpenFlutterFavouriteButton(
                                       favourite: favorite,
-                                      setFavourite: (value) =>
-                                          {setFavourite(bloc)},
+                                      setFavourite: () => {setFavourite(bloc)},
                                     )
                                   ]),
                         ),

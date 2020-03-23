@@ -12,13 +12,23 @@ abstract class FavouriteEvent extends Equatable {
 }
 
 @immutable
-class FavouriteListViewEvent extends FavouriteEvent {
+class ShowListViewEvent extends FavouriteEvent {
   @override
   String toString() => 'Favourite is Loaded in ListView';
 }
 
 @immutable
-class FavouriteTileViewEvent extends FavouriteEvent {
+class ShowTileViewEvent extends FavouriteEvent {
   @override
   String toString() => 'Favourite is Loaded in TileView';
+}
+
+class MakeFavoriteEvent extends FavouriteEvent {
+  final bool isFavorite;
+  final int productId;
+
+  MakeFavoriteEvent(this.isFavorite, this.productId);
+
+  @override
+  List<Object> get props => [isFavorite, productId];
 }
