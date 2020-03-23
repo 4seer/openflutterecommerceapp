@@ -4,10 +4,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
+import 'package:openflutterecommerce/presentation/features/products/products_screen.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 class OpenFlutterProductCard extends StatelessWidget {
@@ -178,9 +179,8 @@ class OpenFlutterProductCard extends StatelessWidget {
   }
 
   void navigateToProductDetailsScreen(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ProductDetailsScreen(),
-    ));
+    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.productList,
+        arguments: ProductListScreenParameters(product.id));
   }
 
   Widget buildColor(Product product, ThemeData _theme) {

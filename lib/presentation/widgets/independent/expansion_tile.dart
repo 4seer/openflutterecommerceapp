@@ -6,7 +6,7 @@ class OpenFlutterExpansionTile extends StatelessWidget {
   OpenFlutterExpansionTile({
     Key key,
     @required this.title,
-    this.description,
+    @required this.description,
   }) : super(key: key);
 
   @override

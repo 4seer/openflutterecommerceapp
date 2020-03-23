@@ -15,12 +15,18 @@ import 'views/brands.dart';
 import 'views/filters.dart';
 
 class ProductsScreen extends StatefulWidget {
-  final int categoryId;
+  final ProductListScreenParameters parameters;
 
-  const ProductsScreen({Key key, this.categoryId}) : super(key: key);
+  const ProductsScreen({Key key, this.parameters}) : super(key: key);
 
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
+}
+
+class ProductListScreenParameters {
+  final int categoryId;
+
+  ProductListScreenParameters(this.categoryId);
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
@@ -33,7 +39,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       body: BlocProvider<ProductsBloc>(
           create: (context) {
             return ProductsBloc(
-                categoryId: widget.categoryId,
+                categoryId: widget.parameters.categoryId,
                 productRepository:
                     RepositoryProvider.of<ProductRepository>(context),
                 categoryRepository:

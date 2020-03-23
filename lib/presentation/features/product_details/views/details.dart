@@ -113,7 +113,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           margin: EdgeInsets.only(
                               left: 16.0, right: 16.0, bottom: 10.0),
                           child: Text(
-                            widget.product.description,
+                            widget.product.description ?? 'no details',
                             style: TextStyle(fontSize: 15.0),
                           ),
                         ),
@@ -136,13 +136,13 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         OpenFlutterExpansionTile(
                           title: 'Shipping info',
                           //TODO: get this date from store settings
-                          description: widget.product.description,
+                          description: 'detailed data about shipping options',
                         ),
                         Theme(data: dividerTheme, child: Divider()),
                         OpenFlutterExpansionTile(
                           title: 'Support',
                           //TODO: get this date from store settings
-                          description: widget.product.description,
+                          description: 'detailed data about support',
                         ),
                         Theme(data: dividerTheme, child: Divider()),
                         SizedBox(

@@ -7,6 +7,7 @@ import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/fake_product_repository.dart';
+import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/features/splash_screen.dart';
 
@@ -152,11 +153,17 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
         },
       );
     } else if (settings.name == OpenFlutterEcommerceRoutes.productList) {
-      final int categoryId = settings.arguments;
+      final ProductListScreenParameters productListScreenParameters =
+          settings.arguments;
       return MaterialPageRoute(builder: (context) {
         return ProductsScreen(
-          categoryId: categoryId,
+          parameters: productListScreenParameters,
         );
+      });
+    } else if (settings.name == OpenFlutterEcommerceRoutes.product) {
+      final ProductDetailsParameters parameters = settings.arguments;
+      return MaterialPageRoute(builder: (context) {
+        return ProductDetailsScreen(parameters);
       });
     } else {
       return MaterialPageRoute(

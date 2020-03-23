@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
@@ -47,8 +48,9 @@ class OpenFlutterProductTile extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             GestureDetector(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ProductDetailsScreen())),
+              onTap: () => Navigator.of(context).pushNamed(
+                  OpenFlutterEcommerceRoutes.product,
+                  arguments: ProductDetailsParameters(product.id)),
               child: Padding(
                 padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
                 child: Container(

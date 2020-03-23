@@ -35,8 +35,10 @@ class FakeProductRepository extends ProductRepository {
   @override
   Future<List<Product>> getProductsInCategory(int categoryId,
       {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) async {
-    final List<int> generatedContent = _generateRandomProductList();
-    return generatedContent.map((e) => _productsInside[e]).toList();
+    if (!productsInCategories.containsKey(categoryId)) {
+      productsInCategories[categoryId] = _generateRandomProductList();
+    }
+    return productsInCategories[categoryId].map((e) => _productsInside[e]).toList();
   }
 
   @override
@@ -45,6 +47,8 @@ class FakeProductRepository extends ProductRepository {
     final List<int> generatedContent = _generateRandomProductList();
     return generatedContent.map((e) => _productsInside[e]).toList();
   }
+
+  final Map<int, List<int>> productsInCategories = {};
 
   final Map<int, FakeProduct> _productsInside = {
     1: FakeProduct(
@@ -124,5 +128,11 @@ class FakeProductRepository extends ProductRepository {
       result[i] = rnd.nextInt(5) + 1;
     }
     return result;
+  }
+
+
+
+  FakeProductRepository() {
+
   }
 }

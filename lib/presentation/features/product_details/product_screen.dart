@@ -10,17 +10,27 @@ import 'product_state.dart';
 import 'views/details.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final int productId;
+  final ProductDetailsParameters parameters;
 
-  const ProductDetailsScreen({Key key, this.productId}) : super(key: key);
+  const ProductDetailsScreen(
+    this.parameters, {
+    Key key,
+  }) : super(key: key);
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
 
+class ProductDetailsParameters {
+  final int productId;
+
+  const ProductDetailsParameters(this.productId);
+}
+
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    print("productId: ${widget.parameters.productId}");
     return SafeArea(
         child: OpenFlutterScaffold(
       background: null,
@@ -28,7 +38,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       body: BlocProvider<ProductBloc>(
           create: (context) {
             return ProductBloc(
-                productId: widget.productId,
+                productId: widget.parameters.productId,
                 productRepository:
                     RepositoryProvider.of<ProductRepository>(context))
               ..add(ScreenLoadedEvent());
