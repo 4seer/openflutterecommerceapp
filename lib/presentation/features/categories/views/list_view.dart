@@ -4,9 +4,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
-import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -48,7 +48,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
               OpenFlutterButton(
                 onPressed: (() => {
                       BlocProvider.of<CategoryBloc>(context)
-                          .add(CategoryShowTilesEvent(CategoryType.general)),
+                          .add(CategoryShowTilesEvent(0)),
                     }),
                 title: 'VIEW ALL ITEMS',
                 width: widgetWidth,
@@ -77,16 +77,16 @@ class _CategoriesListViewState extends State<CategoriesListView> {
     for (var i = 0; i < categories.length; i++) {
       elements.add(
         InkWell(
-          onTap: (() {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return ProductsScreen(categoryId: categories[i].id);
+          onTap: categories[i].isCategoryContainer
+              ? () {
+                  BlocProvider.of<CategoryBloc>(context)
+                      .add(ChangeCategoryParent(categories[i].id));
+                }
+              : () {
+                  Navigator.of(context).pushNamed(
+                      OpenFlutterEcommerceRoutes.productList,
+                      arguments: ProductListScreenParameters(categories[i].id));
                 },
-              ),
-            );
-          }),
           child: OpenFlutterCatregoryListElement(category: categories[i]),
         ),
       );

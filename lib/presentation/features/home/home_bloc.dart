@@ -4,7 +4,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 
 import 'home.dart';
 
@@ -23,8 +23,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (event is HomeLoadEvent) {
       if (state is HomeInitialState) {
         yield HomeLoadedState(
-            salesProducts: productRepository.getProducts(1),
-            newProducts: productRepository.getProducts(2));
+            salesProducts: await productRepository.getProductsInCategory(1),
+            newProducts: await productRepository.getProductsInCategory(2));
       } else if (state is HomeLoadedState) {
         yield state;
       }

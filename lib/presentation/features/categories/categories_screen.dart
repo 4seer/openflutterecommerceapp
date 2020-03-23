@@ -4,9 +4,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
-import 'package:openflutterecommerce/presentation/widgets/loading_view.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/loading_view.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import 'categories.dart';
@@ -21,9 +21,9 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class CategoriesParameters {
-  final CategoryType category;
+  final int categoryId;
 
-  const CategoriesParameters(this.category);
+  const CategoriesParameters(this.categoryId);
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
@@ -37,8 +37,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   categoryRepository:
                       RepositoryProvider.of<CategoryRepository>(context))
                 ..add(CategoryShowListEvent(widget.parameters == null
-                    ? CategoryType.general
-                    : widget.parameters.category));
+                    ? 0
+                    : widget.parameters.categoryId));
             },
             child: CategoriesWrapper()));
   }

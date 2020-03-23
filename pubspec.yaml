@@ -71,7 +71,66 @@ flutter:
     - assets/thumbs/category/
     - assets/i18n/
     - assets/profile/
-  
+    - assets/placeholder.png
+
+  fonts:
+    - family: Metropolis
+      fonts:
+        - asset: fonts/Metropolis-Thin.otf
+          weight: 100
+          style: normal
+        - asset: fonts/Metropolis-ThinItalic.otf
+          weight: 100
+          style: italic
+        - asset: fonts/Metropolis-ExtraLight.otf
+          weight: 200
+          style: normal
+        - asset: fonts/Metropolis-ExtraLightItalic.otf
+          weight: 200
+          style: italic
+        - asset: fonts/Metropolis-Light.otf
+          weight: 300
+          style: normal
+        - asset: fonts/Metropolis-LightItalic.otf
+          weight: 300
+          style: italic
+        - asset: fonts/Metropolis-Regular.otf
+          weight: 400
+          style: normal
+        - asset: fonts/Metropolis-RegularItalic.otf
+          weight: 400
+          style: italic
+        - asset: fonts/Metropolis-Medium.otf
+          weight: 500
+          style: normal
+        - asset: fonts/Metropolis-MediumItalic.otf
+          weight: 500
+          style: italic
+        - asset: fonts/Metropolis-SemiBold.otf
+          weight: 600
+          style: normal
+        - asset: fonts/Metropolis-SemiBoldItalic.otf
+          weight: 600
+          style: italic
+        - asset: fonts/Metropolis-Bold.otf
+          weight: 700
+          style: normal
+        - asset: fonts/Metropolis-BoldItalic.otf
+          weight: 700
+          style: italic
+        - asset: fonts/Metropolis-ExtraBold.otf
+          weight: 800
+          style: normal
+        - asset: fonts/Metropolis-ExtraBoldItalic.otf
+          weight: 800
+          style: italic
+        - asset: fonts/Metropolis-Black.otf
+          weight: 900
+          style: normal
+        - asset: fonts/Metropolis-BlackItalic.otf
+          weight: 900
+          style: italic
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

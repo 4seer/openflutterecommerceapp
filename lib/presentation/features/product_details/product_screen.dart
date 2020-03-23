@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../wrapper.dart';
@@ -11,25 +10,38 @@ import 'product_state.dart';
 import 'views/details.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final int productId;
+  final ProductDetailsParameters parameters;
 
-  const ProductDetailsScreen({Key key, this.productId}) : super(key: key);
+  const ProductDetailsScreen(
+    this.parameters, {
+    Key key,
+  }) : super(key: key);
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
 
+class ProductDetailsParameters {
+  final int productId;
+
+  const ProductDetailsParameters(this.productId);
+}
+
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    print("productId: ${widget.parameters.productId}");
     return SafeArea(
         child: OpenFlutterScaffold(
       background: null,
       title: null,
       body: BlocProvider<ProductBloc>(
           create: (context) {
-            return ProductBloc(productRepository: ProductRepository())
-              ..add(ProductStartEvent(widget.productId));
+            return ProductBloc(
+                productId: widget.parameters.productId,
+                productRepository:
+                    RepositoryProvider.of<ProductRepository>(context))
+              ..add(ScreenLoadedEvent());
           },
           child: ProductWrapper()),
       bottomMenuIndex: 1,
@@ -38,17 +50,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 }
 
 class ProductWrapper extends StatefulWidget {
-  final Product product;
-
-  const ProductWrapper({Key key, this.product}) : super(key: key);
-
   @override
   _ProductWrapperState createState() => _ProductWrapperState();
 }
 
 class _ProductWrapperState extends OpenFlutterWrapperState<ProductWrapper> {
-  //State createState() => OpenFlutterWrapperState();
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductBloc, ProductState>(

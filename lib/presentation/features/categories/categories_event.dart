@@ -3,29 +3,26 @@
 // Date: 2020-02-06
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
 
 @immutable
 abstract class CategoryEvent extends Equatable {
-  final CategoryType type;
-  CategoryEvent(this.type) : super();
+  final int parentCategoryId;
+  CategoryEvent(this.parentCategoryId) : super();
 
   @override
-  List<Object> get props => [type];
+  List<Object> get props => [parentCategoryId];
 }
 
 @immutable
 class CategoryShowListEvent extends CategoryEvent {
-  CategoryShowListEvent(CategoryType type) : super(type);
-
-  @override
-  String toString() => 'Category show list view';
+  CategoryShowListEvent(int parentCategoryId) : super(parentCategoryId);
 }
 
 @immutable
 class CategoryShowTilesEvent extends CategoryEvent {
-  CategoryShowTilesEvent(CategoryType type) : super(type);
+  CategoryShowTilesEvent(int parentCategoryId) : super(parentCategoryId);
+}
 
-  @override
-  String toString() => 'Category show tiles view';
+class ChangeCategoryParent extends CategoryEvent {
+  ChangeCategoryParent(int parentCategoryId) : super(parentCategoryId);
 }

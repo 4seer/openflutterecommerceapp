@@ -5,11 +5,15 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/fake_category_repository.dart';
-import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/fake_product_repository.dart';
+import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
+import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/features/splash_screen.dart';
 
 import 'config/routes.dart';
+import 'data/abstract/category_repository.dart';
+import 'data/fake_model/fake_category_repository.dart';
 import 'presentation/features/authentication/authentication.dart';
 import 'presentation/features/cart/cart.dart';
 import 'presentation/features/categories/categories.dart';
@@ -56,6 +60,9 @@ void main() async {
         providers: [
           RepositoryProvider<CategoryRepository>(
             create: (context) => FakeCategoryRepository(),
+          ),
+          RepositoryProvider<ProductRepository>(
+            create: (context) => FakeProductRepository(),
           ),
         ],
         child: LocalizedApp(
@@ -145,6 +152,19 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
           );
         },
       );
+    } else if (settings.name == OpenFlutterEcommerceRoutes.productList) {
+      final ProductListScreenParameters productListScreenParameters =
+          settings.arguments;
+      return MaterialPageRoute(builder: (context) {
+        return ProductsScreen(
+          parameters: productListScreenParameters,
+        );
+      });
+    } else if (settings.name == OpenFlutterEcommerceRoutes.product) {
+      final ProductDetailsParameters parameters = settings.arguments;
+      return MaterialPageRoute(builder: (context) {
+        return ProductDetailsScreen(parameters);
+      });
     } else {
       return MaterialPageRoute(
         builder: (context) {

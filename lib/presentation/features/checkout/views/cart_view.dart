@@ -5,10 +5,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/action_card.dart';
-import 'package:openflutterecommerce/presentation/widgets/delivery_method.dart';
-import 'package:openflutterecommerce/presentation/widgets/payment_card.dart';
-import 'package:openflutterecommerce/presentation/widgets/summary_line.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/action_card.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/delivery_method.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/payment_card.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/summary_line.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';

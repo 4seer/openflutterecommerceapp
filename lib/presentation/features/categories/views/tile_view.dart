@@ -3,8 +3,9 @@
 // Date: 2020-02-06
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -103,12 +104,9 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
     for (var i = 0; i < categories.length; i++) {
       elements.add(InkWell(
           onTap: (() {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return ProductsScreen(categoryId: categories[i].id);
-              }),
-            );
+            Navigator.of(context).pushNamed(
+                OpenFlutterEcommerceRoutes.productList,
+                arguments: ProductListScreenParameters(categories[i].id));
           }),
           child: OpenFlutterCategoryTile(
               height: 100, width: width, category: categories[i])));

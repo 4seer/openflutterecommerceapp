@@ -4,9 +4,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/hashtag_repository.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
-import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -15,12 +15,18 @@ import 'views/brands.dart';
 import 'views/filters.dart';
 
 class ProductsScreen extends StatefulWidget {
-  final int categoryId;
+  final ProductListScreenParameters parameters;
 
-  const ProductsScreen({Key key, this.categoryId}) : super(key: key);
+  const ProductsScreen({Key key, this.parameters}) : super(key: key);
 
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
+}
+
+class ProductListScreenParameters {
+  final int categoryId;
+
+  ProductListScreenParameters(this.categoryId);
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
@@ -33,11 +39,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
       body: BlocProvider<ProductsBloc>(
           create: (context) {
             return ProductsBloc(
-                productRepository: ProductRepository(),
+                categoryId: widget.parameters.categoryId,
+                productRepository:
+                    RepositoryProvider.of<ProductRepository>(context),
                 categoryRepository:
                     RepositoryProvider.of<CategoryRepository>(context),
                 hashtagRepository: HashtagRepository())
-              ..add(ProductStartEvent(widget.categoryId));
+              ..add(ScreenLoadedEvent());
           },
           child: ProductsWrapper()),
       bottomMenuIndex: 1,

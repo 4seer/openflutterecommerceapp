@@ -4,39 +4,41 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/hashtag.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 
 @immutable
 abstract class FavouriteState extends Equatable {
+  final List<Product> favouriteProducts;
+  final List<HashTag> hashtags;
+
+  FavouriteState(this.favouriteProducts, this.hashtags);
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [favouriteProducts, hashtags];
+}
+
+@immutable
+class InitialViewState extends FavouriteState {
+  InitialViewState() : super(null, null);
 }
 
 @immutable
 class FavouriteListViewState extends FavouriteState {
-  final List<Product> favouriteProducts;
-  final List<HashTag> hashtags;
-
-  FavouriteListViewState({this.favouriteProducts,this.hashtags});
+  FavouriteListViewState(
+      List<Product> favouriteProducts, List<HashTag> hashtags)
+      : super(favouriteProducts, hashtags);
 
   @override
   String toString() => 'FavouriteListViewState';
-
-  @override
-  List<Object> get props => [favouriteProducts,hashtags];
 }
 
 @immutable
 class FavouriteTileViewState extends FavouriteState {
-  final List<Product> favouriteProducts;
-  final List<HashTag> hashtags;
-
-  FavouriteTileViewState({this.favouriteProducts,this.hashtags});
+  FavouriteTileViewState(
+      List<Product> favouriteProducts, List<HashTag> hashtags)
+      : super(favouriteProducts, hashtags);
 
   @override
   String toString() => 'FavouriteTileViewState';
-
-  @override
-  List<Object> get props => [favouriteProducts,hashtags];
 }

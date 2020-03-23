@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
-import 'package:openflutterecommerce/data/interfaces/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/presentation/features/categories/categories.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
@@ -73,7 +72,7 @@ class _Main1ViewState extends State<Main1View> {
             linkText: 'View All',
             onLinkTap: () => {
               Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.shop,
-                  arguments: CategoriesParameters(CategoryType.newItems))
+                  arguments: CategoriesParameters(0))
             },
             description: 'You’ve never seen it before!',
           ),
