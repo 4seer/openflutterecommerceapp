@@ -38,14 +38,20 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         listener: (context, state) {
           // on success push back
           if (state is ForgetPasswordFinishedState) {
-            Navigator.of(context).pop();
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                content: Text('An email with password reminder was sent to ${state.email}'),
+                backgroundColor: Colors.green, // TODO use app colors
+                duration: Duration(seconds: 3),
+              ),
+            );
           }
           // on failure show a snackbar
           if (state is ForgetPasswordErrorState) {
             Scaffold.of(context).showSnackBar(
               SnackBar(
                 content: Text('${state.error}'),
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.red, // TODO use app colors
                 duration: Duration(seconds: 3),
               ),
             );

@@ -41,10 +41,19 @@ class UserRepository {
     @required String password,
   }) async {
     try {
-      // TODO api call for user information
-      await Future.delayed(Duration(seconds: 2));
+      var route = HttpClient().createUri(endpointSignUp);
+      var data = <String, String>{
+        'name': name,
+        'username': email,
+        'password': password,
+      };
 
-      return 'token';
+      var response = await http.post(route, body: data);
+      Map jsonResponse = json.decode(response.body);
+      if (response.statusCode != 200) {
+        throw jsonResponse['message'];
+      }
+      return jsonResponse['token'];
     } catch (error) {
       rethrow;
     }
@@ -67,8 +76,18 @@ class UserRepository {
     @required String email,
   }) async {
     try {
-      // TODO api call for forget password
-      await Future.delayed(Duration(seconds: 2));
+      print('fake');
+
+      var route = HttpClient().createUri(endpointForgotPassword);
+      var data = <String, String>{
+        'email': email,
+      };
+
+      var response = await http.post(route, body: data);
+      Map jsonResponse = json.decode(response.body);
+      if (response.statusCode != 200) {
+        throw jsonResponse['message'];
+      }
     } catch (error) {
       rethrow;
     }

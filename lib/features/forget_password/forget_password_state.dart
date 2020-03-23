@@ -18,4 +18,11 @@ class ForgetPasswordErrorState extends ForgetPasswordState {
   List<Object> get props => [error];
 }
 
-class ForgetPasswordFinishedState extends ForgetPasswordState {}
+class ForgetPasswordFinishedState extends ForgetPasswordState {
+  final String email;
+
+  ForgetPasswordFinishedState(this.email);
+
+  @override
+  List<Object> get props => [email];
+}

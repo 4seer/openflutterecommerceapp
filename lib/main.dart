@@ -5,9 +5,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/data/fake_repositories/user_repository.dart'; // this is the fake repo
 
 
-import 'data/remote/repositories/user_repository.dart';
+//import 'data/remote/repositories/user_repository.dart'; // this is the real repo
 import 'features/authentication/authentication.dart';
 import 'config/routes.dart';
 import 'features/forget_password/forget_password.dart';
