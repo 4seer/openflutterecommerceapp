@@ -44,19 +44,19 @@ class FakeCategoryRepository extends CategoryRepository {
       case CategoryType.general:
       default:
         return [
-          Category(id: 10, title: 'Tops', image: '', typeId: 4),
-          Category(id: 11, title: 'Shirts & Blouses', image: '', typeId: 4),
-          Category(id: 12, title: 'Cardigans & Sweaters', image: '', typeId: 4),
-          Category(id: 13, title: 'Knitwear', image: '', typeId: 4),
-          Category(id: 14, title: 'Blazers', image: '', typeId: 4),
-          Category(id: 15, title: 'Knitwear', image: '', typeId: 4),
-          Category(id: 16, title: 'Blazers', image: '', typeId: 4),
-          Category(id: 17, title: 'Outerwear', image: '', typeId: 4),
-          Category(id: 18, title: 'Pants', image: '', typeId: 4),
-          Category(id: 19, title: 'Jeans', image: '', typeId: 4),
-          Category(id: 20, title: 'Shorts', image: '', typeId: 4),
-          Category(id: 21, title: 'Skirts', image: '', typeId: 4),
-          Category(id: 22, title: 'Dresses', image: '', typeId: 4),
+          Category(id: 10, title: 'Tops', image: 'assets/thumbs/category/accessories.png', typeId: 4),
+          Category(id: 11, title: 'Shirts & Blouses', image: 'assets/thumbs/category/clothes.png', typeId: 4),
+          Category(id: 12, title: 'Cardigans & Sweaters', image: 'assets/thumbs/category/accessories.png', typeId: 4),
+          Category(id: 13, title: 'Knitwear', image: 'assets/thumbs/category/accessories.png', typeId: 4),
+          Category(id: 14, title: 'Blazers', image: 'assets/thumbs/category/accessories.png', typeId: 4),
+          Category(id: 15, title: 'Knitwear', image: 'assets/thumbs/category/clothes.png', typeId: 4),
+          Category(id: 16, title: 'Blazers', image: 'assets/thumbs/category/accessories.png', typeId: 4),
+          Category(id: 17, title: 'Outerwear', image: 'assets/thumbs/category/accessories.png', typeId: 4),
+          Category(id: 18, title: 'Pants', image: 'assets/thumbs/category/clothes.png', typeId: 4),
+          Category(id: 19, title: 'Jeans', image: 'assets/thumbs/category/accessories.png', typeId: 4),
+          Category(id: 20, title: 'Shorts', image: 'assets/thumbs/category/clothes.png', typeId: 4),
+          Category(id: 21, title: 'Skirts', image: 'assets/thumbs/category/clothes.png', typeId: 4),
+          Category(id: 22, title: 'Dresses', image: 'assets/thumbs/category/clothes.png', typeId: 4),
         ];
     }
   }
