@@ -38,7 +38,7 @@ class _OpenFlutterSearchBarState extends State<OpenFlutterSearchBar> {
                 width: width - 90,
                 child: TextField(
                     controller: _searchKeyController,
-                    style: _theme.textTheme.headline5
+                    style: _theme.textTheme.display3
                         .copyWith(color: _theme.primaryColorLight),
                     decoration: InputDecoration(
                       border: InputBorder.none,

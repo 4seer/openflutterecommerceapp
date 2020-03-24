@@ -41,19 +41,19 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                               text: TextSpan(children: <TextSpan>[
                             TextSpan(
                               text: 'Order: ',
-                              style: _theme.textTheme.headline3,
+                              style: _theme.textTheme.display1,
                             ),
                             TextSpan(
                               text:
                                   '#' + state.orderData.orderNumber.toString(),
-                              style: _theme.textTheme.headline3
+                              style: _theme.textTheme.display1
                                   .copyWith(fontWeight: FontWeight.w700),
                             ),
                           ])),
                           Text(
                               DateFormat('yyyy-MM-dd')
                                   .format(state.orderData.orderDate),
-                              style: _theme.textTheme.headline5
+                              style: _theme.textTheme.display3
                                   .copyWith(color: AppColors.lightGray))
                         ],
                       ),
@@ -67,16 +67,16 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                                 text: TextSpan(children: <TextSpan>[
                               TextSpan(
                                 text: 'Tacking Number: ',
-                                style: _theme.textTheme.headline3
+                                style: _theme.textTheme.display1
                                     .copyWith(color: _theme.primaryColorLight),
                               ),
                               TextSpan(
                                 text: state.orderData.trackingNumber,
-                                style: _theme.textTheme.headline3,
+                                style: _theme.textTheme.display1,
                               ),
                             ])),
                             Text('Delivered',
-                                style: _theme.textTheme.headline3
+                                style: _theme.textTheme.display1
                                     .copyWith(color: AppColors.green)),
                           ]),
                       SizedBox(
@@ -89,14 +89,14 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                             children: <Widget>[
                               Text(
                                 state.orderData.totalQuantity.toString(),
-                                style: _theme.textTheme.headline3,
+                                style: _theme.textTheme.display1,
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
                                     left: AppSizes.linePadding),
                                 child: Text(
                                   'items',
-                                  style: _theme.textTheme.headline3,
+                                  style: _theme.textTheme.display1,
                                 ),
                               ),
                             ],
@@ -192,14 +192,14 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
         children: <Widget>[
           Text(
             label,
-            style: _theme.textTheme.headline3
+            style: _theme.textTheme.display1
                 .copyWith(color: _theme.primaryColorLight),
           ),
           Container(
             width: width / 2,
             child: Text(
               text,
-              style: _theme.textTheme.headline3,
+              style: _theme.textTheme.display1,
             ),
           )
         ]);

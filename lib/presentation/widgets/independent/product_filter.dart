@@ -50,7 +50,7 @@ class OpenFlutterProductFilter extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.only(left: iconSize / 3),
                     width: thirdWidth,
-                    child: Text('Filters', style: _theme.textTheme.bodyText1),
+                    child: Text('Filters', style: _theme.textTheme.body1),
                   )
                 ])),
             InkWell(
@@ -61,7 +61,7 @@ class OpenFlutterProductFilter extends StatelessWidget {
                     padding: EdgeInsets.only(left: iconSize / 3),
                     width: thirdWidth * 2,
                     child: Text(getSortTitle(sortBy),
-                        style: _theme.textTheme.bodyText1),
+                        style: _theme.textTheme.body1),
                   )
                 ])),
             InkWell(

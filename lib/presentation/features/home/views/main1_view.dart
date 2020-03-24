@@ -49,7 +49,7 @@ class _Main1ViewState extends State<Main1View> {
                       ),
                       width: width / 2,
                       child: Text(translate('fashionSale'),
-                          style: _theme.textTheme.headline1)),
+                          style: _theme.textTheme.headline)),
                   Container(
                     padding: EdgeInsets.only(
                         left: AppSizes.sidePadding,

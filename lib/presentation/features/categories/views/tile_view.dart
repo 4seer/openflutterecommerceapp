@@ -47,7 +47,7 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
       return Container(
           padding: EdgeInsets.all(AppSizes.sidePadding),
           child: Text('An error occured',
-              style: _theme.textTheme.headline3
+              style: _theme.textTheme.display1
                   .copyWith(color: _theme.errorColor)));
     }, child:
             BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
@@ -69,10 +69,10 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text('SUMMER SALES',
-                            style: _theme.textTheme.headline3
+                            style: _theme.textTheme.display1
                                 .copyWith(color: AppColors.white)),
                         Text('Up to 50% off',
-                            style: _theme.textTheme.headline3
+                            style: _theme.textTheme.display1
                                 .copyWith(color: AppColors.white))
                       ],
                     ))),

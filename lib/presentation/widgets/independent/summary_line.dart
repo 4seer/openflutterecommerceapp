@@ -19,12 +19,12 @@ class OpenFlutterSummaryLine extends StatelessWidget {
           children: <Widget>[
             Container(
                 width: width / 2,
-                child: Text(title, style: _theme.textTheme.headline5)),
+                child: Text(title, style: _theme.textTheme.display3)),
             Container(
                 alignment: Alignment.centerRight,
                 width: width / 2,
                 child: Text(summary,
-                    style: _theme.textTheme.headline5.copyWith(
+                    style: _theme.textTheme.display3.copyWith(
                         fontWeight: FontWeight.bold,
                         color: _theme.primaryColor))),
           ],

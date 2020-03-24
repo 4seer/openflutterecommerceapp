@@ -34,7 +34,7 @@ class OpenFlutterBlockSubtitle extends StatelessWidget {
                   Container(
                       width: width - rightLinkWidth,
                       child: Text(title,
-                          style: _theme.textTheme.headline3.copyWith(
+                          style: _theme.textTheme.display1.copyWith(
                               fontWeight: FontWeight.bold,
                               color: _theme.primaryColor))),
                   linkText != null
@@ -46,7 +46,7 @@ class OpenFlutterBlockSubtitle extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 linkText,
-                                style: _theme.textTheme.headline3
+                                style: _theme.textTheme.display1
                                     .copyWith(color: _theme.accentColor),
                               ),
                             ),

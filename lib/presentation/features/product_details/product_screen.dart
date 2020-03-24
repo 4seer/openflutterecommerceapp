@@ -30,7 +30,7 @@ class ProductDetailsParameters {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    print("productId: ${widget.parameters.productId}");
+    print('productId: ${widget.parameters.productId}');
     return SafeArea(
         child: OpenFlutterScaffold(
       background: null,

@@ -24,7 +24,7 @@ class OpenFlutterPaymentCard extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(left: AppSizes.sidePadding),
               child: Text(cardNumber,
-                  style: _theme.textTheme.headline5
+                  style: _theme.textTheme.display3
                       .copyWith(color: _theme.primaryColor)),
             )
           ],

@@ -76,8 +76,8 @@ class _MyOrdersViewState extends State<MyOrdersView> {
                                 tabBarIndicatorSize: TabBarIndicatorSize.tab,
                               ),
                               tabs: tabs,
-                              unselectedLabelStyle: _theme.textTheme.headline5,
-                              labelStyle: _theme.textTheme.headline5
+                              unselectedLabelStyle: _theme.textTheme.display3,
+                              labelStyle: _theme.textTheme.display3
                                   .copyWith(color: AppColors.white),
                             ),
                           ]),

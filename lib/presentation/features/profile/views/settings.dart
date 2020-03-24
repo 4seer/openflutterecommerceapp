@@ -145,7 +145,7 @@ class _SettingsViewState extends State<SettingsView> {
                         style: TextStyle(fontSize: 14, color: AppColors.black),
                       ),
                       CupertinoSwitch(
-                        trackColor: AppColors.lightGray,
+                        //trackColor: AppColors.lightGray,
                         value: state.settings.notifySales,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc
@@ -164,7 +164,7 @@ class _SettingsViewState extends State<SettingsView> {
                         style: TextStyle(fontSize: 14, color: AppColors.black),
                       ),
                       CupertinoSwitch(
-                        trackColor: AppColors.lightGray,
+                        //trackColor: AppColors.lightGray,
                         value: state.settings.notifyArrivals,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc
@@ -184,7 +184,7 @@ class _SettingsViewState extends State<SettingsView> {
                         style: TextStyle(fontSize: 14, color: AppColors.black),
                       ),
                       CupertinoSwitch(
-                        trackColor: AppColors.lightGray,
+                        //trackColor: AppColors.lightGray,
                         value: state.settings.notifyDelivery,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc

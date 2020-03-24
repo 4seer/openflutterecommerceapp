@@ -42,13 +42,13 @@ class OpenFlutterPriceRangeSlider extends StatelessWidget {
                       width: width / 2,
                       alignment: Alignment.centerLeft,
                       child: Text('\$' + start.toStringAsFixed(0),
-                          style: _theme.textTheme.headline5
+                          style: _theme.textTheme.display3
                               .copyWith(color: _theme.primaryColor))),
                   Container(
                       width: width / 2,
                       alignment: Alignment.centerRight,
                       child: Text('\$' + end.toStringAsFixed(0),
-                          style: _theme.textTheme.headline5
+                          style: _theme.textTheme.display3
                               .copyWith(color: _theme.primaryColor)))
                 ],
               ),

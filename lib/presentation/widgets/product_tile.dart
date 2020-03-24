@@ -128,18 +128,18 @@ class OpenFlutterProductTile extends StatelessWidget {
             children: <Widget>[
               category == null
                   ? Container()
-                  : Text(category.name, style: _theme.textTheme.bodyText1),
-              Text(product.title, style: _theme.textTheme.headline3),
+                  : Text(category.name, style: _theme.textTheme.body1),
+              Text(product.title, style: _theme.textTheme.display1),
             ],
           )
         : Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(product.title, style: _theme.textTheme.headline3),
+              Text(product.title, style: _theme.textTheme.display1),
               category == null
                   ? Container()
-                  : Text(category.name, style: _theme.textTheme.bodyText1),
+                  : Text(category.name, style: _theme.textTheme.body1),
             ],
           );
   }
@@ -176,7 +176,7 @@ class OpenFlutterProductTile extends StatelessWidget {
               ),
               Padding(padding: EdgeInsets.only(top: AppSizes.linePadding)),
               Text('\$' + product.price.toStringAsFixed(2),
-                  style: _theme.textTheme.headline5.copyWith(
+                  style: _theme.textTheme.display3.copyWith(
                       color: _theme.primaryColor, fontWeight: FontWeight.bold))
             ],
           );
@@ -222,7 +222,7 @@ class OpenFlutterProductTile extends StatelessWidget {
     return Row(
       children: <Widget>[
         Text('\$' + product.price.toStringAsFixed(0),
-            style: _theme.textTheme.headline5.copyWith(
+            style: _theme.textTheme.display3.copyWith(
               decoration: discountPrice > 0
                   ? TextDecoration.lineThrough
                   : TextDecoration.none,
@@ -232,7 +232,7 @@ class OpenFlutterProductTile extends StatelessWidget {
         ),
         discountPrice > 0
             ? Text('\$' + discountPrice.toStringAsFixed(0),
-                style: _theme.textTheme.headline5
+                style: _theme.textTheme.display3
                     .copyWith(color: _theme.errorColor))
             : Container()
       ],
@@ -242,13 +242,13 @@ class OpenFlutterProductTile extends StatelessWidget {
   Widget buildColor(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text('Color:', style: _theme.textTheme.headline5.copyWith()),
+        Text('Color:', style: _theme.textTheme.display3.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text(
           'Blue',
-          style: _theme.textTheme.headline5.copyWith(color: AppColors.black),
+          style: _theme.textTheme.display3.copyWith(color: AppColors.black),
         ),
       ],
     );
@@ -257,12 +257,12 @@ class OpenFlutterProductTile extends StatelessWidget {
   Widget buildSize(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text('Size:', style: _theme.textTheme.headline5.copyWith()),
+        Text('Size:', style: _theme.textTheme.display3.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text('L',
-            style: _theme.textTheme.headline5.copyWith(color: AppColors.black))
+            style: _theme.textTheme.display3.copyWith(color: AppColors.black))
       ],
     );
   }
@@ -307,7 +307,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                 color: AppColors.black,
               ),
               child: Text('NEW',
-                  style: theme.textTheme.bodyText1.copyWith(
+                  style: theme.textTheme.body1.copyWith(
                       color: AppColors.white, fontWeight: FontWeight.bold)))
           : (product.discountPercent > 0
               ? Container(
@@ -318,7 +318,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                   ),
                   child: Text(
                       '-' + product.discountPercent.toStringAsFixed(0) + '%',
-                      style: theme.textTheme.bodyText1.copyWith(
+                      style: theme.textTheme.body1.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.bold,
                       )))

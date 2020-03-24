@@ -40,7 +40,7 @@ class OpenFlutterInputButton extends StatelessWidget {
               width: width - 40,
               child: TextField(
                   controller: controller,
-                  style: _theme.textTheme.headline5
+                  style: _theme.textTheme.display3
                       .copyWith(color: _theme.primaryColorLight),
                   decoration: InputDecoration(
                     border: InputBorder.none,

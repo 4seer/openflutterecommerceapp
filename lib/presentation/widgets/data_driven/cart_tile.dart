@@ -70,7 +70,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                   Container(
                                     width: width - 173,
                                     child: Text(widget.item.product.title,
-                                        style: _theme.textTheme.headline3
+                                        style: _theme.textTheme.display1
                                             .copyWith(
                                                 fontWeight: FontWeight.bold,
                                                 color: _theme.primaryColor)),
@@ -143,7 +143,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                                 AppSizes.linePadding * 2),
                                             child: Text(quantity.toString(),
                                                 style:
-                                                    _theme.textTheme.headline3),
+                                                    _theme.textTheme.display1),
                                           ),
                                           InkWell(
                                               onTap: (() => {
@@ -180,9 +180,9 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                       width: 110,
                                       child: Row(children: <Widget>[
                                         Text('Units: ',
-                                            style: _theme.textTheme.bodyText1),
+                                            style: _theme.textTheme.body1),
                                         Text(widget.item.quantity.toString(),
-                                            style: _theme.textTheme.bodyText1
+                                            style: _theme.textTheme.body1
                                                 .copyWith(
                                                     color:
                                                         _theme.primaryColor)),
@@ -193,7 +193,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                 child: Text(
                                     '\$' +
                                         (widget.item.price).toStringAsFixed(0),
-                                    style: _theme.textTheme.headline3),
+                                    style: _theme.textTheme.display1),
                               )
                             ])
                           ]))

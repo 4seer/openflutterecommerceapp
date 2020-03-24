@@ -132,7 +132,5 @@ class FakeProductRepository extends ProductRepository {
 
 
 
-  FakeProductRepository() {
-
-  }
+  FakeProductRepository();
 }

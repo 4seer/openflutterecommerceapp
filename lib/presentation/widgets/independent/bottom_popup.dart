@@ -40,7 +40,7 @@ class OpenFlutterBottomPopup extends StatelessWidget {
                 ),
               ),
               title != ''
-                  ? Text(title, style: _theme.textTheme.headline3)
+                  ? Text(title, style: _theme.textTheme.display1)
                   : Container(),
               Padding(
                 padding: EdgeInsets.only(bottom: AppSizes.sidePadding),

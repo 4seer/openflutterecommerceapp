@@ -35,7 +35,7 @@ class OpenFlutterCategoryTile extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     width: width - 200.0,
                     child:
-                        Text(category.name, style: _theme.textTheme.headline3)),
+                        Text(category.name, style: _theme.textTheme.display1)),
                 Container(
                   width: 200,
                   alignment: Alignment.centerRight,

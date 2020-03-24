@@ -51,7 +51,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
       children: <Widget>[
         Text(
           rating.toString(),
-          style: Theme.of(context).textTheme.headline4.copyWith(
+          style: Theme.of(context).textTheme.display2.copyWith(
                 color: Colors.black,
               ),
         ),

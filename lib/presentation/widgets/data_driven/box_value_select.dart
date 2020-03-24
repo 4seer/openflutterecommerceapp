@@ -93,7 +93,7 @@ class _OpenFlutterSelectValuesBoxesState<T>
       child: Text(
         convertValueToString(currentValue).toUpperCase(),
         overflow: TextOverflow.ellipsis,
-        style: _theme.textTheme.headline5.copyWith(
+        style: _theme.textTheme.display3.copyWith(
           color: widget.selectedValues.contains(currentValue)
               ? AppColors.white
               : _theme.accentColor,

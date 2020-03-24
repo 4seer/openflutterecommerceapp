@@ -45,7 +45,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.centerRight,
                           child:
-                              Text(linkText, style: _theme.textTheme.bodyText2),
+                              Text(linkText, style: _theme.textTheme.body2),
                         ),
                       )
                     : Container(),
@@ -54,7 +54,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
             description != null
                 ? Text(
                     description,
-                    style: _theme.textTheme.bodyText2,
+                    style: _theme.textTheme.body2,
                   )
                 : Container()
           ],

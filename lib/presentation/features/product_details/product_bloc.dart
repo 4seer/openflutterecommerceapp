@@ -22,9 +22,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           await productRepository.getSimilarProducts(productId);
       yield ProductLoadedState(product: data, similarProducts: similarProducts);
     } else if (event is ProductAddToFavoritesEvent) {
-      productRepository.addToFavorites(productId);
+      await productRepository.addToFavorites(productId);
     } else if (event is ProductAddToFavoritesEvent) {
-      productRepository.removeFromFavorites(productId);
+      await productRepository.removeFromFavorites(productId);
     } else if (event is ProductAddToCartEvent) {
       //TODO: add to cart
     } else if (event is ProductSetAttributeEvent) {

@@ -36,7 +36,7 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline3
+                    style: _theme.textTheme.display1
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -80,7 +80,7 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
           RichText(
             text: TextSpan(
                 text: '3 Newbridge Court Chino Hills, CA 91709, United States',
-                style: _theme.textTheme.headline5
+                style: _theme.textTheme.display3
                     .copyWith(color: _theme.primaryColor)),
             maxLines: 2,
           ),

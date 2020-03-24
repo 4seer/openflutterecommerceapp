@@ -37,7 +37,7 @@ class _OpenFlutterLabelRightCheckboxState
             Container(
                 width: widget.width - 50,
                 child: Text(widget.title,
-                    style: _theme.textTheme.headline3.copyWith(
+                    style: _theme.textTheme.display1.copyWith(
                         color: _checked
                             ? _theme.accentColor
                             : _theme.primaryColor))),

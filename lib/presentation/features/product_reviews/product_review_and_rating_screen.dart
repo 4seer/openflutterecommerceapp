@@ -74,7 +74,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
   Widget _buildTitle(BuildContext context) {
     return Text(
       'Ratings&Reviews',
-      style: Theme.of(context).textTheme.headline2,
+      style: Theme.of(context).textTheme.title,
     );
   }
 
@@ -207,7 +207,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
           children: <Widget>[
             Text(
               '$reviewCount reviews',
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.subtitle,
             ),
             Expanded(
               child: OpenFlutterCheckbox(
@@ -280,7 +280,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
       child: Center(
         child: Text(
           'Without reviews',
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.body1,
           textAlign: TextAlign.center,
         ),
       ),
