@@ -6,25 +6,23 @@ import 'package:flutter/material.dart';
 
 @immutable
 abstract class CategoryEvent extends Equatable {
-  final int typeId;
-  CategoryEvent(this.typeId) : super();
+  final int parentCategoryId;
+  CategoryEvent(this.parentCategoryId) : super();
 
   @override
-  List<Object> get props => [typeId];
+  List<Object> get props => [parentCategoryId];
 }
 
 @immutable
 class CategoryShowListEvent extends CategoryEvent {
-  CategoryShowListEvent(int typeId) : super(typeId);
-
-  @override
-  String toString() => 'Category show list view';
+  CategoryShowListEvent(int parentCategoryId) : super(parentCategoryId);
 }
 
 @immutable
 class CategoryShowTilesEvent extends CategoryEvent {
-  CategoryShowTilesEvent(typeId) : super(typeId);
+  CategoryShowTilesEvent(int parentCategoryId) : super(parentCategoryId);
+}
 
-  @override
-  String toString() => 'Category show tiles view';
+class ChangeCategoryParent extends CategoryEvent {
+  ChangeCategoryParent(int parentCategoryId) : super(parentCategoryId);
 }

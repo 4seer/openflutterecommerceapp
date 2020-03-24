@@ -5,8 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/bottom_popup.dart';
-import 'package:openflutterecommerce/presentation/widgets/payment_card_preview.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/bottom_popup.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/payment_card_preview.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
@@ -63,7 +63,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline3
+                    style: _theme.textTheme.display1
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();

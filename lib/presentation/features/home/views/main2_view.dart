@@ -3,10 +3,12 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/presentation/features/categories/categories.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
+import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 class Main2View extends StatefulWidget {
   final Function changeView;
@@ -46,14 +48,17 @@ class _Main2ViewState extends State<Main2View> {
                   padding: EdgeInsets.only(left: AppSizes.sidePadding),
                   width: width,
                   child: Text('Street clothes',
-                      style: _theme.textTheme.headline1.copyWith(fontSize: 34)))
+                      style: _theme.textTheme.headline.copyWith(fontSize: 34)))
             ],
           )),
       OpenFlutterBlockHeader(
         width: widgetWidth,
         title: 'Sale',
         linkText: 'View All',
-        onLinkTap: (() => {}),
+        onLinkTap: () => {
+          Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.shop,
+              arguments: CategoriesParameters(2))
+        },
         description: 'Super summer sale',
       ),
       OpenFlutterProductListView(
@@ -63,7 +68,10 @@ class _Main2ViewState extends State<Main2View> {
         width: widgetWidth,
         title: 'New',
         linkText: 'View All',
-        onLinkTap: (() => {}),
+        onLinkTap: () => {
+          Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.shop,
+              arguments: CategoriesParameters(3))
+        },
         description: 'You’ve never seen it before!',
       ),
       OpenFlutterProductListView(

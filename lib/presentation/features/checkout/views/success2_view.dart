@@ -41,7 +41,7 @@ class _Success2ViewState extends State<Success2View> {
                 padding: EdgeInsets.all(AppSizes.sidePadding * 2),
                 child: Text(
                     'Your order will be delivered soon. Thank you for choosing our app!',
-                    style: _theme.textTheme.headline3)),
+                    style: _theme.textTheme.display1)),
             OpenFlutterButton(
               title: 'CONTINUE SHOPPING',
               onPressed: (() => {

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/order_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/order_repository.dart';
 
 import 'profile.dart';
 

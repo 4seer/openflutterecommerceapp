@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
-import 'package:openflutterecommerce/presentation/widgets/menu_line.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/menu_line.dart';
 
 import '../profile.dart';
 

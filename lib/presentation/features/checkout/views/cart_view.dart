@@ -5,10 +5,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/action_card.dart';
-import 'package:openflutterecommerce/presentation/widgets/delivery_method.dart';
-import 'package:openflutterecommerce/presentation/widgets/payment_card.dart';
-import 'package:openflutterecommerce/presentation/widgets/summary_line.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/action_card.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/delivery_method.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/payment_card.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/summary_line.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
@@ -37,7 +37,7 @@ class _CartViewState extends State<CartView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline3
+                    style: _theme.textTheme.display1
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -61,7 +61,7 @@ class _CartViewState extends State<CartView> {
                         text: TextSpan(
                             text:
                                 '3 Newbridge Court Chino Hills, CA 91709, United States',
-                            style: _theme.textTheme.headline5
+                            style: _theme.textTheme.display3
                                 .copyWith(color: _theme.primaryColor)),
                         maxLines: 2,
                       )),

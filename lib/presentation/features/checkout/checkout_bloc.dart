@@ -4,7 +4,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 
 import 'checkout.dart';
 
@@ -23,7 +23,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     if (event is CheckoutStartEvent) {
       if (state is CheckoutInitialState) {
         yield CheckoutProceedState(
-            cardId: 1, cartProducts: productRepository.getProducts(2));
+            cardId: 1,
+            cartProducts: await productRepository.getProductsInCategory(2));
       } else if (state is CheckoutProceedState) {
         yield state;
       }

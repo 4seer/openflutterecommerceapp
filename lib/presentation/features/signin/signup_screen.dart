@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/app_user.dart';
+import 'package:openflutterecommerce/data/abstract/model/app_user.dart';
 import 'package:openflutterecommerce/presentation/features/authentication/authentication.dart';
 import 'package:openflutterecommerce/presentation/features/signin/signin.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';

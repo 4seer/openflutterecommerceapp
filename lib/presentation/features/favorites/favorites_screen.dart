@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/favourite_repository.dart';
-import 'package:openflutterecommerce/data/fake_repositories/hashtag_repository.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 
 import 'favorites.dart';
@@ -24,9 +24,10 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         child: BlocProvider<FavouriteBloc>(
             create: (context) {
               return FavouriteBloc(
-                  favouriteRepository: FavouriteRepository(),
+                  favouriteRepository:
+                      RepositoryProvider.of<ProductRepository>(context),
                   hashtagRepository: HashtagRepository())
-                ..add(FavouriteListViewEvent());
+                ..add(ShowListViewEvent());
             },
             child: FavouriteWrapper()));
   }
