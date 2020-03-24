@@ -20,7 +20,6 @@ jobs:
       # https://github.com/marketplace/actions/flutter-action
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.12.13'
           channel: 'stable'
       - run: flutter pub get
       - name: Static analysis
