@@ -4,9 +4,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
+import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import 'checkout.dart';
 import 'views/add_shipping_address_view.dart';
@@ -25,7 +25,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       title: 'Checkout',
       body: BlocProvider<CheckoutBloc>(
           create: (context) {
-            return CheckoutBloc(productRepository: ProductRepository())
+            return CheckoutBloc(
+                productRepository:
+                    RepositoryProvider.of<ProductRepository>(context))
               ..add(CheckoutStartEvent());
           },
           child: CheckoutWrapper()),

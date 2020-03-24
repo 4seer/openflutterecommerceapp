@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/presentation/features/product_details/views/attribute_bottom_sheet.dart';
 import 'package:openflutterecommerce/presentation/features/product_reviews/product_review_and_rating_screen.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -12,13 +15,18 @@ import '../product_state.dart';
 class ProductDetailsView extends StatefulWidget {
   final Product product;
   final Function changeView;
+  final Category category;
+  final bool hasReviews;
+
   final List<Product> similarProducts;
 
   const ProductDetailsView(
       {Key key,
       @required this.product,
       @required this.changeView,
-      @required this.similarProducts})
+      @required this.similarProducts,
+      this.category,
+      this.hasReviews = false})
       : super(key: key);
 
   @override
@@ -32,7 +40,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   @override
   void initState() {
-    favorite = widget.product.favorite;
+    favorite = widget.product.isFavorite;
     super.initState();
   }
 
@@ -51,7 +59,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline3
+                    style: _theme.textTheme.display1
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -84,19 +92,20 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           //contains size button,color button and favourite button
                           margin: EdgeInsets.all(16),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              selectionOutlineButton(deviceWidth, 'Size',
-                                  _showSelectSizeBottomSheet, bloc),
-                              selectionOutlineButton(deviceWidth, 'Color',
-                                  _showSelectColorBottomSheet, bloc),
-                              OpenFlutterFavouriteButton(
-                                favourite: favorite,
-                                setFavourite: (() => {setFavourite(bloc)}),
-                              ),
-                            ],
-                          ),
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.max,
+                              children: state.product.attributes
+                                      .map((value) => selectionOutlineButton(
+                                          deviceWidth,
+                                          value,
+                                          state.selectedAttributes[value]))
+                                      .toList() +
+                                  [
+                                    OpenFlutterFavouriteButton(
+                                      favourite: favorite,
+                                      setFavourite: () => {setFavourite(bloc)},
+                                    )
+                                  ]),
                         ),
                         productDetails(_theme),
                         //Function call for Product detail widget
@@ -104,7 +113,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           margin: EdgeInsets.only(
                               left: 16.0, right: 16.0, bottom: 10.0),
                           child: Text(
-                            widget.product.description,
+                            widget.product.description ?? 'no details',
                             style: TextStyle(fontSize: 15.0),
                           ),
                         ),
@@ -115,8 +124,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           child: Center(
                             child: OpenFlutterButton(
                               title: 'ADD TO CART',
-                              onPressed: (() =>
-                                  {_showSelectSizeBottomSheet(context, bloc)}),
+                              onPressed: () {
+                                _addItemToCart(context, state);
+                              },
                               width: deviceWidth * 0.88,
                               height: 50,
                             ),
@@ -126,13 +136,13 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         OpenFlutterExpansionTile(
                           title: 'Shipping info',
                           //TODO: get this date from store settings
-                          description: widget.product.description,
+                          description: 'detailed data about shipping options',
                         ),
                         Theme(data: dividerTheme, child: Divider()),
                         OpenFlutterExpansionTile(
                           title: 'Support',
                           //TODO: get this date from store settings
-                          description: widget.product.description,
+                          description: 'detailed data about support',
                         ),
                         Theme(data: dividerTheme, child: Divider()),
                         SizedBox(
@@ -174,16 +184,18 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   void setFavourite(ProductBloc bloc) {
     if (!favorite) {
-      bloc..add(ProductAddToFavEvent(widget.product.id));
+      bloc.add(ProductAddToFavoritesEvent());
     } else {
-      bloc..add(ProductRemoveFromFavEvent(widget.product.id));
+      bloc.add(ProductRemoveFromFavoritesEvent());
     }
     setState(() {
       favorite = !favorite;
     });
   }
 
-  void _showSelectSizeBottomSheet(BuildContext context, ProductBloc bloc) {
+  void _showSelectAttributeBottomSheet(
+      BuildContext context, ProductAttribute attribute,
+      {String selectedValue}) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -191,218 +203,25 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(34), topRight: Radius.circular(34)),
         ),
-        builder: (BuildContext context) => FractionallySizedBox(
-              heightFactor: 0.62,
-              child: Container(
-                padding: AppSizes.bottomSheetPadding,
-                decoration: BoxDecoration(
-                    color: AppColors.background,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(34),
-                        topRight: Radius.circular(34)),
-                    boxShadow: []),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Container(
-                        height: 6,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: AppColors.lightGray,
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Text(
-                        'Select size',
-                        style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Container(
-                        child: IgnorePointer(
-                          child: GridView.count(
-                            shrinkWrap: true,
-                            crossAxisCount: 3,
-                            childAspectRatio: 100 / 60,
-                            children: widget.product.sizes
-                                .map((String value) => InkWell(
-                                      onTap: () => {
-                                        bloc
-                                          ..add(
-                                              ProductSetSizeEvent(size: value))
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.all(10.0),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: AppColors.darkGray),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(15.0))),
-                                        child: Center(
-                                          child: Text(
-                                            value,
-                                            style: TextStyle(fontSize: 15.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Theme(
-                          data: Theme.of(context)
-                              .copyWith(dividerColor: AppColors.darkGray),
-                          child: Divider()),
-                      ExpansionTile(
-                        title: Text('Size info'),
-                        trailing: Icon(Icons.keyboard_arrow_right),
-                      ),
-                      Theme(
-                          data: Theme.of(context)
-                              .copyWith(dividerColor: AppColors.darkGray),
-                          child: Divider()),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Center(
-                        child: OpenFlutterButton(
-                          title: 'ADD TO CART',
-                          onPressed: (() => {
-                                bloc
-                                  ..add(
-                                      ProductAddToCartEvent(widget.product.id))
-                              }),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+        builder: (BuildContext context) => AttributeBottomSheet(
+              productAttribute: attribute,
+              selectedValue: selectedValue,
             ));
   } //modelBottomSheet for selecting size
 
-  void _showSelectColorBottomSheet(BuildContext context,
-      ProductBloc bloc) //modelBottomSheet for selecting color
-  {
-    showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(34), topRight: Radius.circular(34)),
-        ),
-        builder: (BuildContext context) => FractionallySizedBox(
-              heightFactor: 0.45,
-              child: Container(
-                padding: AppSizes.bottomSheetPadding,
-                decoration: BoxDecoration(
-                    color: AppColors.background,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(34),
-                        topRight: Radius.circular(34)),
-                    boxShadow: []),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Container(
-                        height: 6,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: AppColors.lightGray,
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Text(
-                        'Select color',
-                        style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Container(
-                        //height: 250,
-                        child: IgnorePointer(
-                          child: GridView.count(
-                            shrinkWrap: true,
-                            crossAxisCount: 3,
-                            childAspectRatio: 100 / 60,
-                            children: widget.product.colors
-                                .map((String value) => GestureDetector(
-                                      onTap: () => (() => {
-                                            bloc
-                                              ..add(ProductSetColorEvent(
-                                                  color: value))
-                                          }),
-                                      child: Container(
-                                        margin: EdgeInsets.all(10.0),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: AppColors.darkGray),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(15.0))),
-                                        child: Center(
-                                          child: Text(
-                                            value,
-                                            style: TextStyle(fontSize: 15.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Center(
-                        child: OpenFlutterButton(
-                          title: 'ADD TO CART',
-                          onPressed: (() => {
-                                bloc
-                                  ..add(
-                                      ProductAddToCartEvent(widget.product.id))
-                              }),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ));
-  }
-
-  Widget selectionOutlineButton(
-      var deviceWidth, String title, Function fun, ProductBloc bloc) {
+  Widget selectionOutlineButton(var deviceWidth, ProductAttribute attribute,
+      String alreadySelectedValue) {
     //select size and select color widget
     return OutlineButton(
-      onPressed: () => fun(context, bloc),
+      onPressed: () => _showSelectAttributeBottomSheet(context, attribute,
+          selectedValue: alreadySelectedValue),
       child: Container(
         margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              title,
+              alreadySelectedValue ?? attribute.name,
               style: TextStyle(
                   fontSize: 14,
                   color: AppColors.black,
@@ -435,26 +254,32 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             children: <Widget>[
               Text(
                 widget.product.title,
-                style: theme.textTheme.headline2,
+                style: theme.textTheme.title,
               ),
               Text(
                 '\$' + widget.product.price.toString(),
-                style: theme.textTheme.headline2,
+                style: theme.textTheme.title,
               )
             ],
           ),
-          Text(
-            widget.product.categoryTitle,
-            style: theme.textTheme.bodyText1,
-          ),
+          widget.category == null
+              ? Container()
+              : Text(
+                  widget.category.name,
+                  style: theme.textTheme.body1,
+                ),
           SizedBox(
             height: 5,
           ),
           GestureDetector(
-            onTap: () => navigateToReviewDetail(context),
+            onTap: widget.hasReviews
+                ? () {
+                    navigateToReviewDetail(context);
+                  }
+                : null,
             child: Container(
               child: OpenFlutterProductRating(
-                rating: widget.product.rating,
+                rating: widget.product.averageRating,
                 ratingCount: widget.product.ratingCount,
                 alignment: MainAxisAlignment.start,
               ),
@@ -466,12 +291,22 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   }
 
   void navigateToReviewDetail(BuildContext context) {
-    if (widget.product.hasReviews()) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ProductReviewRatingScreen(
-          product: widget.product,
-        ),
-      ));
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ProductReviewRatingScreen(
+        product: widget.product,
+      ),
+    ));
+  }
+
+  void _addItemToCart(BuildContext context, ProductLoadedState state) async {
+    if (state.selectedAttributes.length == state.product.attributes.length) {
+      BlocProvider.of<ProductBloc>(context).add(ProductAddToCartEvent());
+    } else {
+      for (final attribute in state.product.attributes) {
+        if (!state.selectedAttributes.containsKey(attribute)) {
+          await _showSelectAttributeBottomSheet(context, attribute);
+        }
+      }
     }
   }
 }

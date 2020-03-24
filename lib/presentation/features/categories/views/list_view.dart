@@ -4,11 +4,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/category.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
-import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 
 import '../categories.dart';
 import '../categories_bloc.dart';
@@ -16,9 +16,7 @@ import '../categories_event.dart';
 import '../categories_state.dart';
 
 class CategoriesListView extends StatefulWidget {
-  final Function changeView;
-
-  const CategoriesListView({Key key, this.changeView}) : super(key: key);
+  const CategoriesListView({Key key}) : super(key: key);
 
   @override
   _CategoriesListViewState createState() => _CategoriesListViewState();
@@ -36,7 +34,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
-                style: _theme.textTheme.headline3
+                style: _theme.textTheme.display1
                     .copyWith(color: _theme.errorColor)));
       }
       return Container();
@@ -50,8 +48,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
               OpenFlutterButton(
                 onPressed: (() => {
                       BlocProvider.of<CategoryBloc>(context)
-                          .add(CategoryShowTilesEvent(1)),
-                      widget.changeView(changeType: ViewChangeType.Forward)
+                          .add(CategoryShowTilesEvent(0)),
                     }),
                 title: 'VIEW ALL ITEMS',
                 width: widgetWidth,
@@ -62,13 +59,9 @@ class _CategoriesListViewState extends State<CategoriesListView> {
                   top: AppSizes.sidePadding,
                 ),
               ),
-              state.isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Column(
-                      children: buildCategoryList(state.categories),
-                    )
+              Column(
+                children: buildCategoryList(state.categories),
+              )
             ],
           ),
         );
@@ -84,16 +77,16 @@ class _CategoriesListViewState extends State<CategoriesListView> {
     for (var i = 0; i < categories.length; i++) {
       elements.add(
         InkWell(
-          onTap: (() {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return ProductsScreen(categoryId: categories[i].id);
+          onTap: categories[i].isCategoryContainer
+              ? () {
+                  BlocProvider.of<CategoryBloc>(context)
+                      .add(ChangeCategoryParent(categories[i].id));
+                }
+              : () {
+                  Navigator.of(context).pushNamed(
+                      OpenFlutterEcommerceRoutes.productList,
+                      arguments: ProductListScreenParameters(categories[i].id));
                 },
-              ),
-            );
-          }),
           child: OpenFlutterCatregoryListElement(category: categories[i]),
         ),
       );

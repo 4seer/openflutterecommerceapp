@@ -5,25 +5,32 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/user_repository.dart'; // this is the fake repo
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/user_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/fake_product_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/fake_user_repository.dart';
+import 'package:openflutterecommerce/features/sign_in/sign_in.dart';
+import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
+import 'package:openflutterecommerce/presentation/features/products/products.dart';
+import 'package:openflutterecommerce/presentation/features/splash_screen.dart';
 
-
-//import 'data/remote/repositories/user_repository.dart'; // this is the real repo
+import 'data/abstract/cart_repository.dart';
+import 'data/fake_model/fake_cart_repository.dart';
 import 'features/authentication/authentication.dart';
 import 'config/routes.dart';
+import 'data/abstract/category_repository.dart';
+import 'data/fake_model/fake_category_repository.dart';
 import 'features/forget_password/forget_password.dart';
-import 'features/sign_up/sign_up.dart';
-import 'features/sign_in/sign_in.dart';
-import 'presentation/features/cart/cart_screen.dart';
-import 'presentation/features/categories/categories_screen.dart';
-import 'presentation/features/checkout/checkout_screen.dart';
-import 'presentation/features/favorites/favorites_screen.dart';
-import 'presentation/features/home/home_screen.dart';
-import 'presentation/features/profile/profile_screen.dart';
+import 'features/sign_up/sign_up_bloc.dart';
+import 'presentation/features/cart/cart.dart';
+import 'presentation/features/categories/categories.dart';
+import 'presentation/features/checkout/checkout.dart';
+import 'presentation/features/favorites/favorites.dart';
+import 'presentation/features/home/home.dart';
+import 'presentation/features/profile/profile.dart';
 import 'presentation/features/signin/forget_password_screen.dart';
 import 'presentation/features/signin/signin_screen.dart';
 import 'presentation/features/signin/signup_screen.dart';
-import 'presentation/features/splash_screen.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -53,17 +60,27 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = SimpleBlocDelegate();
-
-  AuthenticationBloc _authenticationBloc = AuthenticationBloc();
-  UserRepository _userRepository = UserRepository();
   runApp(
     BlocProvider<AuthenticationBloc>(
-      create: (context) => _authenticationBloc..add(AppStarted()),
-      child: LocalizedApp(
-        delegate,
-        OpenFlutterEcommerceApp(
-          authenticationBloc: _authenticationBloc,
-          userRepository: _userRepository,
+      create: (context) => AuthenticationBloc()..add(AppStarted()),
+      child: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<CategoryRepository>(
+            create: (context) => FakeCategoryRepository(),
+          ),
+          RepositoryProvider<ProductRepository>(
+            create: (context) => FakeProductRepository(),
+          ),
+          RepositoryProvider<UserRepository>(
+            create: (context) => FakeUserRepository(),
+          ),
+          RepositoryProvider<CartRepository>(
+            create: (context) => FakeCartRepository(),
+          ),
+        ],
+        child: LocalizedApp(
+          delegate,
+          OpenFlutterEcommerceApp(),
         ),
       ),
     ),
@@ -71,76 +88,26 @@ void main() async {
 }
 
 class OpenFlutterEcommerceApp extends StatelessWidget {
-  final AuthenticationBloc authenticationBloc;
-  final UserRepository userRepository;
-
-  const OpenFlutterEcommerceApp(
-      {Key key, this.authenticationBloc, this.userRepository})
-      : super(key: key);
-
-  get _signIn => BlocProvider<SignInBloc>(
-        create: (context) => SignInBloc(
-          authenticationBloc: authenticationBloc,
-          userRepository: userRepository,
-        ),
-        child: SignInScreen(),
-      );
-
-  get _signUp => BlocProvider<SignUpBloc>(
-        create: (context) => SignUpBloc(
-          authenticationBloc: authenticationBloc,
-          userRepository: userRepository,
-        ),
-        child: SignUpScreen(),
-      );
-
-  get _forgetPassword => BlocProvider<ForgetPasswordBloc>(
-        create: (context) => ForgetPasswordBloc(),
-        child: ForgetPasswordScreen(),
-      );
-
   @override
   Widget build(BuildContext context) {
     var localizationDelegate = LocalizedApp.of(context).delegate;
 
     return LocalizationProvider(
-      state: LocalizationProvider.of(context).state,
-      child: MaterialApp(
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          localizationDelegate,
-        ],
-        supportedLocales: localizationDelegate.supportedLocales,
-        debugShowCheckedModeBanner: false,
-        locale: localizationDelegate.currentLocale,
-        title: 'Open FLutter E-commerce',
-        theme: OpenFlutterEcommerceTheme.of(context),
-        routes: <String, WidgetBuilder>{
-          OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
-          OpenFlutterEcommerceRoutes.cart: (context) => CartScreen(),
-          OpenFlutterEcommerceRoutes.checkout: (context) => CheckoutScreen(),
-          OpenFlutterEcommerceRoutes.favourites: (context) => FavouriteScreen(),
-          OpenFlutterEcommerceRoutes.signin: (context) => _signIn,
-          OpenFlutterEcommerceRoutes.signup: (context) => _signUp,
-          OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
-              _forgetPassword,
-          OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
-          OpenFlutterEcommerceRoutes.profile: (context) =>
-              BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                builder: (context, state) {
-                  if (state is Authenticated) {
-                    return ProfileScreen(); //TODO profile properties should be here
-                  } else if (state is Unauthenticated) {
-                    return _signUp;
-                  } else {
-                    return SplashScreen();
-                  }
-                },
-              ),
-        },
-      ),
-    );
+        state: LocalizationProvider.of(context).state,
+        child: MaterialApp(
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            localizationDelegate,
+          ],
+          onGenerateRoute: _registerRoutesWithParameters,
+          supportedLocales: localizationDelegate.supportedLocales,
+          debugShowCheckedModeBanner: false,
+          locale: localizationDelegate.currentLocale,
+          title: 'Open FLutter E-commerce',
+          theme: OpenFlutterEcommerceTheme.of(context),
+          routes: _registerRoutes(),
+        ));
   }
 
   Map<String, WidgetBuilder> _registerRoutes() {
@@ -153,7 +120,6 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
       OpenFlutterEcommerceRoutes.signup: (context) => _buildSignUpBloc(),
       OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
           _buildForgetPasswordBloc(),
-      OpenFlutterEcommerceRoutes.shop: (context) => CategoriesScreen(),
       OpenFlutterEcommerceRoutes.profile: (context) =>
           BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) {
@@ -170,22 +136,62 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
 
   BlocProvider<ForgetPasswordBloc> _buildForgetPasswordBloc() {
     return BlocProvider<ForgetPasswordBloc>(
-      create: (context) => ForgetPasswordBloc(),
+      create: (context) => ForgetPasswordBloc(
+        userRepository: RepositoryProvider.of<UserRepository>(context),
+      ),
       child: ForgetPasswordScreen(),
     );
   }
 
   BlocProvider<SignInBloc> _buildSignInBloc() {
     return BlocProvider<SignInBloc>(
-      create: (context) => SignInBloc(),
+      create: (context) => SignInBloc(
+        userRepository: RepositoryProvider.of<UserRepository>(context),
+        authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
+      ),
       child: SignInScreen(),
     );
   }
 
   BlocProvider<SignUpBloc> _buildSignUpBloc() {
     return BlocProvider<SignUpBloc>(
-      create: (context) => SignUpBloc(),
+      create: (context) => SignUpBloc(
+        userRepository: RepositoryProvider.of<UserRepository>(context),
+        authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
+      ),
       child: SignUpScreen(),
     );
+  }
+
+  Route _registerRoutesWithParameters(RouteSettings settings) {
+    if (settings.name == OpenFlutterEcommerceRoutes.shop) {
+      final CategoriesParameters args = settings.arguments;
+      return MaterialPageRoute(
+        builder: (context) {
+          return CategoriesScreen(
+            parameters: args,
+          );
+        },
+      );
+    } else if (settings.name == OpenFlutterEcommerceRoutes.productList) {
+      final ProductListScreenParameters productListScreenParameters =
+          settings.arguments;
+      return MaterialPageRoute(builder: (context) {
+        return ProductsScreen(
+          parameters: productListScreenParameters,
+        );
+      });
+    } else if (settings.name == OpenFlutterEcommerceRoutes.product) {
+      final ProductDetailsParameters parameters = settings.arguments;
+      return MaterialPageRoute(builder: (context) {
+        return ProductDetailsScreen(parameters);
+      });
+    } else {
+      return MaterialPageRoute(
+        builder: (context) {
+          return HomeScreen();
+        },
+      );
+    }
   }
 }

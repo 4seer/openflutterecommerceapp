@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/cart_product.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/promo.dart';
-import 'package:openflutterecommerce/presentation/widgets/bottom_popup.dart';
-import 'package:openflutterecommerce/presentation/widgets/cart_tile.dart';
-import 'package:openflutterecommerce/presentation/widgets/promo_tile.dart';
-import 'package:openflutterecommerce/presentation/widgets/summary_line.dart';
+import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/promo.dart';
+import 'package:openflutterecommerce/presentation/widgets/data_driven/cart_tile.dart';
+import 'package:openflutterecommerce/presentation/widgets/data_driven/promo_tile.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/bottom_popup.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/summary_line.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../cart.dart';
@@ -55,7 +55,7 @@ class _CartViewState extends State<CartView> {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
-                style: _theme.textTheme.headline3
+                style: _theme.textTheme.display1
                     .copyWith(color: _theme.errorColor)));
       }
       return Container();
@@ -150,7 +150,7 @@ class _CartViewState extends State<CartView> {
     return widgets;
   }
 
-  List<Widget> buildCartItems(List<CartProduct> items, CartBloc bloc) {
+  List<Widget> buildCartItems(List<CartItem> items, CartBloc bloc) {
     var widgets = <Widget>[];
     for (var i = 0; i < items.length; i++) {
       widgets.add(Container(

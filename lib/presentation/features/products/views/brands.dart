@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/brand.dart';
-import 'package:openflutterecommerce/presentation/widgets/search_bar.dart';
+import 'package:openflutterecommerce/data/fake_model/models/brand.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/search_bar.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
@@ -28,7 +28,7 @@ class _SelectBrandViewState extends State<SelectBrandView> {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
-                style: _theme.textTheme.headline3
+                style: _theme.textTheme.display1
                     .copyWith(color: _theme.errorColor)));
       }
       return Container();

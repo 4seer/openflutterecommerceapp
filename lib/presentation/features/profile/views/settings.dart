@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/password_repository.dart';
-import 'package:openflutterecommerce/data/fake_repositories/settings_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/password_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/settings_repository.dart';
 import 'package:openflutterecommerce/presentation/features/profile/password_bloc.dart';
 import 'package:openflutterecommerce/presentation/features/profile/password_event.dart';
 import 'package:openflutterecommerce/presentation/features/profile/password_state.dart';
@@ -87,8 +87,9 @@ class _SettingsViewState extends State<SettingsView> {
                     controller: _fullNameController,
                     hint: 'Full Name',
                     horizontalPadding: 0,
-                    onValueChanged: (value) => settingsBloc..add(
-                        UpdateFullNameEvent(fullName: value.toString().trim())),
+                    onValueChanged: (value) => settingsBloc
+                      ..add(UpdateFullNameEvent(
+                          fullName: value.toString().trim())),
                   ),
                   SizedBox(
                     height: 24,
@@ -144,7 +145,7 @@ class _SettingsViewState extends State<SettingsView> {
                         style: TextStyle(fontSize: 14, color: AppColors.black),
                       ),
                       CupertinoSwitch(
-                        trackColor: AppColors.lightGray,
+                        //trackColor: AppColors.lightGray,
                         value: state.settings.notifySales,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc
@@ -163,12 +164,12 @@ class _SettingsViewState extends State<SettingsView> {
                         style: TextStyle(fontSize: 14, color: AppColors.black),
                       ),
                       CupertinoSwitch(
-                        trackColor: AppColors.lightGray,
+                        //trackColor: AppColors.lightGray,
                         value: state.settings.notifyArrivals,
                         activeColor: AppColors.success,
-                        onChanged: (newValue) => settingsBloc..add(
-                            UpdateNotifyArrivalsEvent(
-                                notifyArrivals: newValue)),
+                        onChanged: (newValue) => settingsBloc
+                          ..add(UpdateNotifyArrivalsEvent(
+                              notifyArrivals: newValue)),
                       ),
                     ],
                   ),
@@ -183,12 +184,12 @@ class _SettingsViewState extends State<SettingsView> {
                         style: TextStyle(fontSize: 14, color: AppColors.black),
                       ),
                       CupertinoSwitch(
-                        trackColor: AppColors.lightGray,
+                        //trackColor: AppColors.lightGray,
                         value: state.settings.notifyDelivery,
                         activeColor: AppColors.success,
-                        onChanged: (newValue) => settingsBloc..add(
-                            UpdateNotifyDeliveryEvent(
-                                notifyDelivery: newValue)),
+                        onChanged: (newValue) => settingsBloc
+                          ..add(UpdateNotifyDeliveryEvent(
+                              notifyDelivery: newValue)),
                       ),
                     ],
                   ),
@@ -316,16 +317,16 @@ class _SettingsViewState extends State<SettingsView> {
                             OpenFlutterButton(
                                 title: 'Save Password',
                                 height: 48,
-                                onPressed: () => passwordBloc..add(
-                                    ChangePasswordEvent(
-                                        currentPassword:
-                                            _currentPasswordController.text
-                                                .trim(),
-                                        newPassword:
-                                            _newPasswordController.text.trim(),
-                                        repeatNewPassword:
-                                            _repeatPasswordController.text
-                                                .trim())))
+                                onPressed: () => passwordBloc
+                                  ..add(ChangePasswordEvent(
+                                      currentPassword:
+                                          _currentPasswordController.text
+                                              .trim(),
+                                      newPassword:
+                                          _newPasswordController.text.trim(),
+                                      repeatNewPassword:
+                                          _repeatPasswordController.text
+                                              .trim())))
                           ],
                         ),
                       ),

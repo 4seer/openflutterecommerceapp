@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 
 @immutable
 class ProductState extends Equatable {
@@ -15,14 +16,12 @@ class ProductInitialState extends ProductState {}
 class ProductLoadedState extends ProductState {
   final Product product;
   final List<Product> similarProducts;
-  final String color;
-  final String size;
+  final Map<ProductAttribute, String> selectedAttributes;
 
   ProductLoadedState(
       {@required this.product,
       @required this.similarProducts,
-      this.color,
-      this.size});
+      this.selectedAttributes});
 }
 
 @immutable

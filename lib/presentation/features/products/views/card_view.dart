@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
@@ -35,7 +35,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
-                style: _theme.textTheme.headline3
+                style: _theme.textTheme.display1
                     .copyWith(color: _theme.errorColor)));
       }
       return Container();
@@ -51,7 +51,7 @@ class _ProductsCardViewState extends State<ProductsCardView> {
                     Padding(
                         padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                     OpenFlutterBlockHeader(
-                      title: state.data.category.title,
+                      title: state.data.category.name,
                       width: MediaQuery.of(context).size.width,
                     ),
                     Padding(

@@ -4,7 +4,7 @@
  * @see utils.dart
  */
 
-import 'package:openflutterecommerce/config/app_settings.dart';
+import 'package:openflutterecommerce/config/server_addresses.dart';
 import 'package:openflutterecommerce/config/storage.dart';
 
 class HttpClient {
@@ -18,7 +18,7 @@ class HttpClient {
   Uri createUri(String route, [Map<String, String> param = const {}]) {
     return Uri(
       scheme: 'https',
-      host: AppSettings().apiHost,
+      host: ServerAddresses.SERVER_ADDRESS,
       path: route,
       queryParameters: param,
     );

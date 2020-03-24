@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/app_user.dart';
 import 'package:openflutterecommerce/features/sign_in/sign_in.dart';
 import 'package:openflutterecommerce/features/sign_up/sign_up.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+
 import 'validator.dart';
 
 class SignInScreen extends StatefulWidget {

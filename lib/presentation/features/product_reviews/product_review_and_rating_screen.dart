@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product_review.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_review_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_review.dart';
+import 'package:openflutterecommerce/data/fake_model/product_review_repository.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import 'product_review_bloc.dart';
@@ -74,7 +74,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
   Widget _buildTitle(BuildContext context) {
     return Text(
       'Ratings&Reviews',
-      style: Theme.of(context).textTheme.headline2,
+      style: Theme.of(context).textTheme.title,
     );
   }
 
@@ -190,23 +190,9 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
       child: OpenFlutterRatingSummary(
         barColor: Theme.of(context).accentColor,
         ratingQuantity: widget.product.ratingCount,
-        rating: widget.product.rating,
-        ratingDetail: mapRatingDetail(),
+        rating: widget.product.averageRating,
       ),
     );
-  }
-
-  List<StarQuantity> mapRatingDetail() {
-    return widget.product != null
-        ? widget.product.ratingDetail
-            .map(
-              (e) => StarQuantity(
-                rating: e.rating,
-                quantity: e.quantity,
-              ),
-            )
-            .toList()
-        : null;
   }
 
   Widget _buildTitleCommentAndFilter(BuildContext context) {
@@ -221,7 +207,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
           children: <Widget>[
             Text(
               '$reviewCount reviews',
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.subtitle,
             ),
             Expanded(
               child: OpenFlutterCheckbox(
@@ -256,7 +242,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
           bottom: 16.0,
         ),
         child: OpenFlutterProductReviewItem(
-          rating: productReview.rating,
+          rating: productReview.rating.roundToDouble(),
           writerName: productReview.authorName,
           isHelpfulMarked: productReview.isHelpful,
           comment: productReview.comment,
@@ -294,7 +280,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
       child: Center(
         child: Text(
           'Without reviews',
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.body1,
           textAlign: TextAlign.center,
         ),
       ),

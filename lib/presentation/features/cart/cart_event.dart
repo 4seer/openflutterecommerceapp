@@ -4,7 +4,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/promo.dart';
+import 'package:openflutterecommerce/data/abstract/model/promo.dart';
 
 @immutable
 abstract class CartEvent extends Equatable {
@@ -13,8 +13,7 @@ abstract class CartEvent extends Equatable {
 }
 
 @immutable
-class CartLoadedEvent extends CartEvent { }
-
+class CartLoadedEvent extends CartEvent {}
 
 @immutable
 class CartQuantityChangedEvent extends CartEvent {
@@ -51,5 +50,6 @@ class CartPromoCodeAppliedEvent extends CartEvent {
 
   CartPromoCodeAppliedEvent({this.promoCode});
 }
+
 @immutable
-class CartShowPopupEvent extends CartEvent { }
+class CartShowPopupEvent extends CartEvent {}

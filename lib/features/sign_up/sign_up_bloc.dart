@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:openflutterecommerce/data/remote/repositories/user_repository.dart'; // this is the real repo
-import 'package:openflutterecommerce/data/fake_repositories/user_repository.dart'; // this is the fake repo
+import 'package:openflutterecommerce/data/abstract/user_repository.dart';
 import 'package:openflutterecommerce/features/authentication/authentication.dart';
 
 import 'sign_up.dart';

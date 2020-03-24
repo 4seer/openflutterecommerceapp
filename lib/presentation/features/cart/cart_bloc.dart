@@ -4,17 +4,17 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/fake_repositories/product_repository.dart';
-import 'package:openflutterecommerce/data/fake_repositories/promo_repository.dart';
+import 'package:openflutterecommerce/data/abstract/cart_repository.dart';
+import 'package:openflutterecommerce/data/fake_model/promo_repository.dart';
 
 import 'cart.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  final ProductRepository productRepository;
+  final CartRepository cartRepository;
 
   CartBloc({
-    @required this.productRepository,
-  }) : assert(productRepository != null);
+    @required this.cartRepository,
+  }) : assert(cartRepository != null);
 
   @override
   CartState get initialState => CartInitialState();
@@ -23,7 +23,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Stream<CartState> mapEventToState(CartEvent event) async* {
     if (event is CartLoadedEvent) {
       if (state is CartInitialState) {
-        var products = ProductRepository().getCartProducts();
+        final products = await cartRepository.getCartContent();
         var promos = PromoRepository().getPromos();
         yield CartLoadedState(
             showPromoPopup: false, promos: promos, cartProducts: products);

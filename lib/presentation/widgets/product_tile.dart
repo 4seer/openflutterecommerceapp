@@ -4,17 +4,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_repositories/models/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
 
 import 'widgets.dart';
 
 class OpenFlutterProductTile extends StatelessWidget {
   final Product product;
+  final Category category;
   final double height;
   final double width;
-  final Function(bool) onFavClicked;
+  final VoidCallback onFavClicked;
   final showCartButton;
   final showRemoveButton;
   final showColorAndSize;
@@ -24,10 +27,11 @@ class OpenFlutterProductTile extends StatelessWidget {
 
   const OpenFlutterProductTile(
       {Key key,
-      this.product,
+      @required this.product,
+      this.category,
       this.height,
       this.width,
-      this.onFavClicked,
+      @required this.onFavClicked,
       this.showCartButton = false,
       this.showRemoveButton = false,
       this.showColorAndSize = false,
@@ -44,8 +48,9 @@ class OpenFlutterProductTile extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             GestureDetector(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ProductDetailsScreen())),
+              onTap: () => Navigator.of(context).pushNamed(
+                  OpenFlutterEcommerceRoutes.product,
+                  arguments: ProductDetailsParameters(product.id)),
               child: Padding(
                 padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
                 child: Container(
@@ -96,7 +101,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                   bottom: 0,
                   right: 0,
                   child: OpenFlutterFavouriteButton(
-                    favourite: product.favorite,
+                    favourite: product.isFavorite,
                     setFavourite: onFavClicked,
                     size: 36.0,
                     iconSize: 12.0,
@@ -121,16 +126,20 @@ class OpenFlutterProductTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(product.categoryTitle, style: _theme.textTheme.bodyText1),
-              Text(product.title, style: _theme.textTheme.headline3),
+              category == null
+                  ? Container()
+                  : Text(category.name, style: _theme.textTheme.body1),
+              Text(product.title, style: _theme.textTheme.display1),
             ],
           )
         : Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(product.title, style: _theme.textTheme.headline3),
-              Text(product.categoryTitle, style: _theme.textTheme.bodyText1),
+              Text(product.title, style: _theme.textTheme.display1),
+              category == null
+                  ? Container()
+                  : Text(category.name, style: _theme.textTheme.body1),
             ],
           );
   }
@@ -146,7 +155,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                 padding: EdgeInsets.only(left: AppSizes.sidePadding * 0.45),
               ),
               OpenFlutterProductRating(
-                rating: product.rating,
+                rating: product.averageRating,
                 ratingCount: product.ratingCount,
                 iconSize: 12,
                 alignment: MainAxisAlignment.start,
@@ -159,7 +168,7 @@ class OpenFlutterProductTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               OpenFlutterProductRating(
-                rating: product.rating,
+                rating: product.averageRating,
                 ratingCount: product.ratingCount,
                 iconSize: 12,
                 alignment: MainAxisAlignment.start,
@@ -167,7 +176,7 @@ class OpenFlutterProductTile extends StatelessWidget {
               ),
               Padding(padding: EdgeInsets.only(top: AppSizes.linePadding)),
               Text('\$' + product.price.toStringAsFixed(2),
-                  style: _theme.textTheme.headline5.copyWith(
+                  style: _theme.textTheme.display3.copyWith(
                       color: _theme.primaryColor, fontWeight: FontWeight.bold))
             ],
           );
@@ -187,7 +196,9 @@ class OpenFlutterProductTile extends StatelessWidget {
                                 BorderRadius.circular(AppSizes.imageRadius),
                             image: DecorationImage(
                                 fit: BoxFit.fill,
-                                image: AssetImage(product.image))),
+                                image: product.mainImage.isLocal
+                                    ? AssetImage(product.mainImage.address)
+                                    : NetworkImage(product.mainImage.address))),
                         child: Container())),
                 buildTopLabel(product, _theme)
               ],
@@ -195,7 +206,9 @@ class OpenFlutterProductTile extends StatelessWidget {
           : Container(
               width: 80,
               alignment: Alignment.centerLeft,
-              child: Image(image: AssetImage(product.image))),
+              child: product.mainImage.isLocal
+                  ? Image.asset(product.mainImage.address)
+                  : Image.network(product.mainImage.address)),
     );
   }
 
@@ -209,7 +222,7 @@ class OpenFlutterProductTile extends StatelessWidget {
     return Row(
       children: <Widget>[
         Text('\$' + product.price.toStringAsFixed(0),
-            style: _theme.textTheme.headline5.copyWith(
+            style: _theme.textTheme.display3.copyWith(
               decoration: discountPrice > 0
                   ? TextDecoration.lineThrough
                   : TextDecoration.none,
@@ -219,7 +232,7 @@ class OpenFlutterProductTile extends StatelessWidget {
         ),
         discountPrice > 0
             ? Text('\$' + discountPrice.toStringAsFixed(0),
-                style: _theme.textTheme.headline5
+                style: _theme.textTheme.display3
                     .copyWith(color: _theme.errorColor))
             : Container()
       ],
@@ -229,13 +242,13 @@ class OpenFlutterProductTile extends StatelessWidget {
   Widget buildColor(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text('Color:', style: _theme.textTheme.headline5.copyWith()),
+        Text('Color:', style: _theme.textTheme.display3.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text(
           'Blue',
-          style: _theme.textTheme.headline5.copyWith(color: AppColors.black),
+          style: _theme.textTheme.display3.copyWith(color: AppColors.black),
         ),
       ],
     );
@@ -244,12 +257,12 @@ class OpenFlutterProductTile extends StatelessWidget {
   Widget buildSize(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text('Size:', style: _theme.textTheme.headline5.copyWith()),
+        Text('Size:', style: _theme.textTheme.display3.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text('L',
-            style: _theme.textTheme.headline5.copyWith(color: AppColors.black))
+            style: _theme.textTheme.display3.copyWith(color: AppColors.black))
       ],
     );
   }
@@ -294,7 +307,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                 color: AppColors.black,
               ),
               child: Text('NEW',
-                  style: theme.textTheme.bodyText1.copyWith(
+                  style: theme.textTheme.body1.copyWith(
                       color: AppColors.white, fontWeight: FontWeight.bold)))
           : (product.discountPercent > 0
               ? Container(
@@ -305,7 +318,7 @@ class OpenFlutterProductTile extends StatelessWidget {
                   ),
                   child: Text(
                       '-' + product.discountPercent.toStringAsFixed(0) + '%',
-                      style: theme.textTheme.bodyText1.copyWith(
+                      style: theme.textTheme.body1.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.bold,
                       )))
