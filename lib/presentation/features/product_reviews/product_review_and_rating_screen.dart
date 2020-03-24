@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_review.dart';
 import 'package:openflutterecommerce/data/fake_model/product_review_repository.dart';
@@ -74,7 +75,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
   Widget _buildTitle(BuildContext context) {
     return Text(
       'Ratings&Reviews',
-      style: Theme.of(context).textTheme.headline2,
+      style: OpenFlutterEcommerceTheme.TEXT_HEADLINE2,
     );
   }
 
@@ -207,7 +208,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
           children: <Widget>[
             Text(
               '$reviewCount reviews',
-              style: Theme.of(context).textTheme.subtitle1,
+              style: OpenFlutterEcommerceTheme.TEXT_SUBTITLE1,
             ),
             Expanded(
               child: OpenFlutterCheckbox(
@@ -280,7 +281,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
       child: Center(
         child: Text(
           'Without reviews',
-          style: Theme.of(context).textTheme.bodyText1,
+          style: OpenFlutterEcommerceTheme.TEXT_BODY1,
           textAlign: TextAlign.center,
         ),
       ),

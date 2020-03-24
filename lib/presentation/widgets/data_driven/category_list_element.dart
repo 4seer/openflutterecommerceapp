@@ -28,7 +28,7 @@ class OpenFlutterCatregoryListElement extends StatelessWidget {
           ),
         ),
         child: Text(category.name,
-            style: _theme.textTheme.headline3
+            style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
                 .copyWith(fontWeight: FontWeight.normal)));
   }
 }

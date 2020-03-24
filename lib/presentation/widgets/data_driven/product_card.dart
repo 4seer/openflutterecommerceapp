@@ -73,8 +73,10 @@ class OpenFlutterProductCard extends StatelessWidget {
                   buildRating(context, product),
                   category == null
                       ? Container()
-                      : Text(category.name, style: _theme.textTheme.bodyText1),
-                  Text(product.title, style: _theme.textTheme.headline3),
+                      : Text(category.name,
+                          style: OpenFlutterEcommerceTheme.TEXT_BODY1),
+                  Text(product.title,
+                      style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3),
                   Visibility(
                     child: Row(
                       children: <Widget>[
@@ -109,7 +111,7 @@ class OpenFlutterProductCard extends StatelessWidget {
     return Row(
       children: <Widget>[
         Text('\$' + product.price.toStringAsFixed(0),
-            style: _theme.textTheme.headline5.copyWith(
+            style: OpenFlutterEcommerceTheme.TEXT_HEADLINE5.copyWith(
               decoration: discountPrice > 0
                   ? TextDecoration.lineThrough
                   : TextDecoration.none,
@@ -119,7 +121,7 @@ class OpenFlutterProductCard extends StatelessWidget {
         ),
         discountPrice > 0
             ? Text('\$' + discountPrice.toStringAsFixed(0),
-                style: _theme.textTheme.headline5
+                style: OpenFlutterEcommerceTheme.TEXT_HEADLINE5
                     .copyWith(color: _theme.errorColor))
             : Container()
       ],
@@ -157,7 +159,7 @@ class OpenFlutterProductCard extends StatelessWidget {
                 color: AppColors.black,
               ),
               child: Text('NEW',
-                  style: theme.textTheme.bodyText1.copyWith(
+                  style: OpenFlutterEcommerceTheme.TEXT_BODY1.copyWith(
                       color: AppColors.white, fontWeight: FontWeight.bold)))
           : (product.discountPercent > 0
               ? Container(
@@ -168,7 +170,7 @@ class OpenFlutterProductCard extends StatelessWidget {
                   ),
                   child: Text(
                     '-' + product.discountPercent.toStringAsFixed(0) + '%',
-                    style: theme.textTheme.bodyText1.copyWith(
+                    style: OpenFlutterEcommerceTheme.TEXT_BODY1.copyWith(
                       color: AppColors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -186,12 +188,13 @@ class OpenFlutterProductCard extends StatelessWidget {
   Widget buildColor(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text('Color:', style: _theme.textTheme.bodyText1.copyWith()),
+        Text('Color:', style: OpenFlutterEcommerceTheme.TEXT_BODY1.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text('Blue',
-            style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
+            style: OpenFlutterEcommerceTheme.TEXT_BODY1
+                .copyWith(color: AppColors.black))
       ],
     );
   }
@@ -199,12 +202,13 @@ class OpenFlutterProductCard extends StatelessWidget {
   Row buildSize(Product product, ThemeData _theme) {
     return Row(
       children: <Widget>[
-        Text('Size:', style: _theme.textTheme.bodyText1.copyWith()),
+        Text('Size:', style: OpenFlutterEcommerceTheme.TEXT_BODY1.copyWith()),
         Padding(
           padding: EdgeInsets.only(left: AppSizes.linePadding),
         ),
         Text('L',
-            style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
+            style: OpenFlutterEcommerceTheme.TEXT_BODY1
+                .copyWith(color: AppColors.black))
       ],
     );
   }

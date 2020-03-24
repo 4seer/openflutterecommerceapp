@@ -24,7 +24,6 @@ class OpenFlutterClickableLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _theme = Theme.of(context);
     return InkWell(
         onTap: (() => {onTap(sortBy)}),
         child: Container(
@@ -36,7 +35,7 @@ class OpenFlutterClickableLine extends StatelessWidget {
             width: width,
             color: backgroundColor,
             child: Text(title,
-                style: _theme.textTheme.headline3.copyWith(
+                style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3.copyWith(
                     fontWeight: FontWeight.normal, color: textColor))));
   }
 }

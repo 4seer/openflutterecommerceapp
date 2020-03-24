@@ -3,6 +3,7 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/config/theme.dart';
 
 enum SortBy {
   Popular,
@@ -50,7 +51,8 @@ class OpenFlutterProductFilter extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.only(left: iconSize / 3),
                     width: thirdWidth,
-                    child: Text('Filters', style: _theme.textTheme.bodyText1),
+                    child: Text('Filters',
+                        style: OpenFlutterEcommerceTheme.TEXT_BODY1),
                   )
                 ])),
             InkWell(
@@ -61,7 +63,7 @@ class OpenFlutterProductFilter extends StatelessWidget {
                     padding: EdgeInsets.only(left: iconSize / 3),
                     width: thirdWidth * 2,
                     child: Text(getSortTitle(sortBy),
-                        style: _theme.textTheme.bodyText1),
+                        style: OpenFlutterEcommerceTheme.TEXT_BODY1),
                   )
                 ])),
             InkWell(

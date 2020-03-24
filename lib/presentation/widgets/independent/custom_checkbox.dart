@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:openflutterecommerce/config/theme.dart';
 
 //TODO: change to statefull widget
 class OpenFlutterCheckbox extends StatelessWidget {
@@ -42,7 +43,7 @@ class OpenFlutterCheckbox extends StatelessWidget {
                   width: width - rightLinkWidth,
                   child: Text(
                     title,
-                    style: _theme.textTheme.headline3.copyWith(
+                    style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3.copyWith(
                         fontWeight: FontWeight.bold,
                         color: _theme.primaryColor),
                   ),

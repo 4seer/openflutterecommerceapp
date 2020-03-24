@@ -3,6 +3,7 @@
 // Date: 2020-02-23
 
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/config/theme.dart';
 
 import '../widgets.dart';
 
@@ -51,9 +52,9 @@ class OpenFlutterRatingSummary extends StatelessWidget {
       children: <Widget>[
         Text(
           rating.toString(),
-          style: Theme.of(context).textTheme.headline4.copyWith(
-                color: Colors.black,
-              ),
+          style: OpenFlutterEcommerceTheme.TEXT_HEADLINE4.copyWith(
+            color: Colors.black,
+          ),
         ),
         _buildLabel(context),
       ],

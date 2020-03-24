@@ -38,7 +38,6 @@ class _MyOrdersViewState extends State<MyOrdersView> {
 
   @override
   Widget build(BuildContext context) {
-    var _theme = Theme.of(context);
     var width = MediaQuery.of(context).size.width;
     return BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {},
@@ -76,8 +75,10 @@ class _MyOrdersViewState extends State<MyOrdersView> {
                                 tabBarIndicatorSize: TabBarIndicatorSize.tab,
                               ),
                               tabs: tabs,
-                              unselectedLabelStyle: _theme.textTheme.headline5,
-                              labelStyle: _theme.textTheme.headline5
+                              unselectedLabelStyle:
+                                  OpenFlutterEcommerceTheme.TEXT_HEADLINE5,
+                              labelStyle: OpenFlutterEcommerceTheme
+                                  .TEXT_HEADLINE5
                                   .copyWith(color: AppColors.white),
                             ),
                           ]),

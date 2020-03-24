@@ -23,7 +23,6 @@ class OpenFlutterPaymentCardPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _theme = Theme.of(context);
     var asset = 'assets/images/checkout/dark_card.png';
     if (cardType == CardType.Visa) {
       asset = 'assets/images/checkout/light_card.png';
@@ -48,7 +47,7 @@ class OpenFlutterPaymentCardPreview extends StatelessWidget {
                   width: width - AppSizes.sidePadding,
                   height: 38,
                   child: Text(cardNumber,
-                      style: _theme.textTheme.headline2.copyWith(
+                      style: OpenFlutterEcommerceTheme.TEXT_HEADLINE2.copyWith(
                           fontSize: 24,
                           color: AppColors.white,
                           letterSpacing: 6)),
@@ -59,7 +58,7 @@ class OpenFlutterPaymentCardPreview extends StatelessWidget {
                   width: width - AppSizes.sidePadding,
                   height: 38,
                   child: Text(cardHolderName,
-                      style: _theme.textTheme.headline5.copyWith(
+                      style: OpenFlutterEcommerceTheme.TEXT_HEADLINE5.copyWith(
                           //fontSize: 34,
                           color: AppColors.white)),
                 ),
@@ -72,7 +71,7 @@ class OpenFlutterPaymentCardPreview extends StatelessWidget {
                       expirationMonth.toString().padLeft(2, '0') +
                           '/' +
                           expirationYear.toString().padLeft(2, '0'),
-                      style: _theme.textTheme.headline5.copyWith(
+                      style: OpenFlutterEcommerceTheme.TEXT_HEADLINE5.copyWith(
                           //fontSize: 34,
                           color: AppColors.white)),
                 ),

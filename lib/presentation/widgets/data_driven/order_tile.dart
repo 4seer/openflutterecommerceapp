@@ -39,18 +39,19 @@ class OpenFlutterOrderTile extends StatelessWidget {
                         text: TextSpan(children: <TextSpan>[
                       TextSpan(
                         text: 'Order: ',
-                        style: _theme.textTheme.headline3.copyWith(
-                            color: _theme.primaryColorLight,
-                            fontWeight: FontWeight.normal),
+                        style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
+                            .copyWith(
+                                color: _theme.primaryColorLight,
+                                fontWeight: FontWeight.normal),
                       ),
                       TextSpan(
                         text: '#' + order.orderNumber.toString(),
-                        style: _theme.textTheme.headline3
+                        style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
                             .copyWith(fontWeight: FontWeight.w700),
                       ),
                     ])),
                     Text(DateFormat('yyyy-MM-dd').format(order.orderDate),
-                        style: _theme.textTheme.headline5
+                        style: OpenFlutterEcommerceTheme.TEXT_HEADLINE5
                             .copyWith(color: AppColors.red))
                   ],
                 ),
@@ -65,7 +66,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Tacking Number: ',
-                          style: _theme.textTheme.headline3
+                          style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
                               .copyWith(color: _theme.primaryColorLight),
                         ),
                         Padding(
@@ -73,7 +74,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
                               const EdgeInsets.only(left: AppSizes.sidePadding),
                           child: Text(
                             order.trackingNumber,
-                            style: _theme.textTheme.headline3,
+                            style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3,
                           ),
                         ),
                       ],
@@ -88,7 +89,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               'Quantity: ',
-                              style: _theme.textTheme.headline3
+                              style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
                                   .copyWith(color: _theme.primaryColorLight),
                             ),
                             Padding(
@@ -96,7 +97,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
                                   left: AppSizes.linePadding),
                               child: Text(
                                 order.totalQuantity.toString(),
-                                style: _theme.textTheme.headline3,
+                                style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3,
                               ),
                             ),
                           ],
@@ -105,7 +106,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               'Totat Amount: ',
-                              style: _theme.textTheme.headline3
+                              style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
                                   .copyWith(color: _theme.primaryColorLight),
                             ),
                             Padding(
@@ -114,7 +115,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
                               child: Text(
                                 '\$' + order.totalPrice.toStringAsFixed(0),
                                 //total amount
-                                style: _theme.textTheme.headline3,
+                                style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3,
                               ),
                             ),
                           ],
@@ -142,11 +143,11 @@ class OpenFlutterOrderTile extends StatelessWidget {
                           side: BorderSide(color: AppColors.black, width: 2)),
                       child: Text(
                         'Details',
-                        style: _theme.textTheme.headline3,
+                        style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3,
                       ),
                     ),
                     Text(order.orderStatus.toString().split('.')[1],
-                        style: _theme.textTheme.headline3
+                        style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
                             .copyWith(color: AppColors.green)),
                   ],
                 )

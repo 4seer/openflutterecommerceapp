@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:openflutterecommerce/config/theme.dart';
 
 class OpenFlutterProductRating extends StatelessWidget {
   //current product rating
@@ -141,9 +142,7 @@ class OpenFlutterProductRating extends StatelessWidget {
       child: Center(
         child: Text(
           ' (' + ratingCount.toInt().toString() + ')',
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1
+          style: OpenFlutterEcommerceTheme.TEXT_BODY1
               .copyWith(fontSize: labelFontSize),
           textAlign: TextAlign.center,
         ),

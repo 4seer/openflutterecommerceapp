@@ -26,7 +26,6 @@ class Main2View extends StatefulWidget {
 class _Main2ViewState extends State<Main2View> {
   @override
   Widget build(BuildContext context) {
-    var _theme = Theme.of(context);
     var width = MediaQuery.of(context).size.width;
     var widgetWidth = width - AppSizes.sidePadding * 2;
     return SingleChildScrollView(
@@ -48,7 +47,8 @@ class _Main2ViewState extends State<Main2View> {
                   padding: EdgeInsets.only(left: AppSizes.sidePadding),
                   width: width,
                   child: Text('Street clothes',
-                      style: _theme.textTheme.headline1.copyWith(fontSize: 34)))
+                      style: OpenFlutterEcommerceTheme.TEXT_HEADLINE1
+                          .copyWith(fontSize: 34)))
             ],
           )),
       OpenFlutterBlockHeader(

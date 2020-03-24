@@ -40,7 +40,7 @@ class OpenFlutterActionCard extends StatelessWidget {
                     Container(
                         width: width / 3 * 2,
                         child: Text(title,
-                            style: _theme.textTheme.headline5
+                            style: OpenFlutterEcommerceTheme.TEXT_HEADLINE5
                                 .copyWith(color: _theme.primaryColor))),
                     linkText != null
                         ? Container(
@@ -49,7 +49,8 @@ class OpenFlutterActionCard extends StatelessWidget {
                             child: InkWell(
                               onTap: (() => {onLinkTap()}),
                               child: Text(linkText,
-                                  style: _theme.textTheme.headline5
+                                  style: OpenFlutterEcommerceTheme
+                                      .TEXT_HEADLINE5
                                       .copyWith(color: _theme.accentColor)),
                             ))
                         : Container()

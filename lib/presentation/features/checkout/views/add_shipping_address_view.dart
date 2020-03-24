@@ -66,7 +66,7 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline3
+                    style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();

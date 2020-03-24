@@ -38,7 +38,9 @@ class FakeProductRepository extends ProductRepository {
     if (!productsInCategories.containsKey(categoryId)) {
       productsInCategories[categoryId] = _generateRandomProductList();
     }
-    return productsInCategories[categoryId].map((e) => _productsInside[e]).toList();
+    return productsInCategories[categoryId]
+        .map((e) => _productsInside[e])
+        .toList();
   }
 
   @override
@@ -128,11 +130,5 @@ class FakeProductRepository extends ProductRepository {
       result[i] = rnd.nextInt(5) + 1;
     }
     return result;
-  }
-
-
-
-  FakeProductRepository() {
-
   }
 }

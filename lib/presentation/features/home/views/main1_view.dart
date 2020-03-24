@@ -24,7 +24,6 @@ class Main1View extends StatefulWidget {
 class _Main1ViewState extends State<Main1View> {
   @override
   Widget build(BuildContext context) {
-    var _theme = Theme.of(context);
     var width = MediaQuery.of(context).size.width;
     var widgetWidth = width - AppSizes.sidePadding * 2;
     return SingleChildScrollView(
@@ -49,7 +48,7 @@ class _Main1ViewState extends State<Main1View> {
                       ),
                       width: width / 2,
                       child: Text(translate('fashionSale'),
-                          style: _theme.textTheme.headline1)),
+                          style: OpenFlutterEcommerceTheme.TEXT_HEADLINE1)),
                   Container(
                     padding: EdgeInsets.only(
                         left: AppSizes.sidePadding,

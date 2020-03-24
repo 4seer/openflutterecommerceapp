@@ -11,7 +11,6 @@ class OpenFlutterTextTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _theme = Theme.of(context);
     var width = MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
     return InkWell(
         onTap: (() => {onClick()}),
@@ -26,8 +25,10 @@ class OpenFlutterTextTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(title, style: _theme.textTheme.headline3),
-                      Text(subtitle, style: _theme.textTheme.bodyText1)
+                      Text(title,
+                          style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3),
+                      Text(subtitle,
+                          style: OpenFlutterEcommerceTheme.TEXT_BODY1)
                     ],
                   ),
                 ),

@@ -3,6 +3,7 @@
 // Date: 2020-02-23
 
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 class OpenFlutterProductReviewItem extends StatelessWidget {
@@ -106,7 +107,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
       width: double.infinity,
       child: Text(
         writerName,
-        style: Theme.of(context).textTheme.subtitle1,
+        style: OpenFlutterEcommerceTheme.TEXT_SUBTITLE1,
         textAlign: TextAlign.start,
       ),
     );
@@ -142,9 +143,9 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
       width: double.infinity,
       child: Text(
         comment,
-        style: Theme.of(context).textTheme.bodyText2.copyWith(
-              fontSize: 14.0,
-            ),
+        style: OpenFlutterEcommerceTheme.TEXT_BODY2.copyWith(
+          fontSize: 14.0,
+        ),
         textAlign: TextAlign.start,
       ),
     );

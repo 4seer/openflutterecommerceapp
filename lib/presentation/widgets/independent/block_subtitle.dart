@@ -34,9 +34,10 @@ class OpenFlutterBlockSubtitle extends StatelessWidget {
                   Container(
                       width: width - rightLinkWidth,
                       child: Text(title,
-                          style: _theme.textTheme.headline3.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: _theme.primaryColor))),
+                          style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: _theme.primaryColor))),
                   linkText != null
                       ? InkWell(
                           onTap: (() => {onLinkTap()}),
@@ -46,7 +47,7 @@ class OpenFlutterBlockSubtitle extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 linkText,
-                                style: _theme.textTheme.headline3
+                                style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
                                     .copyWith(color: _theme.accentColor),
                               ),
                             ),

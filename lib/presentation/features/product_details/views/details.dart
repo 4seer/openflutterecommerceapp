@@ -59,7 +59,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline3
+                    style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -254,11 +254,11 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             children: <Widget>[
               Text(
                 widget.product.title,
-                style: theme.textTheme.headline2,
+                style: OpenFlutterEcommerceTheme.TEXT_HEADLINE2,
               ),
               Text(
                 '\$' + widget.product.price.toString(),
-                style: theme.textTheme.headline2,
+                style: OpenFlutterEcommerceTheme.TEXT_HEADLINE2,
               )
             ],
           ),
@@ -266,7 +266,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               ? Container()
               : Text(
                   widget.category.name,
-                  style: theme.textTheme.bodyText1,
+                  style: OpenFlutterEcommerceTheme.TEXT_BODY1,
                 ),
           SizedBox(
             height: 5,

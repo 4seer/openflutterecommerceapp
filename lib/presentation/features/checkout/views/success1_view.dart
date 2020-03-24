@@ -41,7 +41,7 @@ class _Success1ViewState extends State<Success1View> {
                     padding: EdgeInsets.all(AppSizes.sidePadding),
                     child: Text(
                         'Your order will be delivered soon. Thank you for choosing our app!',
-                        style: _theme.textTheme.headline3)),
+                        style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3)),
                 OpenFlutterButton(
                   title: 'Continue shopping',
                   onPressed: (() =>

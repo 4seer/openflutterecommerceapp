@@ -19,7 +19,6 @@ class OpenFlutterCategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _theme = Theme.of(context);
     return Padding(
         padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
         child: Container(
@@ -34,8 +33,8 @@ class OpenFlutterCategoryTile extends StatelessWidget {
                 Container(
                     alignment: Alignment.centerLeft,
                     width: width - 200.0,
-                    child:
-                        Text(category.name, style: _theme.textTheme.headline3)),
+                    child: Text(category.name,
+                        style: OpenFlutterEcommerceTheme.TEXT_HEADLINE3)),
                 Container(
                   width: 200,
                   alignment: Alignment.centerRight,
