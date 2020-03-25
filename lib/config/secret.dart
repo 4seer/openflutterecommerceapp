@@ -3,5 +3,5 @@
 // The AppSecretSettings class contains sample fields 
 // used in the app
 class AppSecretSettings{
-  String woocommerceHost = '';
+  String woocommerceHost = '1';
 }
