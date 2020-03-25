@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/fake_model/models/brand.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/search_bar.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -21,7 +21,6 @@ class _SelectBrandViewState extends State<SelectBrandView> {
   @override
   Widget build(BuildContext context) {
     var _theme = Theme.of(context);
-    final bloc = BlocProvider.of<ProductsBloc>(context);
     var fullWidth = MediaQuery.of(context).size.width;
     return BlocListener<ProductsBloc, ProductState>(listener: (context, state) {
       if (state is ProductsErrorState) {
@@ -34,37 +33,42 @@ class _SelectBrandViewState extends State<SelectBrandView> {
       return Container();
     }, child:
         BlocBuilder<ProductsBloc, ProductState>(builder: (context, state) {
-      if (state is ProductsLoadedState) {
-        return _buildViewByLoadedState(context, state, bloc, fullWidth, _theme);
+      if (state is ProductsReadyState) {
+        return _buildViewByLoadedState(context, state, fullWidth, _theme);
       }
 
       return Container();
     }));
   }
 
-  Stack _buildViewByLoadedState(BuildContext context, ProductsLoadedState state,
-      ProductsBloc bloc, double fullWidth, ThemeData _theme) {
+  Stack _buildViewByLoadedState(BuildContext context, ProductsReadyState state,
+      double fullWidth, ThemeData _theme) {
     var width = MediaQuery.of(context).size.width;
+    ProductAttribute brandAttribute = state.filterRules.selectedAttributes.keys
+        .firstWhere((attribute) => attribute.name == 'Brand');
     return Stack(children: <Widget>[
       SingleChildScrollView(
         child: Column(children: <Widget>[
           Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: OpenFlutterSearchBar(
-              searchKey: state.brandSearchKey,
-              onChange: ((String text) =>
-                  {bloc..add(ProductChangeBrandSearchKeyEvent(text))}),
+              searchKey: '', //TODO make brands be attributes
+              onChange: ((String text) => BlocProvider.of<ProductsBloc>(context)
+                  .add(SearchEvent(text))),
             ),
           ),
-          Container(
-              padding: EdgeInsets.only(left: AppSizes.sidePadding * 1.5),
-              child: Column(
-                  children: buildBranCheckboxList(
-                      state.availableBrands,
-                      state.selectedBrandIds,
-                      state.brandSearchKey,
-                      width,
-                      bloc)))
+          brandAttribute == null
+              ? Container()
+              : Container(
+                  padding: EdgeInsets.only(left: AppSizes.sidePadding * 1.5),
+                  child: Column(
+                    children: buildBranCheckboxList(
+                        state,
+                        brandAttribute,
+                        state.filterRules.selectedAttributes[brandAttribute],
+                        width),
+                  ),
+                )
         ]),
       ),
       Positioned(
@@ -95,37 +99,29 @@ class _SelectBrandViewState extends State<SelectBrandView> {
   }
 
   List<Widget> buildBranCheckboxList(
-      List<Brand> brands,
-      List<int> selectedBrandIds,
-      String searchKeyFilter,
-      double width,
-      ProductsBloc bloc) {
-    var checkboxes = <Widget>[];
-    for (var i = 0; i < brands.length; i++) {
-      if (searchKeyFilter != null &&
-          brands[i]
-              .title
-              .toLowerCase()
-              .contains(searchKeyFilter.toLowerCase())) {
-        var selected =
-            selectedBrandIds != null && selectedBrandIds.contains(brands[i].id);
-        checkboxes.add(
-          OpenFlutterLabelRightCheckbox(
-            width: width - AppSizes.sidePadding * 2,
-            checked: selected,
-            title: brands[i].title,
-            onChanged: ((bool value) {
-              if (value && !selectedBrandIds.contains(brands[i].id)) {
-                selectedBrandIds.insert(selectedBrandIds.length, brands[i].id);
-              } else {
-                selectedBrandIds.remove(brands[i].id);
-              }
-              bloc..add(ProductChangeSelectedBrandsEvent(selectedBrandIds));
-            }),
-          ),
-        );
-      }
-    }
-    return checkboxes;
+    ProductsReadyState state,
+    ProductAttribute brandAttribute,
+    List<String> selectedBrands,
+    double width,
+  ) {
+    return brandAttribute.options
+        .map((brand) => OpenFlutterLabelRightCheckbox(
+              width: width - AppSizes.sidePadding * 2,
+              checked: selectedBrands.contains(brand),
+              title: brand,
+              onChanged: ((bool value) {
+                if (value) {
+                  BlocProvider.of<ProductsBloc>(context).add(
+                      ProductChangeFilterRulesEvent(state.filterRules
+                          .copyWithAdditionalAttribute(brandAttribute, brand)));
+                } else {
+                  BlocProvider.of<ProductsBloc>(context).add(
+                      ProductChangeFilterRulesEvent(state.filterRules
+                          .copyWithRemovedAttributeValue(
+                              brandAttribute, brand)));
+                }
+              }),
+            ))
+        .toList(growable: false);
   }
 }

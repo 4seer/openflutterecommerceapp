@@ -1,14 +1,10 @@
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 
 class RemoteProductRepository extends ProductRepository {
-  @override
-  Future<List<Product>> getFavorites() {
-    // TODO: implement getFavorites
-    throw UnimplementedError();
-  }
-
   @override
   Future<Product> getProduct(int id) {
     // TODO: implement getProduct
@@ -28,16 +24,27 @@ class RemoteProductRepository extends ProductRepository {
   }
 
   @override
-  Future<List<Product>> getProductsInCategory(int categoryId,
-      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
-    // TODO: implement getProductsInCategory
-    throw UnimplementedError();
-  }
-
-  @override
   Future<List<Product>> getSimilarProducts(int categoryI,
       {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
     // TODO: implement getSimilarProducts
     throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Product>> getProducts(
+      {int pageIndex = 0,
+      int pageSize = AppConsts.PAGE_SIZE,
+      int categoryId = 0,
+      bool isFavorite = false,
+      SortRules sortRules = const SortRules(),
+      FilterRules filterRules}) {
+    // TODO: implement getProducts
+    return null;
+  }
+
+  @override
+  Future<FilterRules> getPossibleFilterOptions(int categoryId) {
+    // TODO: implement getPossibleFilterOptions
+    return null;
   }
 }

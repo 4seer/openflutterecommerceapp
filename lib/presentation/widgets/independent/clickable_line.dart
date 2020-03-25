@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
 class OpenFlutterClickableLine extends StatelessWidget {
   final double width;
   final double height;
   final String title;
-  final SortBy sortBy;
+  final SortRules sortRules;
   final Color backgroundColor;
   final Color textColor;
-  final Function(SortBy) onTap;
+  final Function(SortRules) onTap;
 
   const OpenFlutterClickableLine(
       {Key key,
@@ -17,7 +17,7 @@ class OpenFlutterClickableLine extends StatelessWidget {
       @required this.height,
       @required this.title,
       @required this.onTap,
-      @required this.sortBy,
+      @required this.sortRules,
       this.backgroundColor,
       this.textColor})
       : super(key: key);
@@ -26,7 +26,7 @@ class OpenFlutterClickableLine extends StatelessWidget {
   Widget build(BuildContext context) {
     var _theme = Theme.of(context);
     return InkWell(
-        onTap: (() => {onTap(sortBy)}),
+        onTap: (() => {onTap(sortRules)}),
         child: Container(
             padding: EdgeInsets.symmetric(
                 horizontal: AppSizes.sidePadding,

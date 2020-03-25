@@ -2,10 +2,14 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/models/product.dart';
 
@@ -15,8 +19,7 @@ class FakeProductRepository extends ProductRepository {
     return _productsInside[id];
   }
 
-  @override
-  Future<List<FakeProduct>> getFavorites() async {
+  Future<List<FakeProduct>> _getFavorites() async {
     return _productsInside.values.where((e) => e.isFavorite).toList();
   }
 
@@ -30,15 +33,6 @@ class FakeProductRepository extends ProductRepository {
   Future removeFromFavorites(int productId) async {
     _productsInside[productId] =
         _productsInside[productId].changeIsFavorite(false);
-  }
-
-  @override
-  Future<List<Product>> getProductsInCategory(int categoryId,
-      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) async {
-    if (!productsInCategories.containsKey(categoryId)) {
-      productsInCategories[categoryId] = _generateRandomProductList();
-    }
-    return productsInCategories[categoryId].map((e) => _productsInside[e]).toList();
   }
 
   @override
@@ -130,7 +124,33 @@ class FakeProductRepository extends ProductRepository {
     return result;
   }
 
+  @override
+  Future<FilterRules> getPossibleFilterOptions(int categoryId) async {
+    HashMap<ProductAttribute, List<String>> result = HashMap();
+    _productsInside.values.forEach((product) => result
+        .addAll({for (var attribute in product.attributes) attribute: []}));
+    return FilterRules(
+        categories: HashMap(),
+        selectedAttributes: result,
+        selectedPriceRange: PriceRange(10, 100));
+  }
 
-
-  FakeProductRepository();
+  @override
+  Future<List<Product>> getProducts(
+      {int pageIndex = 0,
+      int pageSize = AppConsts.PAGE_SIZE,
+      int categoryId = 0,
+      bool isFavorite = false,
+      SortRules sortRules = const SortRules(),
+      FilterRules filterRules}) async {
+    if (isFavorite) {
+      return _getFavorites();
+    }
+    if (!productsInCategories.containsKey(categoryId)) {
+      productsInCategories[categoryId] = _generateRandomProductList();
+    }
+    return productsInCategories[categoryId]
+        .map((e) => _productsInside[e])
+        .toList();
+  }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
-import 'package:openflutterecommerce/data/fake_model/models/brand.dart';
+import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/fake_model/models/predefined_attributes.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
@@ -34,50 +35,57 @@ class _ProductFilterViewState extends State<ProductFilterView> {
       return Container();
     }, child:
         BlocBuilder<ProductsBloc, ProductState>(builder: (context, state) {
-      if (state is ProductsLoadedState) {
+      if (state is ProductsReadyState) {
         return Stack(children: <Widget>[
           SingleChildScrollView(
               child: Column(children: <Widget>[
             OpenFlutterPriceRangeSlider(
               min: 0,
               max: 300,
-              start: state.priceRange.start,
-              end: state.priceRange.end,
+              start: state.filterRules.selectedPriceRange.minPrice,
+              end: state.filterRules.selectedPriceRange.maxPrice,
               label: 'Price range',
-              onChanged: ((RangeValues values) =>
-                  {bloc..add(ProductChangePriceRangeEvent(values))}),
+              onChanged: ((RangeValues values) => {
+                    bloc.add(ProductChangeFilterRulesEvent(state.filterRules
+                        .copyWithPriceRange(
+                            PriceRange(values.start, values.end))))
+                  }),
             ),
-            OpenFlutterColorSelect(
-              key: UniqueKey(),
+            /*OpenFlutterColorSelect(
               availableColors: state.availableColors,
               selectedColors: state.selectedColors,
               onClick: ((List<Color> newSelectedColors) => {
                     bloc
-                      ..add(ProductChangeSelectedColorsEvent(newSelectedColors))
+                      .add(ProductChangeSelectedAttributesEvent(
+                          newSelectedColors))
                   }),
               label: 'Colors',
-            ),
-            OpenFlutterSelectValuesBoxes<String>(
+            ),*/
+            /*OpenFlutterSelectValuesBoxes<String>(
               availableValues: state.availableSizes,
               selectedValues: state.selectedSizes,
               boxWidth: 50,
               label: 'Sizes',
               onClick: ((List<String> newSelectedValues) => {
                     bloc
-                      ..add(ProductChangeSelectedSizesEvent(newSelectedValues))
+                      .add(ProductChangeSelectedSizesEvent(newSelectedValues))
                   }),
-            ),
+            ),*/
             OpenFlutterSelectValuesBoxes<Category>(
               boxWidth: 70,
-              availableValues: state.availableCategories,
-              selectedValues: state.selectedCategories,
+              availableValues:
+                  state.filterRules.categories.keys.toList(growable: false),
+              selectedValues: state.filterRules.categories.entries
+                  .where((mapEntry) => mapEntry.value)
+                  .map((mapEntry) => mapEntry.key)
+                  .toList(growable: false),
               label: 'Categories',
               onClick: ((List<Category> newSelectedValues) => {
-                    bloc.add(
-                        ProductChangeSelectedCategoriesEvent(newSelectedValues))
+                    bloc.add(ProductChangeFilterRulesEvent(
+                        state.filterRules)) //TODO update
                   }),
             ),
-            OpenFlutterTextTile(
+            /*OpenFlutterTextTile(
                 title: 'Brand',
                 subtitle:
                     getBrandList(state.availableBrands, state.selectedBrandIds),
@@ -85,7 +93,7 @@ class _ProductFilterViewState extends State<ProductFilterView> {
                 onClick: (() => {
                       widget.changeView(
                           changeType: ViewChangeType.Exact, index: 3)
-                    }))
+                    }))*/
           ])),
           Positioned(
             bottom: 0,
@@ -129,7 +137,7 @@ class _ProductFilterViewState extends State<ProductFilterView> {
       var maxCharacters = 70;
       if (concatenate.length < maxCharacters) {
         if (selectedBrandIds.isEmpty || selectedBrandIds.contains(item.id)) {
-          concatenate += (concatenate.isNotEmpty ? ', ' : '') + item.title;
+          concatenate += (concatenate.isNotEmpty ? ', ' : '') + item.name;
         }
       }
     });

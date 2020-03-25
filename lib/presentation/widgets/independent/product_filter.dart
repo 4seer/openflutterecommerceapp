@@ -3,24 +3,17 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-
-enum SortBy {
-  Popular,
-  Newest,
-  CustomerReview,
-  PriceLowestToHigh,
-  PriceHighestToLow
-}
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
 enum ProductView { ListView, CardView }
 
 class OpenFlutterProductFilter extends StatelessWidget {
   final double width;
   final double height;
-  final SortBy sortBy;
+  final SortRules selectedSortRules;
   final ProductView productView;
   final Function onFilterClicked;
-  final Function(SortBy) onSortClicked;
+  final Function(SortRules) onSortClicked;
   final Function onChangeViewClicked;
 
   const OpenFlutterProductFilter(
@@ -30,7 +23,7 @@ class OpenFlutterProductFilter extends StatelessWidget {
       this.onFilterClicked,
       this.onSortClicked,
       this.onChangeViewClicked,
-      this.sortBy,
+      this.selectedSortRules,
       this.productView})
       : super(key: key);
 
@@ -54,13 +47,13 @@ class OpenFlutterProductFilter extends StatelessWidget {
                   )
                 ])),
             InkWell(
-                onTap: (() => {onSortClicked(sortBy)}),
+                onTap: (() => {onSortClicked(selectedSortRules)}),
                 child: Row(children: <Widget>[
                   Icon(Icons.import_export, size: iconSize),
                   Container(
                     padding: EdgeInsets.only(left: iconSize / 3),
                     width: thirdWidth * 2,
-                    child: Text(getSortTitle(sortBy),
+                    child: Text(selectedSortRules.getSortTitle(),
                         style: _theme.textTheme.body1),
                   )
                 ])),
@@ -73,30 +66,5 @@ class OpenFlutterProductFilter extends StatelessWidget {
                     size: iconSize)),
           ],
         ));
-  }
-
-  String getSortTitle(SortBy sortBy) {
-    var title = 'Popular';
-    switch (sortBy) {
-      case SortBy.Popular:
-        title = 'Popular';
-        break;
-
-      case SortBy.Newest:
-        title = 'Newest';
-        break;
-      case SortBy.CustomerReview:
-        title = 'Customer Review';
-        break;
-
-      case SortBy.PriceLowestToHigh:
-        title = 'Price: lowest to high';
-        break;
-
-      case SortBy.PriceHighestToLow:
-        title = 'Price: highest to low';
-        break;
-    }
-    return title;
   }
 }

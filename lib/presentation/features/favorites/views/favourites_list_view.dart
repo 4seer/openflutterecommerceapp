@@ -38,7 +38,6 @@ class _FavouritesListViewState extends State<FavouritesListView> {
     // ignore: omit_local_variable_types
     final double width = MediaQuery.of(context).size.width;
     var productView = ProductView.ListView;
-    var sortBy = SortBy.Popular;
 
     return OpenFlutterCollapsingScaffold(
       background: AppColors.background,
@@ -68,14 +67,12 @@ class _FavouritesListViewState extends State<FavouritesListView> {
                     width: width * 0.95,
                     height: 20,
                     productView: productView,
-                    sortBy: sortBy,
                     onFilterClicked: (() => {print('Filter Clicked')}),
                     onChangeViewClicked: (() {
                       print('Show TileView');
                       bloc..add(ShowTileViewEvent());
                       widget.changeView(changeType: ViewChangeType.Forward);
                     }),
-                    onSortClicked: ((SortBy sortBy) => {print('Sort Clicked')}),
                   ),
                 ),
               ],

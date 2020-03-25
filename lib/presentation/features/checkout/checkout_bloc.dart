@@ -3,17 +3,14 @@
 // Date: 2020-02-17
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/cart_repository.dart';
 
 import 'checkout.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
-  final ProductRepository productRepository;
+  final CartRepository cartRepository;
 
-  CheckoutBloc({
-    @required this.productRepository,
-  }) : assert(productRepository != null);
+  CheckoutBloc(this.cartRepository);
 
   @override
   CheckoutState get initialState => CheckoutInitialState();
@@ -23,8 +20,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     if (event is CheckoutStartEvent) {
       if (state is CheckoutInitialState) {
         yield CheckoutProceedState(
-            cardId: 1,
-            cartProducts: await productRepository.getProductsInCategory(2));
+            cardId: 1, cartProducts: await cartRepository.getCartContent());
       } else if (state is CheckoutProceedState) {
         yield state;
       }

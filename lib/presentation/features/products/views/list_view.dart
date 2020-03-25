@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -42,7 +43,9 @@ class _ProductsListViewState extends State<ProductsListView> {
       return Container();
     }, child:
         BlocBuilder<ProductsBloc, ProductState>(builder: (context, state) {
-      if (state is ProductsLoadedState) {
+      if (state is ProductLoadingState) {
+        return Center(child: CircularProgressIndicator());
+      } else if (state is ProductsReadyState) {
         return Container(
             child: Column(children: <Widget>[
           Container(
@@ -66,7 +69,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                     width: width,
                     height: 24,
                     productView: productView,
-                    sortBy: state.sortBy,
+                    selectedSortRules: state.sortBy,
                     onFilterClicked: (() => {
                           widget.changeView(
                               changeType: ViewChangeType.Exact, index: 2)
@@ -74,40 +77,37 @@ class _ProductsListViewState extends State<ProductsListView> {
                     onChangeViewClicked: (() => {
                           widget.changeView(changeType: ViewChangeType.Forward)
                         }),
-                    onSortClicked: ((SortBy sortBy) => {
+                    onSortClicked: ((SortRules sortBy) => {
                           BlocProvider.of<ProductsBloc>(context)
                               .add(ProductShowSortByEvent()),
                         }),
                   ),
                 ),
               ])),
-          state.isLoading
-              ? Center(child: CircularProgressIndicator())
-              : Container(
-                  height: MediaQuery.of(context).size.height - topPartHeight,
-                  width: fullWidth,
-                  padding: EdgeInsets.only(top: AppSizes.sidePadding),
-                  color: _theme.backgroundColor,
-                  child: Stack(children: <Widget>[
-                    Container(
-                        height:
-                            MediaQuery.of(context).size.height - topPartHeight,
-                        width: fullWidth,
-                        child: SingleChildScrollView(
-                            child: Column(
-                          children: buildProductList(
-                              state.data.products, state.data.category, width),
-                        ))),
-                    state.showSortBy
-                        ? OpenFlutterSortBy(
-                            currentSortBy: state.sortBy,
-                            onSelect: ((SortBy newSortBy) => {
-                                  BlocProvider.of<ProductsBloc>(context)
-                                      .add(ProductChangeSortByEvent(newSortBy))
-                                }),
-                          )
-                        : Container()
-                  ]))
+          Container(
+              height: MediaQuery.of(context).size.height - topPartHeight,
+              width: fullWidth,
+              padding: EdgeInsets.only(top: AppSizes.sidePadding),
+              color: _theme.backgroundColor,
+              child: Stack(children: <Widget>[
+                Container(
+                    height: MediaQuery.of(context).size.height - topPartHeight,
+                    width: fullWidth,
+                    child: SingleChildScrollView(
+                        child: Column(
+                      children: buildProductList(
+                          state.data.products, state.data.category, width),
+                    ))),
+                state.screenType == ScreenType.sort
+                    ? OpenFlutterSortBy(
+                        currentSortBy: state.sortBy,
+                        onSelect: ((SortRules newSortBy) => {
+                              BlocProvider.of<ProductsBloc>(context)
+                                  .add(ProductChangeSortRulesEvent(newSortBy))
+                            }),
+                      )
+                    : Container()
+              ]))
         ]));
       }
       return Center(child: CircularProgressIndicator());
@@ -124,8 +124,8 @@ class _ProductsListViewState extends State<ProductsListView> {
               product: products[i],
               category: category,
               onFavClicked: () {
-                BlocProvider.of<ProductsBloc>(context)
-                    .add(MakeFavorite(!products[i].isFavorite, products[i].id));
+                BlocProvider.of<ProductsBloc>(context).add(
+                    MakeFavoriteEvent(!products[i].isFavorite, products[i].id));
               },
               height: 100,
               width: width - AppSizes.sidePadding * 2)));

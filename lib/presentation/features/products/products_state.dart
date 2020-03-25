@@ -4,132 +4,63 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
-import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/fake_model/models/brand.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
-class ProductStateData {
-  List<Product> products;
-  List<HashTag> hashtags;
-  Category category;
-}
+import 'bloc_list_data.dart';
 
 @immutable
 abstract class ProductState extends Equatable {
+  @override
+  bool get stringify => true;
+
   @override
   List<Object> get props => [];
 }
 
 @immutable
-class ProductInitialState extends ProductState {}
+class ProductLoadingState extends ProductState {}
 
 @immutable
-class ProductsLoadedState extends ProductState {
-  final ProductStateData data;
-  final bool isLoading;
-  final bool showSortBy;
-  final SortBy sortBy;
+class ProductsReadyState extends ProductState {
+  final ProductListData data;
+  final SortRules sortBy;
+  final FilterRules filterRules;
+  final ScreenType screenType;
 
-  final List<Color> availableColors = [
-    Color(0xFF222222),
-    Color(0xFFFFFFFF),
-    Color(0xFFB82222),
-    Color(0xFFBEA9A9),
-    Color(0xFFE2BB8D),
-    Color(0xFF151867)
-  ];
+  ProductsReadyState({
+    this.data,
+    this.sortBy,
+    this.filterRules,
+    this.screenType = ScreenType.list,
+  });
 
-  final List<Color> selectedColors;
-
-  final List<String> availableSizes = ['XS', 'S', 'M', 'L', 'XL'];
-
-  final List<String> selectedSizes;
-
-  final List<Category> availableCategories = [
-    Category(1, name: 'Women'),
-    Category(2, name: 'Men'),
-    Category(3, name: 'Boys'),
-    Category(4, name: 'Girls'),
-  ];
-
-  final List<Category> selectedCategories;
-
-  final List<Brand> availableBrands = [
-    Brand(1, 'Adidas'),
-    Brand(2, 'Adidas Originals'),
-    Brand(3, 'Blend'),
-    Brand(4, 'Boutique Moschino'),
-    Brand(5, 'Champion'),
-    Brand(6, 'Diesel'),
-  ];
-
-  final List<int> selectedBrandIds;
-
-  final RangeValues priceRange;
-
-  final RangeValues availablePriceRange;
-
-  final String brandSearchKey;
-
-  ProductsLoadedState(
-      {this.data,
-      this.isLoading,
-      this.showSortBy,
-      this.sortBy,
-      this.priceRange,
-      @required this.availablePriceRange,
-      this.selectedColors,
-      this.selectedSizes,
-      this.selectedCategories,
-      this.selectedBrandIds,
-      this.brandSearchKey});
-
-  ProductsLoadedState copyWith(
-      {ProductStateData data,
-      bool loading,
-      bool showSortBy,
-      SortBy sortBy,
-      RangeValues priceRange,
-      RangeValues availablePriceRange,
-      List<Color> selectedColors,
-      List<String> selectedSizes,
-      List<Category> selectedCategories,
-      List<int> selectedBrandIds,
-      String brandSearchKey}) {
-    return ProductsLoadedState(
+  ProductsReadyState copyWith({
+    ProductListData data,
+    bool showSortBy,
+    SortRules sortBy,
+    FilterRules filterRules,
+    ScreenType screenType,
+  }) {
+    return ProductsReadyState(
         data: data ?? this.data,
-        isLoading: loading ?? isLoading,
-        showSortBy: showSortBy ?? this.showSortBy,
         sortBy: sortBy ?? this.sortBy,
-        priceRange: priceRange ?? this.priceRange,
-        availablePriceRange: availablePriceRange ?? this.availablePriceRange,
-        selectedColors: selectedColors ?? this.selectedColors,
-        selectedSizes: selectedSizes ?? this.selectedSizes,
-        selectedCategories: selectedCategories ?? this.selectedCategories,
-        selectedBrandIds: selectedBrandIds ?? this.selectedBrandIds,
-        brandSearchKey: brandSearchKey ?? this.brandSearchKey);
+        filterRules: filterRules ?? this.filterRules,
+        screenType: screenType ?? this.screenType);
   }
 
   @override
-  bool get stringify => true;
-
-  @override
-  List<Object> get props => [
-        data,
-        isLoading,
-        showSortBy,
-        sortBy,
-        availablePriceRange,
-        priceRange,
-        selectedColors,
-        selectedSizes,
-        selectedCategories,
-        selectedBrandIds,
-        brandSearchKey
-      ];
+  List<Object> get props => [data, sortBy, filterRules, screenType];
 }
 
+enum ScreenType { list, tile, filter, sort }
+
 @immutable
-class ProductsErrorState extends ProductState {}
+class ProductsErrorState extends ProductState {
+  final String error;
+
+  ProductsErrorState(this.error);
+
+  @override
+  List<Object> get props => [error];
+}
