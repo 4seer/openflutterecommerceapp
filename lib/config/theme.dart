@@ -68,11 +68,11 @@ class OpenFlutterEcommerceTheme {
             fontSize: 48,
             color: AppColors.white,
             fontFamily: 'Metropolis',
-            fontWeight: FontWeight.w300),
+            fontWeight: FontWeight.w900),
           title: theme.textTheme.title.copyWith(
             fontSize: 24,
             color: AppColors.black,
-            fontWeight: FontWeight.w300,
+            fontWeight: FontWeight.w900,
             fontFamily: 'Metropolis'), //
 
           //product title
@@ -114,7 +114,7 @@ class OpenFlutterEcommerceTheme {
             fontSize: 34,
             color: AppColors.black,
             fontFamily: 'Metropolis',
-            fontWeight: FontWeight.w400),
+            fontWeight: FontWeight.w700),
           //light gray small text
           body1: theme.textTheme.body1.copyWith(
             color: AppColors.lightGray,
