@@ -16,7 +16,7 @@ abstract class ProductRepository {
   ///The algorithm of selecting similarity is up to repository concrete
   ///realization. Output is limited to [pageSize] and at [pageIndex] page
   Future<List<Product>> getSimilarProducts(int productId,
-      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE});
+      {int pageIndex = 0, int pageSize = AppConsts.page_size});
 
   ///returns products limited to [pageSize] and at [pageIndex] page.
   ///The result can be filtered by
@@ -28,7 +28,7 @@ abstract class ProductRepository {
   ///highest or vice versa with main sort parameter specified.
   Future<List<Product>> getProducts({
     int pageIndex = 0,
-    int pageSize = AppConsts.PAGE_SIZE,
+    int pageSize = AppConsts.page_size,
     int categoryId = 0,
     bool isFavorite = false,
     SortRules sortRules = const SortRules(),

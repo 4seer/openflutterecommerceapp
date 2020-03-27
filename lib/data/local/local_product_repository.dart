@@ -25,7 +25,7 @@ class ProductLocalRepository implements ProductRepository {
 
   @override
   Future<List<Product>> getSimilarProducts(int categoryI,
-      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) {
+      {int pageIndex = 0, int pageSize = AppConsts.page_size}) {
     // TODO: implement getSimilarProducts
     throw UnimplementedError();
   }
@@ -33,7 +33,7 @@ class ProductLocalRepository implements ProductRepository {
   @override
   Future<List<Product>> getProducts(
       {int pageIndex = 0,
-      int pageSize = AppConsts.PAGE_SIZE,
+      int pageSize = AppConsts.page_size,
       int categoryId = 0,
       bool isFavorite = false,
       SortRules sortRules = const SortRules(),

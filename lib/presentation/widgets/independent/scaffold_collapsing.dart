@@ -67,7 +67,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
 
     return <Widget>[
       SliverAppBar(
-          expandedHeight: AppSizes.APP_BAR_EXPANDED_SIZE,
+          expandedHeight: AppSizes.app_bar_expanded_size,
           floating: false,
           pinned: true,
           bottom: tabWidget,
@@ -86,7 +86,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
             builder: (BuildContext context, BoxConstraints constraints) {
               var percent = ((constraints.maxHeight - kToolbarHeight) *
                   100.0 /
-                  (AppSizes.APP_BAR_EXPANDED_SIZE - kToolbarHeight));
+                  (AppSizes.app_bar_expanded_size - kToolbarHeight));
               var dx = 0.0;
 
               dx = 100.0 - percent;

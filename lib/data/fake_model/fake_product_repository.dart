@@ -37,7 +37,7 @@ class FakeProductRepository extends ProductRepository {
 
   @override
   Future<List<Product>> getSimilarProducts(int productId,
-      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE}) async {
+      {int pageIndex = 0, int pageSize = AppConsts.page_size}) async {
     final List<int> generatedContent = _generateRandomProductList();
     return generatedContent.map((e) => _productsInside[e]).toList();
   }
@@ -138,7 +138,7 @@ class FakeProductRepository extends ProductRepository {
   @override
   Future<List<Product>> getProducts(
       {int pageIndex = 0,
-      int pageSize = AppConsts.PAGE_SIZE,
+      int pageSize = AppConsts.page_size,
       int categoryId = 0,
       bool isFavorite = false,
       SortRules sortRules = const SortRules(),

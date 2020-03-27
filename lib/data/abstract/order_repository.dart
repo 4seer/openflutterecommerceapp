@@ -7,7 +7,7 @@ abstract class OrderRepository {
   ///(depending on concrete realization). It divides the result to chunks with
   ///pagination settings: [pageIndex] and [pageSize]
   Future<List<UserOrder>> getMyOrders(
-      {int pageIndex = 0, int pageSize = AppConsts.PAGE_SIZE});
+      {int pageIndex = 0, int pageSize = AppConsts.page_size});
 
   ///returns order details for order with [orderId]
   Future<UserOrder> getOrderDetails(int orderId);
