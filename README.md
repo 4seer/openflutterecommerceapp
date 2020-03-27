@@ -58,20 +58,6 @@ Functionality description and discussion
 
 [E-commerce App Mobile App Local Database Structure](https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-local-database-4744b61264c7)
 
-## Flutter Version
-
-You may need to update flutter to dev or beta for the most recent updates to work. Use following commands to upgrade flutter:
-
-```
-flutter channel dev
-flutter upgrade
-```
-or
-
-```
-flutter channel beta
-flutter upgrade
-```
 
 ## Tests
 To run tests use command below:

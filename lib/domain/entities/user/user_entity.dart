@@ -6,6 +6,7 @@ class UserEntity extends Entity<int> {
   final String email;
   final String password;
   final String birthDate;
+  final String token;
   final bool salesNotification;
   final bool newArrivalsNotification;
   final bool deliveryStatusChanges;
@@ -17,6 +18,7 @@ class UserEntity extends Entity<int> {
     this.email,
     this.password,
     this.birthDate,
+    this.token,
     this.salesNotification,
     this.newArrivalsNotification,
     this.deliveryStatusChanges}) : super(id);
@@ -30,6 +32,7 @@ class UserEntity extends Entity<int> {
       'email': email,
       'password': password,
       'birthDate': birthDate,
+      'token': token,
       'salesNotification': salesNotification,
       'newArrivalsNotification': newArrivalsNotification,
       'deliveryStatusChanges': deliveryStatusChanges
@@ -44,6 +47,7 @@ class UserEntity extends Entity<int> {
     email,
     password,
     birthDate,
+    token,
     salesNotification,
     newArrivalsNotification,
     deliveryStatusChanges

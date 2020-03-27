@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/features/forget_password/forget_password.dart';
+import 'package:openflutterecommerce/features/sign_up/sign_up.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
-import 'forget_password.dart';
-import 'signup.dart';
 import 'validator.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -34,12 +34,32 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         iconTheme: IconThemeData(color: AppColors.black),
       ),
       backgroundColor: AppColors.background,
-      body: BlocConsumer<ForgetPasswordBloc, SignInState>(
+      body: BlocConsumer<ForgetPasswordBloc, ForgetPasswordState>(
         listener: (context, state) {
-          if (state is FinishedState) Navigator.of(context).pop();
+          // on success push back
+          if (state is ForgetPasswordFinishedState) {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                content: Text('An email with password reminder was sent to ${state.email}'),
+                backgroundColor: Colors.green, // TODO use app colors
+                duration: Duration(seconds: 3),
+              ),
+            );
+          }
+          // on failure show a snackbar
+          if (state is ForgetPasswordErrorState) {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                content: Text('${state.error}'),
+                backgroundColor: Colors.red, // TODO use app colors
+                duration: Duration(seconds: 3),
+              ),
+            );
+          }
         },
         builder: (context, state) {
-          if (state is ProcessingState) {
+          // show loading screen while processing
+          if (state is ForgetPasswordProcessingState) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -82,26 +102,29 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ),
                   ),
                   Padding(
-                      padding: EdgeInsets.symmetric(horizontal: width * 0.2),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          OpenFlutterServiceButton(
-                            serviceType: ServiceType.Google,
-                            onPressed: () {
-                              BlocProvider.of<SignUpBloc>(context)
-                                  .add(SignUpWithGoogle());
-                            },
-                          ),
-                          OpenFlutterServiceButton(
-                            serviceType: ServiceType.Facebook,
-                            onPressed: () {
-                              BlocProvider.of<SignUpBloc>(context)
-                                  .add(SignUpWithFB());
-                            },
-                          ),
-                        ],
-                      )),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.2),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        OpenFlutterServiceButton(
+                          serviceType: ServiceType.Google,
+                          onPressed: () {
+                            BlocProvider.of<SignUpBloc>(context).add(
+                              SignUpPressedGoogle(),
+                            );
+                          },
+                        ),
+                        OpenFlutterServiceButton(
+                          serviceType: ServiceType.Facebook,
+                          onPressed: () {
+                            BlocProvider.of<SignUpBloc>(context).add(
+                              SignUpPressedFacebook(),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -119,8 +142,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     if (emailKey.currentState.validate() != null) {
       return;
     }
-    BlocProvider.of<SignUpBloc>(context).add(SendEmailPressed(
-      emailController.text,
-    ));
+    BlocProvider.of<ForgetPasswordBloc>(context).add(
+      ForgetPasswordPressed(
+        emailController.text,
+      ),
+    );
   }
 }
