@@ -11,10 +11,10 @@ import 'package:http/http.dart' as http;
 import 'package:openflutterecommerce/config/server_addresses.dart';
 import 'package:openflutterecommerce/data/abstract/model/app_user.dart';
 import 'package:openflutterecommerce/data/abstract/user_repository.dart';
-import 'package:openflutterecommerce/data/remote/utils.dart';
+
+import '../utils.dart';
 
 class RemoteUserRepository extends UserRepository {
-
   @override
   Future<String> signIn({
     @required String email,
