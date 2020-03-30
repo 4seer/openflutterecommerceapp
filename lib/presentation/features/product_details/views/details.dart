@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
@@ -94,11 +96,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
-                              children: state.product.attributes
+                              children: state.product.selectableAttributes
                                       .map((value) => selectionOutlineButton(
                                           deviceWidth,
                                           value,
-                                          state.selectedAttributes[value]))
+                                          state.selectedAttributes == null
+                                              ? null
+                                              : state
+                                                  .selectedAttributes[value]))
                                       .toList() +
                                   [
                                     OpenFlutterFavouriteButton(
@@ -184,7 +189,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   void setFavourite(ProductBloc bloc) {
     if (!favorite) {
-      bloc.add(ProductAddToFavoritesEvent());
+      bloc.add(ProductAddToFavoritesEvent(
+          HashMap())); //TODO ask for real parameters if required
     } else {
       bloc.add(ProductRemoveFromFavoritesEvent());
     }
@@ -299,10 +305,11 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   }
 
   void _addItemToCart(BuildContext context, ProductLoadedState state) async {
-    if (state.selectedAttributes.length == state.product.attributes.length) {
+    if (state.selectedAttributes.length ==
+        state.product.selectableAttributes.length) {
       BlocProvider.of<ProductBloc>(context).add(ProductAddToCartEvent());
     } else {
-      for (final attribute in state.product.attributes) {
+      for (final attribute in state.product.selectableAttributes) {
         if (!state.selectedAttributes.containsKey(attribute)) {
           await _showSelectAttributeBottomSheet(context, attribute);
         }

@@ -50,6 +50,21 @@ class SortRules {
         return 'No order';
     }
   }
+
+  Map<SortType, String> get sortTextVariants => {
+        SortType.DateAdded: 'Date added',
+        SortType.Reviewed: 'Reviews',
+        SortType.Price: 'Price',
+        SortType.Popularity: 'Popularity'
+      };
+
+  SortRules copyWithChangedOrder() {
+    return SortRules(
+        sortType: sortType,
+        sortOrder: sortOrder == SortOrder.FromHighestToLowest
+            ? SortOrder.FromLowestToHighest
+            : SortOrder.FromHighestToLowest);
+  }
 }
 
 enum SortType { DateAdded, Reviewed, Price, Popularity }

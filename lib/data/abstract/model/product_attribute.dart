@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 class ProductAttribute extends Equatable {
   final int id;
@@ -6,7 +7,8 @@ class ProductAttribute extends Equatable {
   final List<String> options;
   final String info;
 
-  const ProductAttribute({this.id, this.name, this.options, this.info});
+  const ProductAttribute(
+      {this.id, @required this.name, this.options, this.info});
 
   @override
   List<Object> get props => [id, name, options, info];

@@ -14,7 +14,7 @@ description: A Flutter E-commerce App.
 version: 0.0.2+2
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -37,6 +37,7 @@ dependencies:
   path:
   http: ^0.12.0+4
   flutter_secure_storage: ^3.3.1+1
+  font_awesome_flutter: 8.7.0
 
 dev_dependencies:
   flutter_test:

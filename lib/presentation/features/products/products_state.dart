@@ -9,58 +9,99 @@ import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
 import 'bloc_list_data.dart';
 
-@immutable
-abstract class ProductState extends Equatable {
-  @override
-  bool get stringify => true;
-
-  @override
-  List<Object> get props => [];
-}
-
-@immutable
-class ProductLoadingState extends ProductState {}
-
-@immutable
-class ProductsReadyState extends ProductState {
+abstract class ProductsState extends Equatable {
   final ProductListData data;
   final SortRules sortBy;
   final FilterRules filterRules;
-  final ScreenType screenType;
+  final String error;
 
-  ProductsReadyState({
+  ProductsState({
     this.data,
-    this.sortBy,
     this.filterRules,
-    this.screenType = ScreenType.list,
+    this.sortBy,
+    this.error,
   });
 
-  ProductsReadyState copyWith({
+  ProductsState copyWith({
     ProductListData data,
-    bool showSortBy,
     SortRules sortBy,
     FilterRules filterRules,
-    ScreenType screenType,
-  }) {
-    return ProductsReadyState(
-        data: data ?? this.data,
-        sortBy: sortBy ?? this.sortBy,
-        filterRules: filterRules ?? this.filterRules,
-        screenType: screenType ?? this.screenType);
+    String error,
+  });
+
+  ProductsState getLoading() {
+    return copyWith(data: null);
+  }
+
+  bool get isProductsLoading => data == null;
+  bool get isFilterRulesVisible => filterRules != null;
+  bool get hasError => error != null;
+
+  @override
+  List<Object> get props => [data, filterRules, sortBy];
+
+  @override
+  bool get stringify => true;
+}
+
+@immutable
+class ProductsListViewState extends ProductsState {
+  ProductsListViewState({
+    ProductListData data,
+    SortRules sortBy,
+    FilterRules filterRules,
+    String error,
+  }) : super(
+            data: data, sortBy: sortBy, filterRules: filterRules, error: error);
+
+  ProductsTileViewState getTiles() {
+    return ProductsTileViewState(
+        data: data, sortBy: sortBy, filterRules: filterRules);
   }
 
   @override
-  List<Object> get props => [data, sortBy, filterRules, screenType];
+  ProductsListViewState copyWith({
+    ProductListData data,
+    SortRules sortBy,
+    FilterRules filterRules,
+    String error,
+  }) {
+    return ProductsListViewState(
+      data: data ?? this.data,
+      filterRules: filterRules ?? this.filterRules,
+      sortBy: sortBy ?? this.sortBy,
+      error: error,
+    );
+  }
 }
 
-enum ScreenType { list, tile, filter, sort }
-
 @immutable
-class ProductsErrorState extends ProductState {
-  final String error;
-
-  ProductsErrorState(this.error);
+class ProductsTileViewState extends ProductsState {
+  ProductsTileViewState(
+      {ProductListData data,
+      SortRules sortBy,
+      FilterRules filterRules,
+      String error})
+      : super(
+            data: data, sortBy: sortBy, filterRules: filterRules, error: error);
 
   @override
-  List<Object> get props => [error];
+  ProductsTileViewState copyWith({
+    ProductListData data,
+    SortRules sortBy,
+    FilterRules filterRules,
+    String error,
+  }) {
+    return ProductsTileViewState(
+      data: data ?? this.data,
+      filterRules: filterRules ?? this.filterRules,
+      sortBy: sortBy ?? this.sortBy,
+      error: error,
+    );
+  }
+
+  ProductsListViewState getList() {
+    return ProductsListViewState(
+        data: data, sortBy: sortBy, filterRules: filterRules);
+  }
 }

@@ -26,6 +26,10 @@ class FilterRules {
         selectedAttributes: updatedAttributes);
   }
 
+  /// this behavior can be changed in subclasses to show special attribute instead of first
+  MapEntry<ProductAttribute, List<String>> get topmostOption =>
+      selectedAttributes?.entries?.first;
+
   FilterRules copyWithRemovedAttributeValue(
       ProductAttribute attribute, String value) {
     HashMap<ProductAttribute, List<String>> updatedAttributes =

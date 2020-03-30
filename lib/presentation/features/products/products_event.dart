@@ -2,9 +2,12 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
+import 'dart:collection';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
 @immutable
@@ -22,7 +25,7 @@ class ScreenLoadedEvent extends ProductsListEvent {
 }
 
 @immutable
-class ProductShowSortByEvent extends ProductsListEvent {}
+class ProductsChangeViewEvent extends ProductsListEvent {}
 
 @immutable
 class ProductChangeSortRulesEvent extends ProductsListEvent {
@@ -56,8 +59,9 @@ class SearchEvent extends ProductsListEvent {
 class MakeFavoriteEvent extends ProductsListEvent {
   final bool isFavorite;
   final int productId;
+  final HashMap<ProductAttribute, String> favoriteAttributes;
 
-  MakeFavoriteEvent(this.isFavorite, this.productId);
+  MakeFavoriteEvent(this.isFavorite, this.productId, {this.favoriteAttributes});
 
   @override
   List<Object> get props => [isFavorite, productId];

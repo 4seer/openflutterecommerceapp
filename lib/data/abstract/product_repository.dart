@@ -23,14 +23,12 @@ abstract class ProductRepository {
   ///a) which category (with [categoryId] and its subcategories) they belong
   ///b) [filterRules] which basically consist of attributes, subcategories and
   ///price range, but can be extended to include more
-  ///c) only favorite products which were predefined by the user
   ///The result can be sorted by [sortRules] with values coming from lowest to
   ///highest or vice versa with main sort parameter specified.
   Future<List<Product>> getProducts({
     int pageIndex = 0,
     int pageSize = AppConsts.page_size,
     int categoryId = 0,
-    bool isFavorite = false,
     SortRules sortRules = const SortRules(),
     FilterRules filterRules,
   });
@@ -39,10 +37,4 @@ abstract class ProductRepository {
   ///id = [categoryId] and its subcategories. All rules should be set with
   ///initial (unselected) values
   Future<FilterRules> getPossibleFilterOptions(int categoryId);
-
-  ///adds product with [productId] to the list of favorites
-  Future addToFavorites(int productId);
-
-  ///removes product with [productId] from the list of favorites
-  Future removeFromFavorites(int productId);
 }

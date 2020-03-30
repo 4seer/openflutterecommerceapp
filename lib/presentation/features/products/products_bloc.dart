@@ -5,6 +5,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/category_repository.dart';
+import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
@@ -13,9 +14,10 @@ import 'package:openflutterecommerce/presentation/features/products/products.dar
 
 import 'bloc_list_data.dart';
 
-class ProductsBloc extends Bloc<ProductsListEvent, ProductState> {
+class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   final ProductRepository productRepository;
   final CategoryRepository categoryRepository;
+  final FavoritesRepository favoritesRepository;
   final HashtagRepository hashtagRepository;
   final int categoryId;
 
@@ -23,38 +25,39 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductState> {
     @required this.categoryId,
     @required this.categoryRepository,
     @required this.productRepository,
+    @required this.favoritesRepository,
     @required this.hashtagRepository,
   }) : assert(productRepository != null);
 
   @override
-  ProductState get initialState => ProductLoadingState();
+  ProductsState get initialState => ProductsListViewState();
 
   @override
-  Stream<ProductState> mapEventToState(ProductsListEvent event) async* {
+  Stream<ProductsState> mapEventToState(ProductsListEvent event) async* {
     if (event is ScreenLoadedEvent) {
-      yield ProductsReadyState(
-          screenType: ScreenType.list,
+      yield ProductsListViewState(
           sortBy: SortRules(),
           data: await getInitialStateData(categoryId),
           filterRules:
               await productRepository.getPossibleFilterOptions(categoryId));
+    } else if (event is ProductsChangeViewEvent) {
+      if (state is ProductsListViewState) {
+        yield (state as ProductsListViewState).getTiles();
+      } else {
+        yield (state as ProductsTileViewState).getList();
+      }
     } else if (event is ProductChangeSortRulesEvent) {
-      final state = this.state as ProductsReadyState;
-      yield ProductLoadingState();
+      yield state.getLoading();
       final List<Product> filteredData = await productRepository.getProducts(
           categoryId: categoryId,
           filterRules: state.filterRules,
           sortRules: event.sortBy);
       yield state.copyWith(
-          sortBy: event.sortBy,
-          data: state.data.copyWith(filteredData),
-          showSortBy: false);
-    } else if (event is ProductShowSortByEvent) {
-      final state = this.state as ProductsReadyState;
-      yield state.copyWith(showSortBy: true);
+        sortBy: event.sortBy,
+        data: state.data.copyWith(filteredData),
+      );
     } else if (event is ProductChangeFilterRulesEvent) {
-      final state = this.state as ProductsReadyState;
-      yield ProductLoadingState();
+      yield state.getLoading();
       final List<Product> filteredData = await productRepository.getProducts(
           categoryId: categoryId,
           filterRules: event.filterRules,
@@ -64,12 +67,20 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductState> {
           data: state.data.copyWith(filteredData));
     } else if (event is MakeFavoriteEvent) {
       if (event.isFavorite) {
-        await productRepository.addToFavorites(event.productId);
+        await favoritesRepository.addToFavorites(
+            event.productId, event.favoriteAttributes);
       } else {
-        await productRepository.removeFromFavorites(event.productId);
+        await favoritesRepository.removeFromFavorites(event.productId);
       }
-      final state = this.state as ProductsReadyState;
-      yield state.copyWith(data: await getInitialStateData(categoryId));
+      final List<Product> data = state.data.products;
+      yield state.copyWith(
+          data: state.data.copyWith(data.map((item) {
+        if (event.productId == item.id) {
+          return item.favorite(event.isFavorite);
+        } else {
+          return item;
+        }
+      }).toList(growable: false)));
     }
   }
 

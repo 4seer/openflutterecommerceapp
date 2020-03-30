@@ -43,7 +43,7 @@ class FakeProduct extends Product {
                         isLocal: true))
                     .toList(growable: false)
                 : [],
-            attributes: productAttributes ??
+            selectableAttributes: productAttributes ??
                 [
                   colors != null && colors.isNotEmpty
                       ? ProductAttribute(id: 0, name: 'color', options: colors)
@@ -66,6 +66,6 @@ class FakeProduct extends Product {
         created: created,
         rating: averageRating,
         ratingCount: ratingCount,
-        productAttributes: attributes);
+        productAttributes: selectableAttributes);
   }
 }

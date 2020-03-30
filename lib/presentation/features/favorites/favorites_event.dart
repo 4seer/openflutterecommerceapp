@@ -4,6 +4,8 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
 @immutable
 abstract class FavouriteEvent extends Equatable {
@@ -12,23 +14,59 @@ abstract class FavouriteEvent extends Equatable {
 }
 
 @immutable
-class ShowListViewEvent extends FavouriteEvent {
+class ScreenLoadedEvent extends FavouriteEvent {
+  ScreenLoadedEvent();
+
   @override
-  String toString() => 'Favourite is Loaded in ListView';
+  List<Object> get props => [];
 }
 
 @immutable
-class ShowTileViewEvent extends FavouriteEvent {
+class ProductsChangeViewEvent extends FavouriteEvent {}
+
+@immutable
+class ProductChangeSortRulesEvent extends FavouriteEvent {
+  final SortRules sortBy;
+
+  ProductChangeSortRulesEvent(this.sortBy);
+
   @override
-  String toString() => 'Favourite is Loaded in TileView';
+  List<Object> get props => [sortBy];
 }
 
-class MakeFavoriteEvent extends FavouriteEvent {
-  final bool isFavorite;
-  final int productId;
+@immutable
+class ProductChangeFilterRulesEvent extends FavouriteEvent {
+  final FilterRules filterRules;
 
-  MakeFavoriteEvent(this.isFavorite, this.productId);
+  ProductChangeFilterRulesEvent(this.filterRules);
 
   @override
-  List<Object> get props => [isFavorite, productId];
+  List<Object> get props => [filterRules];
+}
+
+class SearchEvent extends FavouriteEvent {
+  final String search;
+
+  SearchEvent(this.search);
+
+  @override
+  List<Object> get props => [search];
+}
+
+class RemoveFromFavoriteEvent extends FavouriteEvent {
+  final int productId;
+
+  RemoveFromFavoriteEvent(this.productId);
+
+  @override
+  List<Object> get props => [productId];
+}
+
+class AddToCartEvent extends FavouriteEvent {
+  final int productId;
+
+  AddToCartEvent(this.productId);
+
+  @override
+  List<Object> get props => [productId];
 }
