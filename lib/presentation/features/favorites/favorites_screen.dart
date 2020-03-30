@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/fav_size_changing_app_bar.dart';
+import 'package:openflutterecommerce/presentation/widgets/data_driven/size_changing_app_bar.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/scaffold.dart';
 
 import 'favorite_bloc.dart';
@@ -45,7 +45,24 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       builder: (BuildContext context, FavouriteState state) {
         return CustomScrollView(
           slivers: <Widget>[
-            FavSizeChangingAppBar(),
+            SizeChangingAppBar(
+              title: 'Favorites',
+              filterRules: state.filterRules,
+              sortRules: state.sortBy,
+              isListView: state.isList,
+              onFilterRulesChanged: (filter) {
+                BlocProvider.of<FavouriteBloc>(context)
+                    .add(ProductChangeFilterRulesEvent(filter));
+              },
+              onSortRulesChanged:  (sort) {
+                BlocProvider.of<FavouriteBloc>(context)
+                    .add(ProductChangeSortRulesEvent(sort));
+              },
+              onViewChanged: () {
+                BlocProvider.of<FavouriteBloc>(context)
+                    .add(ProductsChangeViewEvent());
+              },
+            ),
             state.isList ? FavoritesListView() : FavouritesTileView()
           ],
         );

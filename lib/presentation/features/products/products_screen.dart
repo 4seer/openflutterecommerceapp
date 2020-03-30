@@ -58,7 +58,24 @@ class _ProductsScreenState extends State<ProductsScreen> {
             builder: (context, state) {
               return CustomScrollView(
                 slivers: <Widget>[
-                  SizeChangingAppBar(),
+                  SizeChangingAppBar(
+                    title: state.data?.category?.name,
+                    filterRules: state.filterRules,
+                    sortRules: state.sortBy,
+                    isListView: state is ProductsListViewState,
+                    onFilterRulesChanged: (filter) {
+                      BlocProvider.of<ProductsBloc>(context)
+                          .add(ProductChangeFilterRulesEvent(filter));
+                    },
+                    onSortRulesChanged: (sort) {
+                      BlocProvider.of<ProductsBloc>(context)
+                          .add(ProductChangeSortRulesEvent(sort));
+                    },
+                    onViewChanged: () {
+                      BlocProvider.of<ProductsBloc>(context)
+                          .add(ProductsChangeViewEvent());
+                    },
+                  ),
                   state is ProductsListViewState
                       ? ProductsListView()
                       : ProductsTileView(),
