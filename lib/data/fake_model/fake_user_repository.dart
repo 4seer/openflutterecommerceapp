@@ -7,10 +7,8 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/model/app_user.dart';
 import 'package:openflutterecommerce/data/abstract/user_repository.dart';
-import 'package:openflutterecommerce/domain/entities/user/user_entity.dart';
 
 class FakeUserRepository extends UserRepository {
-
   @override
   Future<String> signIn({
     @required String email,

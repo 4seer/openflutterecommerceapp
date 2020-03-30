@@ -44,12 +44,16 @@ class _Main1ViewState extends State<Main1View> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                      padding: EdgeInsets.only(
-                        left: AppSizes.sidePadding,
-                      ),
-                      width: width / 2,
+                    padding: EdgeInsets.only(
+                      left: AppSizes.sidePadding,
+                    ),
+                    width: width / 2,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
                       child: Text(translate('fashionSale'),
-                          style: _theme.textTheme.headline)),
+                          style: _theme.textTheme.headline),
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.only(
                         left: AppSizes.sidePadding,

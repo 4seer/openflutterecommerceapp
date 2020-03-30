@@ -5,15 +5,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/category_repository.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
-class ProductsBloc extends Bloc<ProductsListEvent, ProductState> {
+import 'bloc_list_data.dart';
+
+class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   final ProductRepository productRepository;
   final CategoryRepository categoryRepository;
+  final FavoritesRepository favoritesRepository;
   final HashtagRepository hashtagRepository;
   final int categoryId;
 
@@ -21,70 +25,69 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductState> {
     @required this.categoryId,
     @required this.categoryRepository,
     @required this.productRepository,
+    @required this.favoritesRepository,
     @required this.hashtagRepository,
   }) : assert(productRepository != null);
 
   @override
-  ProductState get initialState => ProductInitialState();
+  ProductsState get initialState => ProductsListViewState();
 
   @override
-  Stream<ProductState> mapEventToState(ProductsListEvent event) async* {
+  Stream<ProductsState> mapEventToState(ProductsListEvent event) async* {
     if (event is ScreenLoadedEvent) {
-      final data = await getStateData(categoryId);
-      yield ProductsLoadedState(
-          isLoading: false,
-          showSortBy: false,
-          sortBy: SortBy.Popular,
-          selectedBrandIds: <int>[],
-          selectedCategories: <Category>[],
-          selectedSizes: <String>[],
-          selectedColors: <Color>[],
-          priceRange: RangeValues(70, 150),
-          availablePriceRange: RangeValues(0, 1000),
-          brandSearchKey: '',
-          data: data);
-    } else if (event is ProductChangeSortByEvent) {
-      final state = this.state as ProductsLoadedState;
-      yield state.copyWith(sortBy: event.sortBy, showSortBy: false);
-    } else if (event is ProductShowSortByEvent) {
-      final state = this.state as ProductsLoadedState;
-      yield state.copyWith(showSortBy: true);
-    } else if (event is ProductChangePriceRangeEvent) {
-      final state = this.state as ProductsLoadedState;
-      yield state.copyWith(priceRange: event.priceRange);
-    } else if (event is ProductChangeSelectedColorsEvent) {
-      final state = this.state as ProductsLoadedState;
-      yield state.copyWith(selectedColors: event.selectedColors);
-    } else if (event is ProductChangeSelectedSizesEvent) {
-      final state = this.state as ProductsLoadedState;
-      yield state.copyWith(selectedSizes: event.selectedSizes);
-    } else if (event is ProductChangeSelectedCategoriesEvent) {
-      final state = this.state as ProductsLoadedState;
-      yield state.copyWith(selectedCategories: event.selectedCategories);
-    } else if (event is ProductChangeSelectedBrandsEvent) {
-      final state = this.state as ProductsLoadedState;
-      yield state.copyWith(selectedBrandIds: event.selectedBrandIds);
-    } else if (event is ProductChangeBrandSearchKeyEvent) {
-      final state = this.state as ProductsLoadedState;
-      yield state.copyWith(brandSearchKey: event.newSearchKey);
-    } else if (event is MakeFavorite) {
-      if (event.isFavorite) {
-        await productRepository.addToFavorites(event.productId);
+      yield ProductsListViewState(
+          sortBy: SortRules(),
+          data: await getInitialStateData(categoryId),
+          filterRules:
+              await productRepository.getPossibleFilterOptions(categoryId));
+    } else if (event is ProductsChangeViewEvent) {
+      if (state is ProductsListViewState) {
+        yield (state as ProductsListViewState).getTiles();
       } else {
-        await productRepository.removeFromFavorites(event.productId);
+        yield (state as ProductsTileViewState).getList();
       }
-      final state = this.state as ProductsLoadedState;
-      yield state.copyWith(data: await getStateData(categoryId));
+    } else if (event is ProductChangeSortRulesEvent) {
+      yield state.getLoading();
+      final List<Product> filteredData = await productRepository.getProducts(
+          categoryId: categoryId,
+          filterRules: state.filterRules,
+          sortRules: event.sortBy);
+      yield state.copyWith(
+        sortBy: event.sortBy,
+        data: state.data.copyWith(filteredData),
+      );
+    } else if (event is ProductChangeFilterRulesEvent) {
+      yield state.getLoading();
+      final List<Product> filteredData = await productRepository.getProducts(
+          categoryId: categoryId,
+          filterRules: event.filterRules,
+          sortRules: state.sortBy);
+      yield state.copyWith(
+          filterRules: event.filterRules,
+          data: state.data.copyWith(filteredData));
+    } else if (event is MakeFavoriteEvent) {
+      if (event.isFavorite) {
+        await favoritesRepository.addToFavorites(
+            event.productId, event.favoriteAttributes);
+      } else {
+        await favoritesRepository.removeFromFavorites(event.productId);
+      }
+      final List<Product> data = state.data.products;
+      yield state.copyWith(
+          data: state.data.copyWith(data.map((item) {
+        if (event.productId == item.id) {
+          return item.favorite(event.isFavorite);
+        } else {
+          return item;
+        }
+      }).toList(growable: false)));
     }
   }
 
-  Future<ProductStateData> getStateData(int categoryId) async {
-    var data = ProductStateData();
-
-    data.products = await productRepository.getProductsInCategory(categoryId);
-    data.hashtags = hashtagRepository.getHashtags();
-    data.category = await categoryRepository.getCategoryDetails(categoryId);
-
-    return data;
+  Future<ProductListData> getInitialStateData(int categoryId) async {
+    return ProductListData(
+        await productRepository.getProducts(categoryId: categoryId),
+        hashtagRepository.getHashtags(),
+        await categoryRepository.getCategoryDetails(categoryId));
   }
 }

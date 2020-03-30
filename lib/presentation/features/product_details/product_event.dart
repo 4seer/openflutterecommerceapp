@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,11 @@ class ProductEvent extends Equatable {
 class ScreenLoadedEvent extends ProductEvent {}
 
 @immutable
-class ProductAddToFavoritesEvent extends ProductEvent {}
+class ProductAddToFavoritesEvent extends ProductEvent {
+  final HashMap<ProductAttribute, String> selectedAttributes;
+
+  ProductAddToFavoritesEvent(this.selectedAttributes);
+}
 
 @immutable
 class ProductRemoveFromFavoritesEvent extends ProductEvent {}
