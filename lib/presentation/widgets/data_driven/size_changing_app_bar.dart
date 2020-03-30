@@ -64,9 +64,9 @@ class SizeChangingAppBar extends StatelessWidget {
                 BlocProvider.of<ProductsBloc>(context).add(
                     ProductChangeFilterRulesEvent(isSelected
                         ? filterRules?.copyWithAdditionalAttribute(
-                            filterRules?.topmostOption.key, updateValue)
+                            filterRules?.topmostOption?.key, updateValue)
                         : filterRules?.copyWithRemovedAttributeValue(
-                            filterRules?.topmostOption.key, updateValue)));
+                            filterRules?.topmostOption?.key, updateValue)));
               }),
             ),
             OpenFlutterViewOptions(

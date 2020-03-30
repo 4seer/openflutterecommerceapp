@@ -9,8 +9,8 @@ import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/size_changing_app_bar.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/scaffold.dart';
 
-import 'favorite_bloc.dart';
 import 'favorites.dart';
+import 'favorites_bloc.dart';
 import 'favorites_event.dart';
 
 class FavouriteScreen extends StatefulWidget {

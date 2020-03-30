@@ -50,7 +50,7 @@ class ErrorDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "OK",
+                    'OK',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],

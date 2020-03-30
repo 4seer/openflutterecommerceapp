@@ -12,19 +12,7 @@ class ProductLocalRepository implements ProductRepository {
   }
 
   @override
-  Future addToFavorites(int productId) {
-    // TODO: implement addToFavorites
-    throw UnimplementedError();
-  }
-
-  @override
-  Future removeFromFavorites(int productId) {
-    // TODO: implement removeFromFavorites
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<Product>> getSimilarProducts(int categoryI,
+  Future<List<Product>> getSimilarProducts(int categoryId,
       {int pageIndex = 0, int pageSize = AppConsts.page_size}) {
     // TODO: implement getSimilarProducts
     throw UnimplementedError();
