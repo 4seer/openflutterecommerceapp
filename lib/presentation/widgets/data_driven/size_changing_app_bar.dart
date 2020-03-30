@@ -37,33 +37,48 @@ class SizeChangingAppBar extends StatelessWidget {
           onPressed: null, //TODO add search
         )
       ],
-      centerTitle: true,
       floating: true,
-      flexibleSpace: Column(
-        children: <Widget>[
-          Spacer(),
-          FlexibleSpaceBar(title: Text(title ?? 'Loading...')),
-          Container(
-            height: 30,
-            child: VisualFilter(filterRules?.topmostOption,
-                (updateValue, isSelected) {
-              BlocProvider.of<ProductsBloc>(context).add(
-                  ProductChangeFilterRulesEvent(isSelected
-                      ? filterRules?.copyWithAdditionalAttribute(
-                          filterRules?.topmostOption.key, updateValue)
-                      : filterRules?.copyWithRemovedAttributeValue(
-                          filterRules?.topmostOption.key, updateValue)));
-            }),
-          ),
-          OpenFlutterViewOptions(
-            sortRules: sortRules,
-            filterRules: filterRules,
-            isListView: isListView,
-            onChangeViewClicked: onViewChanged,
-            onFilterChanged: onFilterRulesChanged,
-            onSortChanged: onSortRulesChanged,
-          ),
-        ],
+      primary: true,
+      snap: false,
+      pinned: false,
+      /*bottom: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: ,
+      ),*/
+      flexibleSpace: FlexibleSpaceBar(
+        background: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Text(
+                title ?? 'Loading...',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+            Container(
+              height: 30,
+              child: VisualFilter(filterRules?.topmostOption,
+                  (updateValue, isSelected) {
+                BlocProvider.of<ProductsBloc>(context).add(
+                    ProductChangeFilterRulesEvent(isSelected
+                        ? filterRules?.copyWithAdditionalAttribute(
+                            filterRules?.topmostOption.key, updateValue)
+                        : filterRules?.copyWithRemovedAttributeValue(
+                            filterRules?.topmostOption.key, updateValue)));
+              }),
+            ),
+            OpenFlutterViewOptions(
+              sortRules: sortRules,
+              filterRules: filterRules,
+              isListView: isListView,
+              onChangeViewClicked: onViewChanged,
+              onFilterChanged: onFilterRulesChanged,
+              onSortChanged: onSortRulesChanged,
+            ),
+          ],
+        ),
       ),
     );
   }

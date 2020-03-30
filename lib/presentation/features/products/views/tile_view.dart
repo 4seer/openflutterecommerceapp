@@ -11,16 +11,7 @@ import 'package:openflutterecommerce/presentation/widgets/data_driven/general_pr
 
 import '../products.dart';
 
-class ProductsTileView extends StatefulWidget {
-  final Function changeView;
-
-  const ProductsTileView({Key key, this.changeView}) : super(key: key);
-
-  @override
-  _ProductsTileViewState createState() => _ProductsTileViewState();
-}
-
-class _ProductsTileViewState extends State<ProductsTileView> {
+class ProductsTileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsBloc, ProductsState>(builder: (context, state) {

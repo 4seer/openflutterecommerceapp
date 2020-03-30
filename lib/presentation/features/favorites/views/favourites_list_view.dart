@@ -11,14 +11,7 @@ import 'package:openflutterecommerce/presentation/features/product_details/produ
 import 'package:openflutterecommerce/presentation/widgets/data_driven/blank_product_list_item.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/favorite_product_list_item.dart';
 
-class FavoritesListView extends StatefulWidget {
-  const FavoritesListView({Key key}) : super(key: key);
-
-  @override
-  _FavoritesListViewState createState() => _FavoritesListViewState();
-}
-
-class _FavoritesListViewState extends State<FavoritesListView> {
+class FavoritesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavouriteBloc, FavouriteState>(

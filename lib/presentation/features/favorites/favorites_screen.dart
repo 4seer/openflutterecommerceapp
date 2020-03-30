@@ -54,7 +54,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 BlocProvider.of<FavouriteBloc>(context)
                     .add(ProductChangeFilterRulesEvent(filter));
               },
-              onSortRulesChanged:  (sort) {
+              onSortRulesChanged: (sort) {
                 BlocProvider.of<FavouriteBloc>(context)
                     .add(ProductChangeSortRulesEvent(sort));
               },

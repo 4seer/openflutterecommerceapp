@@ -11,16 +11,7 @@ import '../favorite_bloc.dart';
 import '../favorites_event.dart';
 import '../favorites_state.dart';
 
-class FavouritesTileView extends StatefulWidget {
-  final Function changeView;
-
-  const FavouritesTileView({Key key, this.changeView}) : super(key: key);
-
-  @override
-  _FavouritesTileViewState createState() => _FavouritesTileViewState();
-}
-
-class _FavouritesTileViewState extends State<FavouritesTileView> {
+class FavouritesTileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavouriteBloc, FavouriteState>(

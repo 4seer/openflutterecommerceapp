@@ -12,14 +12,7 @@ import 'package:openflutterecommerce/presentation/widgets/data_driven/general_pr
 
 import '../products.dart';
 
-class ProductsListView extends StatefulWidget {
-  const ProductsListView({Key key}) : super(key: key);
-
-  @override
-  _ProductsListViewState createState() => _ProductsListViewState();
-}
-
-class _ProductsListViewState extends State<ProductsListView> {
+class ProductsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsBloc, ProductsState>(builder: (context, state) {
