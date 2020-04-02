@@ -8,7 +8,7 @@ import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/blank_product_list_item.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/general_product_list_item.dart';
+import 'package:openflutterecommerce/presentation/widgets/extensions/product_view.dart';
 
 import '../products.dart';
 
@@ -28,8 +28,8 @@ class ProductsListView extends StatelessWidget {
               return Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-                  child: GeneralProductListItem(
-                    product: state.data.products[index],
+                  child: state.data.products[index].getListView(
+                    context: context,
                     showProductInfo: () {
                       Navigator.of(context).pushNamed(
                           OpenFlutterEcommerceRoutes.product,

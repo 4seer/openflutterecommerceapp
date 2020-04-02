@@ -4,8 +4,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/favorites_product_tile.dart';
+import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
+import 'package:openflutterecommerce/presentation/widgets/extensions/product_view.dart';
 
 import '../favorites_bloc.dart';
 import '../favorites_event.dart';
@@ -26,8 +28,15 @@ class FavouritesTileView extends StatelessWidget {
           (BuildContext context, int index) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-              child: FavoritesProductTile(
-                product: state.data[index].product,
+              child: state.data[index].getTileView(
+                context: context,
+                showProductInfo: () {
+                  Navigator.of(context).pushNamed(
+                      OpenFlutterEcommerceRoutes.product,
+                      arguments: ProductDetailsParameters(
+                          state.data[index].product.id,
+                          selectedAttributes: state.data[index].favoriteForm));
+                },
                 onRemoveFromFavorites: () {
                   BlocProvider.of<FavouriteBloc>(context).add(
                       RemoveFromFavoriteEvent(state.data[index].product.id));

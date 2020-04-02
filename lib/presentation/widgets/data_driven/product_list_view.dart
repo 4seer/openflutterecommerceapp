@@ -8,7 +8,7 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
 
-import '../widgets.dart';
+import '../extensions/product_view.dart';
 
 class OpenFlutterProductListView extends StatelessWidget {
   final double width;
@@ -31,10 +31,10 @@ class OpenFlutterProductListView extends StatelessWidget {
         child: ListView(
             scrollDirection: Axis.horizontal,
             children: products
-                .map((product) => GeneralProductTile(
-                      product: product,
+                .map((product) => product.getTileView(
+                      context: context,
                       onFavoritesClick: null, //TODO add favorites actions
-                      onClick: () {
+                      showProductInfo: () {
                         Navigator.of(context).pushNamed(
                             OpenFlutterEcommerceRoutes.product,
                             arguments: ProductDetailsParameters(product.id));

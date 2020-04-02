@@ -9,7 +9,7 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/presentation/features/favorites/favorites.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/blank_product_list_item.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/favorite_product_list_item.dart';
+import 'package:openflutterecommerce/presentation/widgets/extensions/product_view.dart';
 
 class FavoritesListView extends StatelessWidget {
   @override
@@ -28,13 +28,15 @@ class FavoritesListView extends StatelessWidget {
               return Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-                  child: FavoriteProductListItem(
-                    product: state.data[index].product,
+                  child: state.data[index].getListView(
+                    context: context,
                     showProductInfo: () {
                       Navigator.of(context).pushNamed(
                           OpenFlutterEcommerceRoutes.product,
                           arguments: ProductDetailsParameters(
-                              state.data[index].product.id));
+                              state.data[index].product.id,
+                              selectedAttributes:
+                                  state.data[index].favoriteForm));
                     },
                     onRemoveFromFavorites: () {
                       BlocProvider.of<FavouriteBloc>(context).add(
@@ -45,8 +47,6 @@ class FavoritesListView extends StatelessWidget {
                       BlocProvider.of<FavouriteBloc>(context)
                           .add(AddToCartEvent(state.data[index].product.id));
                     },
-                    imageHeight: 100,
-                    imageWidth: 120,
                   ));
             }
           },

@@ -19,8 +19,8 @@ class BaseProductListItem extends StatelessWidget {
       this.bottomRoundButton,
       this.image,
       this.mainContentBuilder,
-      this.imageHeight = 104,
-      this.imageWidth = 104,
+      this.imageHeight = 125,
+      this.imageWidth = 125,
       this.specialMark,
       this.onRemove})
       : super(key: key);
@@ -54,12 +54,17 @@ class BaseProductListItem extends StatelessWidget {
                               : DecorationImage(
                                   image: image, fit: BoxFit.cover),
                           color: AppColors.background,
-                          borderRadius:
-                              BorderRadius.circular(AppSizes.imageRadius),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(AppSizes.imageRadius),
+                            bottomLeft: Radius.circular(AppSizes.imageRadius),
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: mainContentBuilder(context),
+                        child: Padding(
+                          padding: EdgeInsets.all(11.0),
+                          child: mainContentBuilder(context),
+                        ),
                       )
                     ],
                   ),
