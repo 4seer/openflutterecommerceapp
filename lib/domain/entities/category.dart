@@ -1,15 +1,27 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/abstract/model/commerce_image.dart';
 
-class Category extends Entity<int> {
-  Category(int id) : super(id);
+class LocalCategory extends Category {
+  static const create_sql = 'CREATE TABLE category ('
+      'id INTEGER PRIMARY KEY, '
+      'name TEXT, '
+      'description TEXT, '
+      'parentId INTEGER, '
+      'isCategoryContainer INTEGER)';
 
-  @override
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id
-    };
-  }
+  LocalCategory.fromMap(Map<String, dynamic> map, CommerceImage commerceImage)
+      : super(map['id'],
+            name: map['name'],
+            parentId: map['parentId'],
+            description: map['description'],
+            isCategoryContainer: map['isCategoryContainer'] > 0,
+            image: commerceImage);
 
-  @override
-  List<Object> get props => [];
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'parentId': parentId,
+        'name': name,
+        'description': description,
+        'isCategoryContainer': isCategoryContainer ? 1 : 0,
+      };
 }
