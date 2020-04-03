@@ -36,7 +36,8 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
       ProductsByFilterParams params) async {
     List<Product> products;
     if (params.filterByCategory) {
-      products = await productRepository.getProductsInCategory(params.category.id);
+      products =
+          await productRepository.getProducts(categoryId: params.category.id);
     }
     return products;
   }

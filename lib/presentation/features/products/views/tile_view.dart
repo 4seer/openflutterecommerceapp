@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/general_product_tile.dart';
+import 'package:openflutterecommerce/presentation/widgets/extensions/product_view.dart';
 
 import '../products.dart';
 
@@ -26,20 +26,20 @@ class ProductsTileView extends StatelessWidget {
           (BuildContext context, int index) {
             return Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-                child: GeneralProductTile(
+                child: state.data.products[index].getTileView(
+                  context: context,
                   onFavoritesClick: () {
                     BlocProvider.of<ProductsBloc>(context).add(
                         MakeFavoriteEvent(
                             !state.data.products[index].isFavorite,
                             state.data.products[index].id));
                   },
-                  onClick: () {
+                  showProductInfo: () {
                     Navigator.of(context).pushNamed(
                         OpenFlutterEcommerceRoutes.product,
                         arguments: ProductDetailsParameters(
                             state.data.products[index].id));
                   },
-                  product: state.data.products[index],
                 ));
           },
           childCount: state.data.products.length,

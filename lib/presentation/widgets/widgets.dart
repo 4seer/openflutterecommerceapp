@@ -1,7 +1,6 @@
 export 'data_driven/box_value_select.dart';
 export 'data_driven/category_list_element.dart';
 export 'data_driven/category_tile.dart';
-export 'data_driven/general_product_tile.dart';
 export 'data_driven/hashtag_list.dart';
 export 'data_driven/product_list_view.dart';
 export 'data_driven/rating_summary.dart';
