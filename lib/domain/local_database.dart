@@ -26,6 +26,7 @@ class LocalDatabase {
         await db.execute(LocalProductAttribute.create_many_to_many);
         await db.execute(LocalCommerceImage.create_sql);
         await db.execute(LocalCategory.create_sql);
+        await db.execute(LocalCategory.create_product_category_link);
       },
       version: 1,
     );

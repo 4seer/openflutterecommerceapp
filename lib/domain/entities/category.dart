@@ -8,6 +8,11 @@ class LocalCategory extends Category {
       'description TEXT, '
       'parentId INTEGER, '
       'isCategoryContainer INTEGER)';
+  static const create_product_category_link =
+      'CREATE TABLE productCategoryLink ('
+      'id INTEGER PRIMARY KEY, '
+      'categoryId INTEGER, '
+      'productId INTEGER)';
 
   LocalCategory.fromMap(Map<String, dynamic> map, CommerceImage commerceImage)
       : super(map['id'],

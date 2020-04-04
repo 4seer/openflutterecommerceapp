@@ -1,20 +1,27 @@
-import 'dart:collection';
-
 import 'category.dart';
 import 'product_attribute.dart';
 
 class FilterRules {
-  final HashMap<Category, bool> categories;
-  final HashMap<ProductAttribute, List<String>> selectedAttributes;
+  final Map<Category, bool> categories;
+  final Map<ProductAttribute, List<String>> selectedAttributes;
   final PriceRange selectedPriceRange;
 
   FilterRules(
       {this.categories, this.selectedAttributes, this.selectedPriceRange});
 
+  bool get hasCategoryFilter => !(categories == null ||
+      categories.isEmpty ||
+      categories.values.fold(true, (value, listItem) => value && !listItem));
+
+  bool get hasAttributesFilter =>
+      selectedAttributes != null &&
+      selectedAttributes.isNotEmpty &&
+      selectedAttributes.values.fold(
+          false, (value, list) => value || (list != null && list.isNotEmpty));
+
   FilterRules copyWithAdditionalAttribute(
       ProductAttribute attribute, String value) {
-    HashMap<ProductAttribute, List<String>> updatedAttributes =
-        selectedAttributes;
+    Map<ProductAttribute, List<String>> updatedAttributes = selectedAttributes;
     if (updatedAttributes.containsKey(attribute)) {
       updatedAttributes[attribute].add(value);
     } else {
@@ -32,8 +39,7 @@ class FilterRules {
 
   FilterRules copyWithRemovedAttributeValue(
       ProductAttribute attribute, String value) {
-    HashMap<ProductAttribute, List<String>> updatedAttributes =
-        selectedAttributes;
+    Map<ProductAttribute, List<String>> updatedAttributes = selectedAttributes;
     updatedAttributes[attribute].remove(value);
     if (updatedAttributes[attribute].isEmpty) {
       updatedAttributes.remove(attribute);

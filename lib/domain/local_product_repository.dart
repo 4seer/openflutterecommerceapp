@@ -7,6 +7,7 @@ import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/domain/entities/extensions.dart';
 import 'package:openflutterecommerce/domain/entities/product_attribute.dart';
+import 'package:openflutterecommerce/domain/entities/query_utils.dart';
 import 'package:openflutterecommerce/domain/local_database.dart';
 
 class ProductLocalRepository implements ProductRepository {
@@ -82,11 +83,37 @@ class ProductLocalRepository implements ProductRepository {
       {int pageIndex = 0,
       int pageSize = AppConsts.page_size,
       int categoryId = 0,
-      bool isFavorite = false,
       SortRules sortRules = const SortRules(),
-      FilterRules filterRules}) {
-    // TODO: implement getProducts
-    return null;
+      FilterRules filterRules}) async {
+    final String whereFilter =
+        QueryUtils.formWherePart(categoryId, false, filterRules);
+    final String order = QueryUtils.formOrderPart(sortRules);
+
+    final List<
+        Map<String,
+            dynamic>> queryResult = await localDatabase.database.query(
+        'SELECT a.id AS id, '
+        'a.title AS title, '
+        'a.shortDescription AS shortDescription, '
+        'a.description AS description, '
+        'a.isFavorite AS isFavorite, '
+        'a.price AS price, '
+        'a.discountPercent AS discountPercent, '
+        'a.amountAvailable AS amountAvailable, '
+        'a.created AS created, '
+        'a.averageRating AS averageRating, '
+        'a.ratingCount AS ratingCount, '
+        'b.address AS address, '
+        'b.altText AS altText, '
+        'b.isLocal AS isLocal '
+        'FROM (SELECT * FROM product $whereFilter $order LIMIT ${pageIndex * pageSize}, $pageSize}) AS a LEFT JOIN '
+        '(SELECT * FROM commerceImage '
+        'WHERE product.id = commerceImage.productId LIMIT 1) AS b '
+        'ON a.id = b.productId');
+    return queryResult
+        .map((productInMap) => LocalProduct.fromMap(productInMap,
+            [LocalCommerceImage.fromMap(productInMap)], null, null))
+        .toList(growable: false);
   }
 
   @override
