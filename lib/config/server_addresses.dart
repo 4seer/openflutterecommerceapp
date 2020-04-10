@@ -1,11 +1,17 @@
 class ServerAddresses {
-  static const SERVER_ADDRESS = '';
-  static const CATEGORY_SUFFIX = '/wp-json/wc/v3/products/categories/'; //id
-  static const PRODUCT_SUFFIX = ' /wp-json/wc/v3/products/categories';
-  static const SIGN_UP = ''; // TODO need an endpoint for this
-  static const FORGOT_PASSWORD = ''; // TODO need an endpoint for this
+  //Server address of your project should go here
+  static const serverAddress = 'https://woocommerce.openflutterproject.com/';
+  //&consumer_key=ck_*****&consumer_secret=cs_**** goes here
+  static const woocommerceKeys = '';
+  static const categorySuffix = '/wp-json/wc/v3/products/categories/'; //id
+  static const productSuffix = ' /wp-json/wc/v3/products/categories';
+  static const signUp = ''; // TODO need an endpoint for this
+  static const forgotPassword = ''; // TODO need an endpoint for this
 
   /// For more information about wp-rest-api plugin
   /// https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/
-  static const AUTH_TOKEN = 'wp-json/jwt-auth/v1/token';
+  static const authToken = 'wp-json/jwt-auth/v1/token';
+
+  //CACHED API (for test purposes only)
+  static const productCategories= '/cachedapi/v3/products/categories.json';
 }
