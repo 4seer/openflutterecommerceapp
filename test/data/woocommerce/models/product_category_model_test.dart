@@ -53,16 +53,16 @@ void main() {
         final result = productCategoryModel.toJson();
         // assert
         final expectedMap = {
-            "id":18,
-            "name":"Albums",
-            "parent":16,
-            "description":"The best music albums available online.",
-            "image":
+            'id':18,
+            'name':'Albums',
+            'parent':16,
+            'description':'The best music albums available online.',
+            'image':
             {
-                "src":"https://woocommerce.openflutterproject.com/wp-content/uploads/2020/03/cd_4_angle.jpg",
+                'src':'https://woocommerce.openflutterproject.com/wp-content/uploads/2020/03/cd_4_angle.jpg',
             },
-            "menu_order":0,
-            "count":4
+            'menu_order':0,
+            'count':4
         };
         expect(result, expectedMap);
       },
