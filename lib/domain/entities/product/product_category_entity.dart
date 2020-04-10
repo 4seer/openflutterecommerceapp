@@ -6,6 +6,8 @@ class ProductCategoryEntity extends Entity<int> {
   final String image;
   final String thumb;
   final int parentId;
+  final int orderNumber;
+  final int count;
 
   ProductCategoryEntity(
     {int id,
@@ -13,7 +15,9 @@ class ProductCategoryEntity extends Entity<int> {
     this.description,
     this.image,
     this.thumb,
-    this.parentId}) : super(id);
+    this.parentId,
+    this.orderNumber,
+    this.count}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -23,7 +27,9 @@ class ProductCategoryEntity extends Entity<int> {
       'description': description,
       'image': image,
       'thumb': thumb,
-      'parentId': parentId
+      'parentId': parentId,
+      'orderNumber': orderNumber,
+      'count':count
     };
   }
 
@@ -34,6 +40,8 @@ class ProductCategoryEntity extends Entity<int> {
     description, 
     image, 
     thumb, 
-    parentId
+    parentId,
+    orderNumber,
+    count
   ];
 }

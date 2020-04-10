@@ -1,0 +1,13 @@
+{
+    "id":18,
+    "name":"Albums",
+    "parent":16,
+    "description":"The best music albums available online.",
+    "image":
+    {
+        "src":"https:\/\/woocommerce.openflutterproject.com\/wp-content\/uploads\/2020\/03\/cd_4_angle.jpg"
+    },
+    "menu_order":0,
+    "count":4
+}
+
