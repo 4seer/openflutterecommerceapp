@@ -14,11 +14,6 @@ class EntityModelMapperException implements Exception {
   EntityModelMapperException({@required this.message}); 
 }
 
-abstract class Failure extends Equatable {
-  @override
-  List<Object> get props => [];
-}
+class RemoteServerException implements Exception {}
 
-class RemoteServerFailure extends Failure {}
-
-class LocalDatabaseFailure extends Failure {}
+class LocalDatabaseException implements Exception {}

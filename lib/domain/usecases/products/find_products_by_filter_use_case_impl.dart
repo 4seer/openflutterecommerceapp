@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
@@ -14,21 +13,20 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
   );
 
   @override
-  Future<Either<Failure, ProductsByFilterResult>> execute(
+  Future<ProductsByFilterResult> execute(
       ProductsByFilterParams params) async {
     try {
       var products = await _findProductsByFilter(params);
 
       if (products != null && products.isNotEmpty) {
-        return Right(ProductsByFilterResult(
+        return ProductsByFilterResult(
           products,
           products.length,
-        ));
+        );
       }
 
-      return Left(Failure(EmptyProductsException()));
     } catch (e) {
-      return Left(Failure(e));
+      throw EmptyProductsException();
     }
   }
 

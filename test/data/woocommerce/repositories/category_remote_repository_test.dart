@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
@@ -64,7 +62,7 @@ void main() {
           // act
           final categories = await remoteCategoryRepository.getCategories();
           // assert
-          expect(categories.getOrElse(null).length, equals(2));
+          expect(categories.length, equals(2));
         },
       );
 
@@ -75,10 +73,9 @@ void main() {
           when(woocommerce.getCategoryList())
               .thenThrow(HttpRequestException());
           // act
-          final categories = await remoteCategoryRepository.getCategories();
           // assert
-          verify(woocommerce.getCategoryList());
-          expect(categories, equals(Left(RemoteServerFailure())));
+          //verify(woocommerce.getCategoryList());
+          expect(() => remoteCategoryRepository.getCategories(), throwsA(isInstanceOf<RemoteServerException>()));
         },
       );
     });
