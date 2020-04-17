@@ -77,7 +77,7 @@ flutter upgrade
 To run tests use command below:
 
 ```
-flutter run -t test/test.dart
+flutter run -t test/tests.dart
 ```
 
 ## Linter
