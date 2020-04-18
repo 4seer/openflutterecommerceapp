@@ -1,6 +1,9 @@
+import 'dart:collection';
+
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
@@ -19,16 +22,20 @@ class ProductRepositoryImpl extends ProductRepository {
   }
 
   @override
-  Future<List<Product>> getSimilarProducts(int categoryI,
+  Future<List<Product>> getSimilarProducts(int categoryId,
       {int pageIndex = 0, int pageSize = AppConsts.page_size}) {
     // TODO: implement getSimilarProducts
     throw UnimplementedError();
   }
 
   @override
-  Future<FilterRules> getPossibleFilterOptions(int categoryId) {
-    // TODO: implement getPossibleFilterOptions
-    return null;
+  Future<FilterRules> getPossibleFilterOptions(int categoryId) async {
+    HashMap<ProductAttribute, List<String>> result = HashMap();
+    //TODO: init categories from list of products fetched from server
+    return FilterRules(
+        categories: HashMap(),
+        selectedAttributes: result,
+        selectedPriceRange: PriceRange(10, 100));
   }
 
   @override
