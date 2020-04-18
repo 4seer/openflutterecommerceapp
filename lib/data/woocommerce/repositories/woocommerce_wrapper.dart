@@ -7,6 +7,7 @@ import 'package:openflutterecommerce/data/error/exceptions.dart';
 
 abstract class WoocommercWrapperAbastract{
    Future<List<dynamic>> getCategoryList({int parentId=0});
+   Future<List<dynamic>> getProductList({int categoryId=0});
 }
 
 class WoocommerceWrapper implements WoocommercWrapperAbastract{
@@ -15,6 +16,10 @@ class WoocommerceWrapper implements WoocommercWrapperAbastract{
 
   WoocommerceWrapper({@required this.client});
 
+  @override
+  Future<List<dynamic>> getProductList({int categoryId=0}){
+    return _getApiRequest(ServerAddresses.products);
+  }
   @override
   Future<List<dynamic>> getCategoryList({int parentId=0}){
     return _getApiRequest(ServerAddresses.productCategories);
