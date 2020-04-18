@@ -68,7 +68,7 @@ class Product extends Equatable {
         rating5Count: rating5Count,
         images: images,
         selectableAttributes: selectableAttributes,
-        isFavorite: isFavorite);
+        isFavorite: isFavorite??false);
   }
 
   //Method mapping domain entity with presentation level model
@@ -80,7 +80,7 @@ class Product extends Equatable {
         title: entity.title,
         shortDescription: entity.description,
         description: entity.description,
-        price: entity.price,
+        price: entity.price ?? 0,
         discountPercent: entity.discountPercent,
         amountAvailable: entity.amount,
         //TODO: created - do we need this attribute in the model?
@@ -119,7 +119,7 @@ class Product extends Equatable {
   bool get hasRating => averageRating != null;
 
   double get discountPrice {
-    return (price * (100 - discountPercent) / 100).roundToDouble();
+    return (price ?? 0 * (100 - discountPercent) / 100).roundToDouble();
   }
 
   //TODO place it in extension because it is about UI

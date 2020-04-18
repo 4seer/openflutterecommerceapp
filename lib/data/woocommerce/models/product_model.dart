@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
 
 class ProductModel extends ProductEntity {
@@ -10,12 +11,14 @@ class ProductModel extends ProductEntity {
     @required description,
     @required image,
     @required thumb,
-    parentId,
+    @required selectableAttributes,
+    categoryId,
     orderNumber,
     count}) : super(
       id: id, 
       title: title,
       description: description,
+      selectableAttributes: selectableAttributes,
       image: image,
       thumb: thumb
     );
@@ -27,11 +30,30 @@ class ProductModel extends ProductEntity {
       description: json['description'],
       image: json['image']!=null ? json['image']['src'] : '',
       thumb: json['image']!=null ? json['image']['src'] : '',
-      parentId: (json['parent'] as num).toInt(), 
+      //TODO: add all categories related to product
+      categoryId: json['categories']!=null? (json['categories'][0]['id'] as num).toInt():0, 
       orderNumber: (json['menu_order'] as num).toInt(),
-      count: (json['count'] as num).toInt(),
+      selectableAttributes: _getSelectableAttributesFromJson(json)
     );
   }
+
+  static List<ProductAttribute> _getSelectableAttributesFromJson(Map<String, dynamic> json){
+    List<ProductAttribute> selectableAttributes = [];
+    if ( json['attributes']!= null ) {
+       for (var attribute in json['attributes']) {
+        selectableAttributes.add(
+          ProductAttribute(
+            id: attribute['id']??0,
+            name: attribute['name']??'',
+            options: List<String>.from(attribute['options'])
+          )
+        );
+      }
+    }
+    return selectableAttributes;
+  }
+
+
 
   Map<String, dynamic> toJson() {
     return {
