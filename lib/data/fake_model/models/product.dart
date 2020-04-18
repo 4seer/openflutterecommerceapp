@@ -15,7 +15,7 @@ class FakeProduct extends Product {
       String shortDescription,
       String description,
       double price,
-      int discountPercent,
+      double discountPercent,
       int amountAvailable,
       DateTime created,
       double rating,
