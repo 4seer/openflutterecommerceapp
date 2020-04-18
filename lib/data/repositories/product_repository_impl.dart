@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
@@ -7,9 +6,7 @@ import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/local/local_product_repository.dart';
 import 'package:openflutterecommerce/data/network/network_status.dart';
-import 'package:openflutterecommerce/data/woocommerce/models/product_model.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/product_remote_repository.dart';
-import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 import 'package:openflutterecommerce/locator.dart';
 
 //Uses remote or local data depending on NetworkStatus
@@ -53,7 +50,7 @@ class ProductRepositoryImpl extends ProductRepository {
         productRepository = LocalProductRepository();
       }
 
-      
+      return await productRepository.getProducts();
     } on HttpRequestException {
       throw RemoteServerException();
     }

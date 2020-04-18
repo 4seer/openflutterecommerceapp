@@ -1,6 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/product_remote_repository.dart';
 import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
