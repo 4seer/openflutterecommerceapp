@@ -28,7 +28,12 @@ class FilterRules {
 
   /// this behavior can be changed in subclasses to show special attribute instead of first
   MapEntry<ProductAttribute, List<String>> get topmostOption =>
-      selectedAttributes?.entries?.first;
+    selectedAttributes?.entries?.isNotEmpty ? 
+      selectedAttributes?.entries?.first 
+      : MapEntry<ProductAttribute, List<String>>(
+        ProductAttribute(name: ''),
+        []
+      );
 
   FilterRules copyWithRemovedAttributeValue(
       ProductAttribute attribute, String value) {
