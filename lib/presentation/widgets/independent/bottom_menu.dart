@@ -37,36 +37,54 @@ class OpenFlutterBottomMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: menuIndex,
-      onTap: (value) {
-        switch (value) {
-          case 0:
-            Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.home);
-            break;
-          case 1:
-            Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.shop);
-            break;
-          case 2:
-            Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart);
-            break;
-          case 3:
-            Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.favourites);
-            break;
-          case 4:
-            Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.profile);
-            break;
-        }
-      },
-      items: [
-        getItem('assets/icons/bottom_menu/home.svg', 'Home', _theme, 0),
-        getItem('assets/icons/bottom_menu/cart.svg', 'Shop', _theme, 1),
-        getItem('assets/icons/bottom_menu/bag.svg', 'Bag', _theme, 2),
-        getItem(
-            'assets/icons/bottom_menu/favorites.svg', 'Favorites', _theme, 3),
-        getItem('assets/icons/bottom_menu/profile.svg', 'Profile', _theme, 4),
-      ],
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+        boxShadow: [
+          BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15.0),
+          topRight: Radius.circular(15.0),
+        ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: menuIndex,
+          onTap: (value) {
+            switch (value) {
+              case 0:
+                Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.home);
+                break;
+              case 1:
+                Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.shop);
+                break;
+              case 2:
+                Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart);
+                break;
+              case 3:
+                Navigator.pushNamed(
+                    context, OpenFlutterEcommerceRoutes.favourites);
+                break;
+              case 4:
+                Navigator.pushNamed(
+                    context, OpenFlutterEcommerceRoutes.profile);
+                break;
+            }
+          },
+          items: [
+            getItem('assets/icons/bottom_menu/home.svg', 'Home', _theme, 0),
+            getItem('assets/icons/bottom_menu/cart.svg', 'Shop', _theme, 1),
+            getItem('assets/icons/bottom_menu/bag.svg', 'Bag', _theme, 2),
+            getItem('assets/icons/bottom_menu/favorites.svg', 'Favorites',
+                _theme, 3),
+            getItem(
+                'assets/icons/bottom_menu/profile.svg', 'Profile', _theme, 4),
+          ],
+        ),
+      ),
     );
   }
 }
