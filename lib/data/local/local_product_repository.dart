@@ -4,7 +4,7 @@ import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 
-class ProductLocalRepository implements ProductRepository {
+class LocalProductRepository implements ProductRepository {
   @override
   Future<Product> getProduct(int id) {
     // TODO: implement getProduct
