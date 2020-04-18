@@ -1,5 +1,9 @@
+import 'dart:collection';
+
+import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/woocommerce/repositories/product_remote_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_result.dart';
@@ -18,25 +22,35 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
       var products = await _findProductsByFilter(params);
 
       if (products != null && products.isNotEmpty) {
-        return ProductsByFilterResult(
+        HashMap<ProductAttribute, List<String>> result = HashMap();
+        products.forEach((product) => 
+          product.selectableAttributes != null ?
+            result.addAll({for (var attribute in product.selectableAttributes) attribute: []})
+            : { }
+          );
+        return ProductsByFilterResult(  
           products,
           products.length,
+          FilterRules(
+            categories: HashMap(),
+            selectedAttributes: result,
+            selectedPriceRange: PriceRange(10, 100))
         );
       }
 
     } catch (e) {
       throw EmptyProductsException();
     }
-    return ProductsByFilterResult([],0);
+    return ProductsByFilterResult([],0, FilterRules());
   }
 
   Future<List<Product>> _findProductsByFilter(
       ProductsByFilterParams params) async {
     List<Product> products;
     if (params.filterByCategory) {
-      RemoteProductRepository productRepository = sl();
+      ProductRepository productRepository = sl();
       products =
-          await productRepository.getProducts(categoryId: params.category.id);
+          await productRepository.getProducts(categoryId: params.categoryId);
     }
     return products;
   }
