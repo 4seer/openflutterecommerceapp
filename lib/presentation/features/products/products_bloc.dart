@@ -65,7 +65,7 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
         ProductsByFilterParams(
           categoryId: categoryId,
-          filterRules: state.filterRules,
+          filterRules: event.filterRules,
           sortBy: state.sortBy
         ));
       final List<Product> filteredData = productResults.products;
