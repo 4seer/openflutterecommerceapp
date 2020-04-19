@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,11 +12,14 @@ import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/abstract/user_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/fake_product_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/fake_user_repository.dart';
-import 'package:openflutterecommerce/presentation/features/forget_password/forget_password_screen.dart';
-import 'package:openflutterecommerce/presentation/features/sign_in/sign_in.dart';
+import 'package:openflutterecommerce/data/network/network_status.dart';
+import 'package:openflutterecommerce/data/woocommerce/repositories/remote_product_repository.dart';
+import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/presentation/features/filters/filters_screen.dart';
+import 'package:openflutterecommerce/presentation/features/forget_password/forget_password_screen.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
+import 'package:openflutterecommerce/presentation/features/sign_in/sign_in.dart';
 import 'package:openflutterecommerce/presentation/features/sign_in/signin_screen.dart';
 import 'package:openflutterecommerce/presentation/features/sign_up/signup_screen.dart';
 import 'package:openflutterecommerce/presentation/features/splash_screen.dart';
@@ -26,16 +30,14 @@ import 'data/abstract/category_repository.dart';
 import 'data/fake_model/fake_cart_repository.dart';
 import 'data/fake_model/fake_category_repository.dart';
 import 'presentation/features/authentication/authentication.dart';
-import 'presentation/features/forget_password/forget_password.dart';
-import 'presentation/features/sign_up/sign_up_bloc.dart';
 import 'presentation/features/cart/cart.dart';
 import 'presentation/features/categories/categories.dart';
 import 'presentation/features/checkout/checkout.dart';
 import 'presentation/features/favorites/favorites.dart';
+import 'presentation/features/forget_password/forget_password.dart';
 import 'presentation/features/home/home.dart';
 import 'presentation/features/profile/profile.dart';
-
-import 'locator.dart' as service_locator;
+import 'presentation/features/sign_up/sign_up_bloc.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -58,8 +60,6 @@ class SimpleBlocDelegate extends BlocDelegate {
 }
 
 void main() async {
-  await service_locator.init();
-
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',
     supportedLocales: ['en_US', 'de', 'fr'],
@@ -67,6 +67,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = SimpleBlocDelegate();
+  final ProductRepository productRepository = RemoteProductRepository();
   runApp(
     BlocProvider<AuthenticationBloc>(
       create: (context) => AuthenticationBloc()..add(AppStarted()),
@@ -76,7 +77,13 @@ void main() async {
             create: (context) => FakeCategoryRepository(),
           ),
           RepositoryProvider<ProductRepository>(
-            create: (context) => FakeProductRepository(),
+            create: (context) => productRepository,
+          ),
+          RepositoryProvider<NetworkStatus>(
+            create: (context) => NetworkStatusImpl(DataConnectionChecker()),
+          ),
+          RepositoryProvider<FindProductsByFilterUseCase>(
+            create: (context) => FindProductsByFilterUseCaseImpl(productRepository),
           ),
           RepositoryProvider<FavoritesRepository>(
             create: (context) => FakeProductRepository(),

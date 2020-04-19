@@ -2,6 +2,20 @@ class SortRules {
   final SortOrder sortOrder;
   final SortType sortType;
 
+  String get jsonRuleName {
+    switch (sortType) {
+      case SortType.DateAdded:
+        return 'date';
+      case SortType.Reviewed:
+        return 'date'; //TODO change something about it
+      case SortType.Price:
+        return 'date'; //TODO change something about it
+      case SortType.Popularity:
+      default:
+        return 'date'; //TODO change something about it
+    }
+  }
+
   const SortRules(
       {this.sortOrder = SortOrder.FromHighestToLowest,
       this.sortType = SortType.DateAdded});
@@ -15,6 +29,9 @@ class SortRules {
           SortRules(
               sortType: sortType, sortOrder: SortOrder.FromLowestToHighest),
         ]));
+
+  String get jsonOrder =>
+      sortOrder == SortOrder.FromLowestToHighest ? 'asc' : 'desc';
 
   String getSortTitle() {
     switch (sortType) {

@@ -1,18 +1,19 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
-import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/woocommerce/models/product_model.dart';
-import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
+import 'package:openflutterecommerce/data/woocommerce/network_request.dart';
 
 class RemoteProductRepository extends ProductRepository {
-  
-  final WoocommercWrapperAbastract woocommerce;
+  final http.Client client;
 
-  RemoteProductRepository({@required this.woocommerce});
+  RemoteProductRepository({http.Client client})
+      : this.client = client ?? http.Client();
 
   @override
   Future<Product> getProduct(int id) {
@@ -38,22 +39,18 @@ class RemoteProductRepository extends ProductRepository {
       {int pageIndex = 0,
       int pageSize = AppConsts.page_size,
       int categoryId = 0,
-      bool isFavorite = false,
       SortRules sortRules = const SortRules(),
       FilterRules filterRules}) async {
     // TODO: implement getProducts
-    try
-    {
-      List<dynamic> productsData = await woocommerce.getProductList();
-      List<Product> products = [];
-      for(int i = 0; i < productsData.length; i++){
-        products.add(
-          Product.fromEntity(ProductModel.fromJson(productsData[i]))
-        );
-      }
-      return products;
-    } on HttpRequestException {
-      throw RemoteServerException();
+
+    List<dynamic> productsData = jsonDecode((await NetworkRequest.productList(
+                client, pageIndex, pageSize, categoryId, filterRules, sortRules)
+            .getResult())
+        .body);
+    List<Product> products = [];
+    for (int i = 0; i < productsData.length; i++) {
+      products.add(Product.fromEntity(ProductModel.fromJson(productsData[i])));
     }
+    return products;
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
+import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/size_changing_app_bar.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/error_dialog.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
@@ -39,6 +40,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           create: (context) {
             return ProductsBloc(
                 categoryId: widget.parameters.categoryId,
+                findProductsByFilterUseCase: RepositoryProvider.of<FindProductsByFilterUseCase>(context),
                 categoryRepository:
                     RepositoryProvider.of<CategoryRepository>(context),
                 favoritesRepository:

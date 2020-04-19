@@ -12,8 +12,8 @@ import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_result.dart';
-import 'package:openflutterecommerce/locator.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
+
 import 'bloc_list_data.dart';
 
 class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
@@ -27,8 +27,9 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
     @required this.categoryId,
     @required this.categoryRepository,
     @required this.favoritesRepository,
+    @required this.findProductsByFilterUseCase,
     @required this.hashtagRepository,
-  }) : findProductsByFilterUseCase = sl();
+  });
 
   @override
   ProductsState get initialState => ProductsListViewState();
@@ -38,9 +39,7 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
     if (event is ScreenLoadedEvent) {
       ProductListData data = await getInitialStateData(categoryId);
       yield ProductsListViewState(
-          sortBy: SortRules(),
-          data: data,
-          filterRules: data.filterRules);
+          sortBy: SortRules(), data: data, filterRules: data.filterRules);
     } else if (event is ProductsChangeViewEvent) {
       if (state is ProductsListViewState) {
         yield (state as ProductsListViewState).getTiles();
@@ -49,12 +48,11 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       }
     } else if (event is ProductChangeSortRulesEvent) {
       yield state.getLoading();
-      ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
-        ProductsByFilterParams(
-          categoryId: categoryId,
-          filterRules: state.filterRules,
-          sortBy: event.sortBy
-        ));
+      ProductsByFilterResult productResults =
+          await findProductsByFilterUseCase.execute(ProductsByFilterParams(
+              categoryId: categoryId,
+              filterRules: state.filterRules,
+              sortBy: event.sortBy));
       final List<Product> filteredData = productResults.products;
       yield state.copyWith(
         sortBy: event.sortBy,
@@ -62,12 +60,11 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       );
     } else if (event is ProductChangeFilterRulesEvent) {
       yield state.getLoading();
-      ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
-        ProductsByFilterParams(
-          categoryId: categoryId,
-          filterRules: state.filterRules,
-          sortBy: state.sortBy
-        ));
+      ProductsByFilterResult productResults =
+          await findProductsByFilterUseCase.execute(ProductsByFilterParams(
+              categoryId: categoryId,
+              filterRules: state.filterRules,
+              sortBy: state.sortBy));
       final List<Product> filteredData = productResults.products;
       yield state.copyWith(
           filterRules: event.filterRules,
@@ -92,11 +89,8 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   }
 
   Future<ProductListData> getInitialStateData(int categoryId) async {
-    ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
-      ProductsByFilterParams(
-        categoryId: categoryId
-      )
-    );
+    ProductsByFilterResult productResults = await findProductsByFilterUseCase
+        .execute(ProductsByFilterParams(categoryId: categoryId));
     return ProductListData(
         productResults.products,
         hashtagRepository.getHashtags(),
