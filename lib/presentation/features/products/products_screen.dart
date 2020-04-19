@@ -4,10 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/abstract/category_repository.dart';
-import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
-import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
-import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/size_changing_app_bar.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/error_dialog.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
@@ -36,19 +32,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         child: OpenFlutterScaffold(
       background: null,
       title: null,
-      body: BlocProvider<ProductsBloc>(
-          create: (context) {
-            return ProductsBloc(
-                categoryId: widget.parameters.categoryId,
-                findProductsByFilterUseCase: RepositoryProvider.of<FindProductsByFilterUseCase>(context),
-                categoryRepository:
-                    RepositoryProvider.of<CategoryRepository>(context),
-                favoritesRepository:
-                    RepositoryProvider.of<FavoritesRepository>(context),
-                hashtagRepository: HashtagRepository())
-              ..add(ScreenLoadedEvent());
-          },
-          child: BlocConsumer<ProductsBloc, ProductsState>(
+      body: BlocConsumer<ProductsBloc, ProductsState>(
             listener: (context, state) {
               if (state.hasError) {
                 ErrorDialog.showErrorDialog(context, state.error);
@@ -58,7 +42,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               return CustomScrollView(
                 slivers: <Widget>[
                   SizeChangingAppBar(
-                    title: state.data?.category?.name??'',
+                    title: state.data?.category?.name ?? '',
                     filterRules: state.filterRules,
                     sortRules: state.sortBy,
                     isListView: state is ProductsListViewState,
@@ -81,7 +65,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 ],
               );
             },
-          )),
+          ),
       bottomMenuIndex: 1,
     ));
   }

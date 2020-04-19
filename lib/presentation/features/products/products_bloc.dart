@@ -29,7 +29,9 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
     @required this.favoritesRepository,
     @required this.findProductsByFilterUseCase,
     @required this.hashtagRepository,
-  });
+  }) {
+    add(ScreenLoadedEvent());
+  }
 
   @override
   ProductsState get initialState => ProductsListViewState();

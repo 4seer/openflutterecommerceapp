@@ -29,6 +29,7 @@ import 'data/abstract/cart_repository.dart';
 import 'data/abstract/category_repository.dart';
 import 'data/fake_model/fake_cart_repository.dart';
 import 'data/fake_model/fake_category_repository.dart';
+import 'data/fake_model/hashtag_repository.dart';
 import 'presentation/features/authentication/authentication.dart';
 import 'presentation/features/cart/cart.dart';
 import 'presentation/features/categories/categories.dart';
@@ -83,7 +84,8 @@ void main() async {
             create: (context) => NetworkStatusImpl(DataConnectionChecker()),
           ),
           RepositoryProvider<FindProductsByFilterUseCase>(
-            create: (context) => FindProductsByFilterUseCaseImpl(productRepository),
+            create: (context) =>
+                FindProductsByFilterUseCaseImpl(productRepository),
           ),
           RepositoryProvider<FavoritesRepository>(
             create: (context) => FakeProductRepository(),
@@ -194,9 +196,21 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
       final ProductListScreenParameters productListScreenParameters =
           settings.arguments;
       return MaterialPageRoute(builder: (context) {
-        return ProductsScreen(
+        return BlocProvider<ProductsBloc>(
+            create: (context) {
+          return ProductsBloc(
+              categoryId: productListScreenParameters.categoryId,
+              findProductsByFilterUseCase:
+              RepositoryProvider.of<FindProductsByFilterUseCase>(context),
+              categoryRepository:
+              RepositoryProvider.of<CategoryRepository>(context),
+              favoritesRepository:
+              RepositoryProvider.of<FavoritesRepository>(context),
+              hashtagRepository: HashtagRepository());
+        },
+        child: ProductsScreen(
           parameters: productListScreenParameters,
-        );
+        ),);
       });
     } else if (settings.name == OpenFlutterEcommerceRoutes.product) {
       final ProductDetailsParameters parameters = settings.arguments;
