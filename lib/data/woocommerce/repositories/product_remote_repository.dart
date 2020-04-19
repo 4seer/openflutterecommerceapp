@@ -7,6 +7,7 @@ import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/woocommerce/models/product_model.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
+import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 
 class RemoteProductRepository extends ProductRepository {
   
@@ -21,7 +22,7 @@ class RemoteProductRepository extends ProductRepository {
   }
 
   @override
-  Future<List<Product>> getSimilarProducts(int categoryI,
+  Future<List<Product>> getSimilarProducts(int categoryId,
       {int pageIndex = 0, int pageSize = AppConsts.page_size}) {
     // TODO: implement getSimilarProducts
     throw UnimplementedError();
@@ -44,7 +45,13 @@ class RemoteProductRepository extends ProductRepository {
     // TODO: implement getProducts
     try
     {
-      List<dynamic> productsData = await woocommerce.getProductList();
+      List<dynamic> productsData = await woocommerce.getProductList(
+        ProductsByFilterParams(
+          categoryId: categoryId,
+          sortBy: sortRules, 
+          filterRules: filterRules, 
+        )
+      );
       List<Product> products = [];
       for(int i = 0; i < productsData.length; i++){
         products.add(

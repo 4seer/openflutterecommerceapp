@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:openflutterecommerce/config/server_addresses.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
+import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 
 abstract class WoocommercWrapperAbastract{
    Future<List<dynamic>> getCategoryList({int parentId=0});
-   Future<List<dynamic>> getProductList({int categoryId=0});
+   Future<List<dynamic>> getProductList(ProductsByFilterParams params);
 }
 
 class WoocommerceWrapper implements WoocommercWrapperAbastract{
@@ -17,7 +18,8 @@ class WoocommerceWrapper implements WoocommercWrapperAbastract{
   WoocommerceWrapper({@required this.client});
 
   @override
-  Future<List<dynamic>> getProductList({int categoryId=0}){
+  Future<List<dynamic>> getProductList(ProductsByFilterParams params){
+    //TODO: make remote request using all paramaters
     return _getApiRequest(ServerAddresses.products);
   }
   @override
