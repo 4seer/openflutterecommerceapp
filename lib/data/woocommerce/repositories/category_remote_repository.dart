@@ -5,9 +5,8 @@ import 'package:openflutterecommerce/data/woocommerce/models/product_category_mo
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 
 abstract class CategoryRepository {
-  Future<List<Category>> getCategories({int parentCategoryId = 0});    
-}   
-
+  Future<List<Category>> getCategories({int parentCategoryId = 0});
+}
 
 class RemoteCategoryRepository extends CategoryRepository {
   final WoocommercWrapperAbastract woocommerce;
@@ -16,14 +15,12 @@ class RemoteCategoryRepository extends CategoryRepository {
 
   @override
   Future<List<Category>> getCategories({int parentCategoryId = 0}) async {
-    try
-    {
+    try {
       List<dynamic> categoriesData = await woocommerce.getCategoryList();
-      List<Category> categories = List<Category>();
-      for(int i = 0; i < categoriesData.length; i++){
-        categories.add(
-          Category.fromEntity(ProductCategoryModel.fromJson(categoriesData[i]))
-        );
+      List<Category> categories = [];
+      for (int i = 0; i < categoriesData.length; i++) {
+        categories.add(Category.fromEntity(
+            ProductCategoryModel.fromJson(categoriesData[i])));
       }
       return categories;
     } on HttpRequestException {

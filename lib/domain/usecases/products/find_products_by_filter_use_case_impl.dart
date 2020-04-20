@@ -1,6 +1,5 @@
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
-import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_result.dart';
@@ -13,8 +12,7 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
   );
 
   @override
-  Future<ProductsByFilterResult> execute(
-      ProductsByFilterParams params) async {
+  Future<ProductsByFilterResult> execute(ProductsByFilterParams params) async {
     try {
       var products = await _findProductsByFilter(params);
 
@@ -24,10 +22,10 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
           products.length,
         );
       }
-
     } catch (e) {
       throw EmptyProductsException();
     }
+    return null;
   }
 
   Future<List<Product>> _findProductsByFilter(
