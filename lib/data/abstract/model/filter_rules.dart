@@ -28,7 +28,9 @@ class FilterRules {
 
   /// this behavior can be changed in subclasses to show special attribute instead of first
   MapEntry<ProductAttribute, List<String>> get topmostOption =>
-    selectedAttributes?.entries?.isNotEmpty ? 
+    selectedAttributes != null &&
+    selectedAttributes.entries != null &&
+      selectedAttributes.entries.isNotEmpty ? 
       selectedAttributes?.entries?.first 
       : MapEntry<ProductAttribute, List<String>>(
         ProductAttribute(name: ''),
