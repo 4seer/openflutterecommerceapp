@@ -35,6 +35,8 @@ import 'presentation/features/favorites/favorites.dart';
 import 'presentation/features/home/home.dart';
 import 'presentation/features/profile/profile.dart';
 
+import 'locator.dart' as service_locator;
+
 class SimpleBlocDelegate extends BlocDelegate {
   @override
   void onEvent(Bloc bloc, Object event) {
@@ -56,6 +58,8 @@ class SimpleBlocDelegate extends BlocDelegate {
 }
 
 void main() async {
+  await service_locator.init();
+
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',
     supportedLocales: ['en_US', 'de', 'fr'],

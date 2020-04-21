@@ -8,14 +8,16 @@ import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
+import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
+import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_result.dart';
+import 'package:openflutterecommerce/locator.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
-
 import 'bloc_list_data.dart';
 
 class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
-  final ProductRepository productRepository;
+  final FindProductsByFilterUseCase findProductsByFilterUseCase;
   final CategoryRepository categoryRepository;
   final FavoritesRepository favoritesRepository;
   final HashtagRepository hashtagRepository;
@@ -24,10 +26,9 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   ProductsBloc({
     @required this.categoryId,
     @required this.categoryRepository,
-    @required this.productRepository,
     @required this.favoritesRepository,
     @required this.hashtagRepository,
-  }) : assert(productRepository != null);
+  }) : findProductsByFilterUseCase = sl();
 
   @override
   ProductsState get initialState => ProductsListViewState();
@@ -35,11 +36,11 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   @override
   Stream<ProductsState> mapEventToState(ProductsListEvent event) async* {
     if (event is ScreenLoadedEvent) {
+      ProductListData data = await getInitialStateData(categoryId);
       yield ProductsListViewState(
           sortBy: SortRules(),
-          data: await getInitialStateData(categoryId),
-          filterRules:
-              await productRepository.getPossibleFilterOptions(categoryId));
+          data: data,
+          filterRules: data.filterRules);
     } else if (event is ProductsChangeViewEvent) {
       if (state is ProductsListViewState) {
         yield (state as ProductsListViewState).getTiles();
@@ -48,20 +49,26 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       }
     } else if (event is ProductChangeSortRulesEvent) {
       yield state.getLoading();
-      final List<Product> filteredData = await productRepository.getProducts(
+      ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
+        ProductsByFilterParams(
           categoryId: categoryId,
           filterRules: state.filterRules,
-          sortRules: event.sortBy);
+          sortBy: event.sortBy
+        ));
+      final List<Product> filteredData = productResults.products;
       yield state.copyWith(
         sortBy: event.sortBy,
         data: state.data.copyWith(filteredData),
       );
     } else if (event is ProductChangeFilterRulesEvent) {
       yield state.getLoading();
-      final List<Product> filteredData = await productRepository.getProducts(
+      ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
+        ProductsByFilterParams(
           categoryId: categoryId,
           filterRules: event.filterRules,
-          sortRules: state.sortBy);
+          sortBy: state.sortBy
+        ));
+      final List<Product> filteredData = productResults.products;
       yield state.copyWith(
           filterRules: event.filterRules,
           data: state.data.copyWith(filteredData));
@@ -85,9 +92,15 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   }
 
   Future<ProductListData> getInitialStateData(int categoryId) async {
+    ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
+      ProductsByFilterParams(
+        categoryId: categoryId
+      )
+    );
     return ProductListData(
-        await productRepository.getProducts(categoryId: categoryId),
+        productResults.products,
         hashtagRepository.getHashtags(),
-        await categoryRepository.getCategoryDetails(categoryId));
+        await categoryRepository.getCategoryDetails(categoryId),
+        productResults.filterRules);
   }
 }

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/size_changing_app_bar.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/error_dialog.dart';
@@ -40,8 +39,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
           create: (context) {
             return ProductsBloc(
                 categoryId: widget.parameters.categoryId,
-                productRepository:
-                    RepositoryProvider.of<ProductRepository>(context),
                 categoryRepository:
                     RepositoryProvider.of<CategoryRepository>(context),
                 favoritesRepository:
@@ -59,7 +56,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               return CustomScrollView(
                 slivers: <Widget>[
                   SizeChangingAppBar(
-                    title: state.data?.category?.name,
+                    title: state.data?.category?.name??'',
                     filterRules: state.filterRules,
                     sortRules: state.sortBy,
                     isListView: state is ProductsListViewState,

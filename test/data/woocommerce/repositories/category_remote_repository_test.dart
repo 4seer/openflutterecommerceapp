@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
-import 'package:openflutterecommerce/data/abstract/model/commerce_image.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/network/network_status.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/category_remote_repository.dart';
@@ -19,20 +17,6 @@ void main() {
   MockWoocommerceWrapper woocommerce;
   MockNetworkStatus mockNetworkStatus;
   RemoteCategoryRepository remoteCategoryRepository;
-  
-  final productCategories = [
-    Category(
-      18, 
-      name: 'Albums',
-      parentId: 16,
-      description: 'The best music albums available online.',
-      image: CommerceImage(
-        0,
-        '',//'https://woocommerce.openflutterproject.com/wp-content/uploads/2020/03/cd_4_angle.jpg',
-        ''
-      )
-    )
-  ];
 
   setUp(() {
     woocommerce = MockWoocommerceWrapper();
