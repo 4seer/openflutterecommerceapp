@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/loading_view.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
@@ -33,9 +32,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     return SafeArea(
         child: BlocProvider<CategoryBloc>(
             create: (context) {
-              return CategoryBloc(
-                  categoryRepository:
-                      RepositoryProvider.of<CategoryRepository>(context))
+              return CategoryBloc()
                 ..add(CategoryShowListEvent(widget.parameters == null
                     ? 0
                     : widget.parameters.categoryId));

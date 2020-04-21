@@ -1,3 +1,9 @@
+/// # Find Product by Filter Use Case
+/// 2.2. Display product list use-case: From the category list use clicks 
+/// on a category and gets to the list of products in the list view. 
+/// Complete list of use cases
+/// https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-use-cases-and-features-6b7414a6e708
+
 import 'dart:collection';
 
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
