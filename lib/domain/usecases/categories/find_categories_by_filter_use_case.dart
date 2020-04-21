@@ -18,12 +18,22 @@ abstract class FindCategoriesByFilterUseCase
 class FindCategoriesByFilterUseCaseImpl implements FindCategoriesByFilterUseCase {
   @override
   Future<CategoriesByFilterResult> execute(CategoriesByFilterParams params) async {
-    CategoryRepository _categoryRepository = sl();
-    List<Category> categories = await _categoryRepository.getCategories(parentCategoryId: params.categoryId);
-    return CategoriesByFilterResult(
-      categories,
-      categories.length
-    );
+    try {
+      CategoryRepository _categoryRepository = sl();
+      List<Category> categories = await _categoryRepository.getCategories(parentCategoryId: params.categoryId);
+      return CategoriesByFilterResult(
+        categories,
+        categories.length
+      );
+      
+    } catch (e) {
+      return CategoriesByFilterResult(  
+        null,
+        0,
+        exception: EmptyCategoriesException()
+      );
+    }
   }
-
 }
+
+class EmptyCategoriesException implements Exception {}
