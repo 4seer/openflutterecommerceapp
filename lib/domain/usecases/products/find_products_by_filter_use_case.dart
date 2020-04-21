@@ -14,7 +14,9 @@ import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_result.dart';
 import 'package:openflutterecommerce/locator.dart';
-
+/// FindProductsByFilterUseCase returns ProductsByFilterResult
+/// To check if the results are valid use ProductsByFilterResult.validResults
+/// ProductsByFilterResult.exception contains internal exception
 abstract class FindProductsByFilterUseCase
     implements BaseUseCase<ProductsByFilterResult, ProductsByFilterParams> {}
 
@@ -45,9 +47,19 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
       }
 
     } catch (e) {
-      throw EmptyProductsException();
+      return ProductsByFilterResult(  
+        null,
+        0,
+        null,
+        exception: EmptyProductsException()
+      );
     }
-    return ProductsByFilterResult([],0, FilterRules());
+    return ProductsByFilterResult(  
+      null,
+      0,
+      null,
+      exception: EmptyProductsException()
+    );
   }
 
   Future<List<Product>> _findProductsByFilter(
