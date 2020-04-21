@@ -22,7 +22,7 @@ extension View on Product {
           ? null
           : 'Sorry, this item is currently sold out',
       bottomRoundButton: _getFavoritesButton(onFavoritesClick),
-      image: mainImage.getView(),
+      image: mainImage?.getView(),
       specialMark: specialMark,
       mainContentBuilder: (context) {
         return Column(
@@ -97,9 +97,9 @@ extension View on Product {
 
   Widget buildPrice(ThemeData _theme) {
     return Text(
-      '\$' + price.toStringAsFixed(0),
+      price != null ? '\$' + price.toStringAsFixed(0) : '',
       style: _theme.textTheme.display3.copyWith(
-        decoration: discountPrice > 0
+        decoration: discountPrice!=null && discountPrice > 0
             ? TextDecoration.lineThrough
             : TextDecoration.none,
       ),

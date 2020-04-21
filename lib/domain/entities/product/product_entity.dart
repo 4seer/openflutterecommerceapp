@@ -1,3 +1,4 @@
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
 
 class ProductEntity extends Entity<int> {
@@ -16,24 +17,36 @@ class ProductEntity extends Entity<int> {
   final int rating3Count;
   final int rating4Count;
   final int rating5Count;
+  final List<ProductAttribute> selectableAttributes;
 
   ProductEntity(
     {int id,
     this.title,
     this.image,
     this.thumb,
-    this.price,
-    this.discountPercent,
+    price,
+    discountPercent,
     this.categoryId,
     this.amount,
     this.description,
-    this.isFavourite,
-    this.rating,
-    this.rating1Count,
-    this.rating2Count,
-    this.rating3Count,
-    this.rating4Count,
-    this.rating5Count}) : super(id);
+    this.selectableAttributes,
+    bool isFavourite,
+    rating,
+    rating1Count,
+    rating2Count,
+    rating3Count,
+    rating4Count,
+    rating5Count}) :
+      rating = rating??0,
+      rating1Count = rating1Count??0,
+      rating2Count = rating2Count??0,
+      rating3Count = rating3Count??0,
+      rating4Count = rating4Count??0,
+      rating5Count = rating5Count??0,
+      isFavourite = isFavourite??false,
+      discountPercent = discountPercent??0,
+      price = price??0,
+      super(id);
 
   @override
   Map<String, dynamic> toMap() {

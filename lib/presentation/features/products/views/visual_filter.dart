@@ -18,6 +18,26 @@ class VisualFilter extends StatelessWidget {
       return ListView.builder(
           scrollDirection: Axis.horizontal, itemBuilder: _blankChip);
     } else {
+      List<Widget> widgetList = attribute?.key?.options
+        ?.map((optionText) => Padding(
+              padding: EdgeInsets.only(right: AppSizes.sidePadding / 2),
+              child: ChoiceChip(
+                selected: attribute.value.contains(optionText),
+                padding: EdgeInsets.all(
+                  AppSizes.linePadding,
+                ),
+                backgroundColor: Theme.of(context).primaryColor,
+                label: Text(
+                  optionText,
+                  style: Theme.of(context).textTheme.button,
+                ),
+                onSelected: (value) {
+                  onFilterChanged(optionText, value);
+                },
+              ),
+            ))
+        ?.toList(growable: false) ?? [];
+        
       return ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
@@ -25,25 +45,8 @@ class VisualFilter extends StatelessWidget {
                 width: 16,
               )
             ] +
-            attribute.key.options
-                .map((optionText) => Padding(
-                      padding: EdgeInsets.only(right: AppSizes.sidePadding / 2),
-                      child: ChoiceChip(
-                        selected: attribute.value.contains(optionText),
-                        padding: EdgeInsets.all(
-                          AppSizes.linePadding,
-                        ),
-                        backgroundColor: Theme.of(context).primaryColor,
-                        label: Text(
-                          optionText,
-                          style: Theme.of(context).textTheme.button,
-                        ),
-                        onSelected: (value) {
-                          onFilterChanged(optionText, value);
-                        },
-                      ),
-                    ))
-                .toList(growable: false) +
+            widgetList
+            +
             [
               SizedBox(
                 width: 16,

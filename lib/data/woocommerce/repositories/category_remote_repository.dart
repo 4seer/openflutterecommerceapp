@@ -28,7 +28,6 @@ class RemoteCategoryRepository extends CategoryRepository {
     }
   }
 
-  @override
   Future<Category> getCategoryDetails(int categoryId) {
     // TODO: implement getCategoryDetails
     return null;

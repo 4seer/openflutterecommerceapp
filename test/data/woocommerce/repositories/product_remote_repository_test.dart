@@ -4,26 +4,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/network/network_status.dart';
-import 'package:openflutterecommerce/data/woocommerce/repositories/category_remote_repository.dart';
+import 'package:openflutterecommerce/data/woocommerce/repositories/product_remote_repository.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
-class MockWoocommerceWrapper extends Mock
-    implements WoocommercWrapperAbastract {}
+class MockWoocommerceWrapper extends Mock implements WoocommercWrapperAbastract { }
 
 class MockNetworkStatus extends Mock implements NetworkStatus {}
 
 void main() {
   MockWoocommerceWrapper woocommerce;
   MockNetworkStatus mockNetworkStatus;
-  RemoteCategoryRepository remoteCategoryRepository;
+  RemoteProductRepository remoteProductRepository;
 
   setUp(() {
     woocommerce = MockWoocommerceWrapper();
     mockNetworkStatus = MockNetworkStatus();
-    remoteCategoryRepository =
-        RemoteCategoryRepository(woocommerce: woocommerce);
+    remoteProductRepository = RemoteProductRepository(woocommerce: woocommerce);
   });
 
   void runTestsOnline(Function body) {
@@ -36,33 +34,35 @@ void main() {
     });
   }
 
-  group('Get list of categories ', () {
+  group('Get list of products ', () {
     runTestsOnline(() async {
       test(
-        'should return list of categories when getCategories is successful',
+        'should return list of products when getProducts is successful',
         () async {
           // arrange
-          when(woocommerce.getCategoryList()).thenAnswer(
-              (_) async => json.decode(fixture('woocommerce/categories.json')));
+          when(woocommerce.getProductList(any))
+            .thenAnswer((_) async => json.decode(fixture('woocommerce/products.json'))
+          );
           // act
-          final categories = await remoteCategoryRepository.getCategories();
+          final products = await remoteProductRepository.getProducts();
           // assert
-          expect(categories.length, equals(2));
+          expect(products.length, equals(10));
         },
       );
 
       test(
-        'should return server failure when getCategories is unsuccessful',
+        'should return server failure when getProducts is unsuccessful',
         () async {
           // arrange
-          when(woocommerce.getCategoryList()).thenThrow(HttpRequestException());
+          when(woocommerce.getProductList(any))
+              .thenThrow(HttpRequestException());
           // act
           // assert
-          //verify(woocommerce.getCategoryList());
-          expect(() => remoteCategoryRepository.getCategories(),
-              throwsA(isInstanceOf<RemoteServerException>()));
+          expect(() => remoteProductRepository.getProducts(), throwsA(isInstanceOf<RemoteServerException>()));
         },
       );
     });
   });
+  
 }
+    

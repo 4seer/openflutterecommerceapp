@@ -39,7 +39,8 @@ dependencies:
   font_awesome_flutter: 8.7.0
   # check internet connection availability
   data_connection_checker: ^0.3.4
-
+  get_it: 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

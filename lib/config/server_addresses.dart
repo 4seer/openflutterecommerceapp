@@ -14,4 +14,5 @@ class ServerAddresses {
 
   //CACHED API (for test purposes only)
   static const productCategories= '/cachedapi/v3/products/categories.json';
+  static const products= '/cachedapi/v3/products/products.json';
 }

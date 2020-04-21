@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -35,6 +36,8 @@ import 'presentation/features/favorites/favorites.dart';
 import 'presentation/features/home/home.dart';
 import 'presentation/features/profile/profile.dart';
 
+import 'locator.dart' as service_locator;
+
 class SimpleBlocDelegate extends BlocDelegate {
   @override
   void onEvent(Bloc bloc, Object event) {
@@ -56,12 +59,19 @@ class SimpleBlocDelegate extends BlocDelegate {
 }
 
 void main() async {
+  await service_locator.init();
+
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',
     supportedLocales: ['en_US', 'de', 'fr'],
   );
 
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(
     BlocProvider<AuthenticationBloc>(
