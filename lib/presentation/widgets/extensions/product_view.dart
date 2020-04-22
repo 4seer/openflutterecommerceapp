@@ -76,8 +76,10 @@ extension View on Product {
 
   Widget _getFavoritesButton(VoidCallback onFavoritesClick) {
     return FloatingActionButton(
-      heroTag: Random().nextInt(
-          1000000), //TODO make sure that there is only one product with specified id on screen and use it as a tag
+      heroTag: title +
+          Random()
+              .nextInt(1000000)
+              .toString(), //TODO make sure that there is only one product with specified id on screen and use it as a tag
       mini: true,
       backgroundColor: AppColors.white,
       onPressed: onFavoritesClick,
@@ -99,7 +101,7 @@ extension View on Product {
     return Text(
       price != null ? '\$' + price.toStringAsFixed(0) : '',
       style: _theme.textTheme.display3.copyWith(
-        decoration: discountPrice!=null && discountPrice > 0
+        decoration: discountPrice != null && discountPrice > 0
             ? TextDecoration.lineThrough
             : TextDecoration.none,
       ),
