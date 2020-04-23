@@ -7,7 +7,7 @@ import 'package:openflutterecommerce/data/woocommerce/repositories/product_remot
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 import 'package:openflutterecommerce/domain/usecases/categories/find_categories_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
-import 'package:openflutterecommerce/domain/usecases/products/get_roducts_by_id_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/products/get_product_by_id_use_case.dart';
 
 final sl = GetIt.instance;
 
