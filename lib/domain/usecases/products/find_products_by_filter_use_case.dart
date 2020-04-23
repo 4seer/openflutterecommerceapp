@@ -48,14 +48,14 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
 
     } catch (e) {
       return ProductsByFilterResult(  
-        null,
+        [],
         0,
         null,
         exception: EmptyProductsException()
       );
     }
     return ProductsByFilterResult(  
-      null,
+      [],
       0,
       null,
       exception: EmptyProductsException()

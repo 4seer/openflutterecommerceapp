@@ -26,15 +26,16 @@ class ProductsListView extends StatelessWidget {
               );
             } else {
               return Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-                  child: state.data.products[index].getListView(
+                padding:
+                  EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
+                child: state.data.products[index].getListView(
                     context: context,
                     showProductInfo: () {
                       Navigator.of(context).pushNamed(
                           OpenFlutterEcommerceRoutes.product,
                           arguments: ProductDetailsParameters(
-                              state.data.products[index].id));
+                            state.data.products[index].id,
+                            state.data.category.id));
                     },
                     onFavoritesClick: () {
                       BlocProvider.of<ProductsBloc>(context).add(
@@ -42,7 +43,7 @@ class ProductsListView extends StatelessWidget {
                               !state.data.products[index].isFavorite,
                               state.data.products[index].id));
                     },
-                  ));
+                  )) ;
             }
           },
           childCount: state.data?.products?.length ?? 20,
