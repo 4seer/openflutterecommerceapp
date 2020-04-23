@@ -29,6 +29,7 @@ extension View on Product {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(title, style: Theme.of(context).textTheme.display1),
+            Text(subTitle, style: Theme.of(context).textTheme.body1),
             buildRating(context),
             buildPrice(Theme.of(context)),
           ],
@@ -60,12 +61,6 @@ extension View on Product {
               Row(
                 children: <Widget>[
                   buildPrice(Theme.of(context)),
-                  SizedBox(
-                    width: 8.0,
-                  ),
-                  discountPercent == null
-                      ? Container()
-                      : buildDiscountPrice(Theme.of(context)),
                 ],
               )
             ],
@@ -96,13 +91,23 @@ extension View on Product {
   }
 
   Widget buildPrice(ThemeData _theme) {
-    return Text(
-      price != null ? '\$' + price.toStringAsFixed(0) : '',
-      style: _theme.textTheme.display3.copyWith(
-        decoration: discountPrice!=null && discountPrice > 0
-            ? TextDecoration.lineThrough
-            : TextDecoration.none,
-      ),
+    return Row(
+      children: <Widget>[
+        Text(
+          price != null ? '\$' + price.toStringAsFixed(0) : '',
+          style: _theme.textTheme.display3.copyWith(
+            decoration: hasDiscountPrice
+                ? TextDecoration.lineThrough
+                : TextDecoration.none,
+          ),
+        ),
+        SizedBox(
+          width: 4.0,
+        ),
+        hasDiscountPrice 
+          ? buildDiscountPrice(_theme)
+          : Container(),
+      ]
     );
   }
 
@@ -121,7 +126,10 @@ extension View on Product {
 
   Widget buildDiscountPrice(ThemeData _theme) {
     return Text('\$' + discountPrice.toStringAsFixed(0),
-        style: _theme.textTheme.display3.copyWith(color: _theme.errorColor));
+      style: _theme.textTheme.display3.copyWith(
+        color: _theme.errorColor
+      )
+    );
   }
 }
 
@@ -165,9 +173,6 @@ extension FavoriteView on FavoriteProduct {
             Row(
               children: <Widget>[
                 product.buildPrice(Theme.of(context)),
-                product.discountPercent == null
-                    ? Container()
-                    : product.buildDiscountPrice(Theme.of(context)),
                 Padding(
                   padding: EdgeInsets.only(left: AppSizes.linePadding),
                 ),
@@ -219,9 +224,6 @@ extension FavoriteView on FavoriteProduct {
               Row(
                 children: <Widget>[
                   product.buildPrice(Theme.of(context)),
-                  product.discountPercent == null
-                      ? Container()
-                      : product.buildDiscountPrice(Theme.of(context)),
                   Padding(
                     padding: EdgeInsets.only(left: AppSizes.linePadding),
                   ),

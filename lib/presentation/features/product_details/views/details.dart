@@ -29,20 +29,20 @@ class ProductDetailsView extends StatefulWidget {
       @required this.similarProducts,
       this.category,
       this.hasReviews = false})
-      : super(key: key);
+      : assert(product!=null),
+       super(key: key);
 
   @override
   _ProductDetailsViewState createState() => _ProductDetailsViewState();
 }
 
 class _ProductDetailsViewState extends State<ProductDetailsView> {
-  List<int> list = [1, 2, 3, 4, 5];
   Orientation orientation;
   bool favorite;
 
   @override
   void initState() {
-    favorite = widget.product.isFavorite;
+    favorite = widget.product?.isFavorite??false;
     super.initState();
   }
 
@@ -81,13 +81,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         Container(
                           height: deviceHeight * 0.52,
                           child: ListView.builder(
-                            itemBuilder: (context, index) => Image.asset(
-                              'assets/images/products/shortdress.png',
-                              width: deviceWidth * 0.75,
-                              height: deviceHeight * 0.52,
+                            itemBuilder: (context, index) => Padding(
+                              padding: EdgeInsets.only(right: AppSizes.sidePadding),
+                              child: Image.network(
+                                state.product.images[index].address
+                              )
                             ),
                             scrollDirection: Axis.horizontal,
-                            itemCount: list.length,
+                            itemCount: state.product.images.length,
                           ),
                         ),
                         Container(
@@ -96,7 +97,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
-                              children: state.product.selectableAttributes
+                              children: 
+                                 (state.product.selectableAttributes != null ?
+                                   state.product.selectableAttributes
                                       .map((value) => selectionOutlineButton(
                                           deviceWidth,
                                           value,
@@ -104,13 +107,13 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                               ? null
                                               : state
                                                   .selectedAttributes[value]))
-                                      .toList() +
+                                      .toList() : List<Widget>()) +
                                   [
                                     OpenFlutterFavouriteButton(
                                       favourite: favorite,
                                       setFavourite: () => {setFavourite(bloc)},
                                     )
-                                  ]),
+                                  ]) ,
                         ),
                         productDetails(_theme),
                         //Function call for Product detail widget

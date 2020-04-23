@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
 
 class OpenFlutterExpansionTile extends StatelessWidget {
   final String title, description;
