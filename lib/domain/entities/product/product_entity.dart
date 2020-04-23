@@ -54,10 +54,12 @@ class ProductEntity extends Entity<int> {
     return {
       'id': id,
       'title': title,
+      //TODO: serialize all images and add tests
       'image': images.isNotEmpty?images[0]:'',
       'thumb': thumb,
       'price': price,
       'discountPercent': discountPercent,
+      //TODO: serialize all categoryIds and add tests
       'categoryId': categoryIds.isNotEmpty?categoryIds[0]:0,
       'amount': amount,
       'description': description,
