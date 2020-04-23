@@ -3,10 +3,11 @@ import 'package:openflutterecommerce/domain/entities/entity.dart';
 
 class ProductEntity extends Entity<int> {
   final String title;
+  final String subTitle;
   final List<String> images;
   final String thumb;
   final double price;
-  final double discountPercent;
+  final int discountPercent;
   final List<int> categoryIds;
   final int amount;
   final String description;
@@ -22,6 +23,7 @@ class ProductEntity extends Entity<int> {
   ProductEntity(
     {int id,
     this.title,
+    this.subTitle,
     this.images,
     this.thumb,
     price,
@@ -45,7 +47,7 @@ class ProductEntity extends Entity<int> {
       rating5Count = rating5Count??0,
       isFavourite = isFavourite??false,
       discountPercent = discountPercent??0,
-      price = price??0,
+      price = (price??0).toDouble(),
       categoryIds = categoryIds??[],
       super(id);
 

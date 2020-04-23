@@ -10,11 +10,13 @@ import 'product_attribute.dart';
 class Product extends Equatable {
   final int id;
   final String title;
+  //cateogry or hashtag to display next to title
+  final String subTitle;
   final String shortDescription;
   final String description;
   final bool isFavorite;
   final double price;
-  final double discountPercent;
+  final int discountPercent;
   final int amountAvailable;
   final DateTime created;
   final double averageRating;
@@ -25,12 +27,14 @@ class Product extends Equatable {
   final double rating5Count;
   final int ratingCount;
   final List<CommerceImage> images;
+  final List<int> categoryIds;
   final Map<String, dynamic> properties;
   final List<ProductAttribute> selectableAttributes;
 
   Product(
-    this.id,{
+    this.id, {
     @required this.title,
+    @required this.subTitle,
     this.shortDescription,
     this.description,
     @required this.price,
@@ -47,12 +51,14 @@ class Product extends Equatable {
     this.images,
     this.properties,
     this.selectableAttributes,
+    @required this.categoryIds,
     this.isFavorite = false,
   }) : created = created ?? DateTime.now();
 
   Product favorite(bool isFavorite) {
     return Product(id,
         title: title,
+        subTitle: subTitle,
         shortDescription: shortDescription,
         description: description,
         price: price,
@@ -67,6 +73,7 @@ class Product extends Equatable {
         rating4Count: rating4Count,
         rating5Count: rating5Count,
         images: images,
+        categoryIds: categoryIds,
         selectableAttributes: selectableAttributes,
         isFavorite: isFavorite??false);
   }
@@ -75,9 +82,14 @@ class Product extends Equatable {
   @override
   factory Product.fromEntity(Entity entity) {
     if ( entity is ProductEntity ) {
+      List<CommerceImage> images = [];
+      if ( entity.images.isNotEmpty ) {
+        entity.images.forEach((f) => images.add(CommerceImage(0, f, '')));
+      }
       return Product(
         entity.id, 
         title: entity.title,
+        subTitle: entity.subTitle,
         shortDescription: entity.description,
         description: entity.description,
         price: entity.price ?? 0,
@@ -85,8 +97,10 @@ class Product extends Equatable {
         amountAvailable: entity.amount,
         //TODO: created - do we need this attribute in the model?
         averageRating: entity.rating,
+        categoryIds: entity.categoryIds,
         ratingCount: entity.rating1Count + entity.rating2Count + entity.rating3Count + entity.rating4Count + entity.rating5Count,
         //TODO: add images images: [],
+        images: images,
         //TODO: add selectable attributes selectableAttributes: [],
         isFavorite: entity.isFavourite,
       );
@@ -118,8 +132,10 @@ class Product extends Equatable {
 
   bool get hasRating => averageRating != null;
 
+  bool get hasDiscountPrice => discountPercent > 0;
+
   double get discountPrice {
-    return (price ?? 0 * (100 - discountPercent) / 100).roundToDouble();
+    return ((price ?? 0) * (100 - discountPercent) / 100).roundToDouble();
   }
 
   //TODO place it in extension because it is about UI
