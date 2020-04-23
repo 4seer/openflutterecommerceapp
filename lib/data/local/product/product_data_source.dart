@@ -12,11 +12,12 @@ class ProductDataSource extends DataSource {
       return ProductEntity(
         id: maps[i]['id'],
         title: maps[i]['title'],
-        image: maps[i]['image'],
+        images: [maps[i]['image']],
         thumb: maps[i]['thumb'],
         price: maps[i]['price'],
         discountPercent: maps[i]['discountPercent'],
-        categoryId: maps[i]['categoryId'],
+        //TODO: get full list of categories
+        categoryIds: (maps[i]['categoryId'] as num).toInt()!=0? [maps[i]['categoryId']]:[],
         amount: maps[i]['amount'],
         description: maps[i]['description'],
         isFavourite: maps[i]['isFavourite'].toString() == '1',
@@ -40,11 +41,11 @@ class ProductDataSource extends DataSource {
     return ProductEntity(
       id: maps[0]['id'],
       title: maps[0]['title'],
-      image: maps[0]['image'],
+      images: [maps[0]['image']],
       thumb: maps[0]['thumb'],
       price: maps[0]['price'],
       discountPercent: maps[0]['discountPercent'],
-      categoryId: maps[0]['categoryId'],
+      categoryIds: (maps[0]['categoryId'] as num).toInt()!=0? [maps[0]['categoryId']]:[],
       amount: maps[0]['amount'],
       description: maps[0]['description'],
       isFavourite: maps[0]['isFavourite'].toString() == '1',

@@ -9,7 +9,7 @@ class ProductModel extends ProductEntity {
     {@required int id,
     @required title,
     @required description,
-    @required image,
+    @required images,
     @required thumb,
     @required selectableAttributes,
     categoryId,
@@ -19,7 +19,7 @@ class ProductModel extends ProductEntity {
       title: title,
       description: description,
       selectableAttributes: selectableAttributes,
-      image: image,
+      images: images,
       thumb: thumb
     );
       
@@ -28,7 +28,7 @@ class ProductModel extends ProductEntity {
       id: (json['id'] as num).toInt(), 
       title: json['name'],
       description: json['description'],
-      image: json['image']!=null ? json['image']['src'] : '',
+      images: json['image']!=null ? [json['image']['src']] : [],
       thumb: json['image']!=null ? json['image']['src'] : '',
       //TODO: add all categories related to product
       categoryId: json['categories']!=null? (json['categories'][0]['id'] as num).toInt():0, 
@@ -61,7 +61,7 @@ class ProductModel extends ProductEntity {
       'name': title,
       'description': description,
       'image': {
-        'src': image,
+        'src': images.isNotEmpty?images[0]:'',
       }
     };
   }
