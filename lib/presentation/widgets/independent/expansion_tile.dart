@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/config/theme.dart';
 
 class OpenFlutterExpansionTile extends StatelessWidget {
   final String title, description;
@@ -17,6 +18,7 @@ class OpenFlutterExpansionTile extends StatelessWidget {
       children: <Widget>[
         Container(
           margin: EdgeInsets.only(left: 16.0, right: 16.0),
+          alignment: Alignment.centerLeft,
           child: Text(
             description,
             style: TextStyle(fontSize: 15.0),
