@@ -9,7 +9,8 @@ import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_w
 
 import '../../../fixtures/fixture_reader.dart';
 
-class MockWoocommerceWrapper extends Mock implements WoocommercWrapperAbastract { }
+class MockWoocommerceWrapper extends Mock
+    implements WoocommercWrapperAbastract {}
 
 class MockNetworkStatus extends Mock implements NetworkStatus {}
 
@@ -21,7 +22,8 @@ void main() {
   setUp(() {
     woocommerce = MockWoocommerceWrapper();
     mockNetworkStatus = MockNetworkStatus();
-    remoteCategoryRepository = RemoteCategoryRepository(woocommerce: woocommerce);
+    remoteCategoryRepository =
+        RemoteCategoryRepository(woocommerce: woocommerce);
   });
 
   void runTestsOnline(Function body) {
@@ -40,9 +42,8 @@ void main() {
         'should return list of categories when getCategories is successful',
         () async {
           // arrange
-          when(woocommerce.getCategoryList())
-            .thenAnswer((_) async => json.decode(fixture('woocommerce/categories.json'))
-          );
+          when(woocommerce.getCategoryList()).thenAnswer(
+              (_) async => json.decode(fixture('woocommerce/categories.json')));
           // act
           final categories = await remoteCategoryRepository.getCategories();
           // assert
@@ -54,16 +55,14 @@ void main() {
         'should return server failure when getCategories is unsuccessful',
         () async {
           // arrange
-          when(woocommerce.getCategoryList())
-              .thenThrow(HttpRequestException());
+          when(woocommerce.getCategoryList()).thenThrow(HttpRequestException());
           // act
           // assert
           //verify(woocommerce.getCategoryList());
-          expect(() => remoteCategoryRepository.getCategories(), throwsA(isInstanceOf<RemoteServerException>()));
+          expect(() => remoteCategoryRepository.getCategories(),
+              throwsA(isInstanceOf<RemoteServerException>()));
         },
       );
     });
   });
-  
 }
-    
