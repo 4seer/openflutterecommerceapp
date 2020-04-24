@@ -1,4 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
+import 'package:openflutterecommerce/data/error/exceptions.dart';
+import 'package:openflutterecommerce/domain/entities/entity.dart';
+import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
 
 import 'commerce_image.dart';
 import 'product_attribute.dart';
@@ -6,6 +10,8 @@ import 'product_attribute.dart';
 class Product extends Equatable {
   final int id;
   final String title;
+  //cateogry or hashtag to display next to title
+  final String subTitle;
   final String shortDescription;
   final String description;
   final bool isFavorite;
@@ -14,25 +20,94 @@ class Product extends Equatable {
   final int amountAvailable;
   final DateTime created;
   final double averageRating;
+  final double rating1Count;
+  final double rating2Count;
+  final double rating3Count;
+  final double rating4Count;
+  final double rating5Count;
   final int ratingCount;
   final List<CommerceImage> images;
-  final List<ProductAttribute> attributes;
+  final List<int> categoryIds;
+  final Map<String, dynamic> properties;
+  final List<ProductAttribute> selectableAttributes;
 
   Product(
     this.id, {
-    this.title,
+    @required this.title,
+    @required this.subTitle,
     this.shortDescription,
     this.description,
-    this.price,
-    this.discountPercent,
-    this.amountAvailable,
+    @required this.price,
+    this.discountPercent = 0,
+    this.amountAvailable = 10,
     DateTime created,
     this.averageRating,
-    this.ratingCount,
+    this.ratingCount = 0,
+    this.rating1Count = 0,
+    this.rating2Count = 0,
+    this.rating3Count = 0,
+    this.rating4Count = 0,
+    this.rating5Count = 0,
     this.images,
-    this.attributes,
+    this.properties,
+    this.selectableAttributes,
+    @required this.categoryIds,
     this.isFavorite = false,
   }) : created = created ?? DateTime.now();
+
+  Product favorite(bool isFavorite) {
+    return Product(id,
+        title: title,
+        subTitle: subTitle,
+        shortDescription: shortDescription,
+        description: description,
+        price: price,
+        discountPercent: discountPercent,
+        amountAvailable: amountAvailable,
+        created: created,
+        averageRating: averageRating,
+        ratingCount: ratingCount,
+        rating1Count: rating1Count,
+        rating2Count: rating2Count,
+        rating3Count: rating3Count,
+        rating4Count: rating4Count,
+        rating5Count: rating5Count,
+        images: images,
+        categoryIds: categoryIds,
+        selectableAttributes: selectableAttributes,
+        isFavorite: isFavorite??false);
+  }
+
+  //Method mapping domain entity with presentation level model
+  @override
+  factory Product.fromEntity(Entity entity) {
+    if ( entity is ProductEntity ) {
+      List<CommerceImage> images = [];
+      if ( entity.images.isNotEmpty ) {
+        entity.images.forEach((f) => images.add(CommerceImage(0, f, '')));
+      }
+      return Product(
+        entity.id, 
+        title: entity.title,
+        subTitle: entity.subTitle,
+        shortDescription: entity.description,
+        description: entity.description,
+        price: entity.price ?? 0,
+        discountPercent: entity.discountPercent,
+        amountAvailable: entity.amount,
+        //TODO: created - do we need this attribute in the model?
+        averageRating: entity.rating,
+        categoryIds: entity.categoryIds,
+        ratingCount: entity.rating1Count + entity.rating2Count + entity.rating3Count + entity.rating4Count + entity.rating5Count,
+        //TODO: add images images: [],
+        images: images,
+        //TODO: add selectable attributes selectableAttributes: [],
+        isFavorite: entity.isFavourite,
+      );
+    } else {
+      throw EntityModelMapperException(message: 'Entity should be of type ProductEntity');
+    }
+  }
 
   bool get isNew => created.difference(DateTime.now()).inDays < 3;
 
@@ -56,6 +131,23 @@ class Product extends Equatable {
   bool get stringify => true;
 
   bool get hasRating => averageRating != null;
+
+  bool get hasDiscountPrice => discountPercent > 0;
+
+  double get discountPrice {
+    return ((price ?? 0) * (100 - discountPercent) / 100).roundToDouble();
+  }
+
+  //TODO place it in extension because it is about UI
+  String get specialMark {
+    if (discountPercent > 0) {
+      return '-$discountPercent%';
+    } else if (isNew) {
+      return 'New';
+    } else {
+      return null;
+    }
+  }
 
   CommerceImage get mainImage => (images != null && images.isNotEmpty)
       ? images.first

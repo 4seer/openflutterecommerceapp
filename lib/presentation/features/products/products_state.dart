@@ -4,132 +4,104 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
-import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/fake_model/models/brand.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
-class ProductStateData {
-  List<Product> products;
-  List<HashTag> hashtags;
-  Category category;
-}
+import 'bloc_list_data.dart';
 
-@immutable
-abstract class ProductState extends Equatable {
-  @override
-  List<Object> get props => [];
-}
+abstract class ProductsState extends Equatable {
+  final ProductListData data;
+  final SortRules sortBy;
+  final FilterRules filterRules;
+  final String error;
 
-@immutable
-class ProductInitialState extends ProductState {}
+  ProductsState({
+    this.data,
+    this.filterRules,
+    this.sortBy,
+    this.error,
+  });
 
-@immutable
-class ProductsLoadedState extends ProductState {
-  final ProductStateData data;
-  final bool isLoading;
-  final bool showSortBy;
-  final SortBy sortBy;
+  ProductsState copyWith({
+    ProductListData data,
+    SortRules sortBy,
+    FilterRules filterRules,
+    String error,
+  });
 
-  final List<Color> availableColors = [
-    Color(0xFF222222),
-    Color(0xFFFFFFFF),
-    Color(0xFFB82222),
-    Color(0xFFBEA9A9),
-    Color(0xFFE2BB8D),
-    Color(0xFF151867)
-  ];
-
-  final List<Color> selectedColors;
-
-  final List<String> availableSizes = ['XS', 'S', 'M', 'L', 'XL'];
-
-  final List<String> selectedSizes;
-
-  final List<Category> availableCategories = [
-    Category(1, name: 'Women'),
-    Category(2, name: 'Men'),
-    Category(3, name: 'Boys'),
-    Category(4, name: 'Girls'),
-  ];
-
-  final List<Category> selectedCategories;
-
-  final List<Brand> availableBrands = [
-    Brand(1, 'Adidas'),
-    Brand(2, 'Adidas Originals'),
-    Brand(3, 'Blend'),
-    Brand(4, 'Boutique Moschino'),
-    Brand(5, 'Champion'),
-    Brand(6, 'Diesel'),
-  ];
-
-  final List<int> selectedBrandIds;
-
-  final RangeValues priceRange;
-
-  final RangeValues availablePriceRange;
-
-  final String brandSearchKey;
-
-  ProductsLoadedState(
-      {this.data,
-      this.isLoading,
-      this.showSortBy,
-      this.sortBy,
-      this.priceRange,
-      @required this.availablePriceRange,
-      this.selectedColors,
-      this.selectedSizes,
-      this.selectedCategories,
-      this.selectedBrandIds,
-      this.brandSearchKey});
-
-  ProductsLoadedState copyWith(
-      {ProductStateData data,
-      bool loading,
-      bool showSortBy,
-      SortBy sortBy,
-      RangeValues priceRange,
-      RangeValues availablePriceRange,
-      List<Color> selectedColors,
-      List<String> selectedSizes,
-      List<Category> selectedCategories,
-      List<int> selectedBrandIds,
-      String brandSearchKey}) {
-    return ProductsLoadedState(
-        data: data ?? this.data,
-        isLoading: loading ?? isLoading,
-        showSortBy: showSortBy ?? this.showSortBy,
-        sortBy: sortBy ?? this.sortBy,
-        priceRange: priceRange ?? this.priceRange,
-        availablePriceRange: availablePriceRange ?? this.availablePriceRange,
-        selectedColors: selectedColors ?? this.selectedColors,
-        selectedSizes: selectedSizes ?? this.selectedSizes,
-        selectedCategories: selectedCategories ?? this.selectedCategories,
-        selectedBrandIds: selectedBrandIds ?? this.selectedBrandIds,
-        brandSearchKey: brandSearchKey ?? this.brandSearchKey);
+  ProductsState getLoading() {
+    return copyWith(data: null);
   }
+
+  bool get isProductsLoading => data == null;
+  bool get isFilterRulesVisible => filterRules != null;
+  bool get hasError => error != null;
+
+  @override
+  List<Object> get props => [data, filterRules, sortBy];
 
   @override
   bool get stringify => true;
-
-  @override
-  List<Object> get props => [
-        data,
-        isLoading,
-        showSortBy,
-        sortBy,
-        availablePriceRange,
-        priceRange,
-        selectedColors,
-        selectedSizes,
-        selectedCategories,
-        selectedBrandIds,
-        brandSearchKey
-      ];
 }
 
 @immutable
-class ProductsErrorState extends ProductState {}
+class ProductsListViewState extends ProductsState {
+  ProductsListViewState({
+    ProductListData data,
+    SortRules sortBy,
+    FilterRules filterRules,
+    String error,
+  }) : super(
+            data: data, sortBy: sortBy, filterRules: filterRules, error: error);
+
+  ProductsTileViewState getTiles() {
+    return ProductsTileViewState(
+        data: data, sortBy: sortBy, filterRules: filterRules);
+  }
+
+  @override
+  ProductsListViewState copyWith({
+    ProductListData data,
+    SortRules sortBy,
+    FilterRules filterRules,
+    String error,
+  }) {
+    return ProductsListViewState(
+      data: data ?? this.data,
+      filterRules: filterRules ?? this.filterRules,
+      sortBy: sortBy ?? this.sortBy,
+      error: error,
+    );
+  }
+}
+
+@immutable
+class ProductsTileViewState extends ProductsState {
+  ProductsTileViewState(
+      {ProductListData data,
+      SortRules sortBy,
+      FilterRules filterRules,
+      String error})
+      : super(
+            data: data, sortBy: sortBy, filterRules: filterRules, error: error);
+
+  @override
+  ProductsTileViewState copyWith({
+    ProductListData data,
+    SortRules sortBy,
+    FilterRules filterRules,
+    String error,
+  }) {
+    return ProductsTileViewState(
+      data: data ?? this.data,
+      filterRules: filterRules ?? this.filterRules,
+      sortBy: sortBy ?? this.sortBy,
+      error: error,
+    );
+  }
+
+  ProductsListViewState getList() {
+    return ProductsListViewState(
+        data: data, sortBy: sortBy, filterRules: filterRules);
+  }
+}

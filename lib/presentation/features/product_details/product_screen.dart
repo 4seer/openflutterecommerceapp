@@ -1,6 +1,9 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../wrapper.dart';
@@ -23,8 +26,10 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class ProductDetailsParameters {
   final int productId;
+  final int categoryId;
+  final HashMap<ProductAttribute, String> selectedAttributes;
 
-  const ProductDetailsParameters(this.productId);
+  const ProductDetailsParameters(this.productId, this.categoryId, {this.selectedAttributes});
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
@@ -39,11 +44,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           create: (context) {
             return ProductBloc(
                 productId: widget.parameters.productId,
-                productRepository:
-                    RepositoryProvider.of<ProductRepository>(context))
-              ..add(ScreenLoadedEvent());
+                favoriesRepository:
+                    RepositoryProvider.of<FavoritesRepository>(context))
+              ..add(ProductScreenLoadedEvent(
+                productId: widget.parameters.productId,
+                categoryId: widget.parameters.categoryId
+              ));
           },
-          child: ProductWrapper()),
+          child: ProductWrapper(),
+      ),
       bottomMenuIndex: 1,
     ));
   }
@@ -61,12 +70,10 @@ class _ProductWrapperState extends OpenFlutterWrapperState<ProductWrapper> {
         bloc: BlocProvider.of<ProductBloc>(context),
         builder: (BuildContext context, ProductState state) {
           if (state is ProductLoadedState) {
-            return getPageView(<Widget>[
-              ProductDetailsView(
-                  product: state.product,
-                  similarProducts: state.similarProducts,
-                  changeView: changePage),
-            ]);
+            return ProductDetailsView(
+              product: state.product,
+              similarProducts: state.similarProducts,
+              changeView: changePage);
           }
           return Container();
         });

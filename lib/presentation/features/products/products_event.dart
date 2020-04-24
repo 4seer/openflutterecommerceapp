@@ -2,10 +2,13 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
+import 'dart:collection';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
 @immutable
 abstract class ProductsListEvent extends Equatable {
@@ -22,83 +25,43 @@ class ScreenLoadedEvent extends ProductsListEvent {
 }
 
 @immutable
-class ProductShowSortByEvent extends ProductsListEvent {}
+class ProductsChangeViewEvent extends ProductsListEvent {}
 
 @immutable
-class ProductChangeSortByEvent extends ProductsListEvent {
-  final SortBy sortBy;
+class ProductChangeSortRulesEvent extends ProductsListEvent {
+  final SortRules sortBy;
 
-  ProductChangeSortByEvent(this.sortBy);
+  ProductChangeSortRulesEvent(this.sortBy);
 
   @override
   List<Object> get props => [sortBy];
 }
 
 @immutable
-class ProductChangePriceRangeEvent extends ProductsListEvent {
-  final RangeValues priceRange;
+class ProductChangeFilterRulesEvent extends ProductsListEvent {
+  final FilterRules filterRules;
 
-  ProductChangePriceRangeEvent(this.priceRange);
-
-  @override
-  List<Object> get props => [priceRange];
-}
-
-@immutable
-class ProductChangeSelectedColorsEvent extends ProductsListEvent {
-  final List<Color> selectedColors;
-
-  ProductChangeSelectedColorsEvent(this.selectedColors);
+  ProductChangeFilterRulesEvent(this.filterRules);
 
   @override
-  List<Object> get props => [selectedColors];
+  List<Object> get props => [filterRules];
 }
 
-@immutable
-class ProductChangeSelectedSizesEvent extends ProductsListEvent {
-  final List<String> selectedSizes;
+class SearchEvent extends ProductsListEvent {
+  final String search;
 
-  ProductChangeSelectedSizesEvent(this.selectedSizes);
+  SearchEvent(this.search);
 
   @override
-  List<Object> get props => [selectedSizes];
+  List<Object> get props => [search];
 }
 
-@immutable
-class ProductChangeSelectedCategoriesEvent extends ProductsListEvent {
-  final List<Category> selectedCategories;
-
-  ProductChangeSelectedCategoriesEvent(this.selectedCategories);
-
-  @override
-  List<Object> get props => [selectedCategories];
-}
-
-@immutable
-class ProductChangeSelectedBrandsEvent extends ProductsListEvent {
-  final List<int> selectedBrandIds;
-
-  ProductChangeSelectedBrandsEvent(this.selectedBrandIds);
-
-  @override
-  List<Object> get props => [selectedBrandIds];
-}
-
-@immutable
-class ProductChangeBrandSearchKeyEvent extends ProductsListEvent {
-  final String newSearchKey;
-
-  ProductChangeBrandSearchKeyEvent(this.newSearchKey);
-
-  @override
-  List<Object> get props => [newSearchKey];
-}
-
-class MakeFavorite extends ProductsListEvent {
+class MakeFavoriteEvent extends ProductsListEvent {
   final bool isFavorite;
   final int productId;
+  final HashMap<ProductAttribute, String> favoriteAttributes;
 
-  MakeFavorite(this.isFavorite, this.productId);
+  MakeFavoriteEvent(this.isFavorite, this.productId, {this.favoriteAttributes});
 
   @override
   List<Object> get props => [isFavorite, productId];

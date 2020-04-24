@@ -4,9 +4,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
-import 'package:openflutterecommerce/presentation/features/wrapper.dart';
+import 'package:openflutterecommerce/presentation/widgets/data_driven/size_changing_app_bar.dart';
+import 'package:openflutterecommerce/presentation/widgets/independent/scaffold.dart';
 
 import 'favorites.dart';
 import 'favorites_bloc.dart';
@@ -21,33 +22,51 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: BlocProvider<FavouriteBloc>(
-            create: (context) {
-              return FavouriteBloc(
-                  favouriteRepository:
-                      RepositoryProvider.of<ProductRepository>(context),
-                  hashtagRepository: HashtagRepository())
-                ..add(ShowListViewEvent());
-            },
-            child: FavouriteWrapper()));
+      child: OpenFlutterScaffold(
+        background: null,
+        title: null,
+        body: BlocProvider<FavouriteBloc>(
+          create: (context) {
+            return FavouriteBloc(
+                favoritesRepository:
+                    RepositoryProvider.of<FavoritesRepository>(context),
+                hashtagRepository: HashtagRepository())
+              ..add(ScreenLoadedEvent());
+          },
+          child: _buildScreen(context),
+        ),
+        bottomMenuIndex: 3,
+      ),
+    );
   }
-}
 
-class FavouriteWrapper extends StatefulWidget {
-  @override
-  _FavouriteWrapperState createState() => _FavouriteWrapperState();
-}
-
-class _FavouriteWrapperState extends OpenFlutterWrapperState<FavouriteWrapper> {
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildScreen(BuildContext context) {
     return BlocBuilder<FavouriteBloc, FavouriteState>(
-        bloc: BlocProvider.of<FavouriteBloc>(context),
-        builder: (BuildContext context, FavouriteState state) {
-          return getPageView(<Widget>[
-            FavouritesListView(changeView: changePage, state: state),
-            FavouritesTileView(changeView: changePage, state: state)
-          ]);
-        });
+      builder: (BuildContext context, FavouriteState state) {
+        return CustomScrollView(
+          slivers: <Widget>[
+            SizeChangingAppBar(
+              title: 'Favorites',
+              filterRules: state.filterRules,
+              sortRules: state.sortBy,
+              isListView: state.isList,
+              onFilterRulesChanged: (filter) {
+                BlocProvider.of<FavouriteBloc>(context)
+                    .add(ProductChangeFilterRulesEvent(filter));
+              },
+              onSortRulesChanged: (sort) {
+                BlocProvider.of<FavouriteBloc>(context)
+                    .add(ProductChangeSortRulesEvent(sort));
+              },
+              onViewChanged: () {
+                BlocProvider.of<FavouriteBloc>(context)
+                    .add(ProductsChangeViewEvent());
+              },
+            ),
+            state.isList ? FavoritesListView() : FavouritesTileView()
+          ],
+        );
+      },
+    );
   }
 }

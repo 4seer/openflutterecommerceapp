@@ -4,6 +4,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 
 @immutable
@@ -20,7 +21,7 @@ class CheckoutInitialState extends CheckoutState {
 
 @immutable
 class CheckoutProceedState extends CheckoutState {
-  final List<Product> cartProducts;
+  final List<CartItem> cartProducts;
   final int cardId;
   final bool showAddNewCardForm;
 

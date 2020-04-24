@@ -6,8 +6,8 @@ import '../widgets.dart';
 class OpenFlutterPriceRangeSlider extends StatelessWidget {
   final double max;
   final double min;
-  final double start;
-  final double end;
+  final double selectedMin;
+  final double selectedMax;
   final String label;
   final Function(RangeValues value) onChanged;
 
@@ -17,8 +17,8 @@ class OpenFlutterPriceRangeSlider extends StatelessWidget {
       @required this.min,
       @required this.label,
       @required this.onChanged,
-      @required this.start,
-      @required this.end})
+      @required this.selectedMin,
+      @required this.selectedMax})
       : super(key: key);
 
   @override
@@ -41,13 +41,13 @@ class OpenFlutterPriceRangeSlider extends StatelessWidget {
                   Container(
                       width: width / 2,
                       alignment: Alignment.centerLeft,
-                      child: Text('\$' + start.toStringAsFixed(0),
+                      child: Text('\$' + selectedMin.toStringAsFixed(0),
                           style: _theme.textTheme.display3
                               .copyWith(color: _theme.primaryColor))),
                   Container(
                       width: width / 2,
                       alignment: Alignment.centerRight,
-                      child: Text('\$' + end.toStringAsFixed(0),
+                      child: Text('\$' + selectedMax.toStringAsFixed(0),
                           style: _theme.textTheme.display3
                               .copyWith(color: _theme.primaryColor)))
                 ],
@@ -61,7 +61,7 @@ class OpenFlutterPriceRangeSlider extends StatelessWidget {
               min: min,
               onChangeStart: onChanged,
               onChangeEnd: onChanged,
-              values: RangeValues(start, end),
+              values: RangeValues(selectedMin, selectedMax),
               onChanged: onChanged,
             )
           ]))

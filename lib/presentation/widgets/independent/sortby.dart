@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
+import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
 import '../widgets.dart';
 
 class OpenFlutterSortBy extends StatelessWidget {
-  final Function(SortBy) onSelect;
-  final SortBy currentSortBy;
+  final Function(SortRules) onSelect;
+  final SortRules currentSortBy;
 
   const OpenFlutterSortBy({Key key, this.onSelect, this.currentSortBy})
       : super(key: key);
@@ -22,38 +23,17 @@ class OpenFlutterSortBy extends StatelessWidget {
   }
 
   List<Widget> buildSortBy(double width, ThemeData _theme) {
-    var sortByVariantTitles = <String>[
-      'Popular',
-      'Newest',
-      'Customer Review',
-      'Price: lowest to hight',
-      'Price: highest to low'
-    ];
-    var sortByVariants = <SortBy>[
-      SortBy.Popular,
-      SortBy.Newest,
-      SortBy.CustomerReview,
-      SortBy.PriceLowestToHigh,
-      SortBy.PriceHighestToLow
-    ];
-    var widgets = <Widget>[];
-    for (var i = 0;
-        i < sortByVariants.length && i < sortByVariantTitles.length;
-        i++) {
-      widgets.add(
-        OpenFlutterClickableLine(
-          height: 58,
-          width: width,
-          title: sortByVariantTitles[i],
-          sortBy: sortByVariants[i],
-          backgroundColor:
-              sortByVariants[i] == currentSortBy ? _theme.accentColor : null,
-          textColor:
-              sortByVariants[i] == currentSortBy ? AppColors.white : null,
-          onTap: ((SortBy newSortBy) => {onSelect(sortByVariants[i])}),
-        ),
-      );
-    }
-    return widgets;
+    return SortRules.options
+        .map((rule) => OpenFlutterClickableLine(
+              height: 58,
+              width: width,
+              title: rule.getSortTitle(),
+              sortRules: rule,
+              backgroundColor:
+                  rule == currentSortBy ? _theme.accentColor : null,
+              textColor: rule == currentSortBy ? AppColors.white : null,
+              onTap: ((rule) => {onSelect(rule)}),
+            ))
+        .toList(growable: false);
   }
 }

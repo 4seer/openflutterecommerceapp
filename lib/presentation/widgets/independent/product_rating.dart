@@ -98,7 +98,7 @@ class OpenFlutterProductRating extends StatelessWidget {
       ),
     );
   }
-
+  //TODO: redo so rating supports double values like 4.5 with half star
   Widget _buildStarIcon(int index) {
     var isSelected = _isStarSelected(index);
 

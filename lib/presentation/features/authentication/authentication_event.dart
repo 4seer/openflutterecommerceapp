@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:openflutterecommerce/data/abstract/model/app_user.dart';
 
 abstract class AuthenticationEvent extends Equatable {
   @override
@@ -9,12 +8,12 @@ abstract class AuthenticationEvent extends Equatable {
 class AppStarted extends AuthenticationEvent {}
 
 class LoggedIn extends AuthenticationEvent {
-  final AppUser user;
+  final String token;
 
-  LoggedIn(this.user);
+  LoggedIn(this.token);
 
   @override
-  List<Object> get props => [user.email];
+  List<Object> get props => [token];
 }
 
 class LoggedOut extends AuthenticationEvent {}

@@ -26,32 +26,34 @@ class FakeProduct extends Product {
       List<ProductAttribute> productAttributes,
       bool isFavorite})
       : super(id,
-            title: title,
-            shortDescription: shortDescription,
-            description: description,
-            isFavorite: isFavorite,
-            price: price,
-            discountPercent: discountPercent,
-            amountAvailable: amountAvailable,
-            created: created,
-            averageRating: rating,
-            ratingCount: ratingCount,
-            images: localImages != null && localImages.isNotEmpty
-                ? localImages
-                    .map((localAddress) => CommerceImage(
-                        0, localAddress, 'image of $title',
-                        isLocal: true))
-                    .toList(growable: false)
-                : [],
-            attributes: productAttributes ??
-                [
-                  colors != null && colors.isNotEmpty
-                      ? ProductAttribute(id: 0, name: 'color', options: colors)
-                      : null,
-                  sizes != null && sizes.isNotEmpty
-                      ? ProductAttribute(id: 1, name: 'size', options: sizes)
-                      : null
-                ].where((element) => element != null).toList());
+          title: title,
+          subTitle: title,
+          shortDescription: shortDescription,
+          description: description,
+          isFavorite: isFavorite,
+          price: price,
+          discountPercent: discountPercent,
+          amountAvailable: amountAvailable,
+          created: created,
+          averageRating: rating,
+          ratingCount: ratingCount,
+          categoryIds: [],
+          images: localImages != null && localImages.isNotEmpty
+              ? localImages
+                  .map((localAddress) => CommerceImage(
+                      0, localAddress, 'image of $title',
+                      isLocal: true))
+                  .toList(growable: false)
+              : [],
+          selectableAttributes: productAttributes ??
+              [
+                colors != null && colors.isNotEmpty
+                    ? ProductAttribute(id: 0, name: 'color', options: colors)
+                    : null,
+                sizes != null && sizes.isNotEmpty
+                    ? ProductAttribute(id: 1, name: 'size', options: sizes)
+                    : null
+              ].where((element) => element != null).toList());
 
   FakeProduct changeIsFavorite(bool isFavoriteValue) {
     return FakeProduct(
@@ -66,6 +68,6 @@ class FakeProduct extends Product {
         created: created,
         rating: averageRating,
         ratingCount: ratingCount,
-        productAttributes: attributes);
+        productAttributes: selectableAttributes);
   }
 }

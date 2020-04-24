@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
 
-import 'commerce_image_view.dart';
+import '../extensions/commerce_image_view.dart';
 
 class OpenFlutterCategoryTile extends StatelessWidget {
   final Category category;
@@ -39,7 +39,7 @@ class OpenFlutterCategoryTile extends StatelessWidget {
                 Container(
                   width: 200,
                   alignment: Alignment.centerRight,
-                  child: CommerceImageView(category.image),
+                  child: Image(image: category.image.getView()),
                 )
               ],
             )));
