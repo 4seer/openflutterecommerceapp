@@ -7,6 +7,7 @@ import 'package:openflutterecommerce/data/woocommerce/repositories/product_remot
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 import 'package:openflutterecommerce/domain/usecases/categories/find_categories_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/products/get_product_by_id_use_case.dart';
 
 final sl = GetIt.instance;
 
@@ -20,6 +21,9 @@ void init() {
 
   //get product list by filter use case
   sl.registerLazySingleton<FindProductsByFilterUseCase>(() => FindProductsByFilterUseCaseImpl());
+
+  //get product details by id use case
+  sl.registerLazySingleton<GetProductByIdUseCase>(() => GetProductByIdUseCaseImpl());
 
   //Singleton for HTTP request
   sl.registerLazySingleton(() => http.Client());

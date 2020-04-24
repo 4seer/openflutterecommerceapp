@@ -7,12 +7,20 @@ import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart'
 
 @immutable
 class ProductEvent extends Equatable {
+  
   @override
   List<Object> get props => [];
 }
 
 @immutable
-class ScreenLoadedEvent extends ProductEvent {}
+class ProductScreenLoadedEvent extends ProductEvent {
+  final int productId;
+  final int categoryId;
+
+  ProductScreenLoadedEvent({
+    @required this.productId, 
+    @required this.categoryId
+  });}
 
 @immutable
 class ProductAddToFavoritesEvent extends ProductEvent {

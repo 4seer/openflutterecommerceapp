@@ -102,7 +102,7 @@ class OpenFlutterEcommerceTheme {
                 fontWeight: FontWeight.w400),
             subhead: theme.textTheme.headline.copyWith(
                 fontSize: 24,
-                color: AppColors.white,
+                color: AppColors.darkGray,
                 fontFamily: 'Metropolis',
                 fontWeight: FontWeight.w500),
             //red button with white text

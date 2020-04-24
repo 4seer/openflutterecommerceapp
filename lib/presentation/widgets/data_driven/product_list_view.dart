@@ -37,7 +37,9 @@ class OpenFlutterProductListView extends StatelessWidget {
                       showProductInfo: () {
                         Navigator.of(context).pushNamed(
                             OpenFlutterEcommerceRoutes.product,
-                            arguments: ProductDetailsParameters(product.id));
+                            arguments: ProductDetailsParameters(product.id, 
+                              product.categoryIds.isNotEmpty ? product.categoryIds[0] : 0)
+                            );
                       },
                     ))
                 .toList(growable: false)));

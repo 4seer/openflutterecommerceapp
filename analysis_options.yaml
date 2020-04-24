@@ -4,3 +4,4 @@ analyzer:
   errors:
     todo: ignore
     omit_local_variable_types: ignore
+    prefer_collection_literals: ignore
