@@ -149,7 +149,8 @@ class FakeProductRepository extends ProductRepository with FavoritesRepository {
       SortRules sortRules = const SortRules(),
       FilterRules filterRules}) async {
     return (await _getFavorites())
-        .map((value) => FavoriteProduct(value, HashMap()));
+        .map((value) => FavoriteProduct(value, HashMap()))
+        .toList();
   }
 
   @override
