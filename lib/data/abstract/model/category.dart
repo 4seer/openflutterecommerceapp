@@ -5,7 +5,7 @@ import 'package:openflutterecommerce/domain/entities/product/product_category_en
 
 import 'commerce_image.dart';
 
-class Category extends Equatable {
+class ProductCategory extends Equatable {
   final int id;
   final int parentId;
   final String name;
@@ -13,7 +13,7 @@ class Category extends Equatable {
   final CommerceImage image;
   final bool isCategoryContainer;
 
-  Category(
+  ProductCategory(
     this.id, {
     int parentId,
     this.name,
@@ -30,9 +30,9 @@ class Category extends Equatable {
   bool get stringify => true;
 
   @override
-  factory Category.fromEntity(Entity entity) {
+  factory ProductCategory.fromEntity(Entity entity) {
     if ( entity is ProductCategoryEntity ) {
-      return Category(
+      return ProductCategory(
         entity.id, 
         parentId: entity.parentId,
         name: entity.title,

@@ -9,7 +9,7 @@ import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import '../extensions/commerce_image_view.dart';
 
 class OpenFlutterCategoryTile extends StatelessWidget {
-  final Category category;
+  final ProductCategory category;
   final double height;
   final double width;
 

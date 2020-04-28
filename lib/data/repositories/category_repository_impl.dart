@@ -11,7 +11,7 @@ import 'package:openflutterecommerce/locator.dart';
 class CategoryRepositoryImpl extends CategoryRepository {
 
   @override
-  Future<List<Category>> getCategories({int parentCategoryId = 0}) async {
+  Future<List<ProductCategory>> getCategories({int parentCategoryId = 0}) async {
     try
     {
       NetworkStatus networkStatus = sl();
@@ -29,7 +29,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   }
 
   @override
-  Future<Category> getCategoryDetails(int categoryId) {
+  Future<ProductCategory> getCategoryDetails(int categoryId) {
     // TODO: implement getCategoryDetails
     return null;
   }

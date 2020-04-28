@@ -25,13 +25,13 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       if (state is CategoryListViewState) {
         if (state.parentCategoryId != event.parentCategoryId) {
           yield CategoryLoadingState();
-          List<Category> categories = await _getCategoriesByFilter(event.parentCategoryId);
+          List<ProductCategory> categories = await _getCategoriesByFilter(event.parentCategoryId);
           yield CategoryListViewState(
               categories: categories, parentCategoryId: event.parentCategoryId);
         }
       } else {
         yield CategoryLoadingState();
-        List<Category> categories = await _getCategoriesByFilter(event.parentCategoryId);
+        List<ProductCategory> categories = await _getCategoriesByFilter(event.parentCategoryId);
         yield CategoryListViewState(
             parentCategoryId: event.parentCategoryId, categories: categories);
       }
@@ -39,19 +39,19 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       if (state is CategoryTileViewState) {
         if (state.parentCategoryId != event.parentCategoryId) {
           yield CategoryLoadingState();
-          List<Category> categories = await _getCategoriesByFilter(event.parentCategoryId);
+          List<ProductCategory> categories = await _getCategoriesByFilter(event.parentCategoryId);
           yield CategoryTileViewState(
               categories: categories, parentCategoryId: event.parentCategoryId);
         }
       } else {
         yield CategoryLoadingState();
-        List<Category> categories = await _getCategoriesByFilter(event.parentCategoryId);
+        List<ProductCategory> categories = await _getCategoriesByFilter(event.parentCategoryId);
         yield CategoryTileViewState(
           parentCategoryId: event.parentCategoryId, categories: categories);
       }
     } else if (event is ChangeCategoryParent) {
       yield CategoryLoadingState();
-      List<Category> categories = await _getCategoriesByFilter(event.parentCategoryId);
+      List<ProductCategory> categories = await _getCategoriesByFilter(event.parentCategoryId);
       if (state is CategoryTileViewState) {
         yield CategoryTileViewState(
             parentCategoryId: event.parentCategoryId, categories: categories);
@@ -61,7 +61,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       }
     }
   }
-  Future<List<Category>> _getCategoriesByFilter(int categoryId) async{
+  Future<List<ProductCategory>> _getCategoriesByFilter(int categoryId) async{
     final categoriesData = await findCategoriesByFilterUseCase.execute(
       CategoriesByFilterParams(
         categoryId: categoryId

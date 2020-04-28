@@ -20,7 +20,7 @@ class FindCategoriesByFilterUseCaseImpl implements FindCategoriesByFilterUseCase
   Future<CategoriesByFilterResult> execute(CategoriesByFilterParams params) async {
     try {
       CategoryRepository _categoryRepository = sl();
-      List<Category> categories = await _categoryRepository.getCategories(parentCategoryId: params.categoryId);
+      List<ProductCategory> categories = await _categoryRepository.getCategories(parentCategoryId: params.categoryId);
       return CategoriesByFilterResult(
         categories,
         categories.length

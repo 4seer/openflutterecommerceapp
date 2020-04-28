@@ -104,7 +104,7 @@ class _OpenFlutterSelectValuesBoxesState<T>
 
   String convertValueToString(T currentValue) {
     if (currentValue is CategoryView) return currentValue.title;
-    if (currentValue is Category) {
+    if (currentValue is ProductCategory) {
       return currentValue.name;
     }
     return currentValue.toString();

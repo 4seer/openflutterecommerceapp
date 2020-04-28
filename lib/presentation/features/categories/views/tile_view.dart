@@ -99,7 +99,7 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
     }));
   }
 
-  List<Widget> buildCategoryList(List<Category> categories, double width) {
+  List<Widget> buildCategoryList(List<ProductCategory> categories, double width) {
     var elements = <Widget>[];
     for (var i = 0; i < categories.length; i++) {
       elements.add(InkWell(

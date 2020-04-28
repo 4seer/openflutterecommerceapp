@@ -5,7 +5,7 @@
 import 'package:openflutterecommerce/data/abstract/model/category.dart' as data;
 import 'package:openflutterecommerce/data/abstract/model/commerce_image.dart';
 
-class FakeCategory extends data.Category {
+class FakeCategory extends data.ProductCategory {
   FakeCategory(
       {int id,
       int parentId,

@@ -70,7 +70,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   .values
                   .toList(growable: false) +
               [
-                FilterSelectableVisibleOption<Category>(
+                FilterSelectableVisibleOption<ProductCategory>(
                   title: 'Category',
                   children:
                       rules.categories.map((category, isSelected) => MapEntry(
@@ -92,7 +92,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
-  void _onCategorySelected(Category value) {
+  void _onCategorySelected(ProductCategory value) {
     setState(() {
       rules.categories[value] = !rules.categories[value];
     });

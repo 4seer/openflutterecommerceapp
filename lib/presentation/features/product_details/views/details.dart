@@ -17,7 +17,7 @@ import '../product_state.dart';
 class ProductDetailsView extends StatefulWidget {
   final Product product;
   final Function changeView;
-  final Category category;
+  final ProductCategory category;
   final bool hasReviews;
 
   final List<Product> similarProducts;
