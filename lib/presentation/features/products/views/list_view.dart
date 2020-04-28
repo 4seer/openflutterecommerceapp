@@ -35,7 +35,7 @@ class ProductsListView extends StatelessWidget {
                           OpenFlutterEcommerceRoutes.product,
                           arguments: ProductDetailsParameters(
                             state.data.products[index].id,
-                            state.data.category.id));
+                            state.data.category?.id));
                     },
                     onFavoritesClick: () {
                       BlocProvider.of<ProductsBloc>(context).add(
