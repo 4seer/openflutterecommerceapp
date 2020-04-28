@@ -38,6 +38,7 @@ class FakeProduct extends Product {
           averageRating: rating,
           ratingCount: ratingCount,
           categories: [],
+          hashTags: [],
           images: localImages != null && localImages.isNotEmpty
               ? localImages
                   .map((localAddress) => CommerceImage(

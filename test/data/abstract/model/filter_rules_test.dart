@@ -36,6 +36,7 @@ void main() {
         expect(filterRules.selectedPriceRange.maxPrice, equals(35));
         expect(filterRules.selectedPriceRange.minPrice, equals(0));
         expect(filterRules.selectedAttributes.length, equals(2));
+        expect(filterRules.hashTags.length, equals(4));
       },
     );
   });

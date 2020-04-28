@@ -1,5 +1,7 @@
+
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
+import 'package:openflutterecommerce/domain/entities/hashtag/hashtag_entity.dart';
 import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
 
 class ProductEntity extends Entity<int> {
@@ -10,6 +12,7 @@ class ProductEntity extends Entity<int> {
   final double price;
   final int discountPercent;
   final List<ProductCategoryEntity> categories;
+  final List<HashTagEntity> hashTags;
   final int amount;
   final String description;
   final bool isFavourite;
@@ -30,6 +33,7 @@ class ProductEntity extends Entity<int> {
     price,
     discountPercent,
     List<ProductCategoryEntity> categories,
+    List<HashTagEntity> hashTags,
     this.amount,
     this.description,
     this.selectableAttributes,
@@ -50,6 +54,7 @@ class ProductEntity extends Entity<int> {
       discountPercent = discountPercent??0,
       price = (price??0).toDouble(),
       categories = categories??[],
+      hashTags = hashTags??[],
       super(id);
 
   @override

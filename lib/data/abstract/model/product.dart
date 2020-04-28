@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
@@ -29,6 +30,7 @@ class Product extends Equatable {
   final int ratingCount;
   final List<CommerceImage> images;
   final List<ProductCategory> categories;
+  final List<HashTag> hashTags;
   final Map<String, dynamic> properties;
   final List<ProductAttribute> selectableAttributes;
 
@@ -53,6 +55,7 @@ class Product extends Equatable {
     this.properties,
     this.selectableAttributes,
     @required this.categories,
+    @required this.hashTags,
     this.isFavorite = false,
   }) : created = created ?? DateTime.now();
 
@@ -75,6 +78,7 @@ class Product extends Equatable {
         rating5Count: rating5Count,
         images: images,
         categories: categories,
+        hashTags: hashTags,
         selectableAttributes: selectableAttributes,
         isFavorite: isFavorite??false);
   }
@@ -91,6 +95,10 @@ class Product extends Equatable {
       if ( entity.categories.isNotEmpty ){
         entity.categories.forEach((category) => categories.add(ProductCategory(category.id, name: category.title)));
       }
+      List<HashTag> hashTags = [];
+      if ( entity.hashTags.isNotEmpty ){
+        entity.hashTags.forEach((hashTag) => hashTags.add(HashTag(id: hashTag.id, title: hashTag.title)));
+      }
       return Product(
         entity.id, 
         title: entity.title,
@@ -103,6 +111,7 @@ class Product extends Equatable {
         //TODO: created - do we need this attribute in the model?
         averageRating: entity.rating,
         categories: categories,
+        hashTags:  hashTags,
         ratingCount: entity.rating1Count + entity.rating2Count + entity.rating3Count + entity.rating4Count + entity.rating5Count,
         //TODO: add images images: [],
         images: images,

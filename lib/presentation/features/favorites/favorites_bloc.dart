@@ -6,18 +6,15 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 
 import 'favorites_event.dart';
 import 'favorites_state.dart';
 
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   final FavoritesRepository favoritesRepository;
-  final HashtagRepository hashtagRepository;
 
   FavouriteBloc({
-    @required this.favoritesRepository,
-    @required this.hashtagRepository,
+    @required this.favoritesRepository
   });
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/domain/entities/hashtag/hashtag_entity.dart';
 import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
 import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
 
@@ -17,6 +18,7 @@ class ProductModel extends ProductEntity {
     @required selectableAttributes,
     rating,
     List<ProductCategoryEntity> categories,
+    List<HashTagEntity> hashTags,
     orderNumber,
     count}) : super(
       id: id, 
@@ -29,7 +31,8 @@ class ProductModel extends ProductEntity {
       images: images,
       thumb: thumb,
       rating: rating,
-      categories: categories
+      categories: categories,
+      hashTags: hashTags
     );
       
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -52,8 +55,24 @@ class ProductModel extends ProductEntity {
       //TODO: add all categories related to product
       categories: _getCategoriesFromJson(json),
       orderNumber: (json['menu_order'] as num).toInt(),
-      selectableAttributes: _getSelectableAttributesFromJson(json)
+      selectableAttributes: _getSelectableAttributesFromJson(json),
+      hashTags: _getHashTagsFromJson(json),
     );
+  }
+
+  static List<HashTagEntity> _getHashTagsFromJson(Map<String, dynamic> json){
+    List<HashTagEntity> tags = [];
+    if ( json['tags']!= null ) {
+       for (var hashTag in json['tags']) {
+        tags.add(
+          HashTagEntity(
+            id: hashTag['id']??0,
+            title: hashTag['name']??''
+          )
+        );
+      }
+    }
+    return tags;
   }
 
   static List<ProductCategoryEntity> _getCategoriesFromJson(Map<String, dynamic> json){
