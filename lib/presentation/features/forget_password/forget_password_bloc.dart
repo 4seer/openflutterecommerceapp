@@ -20,7 +20,7 @@ class ForgetPasswordBloc
     if (event is ForgetPasswordPressed) {
       yield ForgetPasswordProcessingState();
       try {
-        await userRepository.forgetPassword(
+        await userRepository.forgotPassword(
           email: event.email.toString(),
         );
         yield ForgetPasswordFinishedState(event.email);
