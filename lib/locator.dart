@@ -1,3 +1,4 @@
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:openflutterecommerce/data/abstract/category_repository.dart';
@@ -15,7 +16,7 @@ final sl = GetIt.instance;
 //Service locator description
 void init() {
   //Singleton for NetworkStatus identification
-  sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl(sl()));
+  sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl(DataConnectionChecker()));
 
   //get categories list by filter use case
   sl.registerLazySingleton<FindCategoriesByFilterUseCase>(() => FindCategoriesByFilterUseCaseImpl());
