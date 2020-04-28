@@ -28,7 +28,7 @@ class FavoritesListView extends StatelessWidget {
               return Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-                  child: state.data[index].getListView(
+                  child: state.data[index]?.getListView(
                     context: context,
                     showProductInfo: () {
                       Navigator.of(context).pushNamed(

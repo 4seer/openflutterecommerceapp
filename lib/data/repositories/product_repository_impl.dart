@@ -17,14 +17,7 @@ import 'package:openflutterecommerce/locator.dart';
 //Uses remote or local data depending on NetworkStatus
 class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
 
-  final HashMap<String, dynamic> _dataStorage = HashMap();
-  final String productKey = 'products';
-  final String favProductKey = 'favProducts';
-
-  ProductRepositoryImpl(){
-    _dataStorage[productKey] = [];
-    _dataStorage[favProductKey] = [];
-  }
+  final ProductDataStorage _dataStorage = ProductDataStorage();
   
   @override
   Future<Product> getProduct(int id) {
@@ -68,8 +61,9 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
         productRepository = LocalProductRepository();
       }
 
-      _dataStorage[productKey] = await productRepository.getProducts();
-      return _dataStorage[productKey];
+      _dataStorage.products = await productRepository.getProducts();
+
+      return _dataStorage.products;
     } on HttpRequestException {
       throw RemoteServerException();
     }
@@ -79,24 +73,28 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
   Future addToFavorites(int productId, HashMap<ProductAttribute, String> selectedAttributes) async {
     Product product;
 
-    (_dataStorage[productKey] as List).forEach((el) =>{
-        if ( (el as Product).id == productId)
-          product = el as Product
+    _dataStorage.products?.forEach((tempProduct) =>{
+        if ( tempProduct.id == productId)
+          product = tempProduct
     });
 
-    (_dataStorage[favProductKey] as List).add(FavoriteProduct(product, selectedAttributes));
+    _dataStorage.favProducts.add(FavoriteProduct(product, selectedAttributes));
   }
 
   @override
   Future<List<FavoriteProduct>> getFavoriteProducts({int pageIndex = 0, int pageSize = AppConsts.page_size, 
       SortRules sortRules = const SortRules(), FilterRules filterRules}) async {
-    return (_dataStorage[favProductKey] as List<FavoriteProduct>);
+    //TODO: remove when favorite feature will be implemented
+    _dataStorage.products = await getProducts();
+    _dataStorage.products.forEach((product) => 
+      _dataStorage.favProducts.add(FavoriteProduct(product, HashMap())));
+    return _dataStorage.favProducts;
   }
 
   @override
-  Future<FilterRules> getFavoritesFilterOptions() {
-    // TODO: implement getFavoritesFilterOptions
-    return null;
+  Future<FilterRules> getFavoritesFilterOptions() async {
+    //TODO: remove when favorite feature will be implemented
+    return FilterRules.getSelectableAttributes(_dataStorage.products);
   }
 
   @override
@@ -104,4 +102,9 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
     // TODO: implement removeFromFavorites
     return null;
   }
+}
+
+class ProductDataStorage {
+  List<Product> products = [];
+  List<FavoriteProduct> favProducts = [];
 }

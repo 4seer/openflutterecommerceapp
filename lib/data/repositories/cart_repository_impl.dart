@@ -30,9 +30,9 @@ class CartRepositoryImpl extends CartRepository{
   }
 
   @override
-  Future<List<CartItem>> getCartContent() {
+  Future<List<CartItem>> getCartContent() async {
     // TODO: implement getCartContent
-    throw UnimplementedError();
+    return [ ];
   }
 
   @override
