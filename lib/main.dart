@@ -12,6 +12,7 @@ import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/abstract/user_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/fake_product_repository.dart';
 import 'package:openflutterecommerce/data/fake_model/fake_user_repository.dart';
+import 'package:openflutterecommerce/data/repositories/category_repository_impl.dart';
 import 'package:openflutterecommerce/presentation/features/forget_password/forget_password_screen.dart';
 import 'package:openflutterecommerce/presentation/features/sign_in/sign_in.dart';
 import 'package:openflutterecommerce/presentation/features/filters/filters_screen.dart';
@@ -25,7 +26,6 @@ import 'config/routes.dart';
 import 'data/abstract/cart_repository.dart';
 import 'data/abstract/category_repository.dart';
 import 'data/fake_model/fake_cart_repository.dart';
-import 'data/fake_model/fake_category_repository.dart';
 import 'presentation/features/authentication/authentication.dart';
 import 'presentation/features/forget_password/forget_password.dart';
 import 'presentation/features/sign_up/sign_up_bloc.dart';
@@ -79,7 +79,7 @@ void main() async {
       child: MultiRepositoryProvider(
         providers: [
           RepositoryProvider<CategoryRepository>(
-            create: (context) => FakeCategoryRepository(),
+            create: (context) => CategoryRepositoryImpl(),
           ),
           RepositoryProvider<ProductRepository>(
             create: (context) => FakeProductRepository(),
