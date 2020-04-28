@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
 
 class VisualFilter extends StatelessWidget {
-  final MapEntry<ProductAttribute, List<String>> attribute;
+  final List<HashTag> hashTags;
   final FilterChanged onFilterChanged;
 
   const VisualFilter(
-    this.attribute,
+    this.hashTags,
     this.onFilterChanged, {
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (attribute == null) {
+    if (hashTags == null) {
       return ListView.builder(
           scrollDirection: Axis.horizontal, itemBuilder: _blankChip);
     } else {
-      List<Widget> widgetList = attribute?.key?.options
+      List<Widget> widgetList = hashTags
         ?.map((optionText) => Padding(
               padding: EdgeInsets.only(right: AppSizes.sidePadding / 2),
               child: ChoiceChip(
-                selected: attribute.value.contains(optionText),
+                selected: hashTags.contains(optionText),
                 padding: EdgeInsets.all(
                   AppSizes.linePadding,
                 ),
                 backgroundColor: Theme.of(context).primaryColor,
                 label: Text(
-                  optionText,
+                  optionText.title,
                   style: Theme.of(context).textTheme.button,
                 ),
                 onSelected: (value) {
-                  onFilterChanged(optionText, value);
+                  onFilterChanged(optionText.title, value);
                 },
               ),
             ))

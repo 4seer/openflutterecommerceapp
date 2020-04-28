@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
-import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/size_changing_app_bar.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/scaffold.dart';
 
@@ -29,8 +28,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           create: (context) {
             return FavouriteBloc(
                 favoritesRepository:
-                    RepositoryProvider.of<FavoritesRepository>(context),
-                hashtagRepository: HashtagRepository())
+                    RepositoryProvider.of<FavoritesRepository>(context))
               ..add(ScreenLoadedEvent());
           },
           child: _buildScreen(context),

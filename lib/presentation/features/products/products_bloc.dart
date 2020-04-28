@@ -8,7 +8,6 @@ import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_result.dart';
@@ -20,14 +19,12 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   final FindProductsByFilterUseCase findProductsByFilterUseCase;
   final CategoryRepository categoryRepository;
   final FavoritesRepository favoritesRepository;
-  final HashtagRepository hashtagRepository;
   final int categoryId;
 
   ProductsBloc({
     @required this.categoryId,
     @required this.categoryRepository,
     @required this.favoritesRepository,
-    @required this.hashtagRepository,
   }) : findProductsByFilterUseCase = sl();
 
   @override
@@ -99,7 +96,6 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
     );
     return ProductListData(
         productResults.products,
-        hashtagRepository.getHashtags(),
         await categoryRepository.getCategoryDetails(categoryId),
         productResults.filterRules);
   }

@@ -59,7 +59,7 @@ class SizeChangingAppBar extends StatelessWidget {
             ),
             Container(
               height: 30,
-              child: VisualFilter(filterRules?.topmostOption,
+              child: VisualFilter(filterRules?.hashTags,
                   (updateValue, isSelected) {
                 BlocProvider.of<ProductsBloc>(context).add(
                     ProductChangeFilterRulesEvent(isSelected

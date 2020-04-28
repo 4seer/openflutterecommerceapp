@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 
 import 'category.dart';
@@ -9,9 +10,10 @@ class FilterRules {
   final HashMap<ProductCategory, bool> categories;
   final HashMap<ProductAttribute, List<String>> selectedAttributes;
   final PriceRange selectedPriceRange;
+  final List<HashTag> hashTags;
 
   FilterRules(
-      {this.categories, this.selectedAttributes, this.selectedPriceRange});
+      {this.categories, this.hashTags, this.selectedAttributes, this.selectedPriceRange});
 
   FilterRules copyWithAdditionalAttribute(
       ProductAttribute attribute, String value) {
@@ -69,12 +71,19 @@ class FilterRules {
     //price ranges
     double maxPrice = 0;
     double minPrice = 0;
-    //TOOD: change to categories instead of categoryIds
     List<int> categoryIds = [];
     HashMap<ProductCategory, bool> categories = HashMap();
-    ///HashMap<String, int> attributeTitleToIndex = HashMap(); 
+    List<int> hashTagIds = [];
+    List<HashTag> hashTags = []; 
 
     products.forEach((product) => {
+      product.hashTags != null ?
+        product.hashTags.forEach((HashTag hashTag) =>  {
+          if ( !hashTagIds.contains(hashTag.id) ) {
+            hashTagIds.add(hashTag.id),
+            hashTags.add(hashTag)
+          }
+        }) : { },
       product.selectableAttributes != null ?
        // returnAttributes.addAll({for (var attribute in product.selectableAttributes) attribute: []})
         product.selectableAttributes.forEach((attribute)=> {
@@ -103,6 +112,7 @@ class FilterRules {
     return  FilterRules(
         categories: categories,
         selectedAttributes: returnAttributes,
+        hashTags: hashTags,
         selectedPriceRange: PriceRange(minPrice, maxPrice)
     );
   }
