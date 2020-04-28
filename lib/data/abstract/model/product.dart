@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
 
 import 'commerce_image.dart';
@@ -27,7 +28,7 @@ class Product extends Equatable {
   final double rating5Count;
   final int ratingCount;
   final List<CommerceImage> images;
-  final List<int> categoryIds;
+  final List<ProductCategory> categories;
   final Map<String, dynamic> properties;
   final List<ProductAttribute> selectableAttributes;
 
@@ -51,7 +52,7 @@ class Product extends Equatable {
     this.images,
     this.properties,
     this.selectableAttributes,
-    @required this.categoryIds,
+    @required this.categories,
     this.isFavorite = false,
   }) : created = created ?? DateTime.now();
 
@@ -73,7 +74,7 @@ class Product extends Equatable {
         rating4Count: rating4Count,
         rating5Count: rating5Count,
         images: images,
-        categoryIds: categoryIds,
+        categories: categories,
         selectableAttributes: selectableAttributes,
         isFavorite: isFavorite??false);
   }
@@ -86,6 +87,10 @@ class Product extends Equatable {
       if ( entity.images.isNotEmpty ) {
         entity.images.forEach((f) => images.add(CommerceImage(0, f, '')));
       }
+      List<ProductCategory> categories = [];
+      if ( entity.categories.isNotEmpty ){
+        entity.categories.forEach((category) => categories.add(ProductCategory(category.id, name: category.title)));
+      }
       return Product(
         entity.id, 
         title: entity.title,
@@ -97,12 +102,13 @@ class Product extends Equatable {
         amountAvailable: entity.amount,
         //TODO: created - do we need this attribute in the model?
         averageRating: entity.rating,
-        categoryIds: entity.categoryIds,
+        categories: categories,
         ratingCount: entity.rating1Count + entity.rating2Count + entity.rating3Count + entity.rating4Count + entity.rating5Count,
         //TODO: add images images: [],
         images: images,
         //TODO: add selectable attributes selectableAttributes: [],
         isFavorite: entity.isFavourite,
+        selectableAttributes: entity.selectableAttributes
       );
     } else {
       throw EntityModelMapperException(message: 'Entity should be of type ProductEntity');

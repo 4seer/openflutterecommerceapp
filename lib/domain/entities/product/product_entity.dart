@@ -1,5 +1,6 @@
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
+import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
 
 class ProductEntity extends Entity<int> {
   final String title;
@@ -8,7 +9,7 @@ class ProductEntity extends Entity<int> {
   final String thumb;
   final double price;
   final int discountPercent;
-  final List<int> categoryIds;
+  final List<ProductCategoryEntity> categories;
   final int amount;
   final String description;
   final bool isFavourite;
@@ -28,7 +29,7 @@ class ProductEntity extends Entity<int> {
     this.thumb,
     price,
     discountPercent,
-    categoryIds,
+    List<ProductCategoryEntity> categories,
     this.amount,
     this.description,
     this.selectableAttributes,
@@ -48,7 +49,7 @@ class ProductEntity extends Entity<int> {
       isFavourite = isFavourite??false,
       discountPercent = discountPercent??0,
       price = (price??0).toDouble(),
-      categoryIds = categoryIds??[],
+      categories = categories??[],
       super(id);
 
   @override
@@ -62,7 +63,7 @@ class ProductEntity extends Entity<int> {
       'price': price,
       'discountPercent': discountPercent,
       //TODO: serialize all categoryIds and add tests
-      'categoryId': categoryIds.isNotEmpty?categoryIds[0]:0,
+      'categoryId': categories.isNotEmpty?categories[0].id:0,
       'amount': amount,
       'description': description,
       'isFavourite': isFavourite,

@@ -17,7 +17,7 @@ class ProductDataSource extends DataSource {
         price: maps[i]['price'],
         discountPercent: maps[i]['discountPercent'],
         //TODO: get full list of categories
-        categoryIds: (maps[i]['categoryId'] as num).toInt()!=0? [maps[i]['categoryId']]:[],
+        categories: (maps[i]['categoryId'] as num).toInt()!=0? [maps[i]['categoryId']]:[],
         amount: maps[i]['amount'],
         description: maps[i]['description'],
         isFavourite: maps[i]['isFavourite'].toString() == '1',
@@ -45,7 +45,7 @@ class ProductDataSource extends DataSource {
       thumb: maps[0]['thumb'],
       price: maps[0]['price'],
       discountPercent: maps[0]['discountPercent'],
-      categoryIds: (maps[0]['categoryId'] as num).toInt()!=0? [maps[0]['categoryId']]:[],
+      categories: (maps[0]['categoryId'] as num).toInt()!=0? [maps[0]['categoryId']]:[],
       amount: maps[0]['amount'],
       description: maps[0]['description'],
       isFavourite: maps[0]['isFavourite'].toString() == '1',
