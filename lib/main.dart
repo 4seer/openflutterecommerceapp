@@ -136,13 +136,15 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
       OpenFlutterEcommerceRoutes.profile: (context) =>
           BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) {
-            if (state is Authenticated) {
+            //TODO: revise authentication later. Right now no login is required.
+            /*if (state is Authenticated) {
               return ProfileScreen(); //TODO profile properties should be here
             } else if (state is Unauthenticated) {
               return _buildSignInBloc();
             } else {
               return SplashScreen();
-            }
+            }*/
+            return ProfileScreen(); 
           }),
     };
   }
