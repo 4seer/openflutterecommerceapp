@@ -1,8 +1,6 @@
+import 'package:openflutterecommerce/data/local/db_provider.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
-import 'config.dart';
 
 abstract class DataSource {
   Database db;
@@ -13,20 +11,10 @@ abstract class DataSource {
 
   // connect to database
   Future<void> open() async {
-    db = await openDatabase(
-      join(await getDatabasesPath(), OpenFlutterDatabaseConfig.databaseName),
-      onCreate: (db, version) {
-        return _createDb(db);
-      },
-      version: OpenFlutterDatabaseConfig.databaseVersion,
-    );
-  }
-
-  static void _createDb(Database db) {
-    OpenFlutterDatabaseConfig.createTablesQueries
-        .forEach((createTableQuery) async {
-      await db.execute(createTableQuery);
-    });
+    if ( SQLiteDbProvider.db==null || !SQLiteDbProvider.db.isOpen ) {
+      await SQLiteDbProvider.open();
+    }
+    db = await SQLiteDbProvider.db;
   }
 
   // get a record in the table
