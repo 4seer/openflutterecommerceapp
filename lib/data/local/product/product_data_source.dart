@@ -1,4 +1,5 @@
 import 'package:openflutterecommerce/data/local/data_source.dart';
+import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
 import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
 
 class ProductDataSource extends DataSource {
@@ -14,10 +15,10 @@ class ProductDataSource extends DataSource {
         title: maps[i]['title'],
         images: [maps[i]['image']],
         thumb: maps[i]['thumb'],
-        price: maps[i]['price'],
-        discountPercent: maps[i]['discountPercent'],
+        price: (maps[i]['price'] as num).toDouble(),
+        discountPercent: (maps[i]['discountPercent'] as num).toInt(),
         //TODO: get full list of categories
-        categories: (maps[i]['categoryId'] as num).toInt()!=0? [maps[i]['categoryId']]:[],
+        categories: [ProductCategoryEntity(id: (maps[i]['categoryId'] as num).toInt())],
         amount: maps[i]['amount'],
         description: maps[i]['description'],
         isFavourite: maps[i]['isFavourite'].toString() == '1',
@@ -44,8 +45,8 @@ class ProductDataSource extends DataSource {
       images: [maps[0]['image']],
       thumb: maps[0]['thumb'],
       price: maps[0]['price'],
-      discountPercent: maps[0]['discountPercent'],
-      categories: (maps[0]['categoryId'] as num).toInt()!=0? [maps[0]['categoryId']]:[],
+      discountPercent: (maps[0]['discountPercent'] as num).toInt(),
+      categories: [ProductCategoryEntity(id: (maps[0]['categoryId'] as num).toInt())],
       amount: maps[0]['amount'],
       description: maps[0]['description'],
       isFavourite: maps[0]['isFavourite'].toString() == '1',
