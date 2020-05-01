@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/local/db_provider.dart';
+
 import 'cart/product_cart_data_source_test.dart'
     as product_cart_data_source_test;
 import 'delivery/delivery_method_data_source_test.dart'
@@ -32,25 +35,27 @@ import 'user/shipping_address_data_source_test.dart'
     as shipping_address_data_source_test;
 import 'user/user_data_source_test.dart' as user_data_source_test;
 
-void main(List<String> args) {
+Future<void> main(List<String> args) async {
+  //Use after database update
+  // await SQLiteDbProvider.clear();
   // run tests on all data sources (tables)
-  delivery_method_data_source_test.main();
-  category_hashtag_data_source_test.main();
-  hash_tag_data_source_test.main();
-  product_hashtag_data_source_test.main();
-  order_product_data_source_test.main();
-  order_product_parameter_data_source_test.main();
-  user_order_data_source_test.main();
-  product_category_data_source_test.main();
-  product_cart_data_source_test.main();
-  product_data_source_test.main();
-  product_image_data_source_test.main();
-  product_parameter_data_source_test.main();
-  product_parameter_variant_data_source_test.main();
-  product_review_data_source_test.main();
-  product_review_photo_data_source_test.main();
-  product2parameter_data_source_test.main();
-  promo_code_data_source_test.main();
-  shipping_address_data_source_test.main();
-  user_data_source_test.main();
+  await delivery_method_data_source_test.main();
+  await category_hashtag_data_source_test.main();
+  await hash_tag_data_source_test.main();
+  await product_hashtag_data_source_test.main();
+  await order_product_data_source_test.main();
+  await order_product_parameter_data_source_test.main();
+  await user_order_data_source_test.main();
+  await product_category_data_source_test.main();
+  await product_cart_data_source_test.main();
+  await product_data_source_test.main();
+  await product_image_data_source_test.main();
+  await product_parameter_data_source_test.main();
+  await product_parameter_variant_data_source_test.main();
+  await product_review_data_source_test.main();
+  await product_review_photo_data_source_test.main();
+  await product2parameter_data_source_test.main();
+  await promo_code_data_source_test.main();
+  await shipping_address_data_source_test.main();
+  await user_data_source_test.main();/**/
 }
