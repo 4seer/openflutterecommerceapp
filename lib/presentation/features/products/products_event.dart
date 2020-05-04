@@ -7,6 +7,7 @@ import 'dart:collection';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
@@ -45,6 +46,17 @@ class ProductChangeFilterRulesEvent extends ProductsListEvent {
 
   @override
   List<Object> get props => [filterRules];
+}
+
+@immutable
+class ProductChangeHashTagEvent extends ProductsListEvent {
+  final HashTag hashTag;
+  final bool isSelected;
+
+  ProductChangeHashTagEvent(this.hashTag, this.isSelected);
+
+  @override
+  List<Object> get props => [hashTag];
 }
 
 class SearchEvent extends ProductsListEvent {

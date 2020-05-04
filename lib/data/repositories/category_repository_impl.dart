@@ -29,8 +29,9 @@ class CategoryRepositoryImpl extends CategoryRepository {
   }
 
   @override
-  Future<ProductCategory> getCategoryDetails(int categoryId) {
+  Future<ProductCategory> getCategoryDetails(int categoryId) async {
     // TODO: implement getCategoryDetails
-    return null;
+    List<ProductCategory> categories = await getCategories();
+    return categories.isNotEmpty ? categories[0] : null;
   }
 }

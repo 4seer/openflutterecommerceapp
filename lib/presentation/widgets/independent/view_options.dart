@@ -31,9 +31,10 @@ class OpenFlutterViewOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     var _theme = Theme.of(context);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Container(
         color: _theme.primaryColorLight.withAlpha(5),
+        height: 32,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -61,6 +62,7 @@ class OpenFlutterViewOptions extends StatelessWidget {
                   )
                 ])),
             IconButton(
+              padding: EdgeInsets.only(top: 0),
               onPressed: onChangeViewClicked,
               icon: Icon(
                 isListView ? Icons.view_list : Icons.view_module,
@@ -81,47 +83,85 @@ class OpenFlutterViewOptions extends StatelessWidget {
     showModalBottomSheet(
         context: context,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(34.0),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(34.0),
+            topRight: Radius.circular(34.0)
+          ),
         ),
         backgroundColor: Colors.white,
         builder: (context) {
           return Column(
-            children: <Widget>[Text('Sort by')] +
-                sortRules.sortTextVariants
-                    .map((key, value) => MapEntry(
-                          key,
-                          Container(
-                            color: sortRules.sortType == key
-                                ? AppColors.red
-                                : AppColors.white,
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: InkWell(
-                                    child: Text(value),
-                                    onTap: () {
-                                      onSortChanged(SortRules(
-                                          sortOrder: sortRules.sortOrder,
-                                          sortType: key));
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                ),
-                                IconButton(
-                                  icon: Icon(FontAwesomeIcons.sort),
-                                  onPressed: () {
-                                    onSortChanged(
-                                        sortRules.copyWithChangedOrder());
-                                    Navigator.pop(context);
-                                  },
-                                )
-                              ],
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(AppSizes.sidePadding),
+                child: Container(
+                  width: 60,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: AppColors.darkGray,
+                    borderRadius: BorderRadius.circular(AppSizes.imageRadius),
+                  ),
+                ),
+              ),
+              Text('Sort by',
+                style: Theme.of(context).textTheme.display1),
+              Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding),),
+              ...sortRules.sortTextVariants
+                .map((key, value) => MapEntry(
+                      key,
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: AppSizes.sidePadding,
+                            vertical: AppSizes.linePadding),
+                        alignment: Alignment.centerLeft,
+                        color: sortRules.sortType == key
+                            ? AppColors.red
+                            : AppColors.white,
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: InkWell(
+                                child: Text(value,
+                                  style: Theme.of(context).textTheme.display1.copyWith(        
+                                      fontWeight: FontWeight.normal,
+                                      color: sortRules.sortType == key
+                                        ? AppColors.white
+                                        : AppColors.black)),
+                                onTap: () {
+                                  onSortChanged(SortRules(
+                                      sortOrder:
+                                        sortRules.sortType == key ?
+                                        (
+                                          sortRules.sortOrder == SortOrder.FromLowestToHighest ?
+                                          SortOrder.FromHighestToLowest : SortOrder.FromLowestToHighest
+                                        ) :
+                                        sortRules.sortOrder,
+                                      sortType: key));
+                                  Navigator.pop(context);
+                                },
+                              ),
                             ),
-                          ),
-                        ))
-                    .values
-                    .toList(growable: false),
-          );
+                            IconButton(
+                              icon: Icon(
+                                sortRules.sortOrder == SortOrder.FromHighestToLowest ?
+                                FontAwesomeIcons.sortAlphaUp :
+                                FontAwesomeIcons.sortAlphaDown),
+                              color: sortRules.sortType == key ?
+                                Theme.of(context).primaryColor 
+                                : Theme.of(context).backgroundColor,
+                              onPressed: () {
+                                onSortChanged(
+                                    sortRules.copyWithChangedOrder());
+                                Navigator.pop(context);
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                    ))
+                .values
+                .toList(growable: false),
+            ]);
         });
   }
 }

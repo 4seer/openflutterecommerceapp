@@ -20,6 +20,7 @@ class FilterSelectableVisibleOption<T> extends StatelessWidget {
           height: AppSizes.sidePadding,
         ),
         Container(
+          alignment: Alignment.centerLeft,
           padding: EdgeInsets.symmetric(
               vertical: AppSizes.sidePadding,
               horizontal: AppSizes.sidePadding * 2),

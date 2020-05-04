@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 
@@ -8,17 +9,26 @@ import 'product_attribute.dart';
 
 class FilterRules {
   final HashMap<ProductCategory, bool> categories;
+  final HashMap<ProductAttribute, List<String>> selectableAttributes;
   final HashMap<ProductAttribute, List<String>> selectedAttributes;
   final PriceRange selectedPriceRange;
   final List<HashTag> hashTags;
+  final HashMap<HashTag, bool> selectedHashTags;
 
-  FilterRules(
-      {this.categories, this.hashTags, this.selectedAttributes, this.selectedPriceRange});
+  FilterRules( 
+    {this.categories, 
+    @required this.hashTags, 
+    @required this.selectedHashTags, 
+    selectedAttributes, 
+    this.selectableAttributes, 
+    this.selectedPriceRange}) 
+    : selectedAttributes = selectedAttributes ?? 
+      HashMap<ProductAttribute, List<String>>();
 
   FilterRules copyWithAdditionalAttribute(
       ProductAttribute attribute, String value) {
     HashMap<ProductAttribute, List<String>> updatedAttributes =
-        selectedAttributes;
+        selectableAttributes;
     if (updatedAttributes.containsKey(attribute)) {
       updatedAttributes[attribute].add(value);
     } else {
@@ -26,14 +36,16 @@ class FilterRules {
     }
     return FilterRules(
         categories: categories,
+        hashTags: hashTags,
+        selectedHashTags: selectedHashTags,
         selectedPriceRange: selectedPriceRange,
-        selectedAttributes: updatedAttributes);
+        selectableAttributes: updatedAttributes);
   }
 
   /// this behavior can be changed in subclasses to show special attribute instead of first
   MapEntry<ProductAttribute, List<String>> get topmostOption =>
-      selectedAttributes?.entries?.isNotEmpty ? 
-      selectedAttributes?.entries?.first 
+      selectableAttributes?.entries?.isNotEmpty ? 
+      selectableAttributes?.entries?.first 
       : MapEntry<ProductAttribute, List<String>>(
         ProductAttribute(name: ''),
         []
@@ -42,22 +54,26 @@ class FilterRules {
   FilterRules copyWithRemovedAttributeValue(
       ProductAttribute attribute, String value) {
     HashMap<ProductAttribute, List<String>> updatedAttributes =
-        selectedAttributes;
+        selectableAttributes;
     updatedAttributes[attribute].remove(value);
     if (updatedAttributes[attribute].isEmpty) {
       updatedAttributes.remove(attribute);
     }
     return FilterRules(
         categories: categories,
+        hashTags: hashTags,
+        selectedHashTags: selectedHashTags,
         selectedPriceRange: selectedPriceRange,
-        selectedAttributes: updatedAttributes);
+        selectableAttributes: updatedAttributes);
   }
 
   FilterRules copyWithPriceRange(PriceRange priceRange) {
     return FilterRules(
         categories: categories,
+        hashTags: hashTags,
+        selectedHashTags: selectedHashTags,
         selectedPriceRange: priceRange,
-        selectedAttributes: selectedAttributes);
+        selectableAttributes: selectableAttributes);
   }
 
   factory FilterRules.getSelectableAttributes(List<Product> products) {
@@ -99,7 +115,7 @@ class FilterRules {
       product.categories.forEach((ProductCategory category) =>  {
         if ( !categoryIds.contains(category.id) ) {
           categoryIds.add(category.id),
-          categories[category] = true
+          categories[category] = false
         }
       })
     });
@@ -109,8 +125,9 @@ class FilterRules {
 
     return  FilterRules(
         categories: categories,
-        selectedAttributes: returnAttributes,
+        selectableAttributes: returnAttributes,
         hashTags: hashTags,
+        selectedHashTags: HashMap<HashTag, bool>(),
         selectedPriceRange: PriceRange(minPrice, maxPrice)
     );
   }

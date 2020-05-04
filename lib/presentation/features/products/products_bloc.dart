@@ -57,6 +57,20 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
         sortBy: event.sortBy,
         data: state.data.copyWith(filteredData),
       );
+    }  else if (event is ProductChangeHashTagEvent) {
+      yield state.getLoading();
+      state.filterRules.selectedHashTags[event.hashTag] = event.isSelected;
+      ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
+        ProductsByFilterParams(
+          categoryId: categoryId,
+          filterRules: state.filterRules,
+          sortBy: state.sortBy
+        ));
+      final List<Product> filteredData = productResults.products;
+      yield state.copyWith(
+        data: state.data.copyWith(filteredData),
+        sortBy: state.sortBy,
+      );
     } else if (event is ProductChangeFilterRulesEvent) {
       yield state.getLoading();
       ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(

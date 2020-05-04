@@ -1,13 +1,17 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
 
 class VisualFilter extends StatelessWidget {
   final List<HashTag> hashTags;
+  final HashMap<HashTag, bool> selecteHashTags;
   final FilterChanged onFilterChanged;
 
   const VisualFilter(
     this.hashTags,
+    this.selecteHashTags,
     this.onFilterChanged, {
     Key key,
   }) : super(key: key);
@@ -19,23 +23,26 @@ class VisualFilter extends StatelessWidget {
           scrollDirection: Axis.horizontal, itemBuilder: _blankChip);
     } else {
       List<Widget> widgetList = hashTags
-        ?.map((optionText) => Padding(
-              padding: EdgeInsets.only(right: AppSizes.sidePadding / 2),
-              child: ChoiceChip(
-                selected: hashTags.contains(optionText),
-                padding: EdgeInsets.all(
-                  AppSizes.linePadding,
-                ),
-                backgroundColor: Theme.of(context).primaryColor,
-                label: Text(
-                  optionText.title,
-                  style: Theme.of(context).textTheme.button,
-                ),
-                onSelected: (value) {
-                  onFilterChanged(optionText.title, value);
-                },
+        ?.map((optionHashTag) => 
+          Padding(
+            padding: EdgeInsets.only(right: AppSizes.sidePadding / 2),
+            child: ChoiceChip(
+              selected: selecteHashTags!=null ? 
+                selecteHashTags[optionHashTag] ?? false : false,
+              padding: EdgeInsets.all(
+                AppSizes.linePadding,
               ),
-            ))
+              backgroundColor: Theme.of(context).primaryColor,
+              selectedColor: Theme.of(context).accentColor,
+              label: Text(
+                optionHashTag.title,
+                style: Theme.of(context).textTheme.button,
+              ),
+              onSelected: (value) {
+                onFilterChanged(optionHashTag, value);
+              },
+            ),
+          ))
         ?.toList(growable: false) ?? [];
         
       return ListView(
@@ -72,4 +79,4 @@ class VisualFilter extends StatelessWidget {
   }
 }
 
-typedef FilterChanged = Function(String attribute, bool isSelected);
+typedef FilterChanged = Function(HashTag attribute, bool isSelected);

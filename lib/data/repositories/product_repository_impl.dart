@@ -4,6 +4,7 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
@@ -38,7 +39,9 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
     //TODO: init categories from list of products fetched from server
     return FilterRules(
         categories: HashMap(),
-        selectedAttributes: result,
+        hashTags: [],
+        selectedHashTags: HashMap<HashTag, bool>(),
+        selectableAttributes: result,
         selectedPriceRange: PriceRange(10, 100));
   }
 
