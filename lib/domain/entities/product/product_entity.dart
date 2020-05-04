@@ -10,7 +10,7 @@ class ProductEntity extends Entity<int> {
   final List<String> images;
   final String thumb;
   final double price;
-  final int discountPercent;
+  final double discountPercent;
   final List<ProductCategoryEntity> categories;
   final List<HashTagEntity> hashTags;
   final int amount;
@@ -31,7 +31,7 @@ class ProductEntity extends Entity<int> {
     this.images,
     this.thumb,
     double price,
-    int discountPercent,
+    double discountPercent,
     List<ProductCategoryEntity> categories,
     List<HashTagEntity> hashTags,
     this.amount,

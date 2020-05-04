@@ -18,7 +18,7 @@ class Product extends Equatable {
   final String description;
   final bool isFavorite;
   final double price;
-  final int discountPercent;
+  final double discountPercent;
   final int amountAvailable;
   final DateTime created;
   final double averageRating;
@@ -156,7 +156,7 @@ class Product extends Equatable {
   //TODO place it in extension because it is about UI
   String get specialMark {
     if (discountPercent > 0) {
-      return '-$discountPercent%';
+      return '-' + discountPercent.round().toString() + '%';
     } else if (isNew) {
       return 'New';
     } else {

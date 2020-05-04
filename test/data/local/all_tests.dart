@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/local/db_provider.dart';
-
 import 'cart/product_cart_data_source_test.dart'
     as product_cart_data_source_test;
 import 'delivery/delivery_method_data_source_test.dart'

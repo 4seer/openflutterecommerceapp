@@ -16,7 +16,7 @@ class ProductDataSource extends DataSource {
         images: [maps[i]['image']],
         thumb: maps[i]['thumb'],
         price: (maps[i]['price'] as num).toDouble(),
-        discountPercent: (maps[i]['discountPercent'] as num).toInt(),
+        discountPercent: (maps[i]['discountPercent'] as num).toDouble(),
         //TODO: get full list of categories
         categories: [ProductCategoryEntity(id: (maps[i]['categoryId'] as num).toInt())],
         amount: maps[i]['amount'],
@@ -45,7 +45,7 @@ class ProductDataSource extends DataSource {
       images: [maps[0]['image']],
       thumb: maps[0]['thumb'],
       price: maps[0]['price'],
-      discountPercent: (maps[0]['discountPercent'] as num).toInt(),
+      discountPercent: (maps[0]['discountPercent'] as num).toDouble(),
       categories: [ProductCategoryEntity(id: (maps[0]['categoryId'] as num).toInt())],
       amount: maps[0]['amount'],
       description: maps[0]['description'],
