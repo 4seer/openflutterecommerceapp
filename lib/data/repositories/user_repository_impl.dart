@@ -1,21 +1,25 @@
 /*
- * @author Martin Appelmann <exlo89@gmail.com>
+ * @author Andrew Poteryahin <openflutterproject@gmail.com>
  * @copyright 2020 Open E-commerce App
- * @see fake_user_repository.dart
+ * @see user_repository_impl.dart
  */
 
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/model/app_user.dart';
 import 'package:openflutterecommerce/data/abstract/user_repository.dart';
+import 'package:openflutterecommerce/data/woocommerce/repositories/remote_user_repository.dart';
 
-class FakeUserRepository extends UserRepository {
+class UserRepositoryImpl extends UserRepository {
+  final RemoteUserRepository remoteUserRepository;
+
+  UserRepositoryImpl({@required this.remoteUserRepository});
+
   @override
   Future<String> signIn({
     @required String email,
     @required String password,
   }) async {
-    await Future.delayed(Duration(seconds: 3));
-    return 'token';
+    return remoteUserRepository.signIn(email: email, password: password);
   }
 
   @override
@@ -24,25 +28,22 @@ class FakeUserRepository extends UserRepository {
     @required String email,
     @required String password,
   }) async {
-    await Future.delayed(Duration(seconds: 3));
-    return 'token';
+    return remoteUserRepository.signUp(name: name, email: email, password: password);
   }
 
   @override
   Future<AppUser> getUser() async {
     try {
-      await Future.delayed(Duration(seconds: 2));
-
-      return AppUser();
+      return remoteUserRepository.getUser();
     } catch (error) {
       rethrow;
     }
   }
 
   @override
-  Future<void> forgetPassword({
+  Future<void> forgotPassword({
     @required String email,
   }) async {
-    await Future.delayed(Duration(seconds: 3));
+      return remoteUserRepository.forgotPassword(email: email);
   }
 }

@@ -27,7 +27,7 @@ abstract class UserRepository {
   Future<AppUser> getUser();
 
   /// Send to [email] a user forget email
-  Future<void> forgetPassword({
+  Future<void> forgotPassword({
     @required String email,
   });
 }

@@ -30,9 +30,9 @@ class ProductsTileView extends StatelessWidget {
                   context: context,
                   onFavoritesClick: () {
                     BlocProvider.of<ProductsBloc>(context).add(
-                        MakeFavoriteEvent(
+                        ProductMakeFavoriteEvent(
                             !state.data.products[index].isFavorite,
-                            state.data.products[index].id));
+                            state.data.products[index]));
                   },
                   showProductInfo: () {
                     Navigator.of(context).pushNamed(

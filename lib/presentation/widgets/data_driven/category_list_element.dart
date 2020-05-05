@@ -7,7 +7,7 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
 
 class OpenFlutterCatregoryListElement extends StatelessWidget {
-  final Category category;
+  final ProductCategory category;
 
   const OpenFlutterCatregoryListElement({Key key, this.category})
       : super(key: key);

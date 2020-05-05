@@ -47,9 +47,9 @@ class FavouriteState extends Equatable {
   bool get hasError => error != null;
 
   FavouriteState getLoading() {
-    return copyWith(data: null);
+    return copyWith(data: []);
   }
 
   @override
-  List<Object> get props => [data, hashtags, sortBy, filterRules, error];
+  List<Object> get props => [data, hashtags, sortBy, filterRules, error, isProductsLoading];
 }

@@ -31,7 +31,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         similarProducts: data.similarProducts);
     } else if (event is ProductAddToFavoritesEvent) {
       await favoriesRepository.addToFavorites(
-          productId, event.selectedAttributes);
+          event.product, event.selectedAttributes);
     } else if (event is ProductAddToFavoritesEvent) {
       await favoriesRepository.removeFromFavorites(productId);
     } else if (event is ProductAddToCartEvent) {

@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
 
 import 'commerce_image.dart';
@@ -16,7 +18,7 @@ class Product extends Equatable {
   final String description;
   final bool isFavorite;
   final double price;
-  final int discountPercent;
+  final double discountPercent;
   final int amountAvailable;
   final DateTime created;
   final double averageRating;
@@ -27,7 +29,8 @@ class Product extends Equatable {
   final double rating5Count;
   final int ratingCount;
   final List<CommerceImage> images;
-  final List<int> categoryIds;
+  final List<ProductCategory> categories;
+  final List<HashTag> hashTags;
   final Map<String, dynamic> properties;
   final List<ProductAttribute> selectableAttributes;
 
@@ -39,7 +42,7 @@ class Product extends Equatable {
     this.description,
     @required this.price,
     this.discountPercent = 0,
-    this.amountAvailable = 10,
+    this.amountAvailable = 0,
     DateTime created,
     this.averageRating,
     this.ratingCount = 0,
@@ -51,7 +54,8 @@ class Product extends Equatable {
     this.images,
     this.properties,
     this.selectableAttributes,
-    @required this.categoryIds,
+    @required this.categories,
+    @required this.hashTags,
     this.isFavorite = false,
   }) : created = created ?? DateTime.now();
 
@@ -73,7 +77,8 @@ class Product extends Equatable {
         rating4Count: rating4Count,
         rating5Count: rating5Count,
         images: images,
-        categoryIds: categoryIds,
+        categories: categories,
+        hashTags: hashTags,
         selectableAttributes: selectableAttributes,
         isFavorite: isFavorite??false);
   }
@@ -86,6 +91,14 @@ class Product extends Equatable {
       if ( entity.images.isNotEmpty ) {
         entity.images.forEach((f) => images.add(CommerceImage(0, f, '')));
       }
+      List<ProductCategory> categories = [];
+      if ( entity.categories.isNotEmpty ){
+        entity.categories.forEach((category) => categories.add(ProductCategory(category.id, name: category.title)));
+      }
+      List<HashTag> hashTags = [];
+      if ( entity.hashTags.isNotEmpty ){
+        entity.hashTags.forEach((hashTag) => hashTags.add(HashTag(id: hashTag.id, title: hashTag.title)));
+      }
       return Product(
         entity.id, 
         title: entity.title,
@@ -97,12 +110,14 @@ class Product extends Equatable {
         amountAvailable: entity.amount,
         //TODO: created - do we need this attribute in the model?
         averageRating: entity.rating,
-        categoryIds: entity.categoryIds,
+        categories: categories,
+        hashTags:  hashTags,
         ratingCount: entity.rating1Count + entity.rating2Count + entity.rating3Count + entity.rating4Count + entity.rating5Count,
         //TODO: add images images: [],
         images: images,
         //TODO: add selectable attributes selectableAttributes: [],
         isFavorite: entity.isFavourite,
+        selectableAttributes: entity.selectableAttributes
       );
     } else {
       throw EntityModelMapperException(message: 'Entity should be of type ProductEntity');
@@ -141,7 +156,7 @@ class Product extends Equatable {
   //TODO place it in extension because it is about UI
   String get specialMark {
     if (discountPercent > 0) {
-      return '-$discountPercent%';
+      return '-' + discountPercent.round().toString() + '%';
     } else if (isNew) {
       return 'New';
     } else {

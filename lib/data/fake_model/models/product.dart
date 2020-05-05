@@ -15,7 +15,7 @@ class FakeProduct extends Product {
       String shortDescription,
       String description,
       double price,
-      int discountPercent,
+      double discountPercent,
       int amountAvailable,
       DateTime created,
       double rating,
@@ -37,7 +37,8 @@ class FakeProduct extends Product {
           created: created,
           averageRating: rating,
           ratingCount: ratingCount,
-          categoryIds: [],
+          categories: [],
+          hashTags: [],
           images: localImages != null && localImages.isNotEmpty
               ? localImages
                   .map((localAddress) => CommerceImage(

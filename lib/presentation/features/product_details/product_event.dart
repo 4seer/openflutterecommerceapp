@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 
 @immutable
@@ -24,9 +25,10 @@ class ProductScreenLoadedEvent extends ProductEvent {
 
 @immutable
 class ProductAddToFavoritesEvent extends ProductEvent {
+  final Product product;
   final HashMap<ProductAttribute, String> selectedAttributes;
 
-  ProductAddToFavoritesEvent(this.selectedAttributes);
+  ProductAddToFavoritesEvent(this.product, this.selectedAttributes);
 }
 
 @immutable

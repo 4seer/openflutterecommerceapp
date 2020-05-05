@@ -28,15 +28,15 @@ class FavoritesListView extends StatelessWidget {
               return Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-                  child: state.data[index].getListView(
+                  child: state.data[index]?.getListView(
                     context: context,
                     showProductInfo: () {
                       Navigator.of(context).pushNamed(
                           OpenFlutterEcommerceRoutes.product,
                           arguments: ProductDetailsParameters(
                               state.data[index].product.id,
-                              state.data[index].product.categoryIds.isNotEmpty ? 
-                                state.data[index].product.categoryIds[0]: 0,
+                              state.data[index].product.categories.isNotEmpty ? 
+                                state.data[index].product.categories[0].id: 0,
                               selectedAttributes:
                                   state.data[index].favoriteForm));
                     },
@@ -52,6 +52,7 @@ class FavoritesListView extends StatelessWidget {
                   ));
             }
           },
+          childCount: state.data?.length
         ),
       );
     });

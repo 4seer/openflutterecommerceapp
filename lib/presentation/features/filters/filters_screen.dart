@@ -33,7 +33,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(' selected attributes: ${rules.selectedAttributes}');
+    print(' selected attributes: ${rules.selectableAttributes}');
     return Scaffold(
       appBar: AppBar(
         title: Text('Filters'),
@@ -51,7 +51,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   onChanged: _changeSelectedPrice,
                 )
               ] +
-              rules.selectedAttributes
+              rules.selectableAttributes
                   .map((attribute, selectedValues) => MapEntry(
                       attribute,
                       FilterSelectableVisibleOption<String>(
@@ -64,13 +64,14 @@ class _FiltersScreenState extends State<FiltersScreen> {
                                 option,
                                 FilterSelectableItem(
                                   text: option,
-                                  isSelected: selectedValues.contains(option),
+                                  isSelected: rules.selectedAttributes[attribute] != null
+                                    ? rules.selectedAttributes[attribute].contains(option) : false,
                                 )))),
                       )))
                   .values
                   .toList(growable: false) +
               [
-                FilterSelectableVisibleOption<Category>(
+                FilterSelectableVisibleOption<ProductCategory>(
                   title: 'Category',
                   children:
                       rules.categories.map((category, isSelected) => MapEntry(
@@ -92,13 +93,16 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
-  void _onCategorySelected(Category value) {
+  void _onCategorySelected(ProductCategory value) {
     setState(() {
       rules.categories[value] = !rules.categories[value];
     });
   }
 
   void _onAttributeSelected(ProductAttribute attribute, String value) {
+    if ( rules.selectedAttributes[attribute] == null ) {
+      rules.selectedAttributes[attribute] = [];
+    }
     if (rules.selectedAttributes[attribute].contains(value)) {
       setState(() {
         rules.selectedAttributes[attribute].remove(value);

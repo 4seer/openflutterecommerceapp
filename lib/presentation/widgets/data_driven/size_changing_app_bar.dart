@@ -19,7 +19,7 @@ class SizeChangingAppBar extends StatelessWidget {
   const SizeChangingAppBar(
       {Key key,
       this.title,
-      this.filterRules,
+      @required this.filterRules,
       this.sortRules,
       this.isListView = true,
       this.onFilterRulesChanged,
@@ -59,14 +59,11 @@ class SizeChangingAppBar extends StatelessWidget {
             ),
             Container(
               height: 30,
-              child: VisualFilter(filterRules?.topmostOption,
+              child: VisualFilter(
+                  filterRules?.hashTags, filterRules?.selectedHashTags,
                   (updateValue, isSelected) {
                 BlocProvider.of<ProductsBloc>(context).add(
-                    ProductChangeFilterRulesEvent(isSelected
-                        ? filterRules?.copyWithAdditionalAttribute(
-                            filterRules?.topmostOption?.key, updateValue)
-                        : filterRules?.copyWithRemovedAttributeValue(
-                            filterRules?.topmostOption?.key, updateValue)));
+                    ProductChangeHashTagEvent(updateValue, isSelected));
               }),
             ),
             OpenFlutterViewOptions(

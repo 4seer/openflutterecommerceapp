@@ -29,7 +29,7 @@ class BaseProductListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: imageHeight + 20,
+      height: imageHeight + 30,
       padding: EdgeInsets.symmetric(horizontal: AppSizes.widgetSidePadding / 2),
       child: Opacity(
         opacity: inactiveMessage == null ? 1 : 0.6,

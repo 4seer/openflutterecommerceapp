@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/woocommerce/models/product_category_model.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
-
-abstract class CategoryRepository {
-  Future<List<Category>> getCategories({int parentCategoryId = 0});
-}
 
 class RemoteCategoryRepository extends CategoryRepository {
   final WoocommercWrapperAbastract woocommerce;
@@ -14,12 +11,12 @@ class RemoteCategoryRepository extends CategoryRepository {
   RemoteCategoryRepository({@required this.woocommerce});
 
   @override
-  Future<List<Category>> getCategories({int parentCategoryId = 0}) async {
+  Future<List<ProductCategory>> getCategories({int parentCategoryId = 0}) async {
     try {
       List<dynamic> categoriesData = await woocommerce.getCategoryList();
-      List<Category> categories = [];
+      List<ProductCategory> categories = [];
       for (int i = 0; i < categoriesData.length; i++) {
-        categories.add(Category.fromEntity(
+        categories.add(ProductCategory.fromEntity(
             ProductCategoryModel.fromJson(categoriesData[i])));
       }
       return categories;
@@ -28,7 +25,8 @@ class RemoteCategoryRepository extends CategoryRepository {
     }
   }
 
-  Future<Category> getCategoryDetails(int categoryId) {
+  @override
+  Future<ProductCategory> getCategoryDetails(int categoryId) {
     // TODO: implement getCategoryDetails
     return null;
   }

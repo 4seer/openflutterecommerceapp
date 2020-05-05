@@ -72,7 +72,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
     }));
   }
 
-  List<Widget> buildCategoryList(List<Category> categories) {
+  List<Widget> buildCategoryList(List<ProductCategory> categories) {
     var elements = <Widget>[];
     for (var i = 0; i < categories.length; i++) {
       elements.add(

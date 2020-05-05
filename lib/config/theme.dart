@@ -17,7 +17,7 @@ class AppSizes {
   static const EdgeInsets bottomSheetPadding =
       EdgeInsets.symmetric(horizontal: 16, vertical: 10);
   static const app_bar_size = 56.0;
-  static const app_bar_expanded_size = 200.0;
+  static const app_bar_expanded_size = 180.0;
   static const tile_width = 148.0;
   static const tile_height = 276.0;
 }

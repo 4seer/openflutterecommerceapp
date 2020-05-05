@@ -71,8 +71,10 @@ extension View on Product {
 
   Widget _getFavoritesButton(VoidCallback onFavoritesClick) {
     return FloatingActionButton(
-      heroTag: Random().nextInt(
-          1000000), //TODO make sure that there is only one product with specified id on screen and use it as a tag
+      heroTag: title +
+          Random()
+              .nextInt(1000000)
+              .toString(), //TODO make sure that there is only one product with specified id on screen and use it as a tag
       mini: true,
       backgroundColor: AppColors.white,
       onPressed: onFavoritesClick,
@@ -91,24 +93,20 @@ extension View on Product {
   }
 
   Widget buildPrice(ThemeData _theme) {
-    return Row(
-      children: <Widget>[
-        Text(
-          price != null ? '\$' + price.toStringAsFixed(0) : '',
-          style: _theme.textTheme.display3.copyWith(
-            decoration: hasDiscountPrice
-                ? TextDecoration.lineThrough
-                : TextDecoration.none,
-          ),
+    return Row(children: <Widget>[
+      Text(
+        price != null ? '\$' + price.toStringAsFixed(0) : '',
+        style: _theme.textTheme.display3.copyWith(
+          decoration: hasDiscountPrice
+              ? TextDecoration.lineThrough
+              : TextDecoration.none,
         ),
-        SizedBox(
-          width: 4.0,
-        ),
-        hasDiscountPrice 
-          ? buildDiscountPrice(_theme)
-          : Container(),
-      ]
-    );
+      ),
+      SizedBox(
+        width: 4.0,
+      ),
+      hasDiscountPrice ? buildDiscountPrice(_theme) : Container(),
+    ]);
   }
 
   Widget buildRating(BuildContext context) {
@@ -126,10 +124,7 @@ extension View on Product {
 
   Widget buildDiscountPrice(ThemeData _theme) {
     return Text('\$' + discountPrice.toStringAsFixed(0),
-      style: _theme.textTheme.display3.copyWith(
-        color: _theme.errorColor
-      )
-    );
+        style: _theme.textTheme.display3.copyWith(color: _theme.errorColor));
   }
 }
 
@@ -146,6 +141,9 @@ extension FavoriteView on FavoriteProduct {
               ? null
               : 'Sorry, this item is currently sold out',
       bottomRoundButton: FloatingActionButton(
+        heroTag: 'Remove from Cart' +Random()
+              .nextInt(1000000)
+              .toString(),
         backgroundColor: AppColors.red,
         onPressed: onAddToCart,
         child: Icon(
@@ -197,6 +195,9 @@ extension FavoriteView on FavoriteProduct {
                 ? null
                 : 'Sorry, this item is currently sold out',
         bottomRoundButton: FloatingActionButton(
+          heroTag: 'Add to Cart' + Random()
+                .nextInt(1000000)
+                .toString(),
           backgroundColor: AppColors.red,
           onPressed: onAddToCart,
           child: Icon(

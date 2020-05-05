@@ -72,7 +72,7 @@ class RemoteUserRepository extends UserRepository {
   }
 
   @override
-  Future<void> forgetPassword({
+  Future<void> forgotPassword({
     @required String email,
   }) async {
     try {

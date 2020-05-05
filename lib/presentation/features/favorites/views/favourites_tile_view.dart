@@ -35,8 +35,8 @@ class FavouritesTileView extends StatelessWidget {
                       OpenFlutterEcommerceRoutes.product,
                       arguments: ProductDetailsParameters(
                           state.data[index].product.id,
-                          state.data[index].product.categoryIds.isNotEmpty ? 
-                            state.data[index].product.categoryIds[0]: 0,
+                          state.data[index].product.categories.isNotEmpty ? 
+                            state.data[index].product.categories[0].id: 0,
                           selectedAttributes: state.data[index].favoriteForm));
                 },
                 onRemoveFromFavorites: () {

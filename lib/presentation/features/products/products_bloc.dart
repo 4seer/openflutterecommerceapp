@@ -8,7 +8,6 @@ import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/fake_model/hashtag_repository.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_result.dart';
@@ -20,14 +19,12 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   final FindProductsByFilterUseCase findProductsByFilterUseCase;
   final CategoryRepository categoryRepository;
   final FavoritesRepository favoritesRepository;
-  final HashtagRepository hashtagRepository;
   final int categoryId;
 
   ProductsBloc({
     @required this.categoryId,
     @required this.categoryRepository,
     @required this.favoritesRepository,
-    @required this.hashtagRepository,
   }) : findProductsByFilterUseCase = sl();
 
   @override
@@ -60,6 +57,20 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
         sortBy: event.sortBy,
         data: state.data.copyWith(filteredData),
       );
+    }  else if (event is ProductChangeHashTagEvent) {
+      yield state.getLoading();
+      state.filterRules.selectedHashTags[event.hashTag] = event.isSelected;
+      ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
+        ProductsByFilterParams(
+          categoryId: categoryId,
+          filterRules: state.filterRules,
+          sortBy: state.sortBy
+        ));
+      final List<Product> filteredData = productResults.products;
+      yield state.copyWith(
+        data: state.data.copyWith(filteredData),
+        sortBy: state.sortBy,
+      );
     } else if (event is ProductChangeFilterRulesEvent) {
       yield state.getLoading();
       ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
@@ -72,17 +83,17 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       yield state.copyWith(
           filterRules: event.filterRules,
           data: state.data.copyWith(filteredData));
-    } else if (event is MakeFavoriteEvent) {
+    } else if (event is ProductMakeFavoriteEvent) {
       if (event.isFavorite) {
         await favoritesRepository.addToFavorites(
-            event.productId, event.favoriteAttributes);
+            event.product, event.favoriteAttributes);
       } else {
-        await favoritesRepository.removeFromFavorites(event.productId);
+        await favoritesRepository.removeFromFavorites(event.product.id);
       }
       final List<Product> data = state.data.products;
       yield state.copyWith(
           data: state.data.copyWith(data.map((item) {
-        if (event.productId == item.id) {
+        if (event.product.id == item.id) {
           return item.favorite(event.isFavorite);
         } else {
           return item;
@@ -99,7 +110,6 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
     );
     return ProductListData(
         productResults.products,
-        hashtagRepository.getHashtags(),
         await categoryRepository.getCategoryDetails(categoryId),
         productResults.filterRules);
   }

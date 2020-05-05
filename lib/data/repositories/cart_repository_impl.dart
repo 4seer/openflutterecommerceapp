@@ -1,7 +1,7 @@
 /*
- * @author Martin Appelmann <exlo89@gmail.com>
+ * @author Andrew Poteryahin <openflutterproject@gmail.com>
  * @copyright 2020 Open E-commerce App
- * @see fake_cart_repository.dart
+ * @see cart_repository_impl.dart
  */
 
 import 'package:openflutterecommerce/data/abstract/cart_repository.dart';
@@ -10,7 +10,7 @@ import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/data/abstract/model/promo.dart';
 
-class FakeCartRepository extends CartRepository{
+class CartRepositoryImpl extends CartRepository{
   @override
   Future addProductToCart(Product product, int quantity, Map<ProductAttribute, String> selectedAttributes) {
     // TODO: implement addProductToCart
@@ -30,9 +30,9 @@ class FakeCartRepository extends CartRepository{
   }
 
   @override
-  Future<List<CartItem>> getCartContent() {
+  Future<List<CartItem>> getCartContent() async {
     // TODO: implement getCartContent
-    throw UnimplementedError();
+    return [ ];
   }
 
   @override

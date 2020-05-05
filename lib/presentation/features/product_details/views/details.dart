@@ -17,7 +17,7 @@ import '../product_state.dart';
 class ProductDetailsView extends StatefulWidget {
   final Product product;
   final Function changeView;
-  final Category category;
+  final ProductCategory category;
   final bool hasReviews;
 
   final List<Product> similarProducts;
@@ -193,6 +193,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   void setFavourite(ProductBloc bloc) {
     if (!favorite) {
       bloc.add(ProductAddToFavoritesEvent(
+          widget.product,
           HashMap())); //TODO ask for real parameters if required
     } else {
       bloc.add(ProductRemoveFromFavoritesEvent());

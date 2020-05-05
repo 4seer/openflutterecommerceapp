@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 
 import 'model/filter_rules.dart';
 import 'model/product_attribute.dart';
@@ -26,10 +27,13 @@ abstract class FavoritesRepository {
   ///that all selectable properties should be set so it will be easy to order
   ///it then
   Future addToFavorites(
-      int productId, HashMap<ProductAttribute, String> selectedAttributes);
+      Product product, HashMap<ProductAttribute, String> selectedAttributes);
 
   ///removes product with [productId] from the list of favorites
-  Future removeFromFavorites(int productId);
+  Future<List<FavoriteProduct>> removeFromFavorites(int productId);
+
+  //check if product was added to favorite
+  bool checkFavorite(int productId);
 
   ///returns filter options available for favorite products.
   ///All rules should be set with initial (unselected) values
