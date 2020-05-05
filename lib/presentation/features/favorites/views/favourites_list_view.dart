@@ -52,6 +52,7 @@ class FavoritesListView extends StatelessWidget {
                   ));
             }
           },
+          childCount: state.data?.length
         ),
       );
     });

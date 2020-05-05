@@ -141,6 +141,9 @@ extension FavoriteView on FavoriteProduct {
               ? null
               : 'Sorry, this item is currently sold out',
       bottomRoundButton: FloatingActionButton(
+        heroTag: 'Remove from Cart' +Random()
+              .nextInt(1000000)
+              .toString(),
         backgroundColor: AppColors.red,
         onPressed: onAddToCart,
         child: Icon(
@@ -192,6 +195,9 @@ extension FavoriteView on FavoriteProduct {
                 ? null
                 : 'Sorry, this item is currently sold out',
         bottomRoundButton: FloatingActionButton(
+          heroTag: 'Add to Cart' + Random()
+                .nextInt(1000000)
+                .toString(),
           backgroundColor: AppColors.red,
           onPressed: onAddToCart,
           child: Icon(

@@ -18,7 +18,7 @@ import 'package:openflutterecommerce/locator.dart';
 //Uses remote or local data depending on NetworkStatus
 class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
 
-  final ProductDataStorage _dataStorage = ProductDataStorage();
+  static ProductDataStorage dataStorage = ProductDataStorage();
   
   @override
   Future<Product> getProduct(int id) {
@@ -64,9 +64,19 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
         productRepository = LocalProductRepository();
       }
 
-      _dataStorage.products = await productRepository.getProducts();
+      List<Product> products = await productRepository.getProducts();
 
-      return _dataStorage.products;
+      //check favorites
+      dataStorage.products = [];
+      products.forEach( (product) =>{
+        dataStorage.products.add(
+          product.copyWith(
+            isFavorite: checkFavorite(product.id)
+          )
+        )
+      }); 
+
+      return dataStorage.products;
     } on HttpRequestException {
       throw RemoteServerException();
     }
@@ -74,7 +84,7 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
 
   @override
   Future addToFavorites(Product product, HashMap<ProductAttribute, String> selectedAttributes) async {
-    _dataStorage.favProducts.add(FavoriteProduct(product, selectedAttributes));
+    dataStorage.favProducts.add(FavoriteProduct(product, selectedAttributes));
   }
 
   @override
@@ -84,19 +94,33 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
     /*_dataStorage.products = await getProducts();
     _dataStorage.products.forEach((product) => 
       _dataStorage.favProducts.add(FavoriteProduct(product, HashMap())));*/
-    return _dataStorage.favProducts;
+    return dataStorage.favProducts;
   }
 
   @override
   Future<FilterRules> getFavoritesFilterOptions() async {
     //TODO: remove when favorite feature will be implemented
-    return FilterRules.getSelectableAttributes(_dataStorage.products);
+    return FilterRules.getSelectableAttributes(dataStorage.products);
   }
 
   @override
-  Future removeFromFavorites(int productId) {
-    // TODO: implement removeFromFavorites
-    return null;
+  Future<List<FavoriteProduct>> removeFromFavorites(int productId) async {
+    //TODO: remove from database in the future
+    dataStorage.favProducts.removeWhere((product) => product.product.id == productId);
+    return dataStorage.favProducts;
+  }
+
+  @override
+  bool checkFavorite(int productId) {
+    // TODO: implement checkFavorite
+    bool isFavorite = false;
+    for( int i = 0; i < dataStorage.favProducts.length; i++) {
+      if ( dataStorage.favProducts[i].product.id == productId) {
+        isFavorite = true;
+        break;
+      }
+    }
+    return isFavorite;
   }
 }
 

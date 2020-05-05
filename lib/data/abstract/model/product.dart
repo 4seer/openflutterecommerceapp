@@ -167,4 +167,24 @@ class Product extends Equatable {
   CommerceImage get mainImage => (images != null && images.isNotEmpty)
       ? images.first
       : CommerceImage.placeHolder();
+
+  Product copyWith({bool isFavorite}) {
+    return Product(
+      id, 
+      title: title,
+      subTitle: subTitle,
+      shortDescription: description,
+      description: description,
+      price: price ?? 0,
+      discountPercent: discountPercent,
+      amountAvailable: amountAvailable,
+      averageRating: averageRating,
+      categories: categories,
+      hashTags:  hashTags,
+      ratingCount: ratingCount,
+      images: images,
+      isFavorite: isFavorite ?? isFavorite,
+      selectableAttributes: selectableAttributes
+    );
+  }
 }

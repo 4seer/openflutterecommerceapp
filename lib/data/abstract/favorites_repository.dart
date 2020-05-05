@@ -30,7 +30,10 @@ abstract class FavoritesRepository {
       Product product, HashMap<ProductAttribute, String> selectedAttributes);
 
   ///removes product with [productId] from the list of favorites
-  Future removeFromFavorites(int productId);
+  Future<List<FavoriteProduct>> removeFromFavorites(int productId);
+
+  //check if product was added to favorite
+  bool checkFavorite(int productId);
 
   ///returns filter options available for favorite products.
   ///All rules should be set with initial (unselected) values

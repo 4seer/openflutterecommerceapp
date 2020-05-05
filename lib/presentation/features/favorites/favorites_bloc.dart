@@ -44,6 +44,10 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       yield state.copyWith(filterRules: event.filterRules, data: filteredData);
     } else if (event is AddToCartEvent) {
       //TODO add to cart
+    } else if ( event is RemoveFromFavoriteEvent ) {
+      yield state.getLoading();
+      final filteredData = await favoritesRepository.removeFromFavorites(event.productId);
+      yield state.copyWith(data: filteredData);
     }
   }
 }
