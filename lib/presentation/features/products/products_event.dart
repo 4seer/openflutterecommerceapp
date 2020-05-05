@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
+import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
@@ -70,11 +71,11 @@ class ProductSearchEvent extends ProductsListEvent {
 
 class ProductMakeFavoriteEvent extends ProductsListEvent {
   final bool isFavorite;
-  final int productId;
+  final Product product;
   final HashMap<ProductAttribute, String> favoriteAttributes;
 
-  ProductMakeFavoriteEvent(this.isFavorite, this.productId, {this.favoriteAttributes});
+  ProductMakeFavoriteEvent(this.isFavorite, this.product, {this.favoriteAttributes});
 
   @override
-  List<Object> get props => [isFavorite, productId];
+  List<Object> get props => [isFavorite, product, favoriteAttributes];
 }

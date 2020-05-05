@@ -42,7 +42,7 @@ class Product extends Equatable {
     this.description,
     @required this.price,
     this.discountPercent = 0,
-    this.amountAvailable = 10,
+    this.amountAvailable = 0,
     DateTime created,
     this.averageRating,
     this.ratingCount = 0,

@@ -73,14 +73,7 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
   }
 
   @override
-  Future addToFavorites(int productId, HashMap<ProductAttribute, String> selectedAttributes) async {
-    Product product;
-
-    _dataStorage.products?.forEach((tempProduct) =>{
-        if ( tempProduct.id == productId)
-          product = tempProduct
-    });
-
+  Future addToFavorites(Product product, HashMap<ProductAttribute, String> selectedAttributes) async {
     _dataStorage.favProducts.add(FavoriteProduct(product, selectedAttributes));
   }
 
@@ -88,9 +81,9 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
   Future<List<FavoriteProduct>> getFavoriteProducts({int pageIndex = 0, int pageSize = AppConsts.page_size, 
       SortRules sortRules = const SortRules(), FilterRules filterRules}) async {
     //TODO: remove when favorite feature will be implemented
-    _dataStorage.products = await getProducts();
+    /*_dataStorage.products = await getProducts();
     _dataStorage.products.forEach((product) => 
-      _dataStorage.favProducts.add(FavoriteProduct(product, HashMap())));
+      _dataStorage.favProducts.add(FavoriteProduct(product, HashMap())));*/
     return _dataStorage.favProducts;
   }
 

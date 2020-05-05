@@ -41,7 +41,7 @@ class ProductsListView extends StatelessWidget {
                       BlocProvider.of<ProductsBloc>(context).add(
                           ProductMakeFavoriteEvent(
                               !state.data.products[index].isFavorite,
-                              state.data.products[index].id));
+                              state.data.products[index]));
                     },
                   )) ;
             }

@@ -86,14 +86,14 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
     } else if (event is ProductMakeFavoriteEvent) {
       if (event.isFavorite) {
         await favoritesRepository.addToFavorites(
-            event.productId, event.favoriteAttributes);
+            event.product, event.favoriteAttributes);
       } else {
-        await favoritesRepository.removeFromFavorites(event.productId);
+        await favoritesRepository.removeFromFavorites(event.product.id);
       }
       final List<Product> data = state.data.products;
       yield state.copyWith(
           data: state.data.copyWith(data.map((item) {
-        if (event.productId == item.id) {
+        if (event.product.id == item.id) {
           return item.favorite(event.isFavorite);
         } else {
           return item;
