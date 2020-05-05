@@ -59,21 +59,21 @@ class ProductChangeHashTagEvent extends ProductsListEvent {
   List<Object> get props => [hashTag];
 }
 
-class SearchEvent extends ProductsListEvent {
+class ProductSearchEvent extends ProductsListEvent {
   final String search;
 
-  SearchEvent(this.search);
+  ProductSearchEvent(this.search);
 
   @override
   List<Object> get props => [search];
 }
 
-class MakeFavoriteEvent extends ProductsListEvent {
+class ProductMakeFavoriteEvent extends ProductsListEvent {
   final bool isFavorite;
   final int productId;
   final HashMap<ProductAttribute, String> favoriteAttributes;
 
-  MakeFavoriteEvent(this.isFavorite, this.productId, {this.favoriteAttributes});
+  ProductMakeFavoriteEvent(this.isFavorite, this.productId, {this.favoriteAttributes});
 
   @override
   List<Object> get props => [isFavorite, productId];

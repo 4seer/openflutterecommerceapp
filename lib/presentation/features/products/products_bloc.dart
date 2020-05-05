@@ -83,7 +83,7 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       yield state.copyWith(
           filterRules: event.filterRules,
           data: state.data.copyWith(filteredData));
-    } else if (event is MakeFavoriteEvent) {
+    } else if (event is ProductMakeFavoriteEvent) {
       if (event.isFavorite) {
         await favoritesRepository.addToFavorites(
             event.productId, event.favoriteAttributes);
