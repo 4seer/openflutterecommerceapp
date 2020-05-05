@@ -36,7 +36,7 @@ void init() {
   //Singleton for HTTP request
   sl.registerLazySingleton(() => http.Client());
 
-  sl.registerLazySingleton<WoocommercWrapperAbastract>(
+  sl.registerLazySingleton<WoocommercWrapperAbstract>(
     () => WoocommerceWrapper(client: sl()),
   );
   

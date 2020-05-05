@@ -10,7 +10,7 @@ import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_w
 import '../../../fixtures/fixture_reader.dart';
 
 class MockWoocommerceWrapper extends Mock
-    implements WoocommercWrapperAbastract {}
+    implements WoocommercWrapperAbstract {}
 
 class MockNetworkStatus extends Mock implements NetworkStatus {}
 

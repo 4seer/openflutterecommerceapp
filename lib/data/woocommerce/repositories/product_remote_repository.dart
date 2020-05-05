@@ -11,7 +11,7 @@ import 'package:openflutterecommerce/domain/usecases/products/products_by_filter
 
 class RemoteProductRepository extends ProductRepository {
   
-  final WoocommercWrapperAbastract woocommerce;
+  final WoocommercWrapperAbstract woocommerce;
 
   RemoteProductRepository({@required this.woocommerce});
 
