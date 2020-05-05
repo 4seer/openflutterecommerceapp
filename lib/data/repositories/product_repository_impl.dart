@@ -70,8 +70,8 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
       dataStorage.products = [];
       products.forEach( (product) =>{
         dataStorage.products.add(
-          product.copyWith(
-            isFavorite: checkFavorite(product.id)
+          product.favorite(
+            checkFavorite(product.id)
           )
         )
       }); 
