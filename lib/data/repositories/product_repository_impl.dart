@@ -106,7 +106,9 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
   @override
   Future<List<FavoriteProduct>> removeFromFavorites(int productId, HashMap<ProductAttribute, String> selectedAttributes) async {
     //TODO: remove from database in the future
-    dataStorage.favProducts.removeWhere((product) => product.product.id == productId && product.favoriteForm == selectedAttributes);
+    dataStorage.favProducts.removeWhere((product) => product.product.id == productId && 
+      (selectedAttributes == null || product.favoriteForm == selectedAttributes)
+    );
     return dataStorage.favProducts;
   }
 
