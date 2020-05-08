@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
@@ -6,7 +8,7 @@ import 'product.dart';
 
 class CartItem extends Equatable {
   final Product product;
-  final Map<ProductAttribute, String> selectedAttributes;
+  final HashMap<ProductAttribute, String> selectedAttributes;
   final ProductQuantity productQuantity;
 
   double get price => productQuantity.quantity * product.price;

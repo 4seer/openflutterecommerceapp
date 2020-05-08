@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/routes.dart';
@@ -110,7 +108,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                   [
                                     OpenFlutterFavouriteButton(
                                       favourite: favorite,
-                                      setFavourite: () => {setFavourite(bloc)},
+                                      setFavourite: () => {
+                                        setFavourite(bloc)
+                                      },
                                     )
                                   ]) ,
                         ),
@@ -189,11 +189,11 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             }));
   }
 
-  void setFavourite(ProductBloc bloc) {
+  void setFavourite(
+    ProductBloc bloc
+  ) {
     if (!favorite) {
-      bloc.add(ProductAddToFavoritesEvent(
-          widget.product,
-          HashMap())); //TODO ask for real parameters if required
+      bloc.add(ProductAddToFavoritesEvent()); //TODO ask for real parameters if required
     } else {
       bloc.add(ProductRemoveFromFavoritesEvent());
     }

@@ -1,8 +1,12 @@
+import 'dart:collection';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
+import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/add_product_to_cart_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/remove_from_favorites_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/get_product_by_id_use_case.dart';
 import 'package:openflutterecommerce/locator.dart';
 
@@ -10,15 +14,18 @@ import 'product_event.dart';
 import 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
+  final AddToFavoritesUseCase addToFavoriteUseCase;
+  final RemoveFromFavoritesUseCase removeFromFavoritesUseCase;
   final GetProductByIdUseCase getProductByIdUseCaseImpl;
   final AddProductToCartUseCase addProductToCartUseCase;
-  final FavoritesRepository favoriesRepository;
   final int productId;
 
   ProductBloc(
-    {this.favoriesRepository, this.productId}):
+    {this.productId}):
       getProductByIdUseCaseImpl = sl(),
-      addProductToCartUseCase = sl();
+      addProductToCartUseCase = sl(),
+      addToFavoriteUseCase = sl(),
+      removeFromFavoritesUseCase = sl();
 
   @override
   ProductState get initialState => ProductInitialState();
@@ -35,14 +42,29 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       yield ProductLoadedState(product: data.productDetails, 
         similarProducts: data.similarProducts,
         productAttributes: SelectedProductAttributes(
-          selectedAttributes: Map<ProductAttribute, String>(),
+          selectedAttributes: HashMap<ProductAttribute, String>(),
           )
         );
     } else if (event is ProductAddToFavoritesEvent) {
-      await favoriesRepository.addToFavorites(
-          event.product, event.selectedAttributes);
-    } else if (event is ProductAddToFavoritesEvent) {
-      await favoriesRepository.removeFromFavorites(productId);
+      ProductLoadedState currentState = state as ProductLoadedState;
+      await addToFavoriteUseCase.execute(
+        FavoriteProduct(
+          currentState.product,
+          currentState.productAttributes.selectedAttributes
+        )
+      );
+    } else if (event is ProductRemoveFromFavoritesEvent) {
+      if ( state is ProductLoadedState) {
+        ProductLoadedState currentState = state as ProductLoadedState;
+        await removeFromFavoritesUseCase.execute(
+          RemoveFromFavoritesParams(
+            FavoriteProduct(
+              currentState.product,
+              currentState.productAttributes.selectedAttributes
+            )
+          )
+        );
+      }
     } else if (event is ProductAddToCartEvent) {
       if ( state is ProductLoadedState) {
         ProductLoadedState currentState = state as ProductLoadedState;
@@ -63,6 +85,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         similarProducts: newState.similarProducts,
         productAttributes: newState.productAttributes
       );
-    }
+    } 
   }
 }

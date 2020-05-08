@@ -4,10 +4,13 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/category_repository.dart';
-import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/get_favorite_products_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/remove_from_favorites_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_result.dart';
@@ -17,15 +20,19 @@ import 'bloc_list_data.dart';
 
 class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   final FindProductsByFilterUseCase findProductsByFilterUseCase;
-  final CategoryRepository categoryRepository;
-  final FavoritesRepository favoritesRepository;
-  final int categoryId;
+
+  final GetFavoriteProductsUseCase getFavoriteProductsUseCase;
+  final RemoveFromFavoritesUseCase removeFromFavoritesUseCase;
+  final AddToFavoritesUseCase addToFavoritesUseCase;
+  
+  final ProductCategory category;
 
   ProductsBloc({
-    @required this.categoryId,
-    @required this.categoryRepository,
-    @required this.favoritesRepository,
-  }) : findProductsByFilterUseCase = sl();
+    @required this.category,
+  }) : findProductsByFilterUseCase = sl(),
+    getFavoriteProductsUseCase = sl(),
+    removeFromFavoritesUseCase = sl(),
+    addToFavoritesUseCase = sl();
 
   @override
   ProductsState get initialState => ProductsListViewState();
@@ -33,7 +40,7 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   @override
   Stream<ProductsState> mapEventToState(ProductsListEvent event) async* {
     if (event is ScreenLoadedEvent) {
-      ProductListData data = await getInitialStateData(categoryId);
+      ProductListData data = await getInitialStateData(category);
       yield ProductsListViewState(
           sortBy: SortRules(),
           data: data,
@@ -48,7 +55,7 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       yield state.getLoading();
       ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
         ProductsByFilterParams(
-          categoryId: categoryId,
+          categoryId: category.id,
           filterRules: state.filterRules,
           sortBy: event.sortBy
         ));
@@ -62,7 +69,7 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       state.filterRules.selectedHashTags[event.hashTag] = event.isSelected;
       ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
         ProductsByFilterParams(
-          categoryId: categoryId,
+          categoryId: category.id,
           filterRules: state.filterRules,
           sortBy: state.sortBy
         ));
@@ -75,7 +82,7 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       yield state.getLoading();
       ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
         ProductsByFilterParams(
-          categoryId: categoryId,
+          categoryId: category.id,
           filterRules: event.filterRules,
           sortBy: state.sortBy
         ));
@@ -85,10 +92,19 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
           data: state.data.copyWith(filteredData));
     } else if (event is ProductMakeFavoriteEvent) {
       if (event.isFavorite) {
-        await favoritesRepository.addToFavorites(
-            event.product, event.favoriteAttributes);
+        await addToFavoritesUseCase.execute(FavoriteProduct(
+          event.product,
+          event.favoriteAttributes
+          )
+        );
       } else {
-        await favoritesRepository.removeFromFavorites(event.product.id);
+        await removeFromFavoritesUseCase.execute(
+          RemoveFromFavoritesParams(FavoriteProduct(
+            event.product,
+            event.favoriteAttributes
+            )
+          )
+        );
       }
       final List<Product> data = state.data.products;
       yield state.copyWith(
@@ -102,15 +118,15 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
     }
   }
 
-  Future<ProductListData> getInitialStateData(int categoryId) async {
+  Future<ProductListData> getInitialStateData(ProductCategory category) async {
     ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
       ProductsByFilterParams(
-        categoryId: categoryId
+        categoryId: category.id
       )
     );
     return ProductListData(
         productResults.products,
-        await categoryRepository.getCategoryDetails(categoryId),
+        category,
         productResults.filterRules);
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
@@ -41,7 +43,7 @@ class ProductLoadedState extends ProductState {
 
 @immutable
 class SelectedProductAttributes extends Equatable{
-  final Map<ProductAttribute, String> selectedAttributes;
+  final HashMap<ProductAttribute, String> selectedAttributes;
 
   SelectedProductAttributes({
     @required this.selectedAttributes

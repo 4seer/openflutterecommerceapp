@@ -6,23 +6,22 @@
 /// and size as the cart item.
 /// https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-use-cases-and-features-6b7414a6e708
 
-import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
 import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
 import 'package:openflutterecommerce/data/repositories/product_repository_impl.dart';
 import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
 
 abstract class AddToFavoritesUseCase
-  implements BaseUseCase<AddToFavoriteResult, CartItem> {}
+  implements BaseUseCase<AddToFavoriteResult, FavoriteProduct> {}
 
     
 class AddToFavoritesUseCaseImpl implements AddToFavoritesUseCase {
   @override
-  Future<AddToFavoriteResult> execute(CartItem item) async {
+  Future<AddToFavoriteResult> execute(FavoriteProduct item) async {
     try {
       ProductRepositoryImpl.dataStorage.favProducts.add(
         FavoriteProduct(
           item.product,
-          item.selectedAttributes
+          item.favoriteForm
         )
       );
       return AddToFavoriteResult(result: true);
