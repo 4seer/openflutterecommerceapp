@@ -6,15 +6,18 @@ import 'package:bloc/bloc.dart';
 import 'package:openflutterecommerce/data/fake_model/promo_repository.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/change_cart_item_quantity_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/get_cart_products_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/cart/remove_product_from_cart_use_case.dart';
 import 'package:openflutterecommerce/locator.dart';
 
 import 'cart.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   final GetCartProductsUseCase getCartProductsUseCase;
+  final RemoveProductFromCartUseCase removeProductFromCartUseCase;
 
   CartBloc() 
-  : getCartProductsUseCase = sl();
+  : getCartProductsUseCase = sl(),
+    removeProductFromCartUseCase = sl();
 
   @override
   CartState get initialState => CartInitialState();
@@ -45,7 +48,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         showPromoPopup: state.showPromoPopup
       );
     } else if (event is CartRemoveFromCartEvent) {
-      //TODO: remove product from cart
+      var state = this.state as CartLoadedState;
+      yield CartLoadingState();
+      await removeProductFromCartUseCase.execute(event.item);
+      final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
+      yield CartLoadedState(
+        cartProducts: cartResults.cartItems, 
+        promos: state.promos, 
+        showPromoPopup: state.showPromoPopup
+      );
     } else if (event is CartAddToFavsEvent) {
       //TODO: add to favs
     } else if (event is CartPromoAppliedEvent) {

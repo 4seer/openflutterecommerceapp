@@ -74,7 +74,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                         onTap: (() => {
                                               //TODO: show popup with add to favs and delete from cart
                                               showPopup = !showPopup,
-                                              //setState(() => {})
+                                              setState(() => {})
                                             }),
                                         child:
                                             Icon(Icons.more_vert, size: 24))
@@ -211,7 +211,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                       widget
                                           .onAddToFav(),
                                       showPopup = false,
-                                      //setState(() => {})
+                                      setState(() => {})
                                     }),
                                 child: Container(
                                     width: 140,
@@ -230,7 +230,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                 onTap: (() => {
                                       widget.onRemoveFromCart(),
                                       showPopup = false,
-                                      //setState(() => {})
+                                      setState(() => {})
                                     }),
                                 child: Container(
                                     alignment: Alignment.center,

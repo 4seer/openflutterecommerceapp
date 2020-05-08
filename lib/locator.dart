@@ -16,6 +16,7 @@ import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_w
 import 'package:openflutterecommerce/domain/usecases/cart/add_product_to_cart_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/change_cart_item_quantity_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/get_cart_products_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/cart/remove_product_from_cart_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/categories/find_categories_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
@@ -28,6 +29,9 @@ void init() {
   //Singleton for NetworkStatus identification
   sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl(DataConnectionChecker()));
 
+  //change cart quantity use case 
+  sl.registerLazySingleton<RemoveProductFromCartUseCase>(() => RemoveProductFromCartUseCaseImpl());
+  
   //change cart quantity use case 
   sl.registerLazySingleton<ChangeCartItemQuantityUseCase>(() => ChangeCartItemQuantityUseCaseImpl());
 
