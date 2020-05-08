@@ -6,12 +6,12 @@ import 'package:openflutterecommerce/config/server_addresses.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 
-abstract class WoocommercWrapperAbastract{
+abstract class WoocommercWrapperAbstract{
    Future<List<dynamic>> getCategoryList({int parentId=0});
    Future<List<dynamic>> getProductList(ProductsByFilterParams params);
 }
 
-class WoocommerceWrapper implements WoocommercWrapperAbastract{
+class WoocommerceWrapper implements WoocommercWrapperAbstract{
   
   final http.Client client;
 
