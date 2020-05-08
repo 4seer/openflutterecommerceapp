@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
@@ -325,5 +326,6 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
         }
       }
     }
+    await Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart);
   }
 }

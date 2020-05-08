@@ -3,15 +3,14 @@ abstract class BaseUseCase<TResult, TParams> {
   Future<TResult> execute(TParams params);
 }
 
-class Failure {
-  final dynamic error;
+class UseCaseResult {
+  final Exception exception;
+  final bool result;
 
-  Failure(this.error);
+  UseCaseResult({
+    this.exception,
+    this.result
+  });
 
-  T cast<T>() {
-    if (error is T) {
-      return(error);
-    }
-    return null;
-  }
+  bool get validResults => exception == null;
 }
