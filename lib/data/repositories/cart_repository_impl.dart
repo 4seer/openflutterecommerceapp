@@ -11,6 +11,8 @@ import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart'
 import 'package:openflutterecommerce/data/abstract/model/promo.dart';
 
 class CartRepositoryImpl extends CartRepository{
+  static CartProductDataStorage cartProductDataStorage 
+    = CartProductDataStorage();
   @override
   Future addProductToCart(Product product, int quantity, Map<ProductAttribute, String> selectedAttributes) {
     // TODO: implement addProductToCart
@@ -18,9 +20,12 @@ class CartRepositoryImpl extends CartRepository{
   }
 
   @override
-  Future changeQuantity(Product product, int newQuantity) {
-    // TODO: implement changeQuantity
-    throw UnimplementedError();
+  Future changeQuantity(CartItem item, int newQuantity) async {
+    for(int i = 0; i < cartProductDataStorage.items.length; i++){
+      if ( cartProductDataStorage.items[i] == item ) {
+        cartProductDataStorage.items[i].productQuantity.changeQuantity(newQuantity);
+      }
+    }
   }
 
   @override
@@ -31,8 +36,7 @@ class CartRepositoryImpl extends CartRepository{
 
   @override
   Future<List<CartItem>> getCartContent() async {
-    // TODO: implement getCartContent
-    return [ ];
+    return cartProductDataStorage.items;
   }
 
   @override
@@ -41,4 +45,8 @@ class CartRepositoryImpl extends CartRepository{
     throw UnimplementedError();
   }
 
+}
+
+class CartProductDataStorage {
+  List<CartItem> items = [];
 }

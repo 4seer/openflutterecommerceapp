@@ -2,7 +2,6 @@ import 'dart:collection';
 
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
-import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
 import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
@@ -128,5 +127,4 @@ class ProductRepositoryImpl extends ProductRepository with FavoritesRepository {
 class ProductDataStorage {
   List<Product> products = [];
   List<FavoriteProduct> favProducts = [];
-  List<CartItem> cart = [];
 }

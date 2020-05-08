@@ -48,7 +48,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         ProductLoadedState currentState = state as ProductLoadedState;
         AddToCartResult addToCartResult = await addProductToCartUseCase.execute(CartItem(
           product: currentState.product,
-          quantity: 1,
+          productQuantity: ProductQuantity(1),
           selectedAttributes: currentState.productAttributes.selectedAttributes
         ));
         if ( !addToCartResult.result) {

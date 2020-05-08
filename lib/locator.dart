@@ -14,8 +14,10 @@ import 'package:openflutterecommerce/data/repositories/user_repository_impl.dart
 import 'package:openflutterecommerce/data/woocommerce/repositories/remote_user_repository.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/add_product_to_cart_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/cart/change_cart_item_quantity_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/get_cart_products_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/categories/find_categories_by_filter_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/get_product_by_id_use_case.dart';
 
@@ -26,8 +28,14 @@ void init() {
   //Singleton for NetworkStatus identification
   sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl(DataConnectionChecker()));
 
+  //change cart quantity use case 
+  sl.registerLazySingleton<ChangeCartItemQuantityUseCase>(() => ChangeCartItemQuantityUseCaseImpl());
+
   //get cart product use case  
   sl.registerLazySingleton<GetCartProductsUseCase>(() => GetCartProductsUseCaseImpl());
+
+  //add to favorite use case 
+  sl.registerLazySingleton<AddToFavoritesUseCase>(() => AddToFavoritesUseCaseImpl());
 
   //add to cart use case
   sl.registerLazySingleton<AddProductToCartUseCase>(() => AddProductToCartUseCaseImpl());

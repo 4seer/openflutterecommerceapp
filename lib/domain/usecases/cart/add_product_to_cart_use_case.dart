@@ -1,4 +1,3 @@
-import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
 /// # Product details screen
 /// 3.3. Add product to cart use-case: Use clicks on product details 
 /// screen, a popup with color and size selection appears, 
@@ -9,11 +8,10 @@ import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
 /// with according selection.
 /// https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-use-cases-and-features-6b7414a6e708
 
-import 'package:openflutterecommerce/data/repositories/product_repository_impl.dart';
+import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
+import 'package:openflutterecommerce/data/repositories/cart_repository_impl.dart';
 import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
-/// FindProductsByFilterUseCase returns ProductsByFilterResult
-/// To check if the results are valid use ProductsByFilterResult.validResults
-/// ProductsByFilterResult.exception contains internal exception
+
 abstract class AddProductToCartUseCase
   implements BaseUseCase<AddToCartResult, CartItem> {}
 
@@ -22,7 +20,7 @@ class AddProductToCartUseCaseImpl implements AddProductToCartUseCase {
   @override
   Future<AddToCartResult> execute(CartItem item) async {
     try {
-      ProductRepositoryImpl.dataStorage.cart.add(item);
+      CartRepositoryImpl.cartProductDataStorage.items.add(item);
       return AddToCartResult(result: true);
     } catch (e) {
       return AddToCartResult(  

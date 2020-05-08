@@ -6,8 +6,8 @@ import 'package:openflutterecommerce/presentation/features/cart/views/selected_a
 class OpenFlutterCartTile extends StatefulWidget {
   final CartItem item;
   final Function(int quantity) onChangeQuantity;
-  final Function(int productId) onAddToFav;
-  final Function(int productId) onRemoveFromCart;
+  final Function() onAddToFav;
+  final Function() onRemoveFromCart;
   final bool orderComplete;
 
   const OpenFlutterCartTile(
@@ -24,14 +24,7 @@ class OpenFlutterCartTile extends StatefulWidget {
 }
 
 class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
-  int quantity;
   bool showPopup = false;
-
-  @override
-  void initState() {
-    quantity = widget.item.quantity;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +74,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                         onTap: (() => {
                                               //TODO: show popup with add to favs and delete from cart
                                               showPopup = !showPopup,
-                                              setState(() => {})
+                                              //setState(() => {})
                                             }),
                                         child:
                                             Icon(Icons.more_vert, size: 24))
@@ -107,73 +100,71 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                           Row(children: <Widget>[
                             widget.onChangeQuantity != null
                                 ? Container(
-                                    width: 120,
-                                    child: Row(
-                                      children: <Widget>[
-                                        InkWell(
-                                            onTap: () => {
-                                                  widget.onChangeQuantity(
-                                                      quantity)
-                                                },
-                                            child: Container(
-                                                alignment: Alignment.center,
-                                                width: 36,
-                                                height: 36,
-                                                decoration: BoxDecoration(
-                                                    color: AppColors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                          color: AppColors
-                                                              .lightGray
-                                                              .withOpacity(
-                                                                  0.3),
-                                                          blurRadius: AppSizes
-                                                              .imageRadius,
-                                                          offset: Offset(
-                                                              0.0,
-                                                              AppSizes
-                                                                  .imageRadius))
-                                                    ]),
-                                                child: Icon(Icons.remove))),
-                                        Container(
+                                  width: 120,
+                                  child: Row(
+                                    children: <Widget>[
+                                      InkWell(
+                                        onTap: () => {
+                                          widget.onChangeQuantity(
+                                            widget.item.productQuantity.quantity-1)
+                                        },
+                                        child: Container(
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(
-                                              AppSizes.linePadding * 2),
-                                          child: Text(quantity.toString(),
-                                              style:
-                                                  _theme.textTheme.display1),
-                                        ),
-                                        InkWell(
-                                            onTap: (() => {
-                                                  widget.onChangeQuantity(
-                                                      quantity)
-                                                }),
-                                            child: Container(
-                                                alignment: Alignment.center,
-                                                width: 36,
-                                                height: 36,
-                                                decoration: BoxDecoration(
-                                                    color: AppColors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                          color: AppColors
-                                                              .lightGray
-                                                              .withOpacity(
-                                                                  0.3),
-                                                          blurRadius: AppSizes
-                                                              .imageRadius,
-                                                          offset: Offset(
-                                                              0.0,
-                                                              AppSizes
-                                                                  .imageRadius))
-                                                    ]),
-                                                child: Icon(Icons.add))),
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.white,
+                                            borderRadius:
+                                              BorderRadius.circular(18),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors
+                                                  .lightGray
+                                                  .withOpacity(
+                                                      0.3),
+                                                blurRadius: AppSizes
+                                                  .imageRadius,
+                                                offset: Offset(
+                                                  0.0,
+                                                  AppSizes
+                                                    .imageRadius))
+                                            ]),
+                                          child: Icon(Icons.remove))),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        padding: EdgeInsets.all(
+                                            AppSizes.linePadding * 2),
+                                        child: Text(widget.item.productQuantity.quantity.toString(),
+                                            style:
+                                                _theme.textTheme.display1),
+                                      ),
+                                      InkWell(
+                                        onTap: (() => {
+                                          widget.onChangeQuantity(
+                                            widget.item.productQuantity.quantity+1)
+                                        }),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.white,
+                                            borderRadius:
+                                              BorderRadius.circular(
+                                                18),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors
+                                                  .lightGray
+                                                  .withOpacity(
+                                                    0.3),
+                                                blurRadius: AppSizes
+                                                  .imageRadius,
+                                                offset: Offset(
+                                                  0.0,
+                                                  AppSizes.imageRadius))
+                                            ]),
+                                          child: Icon(Icons.add))),
                                       ],
                                     ),
                                   )
@@ -182,7 +173,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                     child: Row(children: <Widget>[
                                       Text('Units: ',
                                           style: _theme.textTheme.body1),
-                                      Text(widget.item.quantity.toString(),
+                                      Text(widget.item.productQuantity.quantity.toString(),
                                           style: _theme.textTheme.body1
                                               .copyWith(
                                                   color:
@@ -218,9 +209,9 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                             InkWell(
                                 onTap: (() => {
                                       widget
-                                          .onAddToFav(widget.item.product.id),
+                                          .onAddToFav(),
                                       showPopup = false,
-                                      setState(() => {})
+                                      //setState(() => {})
                                     }),
                                 child: Container(
                                     width: 140,
@@ -237,10 +228,9 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                     child: Text('Add to Favorites'))),
                             InkWell(
                                 onTap: (() => {
-                                      widget.onRemoveFromCart(
-                                          widget.item.product.id),
+                                      widget.onRemoveFromCart(),
                                       showPopup = false,
-                                      setState(() => {})
+                                      //setState(() => {})
                                     }),
                                 child: Container(
                                     alignment: Alignment.center,
