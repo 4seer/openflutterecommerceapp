@@ -243,7 +243,7 @@ extension FavoriteView on FavoriteProduct {
   Widget _buildColor(ThemeData _theme,
     HashMap<ProductAttribute, String> selectedAttributes) {
     String colorValue = '';
-    selectedAttributes.forEach((attribute, value) {
+    selectedAttributes?.forEach((attribute, value) {
       if ( attribute.name == 'Color') colorValue = value;
     });
     return colorValue.isNotEmpty ?
@@ -263,7 +263,7 @@ extension FavoriteView on FavoriteProduct {
   Row _buildSize(ThemeData _theme,
     HashMap<ProductAttribute, String> selectedAttributes) {
     String sizeValue = '';
-    selectedAttributes.forEach((attribute, value) {
+    selectedAttributes?.forEach((attribute, value) {
       if ( attribute.name == 'Size') sizeValue = value;
     });
     return sizeValue.isNotEmpty?
