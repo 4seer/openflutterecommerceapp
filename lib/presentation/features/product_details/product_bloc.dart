@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/domain/usecases/products/get_product_by_id_use_case.dart';
 import 'package:openflutterecommerce/locator.dart';
 
@@ -23,12 +24,16 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     if (event is ProductScreenLoadedEvent) {
       yield ProductLoadingState();
       final ProductDetailsResults data =  await getProductByIdUseCaseImpl.execute(
-        ProductDetailsParams(
-          categoryId: event.categoryId,
-          productId: event.productId)
-        );
+      ProductDetailsParams(
+        categoryId: event.categoryId,
+        productId: event.productId)
+      );
       yield ProductLoadedState(product: data.productDetails, 
-        similarProducts: data.similarProducts);
+        similarProducts: data.similarProducts,
+        productAttributes: SelectedProductAttributes(
+          selectedAttributes: Map<ProductAttribute, String>(),
+          )
+        );
     } else if (event is ProductAddToFavoritesEvent) {
       await favoriesRepository.addToFavorites(
           event.product, event.selectedAttributes);
@@ -37,7 +42,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     } else if (event is ProductAddToCartEvent) {
       //TODO: add to cart
     } else if (event is ProductSetAttributeEvent) {
-      //TODO: add to cart
+      ProductLoadedState newState = state as ProductLoadedState;
+      yield ProductLoadingState();
+      newState.productAttributes.selectedAttributes[event.attribute] =event.selectedValue;
+      yield ProductLoadedState(product: newState.product, 
+        similarProducts: newState.similarProducts,
+        productAttributes: newState.productAttributes
+      );
     }
   }
 }
