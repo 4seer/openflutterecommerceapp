@@ -26,4 +26,5 @@ jobs:
         run: flutter analyze
       # - name: Running tests
       # We can run SQLite tests only on real device
-      #  run: flutter run -t test/tests.dart
+      # flutter run -t test/data/local/all_tests.dart
+        run: flutter test test/tests.dart
