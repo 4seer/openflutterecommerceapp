@@ -203,8 +203,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   }
 
   void _showSelectAttributeBottomSheet(
-      BuildContext context, ProductAttribute attribute,
-      {String selectedValue}) {
+      BuildContext context, 
+      ProductAttribute attribute,
+      {Function onSelect, String selectedValue}) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -220,7 +221,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               bloc..add(
                 ProductSetAttributeEvent(
                   value, productAttribute)),
-              Navigator.pop(context)
+              Navigator.pop(context),
+              onSelect()
             }
           ) 
         ));
@@ -230,7 +232,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
       String alreadySelectedValue) {
     //select size and select color widget
     return OutlineButton(
-      onPressed: () => _showSelectAttributeBottomSheet(context, attribute,
+      onPressed: () => _showSelectAttributeBottomSheet(
+          context, attribute, 
         selectedValue: alreadySelectedValue),
       child: Container(
         margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -319,13 +322,21 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     if (state.productAttributes.selectedAttributes.length ==
         state.product.selectableAttributes.length) {
       BlocProvider.of<ProductBloc>(context).add(ProductAddToCartEvent());
+      await Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart);
     } else {
-      for (final attribute in state.product.selectableAttributes) {
+      for (int i = 0; i < state.product.selectableAttributes.length; i++) {
+        final attribute = state.product.selectableAttributes[i];
         if (!state.productAttributes.selectedAttributes.containsKey(attribute)) {
-          await _showSelectAttributeBottomSheet(context, attribute);
+          await _showSelectAttributeBottomSheet(context, attribute,
+            onSelect: i == 0 ?
+            (() => {
+              BlocProvider.of<ProductBloc>(context).add(ProductAddToCartEvent()),
+              Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart)
+            })
+            : null
+          );
         }
       }
     }
-    await Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart);
   }
 }
