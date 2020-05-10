@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 
-class Settings {
+class UserSettingsEntity {
   String fullName;
   String dateOfBirth;
   bool notifySales;
   bool notifyArrivals;
   bool notifyDelivery;
 
-  Settings(
+  UserSettingsEntity(
       {@required this.fullName,
       @required this.dateOfBirth,
       @required this.notifySales,
