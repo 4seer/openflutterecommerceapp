@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_review.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/product_review.dart';
 import 'package:openflutterecommerce/data/fake_model/product_review_repository.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 

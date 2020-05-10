@@ -1,5 +1,5 @@
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
 import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
 import 'package:openflutterecommerce/locator.dart';
 

@@ -5,7 +5,7 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/app_user.dart';
+import 'package:openflutterecommerce/data/model/app_user.dart';
 
 abstract class UserRepository {
   /// Sign in with [email] and [password] and return

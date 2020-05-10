@@ -1,14 +1,14 @@
-// Home Screen Bloc
+// Cart Screen Bloc
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
 import 'package:bloc/bloc.dart';
-import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/fake_model/promo_repository.dart';
+import 'package:openflutterecommerce/data/model/favorite_product.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/change_cart_item_quantity_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/get_cart_products_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/remove_product_from_cart_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/promos/get_promos_use_case.dart';
 import 'package:openflutterecommerce/locator.dart';
 
 import 'cart.dart';
@@ -17,11 +17,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   final GetCartProductsUseCase getCartProductsUseCase;
   final RemoveProductFromCartUseCase removeProductFromCartUseCase;
   final AddToFavoritesUseCase addToFavoritesUseCase;
+  final GetPromosUseCase getPromosUseCase;
   
   CartBloc() 
   : getCartProductsUseCase = sl(),
     removeProductFromCartUseCase = sl(),
-    addToFavoritesUseCase = sl();
+    addToFavoritesUseCase = sl(),
+    getPromosUseCase = sl();
 
   @override
   CartState get initialState => CartInitialState();
@@ -31,9 +33,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     if (event is CartLoadedEvent) {
       if (state is CartInitialState) {
         final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
-        var promos = PromoRepository().getPromos();
+        var promos = await getPromosUseCase.execute(GetPromosParams());
         yield CartLoadedState(
-            showPromoPopup: false, promos: promos, cartProducts: cartResults.cartItems);
+            showPromoPopup: false, promos: promos.promos, cartProducts: cartResults.cartItems);
       } else if (state is CartLoadedState) {
         yield state;
       }
@@ -71,7 +73,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     } else if (event is CartPromoAppliedEvent) {
       //TODO: apply promo code
       var state = this.state as CartLoadedState;
-      yield state.copyWith(showPromoPopup: false);
+      yield state.copyWith(showPromoPopup: false,
+        appliedPromo: event.promo);
     } else if (event is CartPromoCodeAppliedEvent) {
       //TODO: apply promo code
       var state = this.state as CartLoadedState;

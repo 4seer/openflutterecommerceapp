@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
 
 class OpenFlutterClickableLine extends StatelessWidget {
   final double width;

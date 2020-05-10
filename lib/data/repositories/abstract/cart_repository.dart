@@ -2,11 +2,11 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
-import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/model/promo.dart';
+import 'package:openflutterecommerce/data/model/cart_item.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/promo.dart';
 
-import 'model/product_attribute.dart';
+import '../../model/product_attribute.dart';
 
 abstract class CartRepository {
   ///returns all cart products with their quantity and attributes

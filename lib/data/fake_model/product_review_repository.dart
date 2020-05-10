@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import '../abstract/model/product_review.dart';
+import '../model/product_review.dart';
 
 class ProductReviewRepository {
   final results = [

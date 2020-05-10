@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:openflutterecommerce/config/server_addresses.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 
 class NetworkRequest {

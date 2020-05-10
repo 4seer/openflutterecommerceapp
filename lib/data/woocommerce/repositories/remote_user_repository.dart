@@ -9,8 +9,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:openflutterecommerce/config/server_addresses.dart';
-import 'package:openflutterecommerce/data/abstract/model/app_user.dart';
-import 'package:openflutterecommerce/data/abstract/user_repository.dart';
+import 'package:openflutterecommerce/data/model/app_user.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/user_repository.dart';
 
 import '../utils.dart';
 

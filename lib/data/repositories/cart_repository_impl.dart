@@ -4,11 +4,11 @@
  * @see cart_repository_impl.dart
  */
 
-import 'package:openflutterecommerce/data/abstract/cart_repository.dart';
-import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
-import 'package:openflutterecommerce/data/abstract/model/promo.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
+import 'package:openflutterecommerce/data/model/cart_item.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/promo.dart';
 
 class CartRepositoryImpl extends CartRepository{
   static CartProductDataStorage cartProductDataStorage 

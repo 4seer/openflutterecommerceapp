@@ -4,7 +4,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
 
 import 'home.dart';
 

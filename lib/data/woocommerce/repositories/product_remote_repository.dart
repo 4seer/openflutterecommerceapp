@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/woocommerce/models/product_model.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';

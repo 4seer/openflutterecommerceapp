@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_review.dart';
+import 'package:openflutterecommerce/data/model/product_review.dart';
 
 @immutable
 class ProductReviewData {

@@ -1,5 +1,5 @@
 
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
 import 'package:openflutterecommerce/domain/entities/hashtag/hashtag_entity.dart';
 import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';

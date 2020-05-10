@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
+import 'package:openflutterecommerce/data/model/hashtag.dart';
 
 class OpenFlutterHashTagList extends StatelessWidget {
   final List<HashTag> tags;

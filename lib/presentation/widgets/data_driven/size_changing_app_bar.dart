@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/features/products/views/visual_filter.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/view_options.dart';

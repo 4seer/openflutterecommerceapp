@@ -7,10 +7,10 @@ import 'package:openflutterecommerce/config/theme.dart';
 /// with all the latest price updates.
 /// https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-use-cases-and-features-6b7414a6e708
 
-import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
-import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/favorites_repository.dart';
+import 'package:openflutterecommerce/data/model/favorite_product.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
 import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
 import 'package:openflutterecommerce/locator.dart';
 

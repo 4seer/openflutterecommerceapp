@@ -3,7 +3,7 @@
 // Date: 2020-02-17
 
 import 'package:bloc/bloc.dart';
-import 'package:openflutterecommerce/data/abstract/cart_repository.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
 
 import 'checkout.dart';
 

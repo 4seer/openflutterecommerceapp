@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:openflutterecommerce/data/abstract/model/promo.dart';
+import 'package:openflutterecommerce/data/model/promo.dart';
 
 import 'cart_item.dart';
 import 'shipping_address.dart';

@@ -1,12 +1,12 @@
 import 'dart:collection';
 
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/model/favorite_product.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
 
-import 'model/filter_rules.dart';
-import 'model/product_attribute.dart';
-import 'model/sort_rules.dart';
+import '../../model/filter_rules.dart';
+import '../../model/product_attribute.dart';
+import '../../model/sort_rules.dart';
 
 abstract class FavoritesRepository {
   ///returns list of products with selected properties, so the user can

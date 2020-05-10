@@ -4,7 +4,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
 
 @immutable
 abstract class HomeState extends Equatable {

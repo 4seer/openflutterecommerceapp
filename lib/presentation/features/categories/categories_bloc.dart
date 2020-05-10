@@ -2,7 +2,7 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 import 'package:bloc/bloc.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/model/category.dart';
 import 'package:openflutterecommerce/domain/usecases/categories/categories_by_filter_params.dart';
 import 'package:openflutterecommerce/domain/usecases/categories/find_categories_by_filter_use_case.dart';
 import 'package:openflutterecommerce/locator.dart';

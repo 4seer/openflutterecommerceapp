@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
-import 'package:openflutterecommerce/data/abstract/model/shipping_address.dart';
+import 'dart:collection';
 
-import '../abstract/model/promo.dart';
-import '../abstract/model/user_order.dart';
-import 'models/cart_item.dart';
-import 'models/product.dart';
+import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/model/cart_item.dart';
+import 'package:openflutterecommerce/data/model/commerce_image.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/shipping_address.dart';
+
+import '../model/promo.dart';
+import '../model/user_order.dart';
 
 class OrderRepository {
   UserOrder getOrderDetails(int orderId) {
@@ -26,7 +29,7 @@ class OrderRepository {
       id: 1,
       orderNumber: 1947034,
       orderStatus: UserOrderStatus.Delivered,
-      products: <FakeCartItem>[],
+      products: <CartItem>[],
       promo: Promo(
           daysLeft: 6,
           discount: 10,
@@ -50,7 +53,7 @@ class OrderRepository {
       id: 2,
       orderNumber: 1947035,
       orderStatus: UserOrderStatus.Delivered,
-      products: <FakeCartItem>[],
+      products: <CartItem>[],
       promo: Promo(
           daysLeft: 6,
           discount: 10,
@@ -74,58 +77,60 @@ class OrderRepository {
       id: 3,
       orderNumber: 1947035,
       orderStatus: UserOrderStatus.Delivered,
-      products: <FakeCartItem>[
-        FakeCartItem(
-          product: FakeProduct(
-            id: 1,
-            localImages: ['assets/images/checkout/cart/product1.png'],
+      products: <CartItem>[
+        CartItem(
+          product: Product(
+            1,
+            images: [CommerceImage(0, 'assets/images/checkout/cart/product1.png', '')],
             discountPercent: 20,
-            rating: 5,
+            averageRating: 5,
             ratingCount: 10,
             price: 15,
             title: 'Pullover',
-            productAttributes: [sizeAttribute, colorAttribute],
+            selectableAttributes: [sizeAttribute, colorAttribute], categories: [], hashTags: [], subTitle: null,
           ),
-          selectedAttributes: {
-            sizeAttribute: sizeAttribute.options[0],
-            colorAttribute: colorAttribute.options.first
-          },
-          quantity: 1,
+          selectedAttributes: HashMap.fromEntries([
+            MapEntry(sizeAttribute, 'S'),
+            MapEntry(colorAttribute, 'Blue')
+          ]),
+          productQuantity: ProductQuantity(1)
         ),
-        FakeCartItem(
-          product: FakeProduct(
-            id: 2,
-            localImages: ['assets/images/checkout/cart/product2.png'],
+        CartItem(
+          product: Product(
+            2,
+            images: [CommerceImage(0, 'assets/images/checkout/cart/product2.png', '')],
             discountPercent: 20,
-            rating: 5,
+            averageRating: 5,
             ratingCount: 10,
             price: 15,
             title: 'T-shirt',
-            productAttributes: [sizeAttribute, colorAttribute],
+            selectableAttributes: [sizeAttribute, colorAttribute],
+            categories: [], hashTags: [], subTitle: null,
           ),
-          selectedAttributes: {
-            sizeAttribute: sizeAttribute.options[0],
-            colorAttribute: colorAttribute.options.last
-          },
-          quantity: 1,
+          selectedAttributes: HashMap.fromEntries([
+            MapEntry(sizeAttribute, 'S'),
+            MapEntry(colorAttribute, 'Blue')
+          ]),
+          productQuantity: ProductQuantity(1)
         ),
-        FakeCartItem(
-          product: FakeProduct(
-            id: 3,
-            localImages: ['assets/images/checkout/cart/product2.png'],
+        CartItem(
+          product: Product(
+            3,
+            images: [CommerceImage(0, 'assets/images/checkout/cart/product2.png', '')],
             discountPercent: 20,
             isFavorite: false,
-            rating: 5,
+            averageRating: 5,
             ratingCount: 10,
             price: 15,
             title: 'Sport Dress',
-            productAttributes: [sizeAttribute, colorAttribute],
+            selectableAttributes: [sizeAttribute, colorAttribute],
+            categories: [], hashTags: [], subTitle: null,
           ),
-          selectedAttributes: {
-            sizeAttribute: sizeAttribute.options[0],
-            colorAttribute: colorAttribute.options.last
-          },
-          quantity: 1,
+          selectedAttributes: HashMap.fromEntries([
+            MapEntry(sizeAttribute, 'S'),
+            MapEntry(colorAttribute, 'Blue')
+          ]),
+          productQuantity: ProductQuantity(1)
         ),
       ],
       promo: Promo(

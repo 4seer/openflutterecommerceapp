@@ -1,14 +1,14 @@
 import 'dart:collection';
 
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
-import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/favorites_repository.dart';
+import 'package:openflutterecommerce/data/model/favorite_product.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/hashtag.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/local/local_product_repository.dart';
 import 'package:openflutterecommerce/data/network/network_status.dart';

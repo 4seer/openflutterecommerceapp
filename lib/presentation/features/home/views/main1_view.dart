@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/presentation/features/categories/categories.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';

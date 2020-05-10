@@ -9,6 +9,7 @@ import 'package:openflutterecommerce/domain/usecases/products/products_by_filter
 abstract class WoocommercWrapperAbstract{
    Future<List<dynamic>> getCategoryList({int parentId=0});
    Future<List<dynamic>> getProductList(ProductsByFilterParams params);
+   Future<List<dynamic>> getPromoList({int userId=0});
 }
 
 class WoocommerceWrapper implements WoocommercWrapperAbstract{
@@ -22,14 +23,19 @@ class WoocommerceWrapper implements WoocommercWrapperAbstract{
     //TODO: make remote request using all paramaters
     return _getApiRequest(ServerAddresses.products);
   }
+
   @override
   Future<List<dynamic>> getCategoryList({int parentId=0}){
     return _getApiRequest(ServerAddresses.productCategories);
   }
+
+  @override
+  Future<List> getPromoList({int userId = 0}) {
+    return _getApiRequest(ServerAddresses.promos);
+  }
   
   Future<List<dynamic>> _getApiRequest(String url) async {
-    final response = await client.get(
-      ServerAddresses.serverAddress + url + '?'+ServerAddresses.woocommerceKeys,
+    final response = await client.get(url,
       headers: {
         'Content-Type': 'application/json',
       },

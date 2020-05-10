@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:openflutterecommerce/data/abstract/model/user_order.dart';
+import 'package:openflutterecommerce/data/model/user_order.dart';
 
 @immutable
 class ProfileState extends Equatable {

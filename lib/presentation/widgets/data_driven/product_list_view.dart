@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
 
 import '../extensions/product_view.dart';

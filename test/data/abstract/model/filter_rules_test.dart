@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/product_remote_repository.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 
