@@ -4,8 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/abstract/category_repository.dart';
-import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/category.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/size_changing_app_bar.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/error_dialog.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
@@ -22,9 +21,9 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class ProductListScreenParameters {
-  final int categoryId;
+  final ProductCategory category;
 
-  ProductListScreenParameters(this.categoryId);
+  ProductListScreenParameters(this.category);
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
@@ -37,11 +36,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       body: BlocProvider<ProductsBloc>(
           create: (context) {
             return ProductsBloc(
-                categoryId: widget.parameters.categoryId,
-                categoryRepository:
-                    RepositoryProvider.of<CategoryRepository>(context),
-                favoritesRepository:
-                    RepositoryProvider.of<FavoritesRepository>(context))
+                category: widget.parameters.category)
               ..add(ScreenLoadedEvent());
           },
           child: BlocConsumer<ProductsBloc, ProductsState>(

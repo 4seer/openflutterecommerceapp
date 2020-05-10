@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/base_product_list_item.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/base_product_tile.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/product_rating.dart';
@@ -133,7 +135,8 @@ extension FavoriteView on FavoriteProduct {
       {@required BuildContext context,
       @required VoidCallback showProductInfo,
       @required VoidCallback onAddToCart,
-      @required VoidCallback onRemoveFromFavorites}) {
+      @required VoidCallback onRemoveFromFavorites,
+      @required HashMap<ProductAttribute, String> selectedAttributes}) {
     return BaseProductListItem(
       onClick: showProductInfo,
       inactiveMessage:
@@ -161,11 +164,11 @@ extension FavoriteView on FavoriteProduct {
             Text(product.title, style: Theme.of(context).textTheme.display1),
             Row(
               children: <Widget>[
-                _buildColor(Theme.of(context)),
+                _buildColor(Theme.of(context), selectedAttributes),
                 Padding(
                   padding: EdgeInsets.all(AppSizes.linePadding),
                 ),
-                _buildSize(Theme.of(context)),
+                _buildSize(Theme.of(context), selectedAttributes),
               ],
             ),
             Row(
@@ -187,7 +190,8 @@ extension FavoriteView on FavoriteProduct {
       {@required BuildContext context,
       @required VoidCallback showProductInfo,
       @required VoidCallback onAddToCart,
-      @required VoidCallback onRemoveFromFavorites}) {
+      @required VoidCallback onRemoveFromFavorites,
+      @required HashMap<ProductAttribute, String> selectedAttributes}) {
     return BaseProductTile(
         onClick: showProductInfo,
         inactiveMessage:
@@ -215,11 +219,11 @@ extension FavoriteView on FavoriteProduct {
               Text(product.title, style: Theme.of(context).textTheme.display1),
               Row(
                 children: <Widget>[
-                  _buildColor(Theme.of(context)),
+                  _buildColor(Theme.of(context), selectedAttributes),
                   Padding(
                     padding: EdgeInsets.all(AppSizes.linePadding),
                   ),
-                  _buildSize(Theme.of(context)),
+                  _buildSize(Theme.of(context), selectedAttributes),
                 ],
               ),
               Row(
@@ -236,29 +240,43 @@ extension FavoriteView on FavoriteProduct {
         });
   }
 
-  Widget _buildColor(ThemeData _theme) {
-    return Row(
-      children: <Widget>[
-        Text('Color:', style: _theme.textTheme.body1.copyWith()),
-        Padding(
-          padding: EdgeInsets.only(left: AppSizes.linePadding),
-        ),
-        Text('Blue',
-            style: _theme.textTheme.body1.copyWith(color: AppColors.black))
-      ],
-    );
+  Widget _buildColor(ThemeData _theme,
+    HashMap<ProductAttribute, String> selectedAttributes) {
+    String colorValue = '';
+    selectedAttributes?.forEach((attribute, value) {
+      if ( attribute.name == 'Color') colorValue = value;
+    });
+    return colorValue.isNotEmpty ?
+      Row(
+        children: <Widget>[
+          Text('Color:', style: _theme.textTheme.body1.copyWith()),
+          Padding(
+            padding: EdgeInsets.only(left: AppSizes.linePadding),
+          ),
+          Text(colorValue,
+              style: _theme.textTheme.body1.copyWith(color: AppColors.black))
+        ],
+      ) 
+      : Row();
   }
 
-  Row _buildSize(ThemeData _theme) {
-    return Row(
-      children: <Widget>[
-        Text('Size:', style: _theme.textTheme.body1.copyWith()),
-        Padding(
-          padding: EdgeInsets.only(left: AppSizes.linePadding),
-        ),
-        Text('L',
-            style: _theme.textTheme.body1.copyWith(color: AppColors.black))
-      ],
-    );
+  Row _buildSize(ThemeData _theme,
+    HashMap<ProductAttribute, String> selectedAttributes) {
+    String sizeValue = '';
+    selectedAttributes?.forEach((attribute, value) {
+      if ( attribute.name == 'Size') sizeValue = value;
+    });
+    return sizeValue.isNotEmpty?
+      Row(
+        children: <Widget>[
+          Text('Size:', style: _theme.textTheme.body1.copyWith()),
+          Padding(
+            padding: EdgeInsets.only(left: AppSizes.linePadding),
+          ),
+          Text(sizeValue,
+              style: _theme.textTheme.body1.copyWith(color: AppColors.black))
+        ],
+      )
+      : Row();
   }
 }

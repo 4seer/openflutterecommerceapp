@@ -4,6 +4,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
 import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
 
@@ -54,12 +55,12 @@ class SearchEvent extends FavouriteEvent {
 }
 
 class RemoveFromFavoriteEvent extends FavouriteEvent {
-  final int productId;
+  final FavoriteProduct product;
 
-  RemoveFromFavoriteEvent(this.productId);
+  RemoveFromFavoriteEvent(this.product);
 
   @override
-  List<Object> get props => [productId];
+  List<Object> get props => [product];
 }
 
 class AddToCartEvent extends FavouriteEvent {

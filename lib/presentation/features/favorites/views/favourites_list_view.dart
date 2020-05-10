@@ -43,12 +43,13 @@ class FavoritesListView extends StatelessWidget {
                     onRemoveFromFavorites: () {
                       BlocProvider.of<FavouriteBloc>(context).add(
                           RemoveFromFavoriteEvent(
-                              state.data[index].product.id));
+                              state.data[index]));
                     },
                     onAddToCart: () {
                       BlocProvider.of<FavouriteBloc>(context)
                           .add(AddToCartEvent(state.data[index].product.id));
                     },
+                    selectedAttributes: state.data[index]?.favoriteForm
                   ));
             }
           },

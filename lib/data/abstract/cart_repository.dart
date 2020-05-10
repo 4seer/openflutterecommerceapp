@@ -18,7 +18,7 @@ abstract class CartRepository {
 
   ///sets new quantity for the product in cart. If there is no such product
   ///in cart, does nothing. It can be used also to remove product from cart
-  Future changeQuantity(Product product, int newQuantity);
+  Future changeQuantity(CartItem item, int newQuantity);
 
   ///gets discount properties
   Future<Promo> getAppliedPromo();

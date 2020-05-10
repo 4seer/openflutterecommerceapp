@@ -159,12 +159,18 @@ class _CartViewState extends State<CartView> {
           child: OpenFlutterCartTile(
             item: items[i],
             onChangeQuantity: ((int quantity) => {
-                  bloc
-                    ..add(CartQuantityChangedEvent(
-                        productId: items[i].product.id, newQuantity: quantity))
-                }),
-            onAddToFav: (int productId) {},
-            onRemoveFromCart: (int productId) {},
+              bloc
+                ..add(CartQuantityChangedEvent(
+                  item: items[i], newQuantity: quantity))
+            }),
+            onAddToFav: () {
+              bloc
+                ..add(CartAddToFavsEvent(item: items[i]));
+            },
+            onRemoveFromCart: () {
+              bloc
+                ..add(CartRemoveFromCartEvent(item: items[i]));
+            },
           )));
     }
     return widgets;

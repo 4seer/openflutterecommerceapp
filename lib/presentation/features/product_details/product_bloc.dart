@@ -1,5 +1,12 @@
+import 'dart:collection';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
+import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
+import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
+import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/domain/usecases/cart/add_product_to_cart_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/remove_from_favorites_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/get_product_by_id_use_case.dart';
 import 'package:openflutterecommerce/locator.dart';
 
@@ -7,13 +14,18 @@ import 'product_event.dart';
 import 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
+  final AddToFavoritesUseCase addToFavoriteUseCase;
+  final RemoveFromFavoritesUseCase removeFromFavoritesUseCase;
   final GetProductByIdUseCase getProductByIdUseCaseImpl;
-  final FavoritesRepository favoriesRepository;
+  final AddProductToCartUseCase addProductToCartUseCase;
   final int productId;
 
   ProductBloc(
-    {this.favoriesRepository, this.productId}):
-      getProductByIdUseCaseImpl = sl();
+    {this.productId}):
+      getProductByIdUseCaseImpl = sl(),
+      addProductToCartUseCase = sl(),
+      addToFavoriteUseCase = sl(),
+      removeFromFavoritesUseCase = sl();
 
   @override
   ProductState get initialState => ProductInitialState();
@@ -23,21 +35,56 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     if (event is ProductScreenLoadedEvent) {
       yield ProductLoadingState();
       final ProductDetailsResults data =  await getProductByIdUseCaseImpl.execute(
-        ProductDetailsParams(
-          categoryId: event.categoryId,
-          productId: event.productId)
-        );
+      ProductDetailsParams(
+        categoryId: event.categoryId,
+        productId: event.productId)
+      );
       yield ProductLoadedState(product: data.productDetails, 
-        similarProducts: data.similarProducts);
+        similarProducts: data.similarProducts,
+        productAttributes: SelectedProductAttributes(
+          selectedAttributes: HashMap<ProductAttribute, String>(),
+          )
+        );
     } else if (event is ProductAddToFavoritesEvent) {
-      await favoriesRepository.addToFavorites(
-          event.product, event.selectedAttributes);
-    } else if (event is ProductAddToFavoritesEvent) {
-      await favoriesRepository.removeFromFavorites(productId);
+      ProductLoadedState currentState = state as ProductLoadedState;
+      await addToFavoriteUseCase.execute(
+        FavoriteProduct(
+          currentState.product,
+          currentState.productAttributes.selectedAttributes
+        )
+      );
+    } else if (event is ProductRemoveFromFavoritesEvent) {
+      if ( state is ProductLoadedState) {
+        ProductLoadedState currentState = state as ProductLoadedState;
+        await removeFromFavoritesUseCase.execute(
+          RemoveFromFavoritesParams(
+            FavoriteProduct(
+              currentState.product,
+              currentState.productAttributes.selectedAttributes
+            )
+          )
+        );
+      }
     } else if (event is ProductAddToCartEvent) {
-      //TODO: add to cart
+      if ( state is ProductLoadedState) {
+        ProductLoadedState currentState = state as ProductLoadedState;
+        AddToCartResult addToCartResult = await addProductToCartUseCase.execute(CartItem(
+          product: currentState.product,
+          productQuantity: ProductQuantity(1),
+          selectedAttributes: currentState.productAttributes.selectedAttributes
+        ));
+        if ( !addToCartResult.result) {
+          //TODO: show SnackBar with error
+        }
+      }
     } else if (event is ProductSetAttributeEvent) {
-      //TODO: add to cart
-    }
+      ProductLoadedState newState = state as ProductLoadedState;
+      yield ProductLoadingState();
+      newState.productAttributes.selectedAttributes[event.attribute] =event.selectedValue;
+      yield ProductLoadedState(product: newState.product, 
+        similarProducts: newState.similarProducts,
+        productAttributes: newState.productAttributes
+      );
+    } 
   }
 }

@@ -2,7 +2,6 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -43,9 +42,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       body: BlocProvider<ProductBloc>(
           create: (context) {
             return ProductBloc(
-                productId: widget.parameters.productId,
-                favoriesRepository:
-                    RepositoryProvider.of<FavoritesRepository>(context))
+                productId: widget.parameters.productId)
               ..add(ProductScreenLoadedEvent(
                 productId: widget.parameters.productId,
                 categoryId: widget.parameters.categoryId

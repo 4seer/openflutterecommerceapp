@@ -9,14 +9,14 @@ class FakeCartItem extends CartItem {
       Map<ProductAttribute, String> selectedAttributes})
       : super(
             product: product,
-            quantity: quantity,
+            productQuantity: ProductQuantity(quantity),
             selectedAttributes: selectedAttributes);
 
   FakeCartItem copyWith(
       {int quantity, Map<ProductAttribute, String> selectedAttributes}) {
     return FakeCartItem(
         product: product,
-        quantity: quantity ?? this.quantity,
+        quantity: quantity ?? productQuantity.quantity,
         selectedAttributes: selectedAttributes ?? this.selectedAttributes);
   }
 }

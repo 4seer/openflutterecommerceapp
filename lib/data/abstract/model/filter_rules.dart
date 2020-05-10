@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
 import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
 import 'package:openflutterecommerce/data/abstract/model/product.dart';
 
@@ -130,6 +131,14 @@ class FilterRules {
         selectedHashTags: HashMap<HashTag, bool>(),
         selectedPriceRange: PriceRange(minPrice, maxPrice)
     );
+  }
+
+  factory FilterRules.getFavoriteSelectableAttributes(List<FavoriteProduct> favoriteProducts) {
+    List<Product> products = [];
+    favoriteProducts.forEach((favoriteProduct) { 
+      products.add(favoriteProduct.product);
+    });
+    return FilterRules.getSelectableAttributes(products);
   }
 }
 
