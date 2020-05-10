@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_model/password_repository.dart';
+import 'package:openflutterecommerce/data/repositories/fake_repos/password_repository.dart';
 import 'package:openflutterecommerce/presentation/features/profile/password_event.dart';
 import 'package:openflutterecommerce/presentation/features/profile/password_state.dart';
 

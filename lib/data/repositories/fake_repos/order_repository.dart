@@ -7,8 +7,8 @@ import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/data/model/product_attribute.dart';
 import 'package:openflutterecommerce/data/model/shipping_address.dart';
 
-import '../model/promo.dart';
-import '../model/user_order.dart';
+import '../../model/promo.dart';
+import '../../model/user_order.dart';
 
 class OrderRepository {
   UserOrder getOrderDetails(int orderId) {
@@ -31,19 +31,20 @@ class OrderRepository {
       orderStatus: UserOrderStatus.Delivered,
       products: <CartItem>[],
       promo: Promo(
-          daysLeft: 6,
-          discount: 10,
-          image: null,
-          promoCode: 'promo12',
-          textColor: Colors.white,
-          title: 'Promo 12'),
-      shippingAddress: ShippingAddress(
-          address: '3 Newbridge Court',
-          city: 'Chino Hills',
-          country: 'United States',
-          fullName: 'John Smith',
-          postal: '91709',
-          state: 'CA'),
+        daysLeft: 6,
+        discount: 10,
+        image: null,
+        promoCode: 'promo12',
+        textColor: Colors.white,
+        title: 'Promo 12'),
+      shippingAddress: ShippingAddressModel(
+        id: 1,
+        address: '3 Newbridge Court',
+        city: 'Chino Hills',
+        country: 'United States',
+        fullName: 'John Smith',
+        postal: '91709',
+        state: 'CA'),
       paymentMethod: '**** **** **** 3947',
       deliveryMethod: 'FedEx, 3 days, \$15',
       trackingNumber: 'IW3475453455',
@@ -55,19 +56,20 @@ class OrderRepository {
       orderStatus: UserOrderStatus.Delivered,
       products: <CartItem>[],
       promo: Promo(
-          daysLeft: 6,
-          discount: 10,
-          image: null,
-          promoCode: 'promo12',
-          textColor: Colors.white,
-          title: 'Promo 12'),
-      shippingAddress: ShippingAddress(
-          address: '3 Newbridge Court',
-          city: 'Chino Hills',
-          country: 'United States',
-          fullName: 'John Smith',
-          postal: '91709',
-          state: 'CA'),
+        daysLeft: 6,
+        discount: 10,
+        image: null,
+        promoCode: 'promo12',
+        textColor: Colors.white,
+        title: 'Promo 12'),
+      shippingAddress: ShippingAddressModel(
+        id: 1,
+        address: '3 Newbridge Court',
+        city: 'Chino Hills',
+        country: 'United States',
+        fullName: 'John Smith',
+        postal: '91709',
+        state: 'CA'),
       paymentMethod: '**** **** **** 3947',
       deliveryMethod: 'FedEx, 3 days, \$15',
       trackingNumber: 'IW3475453456',
@@ -134,19 +136,20 @@ class OrderRepository {
         ),
       ],
       promo: Promo(
-          daysLeft: 6,
-          discount: 10,
-          image: null,
-          promoCode: 'promo12',
-          textColor: Colors.white,
-          title: 'Promo 12'),
-      shippingAddress: ShippingAddress(
-          address: '3 Newbridge Court',
-          city: 'Chino Hills',
-          country: 'United States',
-          fullName: 'John Smith',
-          postal: '91709',
-          state: 'CA'),
+        daysLeft: 6,
+        discount: 10,
+        image: null,
+        promoCode: 'promo12',
+        textColor: Colors.white,
+        title: 'Promo 12'),
+      shippingAddress: ShippingAddressModel(
+        id: 1,
+        address: '3 Newbridge Court',
+        city: 'Chino Hills',
+        country: 'United States',
+        fullName: 'John Smith',
+        postal: '91709',
+        state: 'CA'),
       paymentMethod: '**** **** **** 3947',
       deliveryMethod: 'FedEx, 3 days, \$15',
       trackingNumber: 'IW3475453456',

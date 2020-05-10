@@ -1,28 +1,46 @@
-import 'package:equatable/equatable.dart';
 
-class ShippingAddress extends Equatable {
-  final String fullName;
-  final String address;
-  final String city;
-  final String state;
-  final String postal;
-  final String country;
+import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/domain/entities/checkout/shipping_address_entity.dart';
 
-  ShippingAddress(
-      {this.fullName,
-      this.address,
-      this.city,
-      this.state,
-      this.postal,
-      this.country});
+class ShippingAddressModel extends ShippingAddressEntity {
+  ShippingAddressModel(
+    {@required int id,
+    String fullName,
+    String address,
+    String city,
+    String state,
+    String postal,
+    String country,
+    bool isDefault}
+  ) : super(
+      id: id,
+      fullName: fullName,
+      address: address,
+      city: city,
+      state: state,
+      postal: postal,
+      country: country,
+      isDefault: isDefault);
 
-  @override
-  List<Object> get props => [fullName, address, city, state, postal, country];
-
-  @override
-  String toString() =>
-      address + ', ' + city + ', ' + state + ' ' + postal + ', ' + country;
-
-  @override
-  bool get stringify => false;
+  ShippingAddressModel copyWith(
+    {int id,
+    String fullName,
+    String address,
+    String city,
+    String state,
+    String postal,
+    String country,
+    bool isDefault})  
+  {
+    return ShippingAddressModel(
+      id: id ?? id,
+      fullName: fullName ?? fullName,
+      address: address ?? address,
+      city: city ?? city,
+      state: state ?? state,
+      postal: postal ?? postal,
+      country: country ?? country,
+      isDefault: isDefault ?? isDefault
+    );
+  }
 }

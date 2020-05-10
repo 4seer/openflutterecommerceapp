@@ -11,7 +11,7 @@ class UserOrder extends Equatable {
   final List<CartItem> products;
   final int orderNumber;
   final UserOrderStatus orderStatus;
-  final ShippingAddress shippingAddress;
+  final ShippingAddressModel shippingAddress;
 
   //TODO: extend further on
   final String paymentMethod;

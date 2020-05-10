@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/fake_model/settings_repository.dart';
+import 'package:openflutterecommerce/data/repositories/fake_repos/settings_repository.dart';
 import 'package:openflutterecommerce/domain/entities/user/settings.dart';
 import 'package:openflutterecommerce/presentation/features/profile/settings_event.dart';
 import 'package:openflutterecommerce/presentation/features/profile/settings_state.dart';

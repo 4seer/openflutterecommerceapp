@@ -1,21 +1,24 @@
+import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
 
-class ShippingAddressEngity extends Entity<int> {
+class ShippingAddressEntity extends Entity<int> {
   final String fullName;
   final String address;
   final String city;
   final String state;
   final String postal;
   final String country;
+  final bool isDefault;
 
-  ShippingAddressEngity(
+  ShippingAddressEntity(
     {int id, 
-    this.fullName, 
-    this.address, 
-    this.city,
-    this.state,
-    this.postal,
-    this.country}) : super(id);
+    @required this.fullName, 
+    @required this.address, 
+    @required this.city,
+    @required this.state,
+    @required this.postal,
+    @required this.country,
+    @required this.isDefault}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -27,6 +30,7 @@ class ShippingAddressEngity extends Entity<int> {
       'state': state,
       'postal': postal,
       'country': country,
+      'isDefault': isDefault
     };
   }
 
@@ -38,6 +42,14 @@ class ShippingAddressEngity extends Entity<int> {
     city,
     state,
     postal,
-    country
+    country,
+    isDefault
   ];
+
+  @override
+  String toString() =>
+      address + ', ' + city + ', ' + state + ' ' + postal + ', ' + country;
+
+  @override
+  bool get stringify => false;
 }

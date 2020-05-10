@@ -3,14 +3,15 @@
 // Date: 2020-02-17
 
 import 'package:bloc/bloc.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
+import 'package:openflutterecommerce/domain/usecases/checkout/checkout_start_use_case.dart';
+import 'package:openflutterecommerce/locator.dart';
 
 import 'checkout.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
-  final CartRepository cartRepository;
-
-  CheckoutBloc(this.cartRepository);
+  final CheckoutStartUseCase checkoutStartUseCase;
+  
+  CheckoutBloc() : checkoutStartUseCase = sl();
 
   @override
   CheckoutState get initialState => CheckoutInitialState();
@@ -19,8 +20,15 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   Stream<CheckoutState> mapEventToState(CheckoutEvent event) async* {
     if (event is CheckoutStartEvent) {
       if (state is CheckoutInitialState) {
+        ChekcoutStartResult results = await checkoutStartUseCase.execute(ChekcoutStartParams());
         yield CheckoutProceedState(
-            cardId: 1, cartProducts: await cartRepository.getCartContent());
+          cardId: 1, 
+          cartProducts: results.cartItems,
+          shippingAddresses: results.shippingAddress,
+          paymentMethods: results.paymentMethods,
+          currentPaymentMethod: results.currentPaymentMethod,
+          currentShippingAddress: results.currentShippingAddress
+        );
       } else if (state is CheckoutProceedState) {
         yield state;
       }
