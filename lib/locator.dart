@@ -5,11 +5,13 @@ import 'package:openflutterecommerce/data/abstract/cart_repository.dart';
 import 'package:openflutterecommerce/data/abstract/category_repository.dart';
 import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
 import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/abstract/promo_repository.dart';
 import 'package:openflutterecommerce/data/abstract/user_repository.dart';
 import 'package:openflutterecommerce/data/network/network_status.dart';
 import 'package:openflutterecommerce/data/repositories/cart_repository_impl.dart';
 import 'package:openflutterecommerce/data/repositories/category_repository_impl.dart';
 import 'package:openflutterecommerce/data/repositories/product_repository_impl.dart';
+import 'package:openflutterecommerce/data/repositories/promo_repository_impl.dart';
 import 'package:openflutterecommerce/data/repositories/user_repository_impl.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/remote_user_repository.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
@@ -23,6 +25,7 @@ import 'package:openflutterecommerce/domain/usecases/favorites/get_favorite_prod
 import 'package:openflutterecommerce/domain/usecases/favorites/remove_from_favorites_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/get_product_by_id_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/promos/get_promos_use_case.dart';
 
 final sl = GetIt.instance;
 
@@ -31,6 +34,9 @@ void init() {
   //Singleton for NetworkStatus identification
   sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl(DataConnectionChecker()));
 
+  //get promo coupons
+  sl.registerLazySingleton<GetPromosUseCase>(() => GetPromosUseCaseImpl());
+  
   //remove from favorites
   sl.registerLazySingleton<RemoveFromFavoritesUseCase>(() => RemoveFromFavoritesUseCaseImpl());
   
@@ -91,4 +97,9 @@ void init() {
   sl.registerLazySingleton<FavoritesRepository>(
     () => ProductRepositoryImpl(),
   );
+  sl.registerLazySingleton<PromoRepository>(
+    () => PromoRepositoryImpl(),
+  );
+
+  
 }

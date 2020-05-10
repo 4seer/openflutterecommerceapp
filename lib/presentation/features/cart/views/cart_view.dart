@@ -65,6 +65,10 @@ class _CartViewState extends State<CartView> {
         for (var i = 0; i < state.cartProducts.length; i++) {
           totalPrice += state.cartProducts[i].price;
         }
+        final calculatedTotalPrice = 
+          state.appliedPromo != null ?
+            totalPrice * (1 - state.appliedPromo.discount/100)
+            : totalPrice;
         return Stack(children: <Widget>[
           SingleChildScrollView(
               child: Column(children: <Widget>[
@@ -77,7 +81,10 @@ class _CartViewState extends State<CartView> {
               padding: EdgeInsets.only(bottom: AppSizes.sidePadding * 3),
             ),
             OpenFlutterInputButton(
-              placeHolder: 'Enter your promo code',
+              placeHolder:
+                state.appliedPromo != null ?
+                  state.appliedPromo.promoCode 
+                  : 'Enter your promo code',
               controller: _promoController,
               width: width,
               onClick: (() => {bloc..add(CartShowPopupEvent())}),
@@ -85,9 +92,21 @@ class _CartViewState extends State<CartView> {
             Padding(
               padding: EdgeInsets.only(bottom: AppSizes.sidePadding * 3),
             ),
+            state.appliedPromo != null ?
+              Column(
+                children: <Widget> [
+                  OpenFlutterSummaryLine(
+                    title: 'Subtotal:',
+                    summary: '\$' + totalPrice.toStringAsFixed(2)),
+                  
+                  OpenFlutterSummaryLine(
+                    title: 'Discount percent:',
+                    summary: state.appliedPromo.discount.toStringAsFixed(0) + '%') 
+                  ]
+                )  : Container(),
             OpenFlutterSummaryLine(
                 title: 'Total amount:',
-                summary: '\$' + totalPrice.toStringAsFixed(0)),
+                summary: '\$' + calculatedTotalPrice.toStringAsFixed(2)),
             Padding(
               padding: EdgeInsets.only(bottom: AppSizes.sidePadding * 3),
             ),
