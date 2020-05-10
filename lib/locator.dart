@@ -1,12 +1,12 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
-import 'package:openflutterecommerce/data/abstract/cart_repository.dart';
-import 'package:openflutterecommerce/data/abstract/category_repository.dart';
-import 'package:openflutterecommerce/data/abstract/favorites_repository.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
-import 'package:openflutterecommerce/data/abstract/promo_repository.dart';
-import 'package:openflutterecommerce/data/abstract/user_repository.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/category_repository.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/favorites_repository.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/promo_repository.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/user_repository.dart';
 import 'package:openflutterecommerce/data/network/network_status.dart';
 import 'package:openflutterecommerce/data/repositories/cart_repository_impl.dart';
 import 'package:openflutterecommerce/data/repositories/category_repository_impl.dart';

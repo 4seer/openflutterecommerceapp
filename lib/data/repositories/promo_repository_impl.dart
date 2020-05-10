@@ -4,8 +4,8 @@
  * @see promo_repository_impl.dart
  */
 
-import 'package:openflutterecommerce/data/abstract/model/promo.dart';
-import 'package:openflutterecommerce/data/abstract/promo_repository.dart';
+import 'package:openflutterecommerce/data/model/promo.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/promo_repository.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/local/local_promo_repository.dart';
 import 'package:openflutterecommerce/data/network/network_status.dart';

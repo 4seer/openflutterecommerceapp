@@ -1,5 +1,5 @@
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
 
 class ProductsByFilterParams {
   final int categoryId;

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
 
 class ColorAttribute extends ProductAttribute {
   final Map<String, Color> visibleColors;

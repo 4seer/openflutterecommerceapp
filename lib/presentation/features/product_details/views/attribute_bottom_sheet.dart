@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
 
 class AttributeBottomSheet extends StatelessWidget {
   final ProductAttribute productAttribute;

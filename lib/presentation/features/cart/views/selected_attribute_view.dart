@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
 
 class SelectedAttributeView extends StatelessWidget {
   final ProductAttribute productAttribute;

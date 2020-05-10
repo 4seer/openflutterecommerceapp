@@ -2,7 +2,7 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
-import 'model/category.dart';
+import '../../model/category.dart';
 
 abstract class CategoryRepository {
   ///returns categories list for the selected parent category. 0 - is top

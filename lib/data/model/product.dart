@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
+import 'package:openflutterecommerce/data/model/hashtag.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/domain/entities/entity.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/model/category.dart';
 import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
 
 import 'commerce_image.dart';

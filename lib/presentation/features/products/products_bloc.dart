@@ -4,10 +4,10 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
-import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/model/category.dart';
+import 'package:openflutterecommerce/data/model/favorite_product.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
 import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/favorites/get_favorite_products_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/favorites/remove_from_favorites_use_case.dart';

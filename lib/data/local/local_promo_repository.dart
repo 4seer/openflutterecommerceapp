@@ -1,5 +1,5 @@
-import 'package:openflutterecommerce/data/abstract/model/promo.dart';
-import 'package:openflutterecommerce/data/abstract/promo_repository.dart';
+import 'package:openflutterecommerce/data/model/promo.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/promo_repository.dart';
 
 class LocalPromoRepository implements PromoRepository {
   @override

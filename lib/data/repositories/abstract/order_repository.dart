@@ -1,6 +1,6 @@
 import 'package:openflutterecommerce/config/theme.dart';
 
-import 'model/user_order.dart';
+import '../../model/user_order.dart';
 
 abstract class OrderRepository {
   ///returns orders which were made by this user or with this device

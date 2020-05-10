@@ -1,14 +1,14 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
-import 'package:openflutterecommerce/data/abstract/model/commerce_image.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
-import 'package:openflutterecommerce/data/abstract/model/shipping_address.dart';
+import 'package:openflutterecommerce/data/model/cart_item.dart';
+import 'package:openflutterecommerce/data/model/commerce_image.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/shipping_address.dart';
 
-import '../abstract/model/promo.dart';
-import '../abstract/model/user_order.dart';
+import '../model/promo.dart';
+import '../model/user_order.dart';
 
 class OrderRepository {
   UserOrder getOrderDetails(int orderId) {

@@ -3,10 +3,10 @@
 // Date: 2020-02-06
 
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
 
-import 'model/filter_rules.dart';
-import 'model/product.dart';
+import '../../model/filter_rules.dart';
+import '../../model/product.dart';
 
 abstract class ProductRepository {
   ///returns product info for the selected [id]

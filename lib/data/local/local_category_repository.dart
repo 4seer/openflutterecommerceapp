@@ -1,5 +1,5 @@
-import 'package:openflutterecommerce/data/abstract/category_repository.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/category_repository.dart';
+import 'package:openflutterecommerce/data/model/category.dart';
 
 class LocalCategoryRepository extends CategoryRepository{
   @override

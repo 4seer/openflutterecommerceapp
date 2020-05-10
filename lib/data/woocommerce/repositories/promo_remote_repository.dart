@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/promo.dart';
-import 'package:openflutterecommerce/data/abstract/promo_repository.dart';
+import 'package:openflutterecommerce/data/model/promo.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/promo_repository.dart';
 import 'package:openflutterecommerce/data/woocommerce/models/promo_code_model.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 

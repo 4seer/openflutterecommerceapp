@@ -3,7 +3,7 @@
 // Date: 2020-02-06
 
 import 'package:bloc/bloc.dart';
-import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
+import 'package:openflutterecommerce/data/model/favorite_product.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/change_cart_item_quantity_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/get_cart_products_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/cart/remove_product_from_cart_use_case.dart';
