@@ -7,8 +7,10 @@
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/model/cart_item.dart';
 import 'package:openflutterecommerce/data/model/promo.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
 import 'package:openflutterecommerce/data/repositories/cart_repository_impl.dart';
 import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
+import 'package:openflutterecommerce/locator.dart';
 
 abstract class GetCartProductsUseCase
   implements BaseUseCase<GetCartProductsResult, GetCartProductParams> {}
@@ -18,19 +20,17 @@ class GetCartProductsUseCaseImpl implements GetCartProductsUseCase {
   @override
   Future<GetCartProductsResult> execute(GetCartProductParams params) async {
     try {
+      CartRepository cartRepository = sl();
+      if ( params.appliedPromo != null ) {
+        await cartRepository.setPromo(params.appliedPromo);
+      }
       List<CartItem> cartProducts = CartRepositoryImpl.cartProductDataStorage.items;
-      double totalPrice = 0;
-        for (var i = 0; i < cartProducts.length; i++) {
-          totalPrice += cartProducts[i].price;
-        }
-      final calculatedTotalPrice = 
-        params.appliedPromo != null ?
-          totalPrice * (1 - params.appliedPromo.discount/100)
-          : totalPrice;
+      
       return GetCartProductsResult(
         cartItems: cartProducts,
-        totalPrice: totalPrice,
-        calculatedPrice: calculatedTotalPrice,
+        totalPrice: cartRepository.getTotalPrice(),
+        calculatedPrice: cartRepository.getCalculatedPrice(),
+        appliedPromo: await cartRepository.getAppliedPromo(),
         result: true);
     } catch (e) {
       return GetCartProductsResult( 
@@ -57,11 +57,13 @@ class GetCartProductsResult extends UseCaseResult {
   final List<CartItem> cartItems;
   final double totalPrice;
   final double calculatedPrice;
+  final Promo appliedPromo;
 
   GetCartProductsResult({
     @required this.cartItems, 
     @required this.totalPrice,
     @required this.calculatedPrice,
+    this.appliedPromo,
     Exception exception, 
     bool result
   }) 

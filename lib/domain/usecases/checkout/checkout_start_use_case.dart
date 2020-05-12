@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/model/cart_item.dart';
 import 'package:openflutterecommerce/data/model/payment_method.dart';
 import 'package:openflutterecommerce/data/model/shipping_address.dart';
@@ -27,19 +28,27 @@ class CheckoutStartUseCaseImpl implements CheckoutStartUseCase {
       ShippingAddressRepository shippingAddressRepository = sl();
       PaymentMethodRepository paymentMethodRepository = sl();
       CartRepository cartRepository = sl();
-
+      //TODO: make delivery price dynamic
+      const double deliveryPrice = 10;
+      final double calculatedPrice = cartRepository.getCalculatedPrice();
       return ChekcoutStartResult(
         result: true,
         paymentMethods: await paymentMethodRepository.getPaymentMethodList(),
         shippingAddress: await shippingAddressRepository.getShippingAddressList(),
         cartItems: await cartRepository.getCartContent(),
         currentPaymentMethod:  await paymentMethodRepository.getDefaultPaymentMethod(),
-        currentShippingAddress: await shippingAddressRepository.getDefaultShippingAddress()
+        currentShippingAddress: await shippingAddressRepository.getDefaultShippingAddress(),
+        totalCalculatedPrice: calculatedPrice,
+        deliveryPrice: deliveryPrice, 
+        summaryPrice: calculatedPrice + deliveryPrice
       );
     } catch (e) {
       return ChekcoutStartResult(  
         result: false,
-        exception: CheckoutStartException()
+        exception: CheckoutStartException(), 
+        currentPaymentMethod: null, 
+        deliveryPrice: null, 
+        totalCalculatedPrice: null
       );
     }
   }
@@ -51,13 +60,19 @@ class ChekcoutStartResult extends UseCaseResult {
   final List<CartItem> cartItems;
   final ShippingAddressModel currentShippingAddress;
   final PaymentMethodModel currentPaymentMethod;
+  final double totalCalculatedPrice;
+  final double deliveryPrice;
+  final double summaryPrice;
 
   ChekcoutStartResult({
     this.paymentMethods,
     this.shippingAddress,
     this.cartItems,
     this.currentShippingAddress,
-    this.currentPaymentMethod,
+    @required this.currentPaymentMethod,
+    @required this.totalCalculatedPrice,
+    @required this.deliveryPrice,
+    this.summaryPrice,
     Exception exception, bool result}) 
     : super(exception: exception, result: result);
 }

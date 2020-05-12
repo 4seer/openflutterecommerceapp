@@ -40,6 +40,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           totalPrice: cartResults.totalPrice,
           calculatedPrice: cartResults.calculatedPrice,
           promos: promos.promos, 
+          appliedPromo: cartResults.appliedPromo,
           cartProducts: cartResults.cartItems);
       } else if (state is CartLoadedState) {
         yield state;

@@ -85,11 +85,11 @@ class _CartViewState extends State<CartView> {
                     OpenFlutterDeliveryMethod(),
                     Padding(
                         padding: EdgeInsets.only(top: AppSizes.sidePadding * 3)),
-                    OpenFlutterSummaryLine(title: 'Order', summary: '\$112'),
+                    OpenFlutterSummaryLine(title: 'Order', summary: '\$' + state.orderPrice.toStringAsFixed(2)),
                     Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
-                    OpenFlutterSummaryLine(title: 'Delivery', summary: '\$15'),
+                    OpenFlutterSummaryLine(title: 'Delivery', summary: '\$' + state.deliveryPrice.toStringAsFixed(2)),
                     Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
-                    OpenFlutterSummaryLine(title: 'Summary', summary: '\$127'),
+                    OpenFlutterSummaryLine(title: 'Summary', summary: '\$' + state.summaryPrice.toStringAsFixed(2)),
                     Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                     OpenFlutterButton(
                       title: 'SUBMIT ORDER',

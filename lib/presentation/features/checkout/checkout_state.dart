@@ -28,6 +28,9 @@ class CheckoutProceedState extends CheckoutState {
   final List<PaymentMethodModel> paymentMethods;
   final ShippingAddressModel currentShippingAddress;
   final PaymentMethodModel currentPaymentMethod;
+  final double orderPrice;
+  final double deliveryPrice;
+  final double summaryPrice;
   final int cardId;
   final bool showAddNewCardForm;
 
@@ -38,14 +41,24 @@ class CheckoutProceedState extends CheckoutState {
       this.cartProducts,
       this.currentShippingAddress,
       this.currentPaymentMethod,
+      @required this.orderPrice, 
+      @required this.deliveryPrice, 
+      @required this.summaryPrice, 
       this.showAddNewCardForm = false});
 
   CheckoutProceedState copyWith(
-      {List<Product> cartProducts, int cardId, bool showAddNewCardForm}) {
+      {List<Product> cartProducts, int cardId, bool showAddNewCardForm,
+      double orderPrice, 
+      double deliveryPrice, 
+      double summaryPrice, }) {
     return CheckoutProceedState(
         cartProducts: cartProducts ?? this.cartProducts,
         showAddNewCardForm: showAddNewCardForm ?? this.showAddNewCardForm,
-        cardId: cardId ?? this.cardId);
+        cardId: cardId ?? this.cardId,
+        orderPrice: orderPrice ?? this.orderPrice,
+        deliveryPrice: deliveryPrice ?? this.deliveryPrice,
+        summaryPrice: summaryPrice ?? this.summaryPrice
+    );
   }
 
   @override
