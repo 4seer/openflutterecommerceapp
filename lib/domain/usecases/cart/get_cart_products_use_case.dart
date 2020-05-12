@@ -6,6 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/data/model/cart_item.dart';
+import 'package:openflutterecommerce/data/model/promo.dart';
 import 'package:openflutterecommerce/data/repositories/cart_repository_impl.dart';
 import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
 
@@ -17,12 +18,25 @@ class GetCartProductsUseCaseImpl implements GetCartProductsUseCase {
   @override
   Future<GetCartProductsResult> execute(GetCartProductParams params) async {
     try {
+      List<CartItem> cartProducts = CartRepositoryImpl.cartProductDataStorage.items;
+      double totalPrice = 0;
+        for (var i = 0; i < cartProducts.length; i++) {
+          totalPrice += cartProducts[i].price;
+        }
+      final calculatedTotalPrice = 
+        params.appliedPromo != null ?
+          totalPrice * (1 - params.appliedPromo.discount/100)
+          : totalPrice;
       return GetCartProductsResult(
-        cartItems: CartRepositoryImpl.cartProductDataStorage.items,
+        cartItems: cartProducts,
+        totalPrice: totalPrice,
+        calculatedPrice: calculatedTotalPrice,
         result: true);
     } catch (e) {
       return GetCartProductsResult( 
         cartItems: [], 
+        totalPrice: 0,
+        calculatedPrice: 0,
         result: false,
         exception: GetCartProductsException()
       );
@@ -31,14 +45,23 @@ class GetCartProductsUseCaseImpl implements GetCartProductsUseCase {
 
 }
 
-class GetCartProductParams {}
+class GetCartProductParams {
+  final Promo appliedPromo;
+
+  GetCartProductParams({this.appliedPromo});
+}
 
 class GetCartProductsException implements Exception {}
 
 class GetCartProductsResult extends UseCaseResult {
   final List<CartItem> cartItems;
+  final double totalPrice;
+  final double calculatedPrice;
+
   GetCartProductsResult({
     @required this.cartItems, 
+    @required this.totalPrice,
+    @required this.calculatedPrice,
     Exception exception, 
     bool result
   }) 

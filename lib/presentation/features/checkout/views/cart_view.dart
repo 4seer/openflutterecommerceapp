@@ -94,9 +94,9 @@ class _CartViewState extends State<CartView> {
                     OpenFlutterButton(
                       title: 'SUBMIT ORDER',
                       onPressed: (() => {
-                            widget.changeView(
-                                changeType: ViewChangeType.Exact, index: 4)
-                          }),
+                        widget.changeView(
+                          changeType: ViewChangeType.Exact, index: 4)
+                      }),
                     )
                   ],
                 ));
