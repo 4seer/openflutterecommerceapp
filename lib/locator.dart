@@ -29,6 +29,7 @@ import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_
 import 'package:openflutterecommerce/domain/usecases/favorites/get_favorite_products_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/favorites/remove_from_favorites_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/products/get_home_products_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/get_product_by_id_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/promos/get_promos_use_case.dart';
 
@@ -39,6 +40,9 @@ void init() {
   //Singleton for NetworkStatus identification
   sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl(DataConnectionChecker()));
 
+  //get home page products use case
+  sl.registerLazySingleton<GetHomePageProductsUseCase>(() => GetHomePageProductsUseCaseImpl());
+  
   //checkout start use case
   sl.registerLazySingleton<CheckoutStartUseCase>(() => CheckoutStartUseCaseImpl());
   
