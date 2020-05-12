@@ -45,7 +45,9 @@ class FavouritesTileView extends StatelessWidget {
                 },
                 onAddToCart: () {
                   BlocProvider.of<FavouriteBloc>(context)
-                      .add(AddToCartEvent(state.data[index].product.id));
+                    .add(AddToCartEvent(state.data[index]));
+                  Navigator.of(context)
+                    .pushNamed(OpenFlutterEcommerceRoutes.cart);
                 },
                 selectedAttributes: state.data[index]?.favoriteForm
               ),
