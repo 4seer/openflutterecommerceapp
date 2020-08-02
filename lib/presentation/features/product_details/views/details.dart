@@ -5,6 +5,8 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/model/category.dart';
 import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/data/model/product_attribute.dart';
+import 'package:openflutterecommerce/presentation/features/home/home.dart';
+import 'package:openflutterecommerce/presentation/features/home/home_bloc.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/views/attribute_bottom_sheet.dart';
 import 'package:openflutterecommerce/presentation/features/product_reviews/product_review_and_rating_screen.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
@@ -179,6 +181,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         OpenFlutterProductListView(
                           width: deviceWidth,
                           products: widget.similarProducts,
+                          onFavoritesTap: ( (Product product) => {
+                            BlocProvider.of<HomeBloc>(context).add(
+                              HomeAddToFavoriteEvent(
+                                isFavorite: !product.isFavorite,
+                                product: product
+                              )
+                            )
+                          }),
                         )
                       ],
                     ),

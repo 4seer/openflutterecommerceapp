@@ -3,10 +3,13 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/presentation/features/categories/categories.dart';
+import 'package:openflutterecommerce/presentation/features/home/home_bloc.dart';
+import 'package:openflutterecommerce/presentation/features/home/home_event.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -30,7 +33,7 @@ class _Main2ViewState extends State<Main2View> {
     var width = MediaQuery.of(context).size.width;
     var widgetWidth = width - AppSizes.sidePadding * 2;
     return SingleChildScrollView(
-        child: Column(children: <Widget>[
+      child: Column(children: <Widget>[
       Container(
           height: width * 0.52,
           width: width,
@@ -62,7 +65,17 @@ class _Main2ViewState extends State<Main2View> {
         description: 'Super summer sale',
       ),
       OpenFlutterProductListView(
-          width: widgetWidth, products: widget.salesProducts),
+        width: widgetWidth, 
+        products: widget.salesProducts,
+        onFavoritesTap: ( (Product product) => {
+          BlocProvider.of<HomeBloc>(context).add(
+            HomeAddToFavoriteEvent(
+              isFavorite: !product.isFavorite,
+              product: product
+            )
+          )
+        })
+      ),
       Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
       OpenFlutterBlockHeader(
         width: widgetWidth,
@@ -75,7 +88,17 @@ class _Main2ViewState extends State<Main2View> {
         description: 'You’ve never seen it before!',
       ),
       OpenFlutterProductListView(
-          width: widgetWidth, products: widget.newProducts),
+        width: widgetWidth, 
+        products: widget.newProducts,
+        onFavoritesTap: ( (Product product) => {
+          BlocProvider.of<HomeBloc>(context).add(
+            HomeAddToFavoriteEvent(
+              isFavorite: !product.isFavorite,
+              product: product
+            )
+          )
+        }),
+      ),
       OpenFlutterButton(
         title: 'Next Home Page',
         width: 160,

@@ -34,8 +34,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       if (state is CartInitialState) {
         final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
         var promos = await getPromosUseCase.execute(GetPromosParams());
+        
         yield CartLoadedState(
-            showPromoPopup: false, promos: promos.promos, cartProducts: cartResults.cartItems);
+          showPromoPopup: false, 
+          totalPrice: cartResults.totalPrice,
+          calculatedPrice: cartResults.calculatedPrice,
+          promos: promos.promos, 
+          appliedPromo: cartResults.appliedPromo,
+          cartProducts: cartResults.cartItems);
       } else if (state is CartLoadedState) {
         yield state;
       }
@@ -73,7 +79,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     } else if (event is CartPromoAppliedEvent) {
       //TODO: apply promo code
       var state = this.state as CartLoadedState;
-      yield state.copyWith(showPromoPopup: false,
+      final cartResults = await getCartProductsUseCase.execute(
+        GetCartProductParams(appliedPromo: event.promo)
+      );
+      yield state.copyWith(
+        showPromoPopup: false, 
+        totalPrice: cartResults.totalPrice,
+        calculatedPrice: cartResults.calculatedPrice,
         appliedPromo: event.promo);
     } else if (event is CartPromoCodeAppliedEvent) {
       //TODO: apply promo code

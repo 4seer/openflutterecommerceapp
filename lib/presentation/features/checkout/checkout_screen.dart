@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -24,11 +23,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       background: null,
       title: 'Checkout',
       body: BlocProvider<CheckoutBloc>(
-          create: (context) {
-            return CheckoutBloc(RepositoryProvider.of<CartRepository>(context))
-              ..add(CheckoutStartEvent());
-          },
-          child: CheckoutWrapper()),
+        create: (context) {
+          return CheckoutBloc()
+            ..add(CheckoutStartEvent());
+        },
+        child: CheckoutWrapper()),
       bottomMenuIndex: 2,
     ));
   }

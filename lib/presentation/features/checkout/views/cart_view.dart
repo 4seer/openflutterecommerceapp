@@ -45,61 +45,63 @@ class _CartViewState extends State<CartView> {
         child: BlocBuilder(
             bloc: bloc,
             builder: (BuildContext context, CheckoutState state) {
-              return SingleChildScrollView(
-                  child: Column(
-                children: <Widget>[
-                  OpenFlutterBlockSubtitle(
-                      title: 'Shipping Address', width: width),
-                  OpenFlutterActionCard(
-                      title: 'Jane Doe',
+              if (state is CheckoutProceedState) {
+                return SingleChildScrollView(
+                    child: Column(
+                  children: <Widget>[
+                    OpenFlutterBlockSubtitle(
+                        title: 'Shipping Address', width: width),
+                    OpenFlutterActionCard(
+                        title: state.currentShippingAddress.fullName,
+                        linkText: 'Change',
+                        onLinkTap: (() => {
+                            widget.changeView(
+                              changeType: ViewChangeType.Exact, index: 2)
+                          }),
+                        child: RichText(
+                          text: TextSpan(
+                            text: state.currentShippingAddress.toString(),
+                            style: _theme.textTheme.display3
+                              .copyWith(color: _theme.primaryColor)),
+                          maxLines: 2,
+                        )),
+                    OpenFlutterBlockSubtitle(
+                      title: 'Payment',
+                      width: width,
                       linkText: 'Change',
                       onLinkTap: (() => {
-                            widget.changeView(
-                                changeType: ViewChangeType.Exact, index: 2)
-                          }),
-                      child: RichText(
-                        text: TextSpan(
-                            text:
-                                '3 Newbridge Court Chino Hills, CA 91709, United States',
-                            style: _theme.textTheme.display3
-                                .copyWith(color: _theme.primaryColor)),
-                        maxLines: 2,
-                      )),
-                  OpenFlutterBlockSubtitle(
-                    title: 'Payment',
-                    width: width,
-                    linkText: 'Change',
-                    onLinkTap: (() => {
-                          widget.changeView(changeType: ViewChangeType.Forward)
-                        }),
-                  ),
-                  OpenFlutterPaymentCard(
-                    cardNumber: '**** **** **** 3947',
-                  ),
-                  OpenFlutterBlockSubtitle(
-                    title: 'Delivery Method',
-                    width: width,
-                    linkText: 'Change',
-                    onLinkTap: (() => {}),
-                  ),
-                  OpenFlutterDeliveryMethod(),
-                  Padding(
-                      padding: EdgeInsets.only(top: AppSizes.sidePadding * 3)),
-                  OpenFlutterSummaryLine(title: 'Order', summary: '\$112'),
-                  Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
-                  OpenFlutterSummaryLine(title: 'Delivery', summary: '\$15'),
-                  Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
-                  OpenFlutterSummaryLine(title: 'Summary', summary: '\$127'),
-                  Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
-                  OpenFlutterButton(
-                    title: 'SUBMIT ORDER',
-                    onPressed: (() => {
-                          widget.changeView(
-                              changeType: ViewChangeType.Exact, index: 4)
-                        }),
-                  )
-                ],
-              ));
+                        widget.changeView(changeType: ViewChangeType.Forward)
+                      }),
+                    ),
+                    OpenFlutterPaymentCard(
+                      cardNumber: state.currentPaymentMethod.toString(),
+                    ),
+                    OpenFlutterBlockSubtitle(
+                      title: 'Delivery Method',
+                      width: width,
+                      /*linkText: 'Change',
+                      onLinkTap: (() => {}),*/
+                    ),
+                    OpenFlutterDeliveryMethod(),
+                    Padding(
+                        padding: EdgeInsets.only(top: AppSizes.sidePadding * 3)),
+                    OpenFlutterSummaryLine(title: 'Order', summary: '\$' + state.orderPrice.toStringAsFixed(2)),
+                    Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
+                    OpenFlutterSummaryLine(title: 'Delivery', summary: '\$' + state.deliveryPrice.toStringAsFixed(2)),
+                    Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
+                    OpenFlutterSummaryLine(title: 'Summary', summary: '\$' + state.summaryPrice.toStringAsFixed(2)),
+                    Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
+                    OpenFlutterButton(
+                      title: 'SUBMIT ORDER',
+                      onPressed: (() => {
+                        widget.changeView(
+                          changeType: ViewChangeType.Exact, index: 4)
+                      }),
+                    )
+                  ],
+                ));
+              }
+              return Container();
             }));
   }
 }

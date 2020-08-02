@@ -74,23 +74,23 @@ extension View on Product {
   Widget _getFavoritesButton(VoidCallback onFavoritesClick) {
     return FloatingActionButton(
       heroTag: title +
-          Random()
-              .nextInt(1000000)
-              .toString(), //TODO make sure that there is only one product with specified id on screen and use it as a tag
+        Random()
+          .nextInt(1000000)
+          .toString(), //TODO make sure that there is only one product with specified id on screen and use it as a tag
       mini: true,
       backgroundColor: AppColors.white,
       onPressed: onFavoritesClick,
       child: isFavorite
-          ? Icon(
-              FontAwesomeIcons.solidHeart,
-              color: AppColors.red,
-              size: 18.0,
-            )
-          : Icon(
-              FontAwesomeIcons.heart,
-              color: AppColors.red,
-              size: 18.0,
-            ),
+        ? Icon(
+            FontAwesomeIcons.solidHeart,
+            color: AppColors.red,
+            size: 18.0,
+          )
+        : Icon(
+            FontAwesomeIcons.heart,
+            color: AppColors.red,
+            size: 18.0,
+          ),
     );
   }
 
@@ -113,15 +113,16 @@ extension View on Product {
 
   Widget buildRating(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(
-            top: AppSizes.linePadding, bottom: AppSizes.linePadding),
-        child: OpenFlutterProductRating(
-          rating: averageRating,
-          ratingCount: ratingCount,
-          alignment: MainAxisAlignment.start,
-          iconSize: 12,
-          labelFontSize: 12,
-        ));
+      padding: EdgeInsets.only(
+        top: AppSizes.linePadding, bottom: AppSizes.linePadding),
+      child: OpenFlutterProductRating(
+        rating: averageRating,
+        ratingCount: ratingCount,
+        alignment: MainAxisAlignment.start,
+        iconSize: 12,
+        labelFontSize: 12,
+      )
+    );
   }
 
   Widget buildDiscountPrice(ThemeData _theme) {

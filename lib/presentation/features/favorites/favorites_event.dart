@@ -64,10 +64,10 @@ class RemoveFromFavoriteEvent extends FavouriteEvent {
 }
 
 class AddToCartEvent extends FavouriteEvent {
-  final int productId;
+  final FavoriteProduct favouriteProduct;
 
-  AddToCartEvent(this.productId);
+  AddToCartEvent(this.favouriteProduct);
 
   @override
-  List<Object> get props => [productId];
+  List<Object> get props => [favouriteProduct];
 }

@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
 import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -25,9 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: null,
       body: BlocProvider<HomeBloc>(
           create: (context) {
-            return HomeBloc(
-                productRepository:
-                    RepositoryProvider.of<ProductRepository>(context))
+            return HomeBloc()
               ..add(HomeLoadEvent());
           },
           child: HomeWrapper()),
@@ -50,15 +47,14 @@ class _HomeWrapperState extends OpenFlutterWrapperState<HomeWrapper> {
         builder: (BuildContext context, HomeState state) {
       return getPageView(<Widget>[
         Main1View(
-            changeView: changePage,
-            products:
-                state is HomeLoadedState ? state.newProducts : <Product>[]),
+          changeView: changePage,
+          products: state is HomeLoadedState ? state.newProducts : <Product>[],),
         Main2View(
-            changeView: changePage,
-            salesProducts:
-                state is HomeLoadedState ? state.salesProducts : <Product>[],
-            newProducts:
-                state is HomeLoadedState ? state.newProducts : <Product>[]),
+          changeView: changePage,
+          salesProducts:
+            state is HomeLoadedState ? state.salesProducts : <Product>[],
+          newProducts:
+            state is HomeLoadedState ? state.newProducts : <Product>[]),
         Main3View(changeView: changePage)
       ]);
     });

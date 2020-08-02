@@ -3,7 +3,9 @@
 // Date: 2020-02-11
 
 import 'package:bloc/bloc.dart';
+import 'package:openflutterecommerce/data/model/cart_item.dart';
 import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import 'package:openflutterecommerce/domain/usecases/cart/add_product_to_cart_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/favorites/get_favorite_products_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/favorites/remove_from_favorites_use_case.dart';
@@ -16,11 +18,13 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   AddToFavoritesUseCase addToFavoriteUseCase;
   RemoveFromFavoritesUseCase removeFromFavoriteUseCase;
   GetFavoriteProductsUseCase getFavoriteProductsUseCase;
+  AddProductToCartUseCase addProductToCartUseCase;
 
   FavouriteBloc() 
   : addToFavoriteUseCase = sl(),
     removeFromFavoriteUseCase = sl(),
-    getFavoriteProductsUseCase = sl();
+    getFavoriteProductsUseCase = sl(),
+    addProductToCartUseCase = sl();
 
   @override
   FavouriteState get initialState => FavouriteState();
@@ -63,7 +67,11 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
         data: filteredData.products
       );
     } else if (event is AddToCartEvent) {
-      //TODO add to cart
+      await addProductToCartUseCase.execute(CartItem(
+        product: event.favouriteProduct.product, 
+        productQuantity: ProductQuantity(1), 
+        selectedAttributes: event.favouriteProduct.favoriteForm
+      ));
     } else if ( event is RemoveFromFavoriteEvent ) {
       yield state.getLoading();
       await removeFromFavoriteUseCase.execute(

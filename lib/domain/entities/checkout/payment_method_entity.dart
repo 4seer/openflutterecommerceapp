@@ -6,6 +6,7 @@ class PaymentMethodEntity extends Entity<int> {
   final int expiryDateMonth;
   final int expiryDateYear;
   final int cvv;
+  final bool isDefault;
 
   PaymentMethodEntity(
     {int id, 
@@ -13,7 +14,8 @@ class PaymentMethodEntity extends Entity<int> {
     this.cardNumber, 
     this.expiryDateMonth,
     this.expiryDateYear,
-    this.cvv}) : super(id);
+    this.cvv,
+    this.isDefault}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -24,6 +26,7 @@ class PaymentMethodEntity extends Entity<int> {
       'expiryDateMonth': expiryDateMonth,
       'expiryDateYear': expiryDateYear,
       'cvv': cvv,
+      'isDefault': isDefault
     };
   }
 
@@ -34,6 +37,13 @@ class PaymentMethodEntity extends Entity<int> {
     cardNumber, 
     expiryDateMonth,
     expiryDateYear,
-    cvv
+    cvv,
+    isDefault
   ];
+
+
+  @override
+  String toString() =>
+    '**** **** **** ' + cardNumber.substring(cardNumber.length - 4);
+
 }

@@ -25,4 +25,10 @@ abstract class CartRepository {
 
   ///applies promo to cart
   Future setPromo(Promo promo);
+
+  //get cart total price
+  double getTotalPrice();
+
+  //get calculated price with promo discount
+  double getCalculatedPrice();
 }

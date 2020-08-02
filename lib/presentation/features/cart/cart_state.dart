@@ -25,25 +25,29 @@ class CartLoadedState extends CartState {
   final List<Promo> promos;
   final bool showPromoPopup;
   final double totalPrice;
+  final double calculatedPrice;
   final Promo appliedPromo;
 
   CartLoadedState(
-      {@required this.showPromoPopup,
-      @required this.promos,
-      this.totalPrice,
-      this.appliedPromo,
-      @required this.cartProducts});
+    {@required this.showPromoPopup,
+    @required this.promos,
+    this.totalPrice,
+    this.calculatedPrice,
+    this.appliedPromo,
+    @required this.cartProducts});
 
   CartLoadedState copyWith(
       {List<CartItem> cartProducts,
       double totalPrice,
       List<Promo> promos,
       Promo appliedPromo,
+      double calculatedPrice,
       bool showPromoPopup}) {
     return CartLoadedState(
         promos: promos ?? this.promos,
         cartProducts: cartProducts ?? this.cartProducts,
         totalPrice: totalPrice ?? this.totalPrice,
+        calculatedPrice: calculatedPrice ?? this.calculatedPrice,
         appliedPromo: appliedPromo ?? this.appliedPromo,
         showPromoPopup: showPromoPopup ?? this.showPromoPopup);
   }
