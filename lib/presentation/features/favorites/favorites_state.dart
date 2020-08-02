@@ -4,10 +4,10 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/hashtag.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/model/favorite_product.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/hashtag.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
 
 @immutable
 class FavouriteState extends Equatable {
@@ -47,9 +47,9 @@ class FavouriteState extends Equatable {
   bool get hasError => error != null;
 
   FavouriteState getLoading() {
-    return copyWith(data: null);
+    return copyWith(data: []);
   }
 
   @override
-  List<Object> get props => [data, hashtags, sortBy, filterRules, error];
+  List<Object> get props => [data, hashtags, sortBy, filterRules, error, isProductsLoading];
 }

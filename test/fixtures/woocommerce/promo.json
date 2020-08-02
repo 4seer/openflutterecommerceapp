@@ -1,0 +1,18 @@
+[
+    {
+        "id":101,
+        "code":"ten_percent",
+        "amount":"10.00",
+        "discount_type":"percent",
+        "description":"Ten Percent Discount",
+        "date_expires":"2022-05-24T00:00:00"
+    },
+    {
+        "id":102,
+        "code":"twenty_percent",
+        "amount":"20.00",
+        "discount_type":"percent",
+        "description":"Twenty Percent Discount",
+        "date_expires":"2022-05-24T00:00:00"
+    }
+]

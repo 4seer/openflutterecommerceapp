@@ -3,17 +3,23 @@
 // Date: 2020-02-06
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/model/favorite_product.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/favorites/remove_from_favorites_use_case.dart';
+import 'package:openflutterecommerce/domain/usecases/products/get_home_products_use_case.dart';
+import 'package:openflutterecommerce/locator.dart';
 
 import 'home.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final ProductRepository productRepository;
-
-  HomeBloc({
-    @required this.productRepository,
-  }) : assert(productRepository != null);
+  final AddToFavoritesUseCase addToFavoritesUseCase;
+  final RemoveFromFavoritesUseCase removeFromFavoritesUseCase;
+  final GetHomePageProductsUseCase getHomePageProductsUseCase;
+  
+  HomeBloc() : 
+    addToFavoritesUseCase = sl(), 
+    removeFromFavoritesUseCase = sl(),
+    getHomePageProductsUseCase = sl();
 
   @override
   HomeState get initialState => HomeInitialState();
@@ -22,12 +28,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is HomeLoadEvent) {
       if (state is HomeInitialState) {
+        HomeProductsResult results = await getHomePageProductsUseCase.execute(HomeProductParams());
         yield HomeLoadedState(
-            salesProducts: await productRepository.getProducts(categoryId: 1),
-            newProducts: await productRepository.getProducts(categoryId: 2));
+          salesProducts: results.salesProducts,
+          newProducts: results.newProducts);
       } else if (state is HomeLoadedState) {
         yield state;
       }
+    } else if (event is HomeAddToFavoriteEvent) {
+      if (event.isFavorite) {
+        await addToFavoritesUseCase.execute(
+          FavoriteProduct(event.product, null)
+        );
+      } else {
+        await removeFromFavoritesUseCase.execute(
+          RemoveFromFavoritesParams(
+            FavoriteProduct(event.product, null)
+          )
+        );
+      }
+      HomeProductsResult results = await getHomePageProductsUseCase.execute(HomeProductParams());
+      yield HomeLoadedState(
+        salesProducts: results.salesProducts,
+        newProducts: results.newProducts);
     }
   }
 }

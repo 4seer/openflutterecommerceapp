@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:openflutterecommerce/data/local/db_provider.dart';
+
 import 'cart/product_cart_data_source_test.dart'
     as product_cart_data_source_test;
 import 'delivery/delivery_method_data_source_test.dart'
@@ -33,8 +36,9 @@ import 'user/shipping_address_data_source_test.dart'
 import 'user/user_data_source_test.dart' as user_data_source_test;
 
 Future<void> main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
   //Use after database update
-  // await SQLiteDbProvider.clear();
+   await SQLiteDbProvider.clear();
   // run tests on all data sources (tables)
   await delivery_method_data_source_test.main();
   await category_hashtag_data_source_test.main();

@@ -1,8 +1,8 @@
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
 
 class LocalProductRepository implements ProductRepository {
   @override

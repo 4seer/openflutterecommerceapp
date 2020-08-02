@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
-import 'package:openflutterecommerce/data/fake_model/models/settings.dart';
+import 'package:openflutterecommerce/domain/entities/user/settings.dart';
 
 @immutable
 abstract class SettingsState extends Equatable {
-  final Settings settings;
+  final UserSettingsEntity settings;
 
   SettingsState({this.settings});
 
@@ -14,39 +14,39 @@ abstract class SettingsState extends Equatable {
 
 @immutable
 class SettingsInitialState extends SettingsState {
-  SettingsInitialState({Settings settings}) : super(settings: settings);
+  SettingsInitialState({UserSettingsEntity settings}) : super(settings: settings);
 }
 
 @immutable
 class FullNameUpdatedState extends SettingsState {
-  FullNameUpdatedState({Settings settings}) : super(settings: settings);
+  FullNameUpdatedState({UserSettingsEntity settings}) : super(settings: settings);
 }
 
 @immutable
 class DateOfBirthUpdatedState extends SettingsState {
-  DateOfBirthUpdatedState({Settings settings}) : super(settings: settings);
+  DateOfBirthUpdatedState({UserSettingsEntity settings}) : super(settings: settings);
 }
 
 @immutable
 class NotifySalesUpdatedState extends SettingsState {
-  NotifySalesUpdatedState({Settings settings}) : super(settings: settings);
+  NotifySalesUpdatedState({UserSettingsEntity settings}) : super(settings: settings);
 }
 
 @immutable
 class NotifyArrivalsUpdatedSate extends SettingsState {
-  NotifyArrivalsUpdatedSate({Settings settings}) : super(settings: settings);
+  NotifyArrivalsUpdatedSate({UserSettingsEntity settings}) : super(settings: settings);
 }
 
 @immutable
 class NotifyDeliveryUpdatedState extends SettingsState {
-  NotifyDeliveryUpdatedState({Settings settings}) : super(settings: settings);
+  NotifyDeliveryUpdatedState({UserSettingsEntity settings}) : super(settings: settings);
 }
 
 @immutable
 class ChangeSettingsErrorState extends SettingsState {
   final String errorMessage;
 
-  ChangeSettingsErrorState({Settings settings, this.errorMessage})
+  ChangeSettingsErrorState({UserSettingsEntity settings, this.errorMessage})
       : super(settings: settings);
   @override
   List<Object> get props => [settings, errorMessage];

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
+import 'package:openflutterecommerce/data/model/cart_item.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/cart_tile.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
@@ -175,9 +175,15 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
       for (CartItem item in state.orderData.products)
         OpenFlutterCartTile(
           item: item,
-          onAddToFav: null,
-          onChangeQuantity: null,
-          onRemoveFromCart: null,
+          onAddToFav: (() => {
+            
+          }),
+          onChangeQuantity: ((int quantity) => {
+
+          }),
+          onRemoveFromCart: (() => {
+            
+          }),
           orderComplete: true,
         )
     ];

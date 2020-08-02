@@ -1,36 +1,23 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:openflutterecommerce/data/abstract/product_repository.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
-import 'package:openflutterecommerce/data/woocommerce/repositories/product_remote_repository.dart';
-import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 import 'package:openflutterecommerce/domain/usecases/products/find_products_by_filter_use_case.dart';
 import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 
 import '../../../fixtures/fixture_reader.dart';
-
-class MockWoocommerceWrapper extends Mock implements WoocommercWrapperAbastract { }
+import '../use_case_test_include.dart';
 
 void main() {
-  MockWoocommerceWrapper woocommerce;
   FindProductsByFilterUseCase findProductsByFilterUseCase;
   ProductsByFilterParams productsByFilterParams;
   
-  final sl = GetIt.instance;  
-
-  sl.registerLazySingleton<WoocommercWrapperAbastract>(
-    () => woocommerce,
-  );
+  setupLocator();
   
-  sl.registerLazySingleton<ProductRepository>(
-    () => RemoteProductRepository(woocommerce: sl()),
-  );
+  MockWoocommerceWrapper woocommerce = sl();
   
   setUp(() {
-    woocommerce = MockWoocommerceWrapper();
     findProductsByFilterUseCase = FindProductsByFilterUseCaseImpl();
     
     productsByFilterParams = ProductsByFilterParams(

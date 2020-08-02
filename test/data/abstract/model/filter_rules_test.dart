@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/product_remote_repository.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
-class MockWoocommerceWrapper extends Mock implements WoocommercWrapperAbastract { }
+class MockWoocommerceWrapper extends Mock implements WoocommercWrapperAbstract { }
 
 void main() {
   MockWoocommerceWrapper woocommerce;

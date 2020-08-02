@@ -1,6 +1,6 @@
 
 
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/model/category.dart';
 
 class CategoriesByFilterResult {
   final List<ProductCategory> categories;

@@ -4,8 +4,10 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/cart_item.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
+import 'package:openflutterecommerce/data/model/cart_item.dart';
+import 'package:openflutterecommerce/data/model/payment_method.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/shipping_address.dart';
 
 @immutable
 abstract class CheckoutState extends Equatable {
@@ -22,20 +24,41 @@ class CheckoutInitialState extends CheckoutState {
 @immutable
 class CheckoutProceedState extends CheckoutState {
   final List<CartItem> cartProducts;
+  final List<ShippingAddressModel> shippingAddresses;
+  final List<PaymentMethodModel> paymentMethods;
+  final ShippingAddressModel currentShippingAddress;
+  final PaymentMethodModel currentPaymentMethod;
+  final double orderPrice;
+  final double deliveryPrice;
+  final double summaryPrice;
   final int cardId;
   final bool showAddNewCardForm;
 
   CheckoutProceedState(
       {@required this.cardId,
+      this.shippingAddresses,
+      this.paymentMethods,
       this.cartProducts,
+      this.currentShippingAddress,
+      this.currentPaymentMethod,
+      @required this.orderPrice, 
+      @required this.deliveryPrice, 
+      @required this.summaryPrice, 
       this.showAddNewCardForm = false});
 
   CheckoutProceedState copyWith(
-      {List<Product> cartProducts, int cardId, bool showAddNewCardForm}) {
+      {List<Product> cartProducts, int cardId, bool showAddNewCardForm,
+      double orderPrice, 
+      double deliveryPrice, 
+      double summaryPrice, }) {
     return CheckoutProceedState(
         cartProducts: cartProducts ?? this.cartProducts,
         showAddNewCardForm: showAddNewCardForm ?? this.showAddNewCardForm,
-        cardId: cardId ?? this.cardId);
+        cardId: cardId ?? this.cardId,
+        orderPrice: orderPrice ?? this.orderPrice,
+        deliveryPrice: deliveryPrice ?? this.deliveryPrice,
+        summaryPrice: summaryPrice ?? this.summaryPrice
+    );
   }
 
   @override

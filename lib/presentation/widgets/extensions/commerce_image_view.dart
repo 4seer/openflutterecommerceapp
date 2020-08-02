@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/commerce_image.dart';
+import 'package:openflutterecommerce/data/model/commerce_image.dart';
 
 extension View on CommerceImage {
   ImageProvider getView() {

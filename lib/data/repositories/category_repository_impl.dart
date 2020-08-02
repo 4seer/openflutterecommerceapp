@@ -1,6 +1,6 @@
 
-import 'package:openflutterecommerce/data/abstract/category_repository.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
+import 'package:openflutterecommerce/data/repositories/abstract/category_repository.dart';
+import 'package:openflutterecommerce/data/model/category.dart';
 import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/local/local_category_repository.dart';
 import 'package:openflutterecommerce/data/network/network_status.dart';

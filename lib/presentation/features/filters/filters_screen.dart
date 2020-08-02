@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
-import 'package:openflutterecommerce/data/abstract/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/category.dart';
+import 'package:openflutterecommerce/data/model/filter_rules.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
 import 'package:openflutterecommerce/presentation/features/filters/accept_bottom_navigation.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/price_slider.dart';
 

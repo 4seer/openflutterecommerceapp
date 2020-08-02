@@ -1,11 +1,12 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/abstract/model/category.dart';
-import 'package:openflutterecommerce/data/abstract/model/product.dart';
-import 'package:openflutterecommerce/data/abstract/model/product_attribute.dart';
+import 'package:openflutterecommerce/data/model/category.dart';
+import 'package:openflutterecommerce/data/model/product.dart';
+import 'package:openflutterecommerce/data/model/product_attribute.dart';
+import 'package:openflutterecommerce/presentation/features/home/home.dart';
+import 'package:openflutterecommerce/presentation/features/home/home_bloc.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/views/attribute_bottom_sheet.dart';
 import 'package:openflutterecommerce/presentation/features/product_reviews/product_review_and_rating_screen.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
@@ -39,6 +40,7 @@ class ProductDetailsView extends StatefulWidget {
 class _ProductDetailsViewState extends State<ProductDetailsView> {
   Orientation orientation;
   bool favorite;
+  ProductBloc bloc;
 
   @override
   void initState() {
@@ -53,7 +55,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
         Theme.of(context).copyWith(dividerColor: AppColors.darkGray);
     var deviceWidth = MediaQuery.of(context).size.width;
     var deviceHeight = MediaQuery.of(context).size.height;
-    var bloc = BlocProvider.of<ProductBloc>(context);
+    bloc = BlocProvider.of<ProductBloc>(context);
     return BlocListener(
         bloc: bloc,
         listener: (context, state) {
@@ -103,15 +105,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                       .map((value) => selectionOutlineButton(
                                           deviceWidth,
                                           value,
-                                          state.selectedAttributes == null
-                                              ? null
-                                              : state
-                                                  .selectedAttributes[value]))
+                                          state.productAttributes.selectedAttributes[value]))
                                       .toList() : List<Widget>()) +
                                   [
                                     OpenFlutterFavouriteButton(
                                       favourite: favorite,
-                                      setFavourite: () => {setFavourite(bloc)},
+                                      setFavourite: () => {
+                                        setFavourite(bloc)
+                                      },
                                     )
                                   ]) ,
                         ),
@@ -180,6 +181,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         OpenFlutterProductListView(
                           width: deviceWidth,
                           products: widget.similarProducts,
+                          onFavoritesTap: ( (Product product) => {
+                            BlocProvider.of<HomeBloc>(context).add(
+                              HomeAddToFavoriteEvent(
+                                isFavorite: !product.isFavorite,
+                                product: product
+                              )
+                            )
+                          }),
                         )
                       ],
                     ),
@@ -190,11 +199,11 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             }));
   }
 
-  void setFavourite(ProductBloc bloc) {
+  void setFavourite(
+    ProductBloc bloc
+  ) {
     if (!favorite) {
-      bloc.add(ProductAddToFavoritesEvent(
-          widget.product,
-          HashMap())); //TODO ask for real parameters if required
+      bloc.add(ProductAddToFavoritesEvent()); //TODO ask for real parameters if required
     } else {
       bloc.add(ProductRemoveFromFavoritesEvent());
     }
@@ -204,27 +213,38 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   }
 
   void _showSelectAttributeBottomSheet(
-      BuildContext context, ProductAttribute attribute,
-      {String selectedValue}) {
+      BuildContext context, 
+      ProductAttribute attribute,
+      {Function onSelect, String selectedValue}) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(34), topRight: Radius.circular(34)),
+            topLeft: Radius.circular(34), topRight: Radius.circular(34)),
         ),
         builder: (BuildContext context) => AttributeBottomSheet(
-              productAttribute: attribute,
-              selectedValue: selectedValue,
-            ));
+          productAttribute: attribute,
+          selectedValue: selectedValue,
+          onValueSelect: ((String value, ProductAttribute productAttribute)=>
+            {
+              bloc..add(
+                ProductSetAttributeEvent(
+                  value, productAttribute)),
+              Navigator.pop(context),
+              onSelect()
+            }
+          ) 
+        ));
   } //modelBottomSheet for selecting size
 
   Widget selectionOutlineButton(var deviceWidth, ProductAttribute attribute,
       String alreadySelectedValue) {
     //select size and select color widget
     return OutlineButton(
-      onPressed: () => _showSelectAttributeBottomSheet(context, attribute,
-          selectedValue: alreadySelectedValue),
+      onPressed: () => _showSelectAttributeBottomSheet(
+          context, attribute, 
+        selectedValue: alreadySelectedValue),
       child: Container(
         margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
         child: Row(
@@ -233,9 +253,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             Text(
               alreadySelectedValue ?? attribute.name,
               style: TextStyle(
-                  fontSize: 14,
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w300),
+                fontSize: 14,
+                color: AppColors.black,
+                fontWeight: FontWeight.w300),
             ),
             Icon(Icons.keyboard_arrow_down)
           ],
@@ -248,7 +268,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
       highlightColor: Colors.white,
       hoverColor: AppColors.red,
       shape:
-          ContinuousRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        ContinuousRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
     );
   }
 
@@ -309,13 +329,22 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   }
 
   void _addItemToCart(BuildContext context, ProductLoadedState state) async {
-    if (state.selectedAttributes.length ==
+    if (state.productAttributes.selectedAttributes.length ==
         state.product.selectableAttributes.length) {
       BlocProvider.of<ProductBloc>(context).add(ProductAddToCartEvent());
+      await Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart);
     } else {
-      for (final attribute in state.product.selectableAttributes) {
-        if (!state.selectedAttributes.containsKey(attribute)) {
-          await _showSelectAttributeBottomSheet(context, attribute);
+      for (int i = 0; i < state.product.selectableAttributes.length; i++) {
+        final attribute = state.product.selectableAttributes[i];
+        if (!state.productAttributes.selectedAttributes.containsKey(attribute)) {
+          await _showSelectAttributeBottomSheet(context, attribute,
+            onSelect: i == 0 ?
+            (() => {
+              BlocProvider.of<ProductBloc>(context).add(ProductAddToCartEvent()),
+              Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart)
+            })
+            : null
+          );
         }
       }
     }

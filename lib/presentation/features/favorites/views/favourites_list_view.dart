@@ -43,15 +43,19 @@ class FavoritesListView extends StatelessWidget {
                     onRemoveFromFavorites: () {
                       BlocProvider.of<FavouriteBloc>(context).add(
                           RemoveFromFavoriteEvent(
-                              state.data[index].product.id));
+                              state.data[index]));
                     },
                     onAddToCart: () {
                       BlocProvider.of<FavouriteBloc>(context)
-                          .add(AddToCartEvent(state.data[index].product.id));
+                          .add(AddToCartEvent(state.data[index]));
+                      Navigator.of(context)
+                        .pushNamed(OpenFlutterEcommerceRoutes.cart);
                     },
+                    selectedAttributes: state.data[index]?.favoriteForm
                   ));
             }
           },
+          childCount: state.data?.length
         ),
       );
     });
