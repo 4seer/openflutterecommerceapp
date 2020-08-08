@@ -164,6 +164,7 @@ class _CartViewState extends State<CartView> {
 
   List<Widget> buildCartItems(List<CartItem> items, CartBloc bloc) {
     var widgets = <Widget>[];
+    if (items.isNotEmpty) {
     for (var i = 0; i < items.length; i++) {
       widgets.add(Container(
           padding: EdgeInsets.symmetric(
@@ -173,7 +174,10 @@ class _CartViewState extends State<CartView> {
             onChangeQuantity: ((int quantity) => {
               bloc
                 ..add(CartQuantityChangedEvent(
-                  item: items[i], newQuantity: quantity))
+                  item: items[i], newQuantity: quantity)),
+              if(quantity < 1) {
+                items.remove(items[i]),
+              }
             }),
             onAddToFav: () {
               bloc
@@ -182,9 +186,10 @@ class _CartViewState extends State<CartView> {
             onRemoveFromCart: () {
               bloc
                 ..add(CartRemoveFromCartEvent(item: items[i]));
+              items.remove(items[i]);
             },
           )));
-    }
+    }}
     return widgets;
   }
 }

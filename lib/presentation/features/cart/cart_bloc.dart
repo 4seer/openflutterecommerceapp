@@ -49,15 +49,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       var state = this.state as CartLoadedState;
       yield CartLoadingState();
       ChangeCartItemQuantityUseCase changeCartItemQuantityUseCase = sl();
-      await changeCartItemQuantityUseCase.execute(ChangeCartItemQuantityParams(
+      if (event.newQuantity < 1) {
+        await removeProductFromCartUseCase.execute(event.item);
+      } else {
+        await changeCartItemQuantityUseCase.execute(ChangeCartItemQuantityParams(
         item: event.item,
         quantity: event.newQuantity
       ));
+      }
       final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
       yield CartLoadedState(
         cartProducts: cartResults.cartItems, 
         promos: state.promos, 
-        showPromoPopup: state.showPromoPopup
+        showPromoPopup: state.showPromoPopup,
+        totalPrice: cartResults.cartItems.isEmpty ? 0.0 : cartResults.totalPrice,
       );
     } else if (event is CartRemoveFromCartEvent) {
       var state = this.state as CartLoadedState;
@@ -67,7 +72,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       yield CartLoadedState(
         cartProducts: cartResults.cartItems, 
         promos: state.promos, 
-        showPromoPopup: state.showPromoPopup
+        showPromoPopup: state.showPromoPopup,
+        totalPrice: cartResults.cartItems.isEmpty ? 0.0 : cartResults.totalPrice,
       );
     } else if (event is CartAddToFavsEvent) {
       await addToFavoritesUseCase.execute(
