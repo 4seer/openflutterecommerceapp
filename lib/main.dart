@@ -34,7 +34,7 @@ import 'presentation/features/profile/profile.dart';
 
 import 'locator.dart' as service_locator;
 
-class SimpleBlocDelegate extends BlocDelegate {
+class SimpleBlocDelegate extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object event) {
     super.onEvent(bloc, event);
@@ -48,7 +48,7 @@ class SimpleBlocDelegate extends BlocDelegate {
   }
 
   @override
-  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
+  void onError(Cubit bloc, Object error, StackTrace stacktrace) {
     super.onError(bloc, error, stacktrace);
     print(error);
   }
@@ -68,7 +68,7 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  BlocSupervisor.delegate = SimpleBlocDelegate();
+  Bloc.observer = SimpleBlocDelegate();
   runApp(
     BlocProvider<AuthenticationBloc>(
       create: (context) => AuthenticationBloc()..add(AppStarted()),

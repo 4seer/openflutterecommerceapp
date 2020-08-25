@@ -9,16 +9,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SettingsRepository settingsRepository;
 
   SettingsBloc({@required this.settingsRepository})
-      : assert(settingsRepository != null);
-
-  @override
-  SettingsState get initialState => SettingsInitialState(
-      settings: UserSettingsEntity(
-          fullName: '',
-          dateOfBirth: '',
-          notifySales: false,
-          notifyArrivals: false,
-          notifyDelivery: false));
+      : assert(settingsRepository != null),
+        super(SettingsInitialState(
+            settings: UserSettingsEntity(
+                fullName: '',
+                dateOfBirth: '',
+                notifySales: false,
+                notifyArrivals: false,
+                notifyDelivery: false)));
 
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {

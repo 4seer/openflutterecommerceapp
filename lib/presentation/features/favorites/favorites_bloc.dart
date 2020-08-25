@@ -24,10 +24,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   : addToFavoriteUseCase = sl(),
     removeFromFavoriteUseCase = sl(),
     getFavoriteProductsUseCase = sl(),
-    addProductToCartUseCase = sl();
-
-  @override
-  FavouriteState get initialState => FavouriteState();
+    addProductToCartUseCase = sl(),super(FavouriteState());
 
   @override
   Stream<FavouriteState> mapEventToState(FavouriteEvent event) async* {

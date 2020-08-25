@@ -57,7 +57,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     var deviceHeight = MediaQuery.of(context).size.height;
     bloc = BlocProvider.of<ProductBloc>(context);
     return BlocListener(
-        bloc: bloc,
+        cubit: bloc,
         listener: (context, state) {
           if (state is ProductErrorState) {
             return Container(
@@ -69,7 +69,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
           return Container();
         },
         child: BlocBuilder(
-            bloc: bloc,
+            cubit: bloc,
             builder: (BuildContext context, ProductState state) {
               if (state is ProductLoadedState) {
                 return SingleChildScrollView(

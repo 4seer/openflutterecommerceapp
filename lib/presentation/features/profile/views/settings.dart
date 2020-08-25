@@ -57,7 +57,7 @@ class _SettingsViewState extends State<SettingsView> {
     return BlocProvider<SettingsBloc>(
       create: (context) => settingsBloc,
       child: BlocBuilder<SettingsBloc, SettingsState>(
-          bloc: settingsBloc,
+          cubit: settingsBloc,
           builder: (context, state) {
             _fullNameController.text = state.settings.fullName;
             _dateOfBirthController.text = state.settings.dateOfBirth;
@@ -215,7 +215,7 @@ class _SettingsViewState extends State<SettingsView> {
         builder: (BuildContext context) => BlocProvider<PasswordBloc>(
               create: (context) => passwordBloc,
               child: BlocBuilder<PasswordBloc, PasswordState>(
-                  bloc: passwordBloc,
+                  cubit: passwordBloc,
                   builder: (context, state) {
                     if (state is PasswordChangedState) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {

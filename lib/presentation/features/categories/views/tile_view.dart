@@ -41,7 +41,7 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
     var _theme = Theme.of(context);
     var width = MediaQuery.of(context).size.width;
     return BlocListener<CategoryBloc, CategoryState>(
-        condition: (context, state) {
+        listenWhen: (context, state) {
       return state is CategoryErrorState;
     }, listener: (BuildContext context, CategoryState state) {
       return Container(

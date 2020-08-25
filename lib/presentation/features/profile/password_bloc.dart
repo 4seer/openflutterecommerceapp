@@ -8,10 +8,8 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
   final PasswordRepository passwordRepository;
 
   PasswordBloc({@required this.passwordRepository})
-      : assert(passwordRepository != null);
-
-  @override
-  PasswordState get initialState => PasswordInitialState();
+      : assert(passwordRepository != null),
+        super(PasswordInitialState());
 
   @override
   Stream<PasswordState> mapEventToState(PasswordEvent event) async* {

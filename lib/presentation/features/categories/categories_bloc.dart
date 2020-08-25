@@ -12,12 +12,7 @@ import 'categories.dart';
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final FindCategoriesByFilterUseCase findCategoriesByFilterUseCase;
 
-  CategoryBloc(): findCategoriesByFilterUseCase = sl();
-
-
-
-  @override
-  CategoryState get initialState => CategoryLoadingState();
+  CategoryBloc(): findCategoriesByFilterUseCase = sl(),super(CategoryLoadingState());
 
   @override
   Stream<CategoryState> mapEventToState(CategoryEvent event) async* {

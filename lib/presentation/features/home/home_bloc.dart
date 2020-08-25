@@ -19,10 +19,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : 
     addToFavoritesUseCase = sl(), 
     removeFromFavoritesUseCase = sl(),
-    getHomePageProductsUseCase = sl();
-
-  @override
-  HomeState get initialState => HomeInitialState();
+    getHomePageProductsUseCase = sl(),super(HomeInitialState());
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {

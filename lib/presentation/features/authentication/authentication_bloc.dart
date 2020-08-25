@@ -6,8 +6,7 @@ import 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  @override
-  AuthenticationState get initialState => Uninitialized();
+      AuthenticationBloc():super(Uninitialized());
 
   @override
   Stream<AuthenticationState> mapEventToState(
