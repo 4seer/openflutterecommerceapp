@@ -8,11 +8,8 @@ import 'product_review_state.dart';
 class ProductReviewBloc extends Bloc<ProductReviewEvent, ProductReviewState> {
   final ProductReviewRepository productReviewRepository;
 
-  ProductReviewBloc(this.productReviewRepository);
-
-  @override
-  ProductReviewState get initialState => ProductReviewInitialState();
-
+  ProductReviewBloc(this.productReviewRepository):super(ProductReviewInitialState());
+  
   @override
   Stream<ProductReviewState> mapEventToState(ProductReviewEvent event) async* {
     if (event is ProductReviewStartEvent) {

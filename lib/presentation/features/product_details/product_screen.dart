@@ -64,7 +64,7 @@ class _ProductWrapperState extends OpenFlutterWrapperState<ProductWrapper> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductBloc, ProductState>(
-        bloc: BlocProvider.of<ProductBloc>(context),
+        cubit: BlocProvider.of<ProductBloc>(context),
         builder: (BuildContext context, ProductState state) {
           if (state is ProductLoadedState) {
             return ProductDetailsView(

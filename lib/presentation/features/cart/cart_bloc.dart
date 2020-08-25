@@ -23,10 +23,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   : getCartProductsUseCase = sl(),
     removeProductFromCartUseCase = sl(),
     addToFavoritesUseCase = sl(),
-    getPromosUseCase = sl();
+    getPromosUseCase = sl(),super(CartInitialState());
 
-  @override
-  CartState get initialState => CartInitialState();
 
   @override
   Stream<CartState> mapEventToState(CartEvent event) async* {

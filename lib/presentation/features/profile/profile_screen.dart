@@ -48,7 +48,7 @@ class _ProfileWrapperState extends OpenFlutterWrapperState<ProfileWrapper> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
-      bloc: BlocProvider.of<ProfileBloc>(context),
+      cubit: BlocProvider.of<ProfileBloc>(context),
       builder: (BuildContext context, ProfileState state) {
         return getPageView(<Widget>[
             ProfileView(changeView: changePage),

@@ -32,10 +32,8 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   }) : findProductsByFilterUseCase = sl(),
     getFavoriteProductsUseCase = sl(),
     removeFromFavoritesUseCase = sl(),
-    addToFavoritesUseCase = sl();
+    addToFavoritesUseCase = sl(),super(ProductsListViewState());
 
-  @override
-  ProductsState get initialState => ProductsListViewState();
 
   @override
   Stream<ProductsState> mapEventToState(ProductsListEvent event) async* {

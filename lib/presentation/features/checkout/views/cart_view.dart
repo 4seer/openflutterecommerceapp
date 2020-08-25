@@ -31,7 +31,7 @@ class _CartViewState extends State<CartView> {
     var width = MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
 
     return BlocListener(
-        bloc: bloc,
+        cubit: bloc,
         listener: (context, state) {
           if (state is CheckoutErrorState) {
             return Container(
@@ -43,7 +43,7 @@ class _CartViewState extends State<CartView> {
           return Container();
         },
         child: BlocBuilder(
-            bloc: bloc,
+            cubit: bloc,
             builder: (BuildContext context, CheckoutState state) {
               if (state is CheckoutProceedState) {
                 return SingleChildScrollView(

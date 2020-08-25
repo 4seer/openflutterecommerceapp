@@ -60,7 +60,7 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
     var _theme = Theme.of(context);
 
     return BlocListener(
-        bloc: bloc,
+        cubit: bloc,
         listener: (BuildContext context, CheckoutState state) {
           if (state is CheckoutErrorState) {
             return Container(
@@ -72,7 +72,7 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
           return Container();
         },
         child: BlocBuilder(
-            bloc: bloc,
+            cubit: bloc,
             builder: (BuildContext context, CheckoutState state) {
               if (state is CheckoutProceedState) {}
 
