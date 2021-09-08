@@ -30,7 +30,7 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
     var width = MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
 
     return BlocListener(
-        cubit: bloc,
+        bloc: bloc,
         listener: (context, state) {
           if (state is CheckoutErrorState) {
             return Container(
@@ -42,7 +42,7 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
           return Container();
         },
         child: BlocBuilder(
-            cubit: bloc,
+            bloc: bloc,
             builder: (BuildContext context, CheckoutState state) {
               return SingleChildScrollView(
                   child: Stack(children: <Widget>[

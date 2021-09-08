@@ -47,11 +47,11 @@ class SimpleBlocDelegate extends BlocObserver {
     print(transition);
   }
 
-  @override
-  void onError(Cubit bloc, Object error, StackTrace stacktrace) {
-    super.onError(bloc, error, stacktrace);
-    print(error);
-  }
+  // @override
+  // void onError(Cubit bloc, Object error, StackTrace stacktrace) {
+  //   super.onError(bloc, error, stacktrace);
+  //   print(error);
+  // }
 }
 
 void main() async {
@@ -143,7 +143,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             } else {
               return SplashScreen();
             }*/
-            return ProfileScreen(); 
+            return ProfileScreen();
           }),
     };
   }

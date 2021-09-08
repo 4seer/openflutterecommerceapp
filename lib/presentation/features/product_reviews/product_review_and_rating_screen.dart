@@ -136,7 +136,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductReviewBloc, ProductReviewState>(
-        cubit: BlocProvider.of<ProductReviewBloc>(context),
+        bloc: BlocProvider.of<ProductReviewBloc>(context),
         builder: (BuildContext context, ProductReviewState state) {
           _readState(state);
 
