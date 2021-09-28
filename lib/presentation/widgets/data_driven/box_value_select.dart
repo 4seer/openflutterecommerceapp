@@ -21,12 +21,10 @@ class OpenFlutterSelectValuesBoxes<T> extends StatefulWidget {
       : super(key: key);
 
   @override
-  _OpenFlutterSelectValuesBoxesState<T> createState() =>
-      _OpenFlutterSelectValuesBoxesState<T>();
+  _OpenFlutterSelectValuesBoxesState<T> createState() => _OpenFlutterSelectValuesBoxesState<T>();
 }
 
-class _OpenFlutterSelectValuesBoxesState<T>
-    extends State<OpenFlutterSelectValuesBoxes<T>> {
+class _OpenFlutterSelectValuesBoxesState<T> extends State<OpenFlutterSelectValuesBoxes<T>> {
   List<T> selectedValues;
 
   @override
@@ -49,8 +47,7 @@ class _OpenFlutterSelectValuesBoxesState<T>
           child: Column(children: <Widget>[
             Container(
               width: width,
-              padding:
-                  EdgeInsets.symmetric(horizontal: AppSizes.sidePadding * 2),
+              padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding * 2),
               child: Wrap(children: buildSelectBoxes(context)),
             )
           ]))
@@ -81,22 +78,15 @@ class _OpenFlutterSelectValuesBoxesState<T>
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           border: Border.all(
-              color: widget.selectedValues.contains(currentValue)
-                  ? _theme.accentColor
-                  : _theme.primaryColorLight),
-          color: widget.selectedValues.contains(currentValue)
-              ? _theme.accentColor
-              : AppColors.white),
+              color: widget.selectedValues.contains(currentValue) ? _theme.accentColor : _theme.primaryColorLight),
+          color: widget.selectedValues.contains(currentValue) ? _theme.accentColor : AppColors.white),
       padding: EdgeInsets.symmetric(
-          vertical: AppSizes.sidePadding,
-          horizontal: widget.boxWidth == null ? AppSizes.sidePadding : 0),
+          vertical: AppSizes.sidePadding, horizontal: widget.boxWidth == null ? AppSizes.sidePadding : 0),
       child: Text(
         convertValueToString(currentValue).toUpperCase(),
         overflow: TextOverflow.ellipsis,
-        style: _theme.textTheme.display3.copyWith(
-          color: widget.selectedValues.contains(currentValue)
-              ? AppColors.white
-              : _theme.accentColor,
+        style: _theme.textTheme.headline2.copyWith(
+          color: widget.selectedValues.contains(currentValue) ? AppColors.white : _theme.accentColor,
         ),
       ),
     );

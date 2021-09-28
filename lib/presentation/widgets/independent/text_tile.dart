@@ -6,8 +6,7 @@ class OpenFlutterTextTile extends StatelessWidget {
   final String subtitle;
   final Function onClick;
 
-  const OpenFlutterTextTile({Key key, this.title, this.subtitle, this.onClick})
-      : super(key: key);
+  const OpenFlutterTextTile({Key key, this.title, this.subtitle, this.onClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +25,8 @@ class OpenFlutterTextTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(title, style: _theme.textTheme.display1),
-                      Text(subtitle, style: _theme.textTheme.body1)
+                      Text(title, style: _theme.textTheme.headline4),
+                      Text(subtitle, style: _theme.textTheme.bodyText1)
                     ],
                   ),
                 ),

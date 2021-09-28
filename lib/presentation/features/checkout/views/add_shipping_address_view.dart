@@ -60,19 +60,17 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
     var _theme = Theme.of(context);
 
     return BlocListener(
-        cubit: bloc,
+        bloc: bloc,
         listener: (BuildContext context, CheckoutState state) {
           if (state is CheckoutErrorState) {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
-                child: Text('An error occured',
-                    style: _theme.textTheme.display1
-                        .copyWith(color: _theme.errorColor)));
+                child: Text('An error occured', style: _theme.textTheme.headline4.copyWith(color: _theme.errorColor)));
           }
           return Container();
         },
         child: BlocBuilder(
-            cubit: bloc,
+            bloc: bloc,
             builder: (BuildContext context, CheckoutState state) {
               if (state is CheckoutProceedState) {}
 
@@ -135,8 +133,7 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
                                   state: _stateController.text,
                                   postal: _postalController.text,
                                   country: _countryController.text)),
-                            widget.changeView(
-                                changeType: ViewChangeType.Backward)
+                            widget.changeView(changeType: ViewChangeType.Backward)
                           }),
                     )
                   ],

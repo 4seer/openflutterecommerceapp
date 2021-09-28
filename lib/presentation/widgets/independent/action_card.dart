@@ -7,12 +7,7 @@ class OpenFlutterActionCard extends StatelessWidget {
   final Function onLinkTap;
   final Widget child;
 
-  const OpenFlutterActionCard(
-      {Key key,
-      @required this.title,
-      this.linkText,
-      this.child,
-      this.onLinkTap})
+  const OpenFlutterActionCard({Key key, @required this.title, this.linkText, this.child, this.onLinkTap})
       : super(key: key);
 
   @override
@@ -24,8 +19,7 @@ class OpenFlutterActionCard extends StatelessWidget {
         child: Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.all(Radius.circular(AppSizes.imageRadius)),
+                borderRadius: BorderRadius.all(Radius.circular(AppSizes.imageRadius)),
                 color: AppColors.white,
                 boxShadow: [
                   BoxShadow(
@@ -39,26 +33,20 @@ class OpenFlutterActionCard extends StatelessWidget {
                   children: <Widget>[
                     Container(
                         width: width / 3 * 2,
-                        child: Text(title,
-                            style: _theme.textTheme.display3
-                                .copyWith(color: _theme.primaryColor))),
+                        child: Text(title, style: _theme.textTheme.headline2.copyWith(color: _theme.primaryColor))),
                     linkText != null
                         ? Container(
                             alignment: Alignment.centerRight,
                             width: width / 3,
                             child: InkWell(
                               onTap: (() => {onLinkTap()}),
-                              child: Text(linkText,
-                                  style: _theme.textTheme.display3
-                                      .copyWith(color: _theme.accentColor)),
+                              child:
+                                  Text(linkText, style: _theme.textTheme.headline2.copyWith(color: _theme.accentColor)),
                             ))
                         : Container()
                   ],
                 ),
-                Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: AppSizes.linePadding * 2),
-                    child: child)
+                Container(padding: EdgeInsets.symmetric(vertical: AppSizes.linePadding * 2), child: child)
               ],
             )));
   }

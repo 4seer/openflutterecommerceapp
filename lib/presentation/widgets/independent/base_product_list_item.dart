@@ -49,10 +49,7 @@ class BaseProductListItem extends StatelessWidget {
                         width: imageWidth,
                         height: imageHeight,
                         decoration: BoxDecoration(
-                          image: image == null
-                              ? null
-                              : DecorationImage(
-                                  image: image, fit: BoxFit.cover),
+                          image: image == null ? null : DecorationImage(image: image, fit: BoxFit.cover),
                           color: AppColors.background,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(AppSizes.imageRadius),
@@ -93,16 +90,14 @@ class BaseProductListItem extends StatelessWidget {
                     child: Container(
                         padding: EdgeInsets.all(AppSizes.linePadding * 1.5),
                         decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(AppSizes.imageRadius),
-                          color: specialMark == 'New'
-                              ? AppColors.red
-                              : AppColors.black,
+                          borderRadius: BorderRadius.circular(AppSizes.imageRadius),
+                          color: specialMark == 'New' ? AppColors.red : AppColors.black,
                         ),
                         child: Text(specialMark,
-                            style: Theme.of(context).textTheme.body1.copyWith(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.bold))),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(color: AppColors.white, fontWeight: FontWeight.bold))),
                   ),
             onRemove == null
                 ? Container()

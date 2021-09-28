@@ -30,19 +30,17 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
     var width = MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
 
     return BlocListener(
-        cubit: bloc,
+        bloc: bloc,
         listener: (context, state) {
           if (state is CheckoutErrorState) {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
-                child: Text('An error occured',
-                    style: _theme.textTheme.display1
-                        .copyWith(color: _theme.errorColor)));
+                child: Text('An error occured', style: _theme.textTheme.headline4.copyWith(color: _theme.errorColor)));
           }
           return Container();
         },
         child: BlocBuilder(
-            cubit: bloc,
+            bloc: bloc,
             builder: (BuildContext context, CheckoutState state) {
               return SingleChildScrollView(
                   child: Stack(children: <Widget>[
@@ -59,29 +57,23 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
                   child: FloatingActionButton(
                       mini: true,
                       backgroundColor: _theme.primaryColor,
-                      onPressed: (() => {
-                            widget.changeView(
-                                changeType: ViewChangeType.Forward)
-                          }),
+                      onPressed: (() => {widget.changeView(changeType: ViewChangeType.Forward)}),
                       child: Icon(Icons.add, size: 36)),
                 ),
               ]));
             }));
   }
 
-  Widget _buildShippingAddress(
-      ThemeData _theme, double width, CheckoutBloc bloc, bool checked) {
+  Widget _buildShippingAddress(ThemeData _theme, double width, CheckoutBloc bloc, bool checked) {
     return OpenFlutterActionCard(
         title: 'Jane Doe',
         linkText: 'Edit',
-        onLinkTap: (() =>
-            {widget.changeView(changeType: ViewChangeType.Forward)}),
+        onLinkTap: (() => {widget.changeView(changeType: ViewChangeType.Forward)}),
         child: Column(children: <Widget>[
           RichText(
             text: TextSpan(
                 text: '3 Newbridge Court Chino Hills, CA 91709, United States',
-                style: _theme.textTheme.display3
-                    .copyWith(color: _theme.primaryColor)),
+                style: _theme.textTheme.headline2.copyWith(color: _theme.primaryColor)),
             maxLines: 2,
           ),
           Container(
@@ -91,8 +83,7 @@ class _ShippingAddressViewState extends State<ShippingAddressView> {
                   width: width,
                   title: 'Use as the shipping address',
                   checked: checked,
-                  onTap: ((bool newValue) =>
-                      {_changeDefaultShippingAddress(bloc, 3)}))),
+                  onTap: ((bool newValue) => {_changeDefaultShippingAddress(bloc, 3)}))),
         ]));
   }
 

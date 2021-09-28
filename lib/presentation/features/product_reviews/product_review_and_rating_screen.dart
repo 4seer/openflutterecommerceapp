@@ -60,8 +60,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
         ),
         BlocProvider<ProductReviewBloc>(
           create: (context) {
-            return ProductReviewBloc(ProductReviewRepository())
-              ..add(ProductReviewStartEvent(widget.product.id, false));
+            return ProductReviewBloc(ProductReviewRepository())..add(ProductReviewStartEvent(widget.product.id, false));
           },
           child: ProductReviewWrapper(
             product: widget.product,
@@ -74,7 +73,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
   Widget _buildTitle(BuildContext context) {
     return Text(
       'Ratings&Reviews',
-      style: Theme.of(context).textTheme.title,
+      style: Theme.of(context).textTheme.headline6,
     );
   }
 
@@ -136,7 +135,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductReviewBloc, ProductReviewState>(
-        cubit: BlocProvider.of<ProductReviewBloc>(context),
+        bloc: BlocProvider.of<ProductReviewBloc>(context),
         builder: (BuildContext context, ProductReviewState state) {
           _readState(state);
 
@@ -150,9 +149,8 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
                   child: _buildItem(context, index),
                 );
               },
-              childCount: comments != null
-                  ? comments.length + widget.summaryAndFilterIndex
-                  : widget.summaryAndFilterIndex + 1,
+              childCount:
+                  comments != null ? comments.length + widget.summaryAndFilterIndex : widget.summaryAndFilterIndex + 1,
             ),
           );
         });
@@ -207,7 +205,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
           children: <Widget>[
             Text(
               '$reviewCount reviews',
-              style: Theme.of(context).textTheme.subtitle,
+              style: Theme.of(context).textTheme.subtitle2,
             ),
             Expanded(
               child: OpenFlutterCheckbox(
@@ -216,8 +214,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
                 checked: withPhotos,
                 title: 'with photos',
                 onTap: (value) {
-                  BlocProvider.of<ProductReviewBloc>(context)
-                      .add(ProductReviewStartEvent(widget.product.id, value));
+                  BlocProvider.of<ProductReviewBloc>(context).add(ProductReviewStartEvent(widget.product.id, value));
                 },
               ),
             ),
@@ -280,7 +277,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
       child: Center(
         child: Text(
           'Without reviews',
-          style: Theme.of(context).textTheme.body1,
+          style: Theme.of(context).textTheme.bodyText2,
           textAlign: TextAlign.center,
         ),
       ),

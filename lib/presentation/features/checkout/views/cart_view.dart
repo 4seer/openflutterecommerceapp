@@ -31,47 +31,38 @@ class _CartViewState extends State<CartView> {
     var width = MediaQuery.of(context).size.width - AppSizes.sidePadding * 2;
 
     return BlocListener(
-        cubit: bloc,
+        bloc: bloc,
         listener: (context, state) {
           if (state is CheckoutErrorState) {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
-                child: Text('An error occured',
-                    style: _theme.textTheme.display1
-                        .copyWith(color: _theme.errorColor)));
+                child: Text('An error occured', style: _theme.textTheme.headline4.copyWith(color: _theme.errorColor)));
           }
           return Container();
         },
         child: BlocBuilder(
-            cubit: bloc,
+            bloc: bloc,
             builder: (BuildContext context, CheckoutState state) {
               if (state is CheckoutProceedState) {
                 return SingleChildScrollView(
                     child: Column(
                   children: <Widget>[
-                    OpenFlutterBlockSubtitle(
-                        title: 'Shipping Address', width: width),
+                    OpenFlutterBlockSubtitle(title: 'Shipping Address', width: width),
                     OpenFlutterActionCard(
                         title: state.currentShippingAddress.fullName,
                         linkText: 'Change',
-                        onLinkTap: (() => {
-                            widget.changeView(
-                              changeType: ViewChangeType.Exact, index: 2)
-                          }),
+                        onLinkTap: (() => {widget.changeView(changeType: ViewChangeType.Exact, index: 2)}),
                         child: RichText(
                           text: TextSpan(
-                            text: state.currentShippingAddress.toString(),
-                            style: _theme.textTheme.display3
-                              .copyWith(color: _theme.primaryColor)),
+                              text: state.currentShippingAddress.toString(),
+                              style: _theme.textTheme.headline2.copyWith(color: _theme.primaryColor)),
                           maxLines: 2,
                         )),
                     OpenFlutterBlockSubtitle(
                       title: 'Payment',
                       width: width,
                       linkText: 'Change',
-                      onLinkTap: (() => {
-                        widget.changeView(changeType: ViewChangeType.Forward)
-                      }),
+                      onLinkTap: (() => {widget.changeView(changeType: ViewChangeType.Forward)}),
                     ),
                     OpenFlutterPaymentCard(
                       cardNumber: state.currentPaymentMethod.toString(),
@@ -83,8 +74,7 @@ class _CartViewState extends State<CartView> {
                       onLinkTap: (() => {}),*/
                     ),
                     OpenFlutterDeliveryMethod(),
-                    Padding(
-                        padding: EdgeInsets.only(top: AppSizes.sidePadding * 3)),
+                    Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding * 3)),
                     OpenFlutterSummaryLine(title: 'Order', summary: '\$' + state.orderPrice.toStringAsFixed(2)),
                     Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                     OpenFlutterSummaryLine(title: 'Delivery', summary: '\$' + state.deliveryPrice.toStringAsFixed(2)),
@@ -93,10 +83,7 @@ class _CartViewState extends State<CartView> {
                     Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                     OpenFlutterButton(
                       title: 'SUBMIT ORDER',
-                      onPressed: (() => {
-                        widget.changeView(
-                          changeType: ViewChangeType.Exact, index: 4)
-                      }),
+                      onPressed: (() => {widget.changeView(changeType: ViewChangeType.Exact, index: 4)}),
                     )
                   ],
                 ));

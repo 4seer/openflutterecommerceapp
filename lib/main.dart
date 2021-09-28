@@ -48,7 +48,7 @@ class SimpleBlocDelegate extends BlocObserver {
   }
 
   @override
-  void onError(Cubit bloc, Object error, StackTrace stacktrace) {
+  void onError(BlocBase bloc, Object error, StackTrace stacktrace) {
     super.onError(bloc, error, stacktrace);
     print(error);
   }
@@ -130,11 +130,9 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
       OpenFlutterEcommerceRoutes.favourites: (context) => FavouriteScreen(),
       OpenFlutterEcommerceRoutes.signin: (context) => _buildSignInBloc(),
       OpenFlutterEcommerceRoutes.signup: (context) => _buildSignUpBloc(),
-      OpenFlutterEcommerceRoutes.forgotPassword: (context) =>
-          _buildForgetPasswordBloc(),
+      OpenFlutterEcommerceRoutes.forgotPassword: (context) => _buildForgetPasswordBloc(),
       OpenFlutterEcommerceRoutes.profile: (context) =>
-          BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context, state) {
+          BlocBuilder<AuthenticationBloc, AuthenticationState>(builder: (context, state) {
             //TODO: revise authentication later. Right now no login is required.
             /*if (state is Authenticated) {
               return ProfileScreen(); //TODO profile properties should be here
@@ -143,7 +141,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
             } else {
               return SplashScreen();
             }*/
-            return ProfileScreen(); 
+            return ProfileScreen();
           }),
     };
   }
@@ -188,8 +186,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
         },
       );
     } else if (settings.name == OpenFlutterEcommerceRoutes.productList) {
-      final ProductListScreenParameters productListScreenParameters =
-          settings.arguments;
+      final ProductListScreenParameters productListScreenParameters = settings.arguments;
       return MaterialPageRoute(builder: (context) {
         return ProductsScreen(
           parameters: productListScreenParameters,

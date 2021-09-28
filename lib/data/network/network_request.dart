@@ -22,11 +22,7 @@ class NetworkRequest {
   final String plainBody;
 
   NetworkRequest(this.type, this.address,
-      {@required this.client,
-      this.body,
-      this.plainBody,
-      this.listBody,
-      this.headers});
+      {@required this.client, this.body, this.plainBody, this.listBody, this.headers});
 
   Future<http.Response> getResult() async {
     print('ADDRESS: $address');
@@ -42,23 +38,23 @@ class NetworkRequest {
     http.Response response;
     headers ??= _jsonHeaders;
     try {
+      Uri uri = Uri.parse(address);
       switch (type) {
         case RequestType.post:
           response = await client.post(
-            address,
+            uri,
             headers: headers,
             body: jsonEncode(body) ?? plainBody ?? listBody,
           );
           break;
         case RequestType.get:
-          response = await client.get(address, headers: headers);
+          response = await client.get(uri, headers: headers);
           break;
         case RequestType.put:
-          response = await client.put(address,
-              body: body ?? plainBody ?? listBody, headers: headers);
+          response = await client.put(uri, body: body ?? plainBody ?? listBody, headers: headers);
           break;
         case RequestType.delete:
-          response = await client.delete(address, headers: headers);
+          response = await client.delete(uri, headers: headers);
           break;
       }
       print('RESULT: ${response.body}');
@@ -76,12 +72,7 @@ class NetworkRequest {
   }
 
   factory NetworkRequest.productList(
-      http.Client client,
-      int pageIndex,
-      int pageSize,
-      int categoryId,
-      FilterRules filterRules,
-      SortRules sortRules) {
+      http.Client client, int pageIndex, int pageSize, int categoryId, FilterRules filterRules, SortRules sortRules) {
     List<String> parameters = [];
     if (pageIndex != null) {
       parameters.add('page=${pageIndex + 1}');
@@ -97,8 +88,7 @@ class NetworkRequest {
       parameters.add('order=${sortRules.jsonOrder}');
     }
     //TODO add filter rules here
-    final serverAddress =
-        ServerAddresses.serverAddress + '?' + parameters.join('&');
+    final serverAddress = ServerAddresses.serverAddress + '?' + parameters.join('&');
     return NetworkRequest(
       RequestType.get,
       serverAddress,

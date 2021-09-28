@@ -38,11 +38,9 @@ class _Main3ViewState extends State<Main3View> {
             children: <Widget>[
               Container(
                   alignment: Alignment.centerRight,
-                  padding: EdgeInsets.only(
-                      left: AppSizes.sidePadding, bottom: AppSizes.sidePadding),
+                  padding: EdgeInsets.only(left: AppSizes.sidePadding, bottom: AppSizes.sidePadding),
                   width: width,
-                  child: Text('New collection',
-                      style: _theme.textTheme.headline.copyWith(fontSize: 34)))
+                  child: Text('New collection', style: _theme.textTheme.headline5.copyWith(fontSize: 34)))
             ],
           )),
       Row(
@@ -55,23 +53,19 @@ class _Main3ViewState extends State<Main3View> {
                   height: width / 2 - 2,
                   padding: EdgeInsets.all(AppSizes.sidePadding),
                   child: Text('Summer sale',
-                      style: _theme.textTheme.headline
-                          .copyWith(fontSize: 34, color: _theme.accentColor))),
+                      style: _theme.textTheme.headline5.copyWith(fontSize: 34, color: _theme.accentColor))),
               Container(
                   height: width / 2,
                   width: width / 2,
                   alignment: Alignment.bottomLeft,
-                  padding: EdgeInsets.only(
-                      bottom: AppSizes.sidePadding, left: AppSizes.sidePadding),
+                  padding: EdgeInsets.only(bottom: AppSizes.sidePadding, left: AppSizes.sidePadding),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.fill,
                       image: AssetImage('assets/splash/bottombanner.png'),
                     ),
                   ),
-                  child: Text('Black',
-                      style:
-                          _theme.textTheme.headline.copyWith(fontSize: 34))),
+                  child: Text('Black', style: _theme.textTheme.headline5.copyWith(fontSize: 34))),
             ],
           ),
           Container(
@@ -85,8 +79,7 @@ class _Main3ViewState extends State<Main3View> {
                   image: AssetImage('assets/splash/sidebanner.png'),
                 ),
               ),
-              child: Text('Men’s hoodies',
-                  style: _theme.textTheme.headline.copyWith(fontSize: 34))),
+              child: Text('Men’s hoodies', style: _theme.textTheme.headline5.copyWith(fontSize: 34))),
         ],
       ),
       Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
@@ -94,8 +87,7 @@ class _Main3ViewState extends State<Main3View> {
           title: 'Next Home Page',
           width: 160,
           height: 48,
-          onPressed: (() =>
-              widget.changeView(changeType: ViewChangeType.Start)))
+          onPressed: (() => widget.changeView(changeType: ViewChangeType.Start)))
     ]));
   }
 }

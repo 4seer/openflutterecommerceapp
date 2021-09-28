@@ -106,7 +106,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
       width: double.infinity,
       child: Text(
         writerName,
-        style: Theme.of(context).textTheme.subtitle,
+        style: Theme.of(context).textTheme.subtitle2,
         textAlign: TextAlign.start,
       ),
     );
@@ -142,7 +142,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
       width: double.infinity,
       child: Text(
         comment,
-        style: Theme.of(context).textTheme.body2.copyWith(
+        style: Theme.of(context).textTheme.bodyText2.copyWith(
               fontSize: 14.0,
             ),
         textAlign: TextAlign.start,
@@ -170,8 +170,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   }
 
   List<Widget> _buildPhotosItems() {
-    var list = List<Widget>.generate(
-        photos.length, (index) => _buildPhotoItem(photos[index]));
+    var list = List<Widget>.generate(photos.length, (index) => _buildPhotoItem(photos[index]));
     return list;
   }
 
@@ -186,14 +185,12 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
         child: Image.network(
           photoUrl,
           fit: BoxFit.fill,
-          loadingBuilder: (BuildContext context, Widget child,
-              ImageChunkEvent loadingProgress) {
+          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
             if (loadingProgress == null) return child;
             return Center(
               child: CircularProgressIndicator(
                 value: loadingProgress.expectedTotalBytes != null
-                    ? loadingProgress.cumulativeBytesLoaded /
-                        loadingProgress.expectedTotalBytes
+                    ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
                     : null,
               ),
             );
@@ -241,8 +238,6 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   }
 
   Color _getHelpfulColor(BuildContext context) {
-    return isHelpfulMarked
-        ? Theme.of(context).accentColor
-        : Theme.of(context).unselectedWidgetColor;
+    return isHelpfulMarked ? Theme.of(context).accentColor : Theme.of(context).unselectedWidgetColor;
   }
 }

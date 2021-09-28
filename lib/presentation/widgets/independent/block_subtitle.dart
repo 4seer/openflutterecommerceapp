@@ -24,8 +24,7 @@ class OpenFlutterBlockSubtitle extends StatelessWidget {
     var _theme = Theme.of(context);
     const rightLinkWidth = 100.0;
     return Container(
-      padding: EdgeInsets.only(
-          top: AppSizes.sidePadding, left: AppSizes.sidePadding),
+      padding: EdgeInsets.only(top: AppSizes.sidePadding, left: AppSizes.sidePadding),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,9 +33,8 @@ class OpenFlutterBlockSubtitle extends StatelessWidget {
               children: <Widget>[
                 Container(
                     child: Text(title,
-                        style: _theme.textTheme.display1.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: _theme.primaryColor))),
+                        style: _theme.textTheme.headline4
+                            .copyWith(fontWeight: FontWeight.bold, color: _theme.primaryColor))),
                 linkText != null
                     ? InkWell(
                         onTap: (() => {onLinkTap()}),
@@ -46,8 +44,7 @@ class OpenFlutterBlockSubtitle extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: Text(
                               linkText,
-                              style: _theme.textTheme.display1
-                                  .copyWith(color: _theme.accentColor),
+                              style: _theme.textTheme.headline4.copyWith(color: _theme.accentColor),
                             ),
                           ),
                         ),

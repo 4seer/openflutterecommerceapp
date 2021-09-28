@@ -40,15 +40,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       background: null,
       title: null,
       body: BlocProvider<ProductBloc>(
-          create: (context) {
-            return ProductBloc(
-                productId: widget.parameters.productId)
-              ..add(ProductScreenLoadedEvent(
-                productId: widget.parameters.productId,
-                categoryId: widget.parameters.categoryId
-              ));
-          },
-          child: ProductWrapper(),
+        create: (context) {
+          return ProductBloc(productId: widget.parameters.productId)
+            ..add(ProductScreenLoadedEvent(
+                productId: widget.parameters.productId, categoryId: widget.parameters.categoryId));
+        },
+        child: ProductWrapper(),
       ),
       bottomMenuIndex: 1,
     ));
@@ -64,13 +61,11 @@ class _ProductWrapperState extends OpenFlutterWrapperState<ProductWrapper> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductBloc, ProductState>(
-        cubit: BlocProvider.of<ProductBloc>(context),
+        bloc: BlocProvider.of<ProductBloc>(context),
         builder: (BuildContext context, ProductState state) {
           if (state is ProductLoadedState) {
             return ProductDetailsView(
-              product: state.product,
-              similarProducts: state.similarProducts,
-              changeView: changePage);
+                product: state.product, similarProducts: state.similarProducts, changeView: changePage);
           }
           return Container();
         });
