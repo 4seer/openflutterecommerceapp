@@ -86,7 +86,7 @@ class BaseProductTile extends StatelessWidget {
                       : AppColors.black,
                   ),
                   child: Text(specialMark,
-                    style: Theme.of(context).textTheme.body1.copyWith(
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
                       color: AppColors.white,
                       fontWeight: FontWeight.bold))),
                 ),

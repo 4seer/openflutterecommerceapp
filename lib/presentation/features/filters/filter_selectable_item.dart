@@ -25,7 +25,7 @@ class FilterSelectableItem extends StatelessWidget {
             vertical: AppSizes.sidePadding, horizontal: AppSizes.sidePadding),
         child: Text(
           text,
-          style: Theme.of(context).textTheme.display3.copyWith(
+          style: Theme.of(context).textTheme.headline3.copyWith(
                 color:
                     isSelected ? AppColors.white : Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold,

@@ -51,7 +51,7 @@ class _Main2ViewState extends State<Main2View> {
                   padding: EdgeInsets.only(left: AppSizes.sidePadding),
                   width: width,
                   child: Text('Street clothes',
-                      style: _theme.textTheme.headline.copyWith(fontSize: 34)))
+                      style: _theme.textTheme.headline5.copyWith(fontSize: 34)))
             ],
           )),
       OpenFlutterBlockHeader(

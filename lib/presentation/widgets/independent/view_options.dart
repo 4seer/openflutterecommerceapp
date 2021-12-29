@@ -46,7 +46,7 @@ class OpenFlutterViewOptions extends StatelessWidget {
                   Icon(Icons.filter_list),
                   Padding(
                     padding: EdgeInsets.only(left: 5),
-                    child: Text('Filters', style: _theme.textTheme.body1),
+                    child: Text('Filters', style: _theme.textTheme.bodyText1),
                   )
                 ])),
             InkWell(
@@ -58,7 +58,7 @@ class OpenFlutterViewOptions extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.only(left: 5),
                     child: Text(sortRules?.getSortTitle() ?? '',
-                        style: _theme.textTheme.body1),
+                        style: _theme.textTheme.bodyText1),
                   )
                 ])),
             IconButton(
@@ -104,7 +104,7 @@ class OpenFlutterViewOptions extends StatelessWidget {
                 ),
               ),
               Text('Sort by',
-                style: Theme.of(context).textTheme.display1),
+                style: Theme.of(context).textTheme.headline1),
               Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding),),
               ...sortRules.sortTextVariants
                 .map((key, value) => MapEntry(
@@ -122,7 +122,7 @@ class OpenFlutterViewOptions extends StatelessWidget {
                             Expanded(
                               child: InkWell(
                                 child: Text(value,
-                                  style: Theme.of(context).textTheme.display1.copyWith(        
+                                  style: Theme.of(context).textTheme.headline1.copyWith(        
                                       fontWeight: FontWeight.normal,
                                       color: sortRules.sortType == key
                                         ? AppColors.white

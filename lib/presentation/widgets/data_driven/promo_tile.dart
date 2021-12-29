@@ -59,10 +59,10 @@ class OpenFlutterPromoTile extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Text('%',
-                        style: _theme.textTheme.display3
+                        style: _theme.textTheme.headline3
                           .copyWith(color: textColor)),
                       Text('off',
-                        style: _theme.textTheme.display3
+                        style: _theme.textTheme.headline3
                           .copyWith(color: textColor))
                     ],
                   ))
@@ -76,11 +76,11 @@ class OpenFlutterPromoTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(item.title,
-                        style: _theme.textTheme.display1.copyWith(
+                        style: _theme.textTheme.headline1.copyWith(
                             fontWeight: FontWeight.bold,
                             color: _theme.primaryColor)),
                     Text(item.promoCode,
-                        style: _theme.textTheme.body1
+                        style: _theme.textTheme.bodyText1
                             .copyWith(color: _theme.primaryColor))
                   ])),
           Container(
@@ -89,7 +89,7 @@ class OpenFlutterPromoTile extends StatelessWidget {
               width: 155,
               child: Column(children: <Widget>[
                 Text(item.daysLeft.toString() + ' days remaining',
-                    style: _theme.textTheme.display3.copyWith(
+                    style: _theme.textTheme.headline3.copyWith(
                         fontWeight: FontWeight.bold,
                         color: _theme.primaryColor)),
                 Padding(padding: EdgeInsets.only(bottom: AppSizes.linePadding)),

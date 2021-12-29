@@ -66,41 +66,36 @@ class OpenFlutterEcommerceTheme {
       textTheme: theme.textTheme
           .copyWith(
             //over image white text
-            headline: theme.textTheme.headline.copyWith(
+            headline5: theme.textTheme.headline5.copyWith(
                 fontSize: 48,
                 color: AppColors.white,
                 fontFamily: 'Metropolis',
                 fontWeight: FontWeight.w900),
-            title: theme.textTheme.title.copyWith(
+            headline6: theme.textTheme.headline6.copyWith(
                 fontSize: 24,
                 color: AppColors.black,
                 fontWeight: FontWeight.w900,
                 fontFamily: 'Metropolis'), //
 
             //product title
-            display1: theme.textTheme.display1.copyWith(
+            headline1: theme.textTheme.headline1.copyWith(
                 color: AppColors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 fontFamily: 'Metropolis'),
 
-            display2: theme.textTheme.display2.copyWith(
+            headline2: theme.textTheme.headline2.copyWith(
                 fontFamily: 'Metropolis', fontWeight: FontWeight.w400),
             //product price
-            display3: theme.textTheme.display3.copyWith(
+            headline3: theme.textTheme.headline3.copyWith(
                 color: AppColors.lightGray,
                 fontSize: 14,
                 fontFamily: 'Metropolis',
                 fontWeight: FontWeight.w400),
-            display4: theme.textTheme.display4.copyWith(
+            headline4: theme.textTheme.headline4.copyWith(
                 fontFamily: 'Metropolis', fontWeight: FontWeight.w500),
 
-            subtitle: theme.textTheme.headline.copyWith(
-                fontSize: 18,
-                color: AppColors.black,
-                fontFamily: 'Metropolis',
-                fontWeight: FontWeight.w400),
-            subhead: theme.textTheme.headline.copyWith(
+            subtitle1: theme.textTheme.headline5.copyWith(
                 fontSize: 24,
                 color: AppColors.darkGray,
                 fontFamily: 'Metropolis',
@@ -118,13 +113,13 @@ class OpenFlutterEcommerceTheme {
                 fontFamily: 'Metropolis',
                 fontWeight: FontWeight.w700),
             //light gray small text
-            body1: theme.textTheme.body1.copyWith(
+            bodyText1: theme.textTheme.bodyText1.copyWith(
                 color: AppColors.lightGray,
                 fontSize: 11,
                 fontFamily: 'Metropolis',
                 fontWeight: FontWeight.w400),
             //view all link
-            body2: theme.textTheme.body2.copyWith(
+            bodyText2: theme.textTheme.bodyText2.copyWith(
                 color: AppColors.black,
                 fontSize: 11,
                 fontFamily: 'Metropolis',

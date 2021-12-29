@@ -30,8 +30,8 @@ extension View on Product {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(title, style: Theme.of(context).textTheme.display1),
-            Text(subTitle, style: Theme.of(context).textTheme.body1),
+            Text(title, style: Theme.of(context).textTheme.headline1),
+            Text(subTitle, style: Theme.of(context).textTheme.bodyText1),
             buildRating(context),
             buildPrice(Theme.of(context)),
           ],
@@ -58,7 +58,7 @@ extension View on Product {
               buildRating(context),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 4.0),
-                child: Text(title, style: Theme.of(context).textTheme.display1),
+                child: Text(title, style: Theme.of(context).textTheme.headline1),
               ),
               Row(
                 children: <Widget>[
@@ -98,7 +98,7 @@ extension View on Product {
     return Row(children: <Widget>[
       Text(
         price != null ? '\$' + price.toStringAsFixed(0) : '',
-        style: _theme.textTheme.display3.copyWith(
+        style: _theme.textTheme.headline3.copyWith(
           decoration: hasDiscountPrice
               ? TextDecoration.lineThrough
               : TextDecoration.none,
@@ -127,7 +127,7 @@ extension View on Product {
 
   Widget buildDiscountPrice(ThemeData _theme) {
     return Text('\$' + discountPrice.toStringAsFixed(0),
-        style: _theme.textTheme.display3.copyWith(color: _theme.errorColor));
+        style: _theme.textTheme.headline3.copyWith(color: _theme.errorColor));
   }
 }
 
@@ -162,7 +162,7 @@ extension FavoriteView on FavoriteProduct {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(product.title, style: Theme.of(context).textTheme.display1),
+            Text(product.title, style: Theme.of(context).textTheme.headline1),
             Row(
               children: <Widget>[
                 _buildColor(Theme.of(context), selectedAttributes),
@@ -217,7 +217,7 @@ extension FavoriteView on FavoriteProduct {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(product.title, style: Theme.of(context).textTheme.display1),
+              Text(product.title, style: Theme.of(context).textTheme.headline1),
               Row(
                 children: <Widget>[
                   _buildColor(Theme.of(context), selectedAttributes),
@@ -250,12 +250,12 @@ extension FavoriteView on FavoriteProduct {
     return colorValue.isNotEmpty ?
       Row(
         children: <Widget>[
-          Text('Color:', style: _theme.textTheme.body1.copyWith()),
+          Text('Color:', style: _theme.textTheme.bodyText1.copyWith()),
           Padding(
             padding: EdgeInsets.only(left: AppSizes.linePadding),
           ),
           Text(colorValue,
-              style: _theme.textTheme.body1.copyWith(color: AppColors.black))
+              style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
         ],
       ) 
       : Row();
@@ -270,12 +270,12 @@ extension FavoriteView on FavoriteProduct {
     return sizeValue.isNotEmpty?
       Row(
         children: <Widget>[
-          Text('Size:', style: _theme.textTheme.body1.copyWith()),
+          Text('Size:', style: _theme.textTheme.bodyText1.copyWith()),
           Padding(
             padding: EdgeInsets.only(left: AppSizes.linePadding),
           ),
           Text(sizeValue,
-              style: _theme.textTheme.body1.copyWith(color: AppColors.black))
+              style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
         ],
       )
       : Row();
