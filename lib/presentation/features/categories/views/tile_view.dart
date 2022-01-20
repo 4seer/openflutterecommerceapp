@@ -10,7 +10,6 @@ import 'package:openflutterecommerce/presentation/features/products/products.dar
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../categories.dart';
-import '../categories_bloc.dart';
 
 class CategoriesTileView extends StatefulWidget {
   final Function changeView;
@@ -21,7 +20,8 @@ class CategoriesTileView extends StatefulWidget {
   _CategoriesTileViewState createState() => _CategoriesTileViewState();
 }
 
-class _CategoriesTileViewState extends State<CategoriesTileView> with SingleTickerProviderStateMixin {
+class _CategoriesTileViewState extends State<CategoriesTileView>
+    with SingleTickerProviderStateMixin {
   final List<String> types = ['Women', 'Men', 'Kids'];
   final List<int> categotyIds = [1, 2, 3];
   TabController _tabController;
@@ -39,13 +39,17 @@ class _CategoriesTileViewState extends State<CategoriesTileView> with SingleTick
   Widget build(BuildContext context) {
     var _theme = Theme.of(context);
     var width = MediaQuery.of(context).size.width;
-    return BlocListener<CategoryBloc, CategoryState>(listenWhen: (context, state) {
+    return BlocListener<CategoryBloc, CategoryState>(
+        listenWhen: (context, state) {
       return state is CategoryErrorState;
     }, listener: (BuildContext context, CategoryState state) {
       return Container(
           padding: EdgeInsets.all(AppSizes.sidePadding),
-          child: Text('An error occured', style: _theme.textTheme.headline4.copyWith(color: _theme.errorColor)));
-    }, child: BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
+          child: Text('An error occured',
+              style: _theme.textTheme.headline4
+                  .copyWith(color: _theme.errorColor)));
+    }, child:
+            BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
       if (state is CategoryTileViewState) {
         var tabViews = <Widget>[];
         for (var _ in categotyIds) {
@@ -63,13 +67,19 @@ class _CategoriesTileViewState extends State<CategoriesTileView> with SingleTick
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text('SUMMER SALES', style: _theme.textTheme.headline4.copyWith(color: AppColors.white)),
-                        Text('Up to 50% off', style: _theme.textTheme.headline4.copyWith(color: AppColors.white))
+                        Text('SUMMER SALES',
+                            style: _theme.textTheme.headline4
+                                .copyWith(color: AppColors.white)),
+                        Text('Up to 50% off',
+                            style: _theme.textTheme.headline4
+                                .copyWith(color: AppColors.white))
                       ],
                     ))),
             Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
-                child: Column(children: buildCategoryList(state.categories, width - AppSizes.sidePadding * 3)))
+                child: Column(
+                    children: buildCategoryList(
+                        state.categories, width - AppSizes.sidePadding * 3)))
           ])));
         }
         return SafeArea(
@@ -88,15 +98,18 @@ class _CategoriesTileViewState extends State<CategoriesTileView> with SingleTick
     }));
   }
 
-  List<Widget> buildCategoryList(List<ProductCategory> categories, double width) {
+  List<Widget> buildCategoryList(
+      List<ProductCategory> categories, double width) {
     var elements = <Widget>[];
     for (var i = 0; i < categories.length; i++) {
       elements.add(InkWell(
           onTap: (() {
-            Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.productList,
+            Navigator.of(context).pushNamed(
+                OpenFlutterEcommerceRoutes.productList,
                 arguments: ProductListScreenParameters(categories[i]));
           }),
-          child: OpenFlutterCategoryTile(height: 100, width: width, category: categories[i])));
+          child: OpenFlutterCategoryTile(
+              height: 100, width: width, category: categories[i])));
     }
     return elements;
   }

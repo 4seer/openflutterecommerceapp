@@ -3,7 +3,6 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/data/model/hashtag.dart';
 

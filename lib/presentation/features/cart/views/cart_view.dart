@@ -11,13 +11,10 @@ import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/data/model/promo.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/cart_tile.dart';
 import 'package:openflutterecommerce/presentation/widgets/data_driven/promo_tile.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/bottom_popup.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/summary_line.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../cart.dart';
-import '../cart_bloc.dart';
-import '../cart_state.dart';
 
 class CartView extends StatefulWidget {
   final List<Product> products;
@@ -53,7 +50,9 @@ class _CartViewState extends State<CartView> {
       if (state is CartErrorState) {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
-            child: Text('An error occured', style: _theme.textTheme.headline4.copyWith(color: _theme.errorColor)));
+            child: Text('An error occured',
+                style: _theme.textTheme.headline4
+                    .copyWith(color: _theme.errorColor)));
       }
       return Container();
     }, child: BlocBuilder<CartBloc, CartState>(builder: (context, state) {
@@ -70,7 +69,9 @@ class _CartViewState extends State<CartView> {
               padding: EdgeInsets.only(bottom: AppSizes.sidePadding * 3),
             ),
             OpenFlutterInputButton(
-              placeHolder: state.appliedPromo != null ? state.appliedPromo.promoCode : 'Enter your promo code',
+              placeHolder: state.appliedPromo != null
+                  ? state.appliedPromo.promoCode
+                  : 'Enter your promo code',
               controller: _promoController,
               width: width,
               onClick: (() => {bloc..add(CartShowPopupEvent())}),
@@ -80,18 +81,30 @@ class _CartViewState extends State<CartView> {
             ),
             state.appliedPromo != null
                 ? Column(children: <Widget>[
-                    OpenFlutterSummaryLine(title: 'Subtotal:', summary: '\$' + state.totalPrice?.toStringAsFixed(2)),
                     OpenFlutterSummaryLine(
-                        title: 'Discount percent:', summary: state.appliedPromo.discount.toStringAsFixed(0) + '%'),
+                        title: 'Subtotal:',
+                        summary: '\$' + state.totalPrice?.toStringAsFixed(2)),
                     OpenFlutterSummaryLine(
-                        title: 'Total amount:', summary: '\$' + state.calculatedPrice?.toStringAsFixed(2)),
+                        title: 'Discount percent:',
+                        summary:
+                            state.appliedPromo.discount.toStringAsFixed(0) +
+                                '%'),
+                    OpenFlutterSummaryLine(
+                        title: 'Total amount:',
+                        summary:
+                            '\$' + state.calculatedPrice?.toStringAsFixed(2)),
                   ])
-                : OpenFlutterSummaryLine(title: 'Subtotal:', summary: '\$' + state.totalPrice?.toStringAsFixed(2)),
+                : OpenFlutterSummaryLine(
+                    title: 'Subtotal:',
+                    summary: '\$' + state.totalPrice?.toStringAsFixed(2)),
             Padding(
               padding: EdgeInsets.only(bottom: AppSizes.sidePadding * 3),
             ),
             OpenFlutterButton(
-              onPressed: (() => {Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.checkout)}),
+              onPressed: (() => {
+                    Navigator.of(context)
+                        .pushNamed(OpenFlutterEcommerceRoutes.checkout)
+                  }),
               title: 'CHECK OUT',
             )
           ])),
@@ -111,7 +124,9 @@ class _CartViewState extends State<CartView> {
                                     promoCode: _promoController.text))
                             }),
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding)),
+                      Padding(
+                          padding:
+                              EdgeInsets.only(bottom: AppSizes.sidePadding)),
                       OpenFlutterBlockSubtitle(
                         width: width,
                         title: 'Your Promo Codes',
@@ -131,11 +146,13 @@ class _CartViewState extends State<CartView> {
     var widgets = <Widget>[];
     for (var i = 0; i < promos.length; i++) {
       widgets.add(Container(
-          padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding, vertical: AppSizes.sidePadding),
+          padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.sidePadding, vertical: AppSizes.sidePadding),
           child: OpenFlutterPromoTile(
             textColor: promos[i].textColor,
             item: promos[i],
-            onClickApply: (() => {bloc..add(CartPromoAppliedEvent(promo: promos[i]))}),
+            onClickApply: (() =>
+                {bloc..add(CartPromoAppliedEvent(promo: promos[i]))}),
           )));
     }
     return widgets;
@@ -146,11 +163,15 @@ class _CartViewState extends State<CartView> {
     if (items.isNotEmpty) {
       for (var i = 0; i < items.length; i++) {
         widgets.add(Container(
-            padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding, vertical: AppSizes.sidePadding),
+            padding: EdgeInsets.symmetric(
+                horizontal: AppSizes.sidePadding,
+                vertical: AppSizes.sidePadding),
             child: OpenFlutterCartTile(
               item: items[i],
               onChangeQuantity: ((int quantity) => {
-                    bloc..add(CartQuantityChangedEvent(item: items[i], newQuantity: quantity)),
+                    bloc
+                      ..add(CartQuantityChangedEvent(
+                          item: items[i], newQuantity: quantity)),
                     if (quantity < 1)
                       {
                         items.remove(items[i]),

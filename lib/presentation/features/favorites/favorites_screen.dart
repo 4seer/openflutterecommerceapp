@@ -8,8 +8,6 @@ import 'package:openflutterecommerce/presentation/widgets/data_driven/size_chang
 import 'package:openflutterecommerce/presentation/widgets/independent/scaffold.dart';
 
 import 'favorites.dart';
-import 'favorites_bloc.dart';
-import 'favorites_event.dart';
 
 class FavouriteScreen extends StatefulWidget {
   @override
@@ -25,8 +23,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         title: null,
         body: BlocProvider<FavouriteBloc>(
           create: (context) {
-            return FavouriteBloc()
-              ..add(ScreenLoadedEvent());
+            return FavouriteBloc()..add(ScreenLoadedEvent());
           },
           child: _buildScreen(context),
         ),

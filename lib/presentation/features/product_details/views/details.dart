@@ -6,14 +6,11 @@ import 'package:openflutterecommerce/data/model/category.dart';
 import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/data/model/product_attribute.dart';
 import 'package:openflutterecommerce/presentation/features/home/home.dart';
-import 'package:openflutterecommerce/presentation/features/home/home_bloc.dart';
 import 'package:openflutterecommerce/presentation/features/product_details/views/attribute_bottom_sheet.dart';
 import 'package:openflutterecommerce/presentation/features/product_reviews/product_review_and_rating_screen.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../product.dart';
-import '../product_bloc.dart';
-import '../product_state.dart';
 
 class ProductDetailsView extends StatefulWidget {
   final Product product;

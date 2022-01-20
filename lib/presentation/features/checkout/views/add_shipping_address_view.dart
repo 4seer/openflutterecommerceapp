@@ -9,8 +9,6 @@ import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
 import '../checkout.dart';
-import '../checkout_bloc.dart';
-import '../checkout_state.dart';
 
 class AddShippingAddressView extends StatefulWidget {
   final Function changeView;
@@ -65,7 +63,9 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
           if (state is CheckoutErrorState) {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
-                child: Text('An error occured', style: _theme.textTheme.headline4.copyWith(color: _theme.errorColor)));
+                child: Text('An error occured',
+                    style: _theme.textTheme.headline4
+                        .copyWith(color: _theme.errorColor)));
           }
           return Container();
         },
@@ -133,7 +133,8 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
                                   state: _stateController.text,
                                   postal: _postalController.text,
                                   country: _countryController.text)),
-                            widget.changeView(changeType: ViewChangeType.Backward)
+                            widget.changeView(
+                                changeType: ViewChangeType.Backward)
                           }),
                     )
                   ],

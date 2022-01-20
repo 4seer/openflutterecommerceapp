@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:openflutterecommerce/config/routes.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/domain/entities/validator.dart';
 import 'package:openflutterecommerce/presentation/features/sign_up/sign_up.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
-
 
 class SignUpScreen extends StatefulWidget {
   @override

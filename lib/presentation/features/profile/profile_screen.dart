@@ -4,7 +4,6 @@ import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 import '../wrapper.dart';
 import 'profile.dart';
-import 'profile_bloc.dart';
 import 'views/order_details.dart';
 import 'views/orders.dart';
 import 'views/payment_methods.dart';
