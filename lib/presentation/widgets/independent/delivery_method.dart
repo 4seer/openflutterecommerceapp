@@ -11,23 +11,18 @@ class OpenFlutterDeliveryMethod extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      padding: EdgeInsets.only(
-          left: AppSizes.sidePadding, top: AppSizes.sidePadding),
+      padding: EdgeInsets.only(left: AppSizes.sidePadding, top: AppSizes.sidePadding),
       child: Row(
         children: <Widget>[
-          buildElement('assets/images/checkout/fedex.png', '2-3 days', _theme,
-              widgetWidth, height),
-          buildElement('assets/images/checkout/usps.png', '2-3 days', _theme,
-              widgetWidth, height),
-          buildElement('assets/images/checkout/dhl.png', '2-3 days', _theme,
-              widgetWidth, height),
+          buildElement('assets/images/checkout/fedex.png', '2-3 days', _theme, widgetWidth, height),
+          buildElement('assets/images/checkout/usps.png', '2-3 days', _theme, widgetWidth, height),
+          buildElement('assets/images/checkout/dhl.png', '2-3 days', _theme, widgetWidth, height),
         ],
       ),
     );
   }
 
-  Widget buildElement(String assetImage, String title, ThemeData _theme,
-      double width, double height) {
+  Widget buildElement(String assetImage, String title, ThemeData _theme, double width, double height) {
     return Padding(
         padding: EdgeInsets.only(right: AppSizes.sidePadding),
         child: Container(
@@ -35,8 +30,7 @@ class OpenFlutterDeliveryMethod extends StatelessWidget {
           height: height,
           padding: EdgeInsets.all(AppSizes.linePadding),
           decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(AppSizes.imageRadius)),
+              borderRadius: BorderRadius.all(Radius.circular(AppSizes.imageRadius)),
               color: AppColors.white,
               boxShadow: [
                 BoxShadow(
@@ -54,9 +48,7 @@ class OpenFlutterDeliveryMethod extends StatelessWidget {
                   width: 61,
                 ),
               ),
-              Text(title,
-                  style: _theme.textTheme.body2
-                      .copyWith(color: _theme.primaryColorLight))
+              Text(title, style: _theme.textTheme.bodyText2.copyWith(color: _theme.primaryColorLight))
             ],
           ),
         ));

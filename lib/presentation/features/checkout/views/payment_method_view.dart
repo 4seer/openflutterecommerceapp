@@ -62,9 +62,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
           if (state is CheckoutErrorState) {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
-                child: Text('An error occured',
-                    style: _theme.textTheme.display1
-                        .copyWith(color: _theme.errorColor)));
+                child: Text('An error occured', style: _theme.textTheme.headline4.copyWith(color: _theme.errorColor)));
           }
           return Container();
         },
@@ -81,11 +79,9 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
               return SingleChildScrollView(
                   child: Stack(children: <Widget>[
                 Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
+                    padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
                     child: Column(children: <Widget>[
-                      OpenFlutterBlockSubtitle(
-                          width: width, title: 'Your payment cards'),
+                      OpenFlutterBlockSubtitle(width: width, title: 'Your payment cards'),
                       OpenFlutterPaymentCardPreview(
                         width: width,
                         cardNumber: '**** **** **** 3947',
@@ -97,8 +93,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                           width: width,
                           title: 'Use as default payment method',
                           checked: currentCardId == 1,
-                          onTap: ((bool newValue) =>
-                              {_changeDefaultPaymentCard(bloc, 1)})),
+                          onTap: ((bool newValue) => {_changeDefaultPaymentCard(bloc, 1)})),
                       OpenFlutterPaymentCardPreview(
                           width: width,
                           cardNumber: '**** **** **** 4546',
@@ -110,8 +105,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                           width: width,
                           title: 'Use as default payment method',
                           checked: currentCardId == 2,
-                          onTap: ((bool newValue) =>
-                              {_changeDefaultPaymentCard(bloc, 2)})),
+                          onTap: ((bool newValue) => {_changeDefaultPaymentCard(bloc, 2)})),
                     ])),
                 Positioned(
                   bottom: AppSizes.sidePadding,
@@ -119,8 +113,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                   child: FloatingActionButton(
                       mini: true,
                       backgroundColor: _theme.primaryColor,
-                      onPressed: (() =>
-                          {bloc..add(CheckoutShowAddNewCardEvent())}),
+                      onPressed: (() => {bloc..add(CheckoutShowAddNewCardEvent())}),
                       child: Icon(Icons.add, size: 36)),
                 ),
                 showAddNewCardForm
@@ -134,58 +127,46 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                               hint: 'Name on card',
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(bottom: AppSizes.sidePadding),
+                              padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
                             ),
                             OpenFlutterInputField(
                               controller: _cardNumberController,
                               hint: 'Card number',
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(bottom: AppSizes.sidePadding),
+                              padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
                             ),
                             OpenFlutterInputField(
                               controller: _expirationDateController,
                               hint: 'Expiration Date',
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(bottom: AppSizes.sidePadding),
+                              padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
                             ),
                             OpenFlutterInputField(
                               controller: _cvvController,
                               hint: 'CVV',
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(bottom: AppSizes.sidePadding),
+                              padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
                             ),
                             OpenFlutterCheckbox(
                                 width: width,
                                 title: 'Use as default payment method',
                                 checked: false,
-                                onTap: ((bool newValue) =>
-                                    {_changeDefaultPaymentCard(bloc, 3)})),
+                                onTap: ((bool newValue) => {_changeDefaultPaymentCard(bloc, 3)})),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(bottom: AppSizes.sidePadding),
+                              padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
                             ),
                             OpenFlutterButton(
                               title: 'ADD CARD',
                               onPressed: (() => {
                                     bloc
                                       ..add(CheckoutAddNewCardEvent(
-                                          nameOnCard:
-                                              _nameOnCardController.text,
-                                          cardNumber:
-                                              _cardNumberController.text,
-                                          expirationMonth: int.parse(
-                                              _expirationDateController.text
-                                                  .split('/')[0]),
-                                          expirationYear: int.parse(
-                                              _expirationDateController.text
-                                                  .split('/')[1]),
+                                          nameOnCard: _nameOnCardController.text,
+                                          cardNumber: _cardNumberController.text,
+                                          expirationMonth: int.parse(_expirationDateController.text.split('/')[0]),
+                                          expirationYear: int.parse(_expirationDateController.text.split('/')[1]),
                                           cvv: int.parse(_cvvController.text)))
                                   }),
                             )

@@ -13,9 +13,7 @@ class OpenFlutterCategoryTile extends StatelessWidget {
   final double height;
   final double width;
 
-  const OpenFlutterCategoryTile(
-      {Key key, this.category, this.height, this.width})
-      : super(key: key);
+  const OpenFlutterCategoryTile({Key key, this.category, this.height, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +32,7 @@ class OpenFlutterCategoryTile extends StatelessWidget {
                 Container(
                     alignment: Alignment.centerLeft,
                     width: width - 200.0,
-                    child:
-                        Text(category.name, style: _theme.textTheme.display1)),
+                    child: Text(category.name, style: _theme.textTheme.headline4)),
                 Container(
                   width: 200,
                   alignment: Alignment.centerRight,

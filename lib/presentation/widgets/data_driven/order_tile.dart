@@ -7,9 +7,7 @@ class OpenFlutterOrderTile extends StatelessWidget {
   final UserOrder order;
   final Function(int) onClick;
 
-  const OpenFlutterOrderTile(
-      {Key key, @required this.order, @required this.onClick})
-      : super(key: key);
+  const OpenFlutterOrderTile({Key key, @required this.order, @required this.onClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +37,16 @@ class OpenFlutterOrderTile extends StatelessWidget {
                         text: TextSpan(children: <TextSpan>[
                       TextSpan(
                         text: 'Order: ',
-                        style: _theme.textTheme.display1.copyWith(
-                            color: _theme.primaryColorLight,
-                            fontWeight: FontWeight.normal),
+                        style: _theme.textTheme.headline4
+                            .copyWith(color: _theme.primaryColorLight, fontWeight: FontWeight.normal),
                       ),
                       TextSpan(
                         text: '#' + order.orderNumber.toString(),
-                        style: _theme.textTheme.display1
-                            .copyWith(fontWeight: FontWeight.w700),
+                        style: _theme.textTheme.headline4.copyWith(fontWeight: FontWeight.w700),
                       ),
                     ])),
                     Text(DateFormat('yyyy-MM-dd').format(order.orderDate),
-                        style: _theme.textTheme.display3
-                            .copyWith(color: AppColors.red))
+                        style: _theme.textTheme.headline2.copyWith(color: AppColors.red))
                   ],
                 ),
                 SizedBox(
@@ -65,15 +60,13 @@ class OpenFlutterOrderTile extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Tacking Number: ',
-                          style: _theme.textTheme.display1
-                              .copyWith(color: _theme.primaryColorLight),
+                          style: _theme.textTheme.headline4.copyWith(color: _theme.primaryColorLight),
                         ),
                         Padding(
-                          padding:
-                              const EdgeInsets.only(left: AppSizes.sidePadding),
+                          padding: const EdgeInsets.only(left: AppSizes.sidePadding),
                           child: Text(
                             order.trackingNumber,
-                            style: _theme.textTheme.display1,
+                            style: _theme.textTheme.headline4,
                           ),
                         ),
                       ],
@@ -88,15 +81,13 @@ class OpenFlutterOrderTile extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               'Quantity: ',
-                              style: _theme.textTheme.display1
-                                  .copyWith(color: _theme.primaryColorLight),
+                              style: _theme.textTheme.headline4.copyWith(color: _theme.primaryColorLight),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                  left: AppSizes.linePadding),
+                              padding: const EdgeInsets.only(left: AppSizes.linePadding),
                               child: Text(
                                 order.totalQuantity.toString(),
-                                style: _theme.textTheme.display1,
+                                style: _theme.textTheme.headline4,
                               ),
                             ),
                           ],
@@ -105,16 +96,14 @@ class OpenFlutterOrderTile extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               'Totat Amount: ',
-                              style: _theme.textTheme.display1
-                                  .copyWith(color: _theme.primaryColorLight),
+                              style: _theme.textTheme.headline4.copyWith(color: _theme.primaryColorLight),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                  left: AppSizes.sidePadding),
+                              padding: const EdgeInsets.only(left: AppSizes.sidePadding),
                               child: Text(
                                 '\$' + order.totalPrice.toStringAsFixed(0),
                                 //total amount
-                                style: _theme.textTheme.display1,
+                                style: _theme.textTheme.headline4,
                               ),
                             ),
                           ],
@@ -130,24 +119,21 @@ class OpenFlutterOrderTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     RaisedButton(
-                      padding: EdgeInsets.only(
-                          left: 24, right: 24, top: 10, bottom: 10),
+                      padding: EdgeInsets.only(left: 24, right: 24, top: 10, bottom: 10),
                       color: AppColors.white,
                       onPressed: () {
                         onClick(order.id);
                       },
                       shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(AppSizes.imageRadius),
+                          borderRadius: BorderRadius.circular(AppSizes.imageRadius),
                           side: BorderSide(color: AppColors.black, width: 2)),
                       child: Text(
                         'Details',
-                        style: _theme.textTheme.display1,
+                        style: _theme.textTheme.headline4,
                       ),
                     ),
                     Text(order.orderStatus.toString().split('.')[1],
-                        style: _theme.textTheme.display1
-                            .copyWith(color: AppColors.green)),
+                        style: _theme.textTheme.headline4.copyWith(color: AppColors.green)),
                   ],
                 )
               ],

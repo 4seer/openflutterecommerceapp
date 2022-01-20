@@ -5,9 +5,7 @@ class OpenFlutterBottomPopup extends StatelessWidget {
   final Widget child;
   final String title;
 
-  const OpenFlutterBottomPopup(
-      {Key key, @required this.child, @required this.title})
-      : super(key: key);
+  const OpenFlutterBottomPopup({Key key, @required this.child, @required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +37,7 @@ class OpenFlutterBottomPopup extends StatelessWidget {
                   ),
                 ),
               ),
-              title != ''
-                  ? Text(title, style: _theme.textTheme.display1)
-                  : Container(),
+              title != '' ? Text(title, style: _theme.textTheme.headline4) : Container(),
               Padding(
                 padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
               ),

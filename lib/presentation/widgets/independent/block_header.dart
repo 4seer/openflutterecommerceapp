@@ -13,12 +13,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
   final String description;
 
   const OpenFlutterBlockHeader(
-      {Key key,
-      @required this.width,
-      @required this.title,
-      this.linkText,
-      this.onLinkTap,
-      this.description})
+      {Key key, @required this.width, @required this.title, this.linkText, this.onLinkTap, this.description})
       : super(key: key);
 
   @override
@@ -28,8 +23,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
     return InkWell(
       onTap: onLinkTap,
       child: Container(
-        padding: EdgeInsets.only(
-            top: AppSizes.sidePadding, left: AppSizes.sidePadding),
+        padding: EdgeInsets.only(top: AppSizes.sidePadding, left: AppSizes.sidePadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -44,8 +38,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
                         width: rightLinkWidth,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child:
-                              Text(linkText, style: _theme.textTheme.body2),
+                          child: Text(linkText, style: _theme.textTheme.bodyText2),
                         ),
                       )
                     : Container(),
@@ -54,7 +47,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
             description != null
                 ? Text(
                     description,
-                    style: _theme.textTheme.body2,
+                    style: _theme.textTheme.bodyText2,
                   )
                 : Container()
           ],

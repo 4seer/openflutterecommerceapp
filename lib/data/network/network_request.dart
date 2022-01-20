@@ -42,23 +42,24 @@ class NetworkRequest {
     http.Response response;
     headers ??= _jsonHeaders;
     try {
+      Uri uri = address; //Uri.parse(address);
       switch (type) {
         case RequestType.post:
           response = await client.post(
-            address,
+            uri,
             headers: headers,
             body: jsonEncode(body) ?? plainBody ?? listBody,
           );
           break;
         case RequestType.get:
-          response = await client.get(address, headers: headers);
+          response = await client.get(uri, headers: headers);
           break;
         case RequestType.put:
-          response = await client.put(address,
+          response = await client.put(uri,
               body: body ?? plainBody ?? listBody, headers: headers);
           break;
         case RequestType.delete:
-          response = await client.delete(address, headers: headers);
+          response = await client.delete(uri, headers: headers);
           break;
       }
       print('RESULT: ${response.body}');

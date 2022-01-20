@@ -9,8 +9,7 @@ import 'package:openflutterecommerce/data/model/category.dart';
 class OpenFlutterCatregoryListElement extends StatelessWidget {
   final ProductCategory category;
 
-  const OpenFlutterCatregoryListElement({Key key, this.category})
-      : super(key: key);
+  const OpenFlutterCatregoryListElement({Key key, this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +26,6 @@ class OpenFlutterCatregoryListElement extends StatelessWidget {
             bottom: BorderSide(color: _theme.primaryColorLight, width: 0.4),
           ),
         ),
-        child: Text(category.name,
-            style: _theme.textTheme.display1
-                .copyWith(fontWeight: FontWeight.normal)));
+        child: Text(category.name, style: _theme.textTheme.headline4.copyWith(fontWeight: FontWeight.normal)));
   }
 }

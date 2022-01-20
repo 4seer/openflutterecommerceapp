@@ -53,41 +53,33 @@ class _MyOrdersViewState extends State<MyOrdersView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: AppSizes.sidePadding),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            OpenFlutterBlockHeader(
-                              title: 'My Orders',
-                              width: width,
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    bottom: AppSizes.sidePadding)),
-                            TabBar(
-                              indicatorSize: TabBarIndicatorSize.tab,
-                              labelColor: AppColors.white,
-                              labelPadding: EdgeInsets.symmetric(horizontal: 4),
-                              unselectedLabelColor: AppColors.black,
-                              indicator: BubbleTabIndicator(
-                                indicatorHeight: 32,
-                                indicatorColor: Colors.black,
-                                tabBarIndicatorSize: TabBarIndicatorSize.tab,
-                              ),
-                              tabs: tabs,
-                              unselectedLabelStyle: _theme.textTheme.display3,
-                              labelStyle: _theme.textTheme.display3
-                                  .copyWith(color: AppColors.white),
-                            ),
-                          ]),
+                      padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
+                      child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                        OpenFlutterBlockHeader(
+                          title: 'My Orders',
+                          width: width,
+                        ),
+                        Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding)),
+                        TabBar(
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          labelColor: AppColors.white,
+                          labelPadding: EdgeInsets.symmetric(horizontal: 4),
+                          unselectedLabelColor: AppColors.black,
+                          indicator: BubbleTabIndicator(
+                            indicatorHeight: 32,
+                            indicatorColor: Colors.black,
+                            tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                          ),
+                          tabs: tabs,
+                          unselectedLabelStyle: _theme.textTheme.headline2,
+                          labelStyle: _theme.textTheme.headline2.copyWith(color: AppColors.white),
+                        ),
+                      ]),
                     ),
-                    Padding(
-                        padding: EdgeInsets.only(bottom: AppSizes.sidePadding)),
+                    Padding(padding: EdgeInsets.only(bottom: AppSizes.sidePadding)),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: AppSizes.sidePadding),
+                        padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
                         child: TabBarView(
                           children: <Widget>[
                             buildOrderList(state.orderData, bloc),

@@ -12,8 +12,7 @@ import '../profile_state.dart';
 class MyOrderDetailsView extends StatefulWidget {
   final Function changeView;
 
-  const MyOrderDetailsView({Key key, @required this.changeView})
-      : super(key: key);
+  const MyOrderDetailsView({Key key, @required this.changeView}) : super(key: key);
 
   @override
   _MyOrderDetailsViewState createState() => _MyOrderDetailsViewState();
@@ -41,44 +40,34 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                               text: TextSpan(children: <TextSpan>[
                             TextSpan(
                               text: 'Order: ',
-                              style: _theme.textTheme.display1,
+                              style: _theme.textTheme.headline4,
                             ),
                             TextSpan(
-                              text:
-                                  '#' + state.orderData.orderNumber.toString(),
-                              style: _theme.textTheme.display1
-                                  .copyWith(fontWeight: FontWeight.w700),
+                              text: '#' + state.orderData.orderNumber.toString(),
+                              style: _theme.textTheme.headline4.copyWith(fontWeight: FontWeight.w700),
                             ),
                           ])),
-                          Text(
-                              DateFormat('yyyy-MM-dd')
-                                  .format(state.orderData.orderDate),
-                              style: _theme.textTheme.display3
-                                  .copyWith(color: AppColors.lightGray))
+                          Text(DateFormat('yyyy-MM-dd').format(state.orderData.orderDate),
+                              style: _theme.textTheme.headline3.copyWith(color: AppColors.lightGray))
                         ],
                       ),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            RichText(
-                                text: TextSpan(children: <TextSpan>[
-                              TextSpan(
-                                text: 'Tacking Number: ',
-                                style: _theme.textTheme.display1
-                                    .copyWith(color: _theme.primaryColorLight),
-                              ),
-                              TextSpan(
-                                text: state.orderData.trackingNumber,
-                                style: _theme.textTheme.display1,
-                              ),
-                            ])),
-                            Text('Delivered',
-                                style: _theme.textTheme.display1
-                                    .copyWith(color: AppColors.green)),
-                          ]),
+                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                        RichText(
+                            text: TextSpan(children: <TextSpan>[
+                          TextSpan(
+                            text: 'Tacking Number: ',
+                            style: _theme.textTheme.headline4.copyWith(color: _theme.primaryColorLight),
+                          ),
+                          TextSpan(
+                            text: state.orderData.trackingNumber,
+                            style: _theme.textTheme.headline4,
+                          ),
+                        ])),
+                        Text('Delivered', style: _theme.textTheme.headline4.copyWith(color: AppColors.green)),
+                      ]),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
@@ -89,14 +78,13 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                             children: <Widget>[
                               Text(
                                 state.orderData.totalQuantity.toString(),
-                                style: _theme.textTheme.display1,
+                                style: _theme.textTheme.headline4,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    left: AppSizes.linePadding),
+                                padding: const EdgeInsets.only(left: AppSizes.linePadding),
                                 child: Text(
                                   'items',
-                                  style: _theme.textTheme.display1,
+                                  style: _theme.textTheme.headline4,
                                 ),
                               ),
                             ],
@@ -112,29 +100,20 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
-                      buildSummaryLine(
-                          'Shipping Address:',
-                          state.orderData.shippingAddress.toString(),
-                          _theme,
-                          width),
+                      buildSummaryLine('Shipping Address:', state.orderData.shippingAddress.toString(), _theme, width),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
-                      buildSummaryLine('Payment Methods:',
-                          state.orderData.paymentMethod, _theme, width),
+                      buildSummaryLine('Payment Methods:', state.orderData.paymentMethod, _theme, width),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
-                      buildSummaryLine('Discount:',
-                          state.orderData.promo.toString(), _theme, width),
+                      buildSummaryLine('Discount:', state.orderData.promo.toString(), _theme, width),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
                       buildSummaryLine(
-                          'Total Amount:',
-                          '\$' + state.orderData.totalPrice.toStringAsFixed(0),
-                          _theme,
-                          width),
+                          'Total Amount:', '\$' + state.orderData.totalPrice.toStringAsFixed(0), _theme, width),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
@@ -175,22 +154,15 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
       for (CartItem item in state.orderData.products)
         OpenFlutterCartTile(
           item: item,
-          onAddToFav: (() => {
-            
-          }),
-          onChangeQuantity: ((int quantity) => {
-
-          }),
-          onRemoveFromCart: (() => {
-            
-          }),
+          onAddToFav: (() => {}),
+          onChangeQuantity: ((int quantity) => {}),
+          onRemoveFromCart: (() => {}),
           orderComplete: true,
         )
     ];
   }
 
-  Row buildSummaryLine(
-      String label, String text, ThemeData _theme, double width) {
+  Row buildSummaryLine(String label, String text, ThemeData _theme, double width) {
     print(label + ' ' + text);
     return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,14 +170,13 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
         children: <Widget>[
           Text(
             label,
-            style: _theme.textTheme.display1
-                .copyWith(color: _theme.primaryColorLight),
+            style: _theme.textTheme.headline4.copyWith(color: _theme.primaryColorLight),
           ),
           Container(
             width: width / 2,
             child: Text(
               text,
-              style: _theme.textTheme.display1,
+              style: _theme.textTheme.headline4,
             ),
           )
         ]);

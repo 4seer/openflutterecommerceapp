@@ -98,15 +98,14 @@ class OpenFlutterProductRating extends StatelessWidget {
       ),
     );
   }
+
   //TODO: redo so rating supports double values like 4.5 with half star
   Widget _buildStarIcon(int index) {
     var isSelected = _isStarSelected(index);
 
     if (isSelected || showDefaultStar) {
-      return SvgPicture.asset(
-          'assets/icons/products/star' + (isSelected ? '_fav' : '') + '.svg',
-          width: iconSize,
-          height: iconSize);
+      return SvgPicture.asset('assets/icons/products/star' + (isSelected ? '_fav' : '') + '.svg',
+          width: iconSize, height: iconSize);
     }
 
     return Container(
@@ -141,10 +140,7 @@ class OpenFlutterProductRating extends StatelessWidget {
       child: Center(
         child: Text(
           ' (' + ratingCount.toInt().toString() + ')',
-          style: Theme.of(context)
-              .textTheme
-              .body1
-              .copyWith(fontSize: labelFontSize),
+          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: labelFontSize),
           textAlign: TextAlign.center,
         ),
       ),

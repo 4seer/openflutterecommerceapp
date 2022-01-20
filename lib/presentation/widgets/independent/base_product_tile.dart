@@ -51,8 +51,7 @@ class BaseProductTile extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(image: image, fit: BoxFit.cover),
                         color: AppColors.background,
-                        borderRadius:
-                            BorderRadius.circular(AppSizes.imageRadius),
+                        borderRadius: BorderRadius.circular(AppSizes.imageRadius),
                       ),
                     ),
                   ),
@@ -65,42 +64,40 @@ class BaseProductTile extends StatelessWidget {
               ),
             ),
             bottomRoundButton == null
-              ? Container()
-              : Positioned(
-                  top: imageHeight - 24,
-                  right: 0,
-                  child: bottomRoundButton,
-                ),
+                ? Container()
+                : Positioned(
+                    top: imageHeight - 24,
+                    right: 0,
+                    child: bottomRoundButton,
+                  ),
             specialMark == null
-              ? Container()
-              : Positioned(
-                left: 4,
-                top: 6,
-                child: Container(
-                  padding: EdgeInsets.all(AppSizes.linePadding * 1.5),
-                  decoration: BoxDecoration(
-                    borderRadius:
-                      BorderRadius.circular(AppSizes.imageRadius),
-                    color: specialMark == 'New'
-                      ? AppColors.red
-                      : AppColors.black,
+                ? Container()
+                : Positioned(
+                    left: 4,
+                    top: 6,
+                    child: Container(
+                        padding: EdgeInsets.all(AppSizes.linePadding * 1.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(AppSizes.imageRadius),
+                          color: specialMark == 'New' ? AppColors.red : AppColors.black,
+                        ),
+                        child: Text(specialMark,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(color: AppColors.white, fontWeight: FontWeight.bold))),
                   ),
-                  child: Text(specialMark,
-                    style: Theme.of(context).textTheme.body1.copyWith(
-                      color: AppColors.white,
-                      fontWeight: FontWeight.bold))),
-                ),
             onRemove == null
-              ? Container()
-              : Positioned(
-                  top: 0,
-                  right: 0,
-                  child: IconButton(
-                    icon: Icon(Icons.close),
-                    color: AppColors.lightGray,
-                    onPressed: onRemove,
-                  ),
-                )
+                ? Container()
+                : Positioned(
+                    top: 0,
+                    right: 0,
+                    child: IconButton(
+                      icon: Icon(Icons.close),
+                      color: AppColors.lightGray,
+                      onPressed: onRemove,
+                    ),
+                  )
           ],
         ),
       ),

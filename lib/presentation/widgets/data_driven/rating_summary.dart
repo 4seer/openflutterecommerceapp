@@ -51,7 +51,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
       children: <Widget>[
         Text(
           rating.toString(),
-          style: Theme.of(context).textTheme.display2.copyWith(
+          style: Theme.of(context).textTheme.headline3.copyWith(
                 color: Colors.black,
               ),
         ),
@@ -159,8 +159,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
               ),
             ),
             Flexible(
-              flex:
-                  _calculateTransparentBarWithByQuantity(starQuantity.quantity),
+              flex: _calculateTransparentBarWithByQuantity(starQuantity.quantity),
               child: Container(),
             ),
           ],

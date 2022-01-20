@@ -28,18 +28,14 @@ class _CategoriesListViewState extends State<CategoriesListView> {
     var width = MediaQuery.of(context).size.width;
     var widgetWidth = width - AppSizes.sidePadding * 4;
     var _theme = Theme.of(context);
-    return BlocListener<CategoryBloc, CategoryState>(
-        listener: (context, state) {
+    return BlocListener<CategoryBloc, CategoryState>(listener: (context, state) {
       if (state is CategoryErrorState) {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
-            child: Text('An error occured',
-                style: _theme.textTheme.display1
-                    .copyWith(color: _theme.errorColor)));
+            child: Text('An error occured', style: _theme.textTheme.headline4.copyWith(color: _theme.errorColor)));
       }
       return Container();
-    }, child:
-            BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
+    }, child: BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
       if (state is CategoryListViewState) {
         return SingleChildScrollView(
           child: Column(
@@ -47,8 +43,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
               Padding(padding: EdgeInsets.only(top: AppSizes.sidePadding)),
               OpenFlutterButton(
                 onPressed: (() => {
-                      BlocProvider.of<CategoryBloc>(context)
-                          .add(CategoryShowTilesEvent(0)),
+                      BlocProvider.of<CategoryBloc>(context).add(CategoryShowTilesEvent(0)),
                     }),
                 title: 'VIEW ALL ITEMS',
                 width: widgetWidth,
@@ -74,18 +69,16 @@ class _CategoriesListViewState extends State<CategoriesListView> {
 
   List<Widget> buildCategoryList(List<ProductCategory> categories) {
     var elements = <Widget>[];
-    if ( categories != null ) {
+    if (categories != null) {
       for (var i = 0; i < categories.length; i++) {
         elements.add(
           InkWell(
             onTap: categories[i].isCategoryContainer
                 ? () {
-                    BlocProvider.of<CategoryBloc>(context)
-                        .add(ChangeCategoryParent(categories[i].id));
+                    BlocProvider.of<CategoryBloc>(context).add(ChangeCategoryParent(categories[i].id));
                   }
                 : () {
-                    Navigator.of(context).pushNamed(
-                        OpenFlutterEcommerceRoutes.productList,
+                    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.productList,
                         arguments: ProductListScreenParameters(categories[i]));
                   },
             child: OpenFlutterCatregoryListElement(category: categories[i]),
