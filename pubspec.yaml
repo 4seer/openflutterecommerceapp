@@ -38,32 +38,11 @@ dependencies:
   equatable: ^2.0.3
   sqflite: ^2.0.0+4
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  # cupertino_icons: ^0.1.3
-  # flutter_svg: ^0.18.1
-  # intl: ^0.16.0
-  # flutter_translate: any
-  # bubble_tab_indicator: any
-  # http: ^0.12.0+4
-  # rxdart: ^0.23.1
-  # sqflite: null
-  # path: null
-  # flutter_secure_storage: ^3.3.1+1
-  # font_awesome_flutter: 8.7.0
-  # # check internet connection availability
-  # data_connection_checker: ^0.3.4
-  # get_it: null
-  # bloc: ^6.0.2
-  # flutter_bloc: ^6.0.1
-  # equatable: ^1.2.4
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
   
   mockito: ^5.0.16
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
