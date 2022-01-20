@@ -15,14 +15,18 @@ class NetworkRequest {
 
   final http.Client client;
   final RequestType type;
-  final String address;
+  final Uri address;
   final Map<String, dynamic> body;
   Map<String, String> headers;
   final List<int> listBody;
   final String plainBody;
 
   NetworkRequest(this.type, this.address,
-      {@required this.client, this.body, this.plainBody, this.listBody, this.headers});
+      {@required this.client,
+      this.body,
+      this.plainBody,
+      this.listBody,
+      this.headers});
 
   Future<http.Response> getResult() async {
     print('ADDRESS: $address');
@@ -38,7 +42,7 @@ class NetworkRequest {
     http.Response response;
     headers ??= _jsonHeaders;
     try {
-      Uri uri = Uri.parse(address);
+      Uri uri = address; // Uri.parse(address);
       switch (type) {
         case RequestType.post:
           response = await client.post(
@@ -51,7 +55,8 @@ class NetworkRequest {
           response = await client.get(uri, headers: headers);
           break;
         case RequestType.put:
-          response = await client.put(uri, body: body ?? plainBody ?? listBody, headers: headers);
+          response = await client.put(uri,
+              body: body ?? plainBody ?? listBody, headers: headers);
           break;
         case RequestType.delete:
           response = await client.delete(uri, headers: headers);
@@ -72,7 +77,12 @@ class NetworkRequest {
   }
 
   factory NetworkRequest.productList(
-      http.Client client, int pageIndex, int pageSize, int categoryId, FilterRules filterRules, SortRules sortRules) {
+      http.Client client,
+      int pageIndex,
+      int pageSize,
+      int categoryId,
+      FilterRules filterRules,
+      SortRules sortRules) {
     List<String> parameters = [];
     if (pageIndex != null) {
       parameters.add('page=${pageIndex + 1}');
@@ -88,10 +98,11 @@ class NetworkRequest {
       parameters.add('order=${sortRules.jsonOrder}');
     }
     //TODO add filter rules here
-    final serverAddress = ServerAddresses.serverAddress + '?' + parameters.join('&');
+    final serverAddress =
+        ServerAddresses.serverAddress + '?' + parameters.join('&');
     return NetworkRequest(
       RequestType.get,
-      serverAddress,
+      Uri.parse(serverAddress),
       client: client,
     );
   }

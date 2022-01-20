@@ -28,7 +28,8 @@ class ProductDetailsParameters {
   final int categoryId;
   final HashMap<ProductAttribute, String> selectedAttributes;
 
-  const ProductDetailsParameters(this.productId, this.categoryId, {this.selectedAttributes});
+  const ProductDetailsParameters(this.productId, this.categoryId,
+      {this.selectedAttributes});
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
@@ -43,7 +44,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         create: (context) {
           return ProductBloc(productId: widget.parameters.productId)
             ..add(ProductScreenLoadedEvent(
-                productId: widget.parameters.productId, categoryId: widget.parameters.categoryId));
+                productId: widget.parameters.productId,
+                categoryId: widget.parameters.categoryId));
         },
         child: ProductWrapper(),
       ),
@@ -65,7 +67,9 @@ class _ProductWrapperState extends OpenFlutterWrapperState<ProductWrapper> {
         builder: (BuildContext context, ProductState state) {
           if (state is ProductLoadedState) {
             return ProductDetailsView(
-                product: state.product, similarProducts: state.similarProducts, changeView: changePage);
+                product: state.product,
+                similarProducts: state.similarProducts,
+                changeView: changePage);
           }
           return Container();
         });
