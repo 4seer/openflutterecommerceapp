@@ -33,10 +33,8 @@ class WoocommerceWrapper implements WoocommercWrapperAbstract {
   }
 
   Future<List<dynamic>> _getApiRequest(String url) async {
-    Uri uri = Uri(path: url);
-
     final response = await client.get(
-      uri,
+      Uri.parse(url),
       headers: {
         'Content-Type': 'application/json',
       },

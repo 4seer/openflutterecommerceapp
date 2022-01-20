@@ -16,13 +16,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
   final TabController tabController;
 
   const OpenFlutterCollapsingScaffold(
-      {Key key,
-      this.background,
-      this.title,
-      this.body,
-      this.bottomMenuIndex,
-      this.tabBarList,
-      this.tabController})
+      {Key key, this.background, this.title, this.body, this.bottomMenuIndex, this.tabBarList, this.tabController})
       : super(key: key);
 
   @override
@@ -97,15 +91,13 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
               return Stack(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: kToolbarHeight / 4, left: 0.0),
+                    padding: const EdgeInsets.only(top: kToolbarHeight / 4, left: 0.0),
                     child: Transform.translate(
                       child: Text(
                         title,
                         style: _theme.textTheme.caption,
                       ),
-                      offset:
-                          Offset(dx, constraints.maxHeight - kToolbarHeight),
+                      offset: Offset(dx, constraints.maxHeight - kToolbarHeight),
                     ),
                   ),
                 ],

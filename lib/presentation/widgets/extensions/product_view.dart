@@ -20,9 +20,7 @@ extension View on Product {
       @required VoidCallback onFavoritesClick}) {
     return BaseProductListItem(
       onClick: showProductInfo,
-      inactiveMessage: amountAvailable == null || amountAvailable > 0
-          ? null
-          : 'Sorry, this item is currently sold out',
+      inactiveMessage: amountAvailable == null || amountAvailable > 0 ? null : 'Sorry, this item is currently sold out',
       bottomRoundButton: _getFavoritesButton(onFavoritesClick),
       image: mainImage?.getView(),
       specialMark: specialMark,
@@ -30,8 +28,8 @@ extension View on Product {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(title, style: Theme.of(context).textTheme.display1),
-            Text(subTitle, style: Theme.of(context).textTheme.body1),
+            Text(title, style: Theme.of(context).textTheme.headline4),
+            Text(subTitle, style: Theme.of(context).textTheme.bodyText1),
             buildRating(context),
             buildPrice(Theme.of(context)),
           ],
@@ -47,9 +45,8 @@ extension View on Product {
     return BaseProductTile(
         onClick: showProductInfo,
         bottomRoundButton: _getFavoritesButton(onFavoritesClick),
-        inactiveMessage: amountAvailable == null || amountAvailable > 0
-            ? null
-            : 'Sorry, this item is currently sold out',
+        inactiveMessage:
+            amountAvailable == null || amountAvailable > 0 ? null : 'Sorry, this item is currently sold out',
         image: mainImage.getView(),
         mainContentBuilder: (context) {
           return Column(
@@ -58,7 +55,7 @@ extension View on Product {
               buildRating(context),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 4.0),
-                child: Text(title, style: Theme.of(context).textTheme.display1),
+                child: Text(title, style: Theme.of(context).textTheme.headline4),
               ),
               Row(
                 children: <Widget>[
@@ -74,23 +71,23 @@ extension View on Product {
   Widget _getFavoritesButton(VoidCallback onFavoritesClick) {
     return FloatingActionButton(
       heroTag: title +
-        Random()
-          .nextInt(1000000)
-          .toString(), //TODO make sure that there is only one product with specified id on screen and use it as a tag
+          Random()
+              .nextInt(1000000)
+              .toString(), //TODO make sure that there is only one product with specified id on screen and use it as a tag
       mini: true,
       backgroundColor: AppColors.white,
       onPressed: onFavoritesClick,
       child: isFavorite
-        ? Icon(
-            FontAwesomeIcons.solidHeart,
-            color: AppColors.red,
-            size: 18.0,
-          )
-        : Icon(
-            FontAwesomeIcons.heart,
-            color: AppColors.red,
-            size: 18.0,
-          ),
+          ? Icon(
+              FontAwesomeIcons.solidHeart,
+              color: AppColors.red,
+              size: 18.0,
+            )
+          : Icon(
+              FontAwesomeIcons.heart,
+              color: AppColors.red,
+              size: 18.0,
+            ),
     );
   }
 
@@ -98,10 +95,8 @@ extension View on Product {
     return Row(children: <Widget>[
       Text(
         price != null ? '\$' + price.toStringAsFixed(0) : '',
-        style: _theme.textTheme.display3.copyWith(
-          decoration: hasDiscountPrice
-              ? TextDecoration.lineThrough
-              : TextDecoration.none,
+        style: _theme.textTheme.headline2.copyWith(
+          decoration: hasDiscountPrice ? TextDecoration.lineThrough : TextDecoration.none,
         ),
       ),
       SizedBox(
@@ -113,21 +108,19 @@ extension View on Product {
 
   Widget buildRating(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
-        top: AppSizes.linePadding, bottom: AppSizes.linePadding),
-      child: OpenFlutterProductRating(
-        rating: averageRating,
-        ratingCount: ratingCount,
-        alignment: MainAxisAlignment.start,
-        iconSize: 12,
-        labelFontSize: 12,
-      )
-    );
+        padding: EdgeInsets.only(top: AppSizes.linePadding, bottom: AppSizes.linePadding),
+        child: OpenFlutterProductRating(
+          rating: averageRating,
+          ratingCount: ratingCount,
+          alignment: MainAxisAlignment.start,
+          iconSize: 12,
+          labelFontSize: 12,
+        ));
   }
 
   Widget buildDiscountPrice(ThemeData _theme) {
     return Text('\$' + discountPrice.toStringAsFixed(0),
-        style: _theme.textTheme.display3.copyWith(color: _theme.errorColor));
+        style: _theme.textTheme.headline2.copyWith(color: _theme.errorColor));
   }
 }
 
@@ -140,14 +133,11 @@ extension FavoriteView on FavoriteProduct {
       @required HashMap<ProductAttribute, String> selectedAttributes}) {
     return BaseProductListItem(
       onClick: showProductInfo,
-      inactiveMessage:
-          product.amountAvailable == null || product.amountAvailable > 0
-              ? null
-              : 'Sorry, this item is currently sold out',
+      inactiveMessage: product.amountAvailable == null || product.amountAvailable > 0
+          ? null
+          : 'Sorry, this item is currently sold out',
       bottomRoundButton: FloatingActionButton(
-        heroTag: 'Remove from Cart' +Random()
-              .nextInt(1000000)
-              .toString(),
+        heroTag: 'Remove from Cart' + Random().nextInt(1000000).toString(),
         backgroundColor: AppColors.red,
         onPressed: onAddToCart,
         child: Icon(
@@ -162,7 +152,7 @@ extension FavoriteView on FavoriteProduct {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(product.title, style: Theme.of(context).textTheme.display1),
+            Text(product.title, style: Theme.of(context).textTheme.headline4),
             Row(
               children: <Widget>[
                 _buildColor(Theme.of(context), selectedAttributes),
@@ -195,14 +185,11 @@ extension FavoriteView on FavoriteProduct {
       @required HashMap<ProductAttribute, String> selectedAttributes}) {
     return BaseProductTile(
         onClick: showProductInfo,
-        inactiveMessage:
-            product.amountAvailable == null || product.amountAvailable > 0
-                ? null
-                : 'Sorry, this item is currently sold out',
+        inactiveMessage: product.amountAvailable == null || product.amountAvailable > 0
+            ? null
+            : 'Sorry, this item is currently sold out',
         bottomRoundButton: FloatingActionButton(
-          heroTag: 'Add to Cart' + Random()
-                .nextInt(1000000)
-                .toString(),
+          heroTag: 'Add to Cart' + Random().nextInt(1000000).toString(),
           backgroundColor: AppColors.red,
           onPressed: onAddToCart,
           child: Icon(
@@ -217,7 +204,7 @@ extension FavoriteView on FavoriteProduct {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(product.title, style: Theme.of(context).textTheme.display1),
+              Text(product.title, style: Theme.of(context).textTheme.headline4),
               Row(
                 children: <Widget>[
                   _buildColor(Theme.of(context), selectedAttributes),
@@ -241,43 +228,39 @@ extension FavoriteView on FavoriteProduct {
         });
   }
 
-  Widget _buildColor(ThemeData _theme,
-    HashMap<ProductAttribute, String> selectedAttributes) {
+  Widget _buildColor(ThemeData _theme, HashMap<ProductAttribute, String> selectedAttributes) {
     String colorValue = '';
     selectedAttributes?.forEach((attribute, value) {
-      if ( attribute.name == 'Color') colorValue = value;
+      if (attribute.name == 'Color') colorValue = value;
     });
-    return colorValue.isNotEmpty ?
-      Row(
-        children: <Widget>[
-          Text('Color:', style: _theme.textTheme.body1.copyWith()),
-          Padding(
-            padding: EdgeInsets.only(left: AppSizes.linePadding),
-          ),
-          Text(colorValue,
-              style: _theme.textTheme.body1.copyWith(color: AppColors.black))
-        ],
-      ) 
-      : Row();
+    return colorValue.isNotEmpty
+        ? Row(
+            children: <Widget>[
+              Text('Color:', style: _theme.textTheme.bodyText1.copyWith()),
+              Padding(
+                padding: EdgeInsets.only(left: AppSizes.linePadding),
+              ),
+              Text(colorValue, style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
+            ],
+          )
+        : Row();
   }
 
-  Row _buildSize(ThemeData _theme,
-    HashMap<ProductAttribute, String> selectedAttributes) {
+  Row _buildSize(ThemeData _theme, HashMap<ProductAttribute, String> selectedAttributes) {
     String sizeValue = '';
     selectedAttributes?.forEach((attribute, value) {
-      if ( attribute.name == 'Size') sizeValue = value;
+      if (attribute.name == 'Size') sizeValue = value;
     });
-    return sizeValue.isNotEmpty?
-      Row(
-        children: <Widget>[
-          Text('Size:', style: _theme.textTheme.body1.copyWith()),
-          Padding(
-            padding: EdgeInsets.only(left: AppSizes.linePadding),
-          ),
-          Text(sizeValue,
-              style: _theme.textTheme.body1.copyWith(color: AppColors.black))
-        ],
-      )
-      : Row();
+    return sizeValue.isNotEmpty
+        ? Row(
+            children: <Widget>[
+              Text('Size:', style: _theme.textTheme.bodyText1.copyWith()),
+              Padding(
+                padding: EdgeInsets.only(left: AppSizes.linePadding),
+              ),
+              Text(sizeValue, style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
+            ],
+          )
+        : Row();
   }
 }

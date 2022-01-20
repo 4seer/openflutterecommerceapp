@@ -37,7 +37,7 @@ class _CartViewState extends State<CartView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.display1
+                    style: _theme.textTheme.headline4
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -61,7 +61,7 @@ class _CartViewState extends State<CartView> {
                         child: RichText(
                           text: TextSpan(
                               text: state.currentShippingAddress.toString(),
-                              style: _theme.textTheme.display3
+                              style: _theme.textTheme.headline2
                                   .copyWith(color: _theme.primaryColor)),
                           maxLines: 2,
                         )),

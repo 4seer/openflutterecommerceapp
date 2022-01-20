@@ -25,9 +25,7 @@ class _Success1ViewState extends State<Success1View> {
     return Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSizes.imageRadius),
-            image: DecorationImage(
-                fit: BoxFit.fitHeight,
-                image: AssetImage('assets/images/checkout/success.png'))),
+            image: DecorationImage(fit: BoxFit.fitHeight, image: AssetImage('assets/images/checkout/success.png'))),
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding * 3),
             child: Column(
@@ -39,13 +37,11 @@ class _Success1ViewState extends State<Success1View> {
                 ),
                 Padding(
                     padding: EdgeInsets.all(AppSizes.sidePadding),
-                    child: Text(
-                        'Your order will be delivered soon. Thank you for choosing our app!',
-                        style: _theme.textTheme.display1)),
+                    child: Text('Your order will be delivered soon. Thank you for choosing our app!',
+                        style: _theme.textTheme.headline4)),
                 OpenFlutterButton(
                   title: 'Continue shopping',
-                  onPressed: (() =>
-                      {widget.changeView(changeType: ViewChangeType.Forward)}),
+                  onPressed: (() => {widget.changeView(changeType: ViewChangeType.Forward)}),
                 ),
               ],
             )));

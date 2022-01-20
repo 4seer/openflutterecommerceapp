@@ -63,7 +63,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.display1
+                    style: _theme.textTheme.headline4
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -276,11 +276,11 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             children: <Widget>[
               Text(
                 widget.product.title,
-                style: theme.textTheme.title,
+                style: theme.textTheme.headline6,
               ),
               Text(
                 '\$' + widget.product.price.toString(),
-                style: theme.textTheme.title,
+                style: theme.textTheme.headline6,
               )
             ],
           ),
@@ -288,7 +288,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               ? Container()
               : Text(
                   widget.category.name,
-                  style: theme.textTheme.body1,
+                  style: theme.textTheme.bodyText1,
                 ),
           SizedBox(
             height: 5,
