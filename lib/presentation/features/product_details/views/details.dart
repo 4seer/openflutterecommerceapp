@@ -30,8 +30,8 @@ class ProductDetailsView extends StatefulWidget {
       @required this.similarProducts,
       this.category,
       this.hasReviews = false})
-      : assert(product!=null),
-       super(key: key);
+      : assert(product != null),
+        super(key: key);
 
   @override
   _ProductDetailsViewState createState() => _ProductDetailsViewState();
@@ -44,7 +44,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   @override
   void initState() {
-    favorite = widget.product?.isFavorite??false;
+    favorite = widget.product?.isFavorite ?? false;
     super.initState();
   }
 
@@ -57,7 +57,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     var deviceHeight = MediaQuery.of(context).size.height;
     bloc = BlocProvider.of<ProductBloc>(context);
     return BlocListener(
-        cubit: bloc,
+        bloc: bloc,
         listener: (context, state) {
           if (state is ProductErrorState) {
             return Container(
@@ -69,7 +69,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
           return Container();
         },
         child: BlocBuilder(
-            cubit: bloc,
+            bloc: bloc,
             builder: (BuildContext context, ProductState state) {
               if (state is ProductLoadedState) {
                 return SingleChildScrollView(
@@ -84,11 +84,10 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           height: deviceHeight * 0.52,
                           child: ListView.builder(
                             itemBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.only(right: AppSizes.sidePadding),
-                              child: Image.network(
-                                state.product.images[index].address
-                              )
-                            ),
+                                padding: EdgeInsets.only(
+                                    right: AppSizes.sidePadding),
+                                child: Image.network(
+                                    state.product.images[index].address)),
                             scrollDirection: Axis.horizontal,
                             itemCount: state.product.images.length,
                           ),
@@ -99,22 +98,24 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
-                              children: 
-                                 (state.product.selectableAttributes != null ?
-                                   state.product.selectableAttributes
-                                      .map((value) => selectionOutlineButton(
-                                          deviceWidth,
-                                          value,
-                                          state.productAttributes.selectedAttributes[value]))
-                                      .toList() : List<Widget>()) +
+                              children: (state.product.selectableAttributes !=
+                                          null
+                                      ? state.product.selectableAttributes
+                                          .map((value) =>
+                                              selectionOutlineButton(
+                                                  deviceWidth,
+                                                  value,
+                                                  state.productAttributes
+                                                          .selectedAttributes[
+                                                      value]))
+                                          .toList()
+                                      : List<Widget>()) +
                                   [
                                     OpenFlutterFavouriteButton(
                                       favourite: favorite,
-                                      setFavourite: () => {
-                                        setFavourite(bloc)
-                                      },
+                                      setFavourite: () => {setFavourite(bloc)},
                                     )
-                                  ]) ,
+                                  ]),
                         ),
                         productDetails(_theme),
                         //Function call for Product detail widget
@@ -181,14 +182,12 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         OpenFlutterProductListView(
                           width: deviceWidth,
                           products: widget.similarProducts,
-                          onFavoritesTap: ( (Product product) => {
-                            BlocProvider.of<HomeBloc>(context).add(
-                              HomeAddToFavoriteEvent(
-                                isFavorite: !product.isFavorite,
-                                product: product
-                              )
-                            )
-                          }),
+                          onFavoritesTap: ((Product product) => {
+                                BlocProvider.of<HomeBloc>(context).add(
+                                    HomeAddToFavoriteEvent(
+                                        isFavorite: !product.isFavorite,
+                                        product: product))
+                              }),
                         )
                       ],
                     ),
@@ -199,11 +198,10 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             }));
   }
 
-  void setFavourite(
-    ProductBloc bloc
-  ) {
+  void setFavourite(ProductBloc bloc) {
     if (!favorite) {
-      bloc.add(ProductAddToFavoritesEvent()); //TODO ask for real parameters if required
+      bloc.add(
+          ProductAddToFavoritesEvent()); //TODO ask for real parameters if required
     } else {
       bloc.add(ProductRemoveFromFavoritesEvent());
     }
@@ -213,38 +211,32 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   }
 
   void _showSelectAttributeBottomSheet(
-      BuildContext context, 
-      ProductAttribute attribute,
+      BuildContext context, ProductAttribute attribute,
       {Function onSelect, String selectedValue}) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(34), topRight: Radius.circular(34)),
+              topLeft: Radius.circular(34), topRight: Radius.circular(34)),
         ),
         builder: (BuildContext context) => AttributeBottomSheet(
-          productAttribute: attribute,
-          selectedValue: selectedValue,
-          onValueSelect: ((String value, ProductAttribute productAttribute)=>
-            {
-              bloc..add(
-                ProductSetAttributeEvent(
-                  value, productAttribute)),
-              Navigator.pop(context),
-              onSelect()
-            }
-          ) 
-        ));
+            productAttribute: attribute,
+            selectedValue: selectedValue,
+            onValueSelect: ((String value, ProductAttribute productAttribute) =>
+                {
+                  bloc..add(ProductSetAttributeEvent(value, productAttribute)),
+                  Navigator.pop(context),
+                  onSelect()
+                })));
   } //modelBottomSheet for selecting size
 
   Widget selectionOutlineButton(var deviceWidth, ProductAttribute attribute,
       String alreadySelectedValue) {
     //select size and select color widget
     return OutlineButton(
-      onPressed: () => _showSelectAttributeBottomSheet(
-          context, attribute, 
-        selectedValue: alreadySelectedValue),
+      onPressed: () => _showSelectAttributeBottomSheet(context, attribute,
+          selectedValue: alreadySelectedValue),
       child: Container(
         margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
         child: Row(
@@ -253,9 +245,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             Text(
               alreadySelectedValue ?? attribute.name,
               style: TextStyle(
-                fontSize: 14,
-                color: AppColors.black,
-                fontWeight: FontWeight.w300),
+                  fontSize: 14,
+                  color: AppColors.black,
+                  fontWeight: FontWeight.w300),
             ),
             Icon(Icons.keyboard_arrow_down)
           ],
@@ -268,7 +260,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
       highlightColor: Colors.white,
       hoverColor: AppColors.red,
       shape:
-        ContinuousRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          ContinuousRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
     );
   }
 
@@ -336,15 +328,17 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     } else {
       for (int i = 0; i < state.product.selectableAttributes.length; i++) {
         final attribute = state.product.selectableAttributes[i];
-        if (!state.productAttributes.selectedAttributes.containsKey(attribute)) {
+        if (!state.productAttributes.selectedAttributes
+            .containsKey(attribute)) {
           await _showSelectAttributeBottomSheet(context, attribute,
-            onSelect: i == 0 ?
-            (() => {
-              BlocProvider.of<ProductBloc>(context).add(ProductAddToCartEvent()),
-              Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart)
-            })
-            : null
-          );
+              onSelect: i == 0
+                  ? (() => {
+                        BlocProvider.of<ProductBloc>(context)
+                            .add(ProductAddToCartEvent()),
+                        Navigator.pushNamed(
+                            context, OpenFlutterEcommerceRoutes.cart)
+                      })
+                  : null);
         }
       }
     }

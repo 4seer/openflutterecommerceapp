@@ -57,7 +57,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
     var width = MediaQuery.of(context).size.width;
 
     return BlocListener(
-        cubit: bloc,
+        bloc: bloc,
         listener: (BuildContext context, CheckoutState state) {
           if (state is CheckoutErrorState) {
             return Container(
@@ -69,7 +69,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
           return Container();
         },
         child: BlocBuilder(
-            cubit: bloc,
+            bloc: bloc,
             builder: (BuildContext context, CheckoutState state) {
               var currentCardId = 0;
               var showAddNewCardForm = false;

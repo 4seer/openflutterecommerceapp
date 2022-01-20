@@ -15,7 +15,7 @@ class NetworkRequest {
 
   final http.Client client;
   final RequestType type;
-  final String address;
+  final Uri address;
   final Map<String, dynamic> body;
   Map<String, String> headers;
   final List<int> listBody;
@@ -97,8 +97,8 @@ class NetworkRequest {
       parameters.add('order=${sortRules.jsonOrder}');
     }
     //TODO add filter rules here
-    final serverAddress =
-        ServerAddresses.serverAddress + '?' + parameters.join('&');
+    Uri serverAddress =
+        Uri(path: ServerAddresses.serverAddress + '?' + parameters.join('&'));
     return NetworkRequest(
       RequestType.get,
       serverAddress,
