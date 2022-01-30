@@ -8,3 +8,6 @@ analyzer:
     null_aware_in_logical_operator: ignore
     null_aware_in_condition: ignore
     deprecated_member_use: ignore
+    await_only_futures: ignore 
+    avoid_single_cascade_in_expression_statements: ignore
+    sort_child_properties_last: ignore
