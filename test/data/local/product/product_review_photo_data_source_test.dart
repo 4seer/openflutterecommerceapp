@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test ProductReviewPhoto Data Source', () {
-    ProductReviewPhotoDataSource dataSource;
+    late ProductReviewPhotoDataSource dataSource;
 
     setUp(() async {
       dataSource = ProductReviewPhotoDataSource();

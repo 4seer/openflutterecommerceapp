@@ -1,6 +1,4 @@
 
-
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openflutterecommerce/data/repositories/abstract/category_repository.dart';
@@ -16,8 +14,8 @@ final sl = GetIt.instance;
 
 void setupLocator() {
   sl.allowReassignment = true;
-  
-  MockWoocommerceWrapper woocommerce = MockWoocommerceWrapper();
+
+  late MockWoocommerceWrapper woocommerce = MockWoocommerceWrapper();
 
   sl.registerLazySingleton<MockWoocommerceWrapper>(
     () => woocommerce,
@@ -35,5 +33,5 @@ void setupLocator() {
     () => RemoteProductRepository(woocommerce: sl()),
   );
   
-  sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl(DataConnectionChecker()));
+  sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl());
 }

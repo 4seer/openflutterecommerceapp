@@ -15,9 +15,9 @@ class MockWoocommerceWrapper extends Mock
 class MockNetworkStatus extends Mock implements NetworkStatus {}
 
 void main() {
-  MockWoocommerceWrapper woocommerce;
-  MockNetworkStatus mockNetworkStatus;
-  RemoteCategoryRepository remoteCategoryRepository;
+  late MockWoocommerceWrapper woocommerce;
+  late MockNetworkStatus mockNetworkStatus;
+  late RemoteCategoryRepository remoteCategoryRepository;
 
   setUp(() {
     woocommerce = MockWoocommerceWrapper();

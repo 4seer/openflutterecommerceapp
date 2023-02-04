@@ -40,8 +40,7 @@ class RemoteProductRepository extends ProductRepository {
       int pageSize = AppConsts.page_size,
       int categoryId = 0,
       bool isFavorite = false,
-      SortRules sortRules = const SortRules(),
-      required FilterRules filterRules}) async {
+      SortRules sortRules = const SortRules(), FilterRules? filterRules}) async {
     // TODO: implement getProducts
     try
     {

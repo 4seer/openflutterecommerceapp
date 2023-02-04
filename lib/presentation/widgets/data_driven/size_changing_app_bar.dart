@@ -9,17 +9,15 @@ import 'package:openflutterecommerce/presentation/widgets/independent/view_optio
 
 class SizeChangingAppBar extends StatelessWidget {
   final String title;
-  final FilterRules filterRules;
-  final SortRules sortRules;
+  final FilterRules? filterRules;
+  final SortRules? sortRules;
   final bool isListView;
   final Function(FilterRules) onFilterRulesChanged;
   final Function(SortRules) onSortRulesChanged;
   final VoidCallback onViewChanged;
 
   const SizeChangingAppBar(
-      {required this.title,
-      required this.filterRules,
-      required this.sortRules,
+      {required this.title, this.filterRules, this.sortRules,
       this.isListView = true,
       required this.onFilterRulesChanged,
       required this.onSortRulesChanged,

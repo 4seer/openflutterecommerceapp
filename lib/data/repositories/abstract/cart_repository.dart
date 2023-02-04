@@ -24,7 +24,7 @@ abstract class CartRepository {
   Future<Promo> getAppliedPromo();
 
   ///applies promo to cart
-  Future setPromo(Promo promo);
+  Future setPromo(Promo? promo);
 
   //get cart total price
   double getTotalPrice();

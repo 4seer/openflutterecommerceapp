@@ -46,9 +46,9 @@ class GetCartProductsUseCaseImpl implements GetCartProductsUseCase {
 }
 
 class GetCartProductParams {
-  final Promo appliedPromo;
+  final Promo? appliedPromo;
 
-  GetCartProductParams({required this.appliedPromo});
+  GetCartProductParams({this.appliedPromo});
 }
 
 class GetCartProductsException implements Exception {}

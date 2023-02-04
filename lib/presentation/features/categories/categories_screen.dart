@@ -27,7 +27,7 @@ class CategoriesParameters {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as CategoriesParameters;
+    final args = ModalRoute.of(context)?.settings.arguments as CategoriesParameters?;
 
     print('widget parameters at categories screen ${args}');
     return SafeArea(

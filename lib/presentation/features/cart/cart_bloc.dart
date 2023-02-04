@@ -30,7 +30,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Stream<CartState> mapEventToState(CartEvent event) async* {
     if (event is CartLoadedEvent) {
       if (state is CartInitialState) {
-        final cartResults = await getCartProductsUseCase.execute(GetCartProductParams(appliedPromo: null!));
+        final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
         var promos = await getPromosUseCase.execute(GetPromosParams());
         
         yield CartLoadedState(

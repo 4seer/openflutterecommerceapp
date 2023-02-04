@@ -93,16 +93,16 @@ class Product extends Equatable {
       }
       List<ProductCategory> categories = [];
       if ( entity.categories.isNotEmpty ){
-        entity.categories.forEach((category) => categories.add(ProductCategory(category.id, name: category.title, image: CommerceImage.placeHolder())));
+        entity.categories.forEach((category) => categories.add(ProductCategory(category.id, name: category.title!, image: CommerceImage.placeHolder())));
       }
       List<HashTag> hashTags = [];
-      if ( entity.hashTags.isNotEmpty ){
-        entity.hashTags.forEach((hashTag) => hashTags.add(HashTag(id: hashTag.id, title: hashTag.title)));
+      if ( entity.hashTags!.isNotEmpty == true ){
+        entity.hashTags!.forEach((hashTag) => hashTags.add(HashTag(id: hashTag.id, title: hashTag.title)));
       }
       return Product(
         entity.id, 
         title: entity.title,
-        subTitle: entity.subTitle,
+        subTitle: entity.subTitle!,
         shortDescription: entity.description,
         description: entity.description,
         price: entity.price ?? 0,
@@ -117,7 +117,7 @@ class Product extends Equatable {
         images: images,
         //TODO: add selectable attributes selectableAttributes: [],
         isFavorite: entity.isFavourite,
-        selectableAttributes: entity.selectableAttributes, created: DateTime.now(), properties: {}
+        selectableAttributes: entity.selectableAttributes!, created: DateTime.now(), properties: {}
       );
     } else {
       throw EntityModelMapperException(message: 'Entity should be of type ProductEntity');

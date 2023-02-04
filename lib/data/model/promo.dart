@@ -28,7 +28,7 @@ class Promo extends Equatable {
         promoCode: entity.promoCode,
         discount: entity.discountPercent,
         textColor: Colors.white,
-        daysLeft: entity.dateExpires.difference(DateTime.now()).inDays,
+        daysLeft: entity.dateExpires!.difference(DateTime.now()).inDays,
         image: ""
       );
     } else {

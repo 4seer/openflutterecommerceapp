@@ -6,14 +6,16 @@ import 'package:openflutterecommerce/data/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/model/product.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/product_remote_repository.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
+import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
-class MockWoocommerceWrapper extends Mock implements WoocommercWrapperAbstract { }
+class MockWoocommerceWrapper extends Mock implements WoocommercWrapperAbstract {
+}
 
 void main() {
-  MockWoocommerceWrapper woocommerce;
-  RemoteProductRepository remoteProductRepository;
+  late MockWoocommerceWrapper woocommerce;
+  late RemoteProductRepository remoteProductRepository;
 
   setUp(() {
     woocommerce = MockWoocommerceWrapper();
@@ -24,9 +26,9 @@ void main() {
       'should return list of categories when findProductsByFilterUseCase.execute is successful',
       () async {
         // arrange
-        when(woocommerce.getProductList(any))
-          .thenAnswer((_) async => json.decode(fixture('woocommerce/products.json'))
-        );
+        when(woocommerce.getProductList(ProductsByFilterParams(categoryId: 0)))
+            .thenAnswer(
+                (_) async => json.decode(fixture('woocommerce/products.json')));
         // act
         List<Product> products =
             await remoteProductRepository.getProducts(categoryId: 1);
@@ -41,4 +43,3 @@ void main() {
     );
   });
 }
-    

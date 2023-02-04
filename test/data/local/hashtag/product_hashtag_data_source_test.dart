@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test ProductHashTag Data Source', () {
-    ProductHashTagDataSource dataSource;
+    late ProductHashTagDataSource dataSource;
 
     setUp(() async {
       dataSource = ProductHashTagDataSource();

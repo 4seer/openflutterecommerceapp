@@ -12,9 +12,9 @@ import '../use_case_test_include.dart';
 void main() {
 
   setupLocator();
-  MockWoocommerceWrapper woocommerce;
-  FindCategoriesByFilterUseCase findCategoriesByFilterUseCase;
-  CategoriesByFilterParams categoriesByFilterParams;
+  late MockWoocommerceWrapper woocommerce;
+  late FindCategoriesByFilterUseCase findCategoriesByFilterUseCase;
+  late CategoriesByFilterParams categoriesByFilterParams;
   
   setUp(() {
     woocommerce = sl();

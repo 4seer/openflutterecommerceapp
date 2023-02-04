@@ -1,23 +1,16 @@
 import 'package:openflutterecommerce/domain/entities/entity.dart';
 
 class ProductCategoryEntity extends Entity<int> {
-  final String title;
-  final String description;
-  final String image;
-  final String thumb;
-  final int parentId;
-  final int orderNumber;
-  final int count;
+  final String? title;
+  final String? description;
+  final String? image;
+  final String? thumb;
+  final int? parentId;
+  final int? orderNumber;
+  final int? count;
 
   ProductCategoryEntity(
-    {required int id,
-    required this.title,
-    required this.description,
-    required this.image,
-    required this.thumb,
-    required this.parentId,
-    required this.orderNumber,
-    required this.count}) : super(id);
+    {required int id, this.title, this.description, this.image, this.thumb, this.parentId, this.orderNumber, this.count}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -36,12 +29,12 @@ class ProductCategoryEntity extends Entity<int> {
   @override
   List<Object> get props => [
     id, 
-    title, 
-    description, 
-    image, 
-    thumb, 
-    parentId,
-    orderNumber,
-    count
+    title!,
+    description!,
+    image!,
+    thumb!,
+    parentId!,
+    orderNumber!,
+    count!
   ];
 }

@@ -7,7 +7,7 @@ class PromoCodeEntity extends Entity<int> {
   final double discountPercent;
   final bool belongsToUser;
   final bool wasUsed;
-  final DateTime dateExpires;
+  final DateTime? dateExpires;
 
   PromoCodeEntity(
     {required int id,
@@ -16,8 +16,7 @@ class PromoCodeEntity extends Entity<int> {
     required this.promoCode,
     required this.discountPercent,
     required this.belongsToUser,
-    required this.wasUsed,
-    required this.dateExpires}) : super(id);
+    required this.wasUsed, this.dateExpires}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -42,6 +41,6 @@ class PromoCodeEntity extends Entity<int> {
     discountPercent, 
     belongsToUser, 
     wasUsed,
-    dateExpires
+    dateExpires!
   ];
 }

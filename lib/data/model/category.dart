@@ -35,11 +35,11 @@ class ProductCategory extends Equatable {
       return ProductCategory(
         entity.id, 
         parentId: entity.parentId,
-        name: entity.title,
+        name: entity.title!,
         description: entity.description,
         image: CommerceImage(
           0,//TODO: remove id from CommerceImage
-          entity.image,
+          entity.image!,
           ''
         )
       );

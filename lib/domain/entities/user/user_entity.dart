@@ -6,7 +6,7 @@ class UserEntity extends Entity<int> {
   final String email;
   final String password;
   final String birthDate;
-  final String token;
+  final String? token;
   final bool salesNotification;
   final bool newArrivalsNotification;
   final bool deliveryStatusChanges;
@@ -17,8 +17,7 @@ class UserEntity extends Entity<int> {
     required this.avatar,
     required this.email,
     required this.password,
-    required this.birthDate,
-    required this.token,
+    required this.birthDate, this.token,
     required this.salesNotification,
     required this.newArrivalsNotification,
     required this.deliveryStatusChanges}) : super(id);
@@ -47,7 +46,7 @@ class UserEntity extends Entity<int> {
     email,
     password,
     birthDate,
-    token,
+    token!,
     salesNotification,
     newArrivalsNotification,
     deliveryStatusChanges

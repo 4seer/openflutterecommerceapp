@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test CategoryHashTag Data Source', () {
-    CategoryHashTagDataSource dataSource;
+    late CategoryHashTagDataSource dataSource;
 
     setUp(() async {
       dataSource = CategoryHashTagDataSource();

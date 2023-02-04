@@ -6,7 +6,7 @@ class ShippingAddressEntity extends Entity<int> {
   final String city;
   final String country;
   final String postal;
-  final bool isDefault;
+  final bool? isDefault;
 
   ShippingAddressEntity(
     {required int id,
@@ -14,8 +14,7 @@ class ShippingAddressEntity extends Entity<int> {
     required this.address,
     required this.city,
     required this.country,
-    required this.postal,
-    required this.isDefault}) : super(id);
+    required this.postal, this.isDefault}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -38,6 +37,6 @@ class ShippingAddressEntity extends Entity<int> {
     city, 
     country, 
     postal, 
-    isDefault
+    isDefault!
   ];
 }

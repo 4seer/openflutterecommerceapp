@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test DeliveryMethod Data Source', () {
-    DeliveryMethodDataSource dataSource;
+    late DeliveryMethodDataSource dataSource;
 
     setUp(() async {
       dataSource = DeliveryMethodDataSource();

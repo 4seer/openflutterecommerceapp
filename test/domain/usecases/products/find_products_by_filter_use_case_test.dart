@@ -10,8 +10,8 @@ import '../../../fixtures/fixture_reader.dart';
 import '../use_case_test_include.dart';
 
 void main() {
-  FindProductsByFilterUseCase findProductsByFilterUseCase;
-  ProductsByFilterParams productsByFilterParams;
+  late FindProductsByFilterUseCase findProductsByFilterUseCase;
+  late ProductsByFilterParams productsByFilterParams;
   
   setupLocator();
   
@@ -29,7 +29,7 @@ void main() {
       'should return list of categories when findProductsByFilterUseCase.execute is successful',
       () async {
         // arrange
-        when(woocommerce.getProductList(any))
+        when(woocommerce.getProductList(ProductsByFilterParams(categoryId: 0)))
           .thenAnswer((_) async => json.decode(fixture('woocommerce/products.json'))
         );
         // act
@@ -43,7 +43,7 @@ void main() {
       'should return server failure when findProductsByFilterUseCase.execute is unsuccessful',
       () async {
         // arrange
-        when(woocommerce.getProductList(any))
+        when(woocommerce.getProductList(ProductsByFilterParams(categoryId: 0)))
             .thenThrow(HttpRequestException());
         // act
         final productsData = await findProductsByFilterUseCase.execute(productsByFilterParams);

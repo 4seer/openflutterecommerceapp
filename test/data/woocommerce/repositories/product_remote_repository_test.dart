@@ -6,6 +6,7 @@ import 'package:openflutterecommerce/data/error/exceptions.dart';
 import 'package:openflutterecommerce/data/network/network_status.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/product_remote_repository.dart';
 import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
+import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
@@ -14,9 +15,9 @@ class MockWoocommerceWrapper extends Mock implements WoocommercWrapperAbstract {
 class MockNetworkStatus extends Mock implements NetworkStatus {}
 
 void main() {
-  MockWoocommerceWrapper woocommerce;
-  MockNetworkStatus mockNetworkStatus;
-  RemoteProductRepository remoteProductRepository;
+  late MockWoocommerceWrapper woocommerce;
+  late MockNetworkStatus mockNetworkStatus;
+  late RemoteProductRepository remoteProductRepository;
 
   setUp(() {
     woocommerce = MockWoocommerceWrapper();
@@ -40,7 +41,7 @@ void main() {
         'should return list of products when getProducts is successful',
         () async {
           // arrange
-          when(woocommerce.getProductList(any))
+          when(woocommerce.getProductList(ProductsByFilterParams(categoryId: 0)))
             .thenAnswer((_) async => json.decode(fixture('woocommerce/products.json'))
           );
           // act
@@ -54,7 +55,7 @@ void main() {
         'should return server failure when getProducts is unsuccessful',
         () async {
           // arrange
-          when(woocommerce.getProductList(any))
+          when(woocommerce.getProductList(ProductsByFilterParams(categoryId: 0)))
               .thenThrow(HttpRequestException());
           // act
           // assert
