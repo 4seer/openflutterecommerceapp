@@ -45,8 +45,8 @@ class CartRepositoryImpl extends CartRepository{
   }
 
   @override
-  Future setPromo(Promo promo) async {
-    cartProductDataStorage.appliedPromo = promo;
+  Future setPromo(Promo? promo) async {
+    cartProductDataStorage.appliedPromo = promo!;
   }
 
   @override
@@ -72,5 +72,5 @@ class CartRepositoryImpl extends CartRepository{
 
 class CartProductDataStorage {
   List<CartItem> items = [];
-  Promo appliedPromo;
+  late Promo appliedPromo;
 }

@@ -11,13 +11,12 @@ class OpenFlutterCartTile extends StatefulWidget {
   final bool orderComplete;
 
   const OpenFlutterCartTile(
-      {Key key,
-      @required this.item,
-      @required this.onChangeQuantity,
-      @required this.onAddToFav,
-      @required this.onRemoveFromCart,
-      this.orderComplete = false})
-      : super(key: key);
+      {
+      required this.item,
+      required this.onChangeQuantity,
+      required this.onAddToFav,
+      required this.onRemoveFromCart,
+      this.orderComplete = false});
 
   @override
   _OpenFlutterCartTileState createState() => _OpenFlutterCartTileState();
@@ -60,7 +59,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                             width: width - 173,
                             child: Text(widget.item.product.title,
                                 style: _theme.textTheme.headline4
-                                    .copyWith(fontWeight: FontWeight.bold, color: _theme.primaryColor)),
+                                    ?.copyWith(fontWeight: FontWeight.bold, color: _theme.primaryColor)),
                           ),
                           !widget.orderComplete
                               ? InkWell(
@@ -140,7 +139,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                   child: Row(children: <Widget>[
                                     Text('Units: ', style: _theme.textTheme.bodyText1),
                                     Text(widget.item.productQuantity.quantity.toString(),
-                                        style: _theme.textTheme.bodyText1.copyWith(color: _theme.primaryColor)),
+                                        style: _theme.textTheme.bodyText1?.copyWith(color: _theme.primaryColor)),
                                   ])),
                           Container(
                             width: width - 280,

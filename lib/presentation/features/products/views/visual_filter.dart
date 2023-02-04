@@ -12,9 +12,7 @@ class VisualFilter extends StatelessWidget {
   const VisualFilter(
     this.hashTags,
     this.selecteHashTags,
-    this.onFilterChanged, {
-    Key key,
-  }) : super(key: key);
+    this.onFilterChanged);
 
   @override
   Widget build(BuildContext context) {

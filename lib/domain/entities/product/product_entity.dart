@@ -6,13 +6,13 @@ import 'package:openflutterecommerce/domain/entities/product/product_category_en
 
 class ProductEntity extends Entity<int> {
   final String title;
-  final String subTitle;
+  final String? subTitle;
   final List<String> images;
   final String thumb;
   final double price;
   final double discountPercent;
   final List<ProductCategoryEntity> categories;
-  final List<HashTagEntity> hashTags;
+  final List<HashTagEntity>? hashTags;
   final int amount;
   final String description;
   final bool isFavourite;
@@ -22,22 +22,18 @@ class ProductEntity extends Entity<int> {
   final int rating3Count;
   final int rating4Count;
   final int rating5Count;
-  final List<ProductAttribute> selectableAttributes;
+  final List<ProductAttribute>? selectableAttributes;
 
   ProductEntity(
-    {int id,
-    this.title,
-    this.subTitle,
-    this.images,
-    this.thumb,
-    double price,
-    double discountPercent,
-    List<ProductCategoryEntity> categories,
-    List<HashTagEntity> hashTags,
-    this.amount,
-    this.description,
-    this.selectableAttributes,
-    bool isFavourite,
+    {required int id,
+    required this.title, this.subTitle,
+    required this.images,
+    required this.thumb,
+    required double price,
+    required double discountPercent, List<ProductCategoryEntity>? categories, List<HashTagEntity>? hashTags,
+    required this.amount,
+    required this.description, this.selectableAttributes,
+    required bool isFavourite,
     rating,
     rating1Count,
     rating2Count,

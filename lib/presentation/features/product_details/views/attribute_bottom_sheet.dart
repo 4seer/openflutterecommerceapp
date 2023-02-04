@@ -8,19 +8,20 @@ class AttributeBottomSheet extends StatelessWidget {
   final Function(String, ProductAttribute) onValueSelect;
 
   const AttributeBottomSheet(
-    {Key key, this.productAttribute, this.selectedValue, this.onValueSelect})
-    : super(key: key);
+      {required this.productAttribute,
+      required this.selectedValue,
+      required this.onValueSelect});
 
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
-      heightFactor: 0.12 + productAttribute.options.length/3*0.1,
+      heightFactor: 0.12 + productAttribute.options.length / 3 * 0.1,
       child: Container(
         padding: AppSizes.bottomSheetPadding,
         decoration: BoxDecoration(
             color: AppColors.background,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(34), topRight: Radius.circular(34)),
+                topLeft: Radius.circular(34), topRight: Radius.circular(34)),
             boxShadow: []),
         child: SingleChildScrollView(
           child: Column(
@@ -40,9 +41,9 @@ class AttributeBottomSheet extends StatelessWidget {
               Text(
                 'Select ${productAttribute.name}',
                 style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+                    color: AppColors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 18,
@@ -53,29 +54,27 @@ class AttributeBottomSheet extends StatelessWidget {
                   crossAxisCount: 3,
                   childAspectRatio: 100 / 60,
                   children: productAttribute.options
-                    .map((String value) => 
-                      InkWell(
-                        onTap: () => {
-                          onValueSelect(value, productAttribute)
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: selectedValue == value
-                                ? AppColors.red
-                                : AppColors.darkGray),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15.0))),
-                          child: Center(
-                            child: Text(
-                              value,
-                              style: TextStyle(fontSize: 15.0),
+                      .map((String value) => InkWell(
+                            onTap: () =>
+                                {onValueSelect(value, productAttribute)},
+                            child: Container(
+                              margin: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: selectedValue == value
+                                          ? AppColors.red
+                                          : AppColors.darkGray),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.0))),
+                              child: Center(
+                                child: Text(
+                                  value,
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      )
-                    ).toList(),
+                          ))
+                      .toList(),
                 ),
               ),
               SizedBox(

@@ -9,7 +9,7 @@ class HashTag extends Equatable {
   final int id;
   final String title;
 
-  HashTag({@required this.id, @required this.title});
+  HashTag({required this.id, required this.title});
 
   @override
   List<Object> get props => [id, title];

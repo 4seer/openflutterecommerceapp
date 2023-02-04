@@ -58,93 +58,93 @@ class OpenFlutterEcommerceTheme {
           iconTheme: IconThemeData(color: AppColors.black),
           textTheme: theme.textTheme.copyWith(
               caption: TextStyle(
-            color: AppColors.black,
-            fontSize: 18,
-            fontFamily: 'Metropolis',
-            fontWeight: FontWeight.w400,
-          ))),
+                color: AppColors.black,
+                fontSize: 18,
+                fontFamily: 'Metropolis',
+                fontWeight: FontWeight.w400,
+              ))),
       textTheme: theme.textTheme
           .copyWith(
-            //over image white text
-            headline5: theme.textTheme.headline5.copyWith(
-              fontSize: 48,
-              color: AppColors.white,
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w900,
-            ),
-            headline6: theme.textTheme.headline6.copyWith(
-              fontSize: 24,
-              color: AppColors.black,
-              fontWeight: FontWeight.w900,
-              fontFamily: 'Metropolis',
-            ), //
+        //over image white text
+        headline5: theme.textTheme.headline5?.copyWith(
+          fontSize: 48,
+          color: AppColors.white,
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w900,
+        ),
+        headline6: theme.textTheme.headline6?.copyWith(
+          fontSize: 24,
+          color: AppColors.black,
+          fontWeight: FontWeight.w900,
+          fontFamily: 'Metropolis',
+        ), //
 
-            //product title
-            headline4: theme.textTheme.headline4.copyWith(
-              color: AppColors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              fontFamily: 'Metropolis',
-            ),
+        //product title
+        headline4: theme.textTheme.headline4?.copyWith(
+          color: AppColors.black,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Metropolis',
+        ),
 
-            headline3: theme.textTheme.headline3.copyWith(
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w400,
-            ),
-            //product price
-            headline2: theme.textTheme.headline2.copyWith(
-              color: AppColors.lightGray,
-              fontSize: 14,
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w400,
-            ),
-            headline1: theme.textTheme.headline1.copyWith(
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w500,
-            ),
+        headline3: theme.textTheme.headline3?.copyWith(
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w400,
+        ),
+        //product price
+        headline2: theme.textTheme.headline2?.copyWith(
+          color: AppColors.lightGray,
+          fontSize: 14,
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w400,
+        ),
+        headline1: theme.textTheme.headline1?.copyWith(
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w500,
+        ),
 
-            subtitle2: theme.textTheme.subtitle2.copyWith(
-              fontSize: 18,
-              color: AppColors.black,
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w400,
-            ),
+        subtitle2: theme.textTheme.subtitle2?.copyWith(
+          fontSize: 18,
+          color: AppColors.black,
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w400,
+        ),
 
-            subtitle1: theme.textTheme.subtitle1.copyWith(
-              fontSize: 24,
-              color: AppColors.darkGray,
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w500,
-            ),
-            //red button with white text
-            button: theme.textTheme.button.copyWith(
-              fontSize: 14,
-              color: AppColors.white,
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w500,
-            ),
-            //black caption title
-            caption: theme.textTheme.caption.copyWith(
-              fontSize: 34,
-              color: AppColors.black,
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w700,
-            ),
-            //light gray small text
-            bodyText1: theme.textTheme.bodyText1.copyWith(
-              color: AppColors.lightGray,
-              fontSize: 11,
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w400,
-            ),
-            //view all link
-            bodyText2: theme.textTheme.bodyText2.copyWith(
-              color: AppColors.black,
-              fontSize: 11,
-              fontFamily: 'Metropolis',
-              fontWeight: FontWeight.w400,
-            ),
-          )
+        subtitle1: theme.textTheme.subtitle1?.copyWith(
+          fontSize: 24,
+          color: AppColors.darkGray,
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w500,
+        ),
+        //red button with white text
+        button: theme.textTheme.button?.copyWith(
+          fontSize: 14,
+          color: AppColors.white,
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w500,
+        ),
+        //black caption title
+        caption: theme.textTheme.caption?.copyWith(
+          fontSize: 34,
+          color: AppColors.black,
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w700,
+        ),
+        //light gray small text
+        bodyText1: theme.textTheme.bodyText1?.copyWith(
+          color: AppColors.lightGray,
+          fontSize: 11,
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w400,
+        ),
+        //view all link
+        bodyText2: theme.textTheme.bodyText2?.copyWith(
+          color: AppColors.black,
+          fontSize: 11,
+          fontFamily: 'Metropolis',
+          fontWeight: FontWeight.w400,
+        ),
+      )
           .apply(fontFamily: 'Metropolis'),
       buttonTheme: theme.buttonTheme.copyWith(
         minWidth: 50,

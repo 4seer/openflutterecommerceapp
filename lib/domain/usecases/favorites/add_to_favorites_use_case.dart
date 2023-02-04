@@ -24,7 +24,7 @@ class AddToFavoritesUseCaseImpl implements AddToFavoritesUseCase {
           item.favoriteForm
         )
       );
-      return AddToFavoriteResult(result: true);
+      return AddToFavoriteResult(result: true, exception: null!);
     } catch (e) {
       return AddToFavoriteResult(  
         result: false,
@@ -38,6 +38,6 @@ class AddToFavoritesUseCaseImpl implements AddToFavoritesUseCase {
 class AddProductToCartException implements Exception {}
 
 class AddToFavoriteResult extends UseCaseResult {
-  AddToFavoriteResult({Exception exception, bool result}) 
+  AddToFavoriteResult({required Exception exception, required bool result})
     : super(exception: exception, result: result);
 }

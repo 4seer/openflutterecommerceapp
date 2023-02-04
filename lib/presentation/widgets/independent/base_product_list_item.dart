@@ -2,28 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 
 class BaseProductListItem extends StatelessWidget {
-  final VoidCallback onClick;
+  final VoidCallback? onClick;
   final String inactiveMessage;
   final Widget bottomRoundButton;
-  final ImageProvider image;
+  final ImageProvider? image;
   final WidgetBuilder mainContentBuilder;
-  final String specialMark;
-  final VoidCallback onRemove;
+  final String? specialMark;
+  final VoidCallback? onRemove;
   final double imageHeight;
   final double imageWidth;
 
   const BaseProductListItem(
-      {Key key,
-      this.onClick,
-      this.inactiveMessage,
-      this.bottomRoundButton,
-      this.image,
-      this.mainContentBuilder,
-      this.imageHeight = 125,
-      this.imageWidth = 125,
-      this.specialMark,
-      this.onRemove})
-      : super(key: key);
+      { this.onClick,
+      required this.inactiveMessage,
+      required this.bottomRoundButton, this.image,
+      required this.mainContentBuilder, this.imageHeight = 125, this.imageWidth = 125, this.specialMark, this.onRemove});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +42,10 @@ class BaseProductListItem extends StatelessWidget {
                         width: imageWidth,
                         height: imageHeight,
                         decoration: BoxDecoration(
-                          image: image == null ? null : DecorationImage(image: image, fit: BoxFit.cover),
+                          image: image == null
+                              ? null
+                              : DecorationImage(
+                                  image: image!, fit: BoxFit.cover),
                           color: AppColors.background,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(AppSizes.imageRadius),
@@ -90,14 +86,19 @@ class BaseProductListItem extends StatelessWidget {
                     child: Container(
                         padding: EdgeInsets.all(AppSizes.linePadding * 1.5),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(AppSizes.imageRadius),
-                          color: specialMark == 'New' ? AppColors.red : AppColors.black,
+                          borderRadius:
+                              BorderRadius.circular(AppSizes.imageRadius),
+                          color: specialMark == 'New'
+                              ? AppColors.red
+                              : AppColors.black,
                         ),
-                        child: Text(specialMark,
+                        child: Text(specialMark!,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1
-                                .copyWith(color: AppColors.white, fontWeight: FontWeight.bold))),
+                                ?.copyWith(
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.bold))),
                   ),
             onRemove == null
                 ? Container()

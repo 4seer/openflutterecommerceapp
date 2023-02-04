@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test ShippingAddress Data Source', () {
-    ShippingAddressDataSource dataSource;
+    late ShippingAddressDataSource dataSource;
 
     setUp(() async {
       dataSource = ShippingAddressDataSource();

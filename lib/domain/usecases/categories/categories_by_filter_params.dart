@@ -3,6 +3,6 @@ class CategoriesByFilterParams {
   final int categoryId;
 
   CategoriesByFilterParams({
-    this.categoryId
+    required this.categoryId
   });
 }

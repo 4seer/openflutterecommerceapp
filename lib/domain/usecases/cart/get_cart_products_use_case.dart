@@ -31,14 +31,14 @@ class GetCartProductsUseCaseImpl implements GetCartProductsUseCase {
         totalPrice: cartRepository.getTotalPrice(),
         calculatedPrice: cartRepository.getCalculatedPrice(),
         appliedPromo: await cartRepository.getAppliedPromo(),
-        result: true);
+        result: true, exception: null!);
     } catch (e) {
       return GetCartProductsResult( 
         cartItems: [], 
         totalPrice: 0,
         calculatedPrice: 0,
         result: false,
-        exception: GetCartProductsException()
+        exception: GetCartProductsException(), appliedPromo: null!
       );
     }
   }
@@ -46,7 +46,7 @@ class GetCartProductsUseCaseImpl implements GetCartProductsUseCase {
 }
 
 class GetCartProductParams {
-  final Promo appliedPromo;
+  final Promo? appliedPromo;
 
   GetCartProductParams({this.appliedPromo});
 }
@@ -60,12 +60,12 @@ class GetCartProductsResult extends UseCaseResult {
   final Promo appliedPromo;
 
   GetCartProductsResult({
-    @required this.cartItems, 
-    @required this.totalPrice,
-    @required this.calculatedPrice,
-    this.appliedPromo,
-    Exception exception, 
-    bool result
+    required this.cartItems,
+    required this.totalPrice,
+    required this.calculatedPrice,
+    required this.appliedPromo,
+    required Exception exception,
+    required bool result
   }) 
     : super(exception: exception, result: result);
 }

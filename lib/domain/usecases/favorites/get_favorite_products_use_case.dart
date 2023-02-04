@@ -27,18 +27,18 @@ class GetFavoriteProductsUseCaseImpl implements GetFavoriteProductsUseCase {
         pageIndex: params.pageIndex,
         pageSize: params.pageSize,
         sortRules: params.sortRules,
-        filterRules: params.filterRules,
+        filterRules: params.filterRules!,
       );
 
       return GetFavoriteProductResult(
         products: favoriteProducts,
         filterRules: FilterRules.getFavoriteSelectableAttributes(favoriteProducts),
-        result: true
+        result: true, exception: null!
       );
     } catch (e) {
       return GetFavoriteProductResult(  
         result: false,
-        exception: GetFavoriteProductException()
+        exception: GetFavoriteProductException(), products: [], filterRules: null!
       );
     }
   }
@@ -48,7 +48,7 @@ class GetFavoriteProductParams {
   final int pageIndex;
   final int pageSize;
   final SortRules sortRules;
-  final FilterRules filterRules;
+  final FilterRules? filterRules;
 
   GetFavoriteProductParams(
     {
@@ -65,10 +65,10 @@ class GetFavoriteProductResult extends UseCaseResult {
   final FilterRules filterRules;
 
   GetFavoriteProductResult({
-    this.products, 
-    this.filterRules,
-    Exception exception, 
-    bool result
+    required this.products, 
+    required this.filterRules,
+    required Exception exception, 
+    required bool result
   }) 
   : super(exception: exception, result: result);
 }

@@ -35,12 +35,6 @@ import 'locator.dart' as service_locator;
 
 class SimpleBlocDelegate extends BlocObserver {
   @override
-  void onEvent(Bloc bloc, Object event) {
-    super.onEvent(bloc, event);
-    print(event);
-  }
-
-  @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
     print(transition);
@@ -54,7 +48,7 @@ class SimpleBlocDelegate extends BlocObserver {
 }
 
 void main() async {
-  await service_locator.init();
+  service_locator.init();
 
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',
@@ -178,31 +172,22 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
 
   Route _registerRoutesWithParameters(RouteSettings settings) {
     if (settings.name == OpenFlutterEcommerceRoutes.shop) {
-      final CategoriesParameters args = settings.arguments;
       return MaterialPageRoute(
         builder: (context) {
-          return CategoriesScreen(
-            parameters: args,
-          );
+          return CategoriesScreen();
         },
       );
     } else if (settings.name == OpenFlutterEcommerceRoutes.productList) {
-      final ProductListScreenParameters productListScreenParameters =
-          settings.arguments;
       return MaterialPageRoute(builder: (context) {
-        return ProductsScreen(
-          parameters: productListScreenParameters,
-        );
+        return ProductsScreen();
       });
     } else if (settings.name == OpenFlutterEcommerceRoutes.product) {
-      final ProductDetailsParameters parameters = settings.arguments;
       return MaterialPageRoute(builder: (context) {
-        return ProductDetailsScreen(parameters);
+        return ProductDetailsScreen();
       });
     } else if (settings.name == OpenFlutterEcommerceRoutes.filters) {
-      final FilterRules filterRules = settings.arguments;
       return MaterialPageRoute(builder: (context) {
-        return FiltersScreen(filterRules);
+        return FiltersScreen();
       });
     } else {
       return MaterialPageRoute(

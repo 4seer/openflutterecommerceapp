@@ -5,9 +5,9 @@ class ProductReviewPhotoEntity extends Entity<int> {
   final int reviewId;
 
   ProductReviewPhotoEntity({
-    int id,
-    this.image,
-    this.reviewId,
+    required int id,
+    required this.image,
+    required this.reviewId,
   }) : super(id);
 
   @override

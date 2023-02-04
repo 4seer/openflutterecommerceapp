@@ -1,4 +1,3 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
@@ -38,7 +37,7 @@ final sl = GetIt.instance;
 //Service locator description
 void init() {
   //Singleton for NetworkStatus identification
-  sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl(DataConnectionChecker()));
+  sl.registerLazySingleton<NetworkStatus>(() => NetworkStatusImpl());
 
   //get home page products use case
   sl.registerLazySingleton<GetHomePageProductsUseCase>(() => GetHomePageProductsUseCaseImpl());

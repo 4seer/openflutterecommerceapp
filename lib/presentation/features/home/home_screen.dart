@@ -21,11 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
         child: OpenFlutterScaffold(
       background: null,
-      title: null,
+      title: '',
       body: BlocProvider<HomeBloc>(
           create: (context) {
-            return HomeBloc()
-              ..add(HomeLoadEvent());
+            return HomeBloc()..add(HomeLoadEvent());
           },
           child: HomeWrapper()),
       bottomMenuIndex: 0,
@@ -48,13 +47,14 @@ class _HomeWrapperState extends OpenFlutterWrapperState<HomeWrapper> {
       return getPageView(<Widget>[
         Main1View(
           changeView: changePage,
-          products: state is HomeLoadedState ? state.newProducts : <Product>[],),
+          products: state is HomeLoadedState ? state.newProducts : <Product>[],
+        ),
         Main2View(
-          changeView: changePage,
-          salesProducts:
-            state is HomeLoadedState ? state.salesProducts : <Product>[],
-          newProducts:
-            state is HomeLoadedState ? state.newProducts : <Product>[]),
+            changeView: changePage,
+            salesProducts:
+                state is HomeLoadedState ? state.salesProducts : <Product>[],
+            newProducts:
+                state is HomeLoadedState ? state.newProducts : <Product>[]),
         Main3View(changeView: changePage)
       ]);
     });

@@ -55,7 +55,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         quantity: event.newQuantity
       ));
       }
-      final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
+      final cartResults = await getCartProductsUseCase.execute(GetCartProductParams(appliedPromo: null!));
       yield CartLoadedState(
         cartProducts: cartResults.cartItems, 
         promos: state.promos, 
@@ -66,7 +66,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       var state = this.state as CartLoadedState;
       yield CartLoadingState();
       await removeProductFromCartUseCase.execute(event.item);
-      final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
+      final cartResults = await getCartProductsUseCase.execute(GetCartProductParams(appliedPromo: null!));
       yield CartLoadedState(
         cartProducts: cartResults.cartItems, 
         promos: state.promos, 

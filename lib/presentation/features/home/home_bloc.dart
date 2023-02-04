@@ -33,14 +33,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         yield state;
       }
     } else if (event is HomeAddToFavoriteEvent) {
-      if (event.isFavorite) {
+      if (event.isFavorite!) {
         await addToFavoritesUseCase.execute(
-          FavoriteProduct(event.product, null)
+          FavoriteProduct(event.product!, null!)
         );
       } else {
         await removeFromFavoritesUseCase.execute(
           RemoveFromFavoritesParams(
-            FavoriteProduct(event.product, null)
+            FavoriteProduct(event.product!, null!)
           )
         );
       }

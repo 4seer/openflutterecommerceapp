@@ -9,12 +9,7 @@ import 'filter_selectable_item.dart';
 import 'filter_selectable_visible_option.dart';
 
 class FiltersScreen extends StatefulWidget {
-  final FilterRules initialRules;
-
-  const FiltersScreen(
-    this.initialRules, {
-    Key key,
-  }) : super(key: key);
+  const FiltersScreen();
 
   @override
   State<StatefulWidget> createState() {
@@ -23,16 +18,17 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  FilterRules rules;
+  late FilterRules rules;
 
   @override
   void initState() {
-    rules = widget.initialRules;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as FilterRules;
+    rules = args;
     print(' selected attributes: ${rules.selectableAttributes}');
     return Scaffold(
       appBar: AppBar(
@@ -64,8 +60,12 @@ class _FiltersScreenState extends State<FiltersScreen> {
                                 option,
                                 FilterSelectableItem(
                                   text: option,
-                                  isSelected: rules.selectedAttributes[attribute] != null
-                                    ? rules.selectedAttributes[attribute].contains(option) : false,
+                                  isSelected:
+                                      rules.selectedAttributes[attribute] !=
+                                              null
+                                          ? rules.selectedAttributes[attribute]
+                                              !.contains(option)
+                                          : false,
                                 )))),
                       )))
                   .values
@@ -95,21 +95,21 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   void _onCategorySelected(ProductCategory value) {
     setState(() {
-      rules.categories[value] = !rules.categories[value];
+      rules.categories[value] = !rules.categories[value]!;
     });
   }
 
   void _onAttributeSelected(ProductAttribute attribute, String value) {
-    if ( rules.selectedAttributes[attribute] == null ) {
+    if (rules.selectedAttributes[attribute] == null) {
       rules.selectedAttributes[attribute] = [];
     }
-    if (rules.selectedAttributes[attribute].contains(value)) {
+    if (rules.selectedAttributes[attribute]!.contains(value)) {
       setState(() {
-        rules.selectedAttributes[attribute].remove(value);
+        rules.selectedAttributes[attribute]!.remove(value);
       });
     } else {
       setState(() {
-        rules.selectedAttributes[attribute].add(value);
+        rules.selectedAttributes[attribute]!.add(value);
       });
     }
   }

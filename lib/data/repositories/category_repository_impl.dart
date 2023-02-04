@@ -32,6 +32,6 @@ class CategoryRepositoryImpl extends CategoryRepository {
   Future<ProductCategory> getCategoryDetails(int categoryId) async {
     // TODO: implement getCategoryDetails
     List<ProductCategory> categories = await getCategories();
-    return categories.isNotEmpty ? categories[0] : null;
+    return categories.isNotEmpty ? categories[0] : null!;
   }
 }

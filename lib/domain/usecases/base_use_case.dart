@@ -8,8 +8,8 @@ class UseCaseResult {
   final bool result;
 
   UseCaseResult({
-    this.exception,
-    this.result
+    required this.exception,
+    required this.result
   });
 
   bool get validResults => exception == null;

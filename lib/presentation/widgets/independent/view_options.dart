@@ -10,22 +10,20 @@ import 'package:openflutterecommerce/data/model/filter_rules.dart';
 import 'package:openflutterecommerce/data/model/sort_rules.dart';
 
 class OpenFlutterViewOptions extends StatelessWidget {
-  final SortRules sortRules;
-  final FilterRules filterRules;
+  final SortRules? sortRules;
+  final FilterRules? filterRules;
   final bool isListView;
   final Function(FilterRules) onFilterChanged;
   final Function(SortRules) onSortChanged;
-  final Function onChangeViewClicked;
+  final Function()? onChangeViewClicked;
 
   const OpenFlutterViewOptions(
-      {Key key,
-      @required this.onFilterChanged,
-      @required this.onSortChanged,
-      @required this.onChangeViewClicked,
-      @required this.sortRules,
-      @required this.filterRules,
-      this.isListView = true})
-      : super(key: key);
+      {required this.onFilterChanged,
+      required this.onSortChanged,
+      required this.onChangeViewClicked,
+      this.sortRules,
+      this.filterRules,
+      this.isListView = true});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +55,8 @@ class OpenFlutterViewOptions extends StatelessWidget {
                   Icon(Icons.import_export),
                   Container(
                     padding: EdgeInsets.only(left: 5),
-                    child: Text(sortRules?.getSortTitle() ?? '', style: _theme.textTheme.bodyText1),
+                    child: Text(sortRules?.getSortTitle() ?? '',
+                        style: _theme.textTheme.bodyText1),
                   )
                 ])),
             IconButton(
@@ -74,14 +73,16 @@ class OpenFlutterViewOptions extends StatelessWidget {
   }
 
   void _showFilterWindow(BuildContext context) {
-    Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.filters, arguments: filterRules);
+    Navigator.of(context)
+        .pushNamed(OpenFlutterEcommerceRoutes.filters, arguments: filterRules);
   }
 
   void _showSortOptions(BuildContext context) {
     showModalBottomSheet(
         context: context,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(34.0), topRight: Radius.circular(34.0)),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(34.0), topRight: Radius.circular(34.0)),
         ),
         backgroundColor: Colors.white,
         builder: (context) {
@@ -101,42 +102,53 @@ class OpenFlutterViewOptions extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: AppSizes.sidePadding),
             ),
-            ...sortRules.sortTextVariants
+            ...sortRules!.sortTextVariants
                 .map((key, value) => MapEntry(
                       key,
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding, vertical: AppSizes.linePadding),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: AppSizes.sidePadding,
+                            vertical: AppSizes.linePadding),
                         alignment: Alignment.centerLeft,
-                        color: sortRules.sortType == key ? AppColors.red : AppColors.white,
+                        color: sortRules!.sortType == key
+                            ? AppColors.red
+                            : AppColors.white,
                         child: Row(
                           children: <Widget>[
                             Expanded(
                               child: InkWell(
                                 child: Text(value,
-                                    style: Theme.of(context).textTheme.headline4.copyWith(
-                                        fontWeight: FontWeight.normal,
-                                        color: sortRules.sortType == key ? AppColors.white : AppColors.black)),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline4
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.normal,
+                                            color: sortRules!.sortType == key
+                                                ? AppColors.white
+                                                : AppColors.black)),
                                 onTap: () {
                                   onSortChanged(SortRules(
-                                      sortOrder: sortRules.sortType == key
-                                          ? (sortRules.sortOrder == SortOrder.FromLowestToHighest
+                                      sortOrder: sortRules!.sortType == key
+                                          ? (sortRules!.sortOrder ==
+                                                  SortOrder.FromLowestToHighest
                                               ? SortOrder.FromHighestToLowest
                                               : SortOrder.FromLowestToHighest)
-                                          : sortRules.sortOrder,
+                                          : sortRules!.sortOrder,
                                       sortType: key));
                                   Navigator.pop(context);
                                 },
                               ),
                             ),
                             IconButton(
-                              icon: Icon(sortRules.sortOrder == SortOrder.FromHighestToLowest
+                              icon: Icon(sortRules!.sortOrder ==
+                                      SortOrder.FromHighestToLowest
                                   ? FontAwesomeIcons.sortAlphaUp
                                   : FontAwesomeIcons.sortAlphaDown),
-                              color: sortRules.sortType == key
+                              color: sortRules!.sortType == key
                                   ? Theme.of(context).primaryColor
                                   : Theme.of(context).backgroundColor,
                               onPressed: () {
-                                onSortChanged(sortRules.copyWithChangedOrder());
+                                onSortChanged(sortRules!.copyWithChangedOrder());
                                 Navigator.pop(context);
                               },
                             )

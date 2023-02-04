@@ -14,7 +14,7 @@ abstract class WoocommercWrapperAbstract {
 class WoocommerceWrapper implements WoocommercWrapperAbstract {
   final http.Client client;
 
-  WoocommerceWrapper({@required this.client});
+  WoocommerceWrapper({required this.client});
 
   @override
   Future<List<dynamic>> getProductList(ProductsByFilterParams params) {

@@ -6,8 +6,7 @@ class SelectedAttributeView extends StatelessWidget {
   final String selectedValue;
 
   const SelectedAttributeView(
-      {Key key, @required this.productAttribute, @required this.selectedValue})
-      : super(key: key);
+      {required this.productAttribute, required this.selectedValue});
 
   @override
   Widget build(BuildContext context) {

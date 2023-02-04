@@ -14,18 +14,18 @@ class UserOrderEntity extends Entity<int> {
   final double deliveryPrice;
 
   UserOrderEntity(
-      {int id,
-      this.orderNumber,
-      this.trackingNumber,
-      this.productCount,
-      this.promoCodeId,
-      this.discountPercent,
-      this.discountTitle,
-      this.shippingAddressId,
-      this.orderStatus,
-      this.totalAmount,
-      this.deliveryMethodId,
-      this.deliveryPrice}) : super(id);
+      {required int id,
+      required this.orderNumber,
+      required this.trackingNumber,
+      required this.productCount,
+      required this.promoCodeId,
+      required this.discountPercent,
+      required this.discountTitle,
+      required this.shippingAddressId,
+      required this.orderStatus,
+      required this.totalAmount,
+      required this.deliveryMethodId,
+      required this.deliveryPrice}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

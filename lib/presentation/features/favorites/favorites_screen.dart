@@ -20,7 +20,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
     return SafeArea(
       child: OpenFlutterScaffold(
         background: null,
-        title: null,
+        title: '',
         body: BlocProvider<FavouriteBloc>(
           create: (context) {
             return FavouriteBloc()..add(ScreenLoadedEvent());

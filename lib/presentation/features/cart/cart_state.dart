@@ -24,25 +24,25 @@ class CartLoadedState extends CartState {
   final List<CartItem> cartProducts;
   final List<Promo> promos;
   final bool showPromoPopup;
-  final double totalPrice;
-  final double calculatedPrice;
-  final Promo appliedPromo;
+  final double? totalPrice;
+  final double? calculatedPrice;
+  final Promo? appliedPromo;
 
   CartLoadedState(
-    {@required this.showPromoPopup,
-    @required this.promos,
+    {required this.showPromoPopup,
+    required this.promos,
     this.totalPrice,
     this.calculatedPrice,
     this.appliedPromo,
-    @required this.cartProducts});
+    required this.cartProducts});
 
   CartLoadedState copyWith(
-      {List<CartItem> cartProducts,
-      double totalPrice,
-      List<Promo> promos,
-      Promo appliedPromo,
-      double calculatedPrice,
-      bool showPromoPopup}) {
+      {List<CartItem>? cartProducts,
+      double? totalPrice,
+      List<Promo>? promos,
+      Promo? appliedPromo,
+      double? calculatedPrice,
+      bool? showPromoPopup}) {
     return CartLoadedState(
         promos: promos ?? this.promos,
         cartProducts: cartProducts ?? this.cartProducts,
@@ -53,7 +53,7 @@ class CartLoadedState extends CartState {
   }
 
   @override
-  List<Object> get props => [totalPrice, cartProducts, appliedPromo, showPromoPopup];
+  List<Object> get props => [totalPrice!, cartProducts, appliedPromo!, showPromoPopup];
 }
 
 @immutable

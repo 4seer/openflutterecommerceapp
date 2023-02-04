@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class SQLiteDbProvider {
 
-  static Database db;
+  static late Database db;
   
   static Future<void> open() async {
     db = await openDatabase(

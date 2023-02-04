@@ -12,9 +12,9 @@ import '../../wrapper.dart';
 import '../checkout.dart';
 
 class PaymentMethodView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const PaymentMethodView({Key key, this.changeView}) : super(key: key);
+  const PaymentMethodView({ this.changeView}) ;
 
   @override
   _PaymentMethodViewState createState() => _PaymentMethodViewState();
@@ -23,10 +23,10 @@ class PaymentMethodView extends StatefulWidget {
 class _PaymentMethodViewState extends State<PaymentMethodView> {
   int paymentCardIndex = 0;
 
-  TextEditingController _nameOnCardController;
-  TextEditingController _cardNumberController;
-  TextEditingController _expirationDateController;
-  TextEditingController _cvvController;
+  late TextEditingController _nameOnCardController;
+  late TextEditingController _cardNumberController;
+  late TextEditingController _expirationDateController;
+  late TextEditingController _cvvController;
 
   @override
   void initState() {
@@ -57,13 +57,12 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
         bloc: bloc,
         listener: (BuildContext context, CheckoutState state) {
           if (state is CheckoutErrorState) {
-            return Container(
+            Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
                     style: _theme.textTheme.headline4
-                        .copyWith(color: _theme.errorColor)));
+                        ?.copyWith(color: _theme.errorColor)));
           }
-          return Container();
         },
         child: BlocBuilder(
             bloc: bloc,
@@ -196,7 +195,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
 
   void _changeDefaultPaymentCard(CheckoutBloc bloc, int cardId) {
     bloc..add(CheckoutSetDefaultCardEvent(cardId));
-    widget.changeView(changeType: ViewChangeType.Exact, index: 0);
+    widget.changeView!(changeType: ViewChangeType.Exact, index: 0);
     //TODO: implement change of default payment card
   }
 }

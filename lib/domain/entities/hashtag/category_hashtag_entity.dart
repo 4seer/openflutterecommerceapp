@@ -4,7 +4,7 @@ class CategoryHashTagEntity extends Entity<int> {
   final int hashTagId;
   final int categoryId;
 
-  CategoryHashTagEntity({int id, this.hashTagId, this.categoryId}) : super(id);
+  CategoryHashTagEntity({required int id, required this.hashTagId, required this.categoryId}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

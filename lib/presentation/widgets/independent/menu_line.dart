@@ -7,11 +7,11 @@ class OpenFlutterMenuLine extends StatelessWidget {
   final VoidCallback onTap;
 
   const OpenFlutterMenuLine(
-      {Key key,
-      @required this.title,
-      @required this.subtitle,
-      @required this.onTap})
-      : super(key: key);
+      {
+      required this.title,
+      required this.subtitle,
+      required this.onTap})
+      ;
 
   @override
   Widget build(BuildContext context) {

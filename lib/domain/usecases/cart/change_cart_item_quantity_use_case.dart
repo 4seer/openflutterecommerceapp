@@ -19,7 +19,7 @@ class ChangeCartItemQuantityUseCaseImpl implements ChangeCartItemQuantityUseCase
     try {
       CartRepository cartReposiory = sl();
       await cartReposiory.changeQuantity(params.item, params.quantity);
-      return ChangeCartItemQuantityResult(result: true);
+      return ChangeCartItemQuantityResult(result: true, exception: null!);
     } catch (e) {
       return ChangeCartItemQuantityResult( 
         result: false,
@@ -34,13 +34,13 @@ class ChangeCartItemQuantityParams {
   final CartItem item;
   final int quantity;
 
-  ChangeCartItemQuantityParams({this.item, this.quantity});
+  ChangeCartItemQuantityParams({required this.item, required this.quantity});
 }
 
 class ChangeCartItemQuantityResult extends UseCaseResult {
   ChangeCartItemQuantityResult({
-    Exception exception, 
-    bool result
+    required Exception exception,
+    required bool result
   }) 
     : super(exception: exception, result: result);
 }

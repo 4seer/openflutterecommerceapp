@@ -11,14 +11,14 @@ class ShippingAddressEntity extends Entity<int> {
   final bool isDefault;
 
   ShippingAddressEntity(
-    {int id, 
-    @required this.fullName, 
-    @required this.address, 
-    @required this.city,
-    @required this.state,
-    @required this.postal,
-    @required this.country,
-    @required this.isDefault}) : super(id);
+    {required int id,
+    required this.fullName,
+    required this.address,
+    required this.city,
+    required this.state,
+    required this.postal,
+    required this.country,
+    required this.isDefault}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

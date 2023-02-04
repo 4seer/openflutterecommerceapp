@@ -21,7 +21,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<OpenFlutterInputFieldState> emailKey = GlobalKey();
   final GlobalKey<OpenFlutterInputFieldState> passwordKey = GlobalKey();
 
-  double sizeBetween;
+  late double sizeBetween;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _SignInScreenState extends State<SignInScreen> {
           }
           // on failure show a snackbar
           if (state is SignInErrorState) {
-            Scaffold.of(context).showSnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('${state.error}'),
                 backgroundColor: Colors.red,
@@ -141,10 +141,10 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _validateAndSend() {
-    if (emailKey.currentState.validate() != null) {
+    if (emailKey.currentState?.validate() != null) {
       return;
     }
-    if (passwordKey.currentState.validate() != null) {
+    if (passwordKey.currentState?.validate() != null) {
       return;
     }
     BlocProvider.of<SignInBloc>(context).add(

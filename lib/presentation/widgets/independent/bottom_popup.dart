@@ -5,7 +5,7 @@ class OpenFlutterBottomPopup extends StatelessWidget {
   final Widget child;
   final String title;
 
-  const OpenFlutterBottomPopup({Key key, @required this.child, @required this.title}) : super(key: key);
+  const OpenFlutterBottomPopup({ required this.child, required this.title}) ;
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ class Validator {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
     } else {
-      return null;
+      return null!;
     }
   }
 
@@ -15,7 +15,7 @@ class Validator {
       if (!regExp.hasMatch(value)) {
         return 'Your password must be at least 8 symbols with number, big and small letter and special character (!@#\$%^&*).';
       } else {
-        return null;
+        return null!;
       }
     } else {
       return emptyResult;
@@ -32,7 +32,7 @@ class Validator {
     } else if (!regExp.hasMatch(value)) {
       return 'Not a valid email address. Should be your@email.com';
     } else {
-      return null;
+      return null!;
     }
   }
 }

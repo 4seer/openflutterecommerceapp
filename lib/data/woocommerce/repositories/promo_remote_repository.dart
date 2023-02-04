@@ -8,7 +8,7 @@ import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_w
 class RemotePromoRepository extends PromoRepository {
   final WoocommercWrapperAbstract woocommerce;
 
-  RemotePromoRepository({@required this.woocommerce});
+  RemotePromoRepository({required this.woocommerce});
 
   @override
   Future<List<Promo>> getPromoList() async {

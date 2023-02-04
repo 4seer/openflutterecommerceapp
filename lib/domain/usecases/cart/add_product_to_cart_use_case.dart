@@ -21,7 +21,7 @@ class AddProductToCartUseCaseImpl implements AddProductToCartUseCase {
   Future<AddToCartResult> execute(CartItem item) async {
     try {
       CartRepositoryImpl.cartProductDataStorage.items.add(item);
-      return AddToCartResult(result: true);
+      return AddToCartResult(result: true, exception: null!);
     } catch (e) {
       return AddToCartResult(  
         result: false,
@@ -35,6 +35,6 @@ class AddProductToCartUseCaseImpl implements AddProductToCartUseCase {
 class AddProductToCartException implements Exception {}
 
 class AddToCartResult extends UseCaseResult {
-  AddToCartResult({Exception exception, bool result}) 
+  AddToCartResult({required Exception exception, required bool result})
     : super(exception: exception, result: result);
 }

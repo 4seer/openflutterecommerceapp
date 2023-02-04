@@ -8,7 +8,7 @@ import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_w
 class RemoteCategoryRepository extends CategoryRepository {
   final WoocommercWrapperAbstract woocommerce;
 
-  RemoteCategoryRepository({@required this.woocommerce});
+  RemoteCategoryRepository({required this.woocommerce});
 
   @override
   Future<List<ProductCategory>> getCategories({int parentCategoryId = 0}) async {
@@ -28,6 +28,6 @@ class RemoteCategoryRepository extends CategoryRepository {
   @override
   Future<ProductCategory> getCategoryDetails(int categoryId) {
     // TODO: implement getCategoryDetails
-    return null;
+    return Future.value(null);
   }
 }

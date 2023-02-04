@@ -16,8 +16,8 @@ class ProductScreenLoadedEvent extends ProductEvent {
   final int categoryId;
 
   ProductScreenLoadedEvent({
-    @required this.productId, 
-    @required this.categoryId
+    required this.productId, 
+    required this.categoryId
   });}
 
 @immutable

@@ -20,8 +20,8 @@ class HomeInitialState extends HomeState {
 
 @immutable
 class HomeLoadedState extends HomeState {
-  final List<Product> salesProducts;
-  final List<Product> newProducts;
+  final List<Product>? salesProducts;
+  final List<Product>? newProducts;
 
   HomeLoadedState({this.salesProducts, this.newProducts});
 
@@ -29,5 +29,5 @@ class HomeLoadedState extends HomeState {
   String toString() => 'HomeLoadedState';
 
   @override
-  List<Object> get props => [salesProducts, newProducts];
+  List<Object> get props => [salesProducts!, newProducts!];
 }

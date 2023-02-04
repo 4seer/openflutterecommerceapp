@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test PromoCode Data Source', () {
-    PromoCodeDataSource dataSource;
+    late PromoCodeDataSource dataSource;
 
     setUp(() async {
       dataSource = PromoCodeDataSource();

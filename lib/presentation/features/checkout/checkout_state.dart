@@ -23,11 +23,11 @@ class CheckoutInitialState extends CheckoutState {
 
 @immutable
 class CheckoutProceedState extends CheckoutState {
-  final List<CartItem> cartProducts;
-  final List<ShippingAddressModel> shippingAddresses;
-  final List<PaymentMethodModel> paymentMethods;
-  final ShippingAddressModel currentShippingAddress;
-  final PaymentMethodModel currentPaymentMethod;
+  final List<CartItem>? cartProducts;
+  final List<ShippingAddressModel>? shippingAddresses;
+  final List<PaymentMethodModel>? paymentMethods;
+  final ShippingAddressModel? currentShippingAddress;
+  final PaymentMethodModel? currentPaymentMethod;
   final double orderPrice;
   final double deliveryPrice;
   final double summaryPrice;
@@ -35,24 +35,24 @@ class CheckoutProceedState extends CheckoutState {
   final bool showAddNewCardForm;
 
   CheckoutProceedState(
-      {@required this.cardId,
+      {required this.cardId,
       this.shippingAddresses,
       this.paymentMethods,
       this.cartProducts,
       this.currentShippingAddress,
       this.currentPaymentMethod,
-      @required this.orderPrice, 
-      @required this.deliveryPrice, 
-      @required this.summaryPrice, 
+      required this.orderPrice, 
+      required this.deliveryPrice, 
+      required this.summaryPrice, 
       this.showAddNewCardForm = false});
 
   CheckoutProceedState copyWith(
-      {List<Product> cartProducts, int cardId, bool showAddNewCardForm,
-      double orderPrice, 
-      double deliveryPrice, 
-      double summaryPrice, }) {
+      {List<Product>? cartProducts, int? cardId, bool? showAddNewCardForm,
+      double? orderPrice,
+      double? deliveryPrice,
+      double? summaryPrice, }) {
     return CheckoutProceedState(
-        cartProducts: cartProducts ?? this.cartProducts,
+        cartProducts: /*cartProducts ?? */this.cartProducts,
         showAddNewCardForm: showAddNewCardForm ?? this.showAddNewCardForm,
         cardId: cardId ?? this.cardId,
         orderPrice: orderPrice ?? this.orderPrice,
@@ -62,7 +62,7 @@ class CheckoutProceedState extends CheckoutState {
   }
 
   @override
-  List<Object> get props => [cartProducts, cardId, showAddNewCardForm];
+  List<Object> get props => [cartProducts!, cardId, showAddNewCardForm];
 }
 
 @immutable

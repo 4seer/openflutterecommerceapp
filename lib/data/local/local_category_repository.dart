@@ -5,13 +5,13 @@ class LocalCategoryRepository extends CategoryRepository{
   @override
   Future<List<ProductCategory>> getCategories({int parentCategoryId = 0}) async {
     // TODO: implement getCategories
-    return null;
+    return Future.value(null);
   }
 
   @override
   Future<ProductCategory> getCategoryDetails(int categoryId) {
     // TODO: implement getCategoryDetails
-    return null;
+    return Future.value(null);
   }
 
 }

@@ -12,9 +12,9 @@ import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 import '../categories.dart';
 
 class CategoriesTileView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const CategoriesTileView({Key key, this.changeView}) : super(key: key);
+  const CategoriesTileView({ this.changeView}) ;
 
   @override
   _CategoriesTileViewState createState() => _CategoriesTileViewState();
@@ -24,7 +24,7 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
     with SingleTickerProviderStateMixin {
   final List<String> types = ['Women', 'Men', 'Kids'];
   final List<int> categotyIds = [1, 2, 3];
-  TabController _tabController;
+  late TabController _tabController;
 
   @override
   void initState() {
@@ -43,11 +43,11 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
         listenWhen: (context, state) {
       return state is CategoryErrorState;
     }, listener: (BuildContext context, CategoryState state) {
-      return Container(
+          Container(
           padding: EdgeInsets.all(AppSizes.sidePadding),
           child: Text('An error occured',
               style: _theme.textTheme.headline4
-                  .copyWith(color: _theme.errorColor)));
+                  ?.copyWith(color: _theme.errorColor)));
     }, child:
             BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
       if (state is CategoryTileViewState) {
@@ -69,10 +69,10 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
                       children: <Widget>[
                         Text('SUMMER SALES',
                             style: _theme.textTheme.headline4
-                                .copyWith(color: AppColors.white)),
+                                ?.copyWith(color: AppColors.white)),
                         Text('Up to 50% off',
                             style: _theme.textTheme.headline4
-                                .copyWith(color: AppColors.white))
+                                ?.copyWith(color: AppColors.white))
                       ],
                     ))),
             Container(

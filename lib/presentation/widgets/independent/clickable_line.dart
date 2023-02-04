@@ -12,15 +12,15 @@ class OpenFlutterClickableLine extends StatelessWidget {
   final Function(SortRules) onTap;
 
   const OpenFlutterClickableLine(
-      {Key key,
-      @required this.width,
-      @required this.height,
-      @required this.title,
-      @required this.onTap,
-      @required this.sortRules,
-      this.backgroundColor,
-      this.textColor})
-      : super(key: key);
+      {
+      required this.width,
+      required this.height,
+      required this.title,
+      required this.onTap,
+      required this.sortRules,
+      required this.backgroundColor,
+      required this.textColor})
+      ;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +34,6 @@ class OpenFlutterClickableLine extends StatelessWidget {
             width: width,
             color: backgroundColor,
             child: Text(title,
-                style: _theme.textTheme.headline4.copyWith(fontWeight: FontWeight.normal, color: textColor))));
+                style: _theme.textTheme.headline4?.copyWith(fontWeight: FontWeight.normal, color: textColor))));
   }
 }

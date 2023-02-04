@@ -6,10 +6,10 @@ class ProductParameterVariantEntity extends Entity<int> {
   final double additionalPrice;
 
   ProductParameterVariantEntity(
-      {int id, 
-      this.title, 
-      this.productParameterId, 
-      this.additionalPrice}) : super(id);
+      {required int id,
+      required this.title,
+      required this.productParameterId,
+      required this.additionalPrice}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

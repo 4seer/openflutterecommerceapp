@@ -8,15 +8,15 @@ import 'product.dart';
 
 class CartItem extends Equatable {
   final Product product;
-  final HashMap<ProductAttribute, String> selectedAttributes;
+  final Map<ProductAttribute, String> selectedAttributes;
   final ProductQuantity productQuantity;
 
   double get price => productQuantity.quantity * product.price;
 
   CartItem({
-    @required this.product,
-    @required this.productQuantity,
-    @required this.selectedAttributes,
+    required this.product,
+    required this.productQuantity,
+    required this.selectedAttributes,
   });
 
   void changeQuantity(int quantity){

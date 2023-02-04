@@ -12,7 +12,7 @@ class ProductReviewRepository {
             'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
         rating: 4,
         comment:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'),
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', isHelpful: null!, photos: []),
     ProductReview(
       id: 2,
       productId: 2,
@@ -25,7 +25,7 @@ class ProductReviewRepository {
       photos: [
         'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
         'http://personal.psu.edu/xqz5228/jpg.jpg'
-      ],
+      ], isHelpful: null!
     ),
     ProductReview(
       id: 3,
@@ -43,6 +43,7 @@ class ProductReviewRepository {
         'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
         'http://personal.psu.edu/xqz5228/jpg.jpg'
       ],
+        isHelpful: null!
     ),
     ProductReview(
       id: 4,
@@ -53,6 +54,7 @@ class ProductReviewRepository {
       rating: 1,
       comment:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        isHelpful: null!, photos: []
     ),
     ProductReview(
       id: 5,
@@ -81,6 +83,7 @@ class ProductReviewRepository {
         'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
         'http://personal.psu.edu/xqz5228/jpg.jpg'
       ],
+        isHelpful: null!
     ),
     ProductReview(
       id: 7,
@@ -91,7 +94,7 @@ class ProductReviewRepository {
       rating: 4,
       comment:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      isHelpful: true,
+      isHelpful: true, photos: [],
     ),
     ProductReview(
       id: 8,
@@ -102,7 +105,7 @@ class ProductReviewRepository {
       rating: 5,
       comment:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      isHelpful: false,
+      isHelpful: false, photos: [],
     ),
   ];
 

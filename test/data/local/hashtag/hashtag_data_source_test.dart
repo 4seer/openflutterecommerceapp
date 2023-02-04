@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test HashTag Data Source', () {
-    HashTagDataSource dataSource;
+    late HashTagDataSource dataSource;
 
     setUp(() async {
       dataSource = HashTagDataSource();

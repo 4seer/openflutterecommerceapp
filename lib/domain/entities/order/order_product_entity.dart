@@ -9,13 +9,13 @@ class OrderProductEntity extends Entity<int> {
   final String thumb;
 
   OrderProductEntity(
-      {int id,
-      this.productId,
-      this.productCount,
-      this.totalPrice,
-      this.title,
-      this.discountPercent,
-      this.thumb}) : super(id);
+      {required int id,
+      required this.productId,
+      required this.productCount,
+      required this.totalPrice,
+      required this.title,
+      required this.discountPercent,
+      required this.thumb}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

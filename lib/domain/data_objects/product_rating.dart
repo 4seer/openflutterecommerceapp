@@ -3,7 +3,7 @@ class ProductRating {
   final int quantity;
 
   ProductRating({
-    this.rating,
-    this.quantity,
+    required this.rating,
+    required this.quantity,
   });
 }

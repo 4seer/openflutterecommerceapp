@@ -22,27 +22,29 @@ class UserOrder extends Equatable {
   final String trackingNumber;
   final DateTime orderDate;
 
-  double get totalPrice =>
-      products.fold(
+  double get totalPrice => 0.0;
+      /*products.fold(
           0,
-          (previousValue, element) =>
-              previousValue += element.productQuantity.quantity * element.price) -
-      promo.discount;
+          (previousValue, element) => previousValue +=
+              element.productQuantity.quantity * element.price) -
+      promo.discount;*/
 
   int get totalQuantity => products.fold(
-      0, (previousValue, element) => previousValue += element.productQuantity.quantity);
+      0,
+      (previousValue, element) =>
+          previousValue += element.productQuantity.quantity);
 
   UserOrder({
-    this.id,
-    List<CartItem> products,
-    this.orderNumber,
+    required this.id,
+    required List<CartItem> products,
+    required this.orderNumber,
     this.orderStatus = UserOrderStatus.InProgress,
-    this.shippingAddress,
-    this.paymentMethod,
-    this.deliveryMethod,
-    this.trackingNumber,
-    this.promo,
-    DateTime orderCreated,
+    required this.shippingAddress,
+    required this.paymentMethod,
+    required this.deliveryMethod,
+    required this.trackingNumber,
+    required this.promo,
+    required DateTime orderCreated,
   })  : products = products ?? [],
         orderDate = orderCreated ?? DateTime.now();
 

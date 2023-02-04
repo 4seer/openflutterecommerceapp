@@ -28,7 +28,7 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
   final ProductCategory category;
 
   ProductsBloc({
-    @required this.category,
+    required this.category,
   }) : findProductsByFilterUseCase = sl(),
     getFavoriteProductsUseCase = sl(),
     removeFromFavoritesUseCase = sl(),
@@ -60,11 +60,11 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       final List<Product> filteredData = productResults.products;
       yield state.copyWith(
         sortBy: event.sortBy,
-        data: state.data.copyWith(filteredData),
+        data: state.data!.copyWith(filteredData),
       );
     }  else if (event is ProductChangeHashTagEvent) {
       yield state.getLoading();
-      state.filterRules.selectedHashTags[event.hashTag] = event.isSelected;
+      state.filterRules!.selectedHashTags[event.hashTag] = event.isSelected;
       ProductsByFilterResult productResults = await findProductsByFilterUseCase.execute(
         ProductsByFilterParams(
           categoryId: category.id,
@@ -73,8 +73,8 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
         ));
       final List<Product> filteredData = productResults.products;
       yield state.copyWith(
-        data: state.data.copyWith(filteredData),
-        sortBy: state.sortBy,
+        data: state.data!.copyWith(filteredData),
+        sortBy: state.sortBy!,
       );
     } else if (event is ProductChangeFilterRulesEvent) {
       yield state.getLoading();
@@ -87,26 +87,26 @@ class ProductsBloc extends Bloc<ProductsListEvent, ProductsState> {
       final List<Product> filteredData = productResults.products;
       yield state.copyWith(
           filterRules: event.filterRules,
-          data: state.data.copyWith(filteredData));
+          data: state.data!.copyWith(filteredData));
     } else if (event is ProductMakeFavoriteEvent) {
       if (event.isFavorite) {
         await addToFavoritesUseCase.execute(FavoriteProduct(
           event.product,
-          event.favoriteAttributes
+          event.favoriteAttributes!
           )
         );
       } else {
         await removeFromFavoritesUseCase.execute(
           RemoveFromFavoritesParams(FavoriteProduct(
             event.product,
-            event.favoriteAttributes
+            event.favoriteAttributes!
             )
           )
         );
       }
-      final List<Product> data = state.data.products;
+      final List<Product> data = state.data!.products;
       yield state.copyWith(
-          data: state.data.copyWith(data.map((item) {
+          data: state.data!.copyWith(data.map((item) {
         if (event.product.id == item.id) {
           return item.favorite(event.isFavorite);
         } else {

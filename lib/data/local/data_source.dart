@@ -3,7 +3,7 @@ import 'package:openflutterecommerce/domain/entities/entity.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class DataSource {
-  Database db;
+  late Database db;
 
   String get tableName;
 
@@ -19,12 +19,12 @@ abstract class DataSource {
 
   // get a record in the table
   Future<Entity> get(int id) async {
-    return null;
+    return Future.value(null);
   }
 
   // get all records in the table
   Future<List<Entity>> all() async {
-    return null;
+    return [];
   }
 
   // insert a record into the table

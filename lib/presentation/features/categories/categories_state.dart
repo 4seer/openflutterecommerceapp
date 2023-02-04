@@ -26,7 +26,7 @@ class CategoryLoadingState extends CategoryState {
 abstract class CategoryViewState extends CategoryState {
   final List<ProductCategory> categories;
 
-  CategoryViewState({int parentCategoryId, this.categories})
+  CategoryViewState({required int parentCategoryId, required this.categories})
       : super(parentCategoryId: parentCategoryId);
 
   @override
@@ -35,7 +35,7 @@ abstract class CategoryViewState extends CategoryState {
 
 @immutable
 class CategoryListViewState extends CategoryViewState {
-  CategoryListViewState({int parentCategoryId, List<ProductCategory> categories})
+  CategoryListViewState({required int parentCategoryId, required List<ProductCategory> categories})
       : super(parentCategoryId: parentCategoryId, categories: categories);
 
   @override
@@ -45,8 +45,8 @@ class CategoryListViewState extends CategoryViewState {
 @immutable
 class CategoryTileViewState extends CategoryViewState {
   CategoryTileViewState({
-    int parentCategoryId,
-    List<ProductCategory> categories,
+    required int parentCategoryId,
+    required List<ProductCategory> categories,
   }) : super(
           parentCategoryId: parentCategoryId,
           categories: categories,

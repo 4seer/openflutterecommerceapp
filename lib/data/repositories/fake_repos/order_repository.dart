@@ -20,9 +20,9 @@ class OrderRepository {
   }
 
   static const sizeAttribute =
-      ProductAttribute(name: 'size', options: ['S', 'M', 'L', 'XL']);
+      ProductAttribute(name: 'size', options: ['S', 'M', 'L', 'XL'], id: -1, info: '');
   static const colorAttribute =
-      ProductAttribute(name: 'color', options: ['grey', 'red', 'yellow']);
+      ProductAttribute(name: 'color', options: ['grey', 'red', 'yellow'], id: -1, info: '');
 
   final _myOrders = [
     UserOrder(
@@ -33,7 +33,7 @@ class OrderRepository {
       promo: Promo(
         daysLeft: 6,
         discount: 10,
-        image: null,
+        image: "",
         promoCode: 'promo12',
         textColor: Colors.white,
         title: 'Promo 12'),
@@ -44,7 +44,7 @@ class OrderRepository {
         country: 'United States',
         fullName: 'John Smith',
         postal: '91709',
-        state: 'CA'),
+        state: 'CA', isDefault: false),
       paymentMethod: '**** **** **** 3947',
       deliveryMethod: 'FedEx, 3 days, \$15',
       trackingNumber: 'IW3475453455',
@@ -58,7 +58,7 @@ class OrderRepository {
       promo: Promo(
         daysLeft: 6,
         discount: 10,
-        image: null,
+        image: "",
         promoCode: 'promo12',
         textColor: Colors.white,
         title: 'Promo 12'),
@@ -69,7 +69,7 @@ class OrderRepository {
         country: 'United States',
         fullName: 'John Smith',
         postal: '91709',
-        state: 'CA'),
+        state: 'CA', isDefault: false),
       paymentMethod: '**** **** **** 3947',
       deliveryMethod: 'FedEx, 3 days, \$15',
       trackingNumber: 'IW3475453456',
@@ -89,7 +89,7 @@ class OrderRepository {
             ratingCount: 10,
             price: 15,
             title: 'Pullover',
-            selectableAttributes: [sizeAttribute, colorAttribute], categories: [], hashTags: [], subTitle: null,
+            selectableAttributes: [sizeAttribute, colorAttribute], categories: [], hashTags: [], subTitle: "", shortDescription: '', description: '', created: DateTime.now(), properties: {},
           ),
           selectedAttributes: HashMap.fromEntries([
             MapEntry(sizeAttribute, 'S'),
@@ -107,7 +107,7 @@ class OrderRepository {
             price: 15,
             title: 'T-shirt',
             selectableAttributes: [sizeAttribute, colorAttribute],
-            categories: [], hashTags: [], subTitle: null,
+            categories: [], hashTags: [], subTitle: "", shortDescription: '', description: '', created: DateTime.now(), properties: {},
           ),
           selectedAttributes: HashMap.fromEntries([
             MapEntry(sizeAttribute, 'S'),
@@ -126,7 +126,7 @@ class OrderRepository {
             price: 15,
             title: 'Sport Dress',
             selectableAttributes: [sizeAttribute, colorAttribute],
-            categories: [], hashTags: [], subTitle: null,
+            categories: [], hashTags: [], subTitle: "", shortDescription: '', description: '', created: DateTime.now(), properties: {},
           ),
           selectedAttributes: HashMap.fromEntries([
             MapEntry(sizeAttribute, 'S'),
@@ -138,7 +138,7 @@ class OrderRepository {
       promo: Promo(
         daysLeft: 6,
         discount: 10,
-        image: null,
+        image: "",
         promoCode: 'promo12',
         textColor: Colors.white,
         title: 'Promo 12'),
@@ -149,7 +149,7 @@ class OrderRepository {
         country: 'United States',
         fullName: 'John Smith',
         postal: '91709',
-        state: 'CA'),
+        state: 'CA', isDefault: false),
       paymentMethod: '**** **** **** 3947',
       deliveryMethod: 'FedEx, 3 days, \$15',
       trackingNumber: 'IW3475453456',

@@ -14,7 +14,7 @@ description: A Flutter E-commerce App.
 version: 0.0.2+2
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -34,12 +34,11 @@ dependencies:
   flutter_bloc: ^7.3.0
   bubble_tab_indicator: ^0.1.6
   cupertino_icons: ^1.0.3
-  data_connection_checker: ^0.3.4
   equatable: ^2.0.3
   sqflite: ^2.0.0+4
 
 dev_dependencies:
-  pedantic: ^1.9.0
+  pedantic: ^1.11.1
   flutter_test:
     sdk: flutter
   

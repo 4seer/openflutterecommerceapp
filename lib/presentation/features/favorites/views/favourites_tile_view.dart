@@ -28,28 +28,28 @@ class FavouritesTileView extends StatelessWidget {
           (BuildContext context, int index) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-              child: state.data[index].getTileView(
+              child: state.data![index].getTileView(
                 context: context,
                 showProductInfo: () {
                   Navigator.of(context).pushNamed(
                       OpenFlutterEcommerceRoutes.product,
                       arguments: ProductDetailsParameters(
-                          state.data[index].product.id,
-                          state.data[index].product.categories.isNotEmpty ? 
-                            state.data[index].product.categories[0].id: 0,
-                          selectedAttributes: state.data[index].favoriteForm));
+                          state.data![index].product.id,
+                          state.data![index].product.categories.isNotEmpty ?
+                            state.data![index].product.categories[0].id: 0,
+                          selectedAttributes: state.data![index].favoriteForm));
                 },
                 onRemoveFromFavorites: () {
                   BlocProvider.of<FavouriteBloc>(context).add(
-                      RemoveFromFavoriteEvent(state.data[index]));
+                      RemoveFromFavoriteEvent(state.data![index]));
                 },
                 onAddToCart: () {
                   BlocProvider.of<FavouriteBloc>(context)
-                    .add(AddToCartEvent(state.data[index]));
+                    .add(AddToCartEvent(state.data![index]));
                   Navigator.of(context)
                     .pushNamed(OpenFlutterEcommerceRoutes.cart);
                 },
-                selectedAttributes: state.data[index]?.favoriteForm
+                selectedAttributes: state.data![index]!.favoriteForm
               ),
             );
           },

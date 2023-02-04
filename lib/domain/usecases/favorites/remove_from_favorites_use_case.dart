@@ -21,7 +21,7 @@ class RemoveFromFavoritesUseCaseImpl implements RemoveFromFavoritesUseCase {
       await favoritesRepository.removeFromFavorites(
         params.product.product.id, 
         params.product.favoriteForm);
-      return RemoveFromFavoritesResult(result: true);
+      return RemoveFromFavoritesResult(result: true, exception: null!);
     } catch (e) {
       return RemoveFromFavoritesResult(  
         result: false,
@@ -39,7 +39,7 @@ class RemoveFromFavoritesParams {
 }
 
 class RemoveFromFavoritesResult extends UseCaseResult {
-  RemoveFromFavoritesResult({Exception exception, bool result}) 
+  RemoveFromFavoritesResult({required Exception exception, required bool result}) 
     : super(exception: exception, result: result);
 }
 

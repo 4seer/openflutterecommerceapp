@@ -6,22 +6,21 @@ class UserEntity extends Entity<int> {
   final String email;
   final String password;
   final String birthDate;
-  final String token;
+  final String? token;
   final bool salesNotification;
   final bool newArrivalsNotification;
   final bool deliveryStatusChanges;
 
   UserEntity(
-    {int id,
-    this.name,
-    this.avatar,
-    this.email,
-    this.password,
-    this.birthDate,
-    this.token,
-    this.salesNotification,
-    this.newArrivalsNotification,
-    this.deliveryStatusChanges}) : super(id);
+    {required int id,
+    required this.name,
+    required this.avatar,
+    required this.email,
+    required this.password,
+    required this.birthDate, this.token,
+    required this.salesNotification,
+    required this.newArrivalsNotification,
+    required this.deliveryStatusChanges}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -47,7 +46,7 @@ class UserEntity extends Entity<int> {
     email,
     password,
     birthDate,
-    token,
+    token!,
     salesNotification,
     newArrivalsNotification,
     deliveryStatusChanges

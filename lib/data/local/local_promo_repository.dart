@@ -5,7 +5,7 @@ class LocalPromoRepository implements PromoRepository {
   @override
   Future<List<Promo>> getPromoList() {
     // TODO: implement getPromoList
-    return null;
+    return Future.value(null);
   }
   
 }

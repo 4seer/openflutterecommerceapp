@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test OrderProductParameter Data Source', () {
-    OrderProductParameterDataSource dataSource;
+    late OrderProductParameterDataSource dataSource;
 
     setUp(() async {
       dataSource = OrderProductParameterDataSource();

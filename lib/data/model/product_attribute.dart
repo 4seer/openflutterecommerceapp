@@ -8,7 +8,7 @@ class ProductAttribute extends Equatable {
   final String info;
 
   const ProductAttribute(
-      {this.id, @required this.name, this.options, this.info});
+      {required this.id, required this.name, required this.options, required this.info});
 
   @override
   List<Object> get props => [id, name, options, info];

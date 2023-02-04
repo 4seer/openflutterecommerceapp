@@ -5,7 +5,7 @@ class OpenFlutterSummaryLine extends StatelessWidget {
   final String title;
   final String summary;
 
-  const OpenFlutterSummaryLine({Key key, this.title, this.summary}) : super(key: key);
+  const OpenFlutterSummaryLine({ required this.title, required this.summary}) ;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class OpenFlutterSummaryLine extends StatelessWidget {
                 width: width / 2,
                 child: Text(summary,
                     style:
-                        _theme.textTheme.headline2.copyWith(fontWeight: FontWeight.bold, color: _theme.primaryColor))),
+                        _theme.textTheme.headline2?.copyWith(fontWeight: FontWeight.bold, color: _theme.primaryColor))),
           ],
         ));
   }

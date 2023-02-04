@@ -7,7 +7,7 @@ import 'package:openflutterecommerce/presentation/features/profile/password_stat
 class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
   final PasswordRepository passwordRepository;
 
-  PasswordBloc({@required this.passwordRepository})
+  PasswordBloc({required this.passwordRepository})
       : assert(passwordRepository != null),
         super(PasswordInitialState());
 

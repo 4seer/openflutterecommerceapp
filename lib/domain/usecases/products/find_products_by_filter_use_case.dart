@@ -28,7 +28,7 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
         return ProductsByFilterResult(  
           products,
           products.length,
-          FilterRules.getSelectableAttributes(products)
+          FilterRules.getSelectableAttributes(products), exception: null!
         );
       }
 
@@ -36,25 +36,25 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
       return ProductsByFilterResult(  
         [],
         0,
-        null,
+        null!,
         exception: EmptyProductsException()
       );
     }
     return ProductsByFilterResult(  
       [],
       0,
-      null,
+      null!,
       exception: EmptyProductsException()
     );
   }
 
   Future<List<Product>> _findProductsByFilter(
       ProductsByFilterParams params) async {
-    List<Product> products;
+    List<Product> products = [];
     if (params.filterByCategory) {
       ProductRepository productRepository = sl();
       products =
-          await productRepository.getProducts(categoryId: params.categoryId);
+          await productRepository.getProducts(categoryId: params.categoryId, filterRules: null!);
     }
     return products;
   }

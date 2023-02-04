@@ -3,9 +3,9 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'package:openflutterecommerce/presentation/widgets/independent/custom_button.dart';
 
 class AcceptBottomNavigation extends StatelessWidget {
-  final VoidCallback onApply;
+  final VoidCallback? onApply;
 
-  const AcceptBottomNavigation({Key key, this.onApply}) : super(key: key);
+  const AcceptBottomNavigation({this.onApply});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class AcceptBottomNavigation extends StatelessWidget {
           Expanded(
             child: OpenFlutterButton(
               title: 'Apply',
-              onPressed: onApply,
+              onPressed: onApply!,
             ),
           )
         ],

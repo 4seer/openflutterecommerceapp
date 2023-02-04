@@ -22,7 +22,7 @@ class PaymentMethodRepositoryImpl implements PaymentMethodRepository{
   
     @override
     Future<List<PaymentMethodModel>> getPaymentMethodList() async {
-       if ( dataStorage.paymentMethods?.isEmpty ) {
+       if ( dataStorage.paymentMethods?.isEmpty == true ) {
         FakePaymentMethodRepository repo = FakePaymentMethodRepository();
         dataStorage.paymentMethods = await repo.getPaymentMethodList();
       }
@@ -43,7 +43,7 @@ class PaymentMethodRepositoryImpl implements PaymentMethodRepository{
       dataStorage.paymentMethods.add(
         paymentMethod
           .copyWith(
-            isDefault: paymentMethod.id == paymentMethodId 
+            isDefault: paymentMethod.id == paymentMethodId
           )
       );
     });

@@ -4,14 +4,14 @@ import 'package:openflutterecommerce/domain/entities/checkout/shipping_address_e
 
 class ShippingAddressModel extends ShippingAddressEntity {
   ShippingAddressModel(
-    {@required int id,
-    String fullName,
-    String address,
-    String city,
-    String state,
-    String postal,
-    String country,
-    bool isDefault}
+    {required int id,
+    required String fullName,
+    required String address,
+    required String city,
+    required String state,
+    required String postal,
+    required country,
+    required bool isDefault}
   ) : super(
       id: id,
       fullName: fullName,
@@ -23,24 +23,24 @@ class ShippingAddressModel extends ShippingAddressEntity {
       isDefault: isDefault);
 
   ShippingAddressModel copyWith(
-    {int id,
-    String fullName,
-    String address,
-    String city,
-    String state,
-    String postal,
-    String country,
-    bool isDefault})  
+    {int? id,
+    String? fullName,
+    String? address,
+    String? city,
+    String? state,
+    String? postal,
+    String? country,
+    bool? isDefault})
   {
     return ShippingAddressModel(
-      id: id ?? id,
-      fullName: fullName ?? fullName,
-      address: address ?? address,
-      city: city ?? city,
-      state: state ?? state,
-      postal: postal ?? postal,
-      country: country ?? country,
-      isDefault: isDefault ?? isDefault
+      id: id! ?? id,
+      fullName: fullName! ?? fullName,
+      address: address! ?? address,
+      city: city! ?? city,
+      state: state! ?? state,
+      postal: postal! ?? postal,
+      country: country! ?? country,
+      isDefault: isDefault! ?? isDefault
     );
   }
 }

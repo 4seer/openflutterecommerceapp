@@ -40,15 +40,15 @@ class CheckoutStartUseCaseImpl implements CheckoutStartUseCase {
         currentShippingAddress: await shippingAddressRepository.getDefaultShippingAddress(),
         totalCalculatedPrice: calculatedPrice,
         deliveryPrice: deliveryPrice, 
-        summaryPrice: calculatedPrice + deliveryPrice
+        summaryPrice: calculatedPrice + deliveryPrice, exception: null!
       );
     } catch (e) {
       return ChekcoutStartResult(  
         result: false,
         exception: CheckoutStartException(), 
-        currentPaymentMethod: null, 
-        deliveryPrice: null, 
-        totalCalculatedPrice: null
+        currentPaymentMethod: null!,
+        deliveryPrice: null!,
+        totalCalculatedPrice: null!, paymentMethods: [], shippingAddress: [], cartItems: [], currentShippingAddress: null!, summaryPrice: null!
       );
     }
   }
@@ -65,15 +65,15 @@ class ChekcoutStartResult extends UseCaseResult {
   final double summaryPrice;
 
   ChekcoutStartResult({
-    this.paymentMethods,
-    this.shippingAddress,
-    this.cartItems,
-    this.currentShippingAddress,
-    @required this.currentPaymentMethod,
-    @required this.totalCalculatedPrice,
-    @required this.deliveryPrice,
-    this.summaryPrice,
-    Exception exception, bool result}) 
+    required this.paymentMethods,
+    required this.shippingAddress,
+    required this.cartItems,
+    required this.currentShippingAddress,
+    required this.currentPaymentMethod,
+    required this.totalCalculatedPrice,
+    required this.deliveryPrice,
+    required this.summaryPrice,
+    required Exception exception, required bool result})
     : super(exception: exception, result: result);
 }
 

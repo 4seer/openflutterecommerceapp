@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test ProductCategory Data Source', () {
-    ProductCategoryDataSource dataSource;
+    late ProductCategoryDataSource dataSource;
 
     setUp(() async {
       dataSource = ProductCategoryDataSource();

@@ -12,9 +12,9 @@ import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 import 'products.dart';
 
 class ProductsScreen extends StatefulWidget {
-  final ProductListScreenParameters parameters;
+  final ProductListScreenParameters? parameters;
 
-  const ProductsScreen({Key key, this.parameters}) : super(key: key);
+  const ProductsScreen({ this.parameters}) ;
 
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
@@ -29,20 +29,21 @@ class ProductListScreenParameters {
 class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as ProductListScreenParameters;
     return SafeArea(
       child: OpenFlutterScaffold(
         background: null,
-        title: null,
+        title: '',
         body: BlocProvider<ProductsBloc>(
             create: (context) {
               return ProductsBloc(
-                  category: widget.parameters.category)
+                  category: widget.parameters!.category)
                 ..add(ScreenLoadedEvent());
             },
             child: BlocConsumer<ProductsBloc, ProductsState>(
               listener: (context, state) {
                 if (state.hasError) {
-                  ErrorDialog.showErrorDialog(context, state.error);
+                  ErrorDialog.showErrorDialog(context, state.error!);
                 }
               },
               builder: (context, state) {
@@ -50,8 +51,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   slivers: <Widget>[
                     SizeChangingAppBar(
                       title: state.data?.category?.name??'',
-                      filterRules: state.filterRules,
-                      sortRules: state.sortBy,
+                      filterRules: state.filterRules!,
+                      sortRules: state.sortBy!,
                       isListView: state is ProductsListViewState,
                       onFilterRulesChanged: (filter) {
                         BlocProvider.of<ProductsBloc>(context)

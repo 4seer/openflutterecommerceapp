@@ -4,19 +4,19 @@ import 'package:openflutterecommerce/config/theme.dart';
 class OpenFlutterInputField extends StatefulWidget {
   final TextEditingController controller;
   final String hint;
-  final FormFieldValidator validator;
+  final FormFieldValidator? validator;
   final TextInputType keyboard;
-  final FocusNode focusNode;
-  final VoidCallback onFinished;
+  final FocusNode? focusNode;
+  final VoidCallback? onFinished;
   final bool isPassword;
   final double horizontalPadding;
-  final Function onValueChanged;
-  final String error;
+  final Function? onValueChanged;
+  final String? error;
 
   const OpenFlutterInputField(
-      {Key key,
-      @required this.controller,
-      this.hint,
+      {Key? key,
+      required this.controller,
+      required this.hint,
       this.validator,
       this.keyboard = TextInputType.text,
       this.focusNode,
@@ -34,12 +34,12 @@ class OpenFlutterInputField extends StatefulWidget {
 }
 
 class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
-  String error;
+  late String error;
   bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
-    error = widget.error;
+    error = widget.error!;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
@@ -62,7 +62,7 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
             child: Padding(
               padding: EdgeInsets.only(left: 16.0),
               child: TextField(
-                onChanged: (value) => widget.onValueChanged(value),
+                onChanged: (value) => widget.onValueChanged!(value),
                 style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.normal,
@@ -80,7 +80,9 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
                             Icons.close,
                             color: AppColors.red,
                           )
-                        : isChecked ? Icon(Icons.done) : null,
+                        : isChecked
+                            ? Icon(Icons.done)
+                            : null,
                     hintStyle: TextStyle(
                         color: AppColors.lightGray,
                         fontSize: 16,
@@ -101,7 +103,7 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
 
   String validate() {
     setState(() {
-      error = widget.validator(widget.controller.text);
+      error = widget.validator!(widget.controller.text)!;
     });
     return error;
   }

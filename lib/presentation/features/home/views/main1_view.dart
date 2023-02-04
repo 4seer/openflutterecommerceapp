@@ -16,10 +16,10 @@ import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 class Main1View extends StatefulWidget {
-  final Function changeView;
-  final List<Product> products;
+  final Function? changeView;
+  final List<Product>? products;
 
-  const Main1View({Key key, this.products, this.changeView}) : super(key: key);
+  const Main1View({ this.products, this.changeView}) ;
 
   @override
   _Main1ViewState createState() => _Main1ViewState();
@@ -66,7 +66,7 @@ class _Main1ViewState extends State<Main1View> {
                         title: 'Check',
                         width: 160,
                         height: 48,
-                        onPressed: (() => widget.changeView(changeType: ViewChangeType.Forward)),
+                        onPressed: (() => widget.changeView!(changeType: ViewChangeType.Forward)),
                       ),
                     )
                   ],
@@ -82,7 +82,7 @@ class _Main1ViewState extends State<Main1View> {
             ),
             OpenFlutterProductListView(
               width: widgetWidth,
-              products: widget.products,
+              products: widget.products!,
               onFavoritesTap: ((Product product) => {
                     BlocProvider.of<HomeBloc>(context)
                         .add(HomeAddToFavoriteEvent(isFavorite: !product.isFavorite, product: product))
@@ -92,7 +92,7 @@ class _Main1ViewState extends State<Main1View> {
               title: 'Next Home Page',
               width: 160,
               height: 48,
-              onPressed: (() => widget.changeView(changeType: ViewChangeType.Forward)),
+              onPressed: (() => widget.changeView!(changeType: ViewChangeType.Forward)),
             )
           ],
         ),

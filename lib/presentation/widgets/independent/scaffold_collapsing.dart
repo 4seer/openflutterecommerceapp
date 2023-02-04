@@ -8,7 +8,7 @@ import 'package:openflutterecommerce/config/theme.dart';
 import 'bottom_menu.dart';
 
 class OpenFlutterCollapsingScaffold extends StatelessWidget {
-  final Color background;
+  final Color? background;
   final String title;
   final Widget body;
   final int bottomMenuIndex;
@@ -16,8 +16,8 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
   final TabController tabController;
 
   const OpenFlutterCollapsingScaffold(
-      {Key key, this.background, this.title, this.body, this.bottomMenuIndex, this.tabBarList, this.tabController})
-      : super(key: key);
+      { this.background, required this.title, required this.body, required this.bottomMenuIndex, required this.tabBarList, required this.tabController})
+      ;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
             ? (BuildContext context, bool innerBoxIsScrolled) {
                 return _buildSilverAppBar(context);
               }
-            : null,
+            : null!,
         body: body,
       ),
       backgroundColor: background,
@@ -46,7 +46,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
       }
     }
 
-    Widget tabWidget = tabBars.isNotEmpty
+    PreferredSizeWidget tabWidget = tabBars.isNotEmpty
         ? TabBar(
             unselectedLabelColor: _theme.primaryColor,
             unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
@@ -56,7 +56,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
             controller: tabController,
             indicatorColor: _theme.accentColor,
             indicatorSize: TabBarIndicatorSize.tab)
-        : null;
+        : TabBar(tabs: [],);
 
     return <Widget>[
       SliverAppBar(

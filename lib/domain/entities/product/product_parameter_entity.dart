@@ -4,8 +4,8 @@ class ProductParameterEntity extends Entity<int> {
   final String title;
 
   ProductParameterEntity(
-    {int id, 
-    this.title}) : super(id);
+    {required int id,
+    required this.title}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

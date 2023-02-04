@@ -18,7 +18,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final RemoveFromFavoritesUseCase removeFromFavoritesUseCase;
   final GetProductByIdUseCase getProductByIdUseCaseImpl;
   final AddProductToCartUseCase addProductToCartUseCase;
-  final int productId;
+  final int? productId;
 
   ProductBloc(
     {this.productId}):

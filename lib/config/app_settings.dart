@@ -1,4 +1,4 @@
 class AppSettings {
-  static bool cacheIsEnabled;
+  static bool cacheIsEnabled = true;
   static bool profileEnabled = true;
 }
