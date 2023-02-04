@@ -11,8 +11,7 @@ class OpenFlutterHashTagList extends StatelessWidget {
   final double height;
   final Function onTap;
 
-  const OpenFlutterHashTagList({Key key, this.tags, this.onTap, this.height})
-      : super(key: key);
+  const OpenFlutterHashTagList({required this.tags, required this.onTap, required this.height});
 
   @override
   Widget build(BuildContext context) {

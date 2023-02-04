@@ -17,17 +17,17 @@ import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 import '../cart.dart';
 
 class CartView extends StatefulWidget {
-  final List<Product> products;
+  final List<Product>? products;
   final Function changeView;
 
-  const CartView({Key key, this.products, this.changeView}) : super(key: key);
+  const CartView({this.products, required this.changeView}) ;
 
   @override
   _CartViewState createState() => _CartViewState();
 }
 
 class _CartViewState extends State<CartView> {
-  TextEditingController _promoController;
+  late TextEditingController _promoController;
 
   @override
   void initState() {
@@ -48,13 +48,12 @@ class _CartViewState extends State<CartView> {
     final bloc = BlocProvider.of<CartBloc>(context);
     return BlocListener<CartBloc, CartState>(listener: (context, state) {
       if (state is CartErrorState) {
-        return Container(
+        Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
                 style: _theme.textTheme.headline4
-                    .copyWith(color: _theme.errorColor)));
+                    ?.copyWith(color: _theme.errorColor)));
       }
-      return Container();
     }, child: BlocBuilder<CartBloc, CartState>(builder: (context, state) {
       if (state is CartLoadedState) {
         return Stack(children: <Widget>[
@@ -70,7 +69,7 @@ class _CartViewState extends State<CartView> {
             ),
             OpenFlutterInputButton(
               placeHolder: state.appliedPromo != null
-                  ? state.appliedPromo.promoCode
+                  ? state.appliedPromo!.promoCode
                   : 'Enter your promo code',
               controller: _promoController,
               width: width,
@@ -83,20 +82,20 @@ class _CartViewState extends State<CartView> {
                 ? Column(children: <Widget>[
                     OpenFlutterSummaryLine(
                         title: 'Subtotal:',
-                        summary: '\$' + state.totalPrice?.toStringAsFixed(2)),
+                        summary: '\$' + state.totalPrice!.toStringAsFixed(2)),
                     OpenFlutterSummaryLine(
                         title: 'Discount percent:',
                         summary:
-                            state.appliedPromo.discount.toStringAsFixed(0) +
+                            state.appliedPromo!.discount.toStringAsFixed(0) +
                                 '%'),
                     OpenFlutterSummaryLine(
                         title: 'Total amount:',
                         summary:
-                            '\$' + state.calculatedPrice?.toStringAsFixed(2)),
+                            '\$' + state.calculatedPrice!.toStringAsFixed(2)),
                   ])
                 : OpenFlutterSummaryLine(
                     title: 'Subtotal:',
-                    summary: '\$' + state.totalPrice?.toStringAsFixed(2)),
+                    summary: '\$' + state.totalPrice!.toStringAsFixed(2)),
             Padding(
               padding: EdgeInsets.only(bottom: AppSizes.sidePadding * 3),
             ),

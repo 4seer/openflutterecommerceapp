@@ -3,5 +3,5 @@ class AppUser {
   final String password;
   final String token;
 
-  AppUser({this.email, this.password, this.token});
+  AppUser({required this.email, required this.password, required this.token});
 }

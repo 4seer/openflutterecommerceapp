@@ -4,8 +4,8 @@ class HashTagEntity extends Entity<int> {
   final String title;
 
   HashTagEntity({
-    int id,
-    this.title,
+    required int id,
+    required this.title,
   }) : super(id);
 
   @override

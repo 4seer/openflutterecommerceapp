@@ -23,12 +23,12 @@ class FindCategoriesByFilterUseCaseImpl implements FindCategoriesByFilterUseCase
       List<ProductCategory> categories = await _categoryRepository.getCategories(parentCategoryId: params.categoryId);
       return CategoriesByFilterResult(
         categories,
-        categories.length
+        categories.length, exception: null!
       );
       
     } catch (e) {
       return CategoriesByFilterResult(  
-        null,
+        null!,
         0,
         exception: EmptyCategoriesException()
       );

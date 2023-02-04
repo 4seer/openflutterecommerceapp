@@ -12,20 +12,19 @@ class OpenFlutterSelectValuesBoxes<T> extends StatefulWidget {
   final double boxWidth;
 
   const OpenFlutterSelectValuesBoxes(
-      {Key key,
-      @required this.availableValues,
-      @required this.selectedValues,
-      @required this.label,
-      @required this.onClick,
-      this.boxWidth})
-      : super(key: key);
+      {required this.availableValues,
+      required this.selectedValues,
+      required this.label,
+      required this.onClick,
+      required this.boxWidth})
+      ;
 
   @override
   _OpenFlutterSelectValuesBoxesState<T> createState() => _OpenFlutterSelectValuesBoxesState<T>();
 }
 
 class _OpenFlutterSelectValuesBoxesState<T> extends State<OpenFlutterSelectValuesBoxes<T>> {
-  List<T> selectedValues;
+  late List<T> selectedValues;
 
   @override
   void initState() {
@@ -85,7 +84,7 @@ class _OpenFlutterSelectValuesBoxesState<T> extends State<OpenFlutterSelectValue
       child: Text(
         convertValueToString(currentValue).toUpperCase(),
         overflow: TextOverflow.ellipsis,
-        style: _theme.textTheme.headline2.copyWith(
+        style: _theme.textTheme.headline2?.copyWith(
           color: widget.selectedValues.contains(currentValue) ? AppColors.white : _theme.accentColor,
         ),
       ),

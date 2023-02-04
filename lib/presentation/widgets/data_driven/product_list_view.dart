@@ -17,11 +17,10 @@ class OpenFlutterProductListView extends StatelessWidget {
   final Function(Product product) onFavoritesTap;
 
   const OpenFlutterProductListView({
-    Key key,
-    this.width,
-    this.products,
-    @required this.onFavoritesTap
-  }) : super(key: key);
+    required this.width,
+    required this.products,
+    required this.onFavoritesTap
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,8 +6,8 @@ class OpenFlutterServiceButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const OpenFlutterServiceButton(
-      {Key key, this.serviceType = ServiceType.Google, this.onPressed})
-      : super(key: key);
+      { this.serviceType = ServiceType.Google, required this.onPressed})
+      ;
 
   @override
   Widget build(BuildContext context) {

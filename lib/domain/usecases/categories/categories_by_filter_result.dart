@@ -10,7 +10,7 @@ class CategoriesByFilterResult {
   CategoriesByFilterResult(
     this.categories,
     this.quantity,{
-      this.exception
+      required this.exception
     }
   );
   

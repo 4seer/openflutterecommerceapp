@@ -13,19 +13,19 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   final String avatarUrl;
 
   final bool withPhotos;
-  final List<String> photos;
+  final List<String>? photos;
   final double photoSize;
 
   final double rating;
   final int starCount;
 
-  final Function onHelpfulTapped;
+  final Function()? onHelpfulTapped;
   final bool isHelpfulMarked;
   final double helpfulIconSize;
   final double helpfulFontSize;
 
   const OpenFlutterProductReviewItem({
-    Key key,
+    
     this.avatarUrl = '',
     this.avatarSize = 40.0,
     this.writerName = '',
@@ -40,7 +40,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
     this.isHelpfulMarked = false,
     this.helpfulIconSize = 14.0,
     this.helpfulFontSize = 12.0,
-  }) : super(key: key);
+  }) ;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,6 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
       width: double.infinity,
       child: Stack(
         fit: StackFit.loose,
-        overflow: Overflow.visible,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
@@ -127,7 +126,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
         Expanded(
           child: Text(
             reviewDateTime,
-            style: Theme.of(context).textTheme.caption.copyWith(
+            style: Theme.of(context).textTheme.caption?.copyWith(
                   fontSize: 12,
                 ),
             textAlign: TextAlign.end,
@@ -142,7 +141,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
       width: double.infinity,
       child: Text(
         comment,
-        style: Theme.of(context).textTheme.bodyText2.copyWith(
+        style: Theme.of(context).textTheme.bodyText2?.copyWith(
               fontSize: 14.0,
             ),
         textAlign: TextAlign.start,
@@ -151,7 +150,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   }
 
   Widget _buildPhotos(BuildContext context) {
-    if (withPhotos && photos != null && photos.isNotEmpty) {
+    if (withPhotos && photos != null && photos?.isNotEmpty == true) {
       return Padding(
         padding: const EdgeInsets.only(
           top: 8.0,
@@ -170,7 +169,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   }
 
   List<Widget> _buildPhotosItems() {
-    var list = List<Widget>.generate(photos.length, (index) => _buildPhotoItem(photos[index]));
+    var list = List<Widget>.generate(photos!.length, (index) => _buildPhotoItem(photos![index]));
     return list;
   }
 
@@ -185,12 +184,12 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
         child: Image.network(
           photoUrl,
           fit: BoxFit.fill,
-          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
             if (loadingProgress == null) return child;
             return Center(
               child: CircularProgressIndicator(
                 value: loadingProgress.expectedTotalBytes != null
-                    ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                    ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!.toInt()
                     : null,
               ),
             );
@@ -202,7 +201,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
 
   Widget _buildIsHelpful(BuildContext context) {
     return GestureDetector(
-      onTap: onHelpfulTapped,
+      onTap: onHelpfulTapped!,
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minHeight: 32.0,
@@ -215,7 +214,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
               child: Text(
                 'Helpful',
                 textAlign: TextAlign.end,
-                style: Theme.of(context).textTheme.caption.copyWith(
+                style: Theme.of(context).textTheme.caption?.copyWith(
                       color: _getHelpfulColor(context),
                       fontSize: helpfulFontSize,
                     ),

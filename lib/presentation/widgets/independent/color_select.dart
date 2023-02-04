@@ -10,19 +10,19 @@ class OpenFlutterColorSelect extends StatefulWidget {
   final Function(List<Color>) onClick;
 
   const OpenFlutterColorSelect(
-      {Key key,
-      @required this.availableColors,
-      @required this.selectedColors,
-      @required this.label,
-      @required this.onClick})
-      : super(key: key);
+      {
+      required this.availableColors,
+      required this.selectedColors,
+      required this.label,
+      required this.onClick})
+      ;
 
   @override
   _OpenFlutterColorSelectState createState() => _OpenFlutterColorSelectState();
 }
 
 class _OpenFlutterColorSelectState extends State<OpenFlutterColorSelect> {
-  List<Color> selectedColors;
+  late List<Color> selectedColors;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _OpenFlutterColorSelectState extends State<OpenFlutterColorSelect> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Column(children: <Widget>[
-      OpenFlutterBlockSubtitle(title: widget.label, width: width),
+      OpenFlutterBlockSubtitle(title: widget.label, width: width, linkText: '', onLinkTap: (){},),
       Padding(
         padding: EdgeInsets.only(bottom: AppSizes.sidePadding),
       ),

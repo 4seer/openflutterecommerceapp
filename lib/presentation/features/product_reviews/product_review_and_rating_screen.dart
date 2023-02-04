@@ -13,9 +13,8 @@ class ProductReviewRatingScreen extends StatefulWidget {
   final Product product;
 
   const ProductReviewRatingScreen({
-    Key key,
-    this.product,
-  }) : super(key: key);
+    required this.product,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -60,7 +59,8 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
         ),
         BlocProvider<ProductReviewBloc>(
           create: (context) {
-            return ProductReviewBloc(ProductReviewRepository())..add(ProductReviewStartEvent(widget.product.id, false));
+            return ProductReviewBloc(ProductReviewRepository())
+              ..add(ProductReviewStartEvent(widget.product.id, false));
           },
           child: ProductReviewWrapper(
             product: widget.product,
@@ -117,9 +117,8 @@ class ProductReviewWrapper extends StatefulWidget {
   final summaryAndFilterIndex = 2;
 
   const ProductReviewWrapper({
-    Key key,
-    this.product,
-  }) : super(key: key);
+    required this.product,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -128,7 +127,7 @@ class ProductReviewWrapper extends StatefulWidget {
 }
 
 class ProductReviewWrapperState extends State<ProductReviewWrapper> {
-  List<ProductReview> comments;
+  late List<ProductReview> comments;
   int reviewCount = 0;
   bool withPhotos = false;
 
@@ -149,8 +148,9 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
                   child: _buildItem(context, index),
                 );
               },
-              childCount:
-                  comments != null ? comments.length + widget.summaryAndFilterIndex : widget.summaryAndFilterIndex + 1,
+              childCount: comments != null
+                  ? comments.length + widget.summaryAndFilterIndex
+                  : widget.summaryAndFilterIndex + 1,
             ),
           );
         });
@@ -158,7 +158,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
 
   void _readState(ProductReviewState state) {
     if (state is ProductReviewLoadingState) {
-      comments = null;
+      comments = [];
       reviewCount = 0;
     }
 
@@ -214,7 +214,8 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
                 checked: withPhotos,
                 title: 'with photos',
                 onTap: (value) {
-                  BlocProvider.of<ProductReviewBloc>(context).add(ProductReviewStartEvent(widget.product.id, value));
+                  BlocProvider.of<ProductReviewBloc>(context)
+                      .add(ProductReviewStartEvent(widget.product.id, value));
                 },
               ),
             ),

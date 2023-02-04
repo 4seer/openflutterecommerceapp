@@ -8,7 +8,7 @@ import '../widgets.dart';
 
 class OpenFlutterRatingSummary extends StatelessWidget {
   final double rating;
-  final List<StarQuantity> ratingDetail;
+  final List<StarQuantity>? ratingDetail;
   final int startCount;
   final int ratingQuantity;
   final bool showLabel;
@@ -19,7 +19,6 @@ class OpenFlutterRatingSummary extends StatelessWidget {
   final double reviewCounterLabelFontSize;
 
   const OpenFlutterRatingSummary({
-    Key key,
     this.startCount = 5,
     this.rating = 5,
     this.ratingQuantity = 0,
@@ -30,7 +29,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
     this.starIconSize = 14.0,
     this.labelFontSize = 14.0,
     this.reviewCounterLabelFontSize = 14.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
       children: <Widget>[
         Text(
           rating.toString(),
-          style: Theme.of(context).textTheme.headline3.copyWith(
+          style: Theme.of(context).textTheme.headline3?.copyWith(
                 color: Colors.black,
               ),
         ),
@@ -75,7 +74,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
     if (showLabel) {
       return Text(
         '${ratingQuantity.toString()} ratings',
-        style: Theme.of(context).textTheme.caption.copyWith(
+        style: Theme.of(context).textTheme.caption?.copyWith(
               color: Colors.grey,
               fontSize: labelFontSize,
             ),
@@ -90,8 +89,8 @@ class OpenFlutterRatingSummary extends StatelessWidget {
 
   List<Widget> _buildList(BuildContext context) {
     var list = <Widget>[];
-    if (ratingDetail != null && ratingDetail.isNotEmpty) {
-      ratingDetail.forEach((starQuantity) {
+    if (ratingDetail != null && ratingDetail!.isNotEmpty) {
+      ratingDetail!.forEach((starQuantity) {
         list.add(_buildItem(context, starQuantity));
       });
     }
@@ -172,7 +171,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
     return Center(
       child: Text(
         starQuantity.quantity.toInt().toString(),
-        style: Theme.of(context).textTheme.caption.copyWith(
+        style: Theme.of(context).textTheme.caption?.copyWith(
               fontSize: reviewCounterLabelFontSize,
             ),
         textAlign: TextAlign.center,
@@ -201,7 +200,7 @@ class StarQuantity {
   final int quantity;
 
   StarQuantity({
-    this.rating,
-    this.quantity,
+    required this.rating,
+    required this.quantity,
   });
 }

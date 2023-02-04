@@ -11,9 +11,9 @@ import '../../wrapper.dart';
 import '../checkout.dart';
 
 class AddShippingAddressView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const AddShippingAddressView({Key key, this.changeView}) : super(key: key);
+  const AddShippingAddressView({ this.changeView}) ;
 
   @override
   _AddShippingAddressViewState createState() => _AddShippingAddressViewState();
@@ -22,12 +22,12 @@ class AddShippingAddressView extends StatefulWidget {
 class _AddShippingAddressViewState extends State<AddShippingAddressView> {
   int paymentCardIndex = 0;
 
-  TextEditingController _fullNameController;
-  TextEditingController _addressController;
-  TextEditingController _cityController;
-  TextEditingController _stateController;
-  TextEditingController _postalController;
-  TextEditingController _countryController;
+  late TextEditingController _fullNameController;
+  late TextEditingController _addressController;
+  late TextEditingController _cityController;
+  late TextEditingController _stateController;
+  late TextEditingController _postalController;
+  late TextEditingController _countryController;
 
   @override
   void initState() {
@@ -61,13 +61,12 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
         bloc: bloc,
         listener: (BuildContext context, CheckoutState state) {
           if (state is CheckoutErrorState) {
-            return Container(
+            Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
                     style: _theme.textTheme.headline4
-                        .copyWith(color: _theme.errorColor)));
+                        ?.copyWith(color: _theme.errorColor)));
           }
-          return Container();
         },
         child: BlocBuilder(
             bloc: bloc,
@@ -133,7 +132,7 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
                                   state: _stateController.text,
                                   postal: _postalController.text,
                                   country: _countryController.text)),
-                            widget.changeView(
+                            widget.changeView!(
                                 changeType: ViewChangeType.Backward)
                           }),
                     )

@@ -15,9 +15,9 @@ import '../../wrapper.dart';
 import '../checkout.dart';
 
 class CartView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const CartView({Key key, this.changeView}) : super(key: key);
+  const CartView({ this.changeView}) ;
 
   @override
   _CartViewState createState() => _CartViewState();
@@ -34,13 +34,12 @@ class _CartViewState extends State<CartView> {
         bloc: bloc,
         listener: (context, state) {
           if (state is CheckoutErrorState) {
-            return Container(
+            Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
                     style: _theme.textTheme.headline4
-                        .copyWith(color: _theme.errorColor)));
+                        ?.copyWith(color: _theme.errorColor)));
           }
-          return Container();
         },
         child: BlocBuilder(
             bloc: bloc,
@@ -52,17 +51,17 @@ class _CartViewState extends State<CartView> {
                     OpenFlutterBlockSubtitle(
                         title: 'Shipping Address', width: width),
                     OpenFlutterActionCard(
-                        title: state.currentShippingAddress.fullName,
+                        title: state.currentShippingAddress!.fullName,
                         linkText: 'Change',
                         onLinkTap: (() => {
-                              widget.changeView(
+                              widget.changeView!(
                                   changeType: ViewChangeType.Exact, index: 2)
                             }),
                         child: RichText(
                           text: TextSpan(
                               text: state.currentShippingAddress.toString(),
                               style: _theme.textTheme.headline2
-                                  .copyWith(color: _theme.primaryColor)),
+                                  ?.copyWith(color: _theme.primaryColor)),
                           maxLines: 2,
                         )),
                     OpenFlutterBlockSubtitle(
@@ -70,7 +69,7 @@ class _CartViewState extends State<CartView> {
                       width: width,
                       linkText: 'Change',
                       onLinkTap: (() => {
-                            widget.changeView(
+                            widget.changeView!(
                                 changeType: ViewChangeType.Forward)
                           }),
                     ),
@@ -105,7 +104,7 @@ class _CartViewState extends State<CartView> {
                     OpenFlutterButton(
                       title: 'SUBMIT ORDER',
                       onPressed: (() => {
-                            widget.changeView(
+                            widget.changeView!(
                                 changeType: ViewChangeType.Exact, index: 4)
                           }),
                     )

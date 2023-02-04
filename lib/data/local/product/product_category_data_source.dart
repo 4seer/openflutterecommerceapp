@@ -15,7 +15,7 @@ class ProductCategoryDataSource extends DataSource {
         description: maps[i]['description'],
         image: maps[i]['image'],
         thumb: maps[i]['thumb'],
-        parentId: maps[i]['parentId'],
+        parentId: maps[i]['parentId'], orderNumber: null!, count: null!,
       );
     });
   }
@@ -33,7 +33,7 @@ class ProductCategoryDataSource extends DataSource {
       description: maps[0]['description'],
       image: maps[0]['image'],
       thumb: maps[0]['thumb'],
-      parentId: maps[0]['parentId'],
+      parentId: maps[0]['parentId'], orderNumber: null!, count: null!,
     );
   }
 

@@ -30,7 +30,7 @@ abstract class ProductRepository {
     int pageSize = AppConsts.page_size,
     int categoryId = 0,
     SortRules sortRules = const SortRules(),
-    FilterRules filterRules,
+    required FilterRules filterRules,
   });
 
   ///returns filter options available for products in category with

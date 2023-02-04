@@ -10,14 +10,14 @@ class ProductCategoryEntity extends Entity<int> {
   final int count;
 
   ProductCategoryEntity(
-    {int id,
-    this.title,
-    this.description,
-    this.image,
-    this.thumb,
-    this.parentId,
-    this.orderNumber,
-    this.count}) : super(id);
+    {required int id,
+    required this.title,
+    required this.description,
+    required this.image,
+    required this.thumb,
+    required this.parentId,
+    required this.orderNumber,
+    required this.count}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

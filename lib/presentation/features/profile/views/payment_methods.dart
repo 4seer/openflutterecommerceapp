@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 class PaymentMethodsView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const PaymentMethodsView({Key key, this.changeView}) : super(key: key);
+  const PaymentMethodsView({ this.changeView}) ;
 
   @override
   _PaymentMethodsViewState createState() => _PaymentMethodsViewState();

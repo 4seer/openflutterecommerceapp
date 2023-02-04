@@ -15,17 +15,16 @@ class OpenFlutterViewOptions extends StatelessWidget {
   final bool isListView;
   final Function(FilterRules) onFilterChanged;
   final Function(SortRules) onSortChanged;
-  final Function onChangeViewClicked;
+  final Function()? onChangeViewClicked;
 
   const OpenFlutterViewOptions(
-      {Key key,
-      @required this.onFilterChanged,
-      @required this.onSortChanged,
-      @required this.onChangeViewClicked,
-      @required this.sortRules,
-      @required this.filterRules,
-      this.isListView = true})
-      : super(key: key);
+      {
+      required this.onFilterChanged,
+      required this.onSortChanged,
+      required this.onChangeViewClicked,
+      required this.sortRules,
+      required this.filterRules,
+      this.isListView = true});
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +112,7 @@ class OpenFlutterViewOptions extends StatelessWidget {
                             Expanded(
                               child: InkWell(
                                 child: Text(value,
-                                    style: Theme.of(context).textTheme.headline4.copyWith(
+                                    style: Theme.of(context).textTheme.headline4?.copyWith(
                                         fontWeight: FontWeight.normal,
                                         color: sortRules.sortType == key ? AppColors.white : AppColors.black)),
                                 onTap: () {

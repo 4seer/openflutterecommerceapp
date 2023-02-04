@@ -10,14 +10,14 @@ class ProductReviewEntity extends Entity<int> {
   final String thumb;
 
   ProductReviewEntity(
-    {int id,
-    this.description,
-    this.productId,
-    this.rating,
-    this.hasPhoto,
-    this.date,
-    this.author,
-    this.thumb}) : super(id);
+    {required int id,
+    required this.description,
+    required this.productId,
+    required this.rating,
+    required this.hasPhoto,
+    required this.date,
+    required this.author,
+    required this.thumb}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

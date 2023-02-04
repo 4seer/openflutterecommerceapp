@@ -20,7 +20,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
     return SafeArea(
       child: OpenFlutterScaffold(
         background: null,
-        title: null,
+        title: '',
         body: BlocProvider<FavouriteBloc>(
           create: (context) {
             return FavouriteBloc()..add(ScreenLoadedEvent());
@@ -39,8 +39,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           slivers: <Widget>[
             SizeChangingAppBar(
               title: 'Favorites',
-              filterRules: state.filterRules,
-              sortRules: state.sortBy,
+              filterRules: state.filterRules!,
+              sortRules: state.sortBy!,
               isListView: state.isList,
               onFilterRulesChanged: (filter) {
                 BlocProvider.of<FavouriteBloc>(context)

@@ -11,7 +11,7 @@ import '../../wrapper.dart';
 class Success2View extends StatefulWidget {
   final Function changeView;
 
-  const Success2View({Key key, this.changeView}) : super(key: key);
+  const Success2View({ required this.changeView}) ;
 
   @override
   _Success2ViewState createState() => _Success2ViewState();

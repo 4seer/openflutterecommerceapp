@@ -12,14 +12,14 @@ class OpenFlutterPaymentCardPreview extends StatelessWidget {
   final CardType cardType;
 
   const OpenFlutterPaymentCardPreview(
-      {Key key,
-      @required this.width,
-      @required this.cardNumber,
-      @required this.cardHolderName,
-      @required this.expirationMonth,
-      @required this.expirationYear,
+      {
+      required this.width,
+      required this.cardNumber,
+      required this.cardHolderName,
+      required this.expirationMonth,
+      required this.expirationYear,
       this.cardType = CardType.MasterCard})
-      : super(key: key);
+      ;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class OpenFlutterPaymentCardPreview extends StatelessWidget {
                   height: 38,
                   child: Text(cardNumber,
                       style:
-                          _theme.textTheme.headline6.copyWith(fontSize: 24, color: AppColors.white, letterSpacing: 6)),
+                          _theme.textTheme.headline6?.copyWith(fontSize: 24, color: AppColors.white, letterSpacing: 6)),
                 ),
                 Positioned(
                   top: 210,
@@ -57,7 +57,7 @@ class OpenFlutterPaymentCardPreview extends StatelessWidget {
                   width: width - AppSizes.sidePadding,
                   height: 38,
                   child: Text(cardHolderName,
-                      style: _theme.textTheme.headline2.copyWith(
+                      style: _theme.textTheme.headline2?.copyWith(
                           //fontSize: 34,
                           color: AppColors.white)),
                 ),
@@ -68,7 +68,7 @@ class OpenFlutterPaymentCardPreview extends StatelessWidget {
                   height: 38,
                   child:
                       Text(expirationMonth.toString().padLeft(2, '0') + '/' + expirationYear.toString().padLeft(2, '0'),
-                          style: _theme.textTheme.headline2.copyWith(
+                          style: _theme.textTheme.headline2?.copyWith(
                               //fontSize: 34,
                               color: AppColors.white)),
                 ),

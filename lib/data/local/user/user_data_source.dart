@@ -20,7 +20,7 @@ class UserDataSource extends DataSource {
         newArrivalsNotification:
             maps[i]['newArrivalsNotification'].toString() == '1',
         deliveryStatusChanges:
-            maps[i]['deliveryStatusChanges'].toString() == '1',
+            maps[i]['deliveryStatusChanges'].toString() == '1', token: '',
       );
     });
   }
@@ -42,7 +42,7 @@ class UserDataSource extends DataSource {
       salesNotification: maps[0]['salesNotification'].toString() == '1',
       newArrivalsNotification:
           maps[0]['newArrivalsNotification'].toString() == '1',
-      deliveryStatusChanges: maps[0]['deliveryStatusChanges'].toString() == '1',
+      deliveryStatusChanges: maps[0]['deliveryStatusChanges'].toString() == '1', token: '',
     );
   }
 

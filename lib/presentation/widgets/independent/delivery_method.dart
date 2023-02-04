@@ -48,7 +48,7 @@ class OpenFlutterDeliveryMethod extends StatelessWidget {
                   width: 61,
                 ),
               ),
-              Text(title, style: _theme.textTheme.bodyText2.copyWith(color: _theme.primaryColorLight))
+              Text(title, style: _theme.textTheme.bodyText2?.copyWith(color: _theme.primaryColorLight))
             ],
           ),
         ));

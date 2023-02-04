@@ -13,7 +13,7 @@ import 'views/settings.dart';
 import 'views/shipping_addresses.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({Key key}) : super(key: key);
+  ProfileScreen({Key? key}) ;
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();

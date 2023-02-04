@@ -9,12 +9,12 @@ abstract class SettingsEvent extends Equatable {
 
 @immutable
 class UpdateFullNameEvent extends SettingsEvent {
-  final String fullName;
+  final String? fullName;
 
   UpdateFullNameEvent({this.fullName});
 
   @override
-  List<Object> get props => [fullName];
+  List<Object> get props => [fullName!];
 
   @override
   String toString() => 'Update FullName Event';
@@ -22,12 +22,12 @@ class UpdateFullNameEvent extends SettingsEvent {
 
 @immutable
 class UpdateDateOfBirthEvent extends SettingsEvent {
-  final String dateOfBirth;
+  final String? dateOfBirth;
 
   UpdateDateOfBirthEvent({this.dateOfBirth});
 
   @override
-  List<Object> get props => [dateOfBirth];
+  List<Object> get props => [dateOfBirth!];
 
   @override
   String toString() => 'Update DateOfBirth Event';
@@ -35,7 +35,7 @@ class UpdateDateOfBirthEvent extends SettingsEvent {
 
 @immutable
 class UpdateNotifySalesEvent extends SettingsEvent {
-  final bool notifySales;
+  final bool? notifySales;
 
   UpdateNotifySalesEvent({this.notifySales});
 
@@ -43,12 +43,12 @@ class UpdateNotifySalesEvent extends SettingsEvent {
   String toString() => 'Update NotifySales Event';
 
   @override
-  List<Object> get props => [notifySales];
+  List<Object> get props => [notifySales!];
 }
 
 @immutable
 class UpdateNotifyArrivalsEvent extends SettingsEvent {
-  final bool notifyArrivals;
+  final bool? notifyArrivals;
 
   UpdateNotifyArrivalsEvent({this.notifyArrivals});
 
@@ -56,12 +56,12 @@ class UpdateNotifyArrivalsEvent extends SettingsEvent {
   String toString() => 'Update NotifyArrivals Event';
 
   @override
-  List<Object> get props => [notifyArrivals];
+  List<Object> get props => [notifyArrivals!];
 }
 
 @immutable
 class UpdateNotifyDeliveryEvent extends SettingsEvent {
-  final bool notifyDelivery;
+  final bool? notifyDelivery;
 
   UpdateNotifyDeliveryEvent({this.notifyDelivery});
 
@@ -69,5 +69,5 @@ class UpdateNotifyDeliveryEvent extends SettingsEvent {
   String toString() => 'Update Delivery Event';
 
   @override
-  List<Object> get props => [notifyDelivery];
+  List<Object> get props => [notifyDelivery!];
 }

@@ -6,10 +6,10 @@ class OrderProductParameterEntity extends Entity<int> {
   final int parameterValueId;
 
   OrderProductParameterEntity(
-    {int id, 
-    this.productId, 
-    this.parameterId, 
-    this.parameterValueId}) : super(id);
+    {required int id,
+    required this.productId,
+    required this.parameterId,
+    required this.parameterValueId}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

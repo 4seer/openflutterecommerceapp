@@ -18,7 +18,7 @@ class RemoveProductFromCartUseCaseImpl implements RemoveProductFromCartUseCase {
   Future<RemoveProductFromCartResult> execute(CartItem item) async {
     try {
       CartRepositoryImpl.cartProductDataStorage.items.remove(item);
-      return RemoveProductFromCartResult(result: true);
+      return RemoveProductFromCartResult(result: true, exception: null!);
     } catch (e) {
       return RemoveProductFromCartResult(  
         result: false,
@@ -31,6 +31,6 @@ class RemoveProductFromCartUseCaseImpl implements RemoveProductFromCartUseCase {
 class AddProductToCartException implements Exception {}
 
 class RemoveProductFromCartResult extends UseCaseResult {
-  RemoveProductFromCartResult({Exception exception, bool result}) 
+  RemoveProductFromCartResult({required Exception exception, required bool result})
     : super(exception: exception, result: result);
 }

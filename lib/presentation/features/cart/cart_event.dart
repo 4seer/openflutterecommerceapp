@@ -21,35 +21,35 @@ class CartQuantityChangedEvent extends CartEvent {
   final CartItem item;
   final int newQuantity;
 
-  CartQuantityChangedEvent({this.item, this.newQuantity});
+  CartQuantityChangedEvent({required this.item, required this.newQuantity});
 }
 
 @immutable
 class CartRemoveFromCartEvent extends CartEvent {
   final CartItem item;
 
-  CartRemoveFromCartEvent({this.item});
+  CartRemoveFromCartEvent({required this.item});
 }
 
 @immutable
 class CartAddToFavsEvent extends CartEvent {
   final CartItem item;
 
-  CartAddToFavsEvent({this.item});
+  CartAddToFavsEvent({required this.item});
 }
 
 @immutable
 class CartPromoAppliedEvent extends CartEvent {
   final Promo promo;
 
-  CartPromoAppliedEvent({this.promo});
+  CartPromoAppliedEvent({required this.promo});
 }
 
 @immutable
 class CartPromoCodeAppliedEvent extends CartEvent {
   final String promoCode;
 
-  CartPromoCodeAppliedEvent({this.promoCode});
+  CartPromoCodeAppliedEvent({required this.promoCode});
 }
 
 @immutable

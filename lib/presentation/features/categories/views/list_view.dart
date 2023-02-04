@@ -13,7 +13,7 @@ import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 import '../categories.dart';
 
 class CategoriesListView extends StatefulWidget {
-  const CategoriesListView({Key key}) : super(key: key);
+  const CategoriesListView() ;
 
   @override
   _CategoriesListViewState createState() => _CategoriesListViewState();
@@ -28,13 +28,12 @@ class _CategoriesListViewState extends State<CategoriesListView> {
     return BlocListener<CategoryBloc, CategoryState>(
         listener: (context, state) {
       if (state is CategoryErrorState) {
-        return Container(
+        Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
                 style: _theme.textTheme.headline4
-                    .copyWith(color: _theme.errorColor)));
+                    ?.copyWith(color: _theme.errorColor)));
       }
-      return Container();
     }, child:
             BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
       if (state is CategoryListViewState) {

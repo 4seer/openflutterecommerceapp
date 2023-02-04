@@ -12,21 +12,21 @@ import 'package:openflutterecommerce/data/woocommerce/repositories/remote_user_r
 class UserRepositoryImpl extends UserRepository {
   final RemoteUserRepository remoteUserRepository;
 
-  UserRepositoryImpl({@required this.remoteUserRepository});
+  UserRepositoryImpl({required this.remoteUserRepository});
 
   @override
   Future<String> signIn({
-    @required String email,
-    @required String password,
+    required String email,
+    required String password,
   }) async {
     return remoteUserRepository.signIn(email: email, password: password);
   }
 
   @override
   Future<String> signUp({
-    @required String name,
-    @required String email,
-    @required String password,
+    required String name,
+    required String email,
+    required String password,
   }) async {
     return remoteUserRepository.signUp(name: name, email: email, password: password);
   }
@@ -42,7 +42,7 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<void> forgotPassword({
-    @required String email,
+    required String email,
   }) async {
       return remoteUserRepository.forgotPassword(email: email);
   }

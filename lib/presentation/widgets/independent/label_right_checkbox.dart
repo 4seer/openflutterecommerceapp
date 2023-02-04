@@ -7,15 +7,15 @@ class OpenFlutterLabelRightCheckbox extends StatefulWidget {
   final Function(bool) onChanged;
   final double width;
 
-  const OpenFlutterLabelRightCheckbox({Key key, this.checked, this.title, this.onChanged, this.width})
-      : super(key: key);
+  const OpenFlutterLabelRightCheckbox({ required this.checked, required this.title, required this.onChanged, required this.width})
+      ;
 
   @override
   _OpenFlutterLabelRightCheckboxState createState() => _OpenFlutterLabelRightCheckboxState();
 }
 
 class _OpenFlutterLabelRightCheckboxState extends State<OpenFlutterLabelRightCheckbox> {
-  bool _checked;
+  late bool _checked;
 
   @override
   void initState() {
@@ -35,14 +35,14 @@ class _OpenFlutterLabelRightCheckboxState extends State<OpenFlutterLabelRightChe
                 width: widget.width - 50,
                 child: Text(widget.title,
                     style: _theme.textTheme.headline4
-                        .copyWith(color: _checked ? _theme.accentColor : _theme.primaryColor))),
+                        ?.copyWith(color: _checked ? _theme.accentColor : _theme.primaryColor))),
             Container(
               child: Checkbox(
                 activeColor: _theme.accentColor,
                 checkColor: AppColors.white,
                 value: _checked,
-                onChanged: (bool value) {
-                  changeCheckboxValue(value);
+                onChanged: (bool? value) {
+                  changeCheckboxValue(value!);
                 },
               ),
             )

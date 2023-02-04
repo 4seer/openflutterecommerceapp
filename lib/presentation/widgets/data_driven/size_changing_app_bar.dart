@@ -17,15 +17,13 @@ class SizeChangingAppBar extends StatelessWidget {
   final VoidCallback onViewChanged;
 
   const SizeChangingAppBar(
-      {Key key,
-      this.title,
-      @required this.filterRules,
-      this.sortRules,
+      {required this.title,
+      required this.filterRules,
+      required this.sortRules,
       this.isListView = true,
-      this.onFilterRulesChanged,
-      this.onSortRulesChanged,
-      this.onViewChanged})
-      : super(key: key);
+      required this.onFilterRulesChanged,
+      required this.onSortRulesChanged,
+      required this.onViewChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +58,7 @@ class SizeChangingAppBar extends StatelessWidget {
             Container(
               height: 30,
               child: VisualFilter(
-                  filterRules?.hashTags, filterRules?.selectedHashTags,
+                  filterRules!.hashTags, filterRules!.selectedHashTags,
                   (updateValue, isSelected) {
                 BlocProvider.of<ProductsBloc>(context).add(
                     ProductChangeHashTagEvent(updateValue, isSelected));

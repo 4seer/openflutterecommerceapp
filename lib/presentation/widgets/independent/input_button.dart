@@ -8,8 +8,8 @@ class OpenFlutterInputButton extends StatelessWidget {
   final TextEditingController controller;
 
   const OpenFlutterInputButton(
-      {Key key, @required this.placeHolder, @required this.onClick, @required this.width, @required this.controller})
-      : super(key: key);
+      { required this.placeHolder, required this.onClick, required this.width, required this.controller})
+      ;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class OpenFlutterInputButton extends StatelessWidget {
               width: width - 40,
               child: TextField(
                   controller: controller,
-                  style: _theme.textTheme.headline2.copyWith(color: _theme.primaryColorLight),
+                  style: _theme.textTheme.headline2?.copyWith(color: _theme.primaryColorLight),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: placeHolder,

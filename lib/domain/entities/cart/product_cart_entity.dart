@@ -6,10 +6,10 @@ class ProductCartEntity extends Entity<int> {
   final double totalPrice;
 
   ProductCartEntity(
-    {int id, 
-    this.productId, 
-    this.productCount, 
-    this.totalPrice}) : super(id);
+    {required int id,
+    required this.productId,
+    required this.productCount,
+    required this.totalPrice}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

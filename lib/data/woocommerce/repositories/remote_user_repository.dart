@@ -17,8 +17,8 @@ import '../utils.dart';
 class RemoteUserRepository extends UserRepository {
   @override
   Future<String> signIn({
-    @required String email,
-    @required String password,
+    required String email,
+    required String password,
   }) async {
     var route = HttpClient().createUri(ServerAddresses.authToken);
     var data = <String, String>{
@@ -36,9 +36,9 @@ class RemoteUserRepository extends UserRepository {
 
   @override
   Future<String> signUp({
-    @required String name,
-    @required String email,
-    @required String password,
+    required String name,
+    required String email,
+    required String password,
   }) async {
     try {
       var route = HttpClient().createUri(ServerAddresses.signUp);
@@ -65,7 +65,7 @@ class RemoteUserRepository extends UserRepository {
       // TODO api call for user information
       await Future.delayed(Duration(seconds: 2));
 
-      return AppUser();
+      return AppUser(email: '', password: '', token: '');
     } catch (error) {
       rethrow;
     }
@@ -73,7 +73,7 @@ class RemoteUserRepository extends UserRepository {
 
   @override
   Future<void> forgotPassword({
-    @required String email,
+    required String email,
   }) async {
     try {
       var route = HttpClient().createUri(ServerAddresses.forgotPassword);

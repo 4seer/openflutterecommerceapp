@@ -4,7 +4,7 @@ class ProductHashTagEntity extends Entity<int> {
   final int hashTagId;
   final int productId;
 
-  ProductHashTagEntity({int id, this.hashTagId, this.productId}) : super(id);
+  ProductHashTagEntity({required int id, required this.hashTagId, required this.productId}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

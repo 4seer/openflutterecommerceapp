@@ -72,5 +72,5 @@ class CartRepositoryImpl extends CartRepository{
 
 class CartProductDataStorage {
   List<CartItem> items = [];
-  Promo appliedPromo;
+  late Promo appliedPromo;
 }

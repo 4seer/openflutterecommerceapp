@@ -44,12 +44,11 @@ class OpenFlutterProductRating extends StatelessWidget {
   final bool showDefaultStar;
 
   //callback when rating was selected
-  final Function(double rating) onRatingSelected;
+  final Function(double rating)? onRatingSelected;
 
   const OpenFlutterProductRating({
-    Key key,
-    this.rating,
-    this.ratingCount,
+    required this.rating,
+    required this.ratingCount,
     this.alignment = MainAxisAlignment.center,
     this.starCount = 5,
     this.iconSize = 24.0,
@@ -60,7 +59,7 @@ class OpenFlutterProductRating extends StatelessWidget {
     this.labelFontSize = 14.0,
     this.editable = false,
     this.showDefaultStar = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +85,7 @@ class OpenFlutterProductRating extends StatelessWidget {
     return GestureDetector(
       onTap: editable
           ? () {
-              onRatingSelected(_calculateRatingSelected(index));
+              onRatingSelected!(_calculateRatingSelected(index));
             }
           : null,
       child: Container(
@@ -104,8 +103,10 @@ class OpenFlutterProductRating extends StatelessWidget {
     var isSelected = _isStarSelected(index);
 
     if (isSelected || showDefaultStar) {
-      return SvgPicture.asset('assets/icons/products/star' + (isSelected ? '_fav' : '') + '.svg',
-          width: iconSize, height: iconSize);
+      return SvgPicture.asset(
+          'assets/icons/products/star' + (isSelected ? '_fav' : '') + '.svg',
+          width: iconSize,
+          height: iconSize);
     }
 
     return Container(
@@ -140,7 +141,10 @@ class OpenFlutterProductRating extends StatelessWidget {
       child: Center(
         child: Text(
           ' (' + ratingCount.toInt().toString() + ')',
-          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: labelFontSize),
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              ?.copyWith(fontSize: labelFontSize),
           textAlign: TextAlign.center,
         ),
       ),

@@ -11,9 +11,8 @@ import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 import 'categories.dart';
 
 class CategoriesScreen extends StatefulWidget {
-  final CategoriesParameters parameters;
 
-  const CategoriesScreen({Key key, this.parameters}) : super(key: key);
+  const CategoriesScreen() ;
 
   @override
   _CategoriesScreenState createState() => _CategoriesScreenState();
@@ -28,14 +27,16 @@ class CategoriesParameters {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
-    print('widget parameters at categories screen ${widget.parameters}');
+    final args = ModalRoute.of(context)!.settings.arguments as CategoriesParameters;
+
+    print('widget parameters at categories screen ${args}');
     return SafeArea(
         child: BlocProvider<CategoryBloc>(
             create: (context) {
               return CategoryBloc()
-                ..add(CategoryShowListEvent(widget.parameters == null
+                ..add(CategoryShowListEvent(args == null
                     ? 0
-                    : widget.parameters.categoryId));
+                    : args.categoryId));
             },
             child: CategoriesWrapper()));
   }

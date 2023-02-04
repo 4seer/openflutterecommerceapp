@@ -15,29 +15,28 @@ import '../product.dart';
 class ProductDetailsView extends StatefulWidget {
   final Product product;
   final Function changeView;
-  final ProductCategory category;
+  final ProductCategory? category;
   final bool hasReviews;
 
   final List<Product> similarProducts;
 
   const ProductDetailsView(
-      {Key key,
-      @required this.product,
-      @required this.changeView,
-      @required this.similarProducts,
+      {
+      required this.product,
+      required this.changeView,
+      required this.similarProducts,
       this.category,
       this.hasReviews = false})
-      : assert(product != null),
-        super(key: key);
+      : assert(product != null);
 
   @override
   _ProductDetailsViewState createState() => _ProductDetailsViewState();
 }
 
 class _ProductDetailsViewState extends State<ProductDetailsView> {
-  Orientation orientation;
-  bool favorite;
-  ProductBloc bloc;
+  Orientation? orientation;
+  bool? favorite;
+  ProductBloc? bloc;
 
   @override
   void initState() {
@@ -57,13 +56,12 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
         bloc: bloc,
         listener: (context, state) {
           if (state is ProductErrorState) {
-            return Container(
+            Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
                     style: _theme.textTheme.headline4
-                        .copyWith(color: _theme.errorColor)));
+                        ?.copyWith(color: _theme.errorColor)));
           }
-          return Container();
         },
         child: BlocBuilder(
             bloc: bloc,
@@ -104,13 +102,13 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                                   value,
                                                   state.productAttributes
                                                           .selectedAttributes[
-                                                      value]))
+                                                      value]!))
                                           .toList()
-                                      : List<Widget>()) +
+                                      : <Widget>[]) +
                                   [
                                     OpenFlutterFavouriteButton(
                                       favourite: favorite,
-                                      setFavourite: () => {setFavourite(bloc)},
+                                      setFavourite: () => {setFavourite(bloc!)},
                                     )
                                   ]),
                         ),
@@ -196,20 +194,20 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   }
 
   void setFavourite(ProductBloc bloc) {
-    if (!favorite) {
+    if (!favorite!) {
       bloc.add(
           ProductAddToFavoritesEvent()); //TODO ask for real parameters if required
     } else {
       bloc.add(ProductRemoveFromFavoritesEvent());
     }
     setState(() {
-      favorite = !favorite;
+      favorite = !favorite!;
     });
   }
 
   void _showSelectAttributeBottomSheet(
       BuildContext context, ProductAttribute attribute,
-      {Function onSelect, String selectedValue}) {
+      {Function? onSelect, String? selectedValue}) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -219,19 +217,19 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
         ),
         builder: (BuildContext context) => AttributeBottomSheet(
             productAttribute: attribute,
-            selectedValue: selectedValue,
+            selectedValue: selectedValue!,
             onValueSelect: ((String value, ProductAttribute productAttribute) =>
                 {
-                  bloc..add(ProductSetAttributeEvent(value, productAttribute)),
+                  bloc!..add(ProductSetAttributeEvent(value, productAttribute)),
                   Navigator.pop(context),
-                  onSelect()
+                  onSelect!()
                 })));
   } //modelBottomSheet for selecting size
 
   Widget selectionOutlineButton(var deviceWidth, ProductAttribute attribute,
       String alreadySelectedValue) {
     //select size and select color widget
-    return OutlineButton(
+    return MaterialButton(
       onPressed: () => _showSelectAttributeBottomSheet(context, attribute,
           selectedValue: alreadySelectedValue),
       child: Container(
@@ -251,8 +249,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
         ),
         width: deviceWidth * 0.29,
       ),
-      borderSide: BorderSide(color: AppColors.darkGray),
-      highlightedBorderColor: AppColors.red,
+      /*borderSide: BorderSide(color: AppColors.darkGray),
+      highlightedBorderColor: AppColors.red,*/
       focusColor: AppColors.white,
       highlightColor: Colors.white,
       hoverColor: AppColors.red,
@@ -284,7 +282,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
           widget.category == null
               ? Container()
               : Text(
-                  widget.category.name,
+                  widget.category!.name,
                   style: theme.textTheme.bodyText1,
                 ),
           SizedBox(
@@ -327,7 +325,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
         final attribute = state.product.selectableAttributes[i];
         if (!state.productAttributes.selectedAttributes
             .containsKey(attribute)) {
-          await _showSelectAttributeBottomSheet(context, attribute,
+          _showSelectAttributeBottomSheet(context, attribute,
               onSelect: i == 0
                   ? (() => {
                         BlocProvider.of<ProductBloc>(context)

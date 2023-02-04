@@ -21,7 +21,7 @@ class _CartScreenState extends State<CartScreen> {
     return SafeArea(
       child: OpenFlutterScaffold(
         background: null,
-        title: null,
+        title: '',
         body: BlocProvider<CartBloc>(
             create: (context) {
               return CartBloc()

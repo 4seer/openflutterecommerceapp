@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 enum ViewChangeType { Start, Forward, Backward, Exact }
 
 class OpenFlutterWrapperState<T> extends State {
-  PageController _viewController;
+  late PageController _viewController;
 
   PageView getPageView(List<Widget> widgets) {
     return PageView(
@@ -16,7 +16,7 @@ class OpenFlutterWrapperState<T> extends State {
         children: widgets);
   }
 
-  void changePage({@required ViewChangeType changeType, int index}) {
+  void changePage({required ViewChangeType changeType, required int index}) {
     switch (changeType) {
       case ViewChangeType.Forward:
         _viewController.nextPage(

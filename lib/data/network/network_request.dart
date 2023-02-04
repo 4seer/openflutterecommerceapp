@@ -22,11 +22,11 @@ class NetworkRequest {
   final String plainBody;
 
   NetworkRequest(this.type, this.address,
-      {@required this.client,
-      this.body,
-      this.plainBody,
-      this.listBody,
-      this.headers});
+      {required this.client,
+      required this.body,
+      required this.plainBody,
+      required this.listBody,
+      required this.headers});
 
   Future<http.Response> getResult() async {
     print('ADDRESS: $address');
@@ -103,7 +103,7 @@ class NetworkRequest {
     return NetworkRequest(
       RequestType.get,
       serverAddress,
-      client: client,
+      client: client, body: {}, plainBody: '', listBody: [], headers: {},
     );
   }
 }

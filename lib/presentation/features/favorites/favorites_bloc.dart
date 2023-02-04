@@ -56,7 +56,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       final filteredData = await getFavoriteProductsUseCase.execute(
         GetFavoriteProductParams(
           filterRules: event.filterRules,
-          sortRules: state.sortBy
+          sortRules: state.sortBy!
         )
       );
       yield state.copyWith(
@@ -79,7 +79,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       final filteredData = await getFavoriteProductsUseCase.execute(
         GetFavoriteProductParams(
           filterRules: state.filterRules,
-          sortRules: state.sortBy
+          sortRules: state.sortBy!
         )
       );
       yield state.copyWith(data: filteredData.products);

@@ -24,7 +24,7 @@ class GetPromosUseCaseImpl implements GetPromosUseCase {
       if (promos != null && promos.isNotEmpty) {
         return GetPromosResult(  
           promos: promos,
-          result: true
+          result: true, exception: null!
         );
       }
 
@@ -47,7 +47,7 @@ class GetPromosUseCaseImpl implements GetPromosUseCase {
 class GetPromosResult extends UseCaseResult {
   List<Promo> promos;
   
-  GetPromosResult({this.promos, Exception exception, bool result}) 
+  GetPromosResult({required this.promos, required Exception exception, required bool result})
     : super(exception: exception, result: result);
 }
   

@@ -12,16 +12,16 @@ class UserEntity extends Entity<int> {
   final bool deliveryStatusChanges;
 
   UserEntity(
-    {int id,
-    this.name,
-    this.avatar,
-    this.email,
-    this.password,
-    this.birthDate,
-    this.token,
-    this.salesNotification,
-    this.newArrivalsNotification,
-    this.deliveryStatusChanges}) : super(id);
+    {required int id,
+    required this.name,
+    required this.avatar,
+    required this.email,
+    required this.password,
+    required this.birthDate,
+    required this.token,
+    required this.salesNotification,
+    required this.newArrivalsNotification,
+    required this.deliveryStatusChanges}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

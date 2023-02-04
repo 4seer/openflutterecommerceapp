@@ -13,7 +13,7 @@ class RemoteProductRepository extends ProductRepository {
   
   final WoocommercWrapperAbstract woocommerce;
 
-  RemoteProductRepository({@required this.woocommerce});
+  RemoteProductRepository({required this.woocommerce});
 
   @override
   Future<Product> getProduct(int id) {
@@ -31,7 +31,7 @@ class RemoteProductRepository extends ProductRepository {
   @override
   Future<FilterRules> getPossibleFilterOptions(int categoryId) {
     // TODO: implement getPossibleFilterOptions
-    return null;
+    return Future.value(null);
   }
 
   @override
@@ -41,7 +41,7 @@ class RemoteProductRepository extends ProductRepository {
       int categoryId = 0,
       bool isFavorite = false,
       SortRules sortRules = const SortRules(),
-      FilterRules filterRules}) async {
+      required FilterRules filterRules}) async {
     // TODO: implement getProducts
     try
     {

@@ -20,9 +20,9 @@ class GetHomePageProductsUseCaseImpl implements GetHomePageProductsUseCase {
     try {
       ProductRepository productRepository = sl();
       return HomeProductsResult(  
-        salesProducts: await productRepository.getProducts(categoryId: 1),
-        newProducts: await productRepository.getProducts(categoryId: 2),
-        result: false,
+        salesProducts: await productRepository.getProducts(categoryId: 1, filterRules: null!),
+        newProducts: await productRepository.getProducts(categoryId: 2, filterRules: null!),
+        result: false, exception: null!,
       );
     } catch (e) {
       return HomeProductsResult(  
@@ -40,7 +40,7 @@ class HomeProductsResult extends UseCaseResult {
   final List<Product> salesProducts;
   final List<Product> newProducts;
 
-  HomeProductsResult({this.salesProducts, this.newProducts, Exception exception, bool result})
+  HomeProductsResult({required this.salesProducts, required this.newProducts, required Exception exception, required bool result})
     : super(exception: exception, result: result);
 }
 

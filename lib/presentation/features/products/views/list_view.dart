@@ -28,20 +28,20 @@ class ProductsListView extends StatelessWidget {
               return Padding(
                 padding:
                   EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-                child: state.data.products[index].getListView(
+                child: state.data!.products[index].getListView(
                     context: context,
                     showProductInfo: () {
                       Navigator.of(context).pushNamed(
                           OpenFlutterEcommerceRoutes.product,
                           arguments: ProductDetailsParameters(
-                            state.data.products[index].id,
-                            state.data.category?.id));
+                            state.data!.products[index].id,
+                            state.data!.category!.id));
                     },
                     onFavoritesClick: () {
                       BlocProvider.of<ProductsBloc>(context).add(
                           ProductMakeFavoriteEvent(
-                              !state.data.products[index].isFavorite,
-                              state.data.products[index]));
+                              !state.data!.products[index].isFavorite,
+                              state.data!.products[index]));
                     },
                   )) ;
             }

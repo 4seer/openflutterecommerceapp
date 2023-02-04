@@ -12,12 +12,7 @@ import 'product_state.dart';
 import 'views/details.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final ProductDetailsParameters parameters;
-
-  const ProductDetailsScreen(
-    this.parameters, {
-    Key key,
-  }) : super(key: key);
+  const ProductDetailsScreen();
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
@@ -26,7 +21,7 @@ class ProductDetailsScreen extends StatefulWidget {
 class ProductDetailsParameters {
   final int productId;
   final int categoryId;
-  final HashMap<ProductAttribute, String> selectedAttributes;
+  final Map<ProductAttribute, String>? selectedAttributes;
 
   const ProductDetailsParameters(this.productId, this.categoryId,
       {this.selectedAttributes});
@@ -35,17 +30,18 @@ class ProductDetailsParameters {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    print('productId: ${widget.parameters.productId}');
+    final args = ModalRoute.of(context)!.settings.arguments as ProductDetailsParameters;
+    print('productId: ${args.productId}');
     return SafeArea(
         child: OpenFlutterScaffold(
       background: null,
-      title: null,
+      title: '',
       body: BlocProvider<ProductBloc>(
         create: (context) {
-          return ProductBloc(productId: widget.parameters.productId)
+          return ProductBloc(productId: args.productId)
             ..add(ProductScreenLoadedEvent(
-                productId: widget.parameters.productId,
-                categoryId: widget.parameters.categoryId));
+                productId: args.productId,
+                categoryId: args.categoryId));
         },
         child: ProductWrapper(),
       ),

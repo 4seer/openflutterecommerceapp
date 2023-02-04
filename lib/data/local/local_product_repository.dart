@@ -25,14 +25,14 @@ class LocalProductRepository implements ProductRepository {
       int categoryId = 0,
       bool isFavorite = false,
       SortRules sortRules = const SortRules(),
-      FilterRules filterRules}) {
+      required FilterRules filterRules}) {
     // TODO: implement getProducts
-    return null;
+    return Future.value(null);
   }
 
   @override
   Future<FilterRules> getPossibleFilterOptions(int categoryId) {
     // TODO: implement getPossibleFilterOptions
-    return null;
+    return Future.value(null);
   }
 }

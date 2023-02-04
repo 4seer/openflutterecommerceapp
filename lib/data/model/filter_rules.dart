@@ -16,22 +16,22 @@ class FilterRules {
   final List<HashTag> hashTags;
   final HashMap<HashTag, bool> selectedHashTags;
 
-  FilterRules( 
-    {this.categories, 
-    @required this.hashTags, 
-    @required this.selectedHashTags, 
-    selectedAttributes, 
-    this.selectableAttributes, 
-    this.selectedPriceRange}) 
-    : selectedAttributes = selectedAttributes ?? 
-      HashMap<ProductAttribute, List<String>>();
+  FilterRules(
+      {required this.categories,
+      required this.hashTags,
+      required this.selectedHashTags,
+      selectedAttributes,
+      required this.selectableAttributes,
+      required this.selectedPriceRange})
+      : selectedAttributes =
+            selectedAttributes ?? HashMap<ProductAttribute, List<String>>();
 
   FilterRules copyWithAdditionalAttribute(
       ProductAttribute attribute, String value) {
     HashMap<ProductAttribute, List<String>> updatedAttributes =
         selectableAttributes;
     if (updatedAttributes.containsKey(attribute)) {
-      updatedAttributes[attribute].add(value);
+      updatedAttributes[attribute]?.add(value);
     } else {
       updatedAttributes[attribute] = [value];
     }
@@ -44,20 +44,18 @@ class FilterRules {
   }
 
   /// this behavior can be changed in subclasses to show special attribute instead of first
-  MapEntry<ProductAttribute, List<String>> get topmostOption =>
-      selectableAttributes?.entries?.isNotEmpty ? 
-      selectableAttributes?.entries?.first 
-      : MapEntry<ProductAttribute, List<String>>(
-        ProductAttribute(name: ''),
-        []
-      );
+  MapEntry<ProductAttribute, List<String>>? get topmostOption =>
+      selectableAttributes?.entries?.isNotEmpty == true
+          ? selectableAttributes?.entries?.first
+          : MapEntry<ProductAttribute, List<String>>(
+              ProductAttribute(name: '', id: -1, options: [], info: ''), []);
 
   FilterRules copyWithRemovedAttributeValue(
       ProductAttribute attribute, String value) {
     HashMap<ProductAttribute, List<String>> updatedAttributes =
         selectableAttributes;
-    updatedAttributes[attribute].remove(value);
-    if (updatedAttributes[attribute].isEmpty) {
+    updatedAttributes[attribute]?.remove(value);
+    if (updatedAttributes[attribute]?.isEmpty == true) {
       updatedAttributes.remove(attribute);
     }
     return FilterRules(
@@ -89,53 +87,56 @@ class FilterRules {
     List<int> categoryIds = [];
     HashMap<ProductCategory, bool> categories = HashMap();
     List<int> hashTagIds = [];
-    List<HashTag> hashTags = []; 
+    List<HashTag> hashTags = [];
 
     products.forEach((product) => {
-      product.hashTags != null ?
-        product.hashTags.forEach((HashTag hashTag) =>  {
-          if ( !hashTagIds.contains(hashTag.id) ) {
-            hashTagIds.add(hashTag.id),
-            hashTags.add(hashTag)
-          }
-        }) : { },
-      product.selectableAttributes != null ?
-       // returnAttributes.addAll({for (var attribute in product.selectableAttributes) attribute: []})
-        product.selectableAttributes.forEach((attribute)=> {
-          if ( attribute != null ) { 
-            if ( attributesIdToString[attribute.id] == null ) {
-              attributesIdToString[attribute.id] = [],
-              attributesIdToAttribute[attribute.id] = attribute
-            },
-            attributesIdToString[attribute.id].addAll(attribute.options)
-          }
-        }) : { },
-      if ( product.price > maxPrice ) maxPrice = product.price,
-      if ( product.price < minPrice ) minPrice = product.price,
-      //TOOD: change to categories instead of categoryIds
-      product.categories.forEach((ProductCategory category) =>  {
-        if ( !categoryIds.contains(category.id) ) {
-          categoryIds.add(category.id),
-          categories[category] = false
-        }
-      })
-    });
+          product.hashTags != null
+              ? product.hashTags.forEach((HashTag hashTag) => {
+                    if (!hashTagIds.contains(hashTag.id))
+                      {hashTagIds.add(hashTag.id), hashTags.add(hashTag)}
+                  })
+              : {},
+          product.selectableAttributes != null
+              ?
+              // returnAttributes.addAll({for (var attribute in product.selectableAttributes) attribute: []})
+              product.selectableAttributes.forEach((attribute) => {
+                    if (attribute != null)
+                      {
+                        if (attributesIdToString[attribute.id] == null)
+                          {
+                            attributesIdToString[attribute.id] = [],
+                            attributesIdToAttribute[attribute.id] = attribute
+                          },
+                        attributesIdToString[attribute.id]
+                            ?.addAll(attribute.options)
+                      }
+                  })
+              : {},
+          if (product.price > maxPrice) maxPrice = product.price,
+          if (product.price < minPrice) minPrice = product.price,
+          //TOOD: change to categories instead of categoryIds
+          product.categories.forEach((ProductCategory category) => {
+                if (!categoryIds.contains(category.id))
+                  {categoryIds.add(category.id), categories[category] = false}
+              })
+        });
     attributesIdToString.keys.forEach((attributeById) => {
-      returnAttributes[attributesIdToAttribute[attributeById]]=attributesIdToString[attributeById].toSet().toList()
-    });
+          returnAttributes[attributesIdToAttribute[attributeById]!!] =
+              attributesIdToString[attributeById]!.toSet().toList()
+        });
 
-    return  FilterRules(
+    return FilterRules(
         categories: categories,
         selectableAttributes: returnAttributes,
         hashTags: hashTags,
         selectedHashTags: HashMap<HashTag, bool>(),
-        selectedPriceRange: PriceRange(minPrice, maxPrice)
-    );
+        selectedPriceRange: PriceRange(minPrice, maxPrice));
   }
 
-  factory FilterRules.getFavoriteSelectableAttributes(List<FavoriteProduct> favoriteProducts) {
+  factory FilterRules.getFavoriteSelectableAttributes(
+      List<FavoriteProduct> favoriteProducts) {
     List<Product> products = [];
-    favoriteProducts.forEach((favoriteProduct) { 
+    favoriteProducts.forEach((favoriteProduct) {
       products.add(favoriteProduct.product);
     });
     return FilterRules.getSelectableAttributes(products);

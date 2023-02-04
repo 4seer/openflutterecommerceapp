@@ -13,12 +13,12 @@ class Promo extends Equatable {
   final Color textColor;
 
   Promo(
-      {@required this.discount,
-      @required this.title,
-      @required this.promoCode,
-      @required this.daysLeft,
-      @required this.image,
-      @required this.textColor});
+      {required this.discount,
+      required this.title,
+      required this.promoCode,
+      required this.daysLeft,
+      required this.image,
+      required this.textColor});
 
 @override
   factory Promo.fromEntity(Entity entity) {
@@ -29,7 +29,7 @@ class Promo extends Equatable {
         discount: entity.discountPercent,
         textColor: Colors.white,
         daysLeft: entity.dateExpires.difference(DateTime.now()).inDays,
-        image: null
+        image: ""
       );
     } else {
       throw EntityModelMapperException(message: 'Entity should be of type ProductEntity');

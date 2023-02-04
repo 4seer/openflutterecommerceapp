@@ -6,28 +6,27 @@ import 'package:flutter/material.dart';
 import 'package:openflutterecommerce/config/theme.dart';
 
 class OpenFlutterButton extends StatelessWidget {
-  final double width;
-  final double height;
-  final Function onPressed;
+  final double? width;
+  final double? height;
+  final Function() onPressed;
   final String title;
-  final IconData icon;
+  IconData? icon;
   final double iconSize;
   final Color backgroundColor;
   final Color textColor;
   final Color borderColor;
 
   OpenFlutterButton({
-    Key key,
     this.width,
     this.height,
-    @required this.title,
-    @required this.onPressed,
+    required this.title,
+    required this.onPressed,
     this.icon,
     this.backgroundColor = AppColors.red,
     this.textColor = AppColors.white,
     this.borderColor = AppColors.red,
     this.iconSize = 18.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +66,7 @@ class OpenFlutterButton extends StatelessWidget {
         ),
       ),
     );
-    /*RaisedButton(
+    /*MaterialButton(
       onPressed: onPressed,
       shape: new RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(
@@ -79,7 +78,7 @@ class OpenFlutterButton extends StatelessWidget {
         width: width,
         height: height,
         child: Text(title,
-          style: _theme.textTheme.button.copyWith(
+          style: _theme.textTheme.button?.copyWith(
             backgroundColor: _theme.textTheme.button.backgroundColor,
             color: _theme.textTheme.button.color
           )
@@ -91,8 +90,8 @@ class OpenFlutterButton extends StatelessWidget {
   Widget _buildTitle(ThemeData _theme) {
     return Text(
       title,
-      style: _theme.textTheme.button.copyWith(
-        backgroundColor: _theme.textTheme.button.backgroundColor,
+      style: _theme.textTheme.button?.copyWith(
+        backgroundColor: _theme.textTheme.button?.backgroundColor,
         color: textColor,
       ),
     );
@@ -107,7 +106,7 @@ class OpenFlutterButton extends StatelessWidget {
         child: Icon(
           icon,
           size: iconSize,
-          color: theme.textTheme.button.color,
+          color: theme.textTheme.button?.color,
         ),
       );
     }

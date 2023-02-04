@@ -36,26 +36,26 @@ class Product extends Equatable {
 
   Product(
     this.id, {
-    @required this.title,
-    @required this.subTitle,
-    this.shortDescription,
-    this.description,
-    @required this.price,
+    required this.title,
+    required this.subTitle,
+    required this.shortDescription,
+    required this.description,
+    required this.price,
     this.discountPercent = 0,
     this.amountAvailable = 0,
-    DateTime created,
-    this.averageRating,
+    required DateTime created,
+    required this.averageRating,
     this.ratingCount = 0,
     this.rating1Count = 0,
     this.rating2Count = 0,
     this.rating3Count = 0,
     this.rating4Count = 0,
     this.rating5Count = 0,
-    this.images,
-    this.properties,
-    this.selectableAttributes,
-    @required this.categories,
-    @required this.hashTags,
+    required this.images,
+    required this.properties,
+    required this.selectableAttributes,
+    required this.categories,
+    required this.hashTags,
     this.isFavorite = false,
   }) : created = created ?? DateTime.now();
 
@@ -80,7 +80,7 @@ class Product extends Equatable {
         categories: categories,
         hashTags: hashTags,
         selectableAttributes: selectableAttributes,
-        isFavorite: isFavorite??false);
+        isFavorite: isFavorite??false, properties: {});
   }
 
   //Method mapping domain entity with presentation level model
@@ -93,7 +93,7 @@ class Product extends Equatable {
       }
       List<ProductCategory> categories = [];
       if ( entity.categories.isNotEmpty ){
-        entity.categories.forEach((category) => categories.add(ProductCategory(category.id, name: category.title)));
+        entity.categories.forEach((category) => categories.add(ProductCategory(category.id, name: category.title, image: CommerceImage.placeHolder())));
       }
       List<HashTag> hashTags = [];
       if ( entity.hashTags.isNotEmpty ){
@@ -117,7 +117,7 @@ class Product extends Equatable {
         images: images,
         //TODO: add selectable attributes selectableAttributes: [],
         isFavorite: entity.isFavourite,
-        selectableAttributes: entity.selectableAttributes
+        selectableAttributes: entity.selectableAttributes, created: DateTime.now(), properties: {}
       );
     } else {
       throw EntityModelMapperException(message: 'Entity should be of type ProductEntity');
@@ -160,7 +160,7 @@ class Product extends Equatable {
     } else if (isNew) {
       return 'New';
     } else {
-      return null;
+      return '';
     }
   }
 

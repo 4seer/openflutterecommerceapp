@@ -14,11 +14,11 @@ import 'package:openflutterecommerce/presentation/features/wrapper.dart';
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 class Main2View extends StatefulWidget {
-  final Function changeView;
-  final List<Product> salesProducts;
-  final List<Product> newProducts;
+  final Function? changeView;
+  final List<Product>? salesProducts;
+  final List<Product>? newProducts;
 
-  const Main2View({Key key, this.changeView, this.salesProducts, this.newProducts}) : super(key: key);
+  const Main2View({ this.changeView, this.salesProducts, this.newProducts}) ;
 
   @override
   _Main2ViewState createState() => _Main2ViewState();
@@ -48,7 +48,7 @@ class _Main2ViewState extends State<Main2View> {
               Container(
                   padding: EdgeInsets.only(left: AppSizes.sidePadding),
                   width: width,
-                  child: Text('Street clothes', style: _theme.textTheme.headline5.copyWith(fontSize: 34)))
+                  child: Text('Street clothes', style: _theme.textTheme.headline5?.copyWith(fontSize: 34)))
             ],
           )),
       OpenFlutterBlockHeader(
@@ -61,7 +61,7 @@ class _Main2ViewState extends State<Main2View> {
       ),
       OpenFlutterProductListView(
           width: widgetWidth,
-          products: widget.salesProducts,
+          products: widget.salesProducts!,
           onFavoritesTap: ((Product product) => {
                 BlocProvider.of<HomeBloc>(context)
                     .add(HomeAddToFavoriteEvent(isFavorite: !product.isFavorite, product: product))
@@ -77,7 +77,7 @@ class _Main2ViewState extends State<Main2View> {
       ),
       OpenFlutterProductListView(
         width: widgetWidth,
-        products: widget.newProducts,
+        products: widget.newProducts!,
         onFavoritesTap: ((Product product) => {
               BlocProvider.of<HomeBloc>(context)
                   .add(HomeAddToFavoriteEvent(isFavorite: !product.isFavorite, product: product))
@@ -87,7 +87,7 @@ class _Main2ViewState extends State<Main2View> {
         title: 'Next Home Page',
         width: 160,
         height: 48,
-        onPressed: (() => widget.changeView(changeType: ViewChangeType.Forward)),
+        onPressed: (() => widget.changeView!(changeType: ViewChangeType.Forward)),
       )
     ]));
   }

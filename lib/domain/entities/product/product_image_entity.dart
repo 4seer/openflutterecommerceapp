@@ -6,10 +6,10 @@ class ProductImageEntity extends Entity<int> {
   final String image;
 
   ProductImageEntity({
-    int id, 
-    this.title, 
-    this.thumb, 
-    this.image}) : super(id);
+    required int id,
+    required this.title,
+    required this.thumb,
+    required this.image}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

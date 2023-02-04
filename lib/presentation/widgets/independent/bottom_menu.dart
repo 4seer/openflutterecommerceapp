@@ -24,14 +24,7 @@ class OpenFlutterBottomMenu extends StatelessWidget {
         height: 24.0,
         width: 24.0,
         color: colorByIndex(theme, index),
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 10.0,
-          color: colorByIndex(theme, index),
-        ),
-      ),
+      )
     );
   }
 

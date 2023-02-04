@@ -8,9 +8,9 @@ class UserSettingsEntity {
   bool notifyDelivery;
 
   UserSettingsEntity(
-      {@required this.fullName,
-      @required this.dateOfBirth,
-      @required this.notifySales,
-      @required this.notifyArrivals,
-      @required this.notifyDelivery});
+      {required this.fullName,
+      required this.dateOfBirth,
+      required this.notifySales,
+      required this.notifyArrivals,
+      required this.notifyDelivery});
 }

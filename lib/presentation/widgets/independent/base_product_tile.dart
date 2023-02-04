@@ -8,24 +8,23 @@ class BaseProductTile extends StatelessWidget {
   final ImageProvider image;
   final WidgetBuilder mainContentBuilder;
   final String specialMark;
-  final VoidCallback onRemove;
+  final VoidCallback? onRemove;
   final double imageHeight;
   final double imageWidth;
   final double tileHeight;
 
   const BaseProductTile(
-      {Key key,
-      this.onClick,
-      this.inactiveMessage,
-      this.bottomRoundButton,
-      this.image,
-      this.mainContentBuilder,
+      {
+      required this.onClick,
+      required this.inactiveMessage,
+      required this.bottomRoundButton,
+      required this.image,
+      required this.mainContentBuilder,
       this.imageHeight = 184,
       this.imageWidth = AppSizes.tile_width,
       this.tileHeight = AppSizes.tile_height,
-      this.specialMark,
-      this.onRemove})
-      : super(key: key);
+      required this.specialMark, this.onRemove})
+      ;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +84,7 @@ class BaseProductTile extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1
-                                .copyWith(color: AppColors.white, fontWeight: FontWeight.bold))),
+                                ?.copyWith(color: AppColors.white, fontWeight: FontWeight.bold))),
                   ),
             onRemove == null
                 ? Container()

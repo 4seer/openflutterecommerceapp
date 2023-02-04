@@ -13,9 +13,9 @@ import 'package:openflutterecommerce/presentation/features/profile/settings_stat
 import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
 
 class SettingsView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const SettingsView({Key key, this.changeView}) : super(key: key);
+  const SettingsView({ this.changeView}) ;
 
   @override
   _SettingsViewState createState() => _SettingsViewState();
@@ -24,11 +24,11 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends State<SettingsView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  TextEditingController _currentPasswordController;
-  TextEditingController _newPasswordController;
-  TextEditingController _repeatPasswordController;
-  TextEditingController _fullNameController;
-  TextEditingController _dateOfBirthController;
+  late TextEditingController _currentPasswordController;
+  late TextEditingController _newPasswordController;
+  late TextEditingController _repeatPasswordController;
+  late TextEditingController _fullNameController;
+  late TextEditingController _dateOfBirthController;
 
   @override
   void initState() {
@@ -59,8 +59,8 @@ class _SettingsViewState extends State<SettingsView> {
       child: BlocBuilder<SettingsBloc, SettingsState>(
           bloc: settingsBloc,
           builder: (context, state) {
-            _fullNameController.text = state.settings.fullName;
-            _dateOfBirthController.text = state.settings.dateOfBirth;
+            _fullNameController.text = state.settings!.fullName;
+            _dateOfBirthController.text = state.settings!.dateOfBirth;
 
             return SingleChildScrollView(
                 child: Container(
@@ -140,7 +140,7 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                       CupertinoSwitch(
                         //trackColor: AppColors.lightGray,
-                        value: state.settings.notifySales,
+                        value: state.settings!.notifySales,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc.add(UpdateNotifySalesEvent(notifySales: newValue)),
                       ),
@@ -158,7 +158,7 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                       CupertinoSwitch(
                         //trackColor: AppColors.lightGray,
-                        value: state.settings.notifyArrivals,
+                        value: state.settings!.notifyArrivals,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc..add(UpdateNotifyArrivalsEvent(notifyArrivals: newValue)),
                       ),
@@ -176,7 +176,7 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                       CupertinoSwitch(
                         //trackColor: AppColors.lightGray,
-                        value: state.settings.notifyDelivery,
+                        value: state.settings!.notifyDelivery,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc..add(UpdateNotifyDeliveryEvent(notifyDelivery: newValue)),
                       ),
@@ -216,7 +216,7 @@ class _SettingsViewState extends State<SettingsView> {
                       });
                     } else if (state is ChangePasswordErrorState) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
-                        _showAlertDialog(context, 'Error', state.errorMessage);
+                        _showAlertDialog(context, 'Error', state.errorMessage!);
                       });
                     }
 
@@ -326,7 +326,7 @@ class _SettingsViewState extends State<SettingsView> {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();

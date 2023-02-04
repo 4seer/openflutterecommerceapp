@@ -8,8 +8,8 @@ class FilterSelectableVisibleOption<T> extends StatelessWidget {
   final String title;
 
   const FilterSelectableVisibleOption(
-      {Key key, this.onSelected, this.children, this.title})
-      : super(key: key);
+      { required this.onSelected, required this.children, required this.title})
+      ;
 
   @override
   Widget build(BuildContext context) {

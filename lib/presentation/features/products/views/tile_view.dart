@@ -26,24 +26,24 @@ class ProductsTileView extends StatelessWidget {
           (BuildContext context, int index) {
             return Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-                child: state.data.products[index].getTileView(
+                child: state.data?.products[index].getTileView(
                   context: context,
                   onFavoritesClick: () {
                     BlocProvider.of<ProductsBloc>(context).add(
                         ProductMakeFavoriteEvent(
-                            !state.data.products[index].isFavorite,
-                            state.data.products[index]));
+                            !state.data!.products[index].isFavorite,
+                            state.data!.products[index]));
                   },
                   showProductInfo: () {
                     Navigator.of(context).pushNamed(
                         OpenFlutterEcommerceRoutes.product,
                         arguments: ProductDetailsParameters(
-                            state.data.products[index].id,
-                            state.data.category.id));
+                            state.data!.products[index].id,
+                            state.data!.category.id));
                   },
                 ));
           },
-          childCount: state.data.products.length,
+          childCount: state.data!.products.length,
         ),
       );
     });

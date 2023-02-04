@@ -5,9 +5,9 @@ class Product2ParameterEntity extends Entity<int> {
   final int productId;
 
   Product2ParameterEntity(
-    {int id, 
-    this.productParameterId, 
-    this.productId}) : super(id);
+    {required int id,
+    required this.productParameterId,
+    required this.productId}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

@@ -10,7 +10,7 @@ class LocalDbExceptionimplements implements Exception {}
 class EntityModelMapperException implements Exception {
   final String message;
 
-  EntityModelMapperException({@required this.message});
+  EntityModelMapperException({required this.message});
 }
 
 class RemoteServerException implements Exception {}

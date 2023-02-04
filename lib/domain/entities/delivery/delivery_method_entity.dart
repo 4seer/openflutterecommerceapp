@@ -5,9 +5,9 @@ class DeliveryMethodEntity extends Entity<int> {
   final double price;
 
   DeliveryMethodEntity(
-    {int id, 
-    this.title, 
-    this.price}) : super(id);
+    {required int id,
+    required this.title,
+    required this.price}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

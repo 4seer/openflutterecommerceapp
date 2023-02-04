@@ -6,7 +6,7 @@ class OpenFlutterTextTile extends StatelessWidget {
   final String subtitle;
   final Function onClick;
 
-  const OpenFlutterTextTile({Key key, this.title, this.subtitle, this.onClick}) : super(key: key);
+  const OpenFlutterTextTile({ required this.title, required this.subtitle, required this.onClick}) ;
 
   @override
   Widget build(BuildContext context) {

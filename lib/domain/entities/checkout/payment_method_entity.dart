@@ -9,13 +9,13 @@ class PaymentMethodEntity extends Entity<int> {
   final bool isDefault;
 
   PaymentMethodEntity(
-    {int id, 
-    this.nameOnCard, 
-    this.cardNumber, 
-    this.expiryDateMonth,
-    this.expiryDateYear,
-    this.cvv,
-    this.isDefault}) : super(id);
+    {required int id,
+    required this.nameOnCard,
+    required this.cardNumber,
+    required this.expiryDateMonth,
+    required this.expiryDateYear,
+    required this.cvv,
+    required this.isDefault}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {

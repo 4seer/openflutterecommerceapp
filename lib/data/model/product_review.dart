@@ -12,15 +12,15 @@ class ProductReview extends Equatable {
   final List<String> photos;
 
   ProductReview({
-    this.id,
-    this.productId,
-    this.authorName,
-    this.authorPhotoUrl,
-    this.rating,
-    this.comment,
-    DateTime reviewDate,
-    this.isHelpful,
-    this.photos,
+    required this.id,
+    required this.productId,
+    required this.authorName,
+    required this.authorPhotoUrl,
+    required this.rating,
+    required this.comment,
+    DateTime? reviewDate,
+    required this.isHelpful,
+    required this.photos,
   }) : reviewDate = reviewDate ?? DateTime.now();
 
   @override

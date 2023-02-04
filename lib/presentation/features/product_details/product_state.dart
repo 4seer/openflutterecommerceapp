@@ -21,9 +21,9 @@ class ProductLoadedState extends ProductState {
   final SelectedProductAttributes productAttributes;
 
   ProductLoadedState(
-    {@required this.product,
-    @required this.similarProducts,
-    @required this.productAttributes});
+    {required this.product,
+    required this.similarProducts,
+    required this.productAttributes});
 
   ProductLoadedState copyWith(
     Product product,
@@ -33,7 +33,7 @@ class ProductLoadedState extends ProductState {
     return ProductLoadedState(
       product: product ?? this.product,
       similarProducts: similarProducts ?? this.similarProducts,
-      productAttributes: productAttributes ?? this.productAttributes,
+      productAttributes: this.productAttributes,
     );
   }
 
@@ -46,7 +46,7 @@ class SelectedProductAttributes extends Equatable{
   final HashMap<ProductAttribute, String> selectedAttributes;
 
   SelectedProductAttributes({
-    @required this.selectedAttributes
+    required this.selectedAttributes
   });
   @override
   List<Object> get props => [selectedAttributes, selectedAttributes.values];

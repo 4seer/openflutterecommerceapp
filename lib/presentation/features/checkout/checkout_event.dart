@@ -41,14 +41,14 @@ class CheckoutAddNewCardEvent extends CheckoutEvent {
   final int expirationMonth;
   final int expirationYear;
   final int cvv;
-  final bool setAsDefault;
+  final bool? setAsDefault;
 
-  CheckoutAddNewCardEvent({this.nameOnCard, this.cardNumber, 
-    this.expirationMonth, this.expirationYear, 
-    this.cvv, this.setAsDefault});
+  CheckoutAddNewCardEvent({required this.nameOnCard, required this.cardNumber,
+    required this.expirationMonth, required this.expirationYear,
+    required this.cvv, this.setAsDefault});
 
   @override
-  List<Object> get props => [nameOnCard, cardNumber, expirationMonth, expirationYear, cvv, setAsDefault];
+  List<Object> get props => [nameOnCard, cardNumber, expirationMonth, expirationYear, cvv, setAsDefault!];
 }
 
 @immutable
@@ -69,6 +69,6 @@ class CheckoutAddNewShippingAddressEvent extends CheckoutEvent {
   final String country;
 
   CheckoutAddNewShippingAddressEvent({
-    this.fullName, this.address, this.city, 
-    this.state, this.postal, this.country});
+    required this.fullName, required this.address, required this.city,
+    required this.state, required this.postal, required this.country});
 }

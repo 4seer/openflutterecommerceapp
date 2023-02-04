@@ -18,7 +18,7 @@ class ProductDataSource extends DataSource {
         price: (maps[i]['price'] as num).toDouble(),
         discountPercent: (maps[i]['discountPercent'] as num).toDouble(),
         //TODO: get full list of categories
-        categories: [ProductCategoryEntity(id: (maps[i]['categoryId'] as num).toInt())],
+        categories: [ProductCategoryEntity(id: (maps[i]['categoryId'] as num).toInt(), title: '', description: '', image: '', thumb: '', parentId: null!, orderNumber: null!, count: null!)],
         amount: maps[i]['amount'],
         description: maps[i]['description'],
         isFavourite: maps[i]['isFavourite'].toString() == '1',
@@ -27,7 +27,7 @@ class ProductDataSource extends DataSource {
         rating2Count: maps[i]['rating2Count'],
         rating3Count: maps[i]['rating3Count'],
         rating4Count: maps[i]['rating4Count'],
-        rating5Count: maps[i]['rating5Count'],
+        rating5Count: maps[i]['rating5Count'], subTitle: '', hashTags: [], selectableAttributes: [],
       );
     });
   }
@@ -46,7 +46,7 @@ class ProductDataSource extends DataSource {
       thumb: maps[0]['thumb'],
       price: maps[0]['price'],
       discountPercent: (maps[0]['discountPercent'] as num).toDouble(),
-      categories: [ProductCategoryEntity(id: (maps[0]['categoryId'] as num).toInt())],
+      categories: [ProductCategoryEntity(id: (maps[0]['categoryId'] as num).toInt(), title: '', description: '', image: '', thumb: '', parentId: null!, orderNumber: null!, count: null!)],
       amount: maps[0]['amount'],
       description: maps[0]['description'],
       isFavourite: maps[0]['isFavourite'].toString() == '1',
@@ -55,7 +55,7 @@ class ProductDataSource extends DataSource {
       rating2Count: maps[0]['rating2Count'],
       rating3Count: maps[0]['rating3Count'],
       rating4Count: maps[0]['rating4Count'],
-      rating5Count: maps[0]['rating5Count'],
+      rating5Count: maps[0]['rating5Count'], subTitle: '', hashTags: [], selectableAttributes: [],
     );
   }
 

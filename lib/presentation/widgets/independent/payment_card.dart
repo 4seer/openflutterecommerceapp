@@ -4,7 +4,7 @@ import 'package:openflutterecommerce/config/theme.dart';
 class OpenFlutterPaymentCard extends StatelessWidget {
   final String cardNumber;
 
-  const OpenFlutterPaymentCard({Key key, @required this.cardNumber}) : super(key: key);
+  const OpenFlutterPaymentCard({ required this.cardNumber}) ;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class OpenFlutterPaymentCard extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.only(left: AppSizes.sidePadding),
-              child: Text(cardNumber, style: _theme.textTheme.headline2.copyWith(color: _theme.primaryColor)),
+              child: Text(cardNumber, style: _theme.textTheme.headline2?.copyWith(color: _theme.primaryColor)),
             )
           ],
         ));

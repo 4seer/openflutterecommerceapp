@@ -11,16 +11,16 @@ abstract class UserRepository {
   /// Sign in with [email] and [password] and return
   /// an access token as [String]
   Future<String> signIn({
-    @required String email,
-    @required String password,
+    required String email,
+    required String password,
   });
 
   /// Sign up with [username] and [password] and return
   /// an access token as [String]
   Future<String> signUp({
-    @required String name,
-    @required String email,
-    @required String password,
+    required String name,
+    required String email,
+    required String password,
   });
 
   /// Get the user information and return it as [AppUser]
@@ -28,6 +28,6 @@ abstract class UserRepository {
 
   /// Send to [email] a user forget email
   Future<void> forgotPassword({
-    @required String email,
+    required String email,
   });
 }
