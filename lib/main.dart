@@ -17,6 +17,7 @@ import 'package:openflutterecommerce/presentation/features/product_details/produ
 import 'package:openflutterecommerce/presentation/features/products/products.dart';
 import 'package:openflutterecommerce/presentation/features/sign_in/signin_screen.dart';
 import 'package:openflutterecommerce/presentation/features/sign_up/signup_screen.dart';
+import 'package:openflutterecommerce/presentation/features/splash_screen.dart';
 
 import 'config/routes.dart';
 import 'data/repositories/abstract/cart_repository.dart';
@@ -129,13 +130,13 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
           BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) {
             //TODO: revise authentication later. Right now no login is required.
-            /*if (state is Authenticated) {
+            if (state is Authenticated) {
               return ProfileScreen(); //TODO profile properties should be here
             } else if (state is Unauthenticated) {
               return _buildSignInBloc();
             } else {
               return SplashScreen();
-            }*/
+            }
             return ProfileScreen();
           }),
     };

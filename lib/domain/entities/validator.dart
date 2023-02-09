@@ -3,7 +3,7 @@ class Validator {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
     } else {
-      return null!;
+      return '';
     }
   }
 
